@@ -1,0 +1,84 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Main.master.cs" Inherits="WebItNow.Main" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+
+    <title></title>
+    <asp:ContentPlaceHolder ID="HeadContent" runat="server">
+    </asp:ContentPlaceHolder>
+
+    <meta http-equiv="Cache-Control" content="no-cache" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+
+    <script language="javascript" type="text/javascript">
+    if (history.forward(1)) {
+        location.replace(history.forward(1))
+    }
+
+    //function getNameURLWeb() {
+    //    var sPath = window.location.pathname;
+    //    var sPage = sPath.substring(sPath.lastIndexOf('/') + 1);
+    //    return sPage;
+    //}
+
+    //var xx_nombre_pagina = getNameURLWeb();
+    //    alert(xx_nombre_pagina);
+
+
+    </script>
+
+<!--    <link href="~/Styles/Estilo.css" rel="stylesheet" type="text/css" /> -->
+    <style type="text/css">
+        .style1
+        {
+            width: 180px;
+        }
+        .style2
+        {
+            width: 880px;
+        }
+
+        .style3
+        {
+            width: 180px;
+        }
+
+        #topContent
+        { height: 10%; width: 100%; }
+        #mainContent
+        { height: 80%; width: 100%; }
+        #footerContent
+        { height: 10%; width: 100%; }
+        
+    </style>
+
+</head>
+<body>
+    <form id="form1" runat="server" enctype="multipart/form-data">
+         <div id="topContent" >
+            <!-- <a href="Default.aspx">Control De Horas</a> -->
+          <table>
+            <tr>
+                <td class="style1">
+                    <asp:Image ID="Image1" runat="server" Height="120px" ImageUrl="~/Images/FGR.jpg" Width="224px" />
+                </td>
+                <td class="style2" align="center">
+                    <h2 style="font-family: Arial, Helvetica, sans-serif">SISTEMA INTEGRAL DE INFORMACIÓN PARA EL FONAC (SIIF)</h2> 
+                </td>
+                <td class="style3">
+                </td>
+            </tr>
+          </table>
+         </div>
+          <div id="mainContent" >
+         <asp:ContentPlaceHolder id="MainContent" runat="server">
+             <%--Aqui dentro van los objetos de nuestro web forma--%>
+         </asp:ContentPlaceHolder>
+         </div>
+    </form>
+</body>
+</html>
+
