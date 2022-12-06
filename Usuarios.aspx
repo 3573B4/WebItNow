@@ -78,7 +78,7 @@
     <asp:Panel ID="pnlExpira" runat="server" CssClass="CajaDialogo" style="display: none;">
     <table border="0" width="275px" style="margin: 0px; padding: 0px; background-color: #0033CC; color: #FFFFFF;">
         <tr>
-            <td align="center">
+            <td align="left">
                 <asp:Label ID="Label6" runat="server" Text="I t n o w" />
             </td>
             <td></td>
