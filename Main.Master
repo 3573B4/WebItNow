@@ -63,10 +63,10 @@
           <table>
             <tr>
                 <td class="style1">
-                    <asp:Image ID="Image1" runat="server" Height="120px" ImageUrl="~/Images/FGR.jpg" Width="224px" />
+                    <asp:Image ID="Image1" runat="server" Height="120px" ImageUrl="~/Images/Itnow.jpg" Width="224px" />
                 </td>
                 <td class="style2" align="center">
-                    <h2 style="font-family: Arial, Helvetica, sans-serif">SISTEMA INTEGRAL DE INFORMACIÓN PARA EL FONAC (SIIF)</h2> 
+                    <h2 style="font-family: Arial, Helvetica, sans-serif">Itnow Technologies de México S.A. de C.V.</h2> 
                 </td>
                 <td class="style3">
                 </td>

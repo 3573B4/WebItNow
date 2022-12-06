@@ -87,7 +87,7 @@
         <tr>
             <td></td>
             <td>
-                <asp:Label ID="Label1" runat="server" Text="Fiscalía General de la República" 
+                <asp:Label ID="Label1" runat="server" Text="" 
                     Width="1000px" CssClass="txtAlign" Font-Bold="True" 
                     Font-Names="Bookman Old Style"></asp:Label>
             </td>
@@ -97,7 +97,7 @@
             <td></td>
             <td>
                 <asp:Label ID="Label2" runat="server" 
-                    Text="Dirección General de Recursos Humanos" Width="1000px" 
+                    Text="" Width="1000px" 
                     CssClass="txtAlign" Font-Bold="True" Font-Names="Bookman Old Style"></asp:Label>
             </td>
             <td></td>
@@ -106,7 +106,7 @@
             <td></td>
             <td>
                 <asp:Label ID="Label3" runat="server" 
-                    Text="Dirección General Adjunta de Administración" Width="1000px" 
+                    Text="" Width="1000px" 
                     CssClass="txtAlign" Font-Bold="True" Font-Names="Bookman Old Style"></asp:Label>
             </td>
             <td></td>
@@ -114,7 +114,7 @@
         <tr>
             <td></td>
             <td>
-                <asp:Label ID="Label4" runat="server" Text="Dirección de Pagos" Width="1000px" 
+                <asp:Label ID="Label4" runat="server" Text="" Width="1000px" 
                     CssClass="txtAlign" Font-Bold="True" Font-Names="Bookman Old Style"></asp:Label>
             </td>
             <td></td>
@@ -122,7 +122,7 @@
         <tr>
             <td></td>
             <td>
-                <asp:Label ID="Label5" runat="server" Text="Subdirección de Nómina" 
+                <asp:Label ID="Label5" runat="server" Text="" 
                     Width="1000px" CssClass="txtAlign" Font-Bold="True" Font-Names="Bookman Old Style"></asp:Label>
             </td>
             <td></td>
@@ -138,7 +138,7 @@
         <tr>
             <td></td>
             <td class="style4" colspan="3" align="center" rowspan="1"><asp:Label ID="lblEstatus" runat="server"
-                    Text="Sistema Integral de Información del FONAC (SIIF)" Font-Bold="True" Font-Names="Bookman Old Style"></asp:Label></td>
+                    Text="Ingresa tus datos" Font-Bold="True" Font-Names="Bookman Old Style"></asp:Label></td>
             <td>&nbsp;</td>
         </tr>
         <tr>
@@ -196,10 +196,35 @@
         </tr>
         <tr>
             <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
             <td>
-                &nbsp;</td>
+                <p>
+                    ¿Primer acceso o te olvidaste tu contraseña? <a href="Usuarios.aspx">Ingresa aquí</a>.
+                </p>
+                <!-- <asp:Label ID="lblCotraseña" runat="server" CssClass="txtAlign" Text="¿Primer acceso o te olvidaste tu contraseña?"></asp:Label>-->
+            </td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>&nbsp;</td>
             <td>
-                <asp:Button ID="BtnAceptar" runat="server" Text="Aceptar" OnClick="BtnAceptar_Click" Width="87px" />
+                <asp:Button ID="BtnAceptar" runat="server" Text="Iniciar sesión"  Font-Bold="True" OnClick="BtnAceptar_Click" Width="160px" Height="52px"/>
                 </td>
             <td>
                 <ajaxToolkit:ModalPopupExtender ID="mpeMensaje" runat="server" PopupControlID="pnlMensaje"
@@ -210,18 +235,35 @@
         </tr>
     </table>
     <br />
+    <table cellspacing="1" cellpadding="1" border="0">
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td> <!--
+                <asp:Label ID="Label7" runat="server" Text="© 2022 Todos los derechos reservados" 
+                    Width="1000px" CssClass="txtAlign" Font-Bold="True" 
+                    Font-Names="Bookman Old Style"></asp:Label> -->
+            </td>
+            <td></td>
+        </tr>
+    </table>
+    <br />
     <asp:Panel ID="pnlMensaje" runat="server" CssClass="CajaDialogo" style="display: none;">
 
-        <table border="0" width="275px" style="margin: 0px; padding: 0px; background-color: #0033CC; color: #FFFFFF;">
-            <tr>
-                <td align="center">
-                    <asp:Label ID="Label6" runat="server" Text="F O N A C" />
-                </td>
-                <td>
-                 <!--   <asp:ImageButton ID="btnCerrar" runat="server" Style="vertical-align: top;" ImageAlign="Right" /> -->
-                </td>
-            </tr>
-        </table>
+    <table border="0" width="275px" style="margin: 0px; padding: 0px; background-color: #0033CC; color: #FFFFFF;">
+        <tr>
+            <td align="left">
+                <asp:Label ID="Label6" runat="server" Text="I t n o w" />
+            </td>
+            <td>
+                <!--   <asp:ImageButton ID="btnCerrar" runat="server" Style="vertical-align: top;" ImageAlign="Right" /> -->
+            </td>
+        </tr>
+    </table>
 
         <div>
             <!-- <asp:Image ID="imgIcono" runat="server" ImageUrl="Exclama.jpg" BorderColor="Black"
