@@ -99,5 +99,10 @@ namespace WebItNow
         {
             Conecta.Abrir();
         }
+
+        protected void BtnRegistrarse_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Register.aspx");
+        }
     }
 }

@@ -204,6 +204,15 @@ namespace WebItNow
         protected global::AjaxControlToolkit.ModalPopupExtender mpeMensaje;
 
         /// <summary>
+        /// Control BtnRegistrarse.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BtnRegistrarse;
+
+        /// <summary>
         /// Control lblOculto.
         /// </summary>
         /// <remarks>

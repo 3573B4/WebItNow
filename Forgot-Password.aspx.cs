@@ -7,11 +7,11 @@ using System.Web.UI.WebControls;
 
 namespace WebItNow
 {
-	public partial class Contact : Page
-	{
-		protected void Page_Load(object sender, EventArgs e)
-		{
+    public partial class Forgot_Password : System.Web.UI.Page
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
 
-		}
-	}
+        }
+    }
 }

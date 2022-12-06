@@ -212,12 +212,28 @@
         <tr>
             <td></td>
             <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
             <td>
+                <button onclick="location.href='Forgot-Password.aspx'">Olvidé mi contraseña</button>
+                <!-- 
                 <p>
-                    ¿Primer acceso o te olvidaste tu contraseña? <a href="Usuarios.aspx">Ingresa aquí</a>.
+                    <a href="Forgot-Password.aspx">Olvidé mi contraseña</a>.
                 </p>
-                <!-- <asp:Label ID="lblCotraseña" runat="server" CssClass="txtAlign" Text="¿Primer acceso o te olvidaste tu contraseña?"></asp:Label>-->
+                <asp:Label ID="lblCotraseña" runat="server" CssClass="txtAlign" Text="¿Primer acceso o te olvidaste tu contraseña?"></asp:Label>-->
             </td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
             <td></td>
             <td></td>
         </tr>
@@ -238,6 +254,7 @@
                 <ajaxToolkit:ModalPopupExtender ID="mpeMensaje" runat="server" PopupControlID="pnlMensaje"
                     TargetControlID="lblOculto" BackgroundCssClass="FondoAplicacion" OnOkScript="mpeMensajeOnOk()" >
                 </ajaxToolkit:ModalPopupExtender>
+                <asp:Button ID="BtnRegistrarse" runat="server" Font-Bold="True" Height="52px" OnClick="BtnRegistrarse_Click" Text="Registrarse" Width="160px" />
             </td>
             <td><asp:Label ID="lblOculto" runat="server" Text="Label" Style="display: none;" /></td>
         </tr>
