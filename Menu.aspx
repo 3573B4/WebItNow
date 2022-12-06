@@ -156,11 +156,13 @@
                             <asp:MenuItem Text="Bitacora" NavigateUrl="~/Bitacora.aspx"></asp:MenuItem>
                         </asp:MenuItem>
 --%>
-                        <asp:MenuItem Text="Fonac">
+<%--
+                        <asp:MenuItem Text="Itnow">
                             <asp:MenuItem Text="Correspondencia" NavigateUrl="~/Correspondencia.aspx"></asp:MenuItem>
                             <asp:MenuItem Text="Consulta" NavigateUrl="~/Consulta.aspx"></asp:MenuItem>
                             <asp:MenuItem Text="Totales para desincorporados" NavigateUrl="~/Carga_Nomina.aspx"></asp:MenuItem>
                         </asp:MenuItem>
+--%>
                         <asp:MenuItem Text="Salir" NavigateUrl="~/Acceso.aspx">
                         </asp:MenuItem>
                     </Items>
@@ -182,17 +184,7 @@
         <tr>
             <td></td>
             <td>
-                <asp:Label ID="Label1" runat="server" Text="Fiscalía General de la República" 
-                    Width="1000px" CssClass="txtAlign" Font-Bold="True" 
-                    Font-Names="Bookman Old Style"></asp:Label>
-            </td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td>
-                <asp:Label ID="Label2" runat="server" 
-                    Text="Dirección General de Recursos Humanos" Width="1000px" 
+                <asp:Label ID="Label1" runat="server" Text="" Width="1000px" 
                     CssClass="txtAlign" Font-Bold="True" Font-Names="Bookman Old Style"></asp:Label>
             </td>
             <td></td>
@@ -200,8 +192,7 @@
         <tr>
             <td></td>
             <td>
-                <asp:Label ID="Label3" runat="server" 
-                    Text="Dirección General Adjunta de Administración" Width="1000px" 
+                <asp:Label ID="Label2" runat="server" Text="" Width="1000px" 
                     CssClass="txtAlign" Font-Bold="True" Font-Names="Bookman Old Style"></asp:Label>
             </td>
             <td></td>
@@ -209,7 +200,7 @@
         <tr>
             <td></td>
             <td>
-                <asp:Label ID="Label4" runat="server" Text="Dirección de Pagos" Width="1000px" 
+                <asp:Label ID="Label3" runat="server" Text="" Width="1000px" 
                     CssClass="txtAlign" Font-Bold="True" Font-Names="Bookman Old Style"></asp:Label>
             </td>
             <td></td>
@@ -217,8 +208,16 @@
         <tr>
             <td></td>
             <td>
-                <asp:Label ID="Label5" runat="server" Text="Subdirección de Nómina" 
-                    Width="1000px" CssClass="txtAlign" Font-Bold="True" Font-Names="Bookman Old Style"></asp:Label>
+                <asp:Label ID="Label4" runat="server" Text="" Width="1000px" 
+                    CssClass="txtAlign" Font-Bold="True" Font-Names="Bookman Old Style"></asp:Label>
+            </td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <asp:Label ID="Label5" runat="server" Text="" Width="1000px" 
+                    CssClass="txtAlign" Font-Bold="True" Font-Names="Bookman Old Style"></asp:Label>
             </td>
             <td></td>
         </tr>
@@ -230,6 +229,7 @@
     </table>
     <br />
     <br />
+
     <table cellspacing="1" cellpadding="1" border="0">
         <tr>
             <td></td>
@@ -242,9 +242,11 @@
             <td></td>
             <td></td>
             <td>
-                <asp:Button ID="BtnCorrespondencia" runat="server" Text="Correspondencia" Font-Bold="True" Height="52px" OnClick="BtnCorrespondencia_Click" Width="160px" /><asp:Button ID="BtnConsulta" runat="server" Text="Consulta" Font-Bold="True" Height="52px" OnClick="BtnConsulta_Click" Width="160px" /></td>
+                <%-- <asp:Button ID="BtnCorrespondencia" runat="server" Text="Correspondencia" Font-Bold="True" Height="52px" OnClick="BtnCorrespondencia_Click" Width="160px" /><asp:Button ID="BtnConsulta" runat="server" Text="Consulta" Font-Bold="True" Height="52px" OnClick="BtnConsulta_Click" Width="160px" /> --%>
+            </td>
             <td>
-                <asp:Button ID="BtnCarga_Nomina" runat="server" Text="Totales p/Desincorp." Font-Bold="True" Height="52px" OnClick="BtnCarga_Nomina_Click" Width="160px" /><asp:Button ID="BtnSalir" runat="server" Text="Salir" Font-Bold="True" Height="52px" OnClick="BtnSalir_Click" Width="160px" /></td>
+                <%-- <asp:Button ID="BtnCarga_Nomina" runat="server" Text="Totales p/Desincorp." Font-Bold="True" Height="52px" OnClick="BtnCarga_Nomina_Click" Width="160px" /><asp:Button ID="BtnSalir" runat="server" Text="Salir" Font-Bold="True" Height="52px" OnClick="BtnSalir_Click" Width="160px" />  --%>
+            </td>
             <td></td>
         </tr>
         <tr>

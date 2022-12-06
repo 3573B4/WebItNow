@@ -21,6 +21,7 @@ namespace WebItNow
         }
         protected void BtnEnviar_Click(object sender, EventArgs e)
         {
+            //* Validar si el usuario existe o es nuevo
 
         }
     }

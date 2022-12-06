@@ -31,6 +31,11 @@
     <table cellspacing="1" cellpadding="1" border="0">
         <tr>
             <td></td>
+            <td class="style4" colspan="3" align="center" rowspan="1">Generar nueva contraseña</td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td></td>
             <td></td>
             <td></td>
             <td></td>
@@ -38,20 +43,63 @@
         </tr>
         <tr>
             <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>
+                &nbsp;</td>
+            <td>
+                <asp:Label ID="lblUsu" runat="server" Text="Usuario" Width="148px" CssClass="txtAlign"></asp:Label>
+            </td>
+            <td>
+                <asp:TextBox ID="TxtUsu" runat="server" AutoComplete="off"
+                    ToolTip="TECLEA TU USUARIO EN MAYÚSCULAS" Width="148px"></asp:TextBox>
+            </td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td><asp:Label ID="lblCve" runat="server" Text="Clave" Width="148px" CssClass="txtAlign"></asp:Label></td>
+            <td><asp:TextBox ID="TxtCve" runat="server" TextMode="Password" AutoComplete="off"
+                    ToolTip="TECLEA TU CLAVE EN MAYÚSCULAS" Width="148px"></asp:TextBox></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
             <td></td>
             <td>
                 <asp:Button ID="BtnRegresar" runat="server" Text="Regresar" Font-Bold="True" Height="52px" OnClick="BtnRegresar_Click" Width="160px" /></td>
             <td>
-                <asp:Button ID="BtnEnviar" runat="server" Text="Enviar" Font-Bold="True" Height="52px" OnClick="BtnEnviar_Click" Width="160px" />
+                <asp:Button ID="BtnEnviar0" runat="server" Text="Enviar" Font-Bold="True" Height="52px" OnClick="BtnEnviar_Click" Width="160px" />
                 </td>
-            <td></td>
+            <td>
+                <ajaxToolkit:ModalPopupExtender ID="ModalPopupExtender1" runat="server" PopupControlID="pnlMensaje"
+                    TargetControlID="lblOculto" BackgroundCssClass="FondoAplicacion" OnOkScript="mpeMensajeOnOk()" >
+                </ajaxToolkit:ModalPopupExtender>
+            </td>
+            <td><asp:Label ID="Label1" runat="server" Text="Label" Style="display: none;" /></td>
         </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
+    </table>
+    <br />
+    <table cellspacing="1" cellpadding="1" border="0">
         <tr>
             <td>
                 <ajaxToolkit:ModalPopupExtender ID="mpeMensaje" runat="server" PopupControlID="pnlMensaje"

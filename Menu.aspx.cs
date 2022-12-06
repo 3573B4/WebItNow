@@ -27,10 +27,10 @@ namespace WebItNow
                     MenuItem item2 = Menu1.FindItem("Configuracion/Bitacora");
                     item2.Enabled = false;
                     MenuItem item3 = Menu1.FindItem("Fonac/Totales para desincorporados");
-                //  item3.Parent.ChildItems.Remove(item3);
+                 // item3.Parent.ChildItems.Remove(item3);
                     item3.Enabled = false;
 
-                    BtnCarga_Nomina.Enabled = false;
+                 // BtnCarga_Nomina.Enabled = false;
                 }
             }
 

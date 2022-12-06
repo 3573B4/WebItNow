@@ -165,7 +165,11 @@
                 <asp:TextBox ID="TxtUsu" runat="server" AutoComplete="off"
                     ToolTip="TECLEA TU USUARIO EN MAYÚSCULAS" Width="148px"></asp:TextBox>
             </td>
-            <td></td>
+            <td><!--
+                <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server"   
+                ControlToValidate="TxtUsu" ErrorMessage="* Este campo es obligatorio" ForeColor="Red">
+                </asp:RequiredFieldValidator> -->
+            </td>
             <td></td>
         </tr>
         <tr>
@@ -173,7 +177,11 @@
             <td><asp:Label ID="lblCve" runat="server" Text="Clave" Width="148px" CssClass="txtAlign"></asp:Label></td>
             <td><asp:TextBox ID="TxtCve" runat="server" TextMode="Password" AutoComplete="off"
                     ToolTip="TECLEA TU CLAVE EN MAYÚSCULAS" Width="148px"></asp:TextBox></td>
-            <td></td>
+            <td><!--
+                <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server"   
+                ControlToValidate="TxtCve" ErrorMessage="* Este campo es obligatorio" ForeColor="Red">
+                </asp:RequiredFieldValidator> -->
+            </td>
             <td></td>
         </tr>
         <tr>
