@@ -27,13 +27,13 @@ namespace WebItNow
         protected void BtnEnviar_Click(object sender, EventArgs e)
         {
 			//* Validar si el usuario existe o es nuevo
-			if (TxtUsu.Text != "" && TxtCve.Text != "")
+			if (TxtUsu.Text != "" && TxtPass.Text != "")
 			{
 				ConexionBD Conecta = new ConexionBD();
 				Conecta.Abrir();
 
 				Variables.wUsu = TxtUsu.Text;
-				Variables.wCve = TxtCve.Text;
+				Variables.wCve = TxtPass.Text;
 
 				SqlCommand cmd1 = new SqlCommand("Insert into tbUsuarios (Usuario, Clave) " +
 						"values ('" + Variables.wUsu + "','" + Variables.wCve + "')",
@@ -55,7 +55,7 @@ namespace WebItNow
 					{
                         Lbl_Mensaje.Text = "Debes captura Usuario.";
 					}
-					else if (TxtCve.Text == "")
+					else if (TxtPass.Text == "")
 					{
                         Lbl_Mensaje.Text = "Debes captura Clave.";
 					}
