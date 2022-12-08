@@ -18,9 +18,12 @@ namespace WebItNow
 
         public struct UsPrivilegios
         {
-            public const string Administrator = "Administrator";
-            public const string Consultant = "Consultant";
-            public const string UploadFiles = "UploadFiles";
+            // 1 - Administrator
+            // 2 - Consultant
+            // 3 - UploadFiles
+            public const int Administrator = 1;
+            public const int Consultant = 2;
+            public const int UploadFiles = 3;
         }
 
         public static int wTipo_Plaza;

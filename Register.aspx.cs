@@ -19,6 +19,7 @@ namespace WebItNow
             {
             }
         }
+
         protected void BtnRegresar_Click(object sender, EventArgs e)
         {
             Response.Redirect("Acceso.aspx");
@@ -28,25 +29,39 @@ namespace WebItNow
         {
 			//* Validar si el usuario existe o es nuevo
 			if (TxtUsu.Text != "" && TxtPass.Text != "")
-			{
-				ConexionBD Conecta = new ConexionBD();
-				Conecta.Abrir();
+			    {
 
-				Variables.wUsu = TxtUsu.Text;
-				Variables.wCve = TxtPass.Text;
+                // Insertar Registo Usuario Cargas
+                int result = Registrar(TxtUsu.Text, TxtPass.Text, 3, "Insert");
+                if (result == 0)
+                {
+                    LblMessage.Text = "Usuario fue insertado correctamente ";
+                    this.mpeMensaje.Show();
 
-				SqlCommand cmd1 = new SqlCommand("Insert into tbUsuarios (Usuario, Clave) " +
-						"values ('" + Variables.wUsu + "','" + Variables.wCve + "')",
+                    Limpia(this.Controls);
 
-					Conecta.ConectarBD);
-					SqlDataReader dr1 = cmd1.ExecuteReader();
+                    Response.Redirect("Acceso.aspx");
+                }
+                    /*
+                                        ConexionBD Conecta = new ConexionBD();
+                                        Conecta.Abrir();
 
-					cmd1.Dispose();
-					dr1.Dispose();
+                                        Variables.wUsu = TxtUsu.Text;
+                                        Variables.wCve = TxtPass.Text;
 
-					Conecta.Cerrar();
+                                        SqlCommand cmd1 = new SqlCommand("Insert into tbUsuarios (Usuario, UsPassword) " +
+                                                "values ('" + Variables.wUsu + "','" + Variables.wCve + "')",
 
-					Limpia(this.Controls);
+                                        Conecta.ConectarBD);
+                                        SqlDataReader dr1 = cmd1.ExecuteReader();
+
+                                        cmd1.Dispose();
+                                        dr1.Dispose();
+
+                                        Conecta.Cerrar();
+                    */
+
+
 				}
 				else
 				{
@@ -57,7 +72,7 @@ namespace WebItNow
 					}
 					else if (TxtPass.Text == "")
 					{
-                        Lbl_Mensaje.Text = "Debes captura Clave.";
+                        Lbl_Mensaje.Text = "Debes captura Password.";
 					}
                 */
 					this.mpeMensaje.Show();
@@ -86,6 +101,58 @@ namespace WebItNow
                     Limpia(control.Controls);
             }
 
+        }
+
+        private static void NewMethod(ConexionBD Conecta)
+        {
+            Conecta.Abrir();
+        }
+
+        public int Registrar(String pUsuarios, String pUsPassword, int pUsPrivilegios, string pStatementType)
+        {
+            ConexionBD Conecta = new ConexionBD();
+            NewMethod(Conecta);
+
+            try
+            {
+
+                SqlCommand cmd1 = new SqlCommand("sp_tbUsuario_StatementType", Conecta.ConectarBD);
+                cmd1.CommandType = CommandType.StoredProcedure;
+
+                cmd1.Parameters.AddWithValue("@usuario", pUsuarios);
+                cmd1.Parameters.AddWithValue("@password", pUsPassword);
+                cmd1.Parameters.AddWithValue("@privilegios", pUsPrivilegios);
+                cmd1.Parameters.AddWithValue("@StatementType", pStatementType);
+
+                SqlDataReader dr1 = cmd1.ExecuteReader();
+
+                if (dr1.Read())
+                {
+
+                    return dr1.GetInt32(0);
+
+                }
+
+                cmd1.Dispose();
+                dr1.Dispose();
+
+                Conecta.Cerrar();
+
+                return 0;
+
+            }
+            catch (Exception ex)
+            {
+                // Show(ex.Message);
+                LblMessage.Text = ex.Message;
+                this.mpeMensaje.Show();
+            }
+            finally
+            {
+
+            }
+
+            return -1;
         }
     }
 }

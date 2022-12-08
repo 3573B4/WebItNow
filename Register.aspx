@@ -79,7 +79,7 @@
         </tr>
         <tr>
             <td>&nbsp;</td>
-            <td colspan="3" align="center" rowspan="1"><asp:Label ID="Lbl_Mensaje" runat="server"></asp:Label></td>
+            <td colspan="3" align="center" rowspan="1"><asp:Label ID="LblMessage" runat="server"></asp:Label></td>
             <td></td>
             <td></td>
             <td></td>
@@ -130,7 +130,7 @@
             <td></td>
         </tr>
     </table>
-
+    <br />
     <asp:Panel ID="pnlExpira" runat="server" CssClass="CajaDialogo" style="display: none;">
     <table border="0" width="275px" style="margin: 0px; padding: 0px; background-color: #0033CC; color: #FFFFFF;">
         <tr>
@@ -162,4 +162,5 @@
     </div>
 
     </asp:Panel>
+
 </asp:Content>
