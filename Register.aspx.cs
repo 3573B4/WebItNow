@@ -38,6 +38,9 @@ namespace WebItNow
                         LblMessage.Text = "Usuario fue insertado correctamente ";
                         this.mpeMensaje.Show();
 
+                    //string script = "alert('Usuario fue insertado correctamente');";
+                    //ScriptManager.RegisterStartupScript(this, typeof(Page), "alerta", script, true);
+
                         Limpia(this.Controls);
 
                      //Response.Redirect("Acceso.aspx");
