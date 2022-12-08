@@ -31,51 +31,23 @@ namespace WebItNow
 			if (TxtUsu.Text != "" && TxtPass.Text != "")
 			    {
 
-                // Insertar Registo Usuario Cargas
-                int result = Registrar(TxtUsu.Text, TxtPass.Text, 3, "Insert");
-                if (result == 0)
-                {
-                    LblMessage.Text = "Usuario fue insertado correctamente ";
-                    this.mpeMensaje.Show();
+                    // Insertar Registo Usuario Cargas
+                    int result = Registrar(TxtUsu.Text, TxtPass.Text, 3, "Insert");
+                    if (result == 0)
+                    {
+                        LblMessage.Text = "Usuario fue insertado correctamente ";
+                        this.mpeMensaje.Show();
 
-                    Limpia(this.Controls);
+                        Limpia(this.Controls);
 
-                    Response.Redirect("Acceso.aspx");
-                }
-                    /*
-                                        ConexionBD Conecta = new ConexionBD();
-                                        Conecta.Abrir();
-
-                                        Variables.wUsu = TxtUsu.Text;
-                                        Variables.wCve = TxtPass.Text;
-
-                                        SqlCommand cmd1 = new SqlCommand("Insert into tbUsuarios (Usuario, UsPassword) " +
-                                                "values ('" + Variables.wUsu + "','" + Variables.wCve + "')",
-
-                                        Conecta.ConectarBD);
-                                        SqlDataReader dr1 = cmd1.ExecuteReader();
-
-                                        cmd1.Dispose();
-                                        dr1.Dispose();
-
-                                        Conecta.Cerrar();
-                    */
-
+                     //Response.Redirect("Acceso.aspx");
+                    }
 
 				}
 				else
 				{
-                /*
-					if (TxtUsu.Text == "")
-					{
-                        Lbl_Mensaje.Text = "Debes captura Usuario.";
-					}
-					else if (TxtPass.Text == "")
-					{
-                        Lbl_Mensaje.Text = "Debes captura Password.";
-					}
-                */
-					this.mpeMensaje.Show();
+                    LblMessage.Text = "Debes captura Usuario / Password.";
+                    this.mpeMensaje.Show();
 				}
 			}
 

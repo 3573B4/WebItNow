@@ -2,6 +2,53 @@
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
+    <style type="text/css">
+        .txtAlign { Text-Align: right }
+
+        .CajaDialogo
+
+        {
+
+            background-color: lightcyan;
+
+            border-width: 4px;
+
+            border-style: outset;
+
+            border-color: black;
+
+            padding: 0px;
+
+            width: 275px;
+
+            font-weight: bold;
+
+            font-style: italic;
+
+        }
+
+        .CajaDialogo div
+
+        {
+
+            margin: 7px;
+
+            text-align: center;
+
+        }
+
+        .FondoAplicacion
+
+        {
+
+            background-color: Gray;
+
+            /* filter: alpha(opacity=70); */
+
+            opacity: 0.7;
+
+        }
+    </style>
 <script language="javascript" type="text/javascript">
 
     var timer = setTimeout(function () {
@@ -79,7 +126,7 @@
         </tr>
         <tr>
             <td>&nbsp;</td>
-            <td colspan="3" align="center" rowspan="1"><asp:Label ID="LblMessage" runat="server"></asp:Label></td>
+            <td colspan="3" align="center" rowspan="1"><asp:Label ID="Lbl_Message" runat="server"></asp:Label></td>
             <td></td>
             <td></td>
             <td></td>
@@ -99,9 +146,10 @@
                 <asp:Button ID="BtnEnviar0" runat="server" Text="Enviar" Font-Bold="True" Height="52px" OnClick="BtnEnviar_Click" Width="160px" />
                 </td>
             <td>
+                <!--
                 <ajaxToolkit:ModalPopupExtender ID="ModalPopupExtender1" runat="server" PopupControlID="pnlMensaje"
                     TargetControlID="lblOculto" BackgroundCssClass="FondoAplicacion" OnOkScript="mpeMensajeOnOk()" >
-                </ajaxToolkit:ModalPopupExtender>
+                </ajaxToolkit:ModalPopupExtender> !-->
             </td>
             <td><asp:Label ID="Label1" runat="server" Text="Label" Style="display: none;" /></td>
         </tr>
@@ -162,5 +210,42 @@
     </div>
 
     </asp:Panel>
+    <br />
 
+    <asp:Panel ID="pnlMensaje" runat="server" CssClass="CajaDialogo" style="display: none;">
+
+    <table border="0" width="275px" style="margin: 0px; padding: 0px; background-color: #0033CC; color: #FFFFFF;">
+        <tr>
+            <td align="left">
+                <asp:Label ID="Label2" runat="server" Text="I t n o w" />
+            </td>
+            <td>
+                <!--   <asp:ImageButton ID="btnCerrar" runat="server" Style="vertical-align: top;" ImageAlign="Right" /> -->
+            </td>
+        </tr>
+    </table>
+
+        <div>
+            <!-- <asp:Image ID="imgIcono" runat="server" ImageUrl="Exclama.jpg" BorderColor="Black"
+                BorderStyle="Solid" BorderWidth="1px" ImageAlign="Middle" /> -->
+            <br />
+            <table border="0" width="275px" style="margin: 0px; padding: 0px;" >
+                <tr>
+                    <td><asp:Label ID="LblMessage" runat="server" Text="" /></td>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
+
+        <div>
+            <br />
+            <table border="0" width="275px" style="margin: 0px; padding: 0px;">
+                <tr>
+                    <td align="center"><asp:Button ID="btnClose" runat="server" Text="Cerrar" /></td>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
+
+    </asp:Panel>
 </asp:Content>
