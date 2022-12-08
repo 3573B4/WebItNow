@@ -25,6 +25,7 @@ namespace WebItNow
             }
 
         }
+
         protected void BtnAceptar_Click(object sender, EventArgs e)
         {
             if (TxtUsu.Text == "" || TxtPass.Text == "" || txtVerificationCode.Text == "")
@@ -44,6 +45,9 @@ namespace WebItNow
 
                 if (result >= 1)
                 {
+                    // Permisos Usuario
+                    // System.Web.HttpContext.Current.Session["UsPrivilegios"] = dr1["UsPrivilegios"].ToString().Trim();
+                    
                     Response.Redirect("Menu.aspx");
                 }
                 else if (result == 0)
@@ -58,7 +62,7 @@ namespace WebItNow
 
                                 try
                                 {
-                                    SqlCommand cmd1 = new SqlCommand("Select * From tbUsuarios Where Usuario = '" + TxtUsu.Text + "' and Password = '" + TxtPass.Text + "'", Conecta.ConectarBD);
+                                    SqlCommand cmd1 = new SqlCommand("Select * From tbUsuarios Where Usuario = '" + TxtUsu.Text + "' and UsPassword = '" + TxtPass.Text + "'", Conecta.ConectarBD);
                                     SqlDataReader dr1 = cmd1.ExecuteReader();
 
                                     //Application.EnableVisualStyles();
@@ -137,7 +141,7 @@ namespace WebItNow
                 cmd1.CommandType = CommandType.StoredProcedure;
 
                 cmd1.Parameters.AddWithValue("@usuario", pUsuarios);
-                cmd1.Parameters.AddWithValue("@contrasena", pContrasena);
+                cmd1.Parameters.AddWithValue("@password", pContrasena);
 
                 SqlDataReader dr1 = cmd1.ExecuteReader();
 
@@ -167,5 +171,6 @@ namespace WebItNow
 
             return -1;
         }
+
     }
 }

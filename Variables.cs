@@ -16,6 +16,13 @@ namespace WebItNow
         public static string wCve;
         public static string wPass;
 
+        public struct UsPrivilegios
+        {
+            public const string Administrator = "Administrator";
+            public const string Consultant = "Consultant";
+            public const string UploadFiles = "UploadFiles";
+        }
+
         public static int wTipo_Plaza;
         public static int wEstatus;
 
