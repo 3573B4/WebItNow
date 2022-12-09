@@ -25,8 +25,11 @@ namespace WebItNow
         {
             if (TxtUsu.Text == "" || TxtPass.Text == "" || txtVerificationCode.Text == "")
             {
-                LblMessage.Text = "Debes capturar Usuario / Clave / " + "<br/>" + "Código de verificación.";
-                this.mpeMensaje.Show();
+                Lbl_Message.Visible = true;
+                Lbl_Message.Text = "* Estos campos son obligatorios";
+
+                //LblMessage.Text = "Debes capturar Usuario / Clave / " + "<br/>" + "Código de verificación.";
+                //this.mpeMensaje.Show();
             }
             else if (txtVerificationCode.Text.ToLower() != Session["CaptchaVerify"].ToString())
             {
@@ -44,6 +47,7 @@ namespace WebItNow
                     // System.Web.HttpContext.Current.Session["UsPrivilegios"] = dr1["UsPrivilegios"].ToString().Trim();
 
                     Response.Redirect("Menu.aspx");
+                    Lbl_Message.Visible = false;
                 }
                 else if (result == 0)
                 {

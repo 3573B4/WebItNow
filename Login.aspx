@@ -17,12 +17,18 @@
         </div>
         <div class="form-group">
             <asp:Label ID="LblUsu" runat="server" Text="Usuario" CssClass="control-label co-sm-3"></asp:Label>
+            <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server"   
+                ControlToValidate="TxtUsu" ErrorMessage="*" ForeColor="Red">
+                </asp:RequiredFieldValidator>
             <div class="col-sm-12">
                 <asp:TextBox ID="TxtUsu" runat="server" CssClass="form-control" placeholder="Usuario"></asp:TextBox>
             </div>
         </div>
         <div class="form-group">
-            <asp:Label ID="Label1" runat="server" Text="Contraseña" CssClass="control-label col-sm-2"></asp:Label>
+            <asp:Label ID="LblPass" runat="server" Text="Contraseña" CssClass="control-label col-sm-2"></asp:Label>
+            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server"   
+                ControlToValidate="TxtPass" ErrorMessage="*" ForeColor="Red">
+                </asp:RequiredFieldValidator>
             <div class="col-sm-12">
                 <asp:TextBox ID="TxtPass" runat="server" CssClass="form-control" placeholder="Contraseña"></asp:TextBox>
             </div>
@@ -39,8 +45,16 @@
         </div>
         <div class="from-group">
             <asp:Label ID="lblVerificacion" runat="server" CssClass="control-label col-sm-2" Text="Código de verificación" ></asp:Label>
+            <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server"   
+                ControlToValidate="txtVerificationCode" ErrorMessage="*" ForeColor="Red">
+                </asp:RequiredFieldValidator>
             <div class="col-sm-12">
                 <asp:TextBox runat="server" ID="txtVerificationCode" placeholder="Código de verificación" CssClass="form-control"></asp:TextBox>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="d-grid col-6 mx-auto">
+                <asp:Label ID="Lbl_Message" runat="server" ForeColor="Red" Visible="False" ></asp:Label>
             </div>
         </div>
         <div class="from-group">
