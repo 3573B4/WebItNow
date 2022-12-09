@@ -46,7 +46,7 @@
         <div class="from-group">
             <div class="d-grid col-6 mx-auto">
                 
-                    <button <%--onclick="location.href='Forgot-Password.aspx'" --%> class="btn btn-link">Olvidé mi contraseña</button>
+                    <button onclick="location.href='Forgot-Password.aspx'" class="btn btn-link">Olvidé mi contraseña</button>
                 
             </div>
         </div>
@@ -64,7 +64,7 @@
 
         <asp:Panel ID="pnlMensaje" runat="server" CssClass="CajaDialogo" style="display: none;">
 
-        <table border="0" width="275px" style="margin: 0px; padding: 0px; background-color: #0033CC; color: #FFFFFF;">
+        <table border="0" width="287px" style="margin: 0px; padding: 0px; background-color: #0033CC; color: #FFFFFF;">
             <tr>
                 <td align="left">
                     <asp:Label ID="Label6" runat="server" Text="I t n o w" />

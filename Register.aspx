@@ -105,7 +105,7 @@
                 <ajaxToolkit:ModalPopupExtender ID="ModalPopupExtender1" runat="server" PopupControlID="pnlMensaje"
                     TargetControlID="lblOculto" BackgroundCssClass="FondoAplicacion" OnOkScript="mpeMensajeOnOk()" >
                 </ajaxToolkit:ModalPopupExtender> !-->
-            <asp:Button ID="Button1" runat="server" Text="Grabar y Finalizar" onclick="Button1_Click" Height="52px" Visible="False" Width="160px" />
+            <asp:Button ID="Button1" runat="server" Text="Grabar y Finalizar" onclick="Button1_Click" Height="52px" Visible="false" Width="160px" />
                 <ajaxToolkit:ConfirmButtonExtender ID="btnEnviar_ConfirmButtonExtender" runat="server" 
                     BehaviorID="btnEnviar_ConfirmButtonExtender" ConfirmText="Usuario para alta BD" TargetControlID="Button1" />
             </td>
@@ -172,7 +172,7 @@
 
     <asp:Panel ID="pnlMensaje" runat="server" CssClass="CajaDialogo" style="display: none;">
 
-    <table border="0" width="275px" style="margin: 0px; padding: 0px; background-color: #0033CC; color: #FFFFFF;">
+    <table border="0" width="287px" style="margin: 0px; padding: 0px; background-color: #0033CC; color: #FFFFFF;">
         <tr>
             <td align="left">
                 <asp:Label ID="Label2" runat="server" Text="I t n o w" />
