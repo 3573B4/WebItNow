@@ -116,6 +116,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
+    <Content Include="Estilos.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Forgot-Password.aspx" />
@@ -130,6 +131,7 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Images\Itnow.jpg" />
     <Content Include="Images\search_find.png" />
+    <Content Include="Login.aspx" />
     <Content Include="Main.Master" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Menu.aspx" />
@@ -202,6 +204,13 @@
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
     <Compile Include="Main.Master.cs">
       <DependentUpon>Main.Master</DependentUpon>

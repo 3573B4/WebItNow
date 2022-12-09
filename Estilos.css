@@ -1,0 +1,10 @@
+﻿h2 {
+    text-align: center;
+}
+
+.contenedorLogin {
+    width: 30% !important;
+    margin-top: 7% !important;
+    margin-left: 300px;
+    border: 5px !important;
+}
