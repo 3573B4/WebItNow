@@ -163,7 +163,7 @@
                             <asp:MenuItem Text="Totales para desincorporados" NavigateUrl="~/Carga_Nomina.aspx"></asp:MenuItem>
                         </asp:MenuItem>
 --%>
-                        <asp:MenuItem Text="Salir" NavigateUrl="~/Acceso.aspx">
+                        <asp:MenuItem Text="Salir" NavigateUrl="~/Login.aspx">
                         </asp:MenuItem>
                     </Items>
                 </asp:Menu>
@@ -320,7 +320,7 @@
     <table border="0" width="275px" style="margin: 0px; padding: 0px; background-color: #0033CC; color: #FFFFFF;">
         <tr>
             <td align="center">
-                <asp:Label ID="Label6" runat="server" Text="F O N A C" />
+                <asp:Label ID="Label6" runat="server" Text="I T N O W" />
             </td>
             <td></td>
         </tr>

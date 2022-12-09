@@ -47,7 +47,7 @@ namespace WebItNow
         }
         protected void BtnSalir_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Acceso.aspx");
+            Response.Redirect("Login.aspx");
         }
         protected void BtnCarga_Nomina_Click(object sender, EventArgs e)
         {

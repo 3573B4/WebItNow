@@ -2,53 +2,6 @@
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
-    <style type="text/css">
-        .txtAlign { Text-Align: right }
-
-        .CajaDialogo
-
-        {
-
-            background-color: lightcyan;
-
-            border-width: 4px;
-
-            border-style: outset;
-
-            border-color: black;
-
-            padding: 0px;
-
-            width: 275px;
-
-            font-weight: bold;
-
-            font-style: italic;
-
-        }
-
-        .CajaDialogo div
-
-        {
-
-            margin: 7px;
-
-            text-align: center;
-
-        }
-
-        .FondoAplicacion
-
-        {
-
-            background-color: Gray;
-
-            /* filter: alpha(opacity=70); */
-
-            opacity: 0.7;
-
-        }
-    </style>
 <script language="javascript" type="text/javascript">
 
     var timer = setTimeout(function () {
@@ -100,33 +53,35 @@
                 &nbsp;</td>
             <td>
                 <asp:Label ID="lblUsu" runat="server" Text="Usuario" Width="148px" CssClass="txtAlign"></asp:Label>
+                <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server"   
+                ControlToValidate="TxtUsu" ErrorMessage="*" ForeColor="Red">
+                </asp:RequiredFieldValidator>
             </td>
             <td>
                 <asp:TextBox ID="TxtUsu" runat="server" AutoComplete="off"
                     ToolTip="TECLEA TU USUARIO EN MAYÚSCULAS" Width="148px"></asp:TextBox>
             </td>
             <td>
-                <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server"   
-                ControlToValidate="TxtUsu" ErrorMessage="* Este campo es obligatorio" ForeColor="Red">
-                </asp:RequiredFieldValidator>
             </td>
             <td></td>
         </tr>
         <tr>
             <td>&nbsp;</td>
-            <td><asp:Label ID="lblCve" runat="server" Text="Clave" Width="148px" CssClass="txtAlign"></asp:Label></td>
+            <td>
+                <asp:Label ID="lblCve" runat="server" Text="Clave" Width="148px" CssClass="txtAlign"></asp:Label>
+                <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server"   
+                ControlToValidate="TxtPass" ErrorMessage="*" ForeColor="Red">
+                </asp:RequiredFieldValidator>
+            </td>
             <td><asp:TextBox ID="TxtPass" runat="server" TextMode="Password" AutoComplete="off"
                     ToolTip="TECLEA TU CLAVE EN MAYÚSCULAS" Width="148px"></asp:TextBox></td>
             <td>
-                <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server"   
-                ControlToValidate="TxtPass" ErrorMessage="* Este campo es obligatorio" ForeColor="Red">
-                </asp:RequiredFieldValidator>
             </td>
             <td></td>
         </tr>
         <tr>
             <td>&nbsp;</td>
-            <td colspan="3" align="center" rowspan="1"><asp:Label ID="Lbl_Message" runat="server"></asp:Label></td>
+            <td colspan="3" align="center" rowspan="1"><asp:Label ID="Lbl_Message" runat="server" ForeColor="Red" Visible="False"></asp:Label></td>
             <td></td>
             <td></td>
             <td></td>
@@ -244,7 +199,7 @@
             <br />
             <table border="0" width="275px" style="margin: 0px; padding: 0px;">
                 <tr>
-                    <td align="center"><asp:Button ID="btnClose" runat="server" Text="Cerrar" /></td>
+                    <td align="center"><asp:Button ID="btnClose" OnClick="btnClose_Click" runat="server" Text="Cerrar" /></td>
                     <td></td>
                 </tr>
             </table>

@@ -17,12 +17,12 @@ namespace WebItNow
         {
             if (!Page.IsPostBack)
             {
+
             }
         }
-
         protected void BtnRegresar_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Acceso.aspx");
+            Response.Redirect("Login.aspx");
         }
 
         protected void BtnEnviar_Click(object sender, EventArgs e)
@@ -33,15 +33,16 @@ namespace WebItNow
 
                     // Insertar Registo Usuario Cargas
                     int result = Registrar(TxtUsu.Text, TxtPass.Text, 3, "Insert");
+
                     if (result == 0)
                     {
-                     //   LblMessage.Text = "Usuario fue insertado correctamente ";
-                     //   this.mpeMensaje.Show();
+                        LblMessage.Text = "Usuario fue insertado correctamente ";
+                        this.mpeMensaje.Show();
 
-                    string script = @"<script type='text/javascript'>
-                            alert('Usuario fue agregado correctamente'); </script>";
+                    //string script = @"<script type='text/javascript'>
+                    //        alert('Usuario fue agregado correctamente'); </script>";
 
-                    ScriptManager.RegisterStartupScript(this, typeof(Page), "alerta", script, false);
+                    //ScriptManager.RegisterStartupScript(this, typeof(Page), "alerta", script, false);
 
 
                     //string script = "alert('Usuario fue insertado correctamente');";
@@ -49,17 +50,24 @@ namespace WebItNow
 
                     Limpia(this.Controls);
 
-                     // Response.Redirect("Acceso.aspx");
+                     // Response.Redirect("Login.aspx");
                     }
 
-				}
+                    Lbl_Message.Visible = false;
+            }
 				else
 				{
-                    LblMessage.Text = "Debes captura Usuario / Password.";
-                    this.mpeMensaje.Show();
+                Lbl_Message.Visible = true;
+                Lbl_Message.Text = "* Estos campos son obligatorios";
+                   // LblMessage.Text = "Debes captura Usuario / Password.";
+                   // this.mpeMensaje.Show();
 				}
 			}
 
+        protected void btnClose_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Login.aspx");
+        }
         public void Limpia(ControlCollection controles)
         {
             foreach (Control control in controles)
