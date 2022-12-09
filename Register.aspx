@@ -28,114 +28,57 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
     <br />
-    <table cellspacing="1" cellpadding="1" border="0">
-        <tr>
-            <td></td>
-            <td class="style4" colspan="3" align="center" rowspan="1"></td>
-            <td>&nbsp;</td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>
-                &nbsp;</td>
-            <td>
-                <asp:Label ID="lblUsu" runat="server" Text="Usuario" Width="148px" CssClass="txtAlign"></asp:Label>
-                <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server"   
+
+<div class="container well contenedorLogin">
+        <div class="row">
+            <div class="col-xs-12">
+                <h2> Registrar</h2>
+            </div>
+        </div>
+        <div class="form-group">
+            <asp:Label ID="Label3" runat="server" Text="Usuario" CssClass="control-label co-sm-3" Font-Bold="False"></asp:Label>
+            <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server"   
                 ControlToValidate="TxtUsu" ErrorMessage="*" ForeColor="Red">
                 </asp:RequiredFieldValidator>
-            </td>
-            <td>
-                <asp:TextBox ID="TxtUsu" runat="server" AutoComplete="off"
-                    ToolTip="TECLEA TU USUARIO EN MAYÚSCULAS" Width="148px"></asp:TextBox>
-            </td>
-            <td>
-            </td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>&nbsp;</td>
-            <td>
-                <asp:Label ID="lblCve" runat="server" Text="Clave" Width="148px" CssClass="txtAlign"></asp:Label>
-                <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server"   
+            <div class="col-sm-12">
+                <asp:TextBox ID="TxtUsu" runat="server" CssClass="form-control" placeholder="Usuario"></asp:TextBox>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <asp:Label ID="Label4" runat="server" Text="Contraseña" CssClass="control-label col-sm-2"></asp:Label>
+            <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server"   
                 ControlToValidate="TxtPass" ErrorMessage="*" ForeColor="Red">
                 </asp:RequiredFieldValidator>
-            </td>
-            <td><asp:TextBox ID="TxtPass" runat="server" TextMode="Password" AutoComplete="off"
-                    ToolTip="TECLEA TU CLAVE EN MAYÚSCULAS" Width="148px"></asp:TextBox></td>
-            <td>
-            </td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>&nbsp;</td>
-            <td colspan="3" align="center" rowspan="1"><asp:Label ID="Lbl_Message" runat="server" ForeColor="Red" Visible="False"></asp:Label></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td>
-                <asp:Button ID="BtnRegresar" runat="server" Text="Regresar" Font-Bold="True" Height="52px" OnClick="BtnRegresar_Click" Width="160px" /></td>
-            <td>
-                <asp:Button ID="BtnEnviar0" runat="server" Text="Enviar" Font-Bold="True" Height="52px" OnClick="BtnEnviar_Click" Width="160px" />
-                </td>
-            <td>
-                <!--
-                <ajaxToolkit:ModalPopupExtender ID="ModalPopupExtender1" runat="server" PopupControlID="pnlMensaje"
-                    TargetControlID="lblOculto" BackgroundCssClass="FondoAplicacion" OnOkScript="mpeMensajeOnOk()" >
-                </ajaxToolkit:ModalPopupExtender> !-->
-            <asp:Button ID="Button1" runat="server" Text="Grabar y Finalizar" onclick="Button1_Click" Height="52px" Visible="false" Width="160px" />
-                <ajaxToolkit:ConfirmButtonExtender ID="btnEnviar_ConfirmButtonExtender" runat="server" 
-                    BehaviorID="btnEnviar_ConfirmButtonExtender" ConfirmText="Usuario para alta BD" TargetControlID="Button1" />
-            </td>
-            <td><asp:Label ID="Label1" runat="server" Text="Label" Style="display: none;" /></td>
-        </tr>
-    </table>
-    <br />
-    <table cellspacing="1" cellpadding="1" border="0">
-        <tr>
-            <td>
+            <div class="col-sm-12">
+                <asp:TextBox ID="TxtPass" runat="server" CssClass="form-control" placeholder="Contraseña"></asp:TextBox>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="d-grid col-6 mx-auto">
+                <asp:Label ID="Lbl_Message" runat="server" ForeColor="Red" Visible="False" ></asp:Label>
+            </div>
+        </div>        
+        <div class="from-group">
+            <div class="d-grid col-6 mx-auto">
+                <asp:Button ID="BtnRegresar" runat="server" Text="Iniciar Sesión" Font-Bold="True" OnClick="BtnRegresar_Click" CssClass="btn btn-link"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="d-grid col-6 mx-auto">
+                <asp:Button ID="BtnEnviar" runat="server" Text="Registrar" Font-Bold="True" OnClick="BtnEnviar_Click" CssClass="btn btn-primary" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="d-grid col-6 mx-auto">
                 <ajaxToolkit:ModalPopupExtender ID="mpeMensaje" runat="server" PopupControlID="pnlMensaje"
                     TargetControlID="lblOculto" BackgroundCssClass="FondoAplicacion" OnOkScript="mpeMensajeOnOk()" >
                 </ajaxToolkit:ModalPopupExtender>
-            </td>
-            <td><asp:Label ID="lblOculto" runat="server" Text="Label" Style="display: none;" /></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>
-                <ajaxToolkit:ModalPopupExtender ID="mpeExpira" runat="server" PopupControlID="pnlExpira"
-                    TargetControlID="lblHide" BackgroundCssClass="FondoAplicacion" OnOkScript="mpeExpiraOnOk()" >
-                </ajaxToolkit:ModalPopupExtender>
-            </td>
-            <td class="style3"><asp:Label ID="lblHide" runat="server" Text="Label" Style="display: none;" />
-            </td>
-            <td></td>
-            <td></td>
-        </tr>
-    </table>
+                <asp:Label ID="lblOculto" runat="server" Text="Label" Style="display: none;" />
+            </div>
+        </div>
+    </div>
+
     <br />
     <asp:Panel ID="pnlExpira" runat="server" CssClass="CajaDialogo" style="display: none;">
     <table border="0" width="275px" style="margin: 0px; padding: 0px; background-color: #0033CC; color: #FFFFFF;">
@@ -206,4 +149,29 @@
         </div>
 
     </asp:Panel>
+
+    <table cellspacing="1" cellpadding="1" border="0">
+        <tr>
+            <td>
+                <ajaxToolkit:ModalPopupExtender ID="ModalPopupExtender1" runat="server" PopupControlID="pnlMensaje"
+                    TargetControlID="lblOculto" BackgroundCssClass="FondoAplicacion" OnOkScript="mpeMensajeOnOk()" >
+                </ajaxToolkit:ModalPopupExtender>
+            </td>
+            <td><asp:Label ID="Label1" runat="server" Text="Label" Style="display: none;" /></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>
+                <ajaxToolkit:ModalPopupExtender ID="mpeExpira" runat="server" PopupControlID="pnlExpira"
+                    TargetControlID="lblHide" BackgroundCssClass="FondoAplicacion" OnOkScript="mpeExpiraOnOk()" >
+                </ajaxToolkit:ModalPopupExtender>
+            </td>
+            <td class="style3"><asp:Label ID="lblHide" runat="server" Text="Label" Style="display: none;" />
+            </td>
+            <td></td>
+            <td></td>
+        </tr>
+    </table>
+
 </asp:Content>
