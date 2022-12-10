@@ -68,6 +68,7 @@ namespace WebItNow
         {
             Response.Redirect("Login.aspx");
         }
+
         public void Limpia(ControlCollection controles)
         {
             foreach (Control control in controles)
@@ -144,39 +145,5 @@ namespace WebItNow
             return -1;
         }
 
-        protected void Button1_Click(object sender, EventArgs e)
-        {
-            //* Validar si el usuario existe o es nuevo
-            if (TxtUsu.Text != "" && TxtPass.Text != "")
-            {
-
-                // Insertar Registo Usuario Cargas
-                int result = Registrar(TxtUsu.Text, TxtPass.Text, 3, "Insert");
-
-                if (result == 0)
-                {
-                    //   LblMessage.Text = "Usuario fue insertado correctamente ";
-                    //   this.mpeMensaje.Show();
-
-                    string script = @"<script type='text/javascript'>
-                            alert('Usuario fue agregado correctamente'); </script>";
-                    ScriptManager.RegisterStartupScript(this, typeof(Page), "alerta", script, false);
-
-
-                    //string script = "alert('Usuario fue insertado correctamente');";
-                    //ScriptManager.RegisterStartupScript(this, typeof(Page), "alerta", script, true);
-
-                    Limpia(this.Controls);
-
-                    // Response.Redirect("Acceso.aspx");
-                }
-
-            }
-            else
-            {
-                LblMessage.Text = "Debes captura Usuario / Password.";
-                this.mpeMensaje.Show();
-            }
-        }
     }
 }

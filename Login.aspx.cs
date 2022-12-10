@@ -27,7 +27,7 @@ namespace WebItNow
             {
                 Lbl_Message.Visible = true;
                 Lbl_Message.Text = "* Estos campos son obligatorios";
-
+                lblCaptchaMessage.Text = "";
                 //LblMessage.Text = "Debes capturar Usuario / Clave / " + "<br/>" + "Código de verificación.";
                 //this.mpeMensaje.Show();
             }
