@@ -16,7 +16,7 @@
             </div>
         </div>
         <div class="form-group">
-            <asp:Label ID="LblUsu" runat="server" Text="Usuario" CssClass="control-label co-sm-3"></asp:Label>
+            <asp:Label ID="LblUsu" runat="server" Text="Usuario" CssClass="control-label co-sm-2"></asp:Label>
             <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server"   
                 ControlToValidate="TxtUsu" ErrorMessage="*" ForeColor="Red">
                 </asp:RequiredFieldValidator>
@@ -34,14 +34,12 @@
             </div>
         </div>
         <div class="from-group">
-           
                 <div class="d-grid col-4 mx-auto">
                     <br />
                     <asp:Image ID="ImgCaptcha" runat="server" Height="55px" ImageUrl="~/Captcha.aspx" Width="186px" />
                     <br />
                     <asp:Label runat="server" ID="lblCaptchaMessage"></asp:Label>
                 </div>
-           
         </div>
         <div class="from-group">
             <asp:Label ID="lblVerificacion" runat="server" CssClass="control-label col-sm-2" Text="Código de verificación" ></asp:Label>
@@ -59,15 +57,19 @@
         </div>
         <div class="from-group">
             <div class="d-grid col-6 mx-auto">
-                
                     <button onclick="location.href='Forgot-Password.aspx'" class="btn btn-link">Olvidé mi contraseña</button>
-                
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-12">                
+                <div class="d-grid gap-2 d-md-flex justify-content-center">
+                    <asp:Button ID="BtnAceptar" runat="server" Text="Iniciar sesión"  Font-Bold="True"  CssClass="btn btn-primary me-md-2" OnClick="BtnAceptar_Click"/>
+                    <asp:Button ID="BtnRegistrarse" runat="server" Font-Bold="True" Text="Registrarse" OnClick="BtnRegistrarse_Click" CssClass="btn btn-outline-primary"/>
+                </div>
             </div>
         </div>
         <div class="form-group">
             <div class="d-grid gap-2 d-md-flex justify-content-center">
-                <asp:Button ID="BtnAceptar" runat="server" Text="Iniciar sesión"  Font-Bold="True"  CssClass="btn btn-primary me-md-2" OnClick="BtnAceptar_Click"/>
-                <asp:Button ID="BtnRegistrarse" runat="server" Font-Bold="True" Text="Registrarse" OnClick="BtnRegistrarse_Click" CssClass="btn btn-outline-primary"/>
                 <ajaxToolkit:ModalPopupExtender ID="mpeMensaje" runat="server" PopupControlID="pnlMensaje"
                     TargetControlID="lblOculto" BackgroundCssClass="FondoAplicacion" OnOkScript="mpeMensajeOnOk()" >
                 </ajaxToolkit:ModalPopupExtender>
@@ -76,7 +78,7 @@
         </div>
     </div>
 
-        <asp:Panel ID="pnlMensaje" runat="server" CssClass="CajaDialogo" style="display: none;">
+    <asp:Panel ID="pnlMensaje" runat="server" CssClass="CajaDialogo" style="display: none;">
 
         <table border="0" width="287px" style="margin: 0px; padding: 0px; background-color: #0033CC; color: #FFFFFF;">
             <tr>
@@ -88,27 +90,27 @@
             </tr>
         </table>
 
-            <div>
-                <br />
-                <table border="0" width="275px" style="margin: 0px; padding: 0px;" >
-                    <tr>
-                        <td><asp:Label ID="LblMessage" runat="server" Text="" /></td>
-                        <td></td>
-                    </tr>
-                </table>
-            </div>
+        <div>
+            <br />
+            <table border="0" width="275px" style="margin: 0px; padding: 0px;" >
+                <tr>
+                    <td><asp:Label ID="LblMessage" runat="server" Text="" /></td>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
 
-            <div>
-                <br />
-                <table border="0" width="275px" style="margin: 0px; padding: 0px;">
-                    <tr>
-                        <td align="center"><asp:Button ID="btnClose" runat="server" Text="Cerrar" /></td>
-                        <td></td>
-                    </tr>
-                </table>
-            </div>
+        <div>
+            <br />
+            <table border="0" width="275px" style="margin: 0px; padding: 0px;">
+                <tr>
+                    <td align="center"><asp:Button ID="btnClose" runat="server" Text="Cerrar" /></td>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
 
-        </asp:Panel>
+    </asp:Panel>
     </ContentTemplate>
     </asp:UpdatePanel>
 </asp:Content>
