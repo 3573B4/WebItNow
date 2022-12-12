@@ -25,5 +25,10 @@ namespace WebItNow
         {
 
         }
+
+        protected void ChangePassword1_ChangedPassword(object sender, EventArgs e)
+        {
+
+        }
     }
 }
