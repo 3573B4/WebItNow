@@ -21,6 +21,7 @@ namespace WebItNow
             }
 
         }
+
         public void OnTextChanged(object sender, EventArgs e)
         {
             string wPrivilegios = System.Web.HttpContext.Current.Session["UsPrivilegios"] as string;
@@ -73,7 +74,32 @@ namespace WebItNow
 
         protected void BtnEnviar_Click(object sender, EventArgs e)
         {
+            if (TxtPass.Text == "" || TxtConfPass.Text == "")
+            {
+                Lbl_Message.Visible = true;
+                Lbl_Message.Text = "* Estos campos son obligatorios";
+            }
+            else
+            {
 
+                if (TxtPass.Text == TxtConfPass.Text)
+                {
+                    int result = UpdatePassword(TxtUsu.Text, TxtPass.Text, 3, "Update");
+                    if (result == 0)
+                    {
+                        LblMessage.Text = "Contraseña se actualizo correctamente ";
+                        this.mpeMensaje.Show();
+
+                        Limpia(this.Controls);
+                    }
+                    Lbl_Message.Visible = false;
+                }
+                else 
+                {
+                    Lbl_Message.Visible = true;
+                    Lbl_Message.Text = "* Contraseñas son diferentes";
+                }
+            }
         }
 
         public int ValidaUser(String pUsuarios, int pUsPrivilegios)
@@ -123,6 +149,77 @@ namespace WebItNow
         private static void NewMethod(ConexionBD Conecta)
         {
             Conecta.Abrir();
+        }
+
+        public int UpdatePassword(String pUsuarios, String pUsPassword, int pUsPrivilegios, string pStatementType)
+        {
+            ConexionBD Conecta = new ConexionBD();
+            NewMethod(Conecta);
+
+            try
+            {
+
+                SqlCommand cmd1 = new SqlCommand("sp_tbUsuario_StatementType", Conecta.ConectarBD);
+                cmd1.CommandType = CommandType.StoredProcedure;
+
+                cmd1.Parameters.AddWithValue("@usuario", pUsuarios);
+                cmd1.Parameters.AddWithValue("@password", pUsPassword);
+                cmd1.Parameters.AddWithValue("@privilegios", pUsPrivilegios);
+                cmd1.Parameters.AddWithValue("@StatementType", pStatementType);
+
+                SqlDataReader dr1 = cmd1.ExecuteReader();
+
+                if (dr1.Read())
+                {
+
+                    return dr1.GetInt32(0);
+
+                }
+
+                cmd1.Dispose();
+                dr1.Dispose();
+
+                Conecta.Cerrar();
+
+                return 0;
+
+            }
+            catch (Exception ex)
+            {
+                // Show(ex.Message);
+                LblMessage.Text = ex.Message;
+                this.mpeMensaje.Show();
+            }
+            finally
+            {
+
+            }
+
+            return -1;
+        }
+
+        public void Limpia(ControlCollection controles)
+        {
+            foreach (Control control in controles)
+            {
+                if (control is TextBox)
+                    ((TextBox)control).Text = string.Empty;
+                else if (control is DropDownList)
+                    ((DropDownList)control).Items.Clear();
+                else if (control is RadioButtonList)
+                    ((RadioButtonList)control).ClearSelection();
+                else if (control is CheckBoxList)
+                    ((CheckBoxList)control).ClearSelection();
+                else if (control is RadioButton)
+                    ((RadioButton)control).Checked = false;
+                else if (control is CheckBox)
+                    ((CheckBox)control).Checked = false;
+                else if (control.HasControls())
+                    //Esta linea detécta un Control que contenga otros Controles
+                    //Así ningún control se quedará sin ser limpiado.
+                    Limpia(control.Controls);
+            }
+
         }
 
     }
