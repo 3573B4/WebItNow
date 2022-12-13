@@ -112,7 +112,6 @@
 
     </asp:Panel>
     <br />
-
     <asp:Panel ID="pnlMensaje" runat="server" CssClass="CajaDialogo" style="display: none;">
 
     <table border="0" width="287px" style="margin: 0px; padding: 0px; background-color: #0033CC; color: #FFFFFF;">
