@@ -29,11 +29,11 @@
     //    alert(xx_nombre_pagina);
 
     </script>
-    <link href="~/Styles/Estilos.css" rel="stylesheet" type="text/css" />
-    <link href="~/Styles/Style_Panel.css" rel="stylesheet" type="text/css" />
-    <link href="~/Styles/Stylos_Itnow.css" rel="stylesheet" type="text/css" />
 
-<!--    <link href="~/Styles/Estilo.css" rel="stylesheet" type="text/css" /> -->
+    <link href="~/Styles/default.css" rel="stylesheet" type="text/css" />
+    <link href="~/Styles/estilos.css" rel="stylesheet" type="text/css" />
+    <link href="~/Styles/panek_message.css" rel="stylesheet" type="text/css" />
+
     <style type="text/css">
         .style1
         {
@@ -55,7 +55,6 @@
         { height: 80%; width: 100%; }
         #footerContent
         { height: 10%; width: 100%; }
-        
     </style>
 
 </head>
