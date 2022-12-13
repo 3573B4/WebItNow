@@ -52,7 +52,7 @@ namespace WebItNow
                     // Permisos Usuario
                     // System.Web.HttpContext.Current.Session["UsPrivilegios"] = dr1["UsPrivilegios"].ToString().Trim();
 
-                    Response.Redirect("Menu.aspx");
+                    Response.Redirect("SubirArchivo.aspx");
                     Lbl_Message.Visible = false;
                 }
                 else if (result == 0)

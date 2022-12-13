@@ -115,6 +115,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\icono-Subir-Archivo-morado.png" />
     <Content Include="Styles\center_controls.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -166,6 +167,7 @@
     <Content Include="Register.aspx" />
     <Content Include="Styles\panel_message.css" />
     <Content Include="Styles\default.css" />
+    <Content Include="SubirArchivo.aspx" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config" />
     <Content Include="Bundle.config" />
@@ -242,6 +244,13 @@
     <Compile Include="Register.aspx.designer.cs">
       <DependentUpon>Register.aspx</DependentUpon>
     </Compile>
+    <Compile Include="SubirArchivo.aspx.cs">
+      <DependentUpon>SubirArchivo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SubirArchivo.aspx.designer.cs">
+      <DependentUpon>SubirArchivo.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Variables.cs" />
     <Compile Include="ViewSwitcher.ascx.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
@@ -253,6 +262,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Directorio\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
