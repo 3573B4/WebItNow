@@ -117,11 +117,11 @@
         var modal = $find(modalId);
             modal.show();
         //alert("La sesión ha expirado.");
-        //location.href = '/Acceso.aspx';
+        //location.href = '/Login.aspx';
     }, 120000);
 
     function acceso() {
-        location.href = '/Acceso.aspx';
+        location.href = '/Login.aspx';
     }
 
     function mpeMensajeOnOk()

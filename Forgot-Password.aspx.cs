@@ -17,10 +17,10 @@ namespace WebItNow
             if (!Page.IsPostBack)
             {
                 this.Form.Attributes.Add("autocomplete", "off");
+                TxtUsu.Focus();
             }
 
         }
-
         public void OnTextChanged(object sender, EventArgs e)
         {
             //Reference the TextBox.
@@ -44,12 +44,16 @@ namespace WebItNow
 
                 if (result == 0)
                 {
-                    Lbl_Message.Text = "Usuario incorrecto";
+                    TxtUsu.Text = string.Empty;
+                    //Lbl_Message.Text = "* El nombre de usuario es incorrecto";
+                    LblMessage.Text = "El nombre de usuario es incorrecto";
+                    this.mpeMensaje.Show();
                 }
                 else
                 {
                     Lbl_Message.Text = "";
                     Lbl_Message.Visible = false;
+                    TxtPass.Focus();
                 }
 
             }
@@ -57,8 +61,6 @@ namespace WebItNow
             {
                 Lbl_Message.Visible = true;
                 Lbl_Message.Text = "* Este campo es obligatorio";
-                // LblMessage.Text = "Debes captura Usuario / Password.";
-                // this.mpeMensaje.Show();
             }
 
         }

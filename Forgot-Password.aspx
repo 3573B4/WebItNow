@@ -10,11 +10,11 @@
         var modal = $find(modalId);
             modal.show();
         //alert("La sesión ha expirado.");
-        //location.href = '/Acceso.aspx';
+        //location.href = '/Login.aspx';
     }, 120000);
 
     function acceso() {
-        location.href = '/Acceso.aspx';
+        location.href = '/Login.aspx';
     }
 
     function mpeMensajeOnOk()
@@ -28,7 +28,6 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <br />    
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
-    <br />
     <ContentTemplate>    
     <div class="container well contenedorLogin">
         <div class="row">
@@ -65,7 +64,7 @@
         </div>
         <div class="form-group">
             <div class="d-grid col-6 mx-auto">
-                <asp:Label ID="Lbl_Message" runat="server" ForeColor="Red" Visible="false"></asp:Label>
+                <asp:Label ID="Lbl_Message" runat="server" ForeColor="Red" Visible="false" Width="280px" ></asp:Label>
             </div>
         </div>
         <div class="from-group">
@@ -84,7 +83,6 @@
                     TargetControlID="lblOculto" BackgroundCssClass="FondoAplicacion" OnOkScript="mpeMensajeOnOk()" >
                 </ajaxToolkit:ModalPopupExtender>
                 <asp:Label ID="lblOculto" runat="server" Text="Label" Style="display: none;" />
-                <asp:Label ID="LblMessage" runat="server" Text="" />
             </div>
         </div>
     </div>
@@ -126,5 +124,38 @@
 
     </asp:Panel>
     <br />
+    <asp:Panel ID="pnlMensaje" runat="server" CssClass="CajaDialogo" style="display: none;">
+
+        <table border="0" width="287px" style="margin: 0px; padding: 0px; background-color: #0033CC; color: #FFFFFF;">
+            <tr>
+                <td align="left">
+                    <asp:Label ID="Label2" runat="server" Text="I t n o w" />
+                </td>
+                <td>
+                </td>
+            </tr>
+        </table>
+
+        <div>
+            <br />
+            <table border="0" width="275px" style="margin: 0px; padding: 0px;" >
+                <tr>
+                    <td><asp:Label ID="LblMessage" runat="server" Text="" /></td>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
+
+        <div>
+            <br />
+            <table border="0" width="275px" style="margin: 0px; padding: 0px;">
+                <tr>
+                    <td align="center"><asp:Button ID="btnClose" runat="server" Text="Cerrar" /></td>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
+
+    </asp:Panel>
     </ContentTemplate>
 </asp:Content>
