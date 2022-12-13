@@ -23,6 +23,7 @@ namespace WebItNow
         }
         public void OnTextChanged(object sender, EventArgs e)
         {
+            string wPrivilegios = System.Web.HttpContext.Current.Session["UsPrivilegios"] as string;
             //Reference the TextBox.
             TextBox textBox = sender as TextBox;
 
@@ -40,7 +41,7 @@ namespace WebItNow
                 Lbl_Message.Visible = true;
 
                 // Insertar Registo Usuario Cargas
-                int result = ValidaUser(TxtUsu.Text);
+                int result = ValidaUser(TxtUsu.Text, Int32.Parse(wPrivilegios));
 
                 if (result == 0)
                 {
@@ -75,7 +76,7 @@ namespace WebItNow
 
         }
 
-        public int ValidaUser(String pUsuarios)
+        public int ValidaUser(String pUsuarios, int pUsPrivilegios)
         {
             ConexionBD Conecta = new ConexionBD();
             NewMethod(Conecta);
@@ -87,6 +88,7 @@ namespace WebItNow
                 cmd1.CommandType = CommandType.StoredProcedure;
 
                 cmd1.Parameters.AddWithValue("@usuario", pUsuarios);
+                cmd1.Parameters.AddWithValue("@privilegios", pUsPrivilegios);
                 SqlDataReader dr1 = cmd1.ExecuteReader();
 
                 if (dr1.Read())

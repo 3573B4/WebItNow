@@ -18,6 +18,8 @@ namespace WebItNow
             if (!Page.IsPostBack)
             {
                 this.Form.Attributes.Add("autocomplete", "off");
+                // Permisos Usuario
+                System.Web.HttpContext.Current.Session["UsPrivilegios"] = "3";
             }
         }
 
@@ -43,6 +45,10 @@ namespace WebItNow
 
                 if (result >= 1)
                 {
+
+                    // Permisos Usuario
+                    System.Web.HttpContext.Current.Session["UsPrivilegios"] = "3";
+
                     // Permisos Usuario
                     // System.Web.HttpContext.Current.Session["UsPrivilegios"] = dr1["UsPrivilegios"].ToString().Trim();
 
