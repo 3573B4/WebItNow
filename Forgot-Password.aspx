@@ -2,12 +2,33 @@
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
+    <script language="javascript" type="text/javascript">
+
+    var timer = setTimeout(function () {
+        document.getElementById('<%=LblExpira.ClientID %>').innerHTML = 'La sesión ha expirado.';
+        var modalId = '<%=mpeExpira.ClientID%>';
+        var modal = $find(modalId);
+            modal.show();
+        //alert("La sesión ha expirado.");
+        //location.href = '/Acceso.aspx';
+    }, 120000);
+
+    function acceso() {
+        location.href = '/Acceso.aspx';
+    }
+
+    function mpeMensajeOnOk()
+
+    {
+        Txt_Casos_B1.Focus();
+    }
+
+    </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <br />    
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
     <br />
-    <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
     <ContentTemplate>    
     <div class="container well contenedorLogin">
         <div class="row">
@@ -15,40 +36,24 @@
                 <h2>Cambio de Contraseña</h2>
             </div>
         </div>
-        <!--
         <div class="form-group">
             <asp:Label ID="LblUsu" runat="server" Text="Usuario" CssClass="control-label co-sm-3" Font-Bold="False"></asp:Label>
             <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server"   
                 ControlToValidate="TxtUsu" ErrorMessage="*" ForeColor="Red">
                 </asp:RequiredFieldValidator>
             <div class="col-sm-12">
-                <asp:TextBox ID="TxtUsu" runat="server" CssClass="form-control" placeholder="Usuario"></asp:TextBox>
+                <asp:TextBox ID="TxtUsu" runat="server" CssClass="form-control" placeholder="Usuario"  OnTextChanged ="OnTextChanged" Text = '<%# Eval("IdUser") %>' AutoPostBack="true" ></asp:TextBox>
             </div>
         </div>
-        -->
-
         <div class="form-group">
-            <!--
             <asp:Label ID="LblPass" runat="server" Text="Contraseña" CssClass="control-label col-sm-2"></asp:Label>
             <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server"   
                 ControlToValidate="TxtPass" ErrorMessage="*" ForeColor="Red">
             </asp:RequiredFieldValidator>
-            -->
             <div class="col-sm-12">
-              <!--<asp:TextBox ID="TxtPass" runat="server" CssClass="form-control" placeholder="Contraseña" MaxLength="10" TextMode="Password"></asp:TextBox>-->
-                <asp:ChangePassword ID="ChangePassword1" runat="server" 
-                    CancelButtonText="Iniciar Sesión" 
-                    ChangePasswordButtonText="Confirmar" 
-                    ChangePasswordTitleText="" 
-                    OnChangedPassword="ChangePassword1_ChangedPassword" DisplayUserName="True" CancelDestinationPageUrl="~/Login.aspx" >
-                    <CancelButtonStyle CssClass="btn btn-link" />
-                    <ChangePasswordButtonStyle CssClass="btn btn-primary" />
-                    <LabelStyle CssClass="col-sm-3" />
-                    <TextBoxStyle CssClass="form-control col-sm-12" />
-                </asp:ChangePassword>
+                <asp:TextBox ID="TxtPass" runat="server" CssClass="form-control" placeholder="Contraseña" MaxLength="10" TextMode="Password"></asp:TextBox>
             </div>
         </div>
-<!--
         <div class="form-group">
             <asp:Label ID="Label1" runat="server" Text="Confirmar contraseña" CssClass="control-label col-sm-2"></asp:Label>
             <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server"   
@@ -58,13 +63,11 @@
                 <asp:TextBox ID="TxtConfPass" runat="server" CssClass="form-control" placeholder="Confirmar contraseña" MaxLength="10" TextMode="Password"></asp:TextBox>
             </div>
         </div>
--->
         <div class="form-group">
             <div class="d-grid col-6 mx-auto">
-                <asp:Label ID="Lbl_Message" runat="server" ForeColor="Red" Visible="False" ></asp:Label>
+                <asp:Label ID="Lbl_Message" runat="server" ForeColor="Red" Visible="false"></asp:Label>
             </div>
         </div>
-        <!--
         <div class="from-group">
             <div class="d-grid col-6 mx-auto">
                 <asp:Button ID="BtnRegresar" runat="server" Text="Iniciar Sesión" Font-Bold="True" OnClick="BtnRegresar_Click" CssClass="btn btn-link"/>
@@ -75,16 +78,53 @@
                 <asp:Button ID="BtnEnviar" runat="server" Text="Confirmar" Font-Bold="True" OnClick="BtnEnviar_Click" CssClass="btn btn-primary" />
             </div>
         </div>
-        -->
         <div class="form-group">
             <div class="d-grid col-6 mx-auto">
                 <ajaxToolkit:ModalPopupExtender ID="mpeMensaje" runat="server" PopupControlID="pnlMensaje"
                     TargetControlID="lblOculto" BackgroundCssClass="FondoAplicacion" OnOkScript="mpeMensajeOnOk()" >
                 </ajaxToolkit:ModalPopupExtender>
                 <asp:Label ID="lblOculto" runat="server" Text="Label" Style="display: none;" />
+                <asp:Label ID="LblMessage" runat="server" Text="" />
             </div>
         </div>
     </div>
+    <br />
+    <asp:Panel ID="pnlExpira" runat="server" CssClass="CajaDialogo" style="display: none;">
+    <table border="0" width="275px" style="margin: 0px; padding: 0px; background-color: #0033CC; color: #FFFFFF;">
+        <tr>
+            <td align="left">
+                <asp:Label ID="Label6" runat="server" Text="I t n o w" />
+            </td>
+            <td></td>
+        </tr>
+    </table>
+
+    <div>
+        <br />
+        <table border="0" width="275px" style="margin: 0px; padding: 0px;" >
+            <tr>
+                <td><asp:Label ID="LblExpira" runat="server" Text="" /></td>
+                <td></td>
+            </tr>
+        </table>
+    </div>
+
+    <div>
+        <br />
+        <table border="0" width="275px" style="margin: 0px; padding: 0px;">
+            <tr>
+                <td align="center"><asp:Button ID="BtnClose_Expira" OnClientClick="acceso(); return false;" runat="server" Text="Cerrar" /></td>
+                <td>
+                <ajaxToolkit:ModalPopupExtender ID="mpeExpira" runat="server" PopupControlID="pnlExpira"
+                    TargetControlID="lblHide" BackgroundCssClass="FondoAplicacion" OnOkScript="mpeExpiraOnOk()" >
+                </ajaxToolkit:ModalPopupExtender>
+                </td>
+                <td><asp:Label ID="lblHide" runat="server" Text="Label" Style="display: none;" /></td>
+            </tr>
+        </table>
+    </div>
+
+    </asp:Panel>
+    <br />
     </ContentTemplate>
-    </asp:UpdatePanel>
 </asp:Content>
