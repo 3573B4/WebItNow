@@ -156,13 +156,13 @@
                             <asp:MenuItem Text="Bitacora" NavigateUrl="~/Bitacora.aspx"></asp:MenuItem>
                         </asp:MenuItem>
 --%>
-<%--
+
                         <asp:MenuItem Text="Itnow">
-                            <asp:MenuItem Text="Correspondencia" NavigateUrl="~/Correspondencia.aspx"></asp:MenuItem>
-                            <asp:MenuItem Text="Consulta" NavigateUrl="~/Consulta.aspx"></asp:MenuItem>
-                            <asp:MenuItem Text="Totales para desincorporados" NavigateUrl="~/Carga_Nomina.aspx"></asp:MenuItem>
+                            <asp:MenuItem Text="Revision Documentos" NavigateUrl="~/Review-Document.aspx"></asp:MenuItem>
+                         <%--<asp:MenuItem Text="Consulta" NavigateUrl="~/Consulta.aspx"></asp:MenuItem>
+                            <asp:MenuItem Text="Totales para desincorporados" NavigateUrl="~/Carga_Nomina.aspx"></asp:MenuItem>--%>
                         </asp:MenuItem>
---%>
+
                         <asp:MenuItem Text="Salir" NavigateUrl="~/Login.aspx">
                         </asp:MenuItem>
                     </Items>

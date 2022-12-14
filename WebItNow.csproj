@@ -115,7 +115,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
-    <Content Include="Fotos.aspx" />
+    <Content Include="Review-Document.aspx" />
     <Content Include="Images\icono-Subir-Archivo-morado.png" />
     <Content Include="Styles\center_controls.css" />
     <Content Include="favicon.ico" />
@@ -200,12 +200,12 @@
     <Compile Include="Forgot-Password.aspx.designer.cs">
       <DependentUpon>Forgot-Password.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Fotos.aspx.cs">
-      <DependentUpon>Fotos.aspx</DependentUpon>
+    <Compile Include="Review-Document.aspx.cs">
+      <DependentUpon>Review-Document.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Fotos.aspx.designer.cs">
-      <DependentUpon>Fotos.aspx</DependentUpon>
+    <Compile Include="Review-Document.aspx.designer.cs">
+      <DependentUpon>Review-Document.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

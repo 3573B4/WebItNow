@@ -84,7 +84,7 @@ namespace WebItNow
 
                 foreach (string file in arrFiles)
                 {
-                    //aqui llenamos el Dataset
+                    //Aqui llenamos el Dataset
                     rwFile = taFile.NewRow();
                     rwFile["IdUsuario"] = prmFolder.Substring(varGalleryFolder.Length + 1); ;
                     rwFile["FileName"] = file.Substring(prmFolder.Length + 1);
