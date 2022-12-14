@@ -47,13 +47,25 @@ namespace WebItNow
                 {
 
                     // Permisos Usuario
-                    System.Web.HttpContext.Current.Session["UsPrivilegios"] = "3";
+                    Session["UsPrivilegios"] = "2";
+                    // System.Web.HttpContext.Current.Session["UsPrivilegios"] = "3";
 
                     // Permisos Usuario
                     // System.Web.HttpContext.Current.Session["UsPrivilegios"] = dr1["UsPrivilegios"].ToString().Trim();
 
-                    Response.Redirect("SubirArchivo.aspx");
+                    string mensaje = Convert.ToString(Session["UsPrivilegios"]);
+
+                    if (mensaje == "3")
+                    {
+                        Response.Redirect("SubirArchivo.aspx");
+                    }
+                    else
+                    {
+                        Response.Redirect("menu.aspx");
+                    }
+
                     Lbl_Message.Visible = false;
+
                 }
                 else if (result == 0)
                 {

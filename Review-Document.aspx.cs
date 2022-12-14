@@ -20,6 +20,7 @@ namespace WebItNow
 
         protected void Page_Load(object sender, EventArgs e)
         {
+
             try
             {
 
@@ -39,6 +40,7 @@ namespace WebItNow
                 lblMessage.Text = fnErrorMessage(ex.Message);
             }
         }
+
         void GetFolders(string prmFolder)
         {
             try
@@ -116,6 +118,7 @@ namespace WebItNow
         {
             return ("Directorio/USUARIO3/" + prmPath + "/" + prmFileName);
         }
+
         void GetGallery()
         {
             try
@@ -134,6 +137,7 @@ namespace WebItNow
                 lblMessage.Text = fnErrorMessage(ex.Message);
             }
         }
+
         void GetPhotos(string prmGallery)
         {
             try
@@ -161,6 +165,7 @@ namespace WebItNow
                 lblMessage.Text = fnErrorMessage(ex.Message);
             }
         }
+
         protected void cboGallery_SelectedIndexChanged(object sender, EventArgs e)
         {
             //GetPhotos(cboGallery.SelectedValue.ToString());
@@ -202,6 +207,7 @@ namespace WebItNow
             s = s.Replace("_", "[_]");
             return (s);
         }
+
         public static string fnYESNO(bool prmValue)
         {
             if (prmValue)
@@ -212,6 +218,11 @@ namespace WebItNow
             {
                 return ("NO");
             }
+        }
+
+        protected void BtnRegresar_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Menu.aspx");
         }
 
     }

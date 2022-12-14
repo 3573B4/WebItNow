@@ -41,6 +41,13 @@
         </td>
     </tr>
     </table>
+    <div class="container well contenedorLogin">
+        <div class="from-group">
+            <div class="d-grid col-6 mx-auto">
+                <asp:Button ID="BtnRegresar" runat="server" Text="Regresar" Font-Bold="True" OnClick="BtnRegresar_Click" CssClass="btn btn-outline-primary"/>
+            </div>
+        </div>
+    </div>
  </ContentTemplate>
 </asp:UpdatePanel>
 </asp:Content>
