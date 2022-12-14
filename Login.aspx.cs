@@ -47,7 +47,8 @@ namespace WebItNow
                 {
 
                     // Permisos Usuario
-                    Session["UsPrivilegios"] = "2";
+                    Session["UsPrivilegios"] = "3";
+
                     // System.Web.HttpContext.Current.Session["UsPrivilegios"] = "3";
 
                     // Permisos Usuario
