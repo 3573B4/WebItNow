@@ -115,6 +115,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
+    <Content Include="Fotos.aspx" />
     <Content Include="Images\icono-Subir-Archivo-morado.png" />
     <Content Include="Styles\center_controls.css" />
     <Content Include="favicon.ico" />
@@ -174,6 +175,7 @@
     <Content Include="Site.Mobile.Master" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ThumbGen.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="About.aspx.cs">
       <DependentUpon>About.aspx</DependentUpon>
@@ -197,6 +199,13 @@
     </Compile>
     <Compile Include="Forgot-Password.aspx.designer.cs">
       <DependentUpon>Forgot-Password.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Fotos.aspx.cs">
+      <DependentUpon>Fotos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Fotos.aspx.designer.cs">
+      <DependentUpon>Fotos.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -261,6 +270,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App_Code\" />
     <Folder Include="App_Data\" />
     <Folder Include="Directorio\" />
   </ItemGroup>
