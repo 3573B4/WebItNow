@@ -2,7 +2,23 @@
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
-    <script language="javascript" type="text/javascript"></script>
+        <script language="javascript" type="text/javascript">
+
+            function showimagepreview(input) {
+
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        $("#Image1").attr('scr', e.target.result);
+
+                        // document.getElementsByTagName("img")[0].setAttribute("src", e.target.result);
+                    }
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+
+
+        </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <br />    
@@ -20,14 +36,13 @@
                 <asp:Label ID="indicaciones" runat="server" Text="Click para subir archivos" CssClass="control-label co-sm-3" Font-Bold="False"></asp:Label>
             </div>
         </div>
-        
+
         <div class="form-group">
             <div class="input-group mb-3">
                 <div class="estilo-foto">
-                    <asp:Image ID="Image1" runat="server" ImageUrl="~/Images/icono-Subir-Archivo-morado.png" ></asp:Image>
-                    <!--<asp:ImageButton ID="ImageButton1" runat="server" ImageUrl="~/Images/icono-Subir-Archivo-morado.png" For="FileUpload1"></asp:ImageButton>-->
-                    <asp:FileUpload ID="FileUpload1" runat="server" CssClass="form-control"></asp:FileUpload>
-                    
+                    <asp:Image ID="Image1" runat="server" ImageUrl="~/directorio/tierra-de-cristal-en-gras-131535893.jpg" Width="100%" ></asp:Image>
+              <!--  <asp:ImageButton ID="ImageButton1" runat="server" ImageUrl="~/Images/icono-Subir-Archivo-morado.png" For="FileUpload1"></asp:ImageButton>-->
+                    <asp:FileUpload ID="FileUpload1" runat="server" CssClass="form-control" onchange="showimagepreview=(this)"></asp:FileUpload>
                 </div>
             </div>
             

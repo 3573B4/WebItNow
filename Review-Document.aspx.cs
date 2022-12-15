@@ -17,22 +17,25 @@ namespace WebItNow
     {
         //string varGalleryFolder = "C:\\inetpub\\wwwroot\\WebItNow\\images\\Gallery";
         string varGalleryFolder = System.Web.HttpContext.Current.Server.MapPath("~/Directorio/");
-
+        
         protected void Page_Load(object sender, EventArgs e)
         {
 
             try
             {
-
+                
                 // Valor del usuario viene de la seccion login
                 varGalleryFolder = varGalleryFolder + "USUARIO3";
 
                 if (!Page.IsPostBack)
                 {
+                            // Cargar DropDownList
+                    GetTpoDocumento();
                     //GetGallery();
                     //GetPhotos(cboGallery.SelectedValue.ToString());
-                    GetFolders(varGalleryFolder);
-                    GetFiles(varGalleryFolder + "\\" + cboGallery.SelectedValue.ToString());
+
+                    // GetFolders(varGalleryFolder);
+                    GetFiles(varGalleryFolder + "\\" + cboTpoDocumento.SelectedValue.ToString());
                 }
             }
             catch (Exception ex)
@@ -53,7 +56,7 @@ namespace WebItNow
                     {
                         ListItem lst = new ListItem(dir.Substring(prmFolder.Length + 1),
                             dir.Substring(prmFolder.Length + 1));
-                        cboGallery.Items.Add(lst);
+                        cboTpoDocumento.Items.Add(lst);
                     }
                 }
                 else
@@ -94,7 +97,7 @@ namespace WebItNow
                     taFile.Rows.Add(rwFile);
                 }
 
-                dlsGallery.DataSource = dsGallery.Tables["Files"];
+                dlsTpoDocumento.DataSource = dsGallery.Tables["Files"];
 
                 if (dsGallery.Tables["Files"].Rows.Count == 0)
                 {
@@ -105,7 +108,7 @@ namespace WebItNow
                    // lblMessage.Text = fnInfoMessage("Se encontraron " dsGallery.Tables["Files"].Rows.Count.ToString() + " imágenes");
                 }
 
-                dlsGallery.DataBind();
+                dlsTpoDocumento.DataBind();
                 dsGallery.Dispose();
             }
             catch (Exception ex)
@@ -119,18 +122,32 @@ namespace WebItNow
             return ("Directorio/USUARIO3/" + prmPath + "/" + prmFileName);
         }
 
-        void GetGallery()
+        protected void GetTpoDocumento()
         {
             try
             {
-                DataSet dsGallery = new DataSet("PhotoGallery");
-                dsGallery.ReadXml(Server.MapPath("App_Data\\Gallery.xml"));
-                cboGallery.DataSource = dsGallery.Tables["Gallery"];
-                cboGallery.DataTextField = "GalleryDescription";
-                cboGallery.DataValueField = "GalleryID";
-                cboGallery.DataBind();
-                dlsGallery.DataBind();
-                dsGallery.Dispose();
+                //DataSet dsTpoDocumento = new DataSet("PhotoGallery");
+                //dsTpoDocumento.ReadXml(Server.MapPath("App_Data\\Gallery.xml"));
+
+                ConexionBD Conecta = new ConexionBD();
+                Conecta.Abrir();
+
+                SqlCommand cmd = new SqlCommand("SELECT IdTpoDocumento, Descripcion FROM tbTpoDocumento", Conecta.ConectarBD);
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                cboTpoDocumento.DataSource = dr;
+                cboTpoDocumento.DataTextField = "Descripcion";
+             // cboTpoDocumento.DataValueField = "IdTpoDocumento";
+                cboTpoDocumento.DataBind();
+             // dlsTpoDocumento.DataBind();
+
+             // dsTpoDocumento.Dispose();
+
+                cmd.Dispose();
+                dr.Dispose();
+
+                Conecta.Cerrar();
+
             }
             catch (Exception ex)
             {
@@ -146,7 +163,8 @@ namespace WebItNow
                 dsGallery.ReadXml(Server.MapPath("App_Data\\Gallery.xml"));
                 DataView dvGallery = dsGallery.Tables["Picture"].DefaultView;
                 dvGallery.RowFilter = "IdUsuario='" + prmGallery + "'";
-                dlsGallery.DataSource = dvGallery;
+                dlsTpoDocumento.DataSource = dvGallery;
+
                 if (dvGallery.Count == 0)
                 {
                     lblMessage.Text = fnErrorMessage("No se encontraron imágenes");
@@ -156,7 +174,7 @@ namespace WebItNow
                     lblMessage.Text = fnInfoMessage("Se encontraron " + dvGallery.Count.ToString() +
                         " imágenes");
                 }
-                dlsGallery.DataBind();
+                dlsTpoDocumento.DataBind();
 
                 dsGallery.Dispose();
             }
@@ -166,13 +184,14 @@ namespace WebItNow
             }
         }
 
-        protected void cboGallery_SelectedIndexChanged(object sender, EventArgs e)
+        protected void cboTpoDocumento_SelectedIndexChanged(object sender, EventArgs e)
         {
+            lblMessage.Text = "";
             //GetPhotos(cboGallery.SelectedValue.ToString());
-            GetFiles(varGalleryFolder + "\\" + cboGallery.SelectedValue.ToString());
+            GetFiles(varGalleryFolder + "\\" + cboTpoDocumento.SelectedValue.ToString());
         }
 
-        protected void dlsGallery_SelectedIndexChanged(object sender, EventArgs e)
+        protected void dlsTpoDocumento_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }

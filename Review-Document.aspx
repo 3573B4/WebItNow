@@ -11,11 +11,10 @@
     <tr>
         <td>
             Selecciona la galería que deseas ver:<br />
-            <asp:DropDownList ID="cboGallery" runat="server" AutoPostBack="True" OnSelectedIndexChanged="cboGallery_SelectedIndexChanged" Width="250px">
+            <asp:DropDownList ID="cboTpoDocumento" runat="server" AutoPostBack="True" OnSelectedIndexChanged="cboTpoDocumento_SelectedIndexChanged" Width="250px">
             </asp:DropDownList>
             <br />
-            <br />
-            <asp:DataList ID="dlsGallery" runat="server" RepeatColumns="6" OnSelectedIndexChanged="dlsGallery_SelectedIndexChanged">
+            <asp:DataList ID="dlsTpoDocumento" runat="server" RepeatColumns="6" OnSelectedIndexChanged="dlsTpoDocumento_SelectedIndexChanged">
             <ItemTemplate>
                 <table>
                     <tr>
@@ -24,7 +23,7 @@
                        
                              
                         <asp:Image ID="imgGallery" runat="server" Height="200px" Width="200px"
-                             ImageUrl='<%#fnFilePath(DataBinder.Eval(Container.DataItem,"IdUsuario").ToString(),DataBinder.Eval(Container.DataItem,"FileName").ToString()) %>' />
+                             ImageUrl='<%#fnFilePath(DataBinder.Eval(Container.DataItem,"IdUsuario").ToString(), DataBinder.Eval(Container.DataItem,"FileName").ToString()) %>' />
                          </a>
                         <p style="text-align:center;">
                             <a href="Directorio/USUARIO3/<%#Eval("IdUsuario")%>/<%#Eval("FileName")%>" target="_blank">
@@ -42,6 +41,11 @@
     </tr>
     </table>
     <div class="container well contenedorLogin">
+        <div class="form-group">
+            <div class="d-grid col-4 mx-auto">
+                <asp:ImageMap ID="ImageMap1" runat="server"></asp:ImageMap>
+            </div>
+        </div>        
         <div class="from-group">
             <div class="d-grid col-6 mx-auto">
                 <asp:Button ID="BtnRegresar" runat="server" Text="Regresar" Font-Bold="True" OnClick="BtnRegresar_Click" CssClass="btn btn-outline-primary"/>
