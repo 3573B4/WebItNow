@@ -23,103 +23,28 @@ namespace WebItNow
 
             try
             {
-                
                 // Valor del usuario viene de la seccion login
+                // string IdUsuario = Convert.ToString(Session["IdUsuario"]);
+                
                 varGalleryFolder = varGalleryFolder + "USUARIO3";
 
                 if (!Page.IsPostBack)
                 {
-                            // Cargar DropDownList
+                    // Cargar DropDownList
                     GetTpoDocumento();
-                    //GetGallery();
-                    //GetPhotos(cboGallery.SelectedValue.ToString());
 
-                    // GetFolders(varGalleryFolder);
-                    GetFiles(varGalleryFolder + "\\" + cboTpoDocumento.SelectedValue.ToString());
+                    // Carga GridView
+                    GetEstadoDocumentos();
+
+                    //GetPhotos(cboTpoDocumento.SelectedValue.ToString());
+                    //GetFolders(varGalleryFolder);
+                    //GetFiles(varGalleryFolder + "\\" + cboTpoDocumento.SelectedValue.ToString());
                 }
             }
             catch (Exception ex)
             {
                 lblMessage.Text = fnErrorMessage(ex.Message);
             }
-        }
-
-        void GetFolders(string prmFolder)
-        {
-            try
-            {
-                if (Directory.Exists(prmFolder))
-                {
-                    string[] arrFolders;
-                    arrFolders = Directory.GetDirectories(prmFolder);
-                    foreach (string dir in arrFolders)
-                    {
-                        ListItem lst = new ListItem(dir.Substring(prmFolder.Length + 1),
-                            dir.Substring(prmFolder.Length + 1));
-                        cboTpoDocumento.Items.Add(lst);
-                    }
-                }
-                else
-                {
-                    lblMessage.Text = fnErrorMessage("No existe el directorio de imágenes");
-                }
-            }
-            catch (Exception ex)
-            {
-                lblMessage.Text = fnErrorMessage(ex.Message);
-            }
-        }
-
-        void GetFiles(string prmFolder)
-        {
-            try
-            {
-                string[] arrFiles;
-                arrFiles = Directory.GetFiles(prmFolder, "*.jpg");
-
-                DataSet dsGallery = new DataSet("dsGallery");
-                DataTable taFile;
-                DataRow rwFile;
-                
-                //DataColumn colFile;
-                taFile = dsGallery.Tables.Add("Files");
-                taFile.Columns.Add("IdUsuario", varGalleryFolder.GetType());
-                taFile.Columns.Add("FileName", varGalleryFolder.GetType());
-                taFile.Columns.Add("FileDescription", varGalleryFolder.GetType());
-
-                foreach (string file in arrFiles)
-                {
-                    //Aqui llenamos el Dataset
-                    rwFile = taFile.NewRow();
-                    rwFile["IdUsuario"] = prmFolder.Substring(varGalleryFolder.Length + 1); ;
-                    rwFile["FileName"] = file.Substring(prmFolder.Length + 1);
-                    rwFile["FileDescription"] = file.Substring(prmFolder.Length + 1);
-                    taFile.Rows.Add(rwFile);
-                }
-
-                dlsTpoDocumento.DataSource = dsGallery.Tables["Files"];
-
-                if (dsGallery.Tables["Files"].Rows.Count == 0)
-                {
-                    lblMessage.Text = fnErrorMessage("No se encontraron imágenes");
-                }
-                else
-                {
-                   // lblMessage.Text = fnInfoMessage("Se encontraron " dsGallery.Tables["Files"].Rows.Count.ToString() + " imágenes");
-                }
-
-                dlsTpoDocumento.DataBind();
-                dsGallery.Dispose();
-            }
-            catch (Exception ex)
-            {
-                lblMessage.Text = fnErrorMessage(ex.Message);
-            }
-        }
-
-        protected string fnFilePath(string prmPath, string prmFileName)
-        {
-            return ("Directorio/USUARIO3/" + prmPath + "/" + prmFileName);
         }
 
         protected void GetTpoDocumento()
@@ -137,11 +62,11 @@ namespace WebItNow
 
                 cboTpoDocumento.DataSource = dr;
                 cboTpoDocumento.DataTextField = "Descripcion";
-             // cboTpoDocumento.DataValueField = "IdTpoDocumento";
+                cboTpoDocumento.DataValueField = "IdTpoDocumento";
                 cboTpoDocumento.DataBind();
-             // dlsTpoDocumento.DataBind();
 
-             // dsTpoDocumento.Dispose();
+                // dlsTpoDocumento.DataBind();
+                // dsTpoDocumento.Dispose();
 
                 cmd.Dispose();
                 dr.Dispose();
@@ -155,15 +80,129 @@ namespace WebItNow
             }
         }
 
-        void GetPhotos(string prmGallery)
+        protected void GetEstadoDocumentos() 
+        {
+            ConexionBD Conecta = new ConexionBD();
+            Conecta.Abrir();
+
+            string strQuery = "SELECT IdUsuario, IdTipoDocumento, s.Descripcion " +
+                              "  FROM tbEstadoDocumento ed, tbStatus s " +
+                              " WHERE ed.IdStatus = s.IdStatus";
+
+            SqlCommand cmd = new SqlCommand(strQuery, Conecta.ConectarBD);
+
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+
+            grdEstadoDocumento.DataSource = dt;
+            grdEstadoDocumento.DataBind();
+
+        }
+
+        protected void grdEstadoDocumento_PageIndexChanged(Object sender, EventArgs e)
+        {
+            // Call a helper method to display the current page number 
+            // when the user navigates to a different page.
+            DisplayCurrentPage();
+        }
+
+        protected void DisplayCurrentPage()
+        {
+            // Calculate the current page number.
+            int currentPage = grdEstadoDocumento.PageIndex + 1;
+
+            // Display the current page number. 
+            //Message.Text = "Page " + currentPage.ToString() + " of " grdEstadoDocumento.PageCount.ToString() + ".";
+        }
+
+        protected string fnFilePath(string prmPath, string prmFileName)
+        {
+            return ("Directorio/USUARIO3/" + prmPath + "/" + prmFileName);
+        }
+
+        protected void GetFolders(string prmFolder)
         {
             try
             {
-                DataSet dsGallery = new DataSet("PhotoGallery");
-                dsGallery.ReadXml(Server.MapPath("App_Data\\Gallery.xml"));
-                DataView dvGallery = dsGallery.Tables["Picture"].DefaultView;
+                if (Directory.Exists(prmFolder))
+                {
+                    string[] arrFolders;
+                    arrFolders = Directory.GetDirectories(prmFolder);
+                    foreach (string dir in arrFolders)
+                    {
+                        ListItem lst = new ListItem(dir.Substring(prmFolder.Length + 1),
+                        dir.Substring(prmFolder.Length + 1));
+                        cboTpoDocumento.Items.Add(lst);
+                    }
+                }
+                else
+                {
+                    lblMessage.Text = fnErrorMessage("No existe el directorio de imágenes");
+                }
+            }
+            catch (Exception ex)
+            {
+                lblMessage.Text = fnErrorMessage(ex.Message);
+            }
+        }
+
+        protected void GetFiles(string prmFolder)
+        {
+            try
+            {
+                string[] arrFiles;
+                arrFiles = Directory.GetFiles(prmFolder, "*.jpg");
+
+                DataSet dsDocument = new DataSet("dsDocument");
+                DataTable taFile;
+                DataRow rwFile;
+                
+                //DataColumn colFile;
+                taFile = dsDocument.Tables.Add("Files");
+                taFile.Columns.Add("IdUsuario", varGalleryFolder.GetType());
+                taFile.Columns.Add("FileName", varGalleryFolder.GetType());
+                taFile.Columns.Add("FileDescription", varGalleryFolder.GetType());
+
+                foreach (string file in arrFiles)
+                {
+                    //Aqui llenamos el Dataset
+                    rwFile = taFile.NewRow();
+                    rwFile["IdUsuario"] = prmFolder.Substring(varGalleryFolder.Length + 1); ;
+                    rwFile["FileName"] = file.Substring(prmFolder.Length + 1);
+                    rwFile["FileDescription"] = file.Substring(prmFolder.Length + 1);
+                    taFile.Rows.Add(rwFile);
+                }
+
+                dblstTpoDocumento.DataSource = dsDocument.Tables["Files"];
+
+                if (dsDocument.Tables["Files"].Rows.Count == 0)
+                {
+                    lblMessage.Text = fnErrorMessage("No se encontraron imágenes");
+                }
+                else
+                {
+                   // lblMessage.Text = fnInfoMessage("Se encontraron " dsDocument.Tables["Files"].Rows.Count.ToString() + " imágenes");
+                }
+
+                dblstTpoDocumento.DataBind();
+                dsDocument.Dispose();
+            }
+            catch (Exception ex)
+            {
+                lblMessage.Text = fnErrorMessage(ex.Message);
+            }
+        }
+
+        protected void GetPhotos(string prmGallery)
+        {
+            try
+            {
+                DataSet dsDocument = new DataSet("PhotoGallery");
+                dsDocument.ReadXml(Server.MapPath("App_Data\\Gallery.xml"));
+                DataView dvGallery = dsDocument.Tables["Picture"].DefaultView;
                 dvGallery.RowFilter = "IdUsuario='" + prmGallery + "'";
-                dlsTpoDocumento.DataSource = dvGallery;
+                dblstTpoDocumento.DataSource = dvGallery;
 
                 if (dvGallery.Count == 0)
                 {
@@ -174,9 +213,9 @@ namespace WebItNow
                     lblMessage.Text = fnInfoMessage("Se encontraron " + dvGallery.Count.ToString() +
                         " imágenes");
                 }
-                dlsTpoDocumento.DataBind();
+                dblstTpoDocumento.DataBind();
 
-                dsGallery.Dispose();
+                dsDocument.Dispose();
             }
             catch (Exception ex)
             {
@@ -191,7 +230,7 @@ namespace WebItNow
             GetFiles(varGalleryFolder + "\\" + cboTpoDocumento.SelectedValue.ToString());
         }
 
-        protected void dlsTpoDocumento_SelectedIndexChanged(object sender, EventArgs e)
+        protected void dblstTpoDocumento_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
@@ -242,6 +281,21 @@ namespace WebItNow
         protected void BtnRegresar_Click(object sender, EventArgs e)
         {
             Response.Redirect("Menu.aspx");
+        }
+
+        protected void grdEstadoDocumento_SelectedIndexChanged1(object sender, EventArgs e)
+        {
+            string varGalleryFolder = System.Web.HttpContext.Current.Server.MapPath("~/Directorio/");
+
+           // string IdUsuario = grdEstadoDocumento.SelectedRow.Cells[0].Text;
+
+            varGalleryFolder = varGalleryFolder + grdEstadoDocumento.SelectedRow.Cells[0].Text;
+
+            GetFiles(varGalleryFolder + "\\" + grdEstadoDocumento.SelectedRow.Cells[1].Text);
+
+            // Carga GridView
+            GetEstadoDocumentos();
+
         }
 
     }

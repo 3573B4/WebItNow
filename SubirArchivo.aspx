@@ -23,7 +23,6 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <br />    
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
-    <br />
     <ContentTemplate>
     <div class="container well contenedorLogin">
         <div class="row">
@@ -41,8 +40,10 @@
             <div class="input-group mb-3">
                 <div class="estilo-foto">
                     <asp:Image ID="Image1" runat="server" ImageUrl="~/directorio/tierra-de-cristal-en-gras-131535893.jpg" Width="100%" ></asp:Image>
+                    <asp:FileUpload ID="FileUpload1" runat="server" onchange="showimagepreview(this)" CssClass="form-control"/>
               <!--  <asp:ImageButton ID="ImageButton1" runat="server" ImageUrl="~/Images/icono-Subir-Archivo-morado.png" For="FileUpload1"></asp:ImageButton>-->
-                    <asp:FileUpload ID="FileUpload1" runat="server" CssClass="form-control" onchange="showimagepreview=(this)"></asp:FileUpload>
+              
+
                 </div>
             </div>
             
@@ -75,7 +76,6 @@
         </div>
     </div>
     <br />
-    
     
     </ContentTemplate>
 </asp:Content>

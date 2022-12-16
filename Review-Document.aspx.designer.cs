@@ -42,13 +42,22 @@ namespace WebItNow
         protected global::System.Web.UI.WebControls.DropDownList cboTpoDocumento;
 
         /// <summary>
-        /// Control dlsTpoDocumento.
+        /// Control grdEstadoDocumento.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DataList dlsTpoDocumento;
+        protected global::System.Web.UI.WebControls.GridView grdEstadoDocumento;
+
+        /// <summary>
+        /// Control dblstTpoDocumento.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DataList dblstTpoDocumento;
 
         /// <summary>
         /// Control lblMessage.
@@ -58,15 +67,6 @@ namespace WebItNow
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblMessage;
-
-        /// <summary>
-        /// Control ImageMap1.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageMap ImageMap1;
 
         /// <summary>
         /// Control BtnRegresar.

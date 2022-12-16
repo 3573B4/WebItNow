@@ -12,9 +12,6 @@ namespace WebItNow
         protected void Page_Load(object sender, EventArgs e)
         {
 
-            //Image1.ImageUrl = System.IO.Path.GetDirectoryName(FileUpload1.PostedFile.FileName);
-            //img.ImageUrl = Server.MapPath("./Images/") + "tierra-de-cristal-en-gras-131535893.jpg";
-
         }
 
         protected void BtnEnviar_Click(object sender, EventArgs e)
@@ -22,10 +19,10 @@ namespace WebItNow
             if (FileUpload1.HasFile)
             {
                 // Get the name of the file to upload.
-                string fileName = Server.HtmlEncode(FileUpload1.FileName);
+                //string fileName = Server.HtmlEncode(FileUpload1.FileName);
 
                 // Get the extension of the uploaded file.
-                string extension = System.IO.Path.GetDirectoryName(fileName);
+                //string extension = System.IO.Path.GetDirectoryName(fileName);
 
                 //Lbl_Message.Text = "selecciono un archivo";
                 //Obtener la extesion y el tamaño para delimitar si es necesario
@@ -41,12 +38,12 @@ namespace WebItNow
                 FileUpload1.SaveAs(Server.MapPath("./Directorio/" + FileUpload1.FileName));
                 Lbl_Message.Text = "EL archivo se subio exitosamente";
 
-                Image1.ImageUrl = Server.MapPath("./Directorio/" + FileUpload1.FileName);
+               //Image1.ImageUrl = Server.MapPath("./Directorio/" + FileUpload1.FileName);
 
                 //}
                 //else
                 //{
-                //    Lbl_Message.Text = "Ocurrio un error al subir el archivo";
+                Lbl_Message.Text = "Ocurrio un error al subir el archivo";
                 //}
 
             }
@@ -61,9 +58,5 @@ namespace WebItNow
             Response.Redirect("Login.aspx");
         }
 
-        protected void UploadButton_Click(object sender, EventArgs e)
-        {
-            string nomArch = FileUpload1.FileName;
-        }
     }
 }

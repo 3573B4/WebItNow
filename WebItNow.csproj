@@ -167,6 +167,7 @@
     <Content Include="Scripts\WebForms\WebUIValidation.js" />
     <Content Include="Site.Master" />
     <Content Include="Register.aspx" />
+    <Content Include="Styles\GridView.css" />
     <Content Include="Styles\panel_message.css" />
     <Content Include="Styles\default.css" />
     <Content Include="SubirArchivo.aspx" />
