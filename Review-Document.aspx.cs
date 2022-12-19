@@ -31,7 +31,7 @@ namespace WebItNow
                 if (!Page.IsPostBack)
                 {
                     // Cargar DropDownList
-                    GetTpoDocumento();
+                    // GetTpoDocumento();
 
                     // Carga GridView
                     GetEstadoDocumentos();
