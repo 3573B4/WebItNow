@@ -32,6 +32,9 @@ namespace WebItNow
 			if (TxtUsu.Text != "" && TxtPass.Text != "")
 			    {
 
+                //validar si existe Usuario en la tabla tbUsuarios
+
+
                 // Insertar Registo Tabla tbUsuarios (UploadFiles)
                 int result = Add_tbUsuarios(TxtUsu.Text, TxtPass.Text, 3, "Insert");
                     
@@ -198,5 +201,7 @@ namespace WebItNow
 
             return -1;
         }
+
+
     }
 }
