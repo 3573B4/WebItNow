@@ -174,6 +174,7 @@ namespace WebItNow
 
                     string IdTpoDocumento = Convert.ToString(row[0]);
 
+                    // Insert tabla tbEstadoDocumento
                     SqlCommand cmd1 = new SqlCommand("Insert into tbEstadoDocumento (IdUsuario, IdTipoDocumento, IdStatus) " +
                                         "Values ('" + pUsuarios + "', '" + IdTpoDocumento + "', " + pIdStatus + ")", Conecta.ConectarBD);
 
