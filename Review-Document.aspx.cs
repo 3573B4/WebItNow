@@ -24,7 +24,7 @@ namespace WebItNow
             try
             {
                 // Valor del usuario viene de la seccion login
-                // string IdUsuario = Convert.ToString(Session["IdUsuario"]);
+                string IdUsuario = Convert.ToString(Session["IdUsuario"]);
                 
                 varGalleryFolder = varGalleryFolder + "USUARIO3";
 
@@ -283,20 +283,20 @@ namespace WebItNow
             Response.Redirect("Menu.aspx");
         }
 
-        protected void grdEstadoDocumento_SelectedIndexChanged1(object sender, EventArgs e)
+        protected void grdEstadoDocumento_SelectedIndexChanged(object sender, EventArgs e)
         {
             string varGalleryFolder = System.Web.HttpContext.Current.Server.MapPath("~/Directorio/");
 
-           // string IdUsuario = grdEstadoDocumento.SelectedRow.Cells[0].Text;
+           // string IdUsuario = grdEstadoDocumento.SelectedRow.Cells[1].Text;
 
-            varGalleryFolder = varGalleryFolder + grdEstadoDocumento.SelectedRow.Cells[0].Text;
+            varGalleryFolder = varGalleryFolder + grdEstadoDocumento.SelectedRow.Cells[1].Text;
 
-            GetFiles(varGalleryFolder + "\\" + grdEstadoDocumento.SelectedRow.Cells[1].Text);
+            GetFiles(varGalleryFolder + "\\" + grdEstadoDocumento.SelectedRow.Cells[2].Text);
 
             // Carga GridView
             GetEstadoDocumentos();
 
         }
 
-    }
+        }
 }

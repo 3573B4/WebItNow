@@ -32,19 +32,22 @@ namespace WebItNow
 			if (TxtUsu.Text != "" && TxtPass.Text != "")
 			    {
 
-                    // Insertar Registo Usuario Cargas
-                    int result = Registrar(TxtUsu.Text, TxtPass.Text, 3, "Insert");
-
+                // Insertar Registo Tabla tbUsuarios (UploadFiles)
+                int result = Add_tbUsuarios(TxtUsu.Text, TxtPass.Text, 3, "Insert");
+                    
                     if (result == 0)
                     {
-                        LblMessage.Text = "Usuario fue insertado correctamente ";
+                    // Insertar Registros Tabla tbEstadoDocumento
+                    int idStatus = 1;
+                    int valor = Add_tbEstadoDocumento(TxtUsu.Text, idStatus);
+
+                    LblMessage.Text = "Usuario fue insertado correctamente ";
                         this.mpeMensaje.Show();
 
                     //string script = @"<script type='text/javascript'>
                     //        alert('Usuario fue agregado correctamente'); </script>";
 
                     //ScriptManager.RegisterStartupScript(this, typeof(Page), "alerta", script, false);
-
 
                     //string script = "alert('Usuario fue insertado correctamente');";
                     //ScriptManager.RegisterStartupScript(this, typeof(Page), "alerta", script, true);
@@ -99,7 +102,7 @@ namespace WebItNow
             Conecta.Abrir();
         }
 
-        public int Registrar(String pUsuarios, String pUsPassword, int pUsPrivilegios, string pStatementType)
+        public int Add_tbUsuarios(String pUsuarios, String pUsPassword, int pUsPrivilegios, string pStatementType)
         {
             ConexionBD Conecta = new ConexionBD();
             NewMethod(Conecta);
@@ -146,5 +149,54 @@ namespace WebItNow
             return -1;
         }
 
+        public int Add_tbEstadoDocumento(String pUsuarios, int pIdStatus)
+        {
+            try
+            {
+                ConexionBD Conecta = new ConexionBD();
+                Conecta.Abrir();
+
+                string strQuery = "SELECT IdTpoDocumento, Descripcion FROM tbTpoDocumento";
+
+                SqlCommand cmd = new SqlCommand(strQuery, Conecta.ConectarBD);
+
+              //SqlDataReader dr = cmd.ExecuteReader();
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+
+                da.Fill(dt);
+
+                foreach (DataRow row in dt.Rows)
+                {
+
+                    string IdTpoDocumento = Convert.ToString(row[0]);
+
+                    SqlCommand cmd1 = new SqlCommand("Insert into tbEstadoDocumento (IdUsuario, IdTipoDocumento, IdStatus) " +
+                                        "Values ('" + pUsuarios + "', '" + IdTpoDocumento + "', " + pIdStatus + ")", Conecta.ConectarBD);
+
+                    SqlDataReader dr1 = cmd1.ExecuteReader();
+
+                    cmd1.Dispose();
+                    dr1.Dispose();
+                }
+
+                Conecta.Cerrar();
+
+                return 0;
+
+            }
+            catch (Exception ex)
+            {
+                // Show(ex.Message);
+                LblMessage.Text = ex.Message;
+                this.mpeMensaje.Show();
+            }
+            finally
+            {
+
+            }
+
+            return -1;
+        }
     }
 }

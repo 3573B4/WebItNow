@@ -6,7 +6,35 @@
 <br />
 <asp:UpdatePanel ID="uplMain" runat="server">
 <ContentTemplate>
-
+    <table>
+    <tr>
+        <td>
+            <asp:Label ID="lblUsuario" runat="server" Text="Usuario"></asp:Label>
+        </td>
+        <td>
+            <asp:TextBox ID="txtUsuario" runat="server"></asp:TextBox>
+        </td>
+        <td>
+            <asp:Button ID="btnCatalogoUsuarios" runat="server" Text="..." />
+        </td>
+    <tr>
+        <td>
+            <asp:Label ID="lblTipoDocumento" runat="server" Text="Id. Tipo Documento"></asp:Label>
+        </td>
+        <td>
+            <asp:TextBox ID="txtTpoDocumento" runat="server"></asp:TextBox>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <asp:Label ID="lblEstatus" runat="server" Text="Id. Estatus"></asp:Label>
+        </td>
+        <td>
+            <asp:TextBox ID="txtEstatus" runat="server"></asp:TextBox>
+        </td>
+    </tr>
+    </table>
+    <br />
     <table>
     <tr>
         <td>
@@ -15,15 +43,21 @@
             </asp:DropDownList>
             <br />
             <br />
-            <asp:GridView ID="grdEstadoDocumento" runat="server" AutoGenerateColumns="false" GridLines="None"
-                AllowPaging="true" CssClass="mGrid" PagerStyle-CssClass="pgr" AlternatingRowStyle-CssClass="alt"
-                PageSize="7" OnSelectedIndexChanged="grdEstadoDocumento_SelectedIndexChanged1">
+            <asp:GridView ID="grdEstadoDocumento" runat="server" AutoGenerateColumns="False" GridLines="None" Width="586px"
+                AllowPaging="True" CssClass="mGrid" PagerStyle-CssClass="pgr" AlternatingRowStyle-CssClass="alt"
+                PageSize="7" OnSelectedIndexChanged="grdEstadoDocumento_SelectedIndexChanged">
                 <AlternatingRowStyle CssClass="alt" />
                 <Columns>
+                    <asp:ButtonField ButtonType="Link" CommandName="Select" Text="Select" />
                     <asp:BoundField DataField="IdUsuario" HeaderText="Id. Usuario" />
                     <asp:BoundField DataField="IdTipoDocumento" HeaderText="Id.Tipo Documento" />
                     <asp:BoundField DataField="Descripcion" HeaderText="Id. Status" />
-                    <asp:ButtonField ButtonType="Button" CommandName="Select" Text="Botón" />
+                    <asp:TemplateField HeaderText="Status">
+                        <ItemTemplate>
+                            <asp:DropDownList ID="DropDownList1" runat="server" Width="179px" DataTextField="Status" DataValueField="ID">
+                            </asp:DropDownList>
+                        </ItemTemplate>
+                    </asp:TemplateField>
                 </Columns>
                 <PagerStyle CssClass="pgr" />
             </asp:GridView>
