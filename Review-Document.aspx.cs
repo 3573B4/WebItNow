@@ -34,7 +34,7 @@ namespace WebItNow
                     // GetTpoDocumento();
 
                     // Carga GridView
-                    GetEstadoDocumentos();
+                    GetEstadoDocumentos("USUARIO3");
 
                     //GetPhotos(cboTpoDocumento.SelectedValue.ToString());
                     //GetFolders(varGalleryFolder);
@@ -80,14 +80,15 @@ namespace WebItNow
             }
         }
 
-        protected void GetEstadoDocumentos() 
+        protected void GetEstadoDocumentos(string StrUser) 
         {
             ConexionBD Conecta = new ConexionBD();
             Conecta.Abrir();
 
             string strQuery = "SELECT IdUsuario, IdTipoDocumento, s.Descripcion " +
                               "  FROM tbEstadoDocumento ed, tbStatus s " +
-                              " WHERE ed.IdStatus = s.IdStatus";
+                              " WHERE ed.IdStatus = s.IdStatus" +
+                              "   AND IdUsuario = '" + StrUser + "'";
 
             SqlCommand cmd = new SqlCommand(strQuery, Conecta.ConectarBD);
 
@@ -294,9 +295,61 @@ namespace WebItNow
             GetFiles(varGalleryFolder + "\\" + grdEstadoDocumento.SelectedRow.Cells[2].Text);
 
             // Carga GridView
-            GetEstadoDocumentos();
+            GetEstadoDocumentos(grdEstadoDocumento.SelectedRow.Cells[1].Text);
 
         }
 
+        public void Llena_grdUser(string StrUser)
+        {
+            try
+            {
+                ConexionBD Conecta = new ConexionBD();
+                Conecta.Abrir();
+
+                SqlCommand cmd1 = new SqlCommand("Select u.IdUsuario, p.UsPrivilegios From tbUsuarios u, tbPrivilegios p " +
+                                                " Where u.UsPrivilegios = p.IdPrivilegios And u.UsPrivilegios = 3 ", Conecta.ConectarBD);
+
+                SqlDataReader dr1 = cmd1.ExecuteReader();
+
+                GrdUsuarios.DataSource = dr1;
+                GrdUsuarios.DataBind();
+            }
+            catch (Exception ex)
+            {
+                lblMessage.Text = fnErrorMessage(ex.Message);
+            }
         }
+
+        protected void GrdUsuarios_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //
+            // Se obtiene la fila seleccionada del gridview
+            //
+            txtUsuario.Text = HttpUtility.HtmlDecode(GrdUsuarios.SelectedRow.Cells[0].Text);
+            //txtEstatus.Text = HttpUtility.HtmlDecode(GrdUsuarios.SelectedRow.Cells[1].Text);
+            GetEstadoDocumentos(txtUsuario.Text);
+        }
+
+        protected void GrdUsuarios_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+                e.Row.Attributes["onclick"] = Page.ClientScript.GetPostBackClientHyperlink(GrdUsuarios, "Select$" + Convert.ToString(e.Row.RowIndex), true);
+        }
+
+        protected void BtnBuscadorUser_Click(object sender, EventArgs e)
+        {
+            mpePopup.Show();
+
+            Llena_grdUser(txtUsuario.Text);
+            txtUsuario.Focus();
+        }
+
+        protected void BtnBuscador_Click(object sender, EventArgs e)
+        {
+            mpePopup.Show();
+
+            Llena_grdUser(Txt_BuscadorUser.Text);
+            Txt_BuscadorUser.Focus();
+        }
+    }
 }

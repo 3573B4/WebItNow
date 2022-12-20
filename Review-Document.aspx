@@ -1,4 +1,6 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="Review-Document.aspx.cs" Inherits="WebItNow.Fotos" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" EnableEventValidation = "false" CodeBehind="Review-Document.aspx.cs" Inherits="WebItNow.Fotos" %>
+
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
@@ -15,7 +17,8 @@
             <asp:TextBox ID="txtUsuario" runat="server"></asp:TextBox>
         </td>
         <td>
-            <asp:Button ID="btnCatalogoUsuarios" runat="server" Text="..." />
+            <asp:Button ID="BuscadorUser" runat="server" Text="..." OnClick="BtnBuscadorUser_Click"/>
+            <asp:Button ID="hBtnUser" runat="server" style="display:none;" Text="..." />
         </td>
     <tr>
         <td>
@@ -42,7 +45,6 @@
             <asp:DropDownList ID="cboTpoDocumento" runat="server" AutoPostBack="True" OnSelectedIndexChanged="cboTpoDocumento_SelectedIndexChanged" Width="250px" Visible="False">
             </asp:DropDownList>
             <br />
-            <br />
             <asp:GridView ID="grdEstadoDocumento" runat="server" AutoGenerateColumns="False" GridLines="None" Width="586px"
                 AllowPaging="True" CssClass="mGrid" PagerStyle-CssClass="pgr" AlternatingRowStyle-CssClass="alt"
                 PageSize="7" OnSelectedIndexChanged="grdEstadoDocumento_SelectedIndexChanged">
@@ -52,16 +54,9 @@
                     <asp:BoundField DataField="IdUsuario" HeaderText="Id. Usuario" />
                     <asp:BoundField DataField="IdTipoDocumento" HeaderText="Id.Tipo Documento" />
                     <asp:BoundField DataField="Descripcion" HeaderText="Id. Status" />
-                    <asp:TemplateField HeaderText="Status">
-                        <ItemTemplate>
-                            <asp:DropDownList ID="DropDownList1" runat="server" Width="179px" DataTextField="Status" DataValueField="ID">
-                            </asp:DropDownList>
-                        </ItemTemplate>
-                    </asp:TemplateField>
                 </Columns>
                 <PagerStyle CssClass="pgr" />
             </asp:GridView>
-          
             <br />
             <div class="container well contenedorLogin">
             <asp:DataList ID="dblstTpoDocumento" runat="server" RepeatColumns="6" OnSelectedIndexChanged="dblstTpoDocumento_SelectedIndexChanged">
@@ -98,6 +93,55 @@
             </div>
         </div>
     </div>
+
+    <table cellspacing="1" cellpadding="1" border="0">
+        <tr>
+            <td></td>
+            <td></td>
+            <td>
+            <div style="text-align:left;">
+                <asp:Panel ID="pnlUsuarios" runat="server" Width="600px" BorderStyle="Solid" BorderWidth="2px" BackColor="White">
+                    <table cellspacing="1" cellpadding="1" border="0">
+                    <tr>
+                        <td></td>
+                        <td>
+                            <asp:TextBox ID="Txt_BuscadorUser" runat="server" AutoComplete="off" Style="text-transform: uppercase" MaxLength="13" Width="552px"></asp:TextBox>
+                            <asp:Button ID="BtnBuscador" runat="server" Text="..." Height="22px" OnClick="BtnBuscador_Click" />
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                        <div class="scrolling-table-container">
+                            <asp:GridView ID="GrdUsuarios" runat="server"
+                                CssClass="mGrid" PagerStyle-CssClass="pgr" AlternatingRowStyle-CssClass="alt" GridLines="None"
+                                AutoGenerateColumns="False" AutoGenerateSelectButton="false" Width="586px" 
+                                 OnSelectedIndexChanged="GrdUsuarios_SelectedIndexChanged" OnRowDataBound="GrdUsuarios_RowDataBound">
+                            <Columns>
+                                <asp:BoundField DataField="IdUsuario" HeaderText="Usuario" />
+                                <asp:BoundField DataField="UsPrivilegios" HeaderText="Privilegios" />
+                            </Columns>
+                            </asp:GridView>
+                        </div>
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td align="center"><asp:Button ID="btnCloseUser" runat="server" Text="Close" /></td>
+                        <td></td>
+                    </tr>
+                    </table>
+                </asp:Panel>
+                <ajaxToolkit:ModalPopupExtender ID="mpePopup" runat="server" TargetControlId="hBtnUser"
+                                                PopupControlID="pnlUsuarios" CancelControlID="btnCloseUser" />
+            </div>
+            </td>
+            <td></td>
+        </tr>
+    </table>
+    <br />
  </ContentTemplate>
 </asp:UpdatePanel>
 </asp:Content>
