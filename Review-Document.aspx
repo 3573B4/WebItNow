@@ -52,8 +52,9 @@
                 <Columns>
                     <asp:ButtonField ButtonType="Link" CommandName="Select" Text="Select" />
                     <asp:BoundField DataField="IdUsuario" HeaderText="Id. Usuario" />
-                    <asp:BoundField DataField="IdTipoDocumento" HeaderText="Id.Tipo Documento" />
-                    <asp:BoundField DataField="Descripcion" HeaderText="Id. Status" />
+                    <asp:BoundField DataField="IdTipoDocumento" HeaderText="Id. Tipo Documento" />
+                    <asp:BoundField DataField="Descripcion" HeaderText="Tipo de Documento" />
+                    <asp:BoundField DataField="Desc_Status" HeaderText="Id. Status" />
                 </Columns>
                 <PagerStyle CssClass="pgr" />
             </asp:GridView>

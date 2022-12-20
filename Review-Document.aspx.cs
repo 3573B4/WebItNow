@@ -85,9 +85,9 @@ namespace WebItNow
             ConexionBD Conecta = new ConexionBD();
             Conecta.Abrir();
 
-            string strQuery = "SELECT IdUsuario, IdTipoDocumento, s.Descripcion " +
-                              "  FROM tbEstadoDocumento ed, tbStatus s " +
-                              " WHERE ed.IdStatus = s.IdStatus" +
+            string strQuery = "SELECT ed.IdUsuario, ed.IdTipoDocumento, td.Descripcion, s.Descripcion as Desc_Status  " +
+                              "  FROM tbEstadoDocumento ed, tbTpoDocumento td, tbStatus s " +
+                              " WHERE ed.IdStatus = s.IdStatus And ed.IdTipoDocumento = td.IdTpoDocumento " +
                               "   AND IdUsuario = '" + StrUser + "'";
 
             SqlCommand cmd = new SqlCommand(strQuery, Conecta.ConectarBD);
@@ -306,8 +306,15 @@ namespace WebItNow
                 ConexionBD Conecta = new ConexionBD();
                 Conecta.Abrir();
 
-                SqlCommand cmd1 = new SqlCommand("Select u.IdUsuario, p.UsPrivilegios From tbUsuarios u, tbPrivilegios p " +
-                                                " Where u.UsPrivilegios = p.IdPrivilegios And u.UsPrivilegios = 3 ", Conecta.ConectarBD);
+                string strQuery = "Select u.IdUsuario, p.UsPrivilegios From tbUsuarios u, tbPrivilegios p, tbEstadoDocumento ed " +
+                                  " Where u.UsPrivilegios = p.IdPrivilegios And u.UsPrivilegios = 3 And u.IdUsuario = ed.IdUsuario";
+
+                if (StrUser != "")
+                {
+                    strQuery = strQuery + " And u.IdUsuario = '" + StrUser + "'";
+                }
+
+                SqlCommand cmd1 = new SqlCommand(strQuery, Conecta.ConectarBD);
 
                 SqlDataReader dr1 = cmd1.ExecuteReader();
 
