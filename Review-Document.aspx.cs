@@ -34,7 +34,7 @@ namespace WebItNow
                     // GetTpoDocumento();
 
                     // Carga GridView
-                    GetEstadoDocumentos("USUARIO3");
+                    GetEstadoDocumentos("");
 
                     //GetPhotos(cboTpoDocumento.SelectedValue.ToString());
                     //GetFolders(varGalleryFolder);
@@ -82,23 +82,35 @@ namespace WebItNow
 
         protected void GetEstadoDocumentos(string StrUser) 
         {
-            ConexionBD Conecta = new ConexionBD();
-            Conecta.Abrir();
+            try
+            {
+                ConexionBD Conecta = new ConexionBD();
+                Conecta.Abrir();
 
-            string strQuery = "SELECT ed.IdUsuario, ed.IdTipoDocumento, td.Descripcion, s.Descripcion as Desc_Status  " +
-                              "  FROM tbEstadoDocumento ed, tbTpoDocumento td, tbStatus s " +
-                              " WHERE ed.IdStatus = s.IdStatus And ed.IdTipoDocumento = td.IdTpoDocumento " +
-                              "   AND IdUsuario = '" + StrUser + "'";
+                string strQuery = "SELECT ed.IdUsuario, ed.IdTipoDocumento, td.Descripcion, s.Descripcion as Desc_Status  " +
+                                  "  FROM tbEstadoDocumento ed, tbTpoDocumento td, tbStatus s " +
+                                  " WHERE ed.IdStatus = s.IdStatus And ed.IdTipoDocumento = td.IdTpoDocumento " +
+                                  "   AND IdUsuario = '" + StrUser + "'";
 
-            SqlCommand cmd = new SqlCommand(strQuery, Conecta.ConectarBD);
+                SqlCommand cmd = new SqlCommand(strQuery, Conecta.ConectarBD);
 
-            SqlDataAdapter da = new SqlDataAdapter(cmd);
-            DataTable dt = new DataTable();
-            da.Fill(dt);
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
 
-            grdEstadoDocumento.DataSource = dt;
-            grdEstadoDocumento.DataBind();
+                if (dt.Rows.Count == 0);
+                {
+                    grdEstadoDocumento.ShowHeaderWhenEmpty = true;
+                    grdEstadoDocumento.EmptyDataText = "No hay resultados.";
+                }
 
+                grdEstadoDocumento.DataSource = dt;
+                grdEstadoDocumento.DataBind();
+            }
+            catch (Exception ex)
+            {
+                lblMessage.Text = fnErrorMessage(ex.Message);
+            }
         }
 
         protected void grdEstadoDocumento_PageIndexChanged(Object sender, EventArgs e)
@@ -306,8 +318,9 @@ namespace WebItNow
                 ConexionBD Conecta = new ConexionBD();
                 Conecta.Abrir();
 
-                string strQuery = "Select u.IdUsuario, p.UsPrivilegios From tbUsuarios u, tbPrivilegios p, tbEstadoDocumento ed " +
-                                  " Where u.UsPrivilegios = p.IdPrivilegios And u.UsPrivilegios = 3 And u.IdUsuario = ed.IdUsuario";
+                string strQuery = "Select u.IdUsuario, p.UsPrivilegios From tbUsuarios u, tbPrivilegios p " +
+                                  " Where u.UsPrivilegios = p.IdPrivilegios And u.UsPrivilegios = 3 " + 
+                                  "   And u.IdUsuario In (Select distinct (ed.IdUsuario) from tbEstadoDocumento ed )";
 
                 if (StrUser != "")
                 {
