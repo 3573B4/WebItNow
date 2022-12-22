@@ -4,7 +4,6 @@
 
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
-    <script language="javascript" type="text/javascript"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <br />    
@@ -40,15 +39,13 @@
         <div class="form-group">
             <div class="input-group mb-12">
                 <div class="estilo-foto">
-                    <asp:FileUpload ID="FileUpload1" runat="server" CssClass="form-control"></asp:FileUpload>
+                    <asp:FileUpload ID="FileUpload1" runat="server" OnChange="FileUpload1_OnChange" CssClass="form-control"></asp:FileUpload>
                     <br />
                     <asp:Image ID="Image1" runat="server" ImageUrl="~/Images/icono-Subir-Archivo-morado.png"></asp:Image>
                 </div>
             </div>
-            
-
         </div>
-        
+
         <div class="form-group">
             <div class="d-grid col-6 mx-auto">
                 <asp:Label ID="Lbl_Message" runat="server" ForeColor="Red" Visible="false"></asp:Label>

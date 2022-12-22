@@ -98,7 +98,7 @@ namespace WebItNow
                 DataTable dt = new DataTable();
                 da.Fill(dt);
 
-                if (dt.Rows.Count == 0);
+                if (dt.Rows.Count == 0)
                 {
                     grdEstadoDocumento.ShowHeaderWhenEmpty = true;
                     grdEstadoDocumento.EmptyDataText = "No hay resultados.";

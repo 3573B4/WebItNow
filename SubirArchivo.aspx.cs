@@ -5,11 +5,18 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Data;
 using System.IO;
+
+using System.Data;
 using System.Data.SqlTypes;
 using System.Data.SqlClient;
+
 using System.Configuration;
+
+using System.Web.Security;
+using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls.WebParts;
+using System.Xml.Linq;
 
 namespace WebItNow
 {
@@ -21,6 +28,7 @@ namespace WebItNow
         {
             //string valor = ddlDocs.SelectedValue;
             //Image1.ImageUrl = "~/Images/icono-Subir-Archivo-morado.png";
+
             if (!IsPostBack)
             {
                 getDocRequeridos();
@@ -64,6 +72,7 @@ namespace WebItNow
             string directorioURL = Server.MapPath(directFinal);
             string nomFile = folderName + "-" + FileUpload1.FileName;
 
+            
             if (FileUpload1.HasFile)
             {
                 if (System.IO.Directory.Exists(directorioURL))
@@ -98,6 +107,11 @@ namespace WebItNow
             }
         }
 
+        protected void FileUpload1_OnChange(object sender, EventArgs e)
+        {
+            Lbl_Message.Text = "Debe seleccionar un archivo";
+        }
+
         protected void BtnSalir_Click(object sender, EventArgs e)
         {
             Response.Redirect("Login.aspx");
@@ -107,5 +121,6 @@ namespace WebItNow
         {
             string nombre = ddlDocs.SelectedValue.ToString();
         }
+
     }
 }
