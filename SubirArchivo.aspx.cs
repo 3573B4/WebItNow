@@ -1,44 +1,104 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Data;
+using System.IO;
+using System.Data.SqlTypes;
+using System.Data.SqlClient;
+using System.Configuration;
 
 namespace WebItNow
 {
+
     public partial class SubirArchivo : System.Web.UI.Page
     {
+
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            //string valor = ddlDocs.SelectedValue;
+            //Image1.ImageUrl = "~/Images/icono-Subir-Archivo-morado.png";
+            if (!IsPostBack)
+            {
+                getDocRequeridos();
+                string userId = Convert.ToString(Session["IdUsuario"]);
+            }
         }
+        public void getDocRequeridos()
+        {
+            ConexionBD conectar = new ConexionBD();
+            conectar.Abrir();
 
+            string sqlQuery = "SELECT IdTpoDocumento, Descripcion " +
+                                "FROM tbTpoDocumento";
+
+            SqlCommand cmd = new SqlCommand(sqlQuery, conectar.ConectarBD);
+
+            ddlDocs.DataSource = cmd.ExecuteReader();
+            ddlDocs.DataValueField = "IdTpoDocumento";
+            ddlDocs.DataTextField = "Descripcion";
+            ddlDocs.DataBind();
+
+            
+        }
         protected void BtnEnviar_Click(object sender, EventArgs e)
         {
+
+            string directorio = "./Directorio/";
+            string user = /*"USUARIO4"*/ Convert.ToString(Session["IdUsuario"]);
+            string folderName = ddlDocs.SelectedValue;
+            string directFinal = directorio + user + "/" + folderName + "/";
+            string directorioURL = Server.MapPath(directFinal);
+            string nomFile = /*folderName + "-" +*/ FileUpload1.FileName;
+
+            ConexionBD Conectar = new ConexionBD();
+            Conectar.Abrir();
+
+            string sqlUpDate = "UPDATE tbEstadoDocumento " +
+                                "SET IdStatus = '2'," +
+                                    "DirecImg = '"+ directFinal +"',"+
+                                    "NomImg = '" + nomFile +"'" +
+                                "WHERE IdUsuario = '" + user + "'" +
+                                "AND IdTipoDocumento = '" + folderName + "'";
+
+            SqlCommand cmd = new SqlCommand(sqlUpDate, Conectar.ConectarBD);
+
             if (FileUpload1.HasFile)
             {
-                //Lbl_Message.Text = "selecciono un archivo";
-                //Obtener la extesion y el tamaño para delimitar si es necesario
-                //string ext = System.IO.Path.GetExtension(FileUpload1.FileName);
-                //ext = ext.ToLower();
+                if (System.IO.Directory.Exists(directorioURL))
+                {
+                    if (File.Exists(directorioURL + nomFile))
+                    {
+                        //Console.WriteLine("El documento sI existe");
+                        LblExpira.Text = "El documento ya existe";
+                        this.mpeMensaje.Show();
+                    }
+                    else
+                    {
+                        
+                        FileUpload1.SaveAs(Server.MapPath(directFinal /*+ folderName + "-"*/ + FileUpload1.FileName));
+                        //Lbl_Message.Text = "EL archivo se subio exitosamente";
+                        cmd.ExecuteReader();
+                        LblExpira.Text = "El documento se subio exitosamente";
+                        this.mpeMensaje.Show();
+                    }
 
-                ////El tamaño esta en bytes
-                //int tamArch = FileUpload1.PostedFile.ContentLength;
-
-                ////podemos llevar a cabo la verificacion de extension y de tamaño
-                //if(/*ext==".png" && */tamArch <= 1048576)
-                //{
-                    FileUpload1.SaveAs(Server.MapPath("./Directorio/" + FileUpload1.FileName));
-                    Lbl_Message.Text = "EL archivo se subio exitosamente";
-                //}
-                //else
-                //{
-                //    Lbl_Message.Text = "Ocurrio un error al subir el archivo";
-                //}
-
+                }
+                else
+                {
+                    System.IO.Directory.CreateDirectory(directorioURL);
+                    FileUpload1.SaveAs(Server.MapPath(directFinal /*+ folderName + "-"*/ + FileUpload1.FileName));
+                    //Lbl_Message.Text = "EL archivo se subio exitosamente";
+                    cmd.ExecuteReader();
+                    LblExpira.Text = "El documento se subio exitosamente";
+                    this.mpeMensaje.Show();
+                }
             }
-            else {
+            else
+            {
                 Lbl_Message.Text = "Debe seleccionar un archivo";
             }
         }
@@ -46,6 +106,11 @@ namespace WebItNow
         protected void BtnSalir_Click(object sender, EventArgs e)
         {
             Response.Redirect("Login.aspx");
+        }
+
+        protected void ddlDocs_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string nombre = ddlDocs.SelectedValue.ToString();
         }
     }
 }

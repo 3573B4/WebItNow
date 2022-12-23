@@ -115,8 +115,10 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
-    <Content Include="Review-Document.aspx" />
+    <Content Include="Images\loader.gif" />
+    <Content Include="Images\tierra-de-cristal-en-gras-131535893.jpg" />
     <Content Include="Images\icono-Subir-Archivo-morado.png" />
+    <Content Include="Review-Document.aspx" />
     <Content Include="Styles\center_controls.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -166,6 +168,7 @@
     <Content Include="Scripts\WebForms\WebUIValidation.js" />
     <Content Include="Site.Master" />
     <Content Include="Register.aspx" />
+    <Content Include="Styles\GridView.css" />
     <Content Include="Styles\panel_message.css" />
     <Content Include="Styles\default.css" />
     <Content Include="SubirArchivo.aspx" />
@@ -200,13 +203,6 @@
     <Compile Include="Forgot-Password.aspx.designer.cs">
       <DependentUpon>Forgot-Password.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Review-Document.aspx.cs">
-      <DependentUpon>Review-Document.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Review-Document.aspx.designer.cs">
-      <DependentUpon>Review-Document.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -232,6 +228,13 @@
       <DependentUpon>Menu.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Review-Document.aspx.cs">
+      <DependentUpon>Review-Document.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Review-Document.aspx.designer.cs">
+      <DependentUpon>Review-Document.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -273,6 +276,7 @@
     <Folder Include="App_Code\" />
     <Folder Include="App_Data\" />
     <Folder Include="Directorio\" />
+    <Folder Include="Uploads\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

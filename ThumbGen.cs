@@ -81,8 +81,6 @@ namespace CatalogView
 				context.Response.End();
 
 			}
-
-
 			
 		}
 

@@ -15,9 +15,9 @@
 
     <script language="javascript" type="text/javascript">
 
-    if (history.forward(1)) {
-        location.replace(history.forward(1))
-    }
+        if (history.forward(1)) {
+            location.replace(history.forward(1))
+        }
 
     //function getNameURLWeb() {
     //    var sPath = window.location.pathname;
@@ -27,11 +27,14 @@
 
     //var xx_nombre_pagina = getNameURLWeb();
     //    alert(xx_nombre_pagina);
-
     </script>
+
+
+
     <link href="~/Styles/center_controls.css" rel="stylesheet" type="text/css" />
     <link href="~/Styles/default.css" rel="stylesheet" type="text/css" />
     <link href="~/Styles/panel_message.css" rel="stylesheet" type="text/css" />
+    <link href="~/Styles/GridView.css" rel="stylesheet" type="text/css" />
 
     <style type="text/css">
         .style1

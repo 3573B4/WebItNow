@@ -41,22 +41,22 @@ namespace WebItNow
             else
             {
 
-                int result = Autenticar(TxtUsu.Text, TxtPass.Text);
+                string result = Autenticar(TxtUsu.Text, TxtPass.Text);
 
-                if (result >= 1)
+                if (result != null)
                 {
 
+                    // IdUsuario
+                    System.Web.HttpContext.Current.Session["IdUsuario"] = TxtUsu.Text;
                     // Permisos Usuario
-                    Session["UsPrivilegios"] = "3";
-
-                    // System.Web.HttpContext.Current.Session["UsPrivilegios"] = "3";
+                    System.Web.HttpContext.Current.Session["UsPrivilegios"] = result;
 
                     // Permisos Usuario
                     // System.Web.HttpContext.Current.Session["UsPrivilegios"] = dr1["UsPrivilegios"].ToString().Trim();
 
-                    string mensaje = Convert.ToString(Session["UsPrivilegios"]);
+                    string UsPrivilegios = Convert.ToString(Session["UsPrivilegios"]);
 
-                    if (mensaje == "3")
+                    if (UsPrivilegios == "3")
                     {
                         Response.Redirect("SubirArchivo.aspx");
                     }
@@ -68,7 +68,7 @@ namespace WebItNow
                     Lbl_Message.Visible = false;
 
                 }
-                else if (result == 0)
+                else
                 {
                     // "Usuario y/o Contraseña Incorrectos";
                     LblMessage.Text = "No fue posible iniciar sesión." + "<br/>" + "Confirme su nombre de usuario y contraseña.";
@@ -87,7 +87,7 @@ namespace WebItNow
             Conecta.Abrir();
         }
 
-        public int Autenticar(String pUsuarios, String pContrasena)
+        public string Autenticar(String pUsuarios, String pContrasena)
         {
             ConexionBD Conecta = new ConexionBD();
             NewMethod(Conecta);
@@ -103,14 +103,18 @@ namespace WebItNow
 
                 SqlDataReader dr1 = cmd1.ExecuteReader();
 
-                if (dr1.Read())
+                while (dr1.Read())
                 {
-
-                    return dr1.GetInt32(0);
-
+                    return dr1["UsPrivilegios"].ToString().Trim();
                 }
+                    //if (dr1.Read())
+                    //{
 
-                cmd1.Dispose();
+                    //    return dr1.GetInt32(0);
+
+                    //}
+
+                    cmd1.Dispose();
                 dr1.Dispose();
 
                 Conecta.Cerrar();
@@ -127,7 +131,7 @@ namespace WebItNow
 
             }
 
-            return -1;
+            return null;
         }
 
     }

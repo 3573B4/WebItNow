@@ -44,16 +44,27 @@
                 <asp:TextBox ID="TxtUsu" runat="server" CssClass="form-control" placeholder="Usuario"></asp:TextBox>
             </div>
         </div>
-        
+
+        <div class="form-group">
+            <asp:Label ID="LblEmail" runat="server" Text="Correo electrónico" CssClass="control-label col-sm-2"></asp:Label>
+            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server"   
+                ControlToValidate="TxtEmail" ErrorMessage="*" ForeColor="Red">
+                </asp:RequiredFieldValidator>
+            <div class="col-sm-12">
+                <asp:TextBox ID="TxtEmail" runat="server" CssClass="form-control" placeholder="Ingresa tu e-mail" MaxLength="50" TextMode="Email"></asp:TextBox>
+            </div>
+        </div>        
+
         <div class="form-group">
             <asp:Label ID="LblPass" runat="server" Text="Contraseña" CssClass="control-label col-sm-2"></asp:Label>
             <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server"   
                 ControlToValidate="TxtPass" ErrorMessage="*" ForeColor="Red">
                 </asp:RequiredFieldValidator>
             <div class="col-sm-12">
-                <asp:TextBox ID="TxtPass" runat="server" CssClass="form-control" placeholder="Contraseña" MaxLength="10" TextMode="Password"></asp:TextBox>
+                <asp:TextBox ID="TxtPass" runat="server" CssClass="form-control" placeholder="Crea una contraseña" MaxLength="10" TextMode="Password"></asp:TextBox>
             </div>
         </div>
+
         <div class="form-group">
             <div class="d-grid col-6 mx-auto">
                 <asp:Label ID="Lbl_Message" runat="server" ForeColor="Red" Visible="False" ></asp:Label>
