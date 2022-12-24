@@ -22,13 +22,31 @@
             //
         }
 
+        function getFolder() {
+            return showModalDialog("folderDialog.HTA", "", "width:400px;height:400px;resizeable:yes;");
+        }
+
+        function SelCarpeta() {
+            var objShell = new ActiveXObject("Shell.Application");
+
+            var objFolder = objShell.BrowseForFolder(0, "SELECCIONE LA RUTA DONDE DESEA GUARDAR EL ARCHIVO", 0, 0);
+
+            if (objFolder != null) {
+                var objFolderItem = objFolder.Items().Item();
+                var objPath = objFolderItem.Path;
+                var foldername = objPath;
+                document.forms.aspnetForm.ctl00_ContentPlaceHolder 1_txtrutaID.value = foldername;
+                return false;
+            }
+        }
+
     </script>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
     <br />
-
+    
 <div class="container well contenedorLogin">
         <div class="row">
             <div class="col-xs-12">
@@ -41,23 +59,67 @@
                 <asp:TextBox ID="TxtUsu" runat="server" CssClass="form-control" placeholder="Usuario"></asp:TextBox>
             </div>
         </div>
-        
+        <br />        
         <div class="form-group">
             <asp:Label ID="LblTpoDocumento" runat="server" Text="Tpo. de Documento" CssClass="control-label col-sm-2"></asp:Label>
             <div class="col-sm-12">
                 <asp:TextBox ID="TxtTpoDocumento" runat="server" CssClass="form-control" placeholder="Tipo de Documento" ></asp:TextBox>
             </div>
         </div>
+        <br />
         <div class="form-group">
-            <div class="d-grid col-6 mx-auto">
-                <asp:Label ID="Lbl_Message" runat="server" ForeColor="Red" Visible="False" ></asp:Label>
+            <asp:Label ID="LblPathDownload" runat="server" Text="Ruta Descarga" CssClass="control-label col-sm-2"></asp:Label>
+            <div class="col-sm-12">
+                    <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
+                        <ContentTemplate>
+                        <div class="d-grid gap-2 d-md-flex justify-content-center">
+                            <asp:TextBox ID="TxtPathDownload" runat="server" CssClass="form-control" placeholder="Ruta descarga archivo" ></asp:TextBox>
+                            <asp:ImageButton ID="imgDownload" runat="server" ImageUrl="~/Images/search_find.png" OnClick="imgDownload_Click"  />
+                        </div>
+                        </ContentTemplate>
+                        <Triggers>
+                            <asp:AsyncPostBackTrigger ControlID="imgDownload" EventName="Click" />
+                        </Triggers>
+                    </asp:UpdatePanel>
             </div>
-        </div>        
+            <!--
+                <input type="button" value="Examinar" class="botones" onclick="SelCarpeta()" align="bottom"/>
+                <input type="text" name="txtruta" style="width: 289px" id="txtrutaID" /> 
+            -->
+        </div>
+    <!--
+        <div class="form-group">
+            <input type="file" id="fileLoader" name="files" title="Load File" />
+        </div>
+    -->
+        <br />
         <div class="form-group">
             <div class="d-grid col-6 mx-auto">
                 <asp:Button ID="BtnUnLoad" runat="server" Text="Descarga Archivo(s)" Font-Bold="True" OnClick="BtnUnLoad_Click" CssClass="btn btn-primary" />
             </div>
         </div>
+        <br />
+        <div class="form-group">
+            <asp:GridView ID="grdEstadoDocumento" runat="server" AutoGenerateColumns="False" GridLines="None" Width="586px"
+                AllowPaging="True" CssClass="mGrid" PagerStyle-CssClass="pgr" AlternatingRowStyle-CssClass="alt"
+                PageSize="7" OnSelectedIndexChanged="grdEstadoDocumento_SelectedIndexChanged">
+                <AlternatingRowStyle CssClass="alt" />
+                <Columns>
+                    <asp:ButtonField ButtonType="Link" CommandName="Select" Text="Select" />
+                    <asp:BoundField DataField="IdUsuario" HeaderText="Id. Usuario" />
+                    <asp:BoundField DataField="IdTipoDocumento" HeaderText="Id. Tipo Documento" />
+                    <asp:BoundField DataField="Descripcion" HeaderText="Tipo de Documento" />
+                    <asp:BoundField DataField="Desc_Status" HeaderText="Id. Status" />
+                </Columns>
+                <PagerStyle CssClass="pgr" />
+            </asp:GridView>
+        </div>
+        <div class="form-group">
+            <div class="d-grid col-6 mx-auto">
+                <asp:Label ID="Lbl_Message" runat="server" ForeColor="Red" Visible="False" ></asp:Label>
+            </div>
+        </div>        
+
         <div class="from-group">
             <div class="d-grid col-6 mx-auto">
                 <asp:Button ID="BtnRegresar" runat="server" Text="Regresar" Font-Bold="True" OnClick="BtnRegresar_Click" CssClass="btn btn-link"/>
@@ -172,4 +234,5 @@
             <td></td>
         </tr>
     </table>
+
 </asp:Content>
