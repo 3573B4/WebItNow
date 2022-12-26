@@ -50,7 +50,7 @@
 <div class="container well contenedorLogin">
         <div class="row">
             <div class="col-xs-12">
-                <h2> Descarga de Archivo(s)</h2>
+                <h2> Validación de Documentos</h2>
             </div>
         </div>
         <div class="form-group">
@@ -99,18 +99,30 @@
             </div>
         </div>
         <br />
+        <!--
+        <div class="row">
+            <div class="col-xs-12">
+                <h2> Pendientes</h2>
+            </div>
+        </div>
+        -->
         <div class="form-group">
-            <asp:GridView ID="grdEstadoDocumento" runat="server" AutoGenerateColumns="False" GridLines="None" Width="586px"
+            <asp:GridView ID="grdEstadoDocumento"  runat="server" AutoGenerateColumns="False" GridLines="None" Width="586px"
                 AllowPaging="True" CssClass="mGrid" PagerStyle-CssClass="pgr" AlternatingRowStyle-CssClass="alt"
-                PageSize="7" OnSelectedIndexChanged="grdEstadoDocumento_SelectedIndexChanged">
+                PageSize="5" OnSelectedIndexChanged="grdEstadoDocumento_SelectedIndexChanged" Caption="Pendientes" CaptionAlign="Top" >
                 <AlternatingRowStyle CssClass="alt" />
                 <Columns>
-                    <asp:ButtonField ButtonType="Link" CommandName="Select" Text="Select" />
+                    <asp:TemplateField>
+                        <ItemTemplate>
+                            <asp:ImageButton ID="imgEditar" runat="server" CommandName="Select" ImageUrl="~/Images/edit.jpg" Height="22px" Width="22px" />
+                        </ItemTemplate> 
+                    </asp:TemplateField>
                     <asp:BoundField DataField="IdUsuario" HeaderText="Id. Usuario" />
                     <asp:BoundField DataField="IdTipoDocumento" HeaderText="Id. Tipo Documento" />
                     <asp:BoundField DataField="Descripcion" HeaderText="Tipo de Documento" />
                     <asp:BoundField DataField="Desc_Status" HeaderText="Id. Status" />
                 </Columns>
+                
                 <PagerStyle CssClass="pgr" />
             </asp:GridView>
         </div>

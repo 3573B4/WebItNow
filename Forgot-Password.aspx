@@ -32,7 +32,7 @@
     <div class="container well contenedorLogin">
         <div class="row">
             <div class="col-xs-12">
-                <h2>Cambio de Contraseña</h2>
+                <h2>Recuperación de Cuenta</h2>
             </div>
         </div>
         <div class="form-group">

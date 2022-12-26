@@ -6,8 +6,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
+using System.Web.SessionState;
 using System.Web.UI.WebControls;
 using System.Diagnostics;
+using System.Reflection;
+
 
 using System.Data;
 using System.Data.SqlTypes;
@@ -30,6 +33,7 @@ namespace WebItNow
             {
                 TxtPathDownload.Text = GetDownloadsPath();
 
+                //grdEstadoDocumento.Columns[0].Visible = false;
                 // Carga GridView
                 GetEstadoDocumentos(); 
             }
@@ -55,19 +59,42 @@ namespace WebItNow
 
         protected void grdEstadoDocumento_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string varGalleryFolder = System.Web.HttpContext.Current.Server.MapPath("~/Directorio/");
+            TxtUsu.Text = grdEstadoDocumento.SelectedRow.Cells[1].Text;
+
+            // string varGalleryFolder = System.Web.HttpContext.Current.Server.MapPath("~/Directorio/");
 
             // string IdUsuario = grdEstadoDocumento.SelectedRow.Cells[1].Text;
 
-            varGalleryFolder = varGalleryFolder + grdEstadoDocumento.SelectedRow.Cells[1].Text;
+            // varGalleryFolder = varGalleryFolder + grdEstadoDocumento.SelectedRow.Cells[1].Text;
 
-            //GetFiles(varGalleryFolder + "\\" + grdEstadoDocumento.SelectedRow.Cells[2].Text);
+            // GetFiles(varGalleryFolder + "\\" + grdEstadoDocumento.SelectedRow.Cells[2].Text);
 
             // Carga GridView
-            GetEstadoDocumentos();
-            //GetEstadoDocumentos(grdEstadoDocumento.SelectedRow.Cells[1].Text);
+            // GetEstadoDocumentos();
+
+            // GetEstadoDocumentos(grdEstadoDocumento.SelectedRow.Cells[1].Text);
 
         }
+
+        protected void grdEstadoDocumento_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            if (e.CommandName == "Select")
+            {
+                //
+                // Se obtiene indice de la row seleccionada
+                //
+                int index = Convert.ToInt32(e.CommandArgument);
+
+                //
+                // Obtengo el id de la entidad que se esta editando
+                // en este caso de la entidad Person
+                //
+                int id = Convert.ToInt32(grdEstadoDocumento.DataKeys[index].Value);
+
+            }
+
+        }
+
 
         protected void grdEstadoDocumento_PageIndexChanged(Object sender, EventArgs e)
         {
@@ -133,15 +160,82 @@ namespace WebItNow
 		protected void BtnUnLoad_Click(object send, EventArgs e)
         {
 
+            /// <param name="strURLFile"> URL del archivo que se desea descargar </param>
+            /// <param name="strPathToSave"> Ruta donde se desea almacenar el archivo </param>
+
+            // string strURLFile = Server.MapPath("~/Directorio/") + "live8.jpg";
+            // string strPathToSave = TxtPathDownload.Text + "/live8.jpg";
+
+            string strURLFile = Server.MapPath("~/Directorio/") + "manual.pdf";
+            string strPathToSave = TxtPathDownload.Text + "/" + "manual.pdf";
+
+            downloadFileToSpecificPath(strURLFile, strPathToSave);
+
+            //string file = Request.Params["file"];
+            //file = "";
+
+            //if (!string.IsNullOrEmpty(file))
+            //{
+            //    string downloads = "~/Directorio/";
+
+            //    file = Path.Combine(Server.MapPath(downloads), Path.GetFileName(file));
+            //    Response.Clear();
+            //    Response.ContentType = "application/octect-stream";
+            //    Response.AddHeader("Content–Disposition", "attachment; filename=foo.xyz");
+            //    Response.TransmitFile(file);
+            //    Response.End();
+            //}
         }
 
-		protected void BtnClose_Click(object send, EventArgs e)
+        /// <summary>
+        /// Método que descarga un archivo de Internet en la ruta indicada.
+        /// </summary>
+        /// <param name="strURLFile"> URL del archivo que se desea descargar</param>
+        /// <param name="strPathToSave"> Ruta donde se desea almacenar el archivo</param>
+        public static void downloadFileToSpecificPath(string strURLFile, string strPathToSave)
+        {
+            // Se encierra el código dentro de un bloque try-catch.
+            try
+            {
+                // Se valida que la URL no esté en blanco.
+                if (String.IsNullOrEmpty(strURLFile))
+                {
+                    // Se retorna un mensaje de error al usuario.
+                    throw new ArgumentNullException("La dirección URL del documento es nula o se encuentra en blanco.");
+                }// Fin del if que valida que la URL no esté en blanco.
+
+                // Se valida que la ruta física no esté en blanco.
+                if (String.IsNullOrEmpty(strPathToSave))
+                {
+                    // Se retorna un mensaje de error al usuario.
+                    throw new ArgumentNullException("La ruta para almacenar el documento es nula o se encuentra en blanco.");
+                }// Fin del if que valida que la ruta física no esté en blanco.
+
+                // Se descargar el archivo indicado en la ruta específicada.
+                using (System.Net.WebClient client = new System.Net.WebClient())
+                {
+                    client.DownloadFile(strURLFile, strPathToSave);
+                }// Fin del using para descargar archivos.
+            }// Fin del try.
+            catch (Exception ex)
+            {
+                // Se retorna la excepción al cliente.
+                throw ex;
+            }   // Fin del catch.
+
+        }   // Fin del método downloadFileToSpecificPath.
+
+        protected void BtnClose_Click(object send, EventArgs e)
         {
 
         }
 
         protected void imgDownload_Click(object sender, ImageClickEventArgs e)
         {
+            //if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+            //{
+            //    TxtPathDownload.Text = folderBrowserDialog1.SelectedPath;
+            //}
 
             //Process.Start("explorer.exe");
 
