@@ -74,7 +74,7 @@
                         <ContentTemplate>
                         <div class="d-grid gap-2 d-md-flex justify-content-center">
                             <asp:TextBox ID="TxtPathDownload" runat="server" CssClass="form-control" placeholder="Ruta descarga archivo" Enabled="False" ></asp:TextBox>
-                            <asp:ImageButton ID="imgDownload" runat="server" ImageUrl="~/Images/search_find.png" OnClick="imgDownload_Click"  />
+                            <asp:ImageButton ID="imgDownload" runat="server" ImageUrl="~/Images/search_find.png"  OnClick="imgDownload_Click" />
                         </div>
                         </ContentTemplate>
                         <Triggers>

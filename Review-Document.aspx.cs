@@ -10,7 +10,7 @@ using System.Web.SessionState;
 using System.Web.UI.WebControls;
 using System.Diagnostics;
 using System.Reflection;
-
+using System.Windows.Forms;
 
 using System.Data;
 using System.Data.SqlTypes;
@@ -167,8 +167,11 @@ namespace WebItNow
             // string strURLFile = Server.MapPath("~/Directorio/") + "live8.jpg";
             // string strPathToSave = TxtPathDownload.Text + "/live8.jpg";
 
-            string strURLFile = Server.MapPath("~/Directorio/") + "manual.pdf";
-            string strPathToSave = TxtPathDownload.Text + "/" + "manual.pdf";
+            //string strURLFile = Server.MapPath("~/Directorio/") + "manual.pdf";
+            //string strPathToSave = TxtPathDownload.Text + "/" + "manual.pdf";
+
+            string strURLFile = Server.MapPath("~/Directorio/") + "FileFolderDialog.zip";
+            string strPathToSave = TxtPathDownload.Text + "/" + "FileFolderDialog.zip";
 
             downloadFileToSpecificPath(strURLFile, strPathToSave);
 
@@ -231,12 +234,50 @@ namespace WebItNow
 
         }
 
+        private class OldWindow : System.Windows.Forms.IWin32Window
+        {
+            IntPtr _handle;
+            public OldWindow(IntPtr handle)
+            {
+                _handle = handle;
+            }
+
+            #region IWin32Window Members 
+            IntPtr System.Windows.Forms.IWin32Window.Handle
+            {
+                get { return _handle; }
+            }
+            #endregion
+        }
+
         protected void imgDownload_Click(object sender, ImageClickEventArgs e)
         {
-            //if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+            using (var dialog = new System.Windows.Forms.FolderBrowserDialog())
+            { 
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    TxtPathDownload.Text = dialog.SelectedPath;
+                }
+            }
+
+            //using (var dialog = new System.Windows.Forms.FolderBrowserDialog())
             //{
-            //    TxtPathDownload.Text = folderBrowserDialog1.SelectedPath;
+            //    System.Windows.Forms.DialogResult result = dialog.ShowDialog();
+            //    if (result == DialogResult.OK)
+            //    {
+            //        //string ruta = dialog.SelectedPath;
+            //        TxtPathDownload.Text = dialog.SelectedPath;
+            //    }
             //}
+
+            //using (var fd = new FolderBrowserDialog())
+            //{
+            //    if (fd.ShowDialog() == System.Windows.Forms.DialogResult.OK && !string.IsNullOrWhiteSpace(fd.SelectedPath))
+            //    {
+            //        TxtPathDownload.Text = fd.SelectedPath;
+            //    }
+            //}
+
 
             //Process.Start("explorer.exe");
 
