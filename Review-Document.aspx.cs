@@ -60,6 +60,7 @@ namespace WebItNow
         protected void grdEstadoDocumento_SelectedIndexChanged(object sender, EventArgs e)
         {
             TxtUsu.Text = grdEstadoDocumento.SelectedRow.Cells[1].Text;
+            TxtTpoDocumento.Text = grdEstadoDocumento.SelectedRow.Cells[3].Text;
 
             // string varGalleryFolder = System.Web.HttpContext.Current.Server.MapPath("~/Directorio/");
 

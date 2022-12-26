@@ -56,14 +56,14 @@
         <div class="form-group">
             <asp:Label ID="LblUsu" runat="server" Text="Usuario" CssClass="control-label co-sm-3" Font-Bold="False"></asp:Label>
             <div class="col-sm-12">
-                <asp:TextBox ID="TxtUsu" runat="server" CssClass="form-control" placeholder="Usuario"></asp:TextBox>
+                <asp:TextBox ID="TxtUsu" runat="server" CssClass="form-control" placeholder="Usuario" Enabled="False"></asp:TextBox>
             </div>
         </div>
         <br />        
         <div class="form-group">
             <asp:Label ID="LblTpoDocumento" runat="server" Text="Tpo. de Documento" CssClass="control-label col-sm-2"></asp:Label>
             <div class="col-sm-12">
-                <asp:TextBox ID="TxtTpoDocumento" runat="server" CssClass="form-control" placeholder="Tipo de Documento" ></asp:TextBox>
+                <asp:TextBox ID="TxtTpoDocumento" runat="server" CssClass="form-control" placeholder="Tipo de Documento" Enabled="False" ></asp:TextBox>
             </div>
         </div>
         <br />
@@ -73,7 +73,7 @@
                     <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
                         <ContentTemplate>
                         <div class="d-grid gap-2 d-md-flex justify-content-center">
-                            <asp:TextBox ID="TxtPathDownload" runat="server" CssClass="form-control" placeholder="Ruta descarga archivo" ></asp:TextBox>
+                            <asp:TextBox ID="TxtPathDownload" runat="server" CssClass="form-control" placeholder="Ruta descarga archivo" Enabled="False" ></asp:TextBox>
                             <asp:ImageButton ID="imgDownload" runat="server" ImageUrl="~/Images/search_find.png" OnClick="imgDownload_Click"  />
                         </div>
                         </ContentTemplate>
