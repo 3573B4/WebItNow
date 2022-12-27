@@ -35,18 +35,36 @@
                 var objFolderItem = objFolder.Items().Item();
                 var objPath = objFolderItem.Path;
                 var foldername = objPath;
-                document.forms.aspnetForm.ctl00_ContentPlaceHolder 1_txtrutaID.value = foldername;
+                document.forms.aspnetForm.ctl00_ContentPlaceHolder1_txtrutaID.value = foldername;
                 return false;
             }
         }
 
+        function fnShellBrowseForFolderJ() {
+            var objShell = new ActiveXObject("shell.application");
+            var ssfWINDOWS = 36;
+            var objFolder;
+
+            objFolder = objShell.BrowseForFolder(0, "Example", 0, ssfWINDOWS);
+            if (objFolder != null) {
+                // Add code here.
+            }
+
+            function showDirectory() {
+                document.all.TxtPathDownload.value = window.showModalDialog("browseDirectory.aspx", 'jain', "dialogHeight: 560px; dialogWidth: 360px; edge: Raised; center: Yes; help: Yes; resizable: Yes; status: No;");
+                return false;
+            }
+
+        }
     </script>
+
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
-    <br />
-    
+<asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+<br />
+<asp:UpdatePanel ID="UpdatePanel2" runat="server" UpdateMode="Conditional" >
+<ContentTemplate>
 <div class="container well contenedorLogin">
         <div class="row">
             <div class="col-xs-12">
@@ -70,28 +88,24 @@
         <div class="form-group">
             <asp:Label ID="LblPathDownload" runat="server" Text="Ruta Descarga" CssClass="control-label col-sm-2"></asp:Label>
             <div class="col-sm-12">
-                    <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
-                        <ContentTemplate>
-                        <div class="d-grid gap-2 d-md-flex justify-content-center">
-                            <asp:TextBox ID="TxtPathDownload" runat="server" CssClass="form-control" placeholder="Ruta descarga archivo" Enabled="False" ></asp:TextBox>
-                            <asp:ImageButton ID="imgDownload" runat="server" ImageUrl="~/Images/search_find.png"  OnClick="imgDownload_Click" />
-                        </div>
-                        </ContentTemplate>
-                        <Triggers>
-                            <asp:AsyncPostBackTrigger ControlID="imgDownload" EventName="Click" />
-                        </Triggers>
-                    </asp:UpdatePanel>
+                <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
+                    <ContentTemplate>
+                    <div class="d-grid gap-2 d-md-flex justify-content-center">
+                        <asp:TextBox ID="TxtPathDownload" runat="server" CssClass="form-control" placeholder="Ruta descarga archivo" Enabled="False" ></asp:TextBox>
+                        <asp:ImageButton ID="imgDownload" runat="server" ImageUrl="~/Images/search_find.png" OnClientClick="showDirectory();" />
+                    </div>
+                    </ContentTemplate>
+                </asp:UpdatePanel>
             </div>
-            <!--
-                <input type="button" value="Examinar" class="botones" onclick="SelCarpeta()" align="bottom"/>
-                <input type="text" name="txtruta" style="width: 289px" id="txtrutaID" /> 
-            -->
-        </div>
     <!--
-        <div class="form-group">
-            <input type="file" id="fileLoader" name="files" title="Load File" />
-        </div>
+                <input type="button" value="Examinar" class="botones" onclick="getFolder();" align="bottom"/>
+                <input type="text" name="txtruta" style="width: 289px" id="txtrutaID" /> 
+
+                <div class="form-group">
+                    <input type="file" id="fileLoader" name="files" title="Load File" />
+                </div>
     -->
+        </div>
         <br />
         <div class="form-group">
             <div class="d-grid col-6 mx-auto">
@@ -246,5 +260,9 @@
             <td></td>
         </tr>
     </table>
-
+</ContentTemplate>
+<Triggers>
+    <asp:AsyncPostBackTrigger ControlID="imgDownload" EventName="Click" />
+</Triggers>
+</asp:UpdatePanel>
 </asp:Content>

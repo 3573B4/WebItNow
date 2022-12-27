@@ -22,6 +22,7 @@ namespace WebItNow
 
 	public partial class Review_Document : System.Web.UI.Page
 	{
+        // NYWVH-HT4XC-R2WYW-9Y3CM-X4V3Y
         private static Guid FolderDownloads = new Guid("374DE290-123F-4565-9164-39C4925E467B");
 
         [DllImport("shell32.dll", CharSet = CharSet.Auto)]
@@ -33,7 +34,6 @@ namespace WebItNow
             {
                 TxtPathDownload.Text = GetDownloadsPath();
 
-                //grdEstadoDocumento.Columns[0].Visible = false;
                 // Carga GridView
                 GetEstadoDocumentos(); 
             }
@@ -252,6 +252,7 @@ namespace WebItNow
 
         protected void imgDownload_Click(object sender, ImageClickEventArgs e)
         {
+
             using (var dialog = new System.Windows.Forms.FolderBrowserDialog())
             { 
                 if (dialog.ShowDialog() == DialogResult.OK)
