@@ -10,6 +10,7 @@ using System.IO;
 using System.Data.SqlTypes;
 using System.Data.SqlClient;
 using System.Configuration;
+using System.Diagnostics;
 
 namespace WebItNow
 {
@@ -24,7 +25,9 @@ namespace WebItNow
             if (!IsPostBack)
             {
                 getDocRequeridos();
+                getDocsUsuario();
                 string userId = Convert.ToString(Session["IdUsuario"]);
+                lblUsuario.Text = userId;
             }
         }
         public void getDocRequeridos()
@@ -32,8 +35,9 @@ namespace WebItNow
             ConexionBD conectar = new ConexionBD();
             conectar.Abrir();
 
-            string sqlQuery = "SELECT IdTpoDocumento, Descripcion " +
-                                "FROM tbTpoDocumento";
+            string sqlQuery = "SELECT * " +
+                                "FROM tbTpoDocumento " +
+                                "WHERE Status = '1'";
 
             SqlCommand cmd = new SqlCommand(sqlQuery, conectar.ConectarBD);
 
@@ -44,13 +48,43 @@ namespace WebItNow
 
             
         }
+        public void getDocsUsuario()
+        {
+            string user = /*"USUARIO4"*/ Convert.ToString(Session["IdUsuario"]);
+            ConexionBD Conectar = new ConexionBD();
+            Conectar.Abrir();
+
+            //string sqlQuery = "SELECT IdTipoDocumento, IdStatus " +
+            //                    "FROM tbEstadoDocumento " +
+            //                    "WHERE IdUsuario = '"+ user +"'";
+
+            string sqlQuery = "SELECT ed.IdUsuario, ed.IdTipoDocumento, td.Descripcion, s.Descripcion as Desc_Status  " +
+                                  "  FROM tbEstadoDocumento ed, tbTpoDocumento td, tbStatus s " +
+                                  " WHERE ed.IdStatus = s.IdStatus And ed.IdTipoDocumento = td.IdTpoDocumento " +
+                                  "   AND IdUsuario = '" + user + "'";
+
+            SqlCommand ejecucion = new SqlCommand(sqlQuery, Conectar.ConectarBD);
+            SqlDataAdapter da = new SqlDataAdapter(ejecucion);
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+            
+            if(dt.Rows.Count == 0)
+            {
+                gvEstadoDocs.ShowHeaderWhenEmpty = true;
+                gvEstadoDocs.EmptyDataText = "No hay resultados.";
+            }
+            gvEstadoDocs.DataSource = dt;
+            gvEstadoDocs.DataBind();
+            
+        }
         protected void BtnEnviar_Click(object sender, EventArgs e)
         {
 
-            string directorio = "./Directorio/";
+            string directorio = "~/Directorio/";
             string user = /*"USUARIO4"*/ Convert.ToString(Session["IdUsuario"]);
             string folderName = ddlDocs.SelectedValue;
             string directFinal = directorio + user + "/" + folderName + "/";
+            string UrlFinal = user + "/" + folderName + "/";
             string directorioURL = Server.MapPath(directFinal);
             string nomFile = /*folderName + "-" +*/ FileUpload1.FileName;
 
@@ -59,10 +93,10 @@ namespace WebItNow
 
             string sqlUpDate = "UPDATE tbEstadoDocumento " +
                                 "SET IdStatus = '2'," +
-                                    "DirecImg = '"+ directFinal +"',"+
-                                    "NomImg = '" + nomFile +"'" +
-                                "WHERE IdUsuario = '" + user + "'" +
-                                "AND IdTipoDocumento = '" + folderName + "'";
+                                    " Url_Imagen = '"+ UrlFinal + "',"+
+                                    " Nom_Imagen = '" + nomFile +"'" +
+                                " WHERE IdUsuario = '" + user + "'" +
+                                " AND IdTipoDocumento = '" + folderName + "'";
 
             SqlCommand cmd = new SqlCommand(sqlUpDate, Conectar.ConectarBD);
 
@@ -106,11 +140,14 @@ namespace WebItNow
         protected void BtnSalir_Click(object sender, EventArgs e)
         {
             Response.Redirect("Login.aspx");
+            
         }
 
         protected void ddlDocs_SelectedIndexChanged(object sender, EventArgs e)
         {
             string nombre = ddlDocs.SelectedValue.ToString();
         }
+
+        
     }
 }

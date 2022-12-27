@@ -16,6 +16,7 @@ using System.Data;
 using System.Data.SqlTypes;
 using System.Data.SqlClient;
 
+using System.Threading;
 
 namespace WebItNow
 {
@@ -170,8 +171,8 @@ namespace WebItNow
             //string strURLFile = Server.MapPath("~/Directorio/") + "manual.pdf";
             //string strPathToSave = TxtPathDownload.Text + "/" + "manual.pdf";
 
-            string strURLFile = Server.MapPath("~/Directorio/") + "FileFolderDialog.zip";
-            string strPathToSave = TxtPathDownload.Text + "/" + "FileFolderDialog.zip";
+            string strURLFile = Server.MapPath("~/Directorio/USUARIO5/OTR/") + "Captura de pantalla (3).png";
+            string strPathToSave = TxtPathDownload.Text + "/" + "Captura de pantalla (3).png";
 
             downloadFileToSpecificPath(strURLFile, strPathToSave);
 
@@ -252,14 +253,17 @@ namespace WebItNow
 
         protected void imgDownload_Click(object sender, ImageClickEventArgs e)
         {
+            Thread thdSyncRead = new Thread(new ThreadStart(openfolder));
+            thdSyncRead.SetApartmentState(ApartmentState.STA);
+            thdSyncRead.Start();
 
-            using (var dialog = new System.Windows.Forms.FolderBrowserDialog())
-            { 
-                if (dialog.ShowDialog() == DialogResult.OK)
-                {
-                    TxtPathDownload.Text = dialog.SelectedPath;
-                }
-            }
+            //using (var dialog = new System.Windows.Forms.FolderBrowserDialog())
+            //{ 
+            //    if (dialog.ShowDialog() == DialogResult.OK)
+            //    {
+            //        TxtPathDownload.Text = dialog.SelectedPath;
+            //    }
+            //}
 
             //using (var dialog = new System.Windows.Forms.FolderBrowserDialog())
             //{
@@ -309,6 +313,28 @@ namespace WebItNow
             //        }
             //    }
             //}
+        }
+
+        public void openfolder()
+        {
+            try
+            {
+
+            FolderBrowserDialog fbd = new FolderBrowserDialog();
+            DialogResult result = fbd.ShowDialog();
+
+            string selectedfolder = fbd.SelectedPath;
+
+            TxtPathDownload.Text = fbd.SelectedPath;
+            
+            //string[] files = Directory.GetFiles(fbd.SelectedPath);
+            //System.Windows.Forms.MessageBox.Show("Files found: " + files.Length.ToString(), "Message");
+
+            }
+            catch (Exception ex)
+            {
+                Lbl_Message.Text = ex.Message;
+            }
         }
 
     }

@@ -21,12 +21,17 @@
         </div>
         <div class="form-group">
             <div class="d-grid col-4 mx-auto">
+                <asp:Label ID="lblUsuario" runat="server" Font-Size="XX-Large"></asp:Label>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="d-grid col-4 mx-auto">
                 <asp:Label ID="indicaciones" runat="server" Text="Seleccione el archivo a subir" CssClass="control-label co-sm-3" Font-Bold="False"></asp:Label>
             </div>
         </div>
         <br />
         <div class="form-group">
-            <div class="d-grid col-5 mx-auto">
+            <div class="d-grid col-2 mx-auto">
                 <div class="dropdown">
                     <asp:DropDownList ID="ddlDocs" runat="server" CssClass="btn btn-outline-secondary" OnSelectedIndexChanged="ddlDocs_SelectedIndexChanged" AutoPostBack="true">
                         <asp:ListItem Value="ine">INE</asp:ListItem>
@@ -39,16 +44,9 @@
         <br />
         <div class="form-group">
             <div class="input-group mb-12">
-                <div class="estilo-foto">
-                    <asp:FileUpload ID="FileUpload1" runat="server" CssClass="form-control"></asp:FileUpload>
-                    <br />
-                    <asp:Image ID="Image1" runat="server" ImageUrl="~/Images/icono-Subir-Archivo-morado.png"></asp:Image>
-                </div>
+                <asp:FileUpload ID="FileUpload1" runat="server" CssClass="form-control"></asp:FileUpload>
             </div>
-            
-
         </div>
-        
         <div class="form-group">
             <div class="d-grid col-6 mx-auto">
                 <asp:Label ID="Lbl_Message" runat="server" ForeColor="Red" Visible="false"></asp:Label>
@@ -57,12 +55,23 @@
         <br />
         <div class="form-group">
             <div class="col-sm-12"> 
-            <div class="d-grid gap-2 d-md-flex justify-content-center">
-                <asp:Button ID="BtnSalir"  runat="server" Font-Bold="True" Text="    Salir     " OnClick="BtnSalir_Click" CssClass="btn btn-outline-primary"/>
-                <asp:Button ID="BtnEnviar" runat="server" Font-Bold="True" Text="    Subir     " OnClick="BtnEnviar_Click" CssClass="btn btn-primary me-md-2" />
-                
+                <div class="d-grid gap-2 d-md-flex justify-content-center">
+                    <asp:Button ID="BtnSalir"  runat="server" Font-Bold="True" Text="    Salir     " OnClick="BtnSalir_Click" CssClass="btn btn-outline-primary"/>
+                    <asp:Button ID="BtnEnviar" runat="server" Font-Bold="True" Text="    Subir     " OnClick="BtnEnviar_Click" CssClass="btn btn-primary me-md-2" />
+                </div>
             </div>
-            </div>
+        </div>
+        <div class="row">
+            <asp:GridView ID="gvEstadoDocs" runat="server" AutoGenerateColumns="False" GridLines="None" Width="586px"
+                AllowPaging="True" CssClass="mGrid" PagerStyle-CssClass="pgr" AlternatingRowStyle-CssClass="alt"
+                PageSize="7" >
+                <AlternatingRowStyle CssClass="table" />
+                <Columns>
+                    <asp:BoundField DataField="Descripcion" HeaderText="Tipo Documento"/>
+                    <asp:BoundField DataField="Desc_status" HeaderText="Status"/>
+                </Columns>
+                <PagerStyle CssClass="pgr" />
+            </asp:GridView>
         </div>
         <div class="form-group">
             <div class="d-grid col-6 mx-auto">

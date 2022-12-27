@@ -162,7 +162,7 @@ namespace WebItNow
                 ConexionBD Conecta = new ConexionBD();
                 Conecta.Abrir();
 
-                string strQuery = "SELECT IdTpoDocumento, Descripcion FROM tbTpoDocumento";
+                string strQuery = "SELECT IdTpoDocumento, Descripcion FROM tbTpoDocumento WHERE Status = " + pIdStatus + "";
 
                 SqlCommand cmd = new SqlCommand(strQuery, Conecta.ConectarBD);
 
