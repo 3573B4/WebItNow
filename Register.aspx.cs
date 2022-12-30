@@ -66,10 +66,10 @@ namespace WebItNow
             }
 				else
 				{
-                Lbl_Message.Visible = true;
-                Lbl_Message.Text = "* Estos campos son obligatorios";
-                   // LblMessage.Text = "Debes captura Usuario / Password.";
-                   // this.mpeMensaje.Show();
+                    Lbl_Message.Visible = true;
+                    Lbl_Message.Text = "* Estos campos son obligatorios";
+                    // LblMessage.Text = "Debes captura Usuario / Password.";
+                    // this.mpeMensaje.Show();
 				}
 			}
 

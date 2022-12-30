@@ -1,9 +1,8 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="Review-Document.aspx.cs" Inherits="WebItNow.Review_Document" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" EnableEventValidation="false" CodeBehind="Review-Document.aspx.cs" Inherits="WebItNow.Review_Document" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
     <script language="javascript" type="text/javascript">
-
         var timer = setTimeout(function () {
             document.getElementById('<%=LblExpira.ClientID %>').innerHTML = 'La sesión ha expirado.';
             var modalId = '<%=mpeExpira.ClientID%>';
@@ -28,91 +27,108 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-<asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+    <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
 <br />
 <asp:UpdatePanel ID="UpdatePanel2" runat="server" UpdateMode="Conditional" >
 <ContentTemplate>
-<div class="container well contenedorLogin">
-        <div class="row">
-            <div class="col-xs-12">
-                <h2> Validación de Documentos</h2>
+    <div class="container well contenedorLogin">
+            <div class="row">
+                <div class="col-xs-12">
+                    <h2> Validación de Documentos</h2>
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <asp:Label ID="LblUsu" runat="server" Text="Usuario" CssClass="control-label co-sm-3" Font-Bold="False"></asp:Label>
-            <div class="col-sm-12">
-                <asp:TextBox ID="TxtUsu" runat="server" CssClass="form-control" placeholder="Usuario" Enabled="False"></asp:TextBox>
+            <div class="form-group">
+                <asp:Label ID="LblUsu" runat="server" Text="Usuario" CssClass="control-label co-sm-3" Font-Bold="False"></asp:Label>
+                <div class="col-sm-12">
+                    <asp:TextBox ID="TxtUsu" runat="server" CssClass="form-control" placeholder="Usuario" Enabled="False"></asp:TextBox>
+                </div>
             </div>
-        </div>
-        <br />        
-        <div class="form-group">
-            <asp:Label ID="LblTpoDocumento" runat="server" Text="Tpo. de Documento" CssClass="control-label col-sm-2"></asp:Label>
-            <div class="col-sm-12">
-                <asp:TextBox ID="TxtTpoDocumento" runat="server" CssClass="form-control" placeholder="Tipo de Documento" Enabled="False" ></asp:TextBox>
+            <br />        
+            <div class="form-group">
+                <asp:Label ID="LblTpoDocumento" runat="server" Text="Tpo. de Documento" CssClass="control-label col-sm-2"></asp:Label>
+                <div class="col-sm-12">
+                    <asp:TextBox ID="TxtTpoDocumento" runat="server" CssClass="form-control" placeholder="Tipo de Documento" Enabled="False" ></asp:TextBox>
+                </div>
             </div>
-        </div>
-        <br />
-        <div class="form-group">
-            <asp:Label ID="LblPathDownload" runat="server" Text="Ruta Descarga" CssClass="control-label col-sm-2"></asp:Label>
-            <div class="col-sm-12">
-                <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
-                    <ContentTemplate>
-                    <div class="d-grid gap-2 d-md-flex justify-content-center">
-                        <asp:TextBox ID="TxtPathDownload" runat="server" CssClass="form-control" placeholder="Ruta descarga archivo" Enabled="False" ></asp:TextBox>
-                        <asp:ImageButton ID="imgDownload" runat="server" ImageUrl="~/Images/search_find.png" OnClick="imgDownload_Click" />
-                    </div>
-                    </ContentTemplate>
-                </asp:UpdatePanel>
+            <br />
+            <div class="form-group">
+                <asp:Label ID="LblNomArchivo" runat="server" Text="Archivo para descargar" CssClass="control-label col-sm-2"></asp:Label>
+                <div class="col-sm-12">
+                    <asp:TextBox ID="TxtNomArchivo" runat="server" CssClass="form-control" placeholder="Archivo para descargar" Enabled="False" ></asp:TextBox>
+                </div>
+            </div>
+            <br />
+            <div class="form-group">
+                <asp:Label ID="LblPathDownload" runat="server" Text="Ruta Descarga" CssClass="control-label col-sm-2"></asp:Label>
+                <div class="col-sm-12">
+                    <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
+                        <ContentTemplate>
+                        <div class="d-grid gap-2 d-md-flex justify-content-center">
+                            <asp:TextBox ID="TxtPathDownload" runat="server" CssClass="form-control" placeholder="Ruta descarga archivo" Enabled="False" ></asp:TextBox>
+                            <asp:ImageButton ID="imgDownload" runat="server" ImageUrl="~/Images/descargar.png" Height="35px" Width="35px" OnClick="imgDownload_Click" Enabled="False" />
+                        </div>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+                </div>
+            <br />
+            </div>
+            <br />
+            <div class="form-group">
+                <div class="d-grid col-6 mx-auto">
+                    <asp:Button ID="BtnUnLoad" runat="server" Text="Descarga Archivo" Font-Bold="True" OnClick="BtnUnLoad_Click" CssClass="btn btn-primary" Visible="False" />
+                </div>
+            </div>
+            <br />
+            <div class="form-group">
+                <div class="d-grid col-6 mx-auto">
+                    <asp:Label ID="Lbl_Message" runat="server" ForeColor="Red" Visible="False" ></asp:Label>
+                </div>
+            </div>        
+
+            <div class="from-group">
+                <div class="d-grid col-6 mx-auto">
+                    <asp:Button ID="BtnRegresar" runat="server" Text="Regresar" Font-Bold="True" OnClick="BtnRegresar_Click" CssClass="btn btn-link"/>
+                </div>
             </div>
 
         </div>
-        <br />
-        <div class="form-group">
-            <div class="d-grid col-6 mx-auto">
-                <asp:Button ID="BtnUnLoad" runat="server" Text="Descarga Archivo(s)" Font-Bold="True" OnClick="BtnUnLoad_Click" CssClass="btn btn-primary" />
-            </div>
-        </div>
-        <br />
-        <!--
+    <br />
+    <div class="container">
+    <div class="row align-items-center">
         <div class="row">
             <div class="col-xs-12">
                 <h2> Pendientes</h2>
             </div>
         </div>
-        -->
-        <div class="form-group">
-            <asp:GridView ID="grdEstadoDocumento"  runat="server" AutoGenerateColumns="False" GridLines="None" Width="586px"
-                AllowPaging="True" CssClass="mGrid" PagerStyle-CssClass="pgr" AlternatingRowStyle-CssClass="alt"
-                PageSize="5" OnSelectedIndexChanged="grdEstadoDocumento_SelectedIndexChanged" Caption="Pendientes" CaptionAlign="Top" >
-                <AlternatingRowStyle CssClass="alt" />
-                <Columns>
-                    <asp:TemplateField>
-                        <ItemTemplate>
-                            <asp:ImageButton ID="imgEditar" runat="server" CommandName="Select" ImageUrl="~/Images/edit.jpg" Height="22px" Width="22px" />
-                        </ItemTemplate> 
-                    </asp:TemplateField>
-                    <asp:BoundField DataField="IdUsuario" HeaderText="Id. Usuario" />
-                    <asp:BoundField DataField="IdTipoDocumento" HeaderText="Id. Tipo Documento" />
-                    <asp:BoundField DataField="Descripcion" HeaderText="Tipo de Documento" />
-                    <asp:BoundField DataField="Desc_Status" HeaderText="Id. Status" />
-                </Columns>
+        <asp:GridView ID="grdEstadoDocumento"  runat="server" AutoGenerateColumns="False" GridLines="None" Width="586px"
+            AllowPaging="True" CssClass="mGrid" PagerStyle-CssClass="pgr" AlternatingRowStyle-CssClass="alt"
+            PageSize="5" OnSelectedIndexChanged="grdEstadoDocumento_SelectedIndexChanged" OnRowDataBound ="grdEstadoDocumento_RowDataBound" DataKeyNames="IdUsuario" >
+            <AlternatingRowStyle CssClass="alt" />
+            <Columns>
+                <asp:BoundField DataField="IdUsuario" HeaderText="Id. Usuario" />
+                <asp:BoundField DataField="Descripcion" HeaderText="Tipo de Documento" />
+                <asp:BoundField DataField="Nom_Imagen" HeaderText="Nombre de Archivo" />
+                <asp:BoundField DataField="Desc_Status" HeaderText="Id. Status" />
+                <asp:BoundField DataField="Url_Imagen" HeaderText="Url_Imagen" />
+                <asp:BoundField DataField="IdTipoDocumento" HeaderText="Tipo de Documento" visible ="false" />
+                <asp:TemplateField>
+                    <ItemTemplate>
+                         <asp:Button ID="BtnRechazado" runat="server" Text="Rechazado" OnClick ="BtnRechazado_Click" />
+                    </ItemTemplate> 
+                </asp:TemplateField>
+
+                <asp:TemplateField>
+                    <ItemTemplate>
+                        <asp:Button ID="BtnAceptado" runat="server" Text="Aceptado" OnClick ="BtnAceptado_Click" />
+                    </ItemTemplate> 
+                </asp:TemplateField>
+            </Columns>
                 
-                <PagerStyle CssClass="pgr" />
-            </asp:GridView>
-        </div>
-        <div class="form-group">
-            <div class="d-grid col-6 mx-auto">
-                <asp:Label ID="Lbl_Message" runat="server" ForeColor="Red" Visible="False" ></asp:Label>
-            </div>
-        </div>        
-
-        <div class="from-group">
-            <div class="d-grid col-6 mx-auto">
-                <asp:Button ID="BtnRegresar" runat="server" Text="Regresar" Font-Bold="True" OnClick="BtnRegresar_Click" CssClass="btn btn-link"/>
-            </div>
-        </div>
+            <PagerStyle CssClass="pgr" />
+        </asp:GridView>
+        <asp:HiddenField ID="hdfValorGrid" runat="server" Value=""/>
     </div>
-
+    </div>
     <br />
     <asp:Panel ID="pnlExpira" runat="server" CssClass="CajaDialogo" style="display: none;">
     <table border="0" width="275px" style="margin: 0px; padding: 0px; background-color: #0033CC; color: #FFFFFF;">
@@ -182,7 +198,7 @@
         </div>
 
     </asp:Panel>
-
+    <br />
     <table cellspacing="1" cellpadding="1" border="0">
         <tr>
             <td>
@@ -220,6 +236,7 @@
             <td></td>
         </tr>
     </table>
+
 </ContentTemplate>
 <Triggers>
     <asp:AsyncPostBackTrigger ControlID="imgDownload" EventName="Click" />

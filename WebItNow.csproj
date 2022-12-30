@@ -136,6 +136,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
     <Content Include="DirectoryBrowse.aspx" />
+    <Content Include="Images\descargar.png" />
     <Content Include="Images\edit.jpg" />
     <Content Include="Images\loader.gif" />
     <Content Include="Images\tierra-de-cristal-en-gras-131535893.jpg" />

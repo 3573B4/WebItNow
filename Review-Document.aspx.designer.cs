@@ -69,6 +69,24 @@ namespace WebItNow
         protected global::System.Web.UI.WebControls.TextBox TxtTpoDocumento;
 
         /// <summary>
+        /// Control LblNomArchivo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LblNomArchivo;
+
+        /// <summary>
+        /// Control TxtNomArchivo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TxtNomArchivo;
+
+        /// <summary>
         /// Control LblPathDownload.
         /// </summary>
         /// <remarks>
@@ -114,15 +132,6 @@ namespace WebItNow
         protected global::System.Web.UI.WebControls.Button BtnUnLoad;
 
         /// <summary>
-        /// Control grdEstadoDocumento.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView grdEstadoDocumento;
-
-        /// <summary>
         /// Control Lbl_Message.
         /// </summary>
         /// <remarks>
@@ -139,6 +148,24 @@ namespace WebItNow
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button BtnRegresar;
+
+        /// <summary>
+        /// Control grdEstadoDocumento.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView grdEstadoDocumento;
+
+        /// <summary>
+        /// Control hdfValorGrid.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdfValorGrid;
 
         /// <summary>
         /// Control pnlExpira.

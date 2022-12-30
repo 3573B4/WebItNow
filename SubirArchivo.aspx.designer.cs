@@ -114,15 +114,6 @@ namespace WebItNow
         protected global::System.Web.UI.WebControls.Label lblOculto;
 
         /// <summary>
-        /// Control LblMessage.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LblMessage;
-
-        /// <summary>
         /// Control pnlMensaje.
         /// </summary>
         /// <remarks>
@@ -141,13 +132,13 @@ namespace WebItNow
         protected global::System.Web.UI.WebControls.Label Label6;
 
         /// <summary>
-        /// Control LblExpira.
+        /// Control LblMessage.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LblExpira;
+        protected global::System.Web.UI.WebControls.Label LblMessage;
 
         /// <summary>
         /// Control btnClose.

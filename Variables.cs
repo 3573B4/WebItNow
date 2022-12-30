@@ -15,6 +15,9 @@ namespace WebItNow
         public static string wUsu;
         public static string wCve;
         public static string wPass;
+        public static string wFileName;
+        public static string wQuery;
+
       //  public static int wPrivilegios;
 
         public struct UsPrivilegios

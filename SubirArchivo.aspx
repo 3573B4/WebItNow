@@ -32,7 +32,7 @@
         <br />
         <div class="form-group">
             <div class="d-grid col-2 mx-auto">
-                <div class="dropdown">
+                <div class="dropdown" style="height: 17px">
                     <asp:DropDownList ID="ddlDocs" runat="server" CssClass="btn btn-outline-secondary" OnSelectedIndexChanged="ddlDocs_SelectedIndexChanged" AutoPostBack="true">
                         <asp:ListItem Value="ine">INE</asp:ListItem>
                         <asp:ListItem Value="ComDom">comprovante de domicilio</asp:ListItem>
@@ -44,7 +44,7 @@
         <br />
         <div class="form-group">
             <div class="input-group mb-12">
-                <asp:FileUpload ID="FileUpload1" runat="server" CssClass="form-control"></asp:FileUpload>
+                <asp:FileUpload ID="FileUpload1" runat="server" CssClass="form-control" ></asp:FileUpload>
             </div>
         </div>
         <div class="form-group">
@@ -79,7 +79,6 @@
                     TargetControlID="lblOculto" BackgroundCssClass="FondoAplicacion" OnOkScript="mpeMensajeOnOk()" >
                 </ajaxToolkit:ModalPopupExtender>
                 <asp:Label ID="lblOculto" runat="server" Text="Label" Style="display: none;" />
-                <asp:Label ID="LblMessage" runat="server" Text="" />
             </div>
         </div>
     </div>
@@ -101,7 +100,7 @@
             <br />
             <table border="0" width="275px" style="margin: 0px; padding: 0px;" >
                 <tr>
-                    <td><asp:Label ID="LblExpira" runat="server" Text="" /></td>
+                    <td><asp:Label ID="LblMessage" runat="server" Text="" /></td>
                     <td></td>
                 </tr>
             </table>

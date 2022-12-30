@@ -46,7 +46,6 @@ namespace WebItNow
             ddlDocs.DataTextField = "Descripcion";
             ddlDocs.DataBind();
 
-            
         }
         public void getDocsUsuario()
         {
@@ -87,53 +86,64 @@ namespace WebItNow
             string UrlFinal = user + "/" + folderName + "/";
             string directorioURL = Server.MapPath(directFinal);
             string nomFile = /*folderName + "-" +*/ FileUpload1.FileName;
+            int tamArchivo = FileUpload1.PostedFile.ContentLength;
 
-            ConexionBD Conectar = new ConexionBD();
-            Conectar.Abrir();
-
-            string sqlUpDate = "UPDATE tbEstadoDocumento " +
-                                "SET IdStatus = '2'," +
-                                    " Url_Imagen = '"+ UrlFinal + "',"+
-                                    " Nom_Imagen = '" + nomFile +"'" +
-                                " WHERE IdUsuario = '" + user + "'" +
-                                " AND IdTipoDocumento = '" + folderName + "'";
-
-            SqlCommand cmd = new SqlCommand(sqlUpDate, Conectar.ConectarBD);
-
-            if (FileUpload1.HasFile)
+            if (tamArchivo <= 40960000)
             {
-                if (System.IO.Directory.Exists(directorioURL))
+
+                ConexionBD Conectar = new ConexionBD();
+                Conectar.Abrir();
+
+                string sqlUpDate = "UPDATE tbEstadoDocumento " +
+                                    "SET IdStatus = '2'," +
+                                        " Url_Imagen = '" + UrlFinal + "'," +
+                                        " Nom_Imagen = '" + nomFile + "'" +
+                                    " WHERE IdUsuario = '" + user + "'" +
+                                    " AND IdTipoDocumento = '" + folderName + "'";
+
+                SqlCommand cmd = new SqlCommand(sqlUpDate, Conectar.ConectarBD);
+
+                if (FileUpload1.HasFile)
                 {
-                    if (File.Exists(directorioURL + nomFile))
+                    if (System.IO.Directory.Exists(directorioURL))
                     {
-                        //Console.WriteLine("El documento sI existe");
-                        LblExpira.Text = "El documento ya existe";
-                        this.mpeMensaje.Show();
+                        if (File.Exists(directorioURL + nomFile))
+                        {
+                            //Console.WriteLine("El documento sI existe");
+                            LblMessage.Text = "El documento ya existe";
+                            this.mpeMensaje.Show();
+                        }
+                        else
+                        {
+                            FileUpload1.SaveAs(Server.MapPath(directFinal /*+ folderName + "-"*/ + FileUpload1.FileName));
+                            //Lbl_Message.Text = "EL archivo se subio exitosamente";
+                            cmd.ExecuteReader();
+
+                            LblMessage.Text = "El documento se subio exitosamente";
+                            this.mpeMensaje.Show();
+                        }
+
                     }
                     else
                     {
-                        
+                        System.IO.Directory.CreateDirectory(directorioURL);
                         FileUpload1.SaveAs(Server.MapPath(directFinal /*+ folderName + "-"*/ + FileUpload1.FileName));
                         //Lbl_Message.Text = "EL archivo se subio exitosamente";
                         cmd.ExecuteReader();
-                        LblExpira.Text = "El documento se subio exitosamente";
+
+                        LblMessage.Text = "El documento se subio exitosamente";
                         this.mpeMensaje.Show();
                     }
-
                 }
                 else
                 {
-                    System.IO.Directory.CreateDirectory(directorioURL);
-                    FileUpload1.SaveAs(Server.MapPath(directFinal /*+ folderName + "-"*/ + FileUpload1.FileName));
-                    //Lbl_Message.Text = "EL archivo se subio exitosamente";
-                    cmd.ExecuteReader();
-                    LblExpira.Text = "El documento se subio exitosamente";
-                    this.mpeMensaje.Show();
+                    Lbl_Message.Text = "Debe seleccionar un archivo";
                 }
             }
             else
             {
-                Lbl_Message.Text = "Debe seleccionar un archivo";
+                LblMessage.Text = "El documento excede de 40 MB";
+                this.mpeMensaje.Show();
             }
         }
 
@@ -148,6 +158,24 @@ namespace WebItNow
             string nombre = ddlDocs.SelectedValue.ToString();
         }
 
-        
+        protected void FileUpload1_Click(object sender, EventArgs e)
+        {
+            FileUpload fileUpload1 = new FileUpload();
+
+            if (FileUpload1.PostedFile != null)
+            {
+                int tamArchivo = FileUpload1.PostedFile.ContentLength;
+
+                if (tamArchivo <= 40960000)
+                {
+
+                }
+                else
+                {
+                    LblMessage.Text = "El documento excede de 40 MB";
+                    this.mpeMensaje.Show();
+                }
+            }
+        }
     }
 }
