@@ -11,6 +11,7 @@ using System.Data.SqlTypes;
 using System.Data.SqlClient;
 using System.Configuration;
 using System.Diagnostics;
+using System.IO.Compression;
 
 namespace WebItNow
 {
@@ -42,10 +43,12 @@ namespace WebItNow
             SqlCommand cmd = new SqlCommand(sqlQuery, conectar.ConectarBD);
 
             ddlDocs.DataSource = cmd.ExecuteReader();
+
             ddlDocs.DataValueField = "IdTpoDocumento";
             ddlDocs.DataTextField = "Descripcion";
+            
             ddlDocs.DataBind();
-
+            
         }
         public void getDocsUsuario()
         {
@@ -78,35 +81,41 @@ namespace WebItNow
         }
         protected void BtnEnviar_Click(object sender, EventArgs e)
         {
-
-            string directorio = "~/Directorio/";
-            string user = /*"USUARIO4"*/ Convert.ToString(Session["IdUsuario"]);
-            string folderName = ddlDocs.SelectedValue;
-            string directFinal = directorio + user + "/" + folderName + "/";
-            string UrlFinal = user + "/" + folderName + "/";
-            string directorioURL = Server.MapPath(directFinal);
-            string nomFile = /*folderName + "-" +*/ FileUpload1.FileName;
-            int tamArchivo = FileUpload1.PostedFile.ContentLength;
-
-            if (tamArchivo <= 40960000)
+            try
             {
 
-                ConexionBD Conectar = new ConexionBD();
-                Conectar.Abrir();
 
-                string sqlUpDate = "UPDATE tbEstadoDocumento " +
-                                    "SET IdStatus = '2'," +
-                                        " Url_Imagen = '" + UrlFinal + "'," +
-                                        " Nom_Imagen = '" + nomFile + "'" +
-                                    " WHERE IdUsuario = '" + user + "'" +
-                                    " AND IdTipoDocumento = '" + folderName + "'";
-
-                SqlCommand cmd = new SqlCommand(sqlUpDate, Conectar.ConectarBD);
-
-                if (FileUpload1.HasFile)
+                //string directorio = "https://itnowtech18-my.sharepoint.com/:f:/g/personal/llg_peacock_claims/Ekb4AdD2Id1KgMI9CRoIAU4BdP795N2YLyTJxmlMmIfWUA?e=CCtbfK" + "/";
+                string directorio = "~/Directorio/";
+                string user = /*"USUARIO4"*/ Convert.ToString(Session["IdUsuario"]);
+                string folderName = ddlDocs.SelectedValue;
+                string directFinal = directorio + user + "/" + folderName + "/";
+                string UrlFinal = user + "/" + folderName + "/";
+                string directorioURL = Server.MapPath(directFinal);
+                string nomFile = /*folderName + "-" +*/ FileUpload1.FileName;
+                int tamArchivo = FileUpload1.PostedFile.ContentLength;
+                if (tamArchivo <= 40000000)
                 {
-                    if (System.IO.Directory.Exists(directorioURL))
+
+
+                    ConexionBD Conectar = new ConexionBD();
+                    Conectar.Abrir();
+
+                    string sqlUpDate = "UPDATE tbEstadoDocumento " +
+                                        "SET IdStatus = '2'," +
+                                            " Url_Imagen = '" + UrlFinal + "'," +
+                                            " Nom_Imagen = '" + nomFile + "'" +
+                                        " WHERE IdUsuario = '" + user + "'" +
+                                        " AND IdTipoDocumento = '" + folderName + "'";
+
+                    SqlCommand cmd = new SqlCommand(sqlUpDate, Conectar.ConectarBD);
+
+                    if (FileUpload1.HasFile)
                     {
+                        if (!Directory.Exists(directorioURL))
+                        {
+                            Directory.CreateDirectory(directorioURL);
+                        }
                         if (File.Exists(directorioURL + nomFile))
                         {
                             //Console.WriteLine("El documento sI existe");
@@ -118,32 +127,25 @@ namespace WebItNow
                             FileUpload1.SaveAs(Server.MapPath(directFinal /*+ folderName + "-"*/ + FileUpload1.FileName));
                             //Lbl_Message.Text = "EL archivo se subio exitosamente";
                             cmd.ExecuteReader();
-
+                            getDocsUsuario();
                             LblMessage.Text = "El documento se subio exitosamente";
                             this.mpeMensaje.Show();
                         }
-
                     }
                     else
                     {
-                        System.IO.Directory.CreateDirectory(directorioURL);
-                        FileUpload1.SaveAs(Server.MapPath(directFinal /*+ folderName + "-"*/ + FileUpload1.FileName));
-                        //Lbl_Message.Text = "EL archivo se subio exitosamente";
-                        cmd.ExecuteReader();
-
-                        LblMessage.Text = "El documento se subio exitosamente";
-                        this.mpeMensaje.Show();
+                        Lbl_Message.Text = "Debe seleccionar un archivo";
                     }
                 }
                 else
                 {
-                    Lbl_Message.Text = "Debe seleccionar un archivo";
+                    LblMessage.Text = "El documento Exede los 4 MB";
+                    this.mpeMensaje.Show();
                 }
             }
-            else
+            catch(Exception ex)
             {
-                LblMessage.Text = "El documento excede de 40 MB";
-                this.mpeMensaje.Show();
+                Lbl_Message.Text = ex.Message;
             }
         }
 
@@ -158,24 +160,21 @@ namespace WebItNow
             string nombre = ddlDocs.SelectedValue.ToString();
         }
 
-        protected void FileUpload1_Click(object sender, EventArgs e)
+        protected void AfuFileUpload_UploadedComplete(object sender, AjaxControlToolkit.AsyncFileUploadEventArgs e)
         {
-            FileUpload fileUpload1 = new FileUpload();
+            string directorio = "~/Directorio/";
+            string user = /*"USUARIO4"*/ Convert.ToString(Session["IdUsuario"]);
+            string folderName = ddlDocs.SelectedValue;
+            string directFinal = directorio + user + "/" + folderName + "/";
+            string UrlFinal = user + "/" + folderName + "/";
+            string directorioURL = Server.MapPath(directFinal);
+            string nomArchivo = System.IO.Path.GetFileName(AfuFileUpload.FileName);
+            //AfuFileUpload.SaveAs(Server.MapPath(directFinal + AfuFileUpload.FileName));
+        }
 
-            if (FileUpload1.PostedFile != null)
-            {
-                int tamArchivo = FileUpload1.PostedFile.ContentLength;
+        protected void AfuFileUpload_UploadedFileError(object sender, AjaxControlToolkit.AsyncFileUploadEventArgs e)
+        {
 
-                if (tamArchivo <= 40960000)
-                {
-
-                }
-                else
-                {
-                    LblMessage.Text = "El documento excede de 40 MB";
-                    this.mpeMensaje.Show();
-                }
-            }
         }
     }
 }

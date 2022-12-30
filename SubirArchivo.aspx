@@ -10,13 +10,14 @@
     <br />    
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
     <br />
-    <script src="https://code.jquery.com/jquery-3.6.2.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     
     <ContentTemplate>
     <div class="container well contenedorLogin">
         <div class="row">
             <div class="col-xs-12">
-                <h2>Subir Archivo</h2>
+                <h2>Carga segura de documentos</h2>
             </div>
         </div>
         <div class="form-group">
@@ -32,19 +33,42 @@
         <br />
         <div class="form-group">
             <div class="d-grid col-2 mx-auto">
-                <div class="dropdown" style="height: 17px">
+                <div class="dropdown">
                     <asp:DropDownList ID="ddlDocs" runat="server" CssClass="btn btn-outline-secondary" OnSelectedIndexChanged="ddlDocs_SelectedIndexChanged" AutoPostBack="true">
-                        <asp:ListItem Value="ine">INE</asp:ListItem>
-                        <asp:ListItem Value="ComDom">comprovante de domicilio</asp:ListItem>
-                        <asp:ListItem Value="siniestro">Siniestro</asp:ListItem>
                     </asp:DropDownList>
                 </div>
             </div>
         </div>
         <br />
+        <!-- empieza el acordion -->
+        <div class="row">
+            <div class="accordion" id="accordionExample">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingOne">
+                        <!--<asp:Button ID="btnAcordTitle" runat="server" Text="" class="accordion-button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"></asp:Button>-->
+                        <button id="btnAcrdTitle" class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            Instrucciones
+                        </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <strong>Subir Archivo menor de 40 MB </strong> Tomar foto o escanear el documento que desee subir. subir en PNG, JPG, PDF o ZIP.<!--It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- termina el acordion -->
+        
+        <br />
         <div class="form-group">
             <div class="input-group mb-12">
-                <asp:FileUpload ID="FileUpload1" runat="server" CssClass="form-control" ></asp:FileUpload>
+                <asp:FileUpload ID="FileUpload1" runat="server" CssClass="form-control"></asp:FileUpload>
+                <!--<ajaxToolkit:AjaxFileUpload ID="AjaxFileUpload1" runat="server"></ajaxToolkit:AjaxFileUpload>-->
+                <!--<ajaxToolkit:AsyncFileUpload ID="AfuFileUpload" runat="server" OnUploadedComplete="AfuFileUpload_UploadedComplete" 
+                    OnUploadedFileError="AfuFileUpload_UploadedFileError" OnClientUploadComplete="uploadComplete" Width="400px" UploaderStyle="Modern" 
+                    UploadingBackColor="#CCFFFF" ThrobberID="myThrobber">
+                </ajaxToolkit:AsyncFileUpload>-->
             </div>
         </div>
         <div class="form-group">
@@ -62,7 +86,7 @@
             </div>
         </div>
         <div class="row">
-            <asp:GridView ID="gvEstadoDocs" runat="server" AutoGenerateColumns="False" GridLines="None" Width="586px"
+            <asp:GridView ID="gvEstadoDocs" runat="server" AutoGenerateColumns="False" GridLines="None" Width="380px"
                 AllowPaging="True" CssClass="mGrid" PagerStyle-CssClass="pgr" AlternatingRowStyle-CssClass="alt"
                 PageSize="7" >
                 <AlternatingRowStyle CssClass="table" />

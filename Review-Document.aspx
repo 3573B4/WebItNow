@@ -31,12 +31,15 @@
 <br />
 <asp:UpdatePanel ID="UpdatePanel2" runat="server" UpdateMode="Conditional" >
 <ContentTemplate>
-    <div class="container well contenedorLogin">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-sm-4">
             <div class="row">
-                <div class="col-xs-12">
-                    <h2> Validación de Documentos</h2>
+                <div class="row">    
+                    <div class="col-xs-12">
+                        <h2> Validación de Documentos</h2>
+                    </div>
                 </div>
-            </div>
             <div class="form-group">
                 <asp:Label ID="LblUsu" runat="server" Text="Usuario" CssClass="control-label co-sm-3" Font-Bold="False"></asp:Label>
                 <div class="col-sm-12">
@@ -48,6 +51,7 @@
                 <asp:Label ID="LblTpoDocumento" runat="server" Text="Tpo. de Documento" CssClass="control-label col-sm-2"></asp:Label>
                 <div class="col-sm-12">
                     <asp:TextBox ID="TxtTpoDocumento" runat="server" CssClass="form-control" placeholder="Tipo de Documento" Enabled="False" ></asp:TextBox>
+                    <asp:TextBox ID="TxtUrl_Imagen" runat="server" CssClass="form-control" placeholder="Ruta del archivo" Enabled="False" Visible="false" ></asp:TextBox>
                 </div>
             </div>
             <br />
@@ -90,45 +94,52 @@
                     <asp:Button ID="BtnRegresar" runat="server" Text="Regresar" Font-Bold="True" OnClick="BtnRegresar_Click" CssClass="btn btn-link"/>
                 </div>
             </div>
-
         </div>
-    <br />
-    <div class="container">
-    <div class="row align-items-center">
-        <div class="row">
-            <div class="col-xs-12">
-                <h2> Pendientes</h2>
+            </div>
+        <br />
+        <div class="col-12">
+            <div class="row">
+                <div class="col-xs-12">
+                    <h2> Pendientes</h2>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-6">
+                    <div  class="form-group">
+                        <asp:GridView ID="grdEstadoDocumento"  runat="server" AutoGenerateColumns="False" GridLines="None" Width="586px"
+                            AllowPaging="True" CssClass="mGrid" PagerStyle-CssClass="pgr" AlternatingRowStyle-CssClass="alt"
+                            PageSize="5" OnSelectedIndexChanged="grdEstadoDocumento_SelectedIndexChanged" OnRowDataBound ="grdEstadoDocumento_RowDataBound" DataKeyNames="IdUsuario" >
+                            <AlternatingRowStyle CssClass="alt" />
+                            <Columns>
+                                <asp:BoundField DataField="IdUsuario" HeaderText="Id. Usuario" />
+                                <asp:BoundField DataField="Descripcion" HeaderText="Tipo de Documento" />
+                                <asp:BoundField DataField="Nom_Imagen" HeaderText="Nombre de Archivo" />
+                                <asp:BoundField DataField="Desc_Status" HeaderText="Id. Status" />
+                                <asp:BoundField DataField="Url_Imagen" HeaderText="Url_Imagen" />
+                                <asp:BoundField DataField="IdTipoDocumento" HeaderText="Tipo de Documento" visible ="false" />
+                                <asp:TemplateField>
+                                    <ItemTemplate>
+                                         <asp:Button ID="BtnRechazado" runat="server" Text="Rechazado" OnClick ="BtnRechazado_Click" />
+                                    </ItemTemplate> 
+                                </asp:TemplateField>
+
+                                <asp:TemplateField>
+                                    <ItemTemplate>
+                                        <asp:Button ID="BtnAceptado" runat="server" Text="Aceptado" OnClick ="BtnAceptado_Click" />
+                                    </ItemTemplate> 
+                                </asp:TemplateField>
+                            </Columns>
+                
+                            <PagerStyle CssClass="pgr" />
+                        </asp:GridView>
+                    </div>
+                </div>
+                <asp:HiddenField ID="hdfValorGrid" runat="server" Value=""/>
             </div>
         </div>
-        <asp:GridView ID="grdEstadoDocumento"  runat="server" AutoGenerateColumns="False" GridLines="None" Width="586px"
-            AllowPaging="True" CssClass="mGrid" PagerStyle-CssClass="pgr" AlternatingRowStyle-CssClass="alt"
-            PageSize="5" OnSelectedIndexChanged="grdEstadoDocumento_SelectedIndexChanged" OnRowDataBound ="grdEstadoDocumento_RowDataBound" DataKeyNames="IdUsuario" >
-            <AlternatingRowStyle CssClass="alt" />
-            <Columns>
-                <asp:BoundField DataField="IdUsuario" HeaderText="Id. Usuario" />
-                <asp:BoundField DataField="Descripcion" HeaderText="Tipo de Documento" />
-                <asp:BoundField DataField="Nom_Imagen" HeaderText="Nombre de Archivo" />
-                <asp:BoundField DataField="Desc_Status" HeaderText="Id. Status" />
-                <asp:BoundField DataField="Url_Imagen" HeaderText="Url_Imagen" />
-                <asp:BoundField DataField="IdTipoDocumento" HeaderText="Tipo de Documento" visible ="false" />
-                <asp:TemplateField>
-                    <ItemTemplate>
-                         <asp:Button ID="BtnRechazado" runat="server" Text="Rechazado" OnClick ="BtnRechazado_Click" />
-                    </ItemTemplate> 
-                </asp:TemplateField>
+        </div>
+    </div>
 
-                <asp:TemplateField>
-                    <ItemTemplate>
-                        <asp:Button ID="BtnAceptado" runat="server" Text="Aceptado" OnClick ="BtnAceptado_Click" />
-                    </ItemTemplate> 
-                </asp:TemplateField>
-            </Columns>
-                
-            <PagerStyle CssClass="pgr" />
-        </asp:GridView>
-        <asp:HiddenField ID="hdfValorGrid" runat="server" Value=""/>
-    </div>
-    </div>
     <br />
     <asp:Panel ID="pnlExpira" runat="server" CssClass="CajaDialogo" style="display: none;">
     <table border="0" width="275px" style="margin: 0px; padding: 0px; background-color: #0033CC; color: #FFFFFF;">

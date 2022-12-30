@@ -66,7 +66,7 @@ namespace WebItNow
             TxtUsu.Text = grdEstadoDocumento.SelectedRow.Cells[0].Text;
             TxtTpoDocumento.Text = grdEstadoDocumento.SelectedRow.Cells[1].Text;
             TxtNomArchivo.Text = grdEstadoDocumento.SelectedRow.Cells[2].Text;
-
+            TxtUrl_Imagen.Text = grdEstadoDocumento.SelectedRow.Cells[4].Text;
             this.hdfValorGrid.Value = this.grdEstadoDocumento.SelectedValue.ToString();
 
             imgDownload.Enabled = true;
@@ -184,11 +184,22 @@ namespace WebItNow
                 int index = row.RowIndex;
                 
                 string sUsuario = grdEstadoDocumento.Rows[index].Cells[0].Text;
+
+                // Consultar de la tabla [tbUsuarios] el [UsEmail]
+                string sEmail = "esteban.trejo@itnow.mx";
+
                 grdEstadoDocumento.Rows[index].Cells[3].Text = "Completo";
 
                 // Actualizar en la tabla tbEstadoDocumento (Status = 3)
                 Update_tbEstadoDocumento(sUsuario, 3);
 
+                var email = new EnvioEmail();
+                int Envio_Ok =email.EnvioMensaje(sUsuario, sEmail, "Documento Aceptado ");
+
+                if (Envio_Ok == 0)
+                {
+                    /// Envio de correo Ok.
+                }
             }
             catch (Exception ex)
             {
@@ -200,7 +211,6 @@ namespace WebItNow
 
         protected void BtnRechazado_Click(object sender, EventArgs e)
         {
-
             try
             {
 
@@ -210,6 +220,9 @@ namespace WebItNow
                 string sUsuario = grdEstadoDocumento.Rows[index].Cells[0].Text;
                 string sNom_Archivo = grdEstadoDocumento.Rows[index].Cells[2].Text;
                 string sUrl_Imagen = grdEstadoDocumento.Rows[index].Cells[4].Text;
+
+                // Consultar de la tabla [tbUsuarios] el [UsEmail]
+                string sEmail = "esteban.trejo@itnow.mx";
 
                 string strURLFile = Server.MapPath("~/Directorio/") + sUrl_Imagen + sNom_Archivo;
 
@@ -223,6 +236,15 @@ namespace WebItNow
 
                 // Refrescar GridView
                 GetEstadoDocumentos();
+
+                var email = new EnvioEmail();
+
+                int Envio_Ok = email.EnvioMensaje(sUsuario, sEmail, "Documento Rechazado ");
+
+                if (Envio_Ok == 0)
+                {
+                    /// Envio de correo Ok.
+                }
 
             }
             catch (Exception ex)
@@ -260,13 +282,11 @@ namespace WebItNow
             try
             {
 
-                string sUrl_Imagen = "";
                 /// <param name="strURLFile"> URL del archivo que se desea descargar </param>
                 /// <param name="strPathToSave"> Ruta donde se desea almacenar el archivo </param>
 
                 // System.Web.HttpContext.Current.Session["FileName"] = TxtNomArchivo.Text;
-
-                string strURLFile = Server.MapPath("~/Directorio/") + sUrl_Imagen + TxtNomArchivo.Text;
+                string strURLFile = Server.MapPath("~/Directorio/") + TxtUrl_Imagen.Text + TxtNomArchivo.Text;
                 string strPathToSave = TxtPathDownload.Text + "\\" + TxtNomArchivo.Text;
 
                 downloadFileToSpecificPath(strURLFile, strPathToSave);
@@ -429,8 +449,6 @@ namespace WebItNow
                 {
                     Variables.wQuery = "Update tbEstadoDocumento Set IdStatus = " + pIdStatus + " Where IdUsuario = '" + pUsuarios + "'";
                 }
-
-               
 
                 // Update tabla tbEstadoDocumento
                 SqlCommand cmd1 = new SqlCommand(Variables.wQuery, Conecta.ConectarBD);

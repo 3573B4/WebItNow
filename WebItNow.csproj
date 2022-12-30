@@ -226,6 +226,7 @@
     <Compile Include="DirectoryBrowse.aspx.designer.cs">
       <DependentUpon>DirectoryBrowse.aspx</DependentUpon>
     </Compile>
+    <Compile Include="EnvioEmail.cs" />
     <Compile Include="Forgot-Password.aspx.cs">
       <DependentUpon>Forgot-Password.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
