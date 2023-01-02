@@ -60,6 +60,24 @@ namespace WebItNow
         protected global::System.Web.UI.WebControls.Button btnAcordTitle;
 
         /// <summary>
+        /// Control lblTpoDoc.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblTpoDoc;
+
+        /// <summary>
+        /// Control lblDescrip.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblDescrip;
+
+        /// <summary>
         /// Control FileUpload1.
         /// </summary>
         /// <remarks>

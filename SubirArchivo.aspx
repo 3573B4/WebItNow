@@ -23,12 +23,12 @@
             //
         }
 
-        }
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <br />    
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <br />
     <ContentTemplate>
     <div class="container well contenedorLogin">
@@ -64,12 +64,12 @@
                     <h2 class="accordion-header" id="headingOne">
                         <!--<asp:Button ID="btnAcordTitle" runat="server" Text="" class="accordion-button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"></asp:Button>-->
                         <button id="btnAcrdTitle" class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                            Instrucciones
+                            <asp:Label ID="lblTpoDoc" runat="server" Text="Instrucciones"></asp:Label>
                         </button>
                     </h2>
                     <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                         <div class="accordion-body">
-                            <strong>Subir Archivo menor de 40 MB </strong> Tomar foto o escanear el documento que desee subir. subir en PNG, JPG, PDF o ZIP.<!--It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.-->
+                            <asp:Label ID="lblDescrip" runat="server" Text="Subir Archivo menor de 40 MB Tomar foto o escanear el documento que desee subir. subir en PNG, JPG, PDF o ZIP."></asp:Label>
                         </div>
                     </div>
                 </div>

@@ -57,6 +57,25 @@
         { height: 80%; width: 100%; }
         #footerContent
         { height: 10%; width: 100%; }
+
+        .headerCssClass{  
+            background-color:#c33803;  
+            color:white;
+            border: 1px solid black;  
+            padding: 4px;  
+        }  
+        .contentCssClass{  
+            background-color:#e59a7d;  
+            color:black;  
+            border: 1px dotted black;  
+            padding: 4px;  
+        }  
+        .headerSelectedCss{  
+            background-color:#808080;  
+            color:white;  
+            border: 1px solid black;  
+            padding: 4px;  
+        }  
     </style>
 
 </head>
