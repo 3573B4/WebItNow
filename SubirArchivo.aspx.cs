@@ -83,8 +83,6 @@ namespace WebItNow
         {
             try
             {
-
-
                 //string directorio = "https://itnowtech18-my.sharepoint.com/:f:/g/personal/llg_peacock_claims/Ekb4AdD2Id1KgMI9CRoIAU4BdP795N2YLyTJxmlMmIfWUA?e=CCtbfK" + "/";
                 string directorio = "~/Directorio/";
                 string user = /*"USUARIO4"*/ Convert.ToString(Session["IdUsuario"]);
@@ -93,6 +91,7 @@ namespace WebItNow
                 string UrlFinal = user + "/" + folderName + "/";
                 string directorioURL = Server.MapPath(directFinal);
                 string nomFile = /*folderName + "-" +*/ FileUpload1.FileName;
+
                 int tamArchivo = FileUpload1.PostedFile.ContentLength;
                 if (tamArchivo <= 40000000)
                 {
@@ -120,7 +119,7 @@ namespace WebItNow
                         {
                             //Console.WriteLine("El documento sI existe");
                             LblMessage.Text = "El documento ya existe";
-                            this.mpeMensaje.Show();
+                            mpeMensaje.Show();
                         }
                         else
                         {
@@ -129,7 +128,7 @@ namespace WebItNow
                             cmd.ExecuteReader();
                             getDocsUsuario();
                             LblMessage.Text = "El documento se subio exitosamente";
-                            this.mpeMensaje.Show();
+                            mpeMensaje.Show();
                         }
                     }
                     else
@@ -140,7 +139,7 @@ namespace WebItNow
                 else
                 {
                     LblMessage.Text = "El documento Exede los 4 MB";
-                    this.mpeMensaje.Show();
+                    mpeMensaje.Show();
                 }
             }
             catch(Exception ex)
@@ -148,7 +147,6 @@ namespace WebItNow
                 Lbl_Message.Text = ex.Message;
             }
         }
-
         protected void BtnSalir_Click(object sender, EventArgs e)
         {
             Response.Redirect("Login.aspx");
@@ -160,21 +158,5 @@ namespace WebItNow
             string nombre = ddlDocs.SelectedValue.ToString();
         }
 
-        protected void AfuFileUpload_UploadedComplete(object sender, AjaxControlToolkit.AsyncFileUploadEventArgs e)
-        {
-            string directorio = "~/Directorio/";
-            string user = /*"USUARIO4"*/ Convert.ToString(Session["IdUsuario"]);
-            string folderName = ddlDocs.SelectedValue;
-            string directFinal = directorio + user + "/" + folderName + "/";
-            string UrlFinal = user + "/" + folderName + "/";
-            string directorioURL = Server.MapPath(directFinal);
-            string nomArchivo = System.IO.Path.GetFileName(AfuFileUpload.FileName);
-            //AfuFileUpload.SaveAs(Server.MapPath(directFinal + AfuFileUpload.FileName));
-        }
-
-        protected void AfuFileUpload_UploadedFileError(object sender, AjaxControlToolkit.AsyncFileUploadEventArgs e)
-        {
-
-        }
     }
 }

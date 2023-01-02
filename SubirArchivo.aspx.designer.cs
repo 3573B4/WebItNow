@@ -69,24 +69,6 @@ namespace WebItNow
         protected global::System.Web.UI.WebControls.FileUpload FileUpload1;
 
         /// <summary>
-        /// Control AjaxFileUpload1.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::AjaxControlToolkit.AjaxFileUpload AjaxFileUpload1;
-
-        /// <summary>
-        /// Control AfuFileUpload.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::AjaxControlToolkit.AsyncFileUpload AfuFileUpload;
-
-        /// <summary>
         /// Control Lbl_Message.
         /// </summary>
         /// <remarks>
@@ -123,40 +105,40 @@ namespace WebItNow
         protected global::System.Web.UI.WebControls.GridView gvEstadoDocs;
 
         /// <summary>
-        /// Control pnlExpira.
+        /// Control mpeMensaje.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlExpira;
+        protected global::AjaxControlToolkit.ModalPopupExtender mpeMensaje;
 
         /// <summary>
-        /// Control Label1.
+        /// Control lblOculto.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label1;
+        protected global::System.Web.UI.WebControls.Label lblOculto;
 
         /// <summary>
-        /// Control LblExpira.
+        /// Control mpeExpira.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LblExpira;
+        protected global::AjaxControlToolkit.ModalPopupExtender mpeExpira;
 
         /// <summary>
-        /// Control BtnClose_Expira.
+        /// Control lblHide.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button BtnClose_Expira;
+        protected global::System.Web.UI.WebControls.Label lblHide;
 
         /// <summary>
         /// Control pnlMensaje.
@@ -195,39 +177,39 @@ namespace WebItNow
         protected global::System.Web.UI.WebControls.Button btnClose;
 
         /// <summary>
-        /// Control mpeMensaje.
+        /// Control pnlExpira.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::AjaxControlToolkit.ModalPopupExtender mpeMensaje;
+        protected global::System.Web.UI.WebControls.Panel pnlExpira;
 
         /// <summary>
-        /// Control lblOculto.
+        /// Control Label1.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblOculto;
+        protected global::System.Web.UI.WebControls.Label Label1;
 
         /// <summary>
-        /// Control mpeExpira.
+        /// Control LblExpira.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::AjaxControlToolkit.ModalPopupExtender mpeExpira;
+        protected global::System.Web.UI.WebControls.Label LblExpira;
 
         /// <summary>
-        /// Control lblHide.
+        /// Control BtnClose_Expira.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblHide;
+        protected global::System.Web.UI.WebControls.Button BtnClose_Expira;
     }
 }

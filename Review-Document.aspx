@@ -82,12 +82,6 @@
                 </div>
             </div>
             <br />
-            <div class="form-group">
-                <div class="d-grid col-6 mx-auto">
-                    <asp:Label ID="Lbl_Message" runat="server" ForeColor="Red" Visible="False" ></asp:Label>
-                </div>
-            </div>        
-
             <div class="from-group">
                 <div class="d-grid col-6 mx-auto">
                     <asp:Button ID="BtnRegresar" runat="server" Text="Regresar" Font-Bold="True" OnClick="BtnRegresar_Click" CssClass="btn btn-link"/>
@@ -136,6 +130,11 @@
                 <asp:HiddenField ID="hdfValorGrid" runat="server" Value=""/>
             </div>
         </div>
+        </div>
+        <div class="form-group">
+            <div class="d-grid col-6 mx-auto">
+                <asp:Label ID="Lbl_Message" runat="server" ForeColor="Red" ></asp:Label>
+            </div>
         </div>
     </div>
 

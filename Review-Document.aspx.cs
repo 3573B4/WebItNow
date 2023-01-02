@@ -199,6 +199,7 @@ namespace WebItNow
                 if (Envio_Ok == 0)
                 {
                     /// Envio de correo Ok.
+                    Lbl_Message.Text = "* El documento ha sido aceptado.";
                 }
             }
             catch (Exception ex)
@@ -244,6 +245,7 @@ namespace WebItNow
                 if (Envio_Ok == 0)
                 {
                     /// Envio de correo Ok.
+                    Lbl_Message.Text = "* El documento ha sido rechazado.";
                 }
 
             }
