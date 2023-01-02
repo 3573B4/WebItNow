@@ -4,15 +4,36 @@
 
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
-    <script language="javascript" type="text/javascript"></script>
+    <script language="javascript" type="text/javascript">
+        var timer = setTimeout(function () {
+            document.getElementById('<%=LblExpira.ClientID %>').innerHTML = 'La sesión ha expirado.';
+            var modalId = '<%=mpeExpira.ClientID%>';
+            var modal = $find(modalId);
+            modal.show();
+
+            //alert("La sesión ha expirado.");
+            //location.href = '/Login.aspx';
+        }, 120000);
+
+        function acceso() {
+            location.href = '/Login.aspx';
+        }
+
+        function mpeMensajeOnOk() {
+            //
+        }
+
+        }
+    </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <br />    
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
     <br />
+    <!--
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-    
+    -->
     <ContentTemplate>
     <div class="container well contenedorLogin">
         <div class="row">
@@ -97,16 +118,39 @@
                 <PagerStyle CssClass="pgr" />
             </asp:GridView>
         </div>
-        <div class="form-group">
-            <div class="d-grid col-6 mx-auto">
-                <ajaxToolkit:ModalPopupExtender ID="mpeMensaje" runat="server" PopupControlID="pnlMensaje"
-                    TargetControlID="lblOculto" BackgroundCssClass="FondoAplicacion" OnOkScript="mpeMensajeOnOk()" >
-                </ajaxToolkit:ModalPopupExtender>
-                <asp:Label ID="lblOculto" runat="server" Text="Label" Style="display: none;" />
-            </div>
-        </div>
     </div>
     <br />
+    <asp:Panel ID="pnlExpira" runat="server" CssClass="CajaDialogo" style="display: none;">
+    <table border="0" width="275px" style="margin: 0px; padding: 0px; background-color: #0033CC; color: #FFFFFF;">
+        <tr>
+            <td align="left">
+                <asp:Label ID="Label1" runat="server" Text="I t n o w" />
+            </td>
+            <td></td>
+        </tr>
+    </table>
+
+    <div>
+        <br />
+        <table border="0" width="275px" style="margin: 0px; padding: 0px;" >
+            <tr>
+                <td><asp:Label ID="LblExpira" runat="server" Text="" /></td>
+                <td></td>
+            </tr>
+        </table>
+    </div>
+
+    <div>
+        <br />
+        <table border="0" width="275px" style="margin: 0px; padding: 0px;">
+            <tr>
+                <td align="center"><asp:Button ID="BtnClose_Expira" OnClientClick="acceso(); return false;" runat="server" Text="Cerrar" /></td>
+                <td></td>
+            </tr>
+        </table>
+    </div>
+
+    </asp:Panel>   
 
     <asp:Panel ID="pnlMensaje" runat="server" CssClass="CajaDialogo" style="display: none;">
 
@@ -141,7 +185,23 @@
         </div>
 
     </asp:Panel>
-    
-    
+
+    <br />
+    <div class="form-group">
+        <div class="d-grid col-6 mx-auto">
+            <ajaxToolkit:ModalPopupExtender ID="mpeMensaje" runat="server" PopupControlID="pnlMensaje"
+                TargetControlID="lblOculto" BackgroundCssClass="FondoAplicacion" OnOkScript="mpeMensajeOnOk()" >
+            </ajaxToolkit:ModalPopupExtender>
+            <asp:Label ID="lblOculto" runat="server" Text="Label" Style="display: none;" />
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="d-grid col-6 mx-auto">
+            <ajaxToolkit:ModalPopupExtender ID="mpeExpira" runat="server" PopupControlID="pnlExpira"
+                TargetControlID="lblHide" BackgroundCssClass="FondoAplicacion" OnOkScript="mpeExpiraOnOk()" >
+            </ajaxToolkit:ModalPopupExtender>
+            <asp:Label ID="lblHide" runat="server" Text="Label" Style="display: none;" />
+        </div>
+    </div>
     </ContentTemplate>
 </asp:Content>

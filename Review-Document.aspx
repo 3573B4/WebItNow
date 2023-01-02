@@ -23,7 +23,6 @@
 
         }
     </script>
-
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
@@ -222,16 +221,6 @@
                     </div>
                 </div>
             </td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>
-                <ajaxToolkit:ModalPopupExtender ID="ModalPopupExtender1" runat="server" PopupControlID="pnlMensaje"
-                    TargetControlID="lblOculto" BackgroundCssClass="FondoAplicacion" OnOkScript="mpeMensajeOnOk()" >
-                </ajaxToolkit:ModalPopupExtender>
-            </td>
-            <td><asp:Label ID="Label1" runat="server" Text="Label" Style="display: none;" /></td>
             <td></td>
             <td></td>
         </tr>
