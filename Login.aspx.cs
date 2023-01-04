@@ -114,7 +114,7 @@ namespace WebItNow
 
                     //}
 
-                    cmd1.Dispose();
+                cmd1.Dispose();
                 dr1.Dispose();
 
                 Conecta.Cerrar();

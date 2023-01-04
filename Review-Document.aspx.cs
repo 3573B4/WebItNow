@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.SessionState;
 using System.Web.UI.WebControls;
+
 using System.Diagnostics;
 using System.Reflection;
 using System.Windows.Forms;
@@ -34,13 +35,13 @@ namespace WebItNow
         protected void Page_Load(object sender, EventArgs e)
 		{
 
+
             if (!Page.IsPostBack)
             {
-                TxtPathDownload.Text = GetDownloadsPath();
+               // TxtPathDownload.Text = GetDownloadsPath();
 
                 // Carga GridView
                 GetEstadoDocumentos();
-
             }
         }
 
@@ -67,23 +68,8 @@ namespace WebItNow
             TxtTpoDocumento.Text = grdEstadoDocumento.SelectedRow.Cells[1].Text;
             TxtNomArchivo.Text = grdEstadoDocumento.SelectedRow.Cells[2].Text;
             TxtUrl_Imagen.Text = grdEstadoDocumento.SelectedRow.Cells[4].Text;
+
             this.hdfValorGrid.Value = this.grdEstadoDocumento.SelectedValue.ToString();
-
-            imgDownload.Enabled = true;
-
-
-            // string varGalleryFolder = System.Web.HttpContext.Current.Server.MapPath("~/Directorio/");
-
-            // string IdUsuario = grdEstadoDocumento.SelectedRow.Cells[1].Text;
-
-            // varGalleryFolder = varGalleryFolder + grdEstadoDocumento.SelectedRow.Cells[1].Text;
-
-            // GetFiles(varGalleryFolder + "\\" + grdEstadoDocumento.SelectedRow.Cells[2].Text);
-
-            // Carga GridView
-            // GetEstadoDocumentos();
-
-            // GetEstadoDocumentos(grdEstadoDocumento.SelectedRow.Cells[1].Text);
 
         }
 
@@ -272,27 +258,32 @@ namespace WebItNow
             //string strPathToSave = TxtPathDownload.Text + "\\" + "Captura de pantalla (3).png";
 
             string strURLFile = Server.MapPath("~/Directorio/") + "wordpress-6.1.1.zip";
-            string strPathToSave = TxtPathDownload.Text + "/" + "wordpress-6.1.1.zip";
+         //   string strPathToSave = TxtPathDownload.Text + "/" + "wordpress-6.1.1.zip";
 
-            downloadFileToSpecificPath(strURLFile, strPathToSave);
+        //    downloadFileToSpecificPath(strURLFile, strPathToSave);
 
-            imgDownload.Enabled = false;
+           // imgDownload.Enabled = false;
         }
 
         protected void imgDownload_Click(object sender, ImageClickEventArgs e)
         {
+            //Thread thdSyncRead = new Thread(new ThreadStart(OpenFolder));
+            //thdSyncRead.SetApartmentState(ApartmentState.STA);
+            //thdSyncRead.Start();
+
             try
             {
                 /// <param name="strURLFile"> URL del archivo que se desea descargar </param>
                 /// <param name="strPathToSave"> Ruta donde se desea almacenar el archivo </param>
 
                 // System.Web.HttpContext.Current.Session["FileName"] = TxtNomArchivo.Text;
+                // string dlDir = "";
+
                 string strURLFile = Server.MapPath("~/Directorio/") + TxtUrl_Imagen.Text + TxtNomArchivo.Text;
-                string strPathToSave = TxtPathDownload.Text + "\\" + TxtNomArchivo.Text;
+             //   string strPathToSave = TxtPathDownload.Text + "\\"  + TxtNomArchivo.Text;
 
-                downloadFileToSpecificPath(strURLFile, strPathToSave);
-
-                imgDownload.Enabled = false;
+             // downloadFileToSpecificPath(strURLFile, strPathToSave);
+              //  imgDownload.Enabled = false;
 
             }
             catch (Exception ex)
@@ -304,11 +295,39 @@ namespace WebItNow
                 LblMessage.Text = "El documento se descargo exitosamente";
                 this.mpeMensaje.Show();
             }
-            
-            // Thread thdSyncRead = new Thread(new ThreadStart(ThreadMethod));
-            // thdSyncRead.SetApartmentState(ApartmentState.STA);
-            // thdSyncRead.Start();
 
+        }
+
+        protected void DownloadFile(object sender, EventArgs e)
+        {
+            try
+            {
+                if (TxtNomArchivo.Text == "")
+                {
+                    LblMessage.Text = "Seleccione el archivo a descargar";
+                    this.mpeMensaje.Show();
+                }
+                else
+                {
+                    // string filePath = (sender as LinkButton).CommandArgument;
+                    string filePath = Server.MapPath("~/Directorio/") + TxtUrl_Imagen.Text + TxtNomArchivo.Text;
+                    Response.ContentType = ContentType;
+                    Response.AppendHeader("Content-Disposition", "attachment; filename=" + Path.GetFileName(filePath));
+                    Response.WriteFile(filePath);
+                    Response.End();
+
+                    TxtUsu.Text = string.Empty;
+                    TxtTpoDocumento.Text = string.Empty;
+                    TxtNomArchivo.Text = string.Empty;
+                    TxtUrl_Imagen.Text = string.Empty;
+
+                }
+            }
+            catch (Exception ex)
+            {
+                LblMessage.Text = ex.Message;
+                this.mpeMensaje.Show();
+            }
         }
 
         /// <summary>
@@ -426,7 +445,7 @@ namespace WebItNow
             if (fbd.ShowDialog() == DialogResult.OK)
             {
                 string selectedfolder = fbd.SelectedPath;
-                TxtPathDownload.Text = selectedfolder;
+              //TxtPathDownload.Text = selectedfolder;
                 fbd.Dispose();
 
             }
@@ -474,5 +493,6 @@ namespace WebItNow
             }
             }
 
-        }
+
+    }
 }

@@ -11,7 +11,8 @@ namespace WebItNow
 {
     public class ConexionBD
     {
-        string connString = "Data Source = DESKTOP-EF6AQB3; Initial Catalog = Itnow ; User ID=sa; Password=e22j22";
+    //  string connString = "Data Source = DESKTOP-EF6AQB3; Initial Catalog = Itnow ; User ID=sa; Password=e22j22";
+        string connString = "Server=tcp:codice1.database.windows.net,1433;Initial Catalog=Itnow;Persist Security Info=False; User ID=DB_Codice; Password=Itnow2023; MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
 
         public SqlConnection ConectarBD = new SqlConnection();
 

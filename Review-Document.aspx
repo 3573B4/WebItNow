@@ -26,10 +26,9 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+
+<asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
 <br />
-<asp:UpdatePanel ID="UpdatePanel2" runat="server" UpdateMode="Conditional" >
-<ContentTemplate>
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-sm-4">
@@ -42,14 +41,14 @@
             <div class="form-group">
                 <asp:Label ID="LblUsu" runat="server" Text="Usuario" CssClass="control-label co-sm-3" Font-Bold="False"></asp:Label>
                 <div class="col-sm-12">
-                    <asp:TextBox ID="TxtUsu" runat="server" CssClass="form-control" placeholder="Usuario" Enabled="False"></asp:TextBox>
+                    <asp:TextBox ID="TxtUsu" runat="server" CssClass="form-control" placeholder="Usuario" ReadOnly="True"></asp:TextBox>
                 </div>
             </div>
             <br />        
             <div class="form-group">
                 <asp:Label ID="LblTpoDocumento" runat="server" Text="Tpo. de Documento" CssClass="control-label col-sm-2"></asp:Label>
                 <div class="col-sm-12">
-                    <asp:TextBox ID="TxtTpoDocumento" runat="server" CssClass="form-control" placeholder="Tipo de Documento" Enabled="False" ></asp:TextBox>
+                    <asp:TextBox ID="TxtTpoDocumento" runat="server" CssClass="form-control" placeholder="Tipo de Documento" ReadOnly="True" ></asp:TextBox>
                     <asp:TextBox ID="TxtUrl_Imagen" runat="server" CssClass="form-control" placeholder="Ruta del archivo" Enabled="False" Visible="false" ></asp:TextBox>
                 </div>
             </div>
@@ -57,23 +56,11 @@
             <div class="form-group">
                 <asp:Label ID="LblNomArchivo" runat="server" Text="Archivo para descargar" CssClass="control-label col-sm-2"></asp:Label>
                 <div class="col-sm-12">
-                    <asp:TextBox ID="TxtNomArchivo" runat="server" CssClass="form-control" placeholder="Archivo para descargar" Enabled="False" ></asp:TextBox>
+                    <div class="d-grid gap-2 d-md-flex justify-content-center">
+                    <asp:TextBox ID="TxtNomArchivo" runat="server" CssClass="form-control" placeholder="Archivo para descargar" ReadOnly="True" ></asp:TextBox>
+                        <asp:ImageButton ID="imgDescarga" runat="server" ImageUrl="~/Images/descargar.png" Height="35px" Width="35px" OnClick="DownloadFile" />
+                    </div>
                 </div>
-            </div>
-            <br />
-            <div class="form-group">
-                <asp:Label ID="LblPathDownload" runat="server" Text="Ruta Descarga" CssClass="control-label col-sm-2"></asp:Label>
-                <div class="col-sm-12">
-                    <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
-                        <ContentTemplate>
-                        <div class="d-grid gap-2 d-md-flex justify-content-center">
-                            <asp:TextBox ID="TxtPathDownload" runat="server" CssClass="form-control" placeholder="Ruta descarga archivo" Enabled="False" ></asp:TextBox>
-                            <asp:ImageButton ID="imgDownload" runat="server" ImageUrl="~/Images/descargar.png" Height="35px" Width="35px" OnClick="imgDownload_Click" Enabled="False" />
-                        </div>
-                        </ContentTemplate>
-                    </asp:UpdatePanel>
-                </div>
-            <br />
             </div>
             <br />
             <div class="form-group">
@@ -179,7 +166,7 @@
                 <asp:Label ID="Label2" runat="server" Text="I t n o w" />
             </td>
             <td>
-                <!--   <asp:ImageButton ID="BtnCerrar" runat="server" Style="vertical-align: top;" ImageAlign="Right" /> -->
+                <!-- <asp:ImageButton ID="BtnCerrar" runat="server" Style="vertical-align: top;" ImageAlign="Right" /> -->
             </td>
         </tr>
     </table>
@@ -236,9 +223,4 @@
         </tr>
     </table>
 
-</ContentTemplate>
-<Triggers>
-    <asp:AsyncPostBackTrigger ControlID="imgDownload" EventName="Click" />
-</Triggers>
-</asp:UpdatePanel>
 </asp:Content>

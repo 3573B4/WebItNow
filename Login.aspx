@@ -7,8 +7,8 @@
     <br />    
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
     <br />
-    <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
-    <ContentTemplate>
+<!--    <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
+    <ContentTemplate>   -->
     <div class="container well contenedorLogin">
         <div class="row">
             <div class="col-xs-12">
@@ -111,7 +111,7 @@
         </div>
 
     </asp:Panel>
-
+<!--
     </ContentTemplate>
-    </asp:UpdatePanel>
+    </asp:UpdatePanel>  -->
 </asp:Content>
