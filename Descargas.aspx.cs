@@ -16,7 +16,7 @@ namespace WebItNow
         {
             if (!Page.IsPostBack)
             {
-                if (Request.QueryString["filePath"] != null)
+                if (Session["filePath"] != null)
                 {
                     //string nombrearchivo = Request.QueryString["Fileid"].ToString();
 
@@ -30,7 +30,7 @@ namespace WebItNow
                     //Response.BinaryWrite(txtbyte);
                     //Response.End();
 
-                    string filePath = Request.QueryString["filePath"].ToString();
+                    string filePath = (string)Session["filePath"];
 
                     Response.ContentType = ContentType;
                     Response.AppendHeader("Content-Disposition", "attachment; filename=" + Path.GetFileName(filePath));

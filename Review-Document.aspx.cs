@@ -321,7 +321,12 @@ namespace WebItNow
                 string filePath = Server.MapPath("~/Directorio/") + TxtUrl_Imagen.Text + TxtNomArchivo.Text;
                 Variables.wDownload = true;
 
-                DownloadFile(filePath, Server.MapPath("~/Directorio/") + TxtUrl_Imagen.Text);
+                DescargaArch(filePath);
+
+                // Session["FilePath"] = Server.MapPath("~/Directorio/") + TxtUrl_Imagen.Text + TxtNomArchivo.Text;
+                // Response.Redirect("Descargas.aspx", true);
+                // ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "AbrirDescarga", string.Format("window.open('Descargas.aspx');"), false);
+
             }
         }
 
@@ -337,7 +342,7 @@ namespace WebItNow
                 string filePath = Server.MapPath("~/Directorio/") + TxtUrl_Imagen.Text + TxtNomArchivo.Text;
                 Variables.wDownload = true;
 
-                 DescargaArch(filePath);
+                DescargaArch(filePath);
 
             }
         }
