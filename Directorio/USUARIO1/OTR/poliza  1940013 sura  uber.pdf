@@ -1,0 +1,379 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head><title>
+
+</title>
+    <script language="javascript" type="text/javascript">
+        var timer = setTimeout(function () {
+            document.getElementById('MainContent_LblExpira').innerHTML = 'La sesión ha expirado.';
+            var modalId = 'MainContent_mpeExpira';
+            var modal = $find(modalId);
+            modal.show();
+
+            //alert("La sesión ha expirado.");
+            //location.href = '/Login.aspx';
+        }, 120000);
+
+        function acceso() {
+            location.href = '/Login.aspx';
+        }
+
+        function mpeMensajeOnOk() {
+            //
+        }
+
+        }
+    </script>
+<meta http-equiv="Cache-Control" content="no-cache" /><meta http-equiv="Pragma" content="no-cache" /><meta http-equiv="Expires" content="0" />
+
+    <script language="javascript" type="text/javascript">
+
+        if (history.forward(1)) {
+            location.replace(history.forward(1))
+        }
+
+    //function getNameURLWeb() {
+    //    var sPath = window.location.pathname;
+    //    var sPage = sPath.substring(sPath.lastIndexOf('/') + 1);
+    //    return sPage;
+    //}
+
+    //var xx_nombre_pagina = getNameURLWeb();
+    //    alert(xx_nombre_pagina);
+    </script>
+
+
+
+    <link href="Styles/center_controls.css" rel="stylesheet" type="text/css" /><link href="Styles/default.css" rel="stylesheet" type="text/css" /><link href="Styles/panel_message.css" rel="stylesheet" type="text/css" /><link href="Styles/GridView.css" rel="stylesheet" type="text/css" />
+
+    <style type="text/css">
+        .style1
+        {
+            width: 180px;
+        }
+        .style2
+        {
+            width: 880px;
+        }
+
+        .style3
+        {
+            width: 180px;
+        }
+
+        #topContent
+        { height: 10%; width: 100%; }
+        #mainContent
+        { height: 80%; width: 100%; }
+        #footerContent
+        { height: 10%; width: 100%; }
+
+        .headerCssClass{  
+            background-color:#c33803;  
+            color:white;
+            border: 1px solid black;  
+            padding: 4px;  
+        }  
+        .contentCssClass{  
+            background-color:#e59a7d;  
+            color:black;  
+            border: 1px dotted black;  
+            padding: 4px;  
+        }  
+        .headerSelectedCss{  
+            background-color:#808080;  
+            color:white;  
+            border: 1px solid black;  
+            padding: 4px;  
+        }  
+    </style>
+
+</head>
+<body>
+    <form method="post" action="./Review-Document" id="form1" enctype="multipart/form-data">
+<div class="aspNetHidden">
+<input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="" />
+<input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="" />
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="Eg1HCrgrGcLDgyxOYAZuEYXvIKmLTZ8/Byuh5v312GCrahoCOI1P0o1kITw8pcM40WGlBV3BQzNLpRSc/C1MbwZby/73QPS5WyOQjjE5KZt6t7T78vUFdkAlTDQ+2P66Nn22JFZ+0UmfAWXZ3GVIKheMseW6iuF23et2GFe6dJ9PHOZi6coDwzBmSbEmJ5UDxCYVh23j55XspYt01IZCATZQaFcG1PpNAY0ANAkQ9Jc1yv8rB5Ekc+ipWtKT8iWP1M0NzH+8+qF0sYpd78vnzx+8nakZGiL16rtalEJwnhrNqIr6tXV0a+XD2c549z6H7/Ki5kfQxOj5ktu8EwIIPGphKpcD3CPH+LHUOEaS71qy3ND9homz6uXi0FOkSOvDPe+byoiblF9cgEY2jE2aNbyG6Lfc4fzYY0q535Zfc+oWqZXsbJwT0RVtcwaU0hPX9xzm1z1l9Cz3oeQQN29lFwn7nHrNEwgyGHUifM42BWXhIGWxie9jqg7yTjYUrJ1alvxahkje2eNVmx/1DKVzd5x3Y2XJqUKEV05Smjel8y2qiadnvjOkoByNajatZbBvGG6aqwyzHSi93goNb3hzyUZZVlYQbpjeuWbFuIGNUxZYzWs8udteX3Vgilvb7oWRtsIAo5UpXY37Hz6ViPlS2WCxGka/NpbTqh9GVxBYwGVIUu6QAe9Uo/i+CI87v0kuHr/ZRhAImyJ+gRd//uG+tQViV71eR3XXMW7z3vo2aBEX9a8TFsFlFSl2WAAfDGI2nVYzXqj9GBPoAUMzrzjQoVpFk8RRCCJxcUVZFUo362tt0r/2ZrDrc94KoLJvyVYAMkwS3Xf4R3U02Hb3XGweGf/yqbvWEFn8ZSehs7lhs0GKjEWIGwlD1hfHV1wAetHo9j9AtNmn2ZvehwOs9EN3Glb8tupRFyr04viz4PV0NLMEzN2MwbXW+H2fJLAqmnEjOcm8ur4PCCmYBYryoFr6OpH7j0nTiE/itTS2qGWsKZpnROAFoVfb+rTDpDbeszJq4jfOa3ZdwAyRNstPNlUkWaVCYgC09OncrjH/4bMYqZ9NBlvUO6Z2bxQmvwavZRWMj2y0/Wkj2gCK+TUaDYL7Nuzvuy65LNuy+QF/M7eWAYqgdDKz5xZlHpMsSMuHJkaBKXqJ+Bk+PKnHSHyKF0Z+/6nPxuM9UvuDvp9KniZPbivI3qTn2cZ+YC7OkqYyJkPSgLx1xrcgS1G3wBYhUf+SUP7TmT/etINqz3GbcZipE99pa5knYVAw8usomLG7XJvj" />
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+var theForm = document.forms['form1'];
+if (!theForm) {
+    theForm = document.form1;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+//]]>
+</script>
+
+
+<script src="/WebResource.axd?d=pynGkmcFUV13He1Qd6_TZPzUWlyJciEkO-RH16I9-QJBM1p4hyTZWOIP3euDb7ZMXxXdmBKQfu9z0YqDgEgW3Q2&amp;t=637814444020000000" type="text/javascript"></script>
+
+
+<script src="Scripts/WebForms/MsAjax/MicrosoftAjax.js" type="text/javascript"></script>
+<script type="text/javascript">
+//<![CDATA[
+if (typeof(Sys) === 'undefined') throw new Error('Error al cargar el marco de trabajo de cliente ASP.NET Ajax.');
+//]]>
+</script>
+
+<script src="Scripts/WebForms/MsAjax/MicrosoftAjaxWebForms.js" type="text/javascript"></script>
+<script src="/ScriptResource.axd?d=pVdHczR8HTv0TYtXLibFoLx9DZWI-PZx2GfIu9fmFhNUh85N-RG9BtlGYlDRGMu9sNtHZ2rc_5T_JCtDhSj2imZnD_eJZ5RKdoyBUVELyvxpM4EAtFESLprEUJgt2HupiFRxcXdrCnEXOP5ZKnFCTQ2&amp;t=7d5986a" type="text/javascript"></script>
+<script src="/ScriptResource.axd?d=kRkqQb_yitLUhEgneGG6hwFrmJSMqRFY2VeZhlmRUg2Fz27nHO1mKQMYdgYa_u__Nu_eqLCG91G6NRomOFxQtyI2E3O0cMOyToQcYa1cgGlciMHopCgauhWTUFZ8Bz_rjYAwXEoCp-uYZOaLwHDB_Q2&amp;t=7d5986a" type="text/javascript"></script>
+<script src="/ScriptResource.axd?d=-qISl4-OkT-7X02E4Fisr_Yj0nH4axmr_a_F1pc1SkJHHaT2f04IDA27KmEGVgjUMBRUacQK-6iRNNtO7BXDSgtvEX3fg2bAGahIkyQn5FdAkMfahfX3kigerKSoCqDW0&amp;t=7d5986a" type="text/javascript"></script>
+<script src="/ScriptResource.axd?d=LpGQnoKUSgO3ODsBUs8GfaKsCzcav56oj2BEoOP8-hUblFr1Nt2g5VR4JhyaVcu3PAO-zD39binhi_YZjAHyb9oWEkKLQqyHcaixkd9L_TTryOz5-73use5aReTipsWY0&amp;t=7d5986a" type="text/javascript"></script>
+<script src="/ScriptResource.axd?d=iC2sD0Al8A6ZX4AVmUco0U_XnJMy7Z_Ae9TUqLZKZ2PsQflNsD9wuSPzVN40J7y8SA1OL5mJiLViFAGknc_qhT09uZRdkB-ZJgrjFv0MhTyExYTswKmNSuIAeBVMdVmH0&amp;t=7d5986a" type="text/javascript"></script>
+<script src="/ScriptResource.axd?d=rFItVvyVSHru2mWi6oVDAQIeSYDC8bsYZPXu36m9lOtKs6H4UcGuD5fCetIyoeiadFexl_-bj9TuMK9phamXfnoJ-kaHZ7fX1-y-v_WTk-fkY34J0_NrdCVUuMXBazMr0&amp;t=7d5986a" type="text/javascript"></script>
+<script src="/ScriptResource.axd?d=VXG5HWKmJ5VfT6XbkUxKRn98YqdyCdu_cxi89uJqVpX9YHyI7Y12x3RtetxAp1kwWiflnMhIJUWfAVGiGVOA9PhAlnRkxKl-DPd02Kx2nGWT_wt-sd92OCyQ1ifaY8FK0&amp;t=7d5986a" type="text/javascript"></script>
+<script src="/ScriptResource.axd?d=UOhNCrWepwbJqlILLLhLzcgoBStnWq17uFvEHNQJJyeYw3VKfsn3I20_I7HnL_kJUov1aFRjq-WGq31UgzX-EO34_Ae5z6IeCpiLC44kqj95UlrgHhESrgkLnFqZdD7C0&amp;t=7d5986a" type="text/javascript"></script>
+<script src="/ScriptResource.axd?d=5Ptu7TR6eeUMpbV-tOSG6hG3Ml5OXsnPyrY7FVplxVltpbsTDskvySYDxIhqXPYvGXCKC7n0WASOp0eRiP8A2SycXFzOKZ0fEDcVh0vYjRwfWZWPfL33pA0vd16f41KQ0&amp;t=7d5986a" type="text/javascript"></script>
+<script src="/ScriptResource.axd?d=yq2dglGiX2GonGqAbqjStmPuRwtgMv4UaDZ_bRDvTCd-L1g1vu6bwsgIOeRaAFY8OyRmvm2nkNU8meiWvEg2Eqgeka-X_gU4jObmj-qU6QYrZ_27Qr6b6sjQyUdAZKf20&amp;t=7d5986a" type="text/javascript"></script>
+<script src="/ScriptResource.axd?d=q85rlLsZEVu9loex9kzISOYyJO10nXV0z8-6Sp4YZh1iNAk-fA_GUuB6WfC6H9BktzNtb-PuXrenlqyU6dxCkssjy5RqYuseNndH7bXnU0dG8GrJRcVravhr1EqLRHAn0&amp;t=7d5986a" type="text/javascript"></script>
+<script src="/ScriptResource.axd?d=9fVK6SOzqud8-CG5DRcWdVCnOkJCKTWabcnUb4Btk73Y43BQBHolsHyEkeDpG7QNkg97QSzQT-YFQhlrBWcLRLQwQ_nxjuy-OOGAlfYe59cfXBTXOXQ4NkVDRZbvobsn0&amp;t=7d5986a" type="text/javascript"></script>
+<script src="/ScriptResource.axd?d=FJYGXcD0D1IU18YZcc5S5T6U_CTk8Trsys_bp0tet2thiGV9WQee8HWNnvk4Y28QwzTMM-1-SdTznNp2-jLRgOAjH0akuGt-oo6NMy1og97jXUFA1jy3g-iuE8Pgf6PE0&amp;t=7d5986a" type="text/javascript"></script>
+<script src="/ScriptResource.axd?d=qTnPOILsJCPbmGgsgyJ0ew__YdwhPuFLVI8Ncg0imZ2uZHpHJ5Vl2zrHY33PIrN3ODPidQja42kdGH0jXiftLEf702WXG7VZ0Zz4We2QuzOFdUpMm7egSplAWzU3Sa260&amp;t=7d5986a" type="text/javascript"></script>
+<div class="aspNetHidden">
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="A4FC4499" />
+	<input type="hidden" name="__VIEWSTATEENCRYPTED" id="__VIEWSTATEENCRYPTED" value="" />
+</div>
+         <div id="topContent" >
+            <!-- <a href="Default.aspx">Control De Horas</a> -->
+          <table>
+            <tr>
+                <td class="style1">
+                    <img id="Image1" src="Images/Itnow.jpg" style="height:120px;width:224px;" />
+                </td>
+                <td class="style2" align="center">
+                    <h2 style="font-family: Arial, Helvetica, sans-serif">Itnow Technologies de México S.A. de C.V.</h2> 
+                </td>
+                <td class="style3">
+                </td>
+            </tr>
+          </table>
+         </div>
+          <div id="mainContent" >
+         
+
+<script type="text/javascript">
+//<![CDATA[
+Sys.WebForms.PageRequestManager._initialize('ctl00$MainContent$ScriptManager1', 'form1', [], [], [], 90, 'ctl00');
+//]]>
+</script>
+
+<br />
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-sm-4">
+            <div class="row">
+                <div class="row">    
+                    <div class="col-xs-12">
+                        <h2> Validación de Documentos</h2>
+                    </div>
+                </div>
+            <div class="form-group">
+                <span id="MainContent_LblUsu" class="control-label co-sm-3" style="font-weight:normal;">Usuario</span>
+                <div class="col-sm-12">
+                    <input name="ctl00$MainContent$TxtUsu" type="text" id="MainContent_TxtUsu" class="form-control" placeholder="Usuario" />
+                </div>
+            </div>
+            <br />        
+            <div class="form-group">
+                <span id="MainContent_LblTpoDocumento" class="control-label col-sm-2">Tpo. de Documento</span>
+                <div class="col-sm-12">
+                    <input name="ctl00$MainContent$TxtTpoDocumento" type="text" id="MainContent_TxtTpoDocumento" class="form-control" placeholder="Tipo de Documento" />
+                    
+                </div>
+            </div>
+            <br />
+            <div class="form-group">
+                <span id="MainContent_LblNomArchivo" class="control-label col-sm-2">Archivo para descargar</span>
+                <div class="col-sm-12">
+                    <div class="d-grid gap-2 d-md-flex justify-content-center">
+                    <input name="ctl00$MainContent$TxtNomArchivo" type="text" id="MainContent_TxtNomArchivo" class="form-control" placeholder="Archivo para descargar" />
+                        <input type="image" name="ctl00$MainContent$imgDescarga" id="MainContent_imgDescarga" src="Images/descargar.png" style="height:35px;width:35px;" />
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div class="form-group">
+                <div class="d-grid col-6 mx-auto">
+                    
+                </div>
+            </div>
+            <br />
+            <div class="from-group">
+                <div class="d-grid col-6 mx-auto">
+                    <input type="submit" name="ctl00$MainContent$BtnRegresar" value="Regresar" id="MainContent_BtnRegresar" class="btn btn-link" style="font-weight:bold;" />
+                </div>
+            </div>
+        </div>
+            </div>
+        <br />
+        <div class="col-12">
+            <div class="row">
+                <div class="col-xs-12">
+                    <h2> Pendientes</h2>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-6">
+                    <div  class="form-group">
+                        <div>
+	<table class="mGrid" cellspacing="0" id="MainContent_grdEstadoDocumento" style="width:586px;border-collapse:collapse;">
+		<tr>
+			<th scope="col">Id. Usuario</th><th scope="col">Tipo de Documento</th><th scope="col">Nombre de Archivo</th><th scope="col">Id. Status</th><th scope="col">Url_Imagen</th><th scope="col">&nbsp;</th><th scope="col">&nbsp;</th>
+		</tr><tr OnClick="javascript:__doPostBack(&#39;ctl00$MainContent$grdEstadoDocumento&#39;,&#39;Select$0&#39;);">
+			<td>USUARIO1</td><td>Otros</td><td>poliza  1940013 sura  uber.pdf</td><td>Revision</td><td>USUARIO1/OTR/</td><td>
+                                         <input type="submit" name="ctl00$MainContent$grdEstadoDocumento$ctl02$BtnRechazado" value="Rechazado" id="MainContent_grdEstadoDocumento_BtnRechazado_0" />
+                                    </td><td>
+                                        <input type="submit" name="ctl00$MainContent$grdEstadoDocumento$ctl02$BtnAceptado" value="Aceptado" id="MainContent_grdEstadoDocumento_BtnAceptado_0" />
+                                    </td>
+		</tr><tr class="alt" OnClick="javascript:__doPostBack(&#39;ctl00$MainContent$grdEstadoDocumento&#39;,&#39;Select$1&#39;);">
+			<td>USUARIO2</td><td>Otros</td><td>Requerimiento.xlsx</td><td>Revision</td><td>USUARIO2/OTR/</td><td>
+                                         <input type="submit" name="ctl00$MainContent$grdEstadoDocumento$ctl03$BtnRechazado" value="Rechazado" id="MainContent_grdEstadoDocumento_BtnRechazado_1" />
+                                    </td><td>
+                                        <input type="submit" name="ctl00$MainContent$grdEstadoDocumento$ctl03$BtnAceptado" value="Aceptado" id="MainContent_grdEstadoDocumento_BtnAceptado_1" />
+                                    </td>
+		</tr>
+	</table>
+</div>
+                    </div>
+                </div>
+                <input type="hidden" name="ctl00$MainContent$hdfValorGrid" id="MainContent_hdfValorGrid" value="USUARIO1" />
+            </div>
+        </div>
+        </div>
+        <div class="form-group">
+            <div class="d-grid col-6 mx-auto">
+                <span id="MainContent_Lbl_Message" style="color:Red;"></span>
+            </div>
+        </div>
+    </div>
+
+    <br />
+    <div id="MainContent_pnlExpira" class="CajaDialogo" style="display: none;">
+	
+    <table border="0" width="275px" style="margin: 0px; padding: 0px; background-color: #0033CC; color: #FFFFFF;">
+        <tr>
+            <td align="left">
+                <span id="MainContent_Label6">I t n o w</span>
+            </td>
+            <td></td>
+        </tr>
+    </table>
+
+    <div>
+        <br />
+        <table border="0" width="275px" style="margin: 0px; padding: 0px;" >
+            <tr>
+                <td><span id="MainContent_LblExpira"></span></td>
+                <td></td>
+            </tr>
+        </table>
+    </div>
+
+    <div>
+        <br />
+        <table border="0" width="275px" style="margin: 0px; padding: 0px;">
+            <tr>
+                <td align="center"><input type="submit" name="ctl00$MainContent$BtnClose_Expira" value="Cerrar" onclick="acceso(); return false;" id="MainContent_BtnClose_Expira" /></td>
+                <td></td>
+            </tr>
+        </table>
+    </div>
+
+    
+</div>
+    <br />
+    <div id="MainContent_pnlMensaje" class="CajaDialogo" style="display: none;">
+	
+
+    <table border="0" width="287px" style="margin: 0px; padding: 0px; background-color: #0033CC; color: #FFFFFF;">
+        <tr>
+            <td align="left">
+                <span id="MainContent_Label2">I t n o w</span>
+            </td>
+            <td>
+                <!-- <input type="image" name="ctl00$MainContent$BtnCerrar" id="MainContent_BtnCerrar" align="right" style="vertical-align: top;" /> -->
+            </td>
+        </tr>
+    </table>
+
+        <div>
+            <!-- <img id="MainContent_imgIcono" src="Exclama.jpg" align="middle" style="border-color:Black;border-width:1px;border-style:Solid;" /> -->
+            <br />
+            <table border="0" width="275px" style="margin: 0px; padding: 0px;" >
+                <tr>
+                    <td><span id="MainContent_LblMessage">No se pudo encontrar el archivo 'C:\Users\Dell\source\repos\WebItNow\Directorio\USUARIO1\OTR\poliza  1940013 sura  uber.pdf'.</span></td>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
+
+        <div>
+            <br />
+            <table border="0" width="275px" style="margin: 0px; padding: 0px;">
+                <tr>
+                    <td align="center"><input type="submit" name="ctl00$MainContent$BtnClose" value="Cerrar" id="MainContent_BtnClose" /></td>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
+
+    
+</div>
+    <br />
+    <table cellspacing="1" cellpadding="1" border="0">
+        <tr>
+            <td>
+                <div class="form-group">
+                    <div class="d-grid col-6 mx-auto">
+                        
+                        <span id="MainContent_lblOculto" style="display: none;">Label</span>
+                    </div>
+                </div>
+            </td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>
+                
+            </td>
+            <td class="style3"><span id="MainContent_lblHide" style="display: none;">Label</span>
+            </td>
+            <td></td>
+            <td></td>
+        </tr>
+    </table>
+
+
+         </div>
+    
+
+<script type="text/javascript">
+//<![CDATA[
+(function() {var fn = function() {Sys.Extended.UI.ModalPopupBehavior.invokeViaServer('MainContent_mpeMensaje', true); Sys.Application.remove_load(fn);};Sys.Application.add_load(fn);})();Sys.Extended.UI.Localization.SetLocale("es");Sys.Application.add_init(function() {
+    $create(Sys.Extended.UI.ModalPopupBehavior, {"backgroundCssClass":"FondoAplicacion","dynamicServicePath":"/Review-Document","id":"MainContent_mpeMensaje","onOkScript":"mpeMensajeOnOk()","popupControlID":"MainContent_pnlMensaje"}, null, null, $get("MainContent_lblOculto"));
+});
+Sys.Application.add_init(function() {
+    $create(Sys.Extended.UI.ModalPopupBehavior, {"backgroundCssClass":"FondoAplicacion","dynamicServicePath":"/Review-Document","id":"MainContent_mpeExpira","onOkScript":"mpeExpiraOnOk()","popupControlID":"MainContent_pnlExpira"}, null, null, $get("MainContent_lblHide"));
+});
+//]]>
+</script>
+</form>
+
+</body>
+</html>
+

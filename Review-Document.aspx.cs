@@ -6,12 +6,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
-using System.Web.SessionState;
 using System.Web.UI.WebControls;
+using System.Web.SessionState;
+using System.Net;
 
 using System.Diagnostics;
 using System.Reflection;
-using System.Windows.Forms;
+//using System.Windows.Forms;
 
 using System.Data;
 using System.Data.SqlTypes;
@@ -35,13 +36,23 @@ namespace WebItNow
         protected void Page_Load(object sender, EventArgs e)
 		{
 
-
             if (!Page.IsPostBack)
             {
                // TxtPathDownload.Text = GetDownloadsPath();
 
                 // Carga GridView
                 GetEstadoDocumentos();
+            }
+
+
+            if (Variables.wDownload == true)
+            {
+                TxtUsu.Text = string.Empty;
+                TxtTpoDocumento.Text = string.Empty;
+                TxtNomArchivo.Text = string.Empty;
+                TxtUrl_Imagen.Text = string.Empty;
+
+                Variables.wDownload = false;
             }
         }
 
@@ -298,36 +309,46 @@ namespace WebItNow
 
         }
 
-        protected void DownloadFile(object sender, EventArgs e)
+        protected void DownloadFile(object send, EventArgs e) 
         {
-            try
+            if (TxtNomArchivo.Text == "")
             {
-                if (TxtNomArchivo.Text == "")
-                {
-                    LblMessage.Text = "Seleccione el archivo a descargar";
-                    this.mpeMensaje.Show();
-                }
-                else
-                {
-                    // string filePath = (sender as LinkButton).CommandArgument;
-                    string filePath = Server.MapPath("~/Directorio/") + TxtUrl_Imagen.Text + TxtNomArchivo.Text;
-                    Response.ContentType = ContentType;
-                    Response.AppendHeader("Content-Disposition", "attachment; filename=" + Path.GetFileName(filePath));
-                    Response.WriteFile(filePath);
-                    Response.End();
-
-                    TxtUsu.Text = string.Empty;
-                    TxtTpoDocumento.Text = string.Empty;
-                    TxtNomArchivo.Text = string.Empty;
-                    TxtUrl_Imagen.Text = string.Empty;
-
-                }
-            }
-            catch (Exception ex)
-            {
-                LblMessage.Text = ex.Message;
+                LblMessage.Text = "Seleccione el archivo a descargar";
                 this.mpeMensaje.Show();
             }
+            else
+            {
+                string filePath = Server.MapPath("~/Directorio/") + TxtUrl_Imagen.Text + TxtNomArchivo.Text;
+                Variables.wDownload = true;
+
+                DownloadFile(filePath, Server.MapPath("~/Directorio/") + TxtUrl_Imagen.Text);
+            }
+        }
+
+        protected void ImgDescarga_Click(object send, EventArgs e)
+        {
+            if (TxtNomArchivo.Text == "")
+            {
+                LblMessage.Text = "Seleccione el archivo a descargar";
+                this.mpeMensaje.Show();
+            }
+            else
+            {
+                string filePath = Server.MapPath("~/Directorio/") + TxtUrl_Imagen.Text + TxtNomArchivo.Text;
+                Variables.wDownload = true;
+
+                 DescargaArch(filePath);
+
+            }
+        }
+
+        public void DescargaArch(string filePath)
+        {
+            Response.ContentType = ContentType;
+            Response.AppendHeader("Content-Disposition", "attachment; filename=" + Path.GetFileName(filePath));
+            Response.WriteFile(filePath);
+         // Response.End();
+            HttpContext.Current.ApplicationInstance.CompleteRequest();
         }
 
         /// <summary>
@@ -375,7 +396,7 @@ namespace WebItNow
 
         private class OldWindow : System.Windows.Forms.IWin32Window
         {
-            IntPtr _handle;
+            readonly IntPtr _handle;
             public OldWindow(IntPtr handle)
             {
                 _handle = handle;
@@ -387,69 +408,6 @@ namespace WebItNow
                 get { return _handle; }
             }
             #endregion
-        }
-
-        public static void ThreadMethod()
-        {
-            Stream myStream;
-            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
-            saveFileDialog1.FileName = "";
-            saveFileDialog1.FilterIndex = 2;
-            saveFileDialog1.RestoreDirectory = true;
-
-            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                if ((myStream = saveFileDialog1.OpenFile()) != null)
-                {
-                    // Code to write the stream goes here.
-                    myStream.Close();
-                }
-            }
-        }
-
-        public static void AbrirCarpeta()
-        {
-            var fileContent = string.Empty;
-            var filePath = string.Empty;
-
-            using (OpenFileDialog openFileDialog = new OpenFileDialog())
-            {
-                openFileDialog.InitialDirectory = "c:\\";
-                openFileDialog.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
-                openFileDialog.FilterIndex = 2;
-                openFileDialog.RestoreDirectory = true;
-
-                if (openFileDialog.ShowDialog() == DialogResult.OK)
-                {
-                    //Get the path of specified file
-                    filePath = openFileDialog.FileName;
-
-                    //Read the contents of the file into a stream
-                    var fileStream = openFileDialog.OpenFile();
-
-                    using (StreamReader reader = new StreamReader(fileStream))
-                    {
-                        fileContent = reader.ReadToEnd();
-                    }
-                }
-            }
-
-            MessageBox.Show(fileContent, "File Content at path: " + filePath, MessageBoxButtons.OK);
-        }
-
-        public void OpenFolder()
-        {
-
-            FolderBrowserDialog fbd = new FolderBrowserDialog();
-
-            if (fbd.ShowDialog() == DialogResult.OK)
-            {
-                string selectedfolder = fbd.SelectedPath;
-              //TxtPathDownload.Text = selectedfolder;
-                fbd.Dispose();
-
-            }
-
         }
 
         public void Update_tbEstadoDocumento(string pUsuarios, int pIdStatus)
@@ -493,6 +451,64 @@ namespace WebItNow
             }
             }
 
+        public bool DownloadFile(string UrlString, string DescFilePath)
+        {
+            string fileName = System.IO.Path.GetFileName(UrlString);
+            string descFilePathAndName = System.IO.Path.Combine(DescFilePath, fileName);
+            try
+            {
+                WebRequest myre = WebRequest.Create(UrlString);
+            }
+            catch
+            {
+                return false;
+            }
+            try
+            {
+                byte[] fileData;
+                using (WebClient client = new WebClient())
+                {
+                    fileData = client.DownloadData(UrlString);
+                }
+                using (FileStream fs = new FileStream(descFilePathAndName, FileMode.OpenOrCreate))
+                {
+                    fs.Write(fileData, 0, fileData.Length);
+                }
 
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("download field", ex.InnerException);
+            }
+        }
+
+        protected void DownloadFile_bk(object sender, EventArgs e)
+        {
+            try
+            {
+                if (TxtNomArchivo.Text == "")
+                {
+                    LblMessage.Text = "Seleccione el archivo a descargar";
+                    this.mpeMensaje.Show();
+                }
+                else
+                {
+
+                    // string filePath = (sender as LinkButton).CommandArgument;
+                    string filePath = Server.MapPath("~/Directorio/") + TxtUrl_Imagen.Text + TxtNomArchivo.Text;
+                    Variables.wDownload = true;
+
+                    DescargaArch(filePath);
+
+                }
+            }
+            catch (Exception ex)
+            {
+                LblMessage.Text = ex.Message;
+                this.mpeMensaje.Show();
+            }
+        }
     }
+
 }

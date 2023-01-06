@@ -135,6 +135,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
+    <Content Include="Descargas.aspx" />
     <Content Include="Images\descargar.png" />
     <Content Include="Images\edit.jpg" />
     <Content Include="Images\loader.gif" />
@@ -220,6 +221,13 @@
       <DependentUpon>Captcha.aspx</DependentUpon>
     </Compile>
     <Compile Include="ConexionBD.cs" />
+    <Compile Include="Descargas.aspx.cs">
+      <DependentUpon>Descargas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Descargas.aspx.designer.cs">
+      <DependentUpon>Descargas.aspx</DependentUpon>
+    </Compile>
     <Compile Include="EnvioEmail.cs" />
     <Compile Include="Forgot-Password.aspx.cs">
       <DependentUpon>Forgot-Password.aspx</DependentUpon>

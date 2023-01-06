@@ -22,13 +22,16 @@
         }
 
         }
+
     </script>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 
 <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
-<br />
+<asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional" >
+    <ContentTemplate>
+    <br />
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-sm-4">
@@ -48,7 +51,7 @@
             <div class="form-group">
                 <asp:Label ID="LblTpoDocumento" runat="server" Text="Tpo. de Documento" CssClass="control-label col-sm-2"></asp:Label>
                 <div class="col-sm-12">
-                    <asp:TextBox ID="TxtTpoDocumento" runat="server" CssClass="form-control" placeholder="Tipo de Documento" ReadOnly="True" ></asp:TextBox>
+                    <asp:TextBox ID="TxtTpoDocumento" runat="server" CssClass="form-control" placeholder="Tipo de Documento" ReadOnly="True"></asp:TextBox>
                     <asp:TextBox ID="TxtUrl_Imagen" runat="server" CssClass="form-control" placeholder="Ruta del archivo" Enabled="False" Visible="false" ></asp:TextBox>
                 </div>
             </div>
@@ -56,10 +59,10 @@
             <div class="form-group">
                 <asp:Label ID="LblNomArchivo" runat="server" Text="Archivo para descargar" CssClass="control-label col-sm-2"></asp:Label>
                 <div class="col-sm-12">
-                    <div class="d-grid gap-2 d-md-flex justify-content-center">
-                    <asp:TextBox ID="TxtNomArchivo" runat="server" CssClass="form-control" placeholder="Archivo para descargar" ReadOnly="True" ></asp:TextBox>
-                        <asp:ImageButton ID="imgDescarga" runat="server" ImageUrl="~/Images/descargar.png" Height="35px" Width="35px" OnClick="DownloadFile" />
-                    </div>
+                        <div class="d-grid gap-2 d-md-flex justify-content-center">
+                            <asp:TextBox ID="TxtNomArchivo" runat="server" CssClass="form-control" placeholder="Archivo para descargar" ReadOnly="True"></asp:TextBox>
+                            <asp:ImageButton ID="imgDescarga" runat="server" ImageUrl="~/Images/descargar.png" Height="35px" Width="35px" OnClick="ImgDescarga_Click" />
+                        </div>
                 </div>
             </div>
             <br />
@@ -223,4 +226,9 @@
         </tr>
     </table>
 
+    </ContentTemplate>
+    <Triggers>
+        <asp:PostBackTrigger ControlID="imgDescarga" />
+    </Triggers>
+</asp:UpdatePanel> 
 </asp:Content>
