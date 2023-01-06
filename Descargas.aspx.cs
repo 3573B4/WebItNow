@@ -35,8 +35,7 @@ namespace WebItNow
                     Response.ContentType = ContentType;
                     Response.AppendHeader("Content-Disposition", "attachment; filename=" + Path.GetFileName(filePath));
                     Response.WriteFile(filePath);
-                    // Response.End();
-                    HttpContext.Current.ApplicationInstance.CompleteRequest();
+                    Response.End();
                 }
             }
         }
