@@ -127,73 +127,59 @@
             </div>
         </div>
     </div>
-
     <br />
-    <asp:Panel ID="pnlExpira" runat="server" CssClass="CajaDialogo" style="display: none;">
-    <table border="0" width="275px" style="margin: 0px; padding: 0px; background-color: #0033CC; color: #FFFFFF;">
-        <tr>
-            <td align="left">
-                <asp:Label ID="Label6" runat="server" Text="I t n o w" />
-            </td>
-            <td></td>
-        </tr>
-    </table>
+    <asp:Panel ID="pnlMensaje" runat="server" CssClass="CajaDialogo" style="display: none; border: none; border-radius: 10px; width: 400px; background-color:#FFFFFF;">
+        <div class=" row justify-content-end" data-bs-theme="dark">
+            <div class="col-1">
+                <asp:Button runat="server" type="button" class="btn-close" aria-label="Close" />
+            </div>
+        </div>
+        <div>
+                <br />
+            <hr class="dropdown-divider" />
+        </div>
+        
+        <div>
+            <br />
+            <asp:Label ID="LblMessage" runat="server" Text="" />
+        </div>
+        <div>
+            <br />
+            <hr class="dropdown-divider" />
+        </div>
+        
+        <div>
+            <br />
+            <asp:Button ID="btnClose" runat="server" OnClick="BtnClose_Click" Text="Cerrar" CssClass="btn btn-outline-primary"/>
+        </div>
 
-    <div>
-        <br />
-        <table border="0" width="275px" style="margin: 0px; padding: 0px;" >
-            <tr>
-                <td><asp:Label ID="LblExpira" runat="server" Text="" /></td>
-                <td></td>
-            </tr>
-        </table>
-    </div>
-
-    <div>
-        <br />
-        <table border="0" width="275px" style="margin: 0px; padding: 0px;">
-            <tr>
-                <td align="center"><asp:Button ID="BtnClose_Expira" OnClientClick="acceso(); return false;" runat="server" Text="Cerrar" /></td>
-                <td></td>
-            </tr>
-        </table>
-    </div>
 
     </asp:Panel>
     <br />
-    <asp:Panel ID="pnlMensaje" runat="server" CssClass="CajaDialogo" style="display: none;">
-
-    <table border="0" width="287px" style="margin: 0px; padding: 0px; background-color: #0033CC; color: #FFFFFF;">
-        <tr>
-            <td align="left">
-                <asp:Label ID="Label2" runat="server" Text="I t n o w" />
-            </td>
-            <td>
-                <!-- <asp:ImageButton ID="BtnCerrar" runat="server" Style="vertical-align: top;" ImageAlign="Right" /> -->
-            </td>
-        </tr>
-    </table>
-
-        <div>
-            <!-- <asp:Image ID="imgIcono" runat="server" ImageUrl="Exclama.jpg" BorderColor="Black"
-                BorderStyle="Solid" BorderWidth="1px" ImageAlign="Middle" /> -->
-            <br />
-            <table border="0" width="275px" style="margin: 0px; padding: 0px;" >
-                <tr>
-                    <td><asp:Label ID="LblMessage" runat="server" Text="" /></td>
-                    <td></td>
-                </tr>
-            </table>
+    <asp:Panel ID="pnlExpira" runat="server" CssClass="CajaDialogo" style="display: none; border: none; border-radius: 10px; width: 400px; background-color:#FFFFFF;">
+        <div class=" row justify-content-end" data-bs-theme="dark">
+            <div class="col-1">
+                <asp:Button runat="server" OnClientClick="acceso(); return false;" type="button" class="btn-close" aria-label="Close" />
+            </div>
         </div>
-
+        <div>
+                <br />
+            <hr class="dropdown-divider" />
+        </div>
+        <div>
+                <br />
+            <hr class="dropdown-divider" />
+        </div>
+        <div>
+            <asp:Label ID="LblExpira" runat="server" Text="" />
+        </div>
         <div>
             <br />
-            <table border="0" width="275px" style="margin: 0px; padding: 0px;">
-                <tr>
-                    <td align="center"><asp:Button ID="BtnClose" OnClick="BtnClose_Click" runat="server" Text="Cerrar" /></td>
-                    <td></td>
-                </tr>
-            </table>
+            <hr class="dropdown-divider" />
+        </div>
+        <div>
+            <br />
+                <asp:Button ID="BtnClose_Expira" OnClientClick="acceso(); return false;" runat="server" Text="Cerrar" CssClass="btn btn-outline-primary"/>
         </div>
 
     </asp:Panel>

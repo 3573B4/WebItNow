@@ -25,30 +25,74 @@ namespace WebItNow
             //Image1.ImageUrl = "~/Images/icono-Subir-Archivo-morado.png";
             if (!IsPostBack)
             {
+                BtnEnviar.Enabled = true;
                 getDocRequeridos();
                 getDocsUsuario();
+                checarStatusDoc();
                 string userId = Convert.ToString(Session["IdUsuario"]);
-                lblUsuario.Text = userId;
+                lblUsuario.Text = userId;                
             }
+        }
+        public void checarStatusDoc()
+        {
+            string user = Convert.ToString(Session["IdUsuario"]);
+            string tpoDoc = ddlDocs.SelectedValue;
+            ConexionBD connect = new ConexionBD();
+            connect.Abrir();
+
+            string edoQuery = " SELECT IdUsuario, IdTipoDocumento, IdStatus " +
+                                "FROM tbEstadoDocumento " +
+                                "WHERE IdUsuario = '"+ user +"' " +
+                                "AND IdTipoDocumento = '"+ tpoDoc +"'";
+            SqlCommand cmd = new SqlCommand(edoQuery, connect.ConectarBD);
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+
+            string edoDoc = dt.Rows[0]["IdStatus"].ToString();
+
+            if(edoDoc == "1")
+            {
+                BtnEnviar.Enabled = true;
+            }
+            else
+            {
+                BtnEnviar.Enabled = false;
+            }
+            
         }
         public void getDocRequeridos()
         {
             ConexionBD conectar = new ConexionBD();
             conectar.Abrir();
 
-            string sqlQuery = "SELECT * " +
+            string sqlQuery = "SELECT IdTpoDocumento, Descripcion " +
                                 "FROM tbTpoDocumento " +
                                 "WHERE Status = '1'";
 
             SqlCommand cmd = new SqlCommand(sqlQuery, conectar.ConectarBD);
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            da.Fill(dt);
 
-            ddlDocs.DataSource = cmd.ExecuteReader();
+            ddlDocs.DataSource = dt;
 
             ddlDocs.DataValueField = "IdTpoDocumento";
             ddlDocs.DataTextField = "Descripcion";
-            
+
             ddlDocs.DataBind();
             
+            //cmd.Dispose();
+            //da.Dispose();
+            //conectar.Cerrar();
+
+            //ListItem i;
+            //foreach(DataRow row in dt.Rows)
+            //{
+            //    i = new ListItem(row["Descripcion"].ToString(), row["IdTpoDocumento"].ToString());
+            //    ddlDocs.Items.Add(i);
+            //}
+
         }
         public void getDocsUsuario()
         {
@@ -77,7 +121,7 @@ namespace WebItNow
             }
             gvEstadoDocs.DataSource = dt;
             gvEstadoDocs.DataBind();
-            
+
         }
         protected void BtnEnviar_Click(object sender, EventArgs e)
         {
@@ -96,7 +140,6 @@ namespace WebItNow
                 if (tamArchivo <= 40000000)
                 {
 
-
                     ConexionBD Conectar = new ConexionBD();
                     Conectar.Abrir();
 
@@ -111,6 +154,7 @@ namespace WebItNow
 
                     if (FileUpload1.HasFile)
                     {
+                        
                         if (!Directory.Exists(directorioURL))
                         {
                             Directory.CreateDirectory(directorioURL);
@@ -129,22 +173,29 @@ namespace WebItNow
                             getDocsUsuario();
                             LblMessage.Text = "El documento se subio exitosamente";
                             mpeMensaje.Show();
+                            //BtnEnviar.Enabled = false;
                         }
                     }
                     else
                     {
-                        Lbl_Message.Text = "Debe seleccionar un archivo";
+                        LblMessage.Text = "Debe seleccionar un archivo";
+                        mpeMensaje.Show();
+
+
+                        // ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal();", true);
                     }
                 }
                 else
                 {
                     LblMessage.Text = "El documento Exede los 4 MB";
                     mpeMensaje.Show();
+
                 }
             }
             catch(Exception ex)
             {
                 Lbl_Message.Text = ex.Message;
+
             }
         }
         protected void BtnSalir_Click(object sender, EventArgs e)
@@ -153,10 +204,34 @@ namespace WebItNow
             
         }
 
-        protected void ddlDocs_SelectedIndexChanged(object sender, EventArgs e)
+        protected void BtnClose_Click(object sender, EventArgs e)
         {
-            string nombre = ddlDocs.SelectedValue.ToString();
+
         }
 
+        protected void ddlDocs_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string IdDoc = ddlDocs.SelectedValue.ToString();
+
+            ConexionBD Conectar = new ConexionBD();
+            Conectar.Abrir();
+
+            string sqlQuery = "SELECT IdTpoDocumento, DescrpBrev " +
+                                "FROM tbTpoDocumento " +
+                                "WHERE Status = '1'";
+            SqlCommand cmd1 = new SqlCommand(sqlQuery, Conectar.ConectarBD);
+
+            SqlDataAdapter da = new SqlDataAdapter(cmd1);
+            DataTable dt = new DataTable();
+
+            da.Fill(dt);
+
+
+        }
+
+        protected void gvEstadoDocs_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //int var = 0;
+        }
     }
 }

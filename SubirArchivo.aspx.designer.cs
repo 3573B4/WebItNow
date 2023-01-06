@@ -24,6 +24,15 @@ namespace WebItNow
         protected global::System.Web.UI.ScriptManager ScriptManager1;
 
         /// <summary>
+        /// Control Lbl_M_Message.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Lbl_M_Message;
+
+        /// <summary>
         /// Control lblUsuario.
         /// </summary>
         /// <remarks>
@@ -60,22 +69,13 @@ namespace WebItNow
         protected global::System.Web.UI.WebControls.Button btnAcordTitle;
 
         /// <summary>
-        /// Control lblTpoDoc.
+        /// Control LblDescripcion.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblTpoDoc;
-
-        /// <summary>
-        /// Control lblDescrip.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblDescrip;
+        protected global::System.Web.UI.WebControls.Label LblDescripcion;
 
         /// <summary>
         /// Control FileUpload1.
@@ -168,15 +168,6 @@ namespace WebItNow
         protected global::System.Web.UI.WebControls.Panel pnlMensaje;
 
         /// <summary>
-        /// Control Label6.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label6;
-
-        /// <summary>
         /// Control LblMessage.
         /// </summary>
         /// <remarks>
@@ -202,15 +193,6 @@ namespace WebItNow
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel pnlExpira;
-
-        /// <summary>
-        /// Control Label1.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label1;
 
         /// <summary>
         /// Control LblExpira.

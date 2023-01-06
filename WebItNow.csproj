@@ -142,6 +142,7 @@
     <Content Include="Images\tierra-de-cristal-en-gras-131535893.jpg" />
     <Content Include="Images\icono-Subir-Archivo-morado.png" />
     <Content Include="Review-Document.aspx" />
+    <Content Include="Site.Master" />
     <Content Include="Styles\center_controls.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -191,7 +192,6 @@
     <Content Include="Scripts\WebForms\WebForms.js" />
     <Content Include="Scripts\WebForms\WebParts.js" />
     <Content Include="Scripts\WebForms\WebUIValidation.js" />
-    <Content Include="Site.Master" />
     <Content Include="Register.aspx" />
     <Content Include="Styles\GridView.css" />
     <Content Include="Styles\panel_message.css" />
