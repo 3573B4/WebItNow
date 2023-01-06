@@ -143,5 +143,32 @@
 
     </asp:Panel>
     <br />
+    <table cellspacing="1" cellpadding="1" border="0">
+        <tr>
+            <td>
+                <div class="form-group">
+                    <div class="d-grid col-6 mx-auto">
+                        <ajaxToolkit:ModalPopupExtender ID="ModalPopupExtender1" runat="server" PopupControlID="pnlMensaje"
+                            TargetControlID="lblOculto" BackgroundCssClass="FondoAplicacion" OnOkScript="mpeMensajeOnOk()" >
+                        </ajaxToolkit:ModalPopupExtender>
+                        <asp:Label ID="Label2" runat="server" Text="Label" Style="display: none;" />
+                    </div>
+                </div>
+            </td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>
+                <ajaxToolkit:ModalPopupExtender ID="mpeExpira" runat="server" PopupControlID="pnlExpira"
+                    TargetControlID="lblHide" BackgroundCssClass="FondoAplicacion" OnOkScript="mpeExpiraOnOk()" >
+                </ajaxToolkit:ModalPopupExtender>
+            </td>
+            <td class="style3"><asp:Label ID="lblHide" runat="server" Text="Label" Style="display: none;" />
+            </td>
+            <td></td>
+            <td></td>
+        </tr>
+    </table>
     </ContentTemplate>
 </asp:Content>

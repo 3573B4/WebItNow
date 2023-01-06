@@ -45,24 +45,33 @@ namespace WebItNow
             //}
 
         }
+
         protected void BtnSalir_Click(object sender, EventArgs e)
         {
             Response.Redirect("Login.aspx");
         }
+
         protected void BtnCarga_Nomina_Click(object sender, EventArgs e)
         {
             Response.Redirect("Carga_Nomina.aspx");
         }
+
         protected void BtnConsulta_Click(object sender, EventArgs e)
         {
             Response.Redirect("Consulta.aspx");
         }
+
         protected void BtnCorrespondencia_Click(object sender, EventArgs e)
         {
             Response.Redirect("Correspondencia.aspx", false);
             // OnClientClick = "correspondencia(); return false;"
         }
+
         protected void MyMenu_MenuItemClick(object sender, MenuEventArgs e)
+        {
+
+        }
+        protected void BtnClose_Click(object sender, EventArgs e)
         {
 
         }

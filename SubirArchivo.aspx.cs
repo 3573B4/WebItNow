@@ -112,6 +112,7 @@ namespace WebItNow
             SqlCommand ejecucion = new SqlCommand(sqlQuery, Conectar.ConectarBD);
             SqlDataAdapter da = new SqlDataAdapter(ejecucion);
             DataTable dt = new DataTable();
+
             da.Fill(dt);
             
             if(dt.Rows.Count == 0)
@@ -129,10 +130,10 @@ namespace WebItNow
             {
                 //string directorio = "https://itnowtech18-my.sharepoint.com/:f:/g/personal/llg_peacock_claims/Ekb4AdD2Id1KgMI9CRoIAU4BdP795N2YLyTJxmlMmIfWUA?e=CCtbfK" + "/";
                 string directorio = "~/Directorio/";
-                string user = /*"USUARIO4"*/ Convert.ToString(Session["IdUsuario"]);
+                string User = /*"USUARIO4"*/ Convert.ToString(Session["IdUsuario"]);
                 string folderName = ddlDocs.SelectedValue;
-                string directFinal = directorio + user + "/" + folderName + "/";
-                string UrlFinal = user + "/" + folderName + "/";
+                string directFinal = directorio + User + "/" + folderName + "/";
+                string UrlFinal = User + "/" + folderName + "/";
                 string directorioURL = Server.MapPath(directFinal);
                 string nomFile = /*folderName + "-" +*/ FileUpload1.FileName;
 
@@ -147,7 +148,7 @@ namespace WebItNow
                                         "SET IdStatus = '2'," +
                                             " Url_Imagen = '" + UrlFinal + "'," +
                                             " Nom_Imagen = '" + nomFile + "'" +
-                                        " WHERE IdUsuario = '" + user + "'" +
+                                        " WHERE IdUsuario = '" + User + "'" +
                                         " AND IdTipoDocumento = '" + folderName + "'";
 
                     SqlCommand cmd = new SqlCommand(sqlUpDate, Conectar.ConectarBD);
@@ -171,8 +172,16 @@ namespace WebItNow
                             //Lbl_Message.Text = "EL archivo se subio exitosamente";
                             cmd.ExecuteReader();
                             getDocsUsuario();
+
+                            // Consultar de la tabla [tbUsuarios] el [UsEmail]
+                            string sEmail = "esteban.trejo@itnow.mx";
+
+                            var email = new EnvioEmail();
+                            int Envio_Ok = email.EnvioMensaje(User, sEmail, "Documento Enviado ");
+
                             LblMessage.Text = "El documento se subio exitosamente";
                             mpeMensaje.Show();
+
                             //BtnEnviar.Enabled = false;
                         }
                     }

@@ -73,6 +73,11 @@ namespace WebItNow
             Response.Redirect("Login.aspx");
         }
 
+        protected void BtnClose_Click(object sender, EventArgs e) 
+        {
+        
+        }
+
         protected void BtnEnviar_Click(object sender, EventArgs e)
         {
             if (TxtPass.Text == "" || TxtConfPass.Text == "")
@@ -223,5 +228,5 @@ namespace WebItNow
 
         }
 
-    }
+      }
 }

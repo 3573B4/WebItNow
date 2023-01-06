@@ -79,7 +79,7 @@ namespace WebItNow
 				}
 			}
 
-        protected void btnClose_Click(object sender, EventArgs e)
+        protected void BtnClose_Click(object sender, EventArgs e)
         {
             Response.Redirect("Login.aspx");
         }

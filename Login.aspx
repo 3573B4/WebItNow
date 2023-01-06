@@ -6,6 +6,8 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <br />    
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+    <ContentTemplate>
     <br />
     <div class="container well contenedorLogin">
         <div class="row">
@@ -55,7 +57,7 @@
         </div>
         <div class="from-group">
             <div class="d-grid col-6 mx-auto">
-                    <button onclick="location.href='Forgot-Password.aspx'" class="btn btn-link">Olvidé mi contraseña</button>
+                <button onclick="location.href='Forgot-Password.aspx'" class="btn btn-link">Olvidé mi contraseña</button>
             </div>
         </div>
         <div class="form-group">
@@ -103,4 +105,6 @@
 
     </asp:Panel>
     <br />
+    </ContentTemplate>
+</asp:UpdatePanel>
 </asp:Content>

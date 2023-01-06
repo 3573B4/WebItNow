@@ -134,5 +134,10 @@ namespace WebItNow
             return null;
         }
 
+        protected void BtnClose_Click(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }
