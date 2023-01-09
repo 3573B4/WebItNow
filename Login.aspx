@@ -21,7 +21,7 @@
                 ControlToValidate="TxtUsu" ErrorMessage="*" ForeColor="Red">
                 </asp:RequiredFieldValidator>
             <div class="col-sm-12">
-                <asp:TextBox ID="TxtUsu" runat="server" CssClass="form-control" placeholder="Usuario" ></asp:TextBox>
+                <asp:TextBox ID="TxtUsu" runat="server" CssClass="form-control" placeholder="Usuario" onkeyup="mayus(this);" ></asp:TextBox>
             </div>
         </div>
         <div class="form-group">
@@ -30,7 +30,7 @@
                 ControlToValidate="TxtPass" ErrorMessage="*" ForeColor="Red">
                 </asp:RequiredFieldValidator>
             <div class="col-sm-12">
-                <asp:TextBox ID="TxtPass" runat="server" CssClass="form-control" placeholder="Contraseña" MaxLength="10" TextMode="Password"></asp:TextBox>
+                <asp:TextBox ID="TxtPass" runat="server" CssClass="form-control" placeholder="Contraseña" onkeyup="mayus(this);" MaxLength="10" TextMode="Password"></asp:TextBox>
             </div>
         </div>
         <div class="from-group">
@@ -47,7 +47,7 @@
                 ControlToValidate="txtVerificationCode" ErrorMessage="*" ForeColor="Red">
                 </asp:RequiredFieldValidator>
             <div class="col-sm-12">
-                <asp:TextBox runat="server" ID="txtVerificationCode" placeholder="Código de verificación" CssClass="form-control"></asp:TextBox>
+                <asp:TextBox runat="server" ID="txtVerificationCode" placeholder="Código de verificación" onkeyup="mayus(this);" CssClass="form-control"></asp:TextBox>
             </div>
         </div>
         <div class="form-group">

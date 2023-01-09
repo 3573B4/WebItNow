@@ -19,17 +19,19 @@
             location.replace(history.forward(1))
         }
 
-    //function getNameURLWeb() {
-    //    var sPath = window.location.pathname;
-    //    var sPage = sPath.substring(sPath.lastIndexOf('/') + 1);
-    //    return sPage;
-    //}
+        //function getNameURLWeb() {
+        //    var sPath = window.location.pathname;
+        //    var sPage = sPath.substring(sPath.lastIndexOf('/') + 1);
+        //    return sPage;
+        //}
 
-    //var xx_nombre_pagina = getNameURLWeb();
-    //    alert(xx_nombre_pagina);
+        //var xx_nombre_pagina = getNameURLWeb();
+        //    alert(xx_nombre_pagina);
+
+        function mayus(e) {
+            e.value = e.value.toUpperCase();
+        }
     </script>
-
-
 
     <link href="~/Styles/center_controls.css" rel="stylesheet" type="text/css" />
     <link href="~/Styles/default.css" rel="stylesheet" type="text/css" />
@@ -75,7 +77,9 @@
             color:white;  
             border: 1px solid black;  
             padding: 4px;  
-        }  
+        }
+
+
     </style>
 
 </head>

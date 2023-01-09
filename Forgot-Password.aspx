@@ -41,7 +41,7 @@
                 ControlToValidate="TxtUsu" ErrorMessage="*" ForeColor="Red">
                 </asp:RequiredFieldValidator>
             <div class="col-sm-12">
-                <asp:TextBox ID="TxtUsu" runat="server" CssClass="form-control" placeholder="Usuario"  OnTextChanged ="OnTextChanged" Text = '<%# Eval("IdUser") %>' AutoPostBack="true" ></asp:TextBox>
+                <asp:TextBox ID="TxtUsu" runat="server" CssClass="form-control" placeholder="Usuario" onkeyup="mayus(this);" OnTextChanged ="OnTextChanged" Text = '<%# Eval("IdUser") %>' AutoPostBack="true" ></asp:TextBox>
             </div>
         </div>
         <div class="form-group">
@@ -50,7 +50,7 @@
                 ControlToValidate="TxtPass" ErrorMessage="*" ForeColor="Red">
             </asp:RequiredFieldValidator>
             <div class="col-sm-12">
-                <asp:TextBox ID="TxtPass" runat="server" CssClass="form-control" placeholder="Contraseña" MaxLength="10" TextMode="Password"></asp:TextBox>
+                <asp:TextBox ID="TxtPass" runat="server" CssClass="form-control" placeholder="Contraseña" onkeyup="mayus(this);" MaxLength="10" TextMode="Password"></asp:TextBox>
             </div>
         </div>
         <div class="form-group">
@@ -59,7 +59,7 @@
                 ControlToValidate="TxtConfPass" ErrorMessage="*" ForeColor="Red">
                 </asp:RequiredFieldValidator>
             <div class="col-sm-12">
-                <asp:TextBox ID="TxtConfPass" runat="server" CssClass="form-control" placeholder="Confirmar contraseña" MaxLength="10" TextMode="Password"></asp:TextBox>
+                <asp:TextBox ID="TxtConfPass" runat="server" CssClass="form-control" placeholder="Confirmar contraseña" onkeyup="mayus(this);" MaxLength="10" TextMode="Password"></asp:TextBox>
             </div>
         </div>
         <div class="form-group">
