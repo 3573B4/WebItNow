@@ -3,10 +3,45 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
+using System.Data;
+using System.Data.SqlTypes;
+using System.Data.SqlClient;
+
 namespace WebItNow
 {
     public class EnvioEmail
     {
+        public string CorreoElectronico(string pUsuario)
+        {
+            string sEmail = string.Empty;
+
+            ConexionBD Conecta = new ConexionBD();
+            Conecta.Abrir();
+
+            SqlCommand cmd1 = new SqlCommand("Select UsEmail From tbUsuarios Where IdUsuario = '" + pUsuario + "'", Conecta.ConectarBD);
+            SqlDataReader dr1 = cmd1.ExecuteReader();
+
+            if (dr1.HasRows)
+            {
+
+                while (dr1.Read())
+                {
+                    sEmail = dr1["UsEmail"].ToString().Trim();
+                }
+            }
+            else
+            {
+                return sEmail;
+            }
+
+            cmd1.Dispose();
+            dr1.Dispose();
+
+            Conecta.Cerrar();
+
+            return sEmail;
+        }
+
         public int EnvioMensaje(String pUsuarios, String pEmail, string pMensaje)
         {
             string wDe = "martin.baltierra@itnow.mx";

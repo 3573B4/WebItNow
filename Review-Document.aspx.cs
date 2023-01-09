@@ -181,15 +181,15 @@ namespace WebItNow
                 
                 string sUsuario = grdEstadoDocumento.Rows[index].Cells[0].Text;
 
-                // Consultar de la tabla [tbUsuarios] el [UsEmail]
-                string sEmail = "esteban.trejo@itnow.mx";
-
                 grdEstadoDocumento.Rows[index].Cells[3].Text = "Completo";
 
                 // Actualizar en la tabla tbEstadoDocumento (Status = 3)
                 Update_tbEstadoDocumento(sUsuario, 3);
 
                 var email = new EnvioEmail();
+
+                // Consultar de la tabla [tbUsuarios] el [UsEmail]
+                string sEmail = email.CorreoElectronico(sUsuario);
                 int Envio_Ok =email.EnvioMensaje(sUsuario, sEmail, "Documento Aceptado ");
 
                 if (Envio_Ok == 0)
@@ -218,9 +218,6 @@ namespace WebItNow
                 string sNom_Archivo = grdEstadoDocumento.Rows[index].Cells[2].Text;
                 string sUrl_Imagen = grdEstadoDocumento.Rows[index].Cells[4].Text;
 
-                // Consultar de la tabla [tbUsuarios] el [UsEmail]
-                string sEmail = "esteban.trejo@itnow.mx";
-
                 string strURLFile = Server.MapPath("~/Directorio/") + sUrl_Imagen + sNom_Archivo;
 
                 // Actualizar en la tabla tbEstadoDocumento (Status = 1)
@@ -236,6 +233,8 @@ namespace WebItNow
 
                 var email = new EnvioEmail();
 
+                // Consultar de la tabla [tbUsuarios] el [UsEmail]
+                string sEmail = email.CorreoElectronico(sUsuario);
                 int Envio_Ok = email.EnvioMensaje(sUsuario, sEmail, "Documento Rechazado ");
 
                 if (Envio_Ok == 0)

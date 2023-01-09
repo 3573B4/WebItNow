@@ -173,10 +173,10 @@ namespace WebItNow
                             cmd.ExecuteReader();
                             getDocsUsuario();
 
-                            // Consultar de la tabla [tbUsuarios] el [UsEmail]
-                            string sEmail = "esteban.trejo@itnow.mx";
-
                             var email = new EnvioEmail();
+
+                            // Consultar de la tabla [tbUsuarios] el [UsEmail]
+                            string sEmail = email.CorreoElectronico(User);
                             int Envio_Ok = email.EnvioMensaje(User, sEmail, "Documento Enviado ");
 
                             LblMessage.Text = "El documento se subio exitosamente";
