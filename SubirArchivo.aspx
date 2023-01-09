@@ -32,9 +32,8 @@
             //
         }
 
-
-        
     </script>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" type="text/javascript"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
@@ -67,29 +66,30 @@
 
     <div class="container">
         <div class="row justify-content-center">
+            <div class="row">
+                <div class="col-xs-12">
+                    <h2>Carga segura de documentos</h2>
+                </div>
+            </div> 
             <div class="col-sm-4">
                 <div class="row">
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <h2>Carga segura de documentos</h2>
+                        
+                    <div class="form-group">
+                        <div class="d-grid col-4 mx-auto py-1">
+                            <asp:Label ID="lblUsuario" runat="server" Font-Size="XX-Large" ></asp:Label>
                         </div>
                     </div>
                     <div class="form-group">
-                        <div class="d-grid col-4 mx-auto">
-                            <asp:Label ID="lblUsuario" runat="server" Font-Size="XX-Large"></asp:Label>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="d-grid col-4 mx-auto">
+                        <div class="d-grid col-4 mx-auto py-1">
                             <asp:Label ID="indicaciones" runat="server" Text="Seleccione el archivo a subir" CssClass="control-label co-sm-3" Font-Bold="False"></asp:Label>
                         </div>
                     </div>
                     <br />
                     <br />
                     <div class="form-group">
-                        <div class="d-grid col-2 mx-auto">
+                        <div class="d-grid col-12 mx-auto py-3">
                             <div class="dropdown">
-                                <asp:DropDownList ID="ddlDocs" runat="server" CssClass="btn btn-outline-secondary"  AutoPostBack="true" OnSelectedIndexChanged="ddlDocs_SelectedIndexChanged">
+                                <asp:DropDownList ID="ddlDocs" runat="server" CssClass="btn btn-outline-secondary"  AutoPostBack="true" OnSelectedIndexChanged="ddlDocs_SelectedIndexChanged" Width="400">
                                 </asp:DropDownList>
                             </div>
                         </div>
@@ -103,38 +103,34 @@
                                 <h2 class="accordion-header" id="headingOne">
                                     <!--<asp:Button ID="btnAcordTitle" runat="server" Text="" class="accordion-button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"></asp:Button>-->
                                     <button id="btnAcrdTitle" class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                                        Instrucciones
-                                    </button>
+                                        Instrucciones</button>
                                 </h2>
                                 <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                                     <div class="accordion-body">
-                                        <strong>
-                                            Subir Archivo menor de 40 MB 
-                                        </strong>
-                                        <asp:Label ID="LblDescripcion" runat="server" Text=""></asp:Label>
+                                        <asp:Label ID="LblDescrpBrev" runat="server" Text="Subir Archivo menor de 40 MB"></asp:Label>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <!-- termina el acordion -->
-                    <br />
-                    <br />
+                    
+                    
 
                     <div class="form-group">
-                        <div class="input-group mb-12">
+                        <div class="input-group mx-auto pt-3">
                             <asp:FileUpload ID="FileUpload1" runat="server" CssClass="form-control"></asp:FileUpload>
                         </div>
                     </div>
                     <div class="form-group">
-                        <div class="d-grid col-6 mx-auto">
+                        <div class="d-grid col-6 mx-auto pt-3">
                             <asp:Label ID="Lbl_Message" runat="server" ForeColor="Red" Visible="false"></asp:Label>
                         </div>
                     </div>
                     
                     <div class="form-group">
                         <div class="col-sm-12">
-                            <div class="d-grid gap-2 d-md-flex justify-content-center">
+                            <div class="d-grid gap-4 d-md-flex justify-content-center">
                                 <asp:Button ID="BtnSalir" runat="server" Font-Bold="True" Text="    Salir     " OnClick="BtnSalir_Click" CssClass="btn btn-outline-primary" />
                                 <asp:Button ID="BtnEnviar" runat="server" Font-Bold="True" Text="    Subir     " OnClick="BtnEnviar_Click"  CssClass="btn btn-primary me-md-2" />
                             </div>
@@ -144,7 +140,7 @@
                 </div>
             </div>
             <div class="row justify-content-center">
-                <div class="col-5">
+                <div class="col-5 mt-5">
                     <div class="row">
                         <asp:GridView ID="gvEstadoDocs" runat="server" AutoGenerateColumns="False" GridLines="None" Width="380px"
                             AllowPaging="True" CssClass="mGrid" PagerStyle-CssClass="pgr" AlternatingRowStyle-CssClass="alt"
@@ -152,7 +148,7 @@
                             <AlternatingRowStyle CssClass="table" />
                             <Columns>
                                 <asp:BoundField DataField="Descripcion" HeaderText="Tipo Documento" />
-                                <asp:BoundField DataField="Nom_Imagen" HeaderText="Documento" />
+                                <asp:BoundField DataField="Nom_Imagen" HeaderText="Imagen" />
                                 <asp:BoundField DataField="Desc_status" HeaderText="Status" />
                             </Columns>
                             <PagerStyle CssClass="pgr" />

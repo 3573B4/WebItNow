@@ -21,7 +21,7 @@
                 ControlToValidate="TxtUsu" ErrorMessage="*" ForeColor="Red">
                 </asp:RequiredFieldValidator>
             <div class="col-sm-12">
-                <asp:TextBox ID="TxtUsu" runat="server" CssClass="form-control" placeholder="Usuario"></asp:TextBox>
+                <asp:TextBox ID="TxtUsu" runat="server" CssClass="form-control" placeholder="Usuario" ></asp:TextBox>
             </div>
         </div>
         <div class="form-group">
