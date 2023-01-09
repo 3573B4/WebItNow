@@ -22,7 +22,7 @@
 
             //alert("La sesión ha expirado.");
             //location.href = '/Login.aspx';
-        }, 120000);
+        }, 600000);
 
         function acceso() {
             location.href = '/Login.aspx';
