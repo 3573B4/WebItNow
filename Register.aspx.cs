@@ -28,89 +28,56 @@ namespace WebItNow
 
         protected void BtnEnviar_Click(object sender, EventArgs e)
         {
-			//* Validar si el usuario existe o es nuevo
-			if (TxtUsu.Text != "" && TxtEmail.Text != "" && TxtPass.Text != "")
-			    {
+            //* Validar si el usuario existe o es nuevo
+            if (TxtUsu.Text != "" && TxtEmail.Text != "" && TxtPass.Text != "")
+            {
 
-                //validar si existe Usuario en la tabla tbUsuarios
+                    // Insertar Registo Tabla tbUsuarios (UploadFiles)
+                    int result = Add_tbUsuarios(TxtUsu.Text, TxtEmail.Text, TxtPass.Text, 3, "Insert");
 
-
-                // Insertar Registo Tabla tbUsuarios (UploadFiles)
-                int result = Add_tbUsuarios(TxtUsu.Text, TxtEmail.Text, TxtPass.Text, 3, "Insert");
-                    
                     if (result == 0)
                     {
-                    // Insertar Registros Tabla tbEstadoDocumento
-                    int idStatus = 1;
-                    int valor = Add_tbEstadoDocumento(TxtUsu.Text, idStatus);
+                        // Insertar Registros Tabla tbEstadoDocumento
+                        int idStatus = 1;
+                        int valor = Add_tbEstadoDocumento(TxtUsu.Text, idStatus);
 
-                    var email = new EnvioEmail();
-                    int Envio_Ok = email.EnvioMensaje(TxtUsu.Text.Trim(), TxtEmail.Text.Trim(), "Registro Usuario ");
+                        var email = new EnvioEmail();
+                        int Envio_Ok = email.EnvioMensaje(TxtUsu.Text.Trim(), TxtEmail.Text.Trim(), "Registro Usuario ");
 
-                    //EnvioMensaje(TxtUsu.Text.Trim(), TxtEmail.Text.Trim());
+                        //EnvioMensaje(TxtUsu.Text.Trim(), TxtEmail.Text.Trim());
 
-                    if (Envio_Ok == 0)
+                        if (Envio_Ok == 0)
+                        {
+                            LblMessage.Text = "Usuario fue insertado correctamente ";
+                            this.mpeMensaje.Show();
+                        }
+
+                        //string script = @"<script type='text/javascript'>
+                        //        alert('Usuario fue agregado correctamente'); </script>";
+
+                        //ScriptManager.RegisterStartupScript(this, typeof(Page), "alerta", script, false);
+
+                        //string script = "alert('Usuario fue insertado correctamente');";
+                        //ScriptManager.RegisterStartupScript(this, typeof(Page), "alerta", script, true);
+
+                        Limpia(this.Controls);
+
+                        // Response.Redirect("Login.aspx");
+                        Lbl_Message.Visible = false;
+                    }
+                    else
                     {
-                        LblMessage.Text = "Usuario fue insertado correctamente ";
-                        this.mpeMensaje.Show();
+                        Lbl_Message.Visible = true;
+                        Lbl_Message.Text = "* Estos campos son obligatorios";
+                        // LblMessage.Text = "Debes captura Usuario / Password.";
+                        // this.mpeMensaje.Show();
                     }
-
-                    //string script = @"<script type='text/javascript'>
-                    //        alert('Usuario fue agregado correctamente'); </script>";
-
-                    //ScriptManager.RegisterStartupScript(this, typeof(Page), "alerta", script, false);
-
-                    //string script = "alert('Usuario fue insertado correctamente');";
-                    //ScriptManager.RegisterStartupScript(this, typeof(Page), "alerta", script, true);
-
-                    Limpia(this.Controls);
-
-                     // Response.Redirect("Login.aspx");
-                    }
-
-                    Lbl_Message.Visible = false;
             }
-				else
-				{
-                    Lbl_Message.Visible = true;
-                    Lbl_Message.Text = "* Estos campos son obligatorios";
-                    // LblMessage.Text = "Debes captura Usuario / Password.";
-                    // this.mpeMensaje.Show();
-				}
-			}
+        }
 
         protected void BtnClose_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Login.aspx");
-        }
 
-        public void Limpia(ControlCollection controles)
-        {
-            foreach (Control control in controles)
-            {
-                if (control is TextBox)
-                    ((TextBox)control).Text = string.Empty;
-                else if (control is DropDownList)
-                    ((DropDownList)control).Items.Clear();
-                else if (control is RadioButtonList)
-                    ((RadioButtonList)control).ClearSelection();
-                else if (control is CheckBoxList)
-                    ((CheckBoxList)control).ClearSelection();
-                else if (control is RadioButton)
-                    ((RadioButton)control).Checked = false;
-                else if (control is CheckBox)
-                    ((CheckBox)control).Checked = false;
-                else if (control.HasControls())
-                    //Esta linea detécta un Control que contenga otros Controles
-                    //Así ningún control se quedará sin ser limpiado.
-                    Limpia(control.Controls);
-            }
-
-        }
-
-        private static void NewMethod(ConexionBD Conecta)
-        {
-            Conecta.Abrir();
         }
 
         public int Add_tbUsuarios(String pUsuarios, String pUsEmail, String pUsPassword, int pUsPrivilegios, string pStatementType)
@@ -210,6 +177,99 @@ namespace WebItNow
             }
 
             return -1;
+        }
+
+        public int ValidaUser(String pUsuarios, int pUsPrivilegios)
+        {
+            ConexionBD Conecta = new ConexionBD();
+            NewMethod(Conecta);
+
+            try
+            {
+
+                SqlCommand cmd1 = new SqlCommand("sp_tbUsuario", Conecta.ConectarBD);
+                cmd1.CommandType = CommandType.StoredProcedure;
+
+                cmd1.Parameters.AddWithValue("@usuario", pUsuarios);
+                cmd1.Parameters.AddWithValue("@privilegios", pUsPrivilegios);
+                SqlDataReader dr1 = cmd1.ExecuteReader();
+
+                if (dr1.Read())
+                {
+
+                    return dr1.GetInt32(0);
+
+                }
+
+                cmd1.Dispose();
+                dr1.Dispose();
+
+                Conecta.Cerrar();
+
+                return 0;
+
+            }
+            catch (Exception ex)
+            {
+                // Show(ex.Message);
+                LblMessage.Text = ex.Message;
+                this.mpeMensaje.Show();
+            }
+            finally
+            {
+
+            }
+
+            return -1;
+        }
+
+        protected void TxtUsu_TextChanged(object sender, EventArgs e)
+        {
+            // Validar si existe Usuario en la tabla tbUsuarios
+            Variables.wPrivilegios = "3";
+            int Usuario_Existe = ValidaUser(TxtUsu.Text, Int32.Parse(Variables.wPrivilegios));
+
+            if (Usuario_Existe == 1)
+            {
+                TxtUsu.Text = string.Empty;
+                TxtEmail.Focus();
+
+                LblMessage.Text = "El nombre de usuario es incorrecto";
+                this.mpeMensaje.Show();
+            }
+            else
+            {
+                TxtEmail.Focus();
+            }
+        }
+
+        public void Limpia(ControlCollection controles)
+        {
+            foreach (Control control in controles)
+            {
+                if (control is TextBox)
+                    ((TextBox)control).Text = string.Empty;
+                else if (control is DropDownList)
+                    ((DropDownList)control).Items.Clear();
+                else if (control is RadioButtonList)
+                    ((RadioButtonList)control).ClearSelection();
+                else if (control is CheckBoxList)
+                    ((CheckBoxList)control).ClearSelection();
+                else if (control is RadioButton)
+                    ((RadioButton)control).Checked = false;
+                else if (control is CheckBox)
+                    ((CheckBox)control).Checked = false;
+                else if (control.HasControls())
+                    //Esta linea detécta un Control que contenga otros Controles
+                    //Así ningún control se quedará sin ser limpiado.
+                    Limpia(control.Controls);
+            }
+
+        }
+
+        private static void NewMethod(ConexionBD Conecta)
+        {
+            Conecta.Abrir();
         }
 
     }

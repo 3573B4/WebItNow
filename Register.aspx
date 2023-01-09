@@ -12,7 +12,7 @@
 
         //alert("La sesión ha expirado.");
         //location.href = '/Login.aspx';
-    }, 120000);
+    }, 600000);
 
     function acceso() {
         location.href = '/Login.aspx';
@@ -41,7 +41,7 @@
                 ControlToValidate="TxtUsu" ErrorMessage="*" ForeColor="Red">
                 </asp:RequiredFieldValidator>
             <div class="col-sm-12">
-                <asp:TextBox ID="TxtUsu" runat="server" CssClass="form-control" placeholder="Usuario" onkeyup="mayus(this);" ></asp:TextBox>
+                <asp:TextBox ID="TxtUsu" runat="server" CssClass="form-control" placeholder="Usuario" onkeyup="mayus(this);" OnTextChanged="TxtUsu_TextChanged" AutoPostBack="true" ></asp:TextBox>
             </div>
         </div>
 
