@@ -25,7 +25,8 @@ namespace WebItNow
 
         public void OnTextChanged(object sender, EventArgs e)
         {
-            string wPrivilegios = System.Web.HttpContext.Current.Session["UsPrivilegios"] as string;
+
+            Variables.wPrivilegios = System.Web.HttpContext.Current.Session["UsPrivilegios"] as string;
             //Reference the TextBox.
             TextBox textBox = sender as TextBox;
 
@@ -43,7 +44,7 @@ namespace WebItNow
                 Lbl_Message.Visible = true;
 
                 // Insertar Registo Usuario Cargas
-                int result = ValidaUser(TxtUsu.Text, Int32.Parse(wPrivilegios));
+                int result = ValidaUser(TxtUsu.Text, Int32.Parse(Variables.wPrivilegios));
 
                 if (result == 0)
                 {
@@ -90,15 +91,24 @@ namespace WebItNow
 
                 if (TxtPass.Text == TxtConfPass.Text)
                 {
-                    int result = UpdatePassword(TxtUsu.Text, TxtPass.Text, 3, "Update");
-                    if (result == 0)
-                    {
-                        LblMessage.Text = "Contraseña se actualizo correctamente ";
-                        this.mpeMensaje.Show();
+                    var email = new EnvioEmail();
 
-                        Limpia(this.Controls);
+                    // Consultar de la tabla [tbUsuarios] el [UsEmail]
+                    string sEmail = email.CorreoElectronico(TxtUsu.Text);
+                    int Envio_Ok = email.EnvioMensaje(TxtUsu.Text, sEmail, "Cambio Contraseña ");
+
+                    if (Envio_Ok == 0)
+                    {
+                        int result = UpdatePassword(TxtUsu.Text, sEmail, TxtPass.Text, Int32.Parse(Variables.wPrivilegios), "Update");
+                        if (result == 0)
+                        {
+                            LblMessage.Text = "Contraseña se actualizo correctamente ";
+                            this.mpeMensaje.Show();
+
+                            Limpia(this.Controls);
+                        }
+                        Lbl_Message.Visible = false;
                     }
-                    Lbl_Message.Visible = false;
                 }
                 else 
                 {
@@ -157,7 +167,7 @@ namespace WebItNow
             Conecta.Abrir();
         }
 
-        public int UpdatePassword(String pUsuarios, String pUsPassword, int pUsPrivilegios, string pStatementType)
+        public int UpdatePassword(String pUsuarios, String pEmail, String pUsPassword, int pUsPrivilegios, string pStatementType)
         {
             ConexionBD Conecta = new ConexionBD();
             NewMethod(Conecta);
@@ -169,6 +179,7 @@ namespace WebItNow
                 cmd1.CommandType = CommandType.StoredProcedure;
 
                 cmd1.Parameters.AddWithValue("@usuario", pUsuarios);
+                cmd1.Parameters.AddWithValue("@email", pEmail);
                 cmd1.Parameters.AddWithValue("@password", pUsPassword);
                 cmd1.Parameters.AddWithValue("@privilegios", pUsPrivilegios);
                 cmd1.Parameters.AddWithValue("@StatementType", pStatementType);

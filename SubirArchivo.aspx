@@ -14,7 +14,6 @@
 
             });
         }
-
         var timer = setTimeout(function () {
             document.getElementById('<%=LblExpira.ClientID %>').innerHTML = 'La sesión ha expirado.';
             var modalId = '<%=mpeExpira.ClientID%>';
@@ -46,25 +45,25 @@
     
     <ContentTemplate>
     
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content modal-dialog-centered">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    ...
-                    <asp:Label ID="Lbl_M_Message" runat="server" Text="" />
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content modal-dialog-centered">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        ...
+                        <asp:Label ID="Lbl_M_Message" runat="server" Text="" />
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
     <div class="container">
         <div class="row justify-content-center">
@@ -85,6 +84,7 @@
                             <asp:Label ID="indicaciones" runat="server" Text="Seleccione el archivo a subir" CssClass="control-label co-sm-3" Font-Bold="False"></asp:Label>
                         </div>
                     </div>
+                    <br />
                     <br />
                     <div class="form-group">
                         <div class="d-grid col-2 mx-auto">
@@ -120,6 +120,7 @@
                     <!-- termina el acordion -->
                     <br />
                     <br />
+
                     <div class="form-group">
                         <div class="input-group mb-12">
                             <asp:FileUpload ID="FileUpload1" runat="server" CssClass="form-control"></asp:FileUpload>
@@ -130,7 +131,7 @@
                             <asp:Label ID="Lbl_Message" runat="server" ForeColor="Red" Visible="false"></asp:Label>
                         </div>
                     </div>
-                    <br />
+                    
                     <div class="form-group">
                         <div class="col-sm-12">
                             <div class="d-grid gap-2 d-md-flex justify-content-center">
@@ -151,6 +152,7 @@
                             <AlternatingRowStyle CssClass="table" />
                             <Columns>
                                 <asp:BoundField DataField="Descripcion" HeaderText="Tipo Documento" />
+                                <asp:BoundField DataField="Nom_Imagen" HeaderText="Documento" />
                                 <asp:BoundField DataField="Desc_status" HeaderText="Status" />
                             </Columns>
                             <PagerStyle CssClass="pgr" />
@@ -175,6 +177,7 @@
             </div>
         </div>
     </div>
+
     <br />
     <asp:Panel ID="pnlMensaje" runat="server" CssClass="CajaDialogo" style="display: none; border: none; border-radius: 10px; width: 400px; background-color:#FFFFFF;">
         <div class=" row justify-content-end" data-bs-theme="dark">
@@ -183,7 +186,7 @@
             </div>
         </div>
         <div>
-                <br />
+             <br />
             <hr class="dropdown-divider" />
         </div>
         
@@ -203,7 +206,7 @@
 
 
     </asp:Panel>
-    <br />
+
     <asp:Panel ID="pnlExpira" runat="server" CssClass="CajaDialogo" style="display: none; border: none; border-radius: 10px; width: 400px; background-color:#FFFFFF;">
         <div class=" row justify-content-end" data-bs-theme="dark">
             <div class="col-1">
@@ -211,11 +214,11 @@
             </div>
         </div>
         <div>
-                <br />
+             <br />
             <hr class="dropdown-divider" />
         </div>
         <div>
-                <br />
+             <br />
             <hr class="dropdown-divider" />
         </div>
         <div>
@@ -230,7 +233,9 @@
                 <asp:Button ID="BtnClose_Expira" OnClientClick="acceso(); return false;" runat="server" Text="Cerrar" CssClass="btn btn-outline-primary"/>
         </div>
 
-    </asp:Panel>
-    <br />
+    </asp:Panel>   
+
     </ContentTemplate>
+
+    
 </asp:Content>

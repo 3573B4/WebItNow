@@ -18,6 +18,7 @@ namespace WebItNow
             if (!Page.IsPostBack)
             {
                 this.Form.Attributes.Add("autocomplete", "off");
+
                 // Permisos Usuario
                 System.Web.HttpContext.Current.Session["UsPrivilegios"] = "3";
             }

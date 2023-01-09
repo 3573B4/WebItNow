@@ -17,9 +17,9 @@ namespace WebItNow
         public static string wPass;
         public static string wFileName;
         public static string wQuery;
+        public static string wPrivilegios;
         public static Boolean wDownload = true;
 
-      //  public static int wPrivilegios;
 
         public struct UsPrivilegios
         {

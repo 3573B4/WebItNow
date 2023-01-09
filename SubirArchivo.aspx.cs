@@ -104,7 +104,7 @@ namespace WebItNow
             //                    "FROM tbEstadoDocumento " +
             //                    "WHERE IdUsuario = '"+ user +"'";
 
-            string sqlQuery = "SELECT ed.IdUsuario, ed.IdTipoDocumento, td.Descripcion, s.Descripcion as Desc_Status  " +
+            string sqlQuery = "SELECT ed.IdUsuario, ed.IdTipoDocumento, ed.Nom_Imagen, td.Descripcion, s.Descripcion as Desc_Status  " +
                                   "  FROM tbEstadoDocumento ed, tbTpoDocumento td, tbStatus s " +
                                   " WHERE ed.IdStatus = s.IdStatus And ed.IdTipoDocumento = td.IdTpoDocumento " +
                                   "   AND IdUsuario = '" + user + "'";
@@ -112,7 +112,6 @@ namespace WebItNow
             SqlCommand ejecucion = new SqlCommand(sqlQuery, Conectar.ConectarBD);
             SqlDataAdapter da = new SqlDataAdapter(ejecucion);
             DataTable dt = new DataTable();
-
             da.Fill(dt);
             
             if(dt.Rows.Count == 0)
@@ -130,10 +129,10 @@ namespace WebItNow
             {
                 //string directorio = "https://itnowtech18-my.sharepoint.com/:f:/g/personal/llg_peacock_claims/Ekb4AdD2Id1KgMI9CRoIAU4BdP795N2YLyTJxmlMmIfWUA?e=CCtbfK" + "/";
                 string directorio = "~/Directorio/";
-                string User = /*"USUARIO4"*/ Convert.ToString(Session["IdUsuario"]);
+                string user = /*"USUARIO4"*/ Convert.ToString(Session["IdUsuario"]);
                 string folderName = ddlDocs.SelectedValue;
-                string directFinal = directorio + User + "/" + folderName + "/";
-                string UrlFinal = User + "/" + folderName + "/";
+                string directFinal = directorio + user + "/" + folderName + "/";
+                string UrlFinal = user + "/" + folderName + "/";
                 string directorioURL = Server.MapPath(directFinal);
                 string nomFile = /*folderName + "-" +*/ FileUpload1.FileName;
 
@@ -148,7 +147,7 @@ namespace WebItNow
                                         "SET IdStatus = '2'," +
                                             " Url_Imagen = '" + UrlFinal + "'," +
                                             " Nom_Imagen = '" + nomFile + "'" +
-                                        " WHERE IdUsuario = '" + User + "'" +
+                                        " WHERE IdUsuario = '" + user + "'" +
                                         " AND IdTipoDocumento = '" + folderName + "'";
 
                     SqlCommand cmd = new SqlCommand(sqlUpDate, Conectar.ConectarBD);
@@ -169,20 +168,14 @@ namespace WebItNow
                         else
                         {
                             FileUpload1.SaveAs(Server.MapPath(directFinal /*+ folderName + "-"*/ + FileUpload1.FileName));
-                            //Lbl_Message.Text = "EL archivo se subio exitosamente";
                             cmd.ExecuteReader();
                             getDocsUsuario();
-
+                            checarStatusDoc();
                             var email = new EnvioEmail();
-
-                            // Consultar de la tabla [tbUsuarios] el [UsEmail]
-                            string sEmail = email.CorreoElectronico(User);
-                            int Envio_Ok = email.EnvioMensaje(User, sEmail, "Documento Enviado ");
-
+                            string sEmail = email.CorreoElectronico(user);
+                            int Envio_Ok = email.EnvioMensaje(user, sEmail, "Archivo Enviado");
                             LblMessage.Text = "El documento se subio exitosamente";
                             mpeMensaje.Show();
-
-                            //BtnEnviar.Enabled = false;
                         }
                     }
                     else
