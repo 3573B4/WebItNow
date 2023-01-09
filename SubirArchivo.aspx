@@ -148,7 +148,7 @@
                             <AlternatingRowStyle CssClass="table" />
                             <Columns>
                                 <asp:BoundField DataField="Descripcion" HeaderText="Tipo Documento" />
-                                <asp:BoundField DataField="Nom_Imagen" HeaderText="Imagen" />
+                                <asp:BoundField DataField="Nom_Imagen" HeaderText="Documento" />
                                 <asp:BoundField DataField="Desc_status" HeaderText="Status" />
                             </Columns>
                             <PagerStyle CssClass="pgr" />
