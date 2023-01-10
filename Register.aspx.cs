@@ -135,11 +135,12 @@ namespace WebItNow
                 ConexionBD Conecta = new ConexionBD();
                 Conecta.Abrir();
 
-                string strQuery = "SELECT IdTpoDocumento, Descripcion FROM tbTpoDocumento WHERE Status = " + pIdStatus + "";
+                // Consulta a la tabla Tipo de Documento
+                string strQuery = "SELECT IdTpoDocumento, Descripcion FROM ITM_06 WHERE Status = " + pIdStatus + "";
 
                 SqlCommand cmd = new SqlCommand(strQuery, Conecta.ConectarBD);
 
-              //SqlDataReader dr = cmd.ExecuteReader();
+            //  SqlDataReader dr = cmd.ExecuteReader();
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
 
@@ -150,8 +151,8 @@ namespace WebItNow
 
                     string IdTpoDocumento = Convert.ToString(row[0]);
 
-                    // Insert tabla tbEstadoDocumento
-                    SqlCommand cmd1 = new SqlCommand("Insert into tbEstadoDocumento (IdUsuario, IdTipoDocumento, IdStatus) " +
+                    // Insert en la tabla Estado de Documento
+                    SqlCommand cmd1 = new SqlCommand("Insert into ITM_04 (IdUsuario, IdTipoDocumento, IdStatus) " +
                                         "Values ('" + pUsuarios + "', '" + IdTpoDocumento + "', " + pIdStatus + ")", Conecta.ConectarBD);
 
                     SqlDataReader dr1 = cmd1.ExecuteReader();

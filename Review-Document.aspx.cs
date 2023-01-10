@@ -31,6 +31,7 @@ namespace WebItNow
         private static Guid FolderDownloads = new Guid("374DE290-123F-4565-9164-39C4925E467B");
 
         [DllImport("shell32.dll", CharSet = CharSet.Auto)]
+
         private static extern int SHGetKnownFolderPath(ref Guid id, int flags, IntPtr token, out IntPtr path);
 
         protected void Page_Load(object sender, EventArgs e)
@@ -132,9 +133,13 @@ namespace WebItNow
                 ConexionBD Conecta = new ConexionBD();
                 Conecta.Abrir();
 
+                // Consulta a las tablas : Estado de Documento (Expediente) = ITM_04
+                // Tipo de Documento = ITM_06
+                // Status de Documento = ITM_07
+
                 string strQuery = "SELECT ed.IdUsuario, ed.Nom_Imagen, td.Descripcion, ed.IdTipoDocumento, " +
                                   "s.Descripcion as Desc_Status, ed.Url_Imagen  " +
-                                  "  FROM tbEstadoDocumento ed, tbTpoDocumento td, tbStatus s " +
+                                  "  FROM ITM_04 ed, ITM_06 td, ITM_07 s " +
                                   " WHERE ed.IdStatus = s.IdStatus And ed.IdTipoDocumento = td.IdTpoDocumento " +
                                   "   AND ed.IdStatus IN (2,3) ";
 
@@ -419,20 +424,18 @@ namespace WebItNow
                 ConexionBD Conecta = new ConexionBD();
                 Conecta.Abrir();
 
-
+                // Actualizar en la tabla Estado de Documento
                 if (pIdStatus == 1)
                 {
-                    Variables.wQuery = "Update tbEstadoDocumento Set IdStatus = " + pIdStatus + ", Nom_Imagen = Null " +
+                    Variables.wQuery = "Update ITM_04 Set IdStatus = " + pIdStatus + ", Nom_Imagen = Null " +
                                     " Where IdUsuario = '" + pUsuarios + "'";
                 }
                 else
                 {
-                    Variables.wQuery = "Update tbEstadoDocumento Set IdStatus = " + pIdStatus + " Where IdUsuario = '" + pUsuarios + "'";
+                    Variables.wQuery = "Update ITM_04 Set IdStatus = " + pIdStatus + " Where IdUsuario = '" + pUsuarios + "'";
                 }
 
-                // Update tabla tbEstadoDocumento
                 SqlCommand cmd1 = new SqlCommand(Variables.wQuery, Conecta.ConectarBD);
-
                 SqlDataReader dr1 = cmd1.ExecuteReader();
 
                 cmd1.Dispose();

@@ -18,7 +18,8 @@ namespace WebItNow
             ConexionBD Conecta = new ConexionBD();
             Conecta.Abrir();
 
-            SqlCommand cmd1 = new SqlCommand("Select UsEmail From tbUsuarios Where IdUsuario = '" + pUsuario + "'", Conecta.ConectarBD);
+            // Consulta en la tabla Usuarios
+            SqlCommand cmd1 = new SqlCommand("Select UsEmail From ITM_02 Where IdUsuario = '" + pUsuario + "'", Conecta.ConectarBD);
             SqlDataReader dr1 = cmd1.ExecuteReader();
 
             if (dr1.HasRows)

@@ -18,7 +18,6 @@ namespace WebItNow
 
     public partial class SubirArchivo : System.Web.UI.Page
     {
-
         protected void Page_Load(object sender, EventArgs e)
         {
             //string valor = ddlDocs.SelectedValue;
@@ -40,8 +39,9 @@ namespace WebItNow
             ConexionBD connect = new ConexionBD();
             connect.Abrir();
 
+            // Consulta a la tabla Estado de Documento
             string edoQuery = " SELECT IdUsuario, IdTipoDocumento, IdStatus " +
-                                "FROM tbEstadoDocumento " +
+                                "FROM ITM_04 " +
                                 "WHERE IdUsuario = '"+ user +"' " +
                                 "AND IdTipoDocumento = '"+ tpoDoc +"'";
             SqlCommand cmd = new SqlCommand(edoQuery, connect.ConectarBD);
@@ -61,13 +61,15 @@ namespace WebItNow
             }
             
         }
+
         public void getDocRequeridos()
         {
             ConexionBD conectar = new ConexionBD();
             conectar.Abrir();
 
+            // Consulta a la tabla Tipo de Documento
             string sqlQuery = "SELECT IdTpoDocumento, Descripcion " +
-                                "FROM tbTpoDocumento " +
+                                "FROM ITM_06 " +
                                 "WHERE Status = '1'";
 
             SqlCommand cmd = new SqlCommand(sqlQuery, conectar.ConectarBD);
@@ -94,6 +96,7 @@ namespace WebItNow
             //}
 
         }
+
         public void getDocsUsuario()
         {
             string user = /*"USUARIO4"*/ Convert.ToString(Session["IdUsuario"]);
@@ -101,11 +104,15 @@ namespace WebItNow
             Conectar.Abrir();
 
             //string sqlQuery = "SELECT IdTipoDocumento, IdStatus " +
-            //                    "FROM tbEstadoDocumento " +
+            //                    "FROM ITM_04 " +
             //                    "WHERE IdUsuario = '"+ user +"'";
 
+            // Consulta a las tablas : Estado de Documento (Expediente) = ITM_04
+            // Tipo de Documento = ITM_06
+            // Status de Documento = ITM_07
+
             string sqlQuery = "SELECT ed.IdUsuario, ed.IdTipoDocumento, ed.Nom_Imagen, td.Descripcion, s.Descripcion as Desc_Status  " +
-                                  "  FROM tbEstadoDocumento ed, tbTpoDocumento td, tbStatus s " +
+                                  "  FROM ITM_04 ed, ITM_06 td, ITM_07 s " +
                                   " WHERE ed.IdStatus = s.IdStatus And ed.IdTipoDocumento = td.IdTpoDocumento " +
                                   "   AND IdUsuario = '" + user + "'";
 
@@ -123,6 +130,7 @@ namespace WebItNow
             gvEstadoDocs.DataBind();
 
         }
+
         protected void BtnEnviar_Click(object sender, EventArgs e)
         {
             try
@@ -143,7 +151,8 @@ namespace WebItNow
                     ConexionBD Conectar = new ConexionBD();
                     Conectar.Abrir();
 
-                    string sqlUpDate = "UPDATE tbEstadoDocumento " +
+                    // Actualizar la tabla Estado de Documento
+                    string sqlUpDate = "UPDATE ITM_04 " +
                                         "SET IdStatus = '2'," +
                                             " Url_Imagen = '" + UrlFinal + "'," +
                                             " Nom_Imagen = '" + nomFile + "'" +
@@ -169,11 +178,14 @@ namespace WebItNow
                         {
                             FileUpload1.SaveAs(Server.MapPath(directFinal /*+ folderName + "-"*/ + FileUpload1.FileName));
                             cmd.ExecuteReader();
+
                             getDocsUsuario();
                             checarStatusDoc();
+
                             var email = new EnvioEmail();
                             string sEmail = email.CorreoElectronico(user);
                             int Envio_Ok = email.EnvioMensaje(user, sEmail, "Archivo Enviado");
+
                             LblMessage.Text = "El documento se subio exitosamente";
                             mpeMensaje.Show();
                         }
@@ -218,8 +230,9 @@ namespace WebItNow
             ConexionBD Conectar = new ConexionBD();
             Conectar.Abrir();
 
+            // Consulta a la tabla Tipo de Documento
             string sqlQuery = "SELECT IdTpoDocumento, DescrpBrev " +
-                                "FROM tbTpoDocumento " +
+                                "FROM ITM_06 " +
                                 "WHERE Status = '1'";
             SqlCommand cmd1 = new SqlCommand(sqlQuery, Conectar.ConectarBD);
 
