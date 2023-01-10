@@ -184,7 +184,7 @@ namespace WebItNow
 
                             var email = new EnvioEmail();
                             string sEmail = email.CorreoElectronico(user);
-                            int Envio_Ok = email.EnvioMensaje(user, sEmail, "Archivo Enviado");
+                            int Envio_Ok = email.EnvioMensaje(user, sEmail, "Documento Enviado");
 
                             LblMessage.Text = "El documento se subio exitosamente";
                             mpeMensaje.Show();
@@ -212,6 +212,7 @@ namespace WebItNow
 
             }
         }
+
         protected void BtnSalir_Click(object sender, EventArgs e)
         {
             Response.Redirect("Login.aspx");
