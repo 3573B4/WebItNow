@@ -345,7 +345,16 @@ namespace WebItNow
                 string filePath = Server.MapPath("~/Directorio/") + TxtUrl_Imagen.Text + TxtNomArchivo.Text;
                 Variables.wDownload = true;
 
-                DescargaArch(filePath);
+                bool fileExist = File.Exists(filePath);
+                if (fileExist)
+                {
+                    DescargaArch(filePath);
+                }
+                else
+                {
+                    LblMessage.Text = "El archivo no se encuentra en el repositorio";
+                    this.mpeMensaje.Show();
+                }
             }
         }
 
