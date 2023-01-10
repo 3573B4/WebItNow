@@ -11,7 +11,7 @@
 
             //alert("La sesión ha expirado.");
             //location.href = '/Login.aspx';
-        }, 120000);
+        }, 600000);
 
         function acceso() {
             location.href = '/Login.aspx';
@@ -21,6 +21,13 @@
             //
         }
 
+        function clearTextBox() {
+            var elements = [];
+            elements = document.getElementsByClassName("form-control");
+
+            for (var i = 0; i < elements.length; i++) {
+                elements[i].value = "";
+            }
         }
 
     </script>
@@ -61,7 +68,7 @@
                 <div class="col-sm-12">
                         <div class="d-grid gap-2 d-md-flex justify-content-center">
                             <asp:TextBox ID="TxtNomArchivo" runat="server" CssClass="form-control" placeholder="Archivo para descargar" ReadOnly="True"></asp:TextBox>
-                            <asp:ImageButton ID="imgDescarga" runat="server" ImageUrl="~/Images/descargar.png" Height="35px" Width="35px" OnClick="ImgDescarga_Click" />
+                            <asp:ImageButton ID="imgDescarga" runat="server" ImageUrl="~/Images/descargar.png" Height="35px" Width="35px" OnClick="ImgDescarga_Click" OnClientClick="clearTextBox()" />
                         </div>
                 </div>
             </div>
