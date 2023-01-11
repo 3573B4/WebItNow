@@ -107,7 +107,7 @@
                                 </h2>
                                 <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                                     <div class="accordion-body">
-                                        <asp:Label ID="LblDescrpBrev" runat="server" Text="Subir Archivo menor de 40 MB"></asp:Label>
+                                        <asp:Label ID="LblDescrpBrev" runat="server" Text=""></asp:Label>
                                     </div>
                                 </div>
                             </div>

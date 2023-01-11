@@ -26,12 +26,18 @@ namespace WebItNow
             {
                 BtnEnviar.Enabled = true;
                 getDocRequeridos();
+
+                // * * Obtener Descripcion breve documento
+                string IdDoc = ddlDocs.SelectedValue.ToString();
+                LblDescrpBrev.Text = TpoDocumento_DescrpBrev(IdDoc, 1);
+
                 getDocsUsuario();
                 checarStatusDoc();
                 string userId = Convert.ToString(Session["IdUsuario"]);
                 lblUsuario.Text = userId;                
             }
         }
+
         public void checarStatusDoc()
         {
             string user = Convert.ToString(Session["IdUsuario"]);
@@ -228,21 +234,66 @@ namespace WebItNow
         {
             string IdDoc = ddlDocs.SelectedValue.ToString();
 
-            ConexionBD Conectar = new ConexionBD();
-            Conectar.Abrir();
+            LblDescrpBrev.Text = TpoDocumento_DescrpBrev(IdDoc, 1);
 
-            // Consulta a la tabla Tipo de Documento
-            string sqlQuery = "SELECT IdTpoDocumento, DescrpBrev " +
-                                "FROM ITM_06 " +
-                                "WHERE Status = '1'";
-            SqlCommand cmd1 = new SqlCommand(sqlQuery, Conectar.ConectarBD);
+            //ConexionBD Conectar = new ConexionBD();
+            //Conectar.Abrir();
 
-            SqlDataAdapter da = new SqlDataAdapter(cmd1);
-            DataTable dt = new DataTable();
+            //// Consulta a la tabla Tipo de Documento
+            //string sqlQuery = "SELECT IdTpoDocumento, DescrpBrev " +
+            //                    "FROM ITM_06 " +
+            //                    "WHERE Status = '1'";
+            //SqlCommand cmd1 = new SqlCommand(sqlQuery, Conectar.ConectarBD);
 
-            da.Fill(dt);
+            //SqlDataAdapter da = new SqlDataAdapter(cmd1);
+            //DataTable dt = new DataTable();
 
+            //da.Fill(dt);
 
+        }
+
+        public string TpoDocumento_DescrpBrev(String pIdTpoDocumento, int pIdStatus)
+        {
+            try
+            {
+                string DescrpBrev = string.Empty;
+
+                ConexionBD Conecta = new ConexionBD();
+                Conecta.Abrir();
+
+                // Consulta a la tabla Tipo de Documento
+                string strQuery = "Select IdTpoDocumento, DescrpBrev From ITM_06 Where IdTpoDocumento = '" + pIdTpoDocumento + "' And Status = " + pIdStatus + "";
+
+                SqlCommand cmd = new SqlCommand(strQuery, Conecta.ConectarBD);
+
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+
+                DataTable dt = new DataTable();
+
+                da.Fill(dt);
+
+                foreach (DataRow row in dt.Rows)
+                {
+                    DescrpBrev = Convert.ToString(row[1]);
+                }
+
+                Conecta.Cerrar();
+
+                return DescrpBrev;
+
+            }
+            catch (Exception ex)
+            {
+                // Show(ex.Message);
+                LblMessage.Text = ex.Message;
+                this.mpeMensaje.Show();
+            }
+            finally
+            {
+
+            }
+
+            return string.Empty;
         }
 
         protected void gvEstadoDocs_SelectedIndexChanged(object sender, EventArgs e)

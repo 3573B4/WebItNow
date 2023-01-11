@@ -136,7 +136,7 @@ namespace WebItNow
                 Conecta.Abrir();
 
                 // Consulta a la tabla Tipo de Documento
-                string strQuery = "SELECT IdTpoDocumento, Descripcion FROM ITM_06 WHERE Status = " + pIdStatus + "";
+                string strQuery = "Select IdTpoDocumento, Descripcion From ITM_06 Where Status = " + pIdStatus + "";
 
                 SqlCommand cmd = new SqlCommand(strQuery, Conecta.ConectarBD);
 
