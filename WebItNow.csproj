@@ -160,6 +160,8 @@
     <Content Include="Images\search_find.png" />
     <Content Include="Login.aspx" />
     <Content Include="Main.Master" />
+    <Content Include="fonts\Tahoma-Bold.ttf" />
+    <Content Include="fonts\Tahoma.ttf" />
     <None Include="Properties\PublishProfiles\CODICE1 - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
@@ -196,6 +198,7 @@
     <Content Include="Styles\GridView.css" />
     <Content Include="Styles\panel_message.css" />
     <Content Include="Styles\default.css" />
+    <Content Include="Styles\fuentes.css" />
     <Content Include="SubirArchivo.aspx" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config" />

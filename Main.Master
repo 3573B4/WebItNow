@@ -37,12 +37,14 @@
     <link href="~/Styles/default.css" rel="stylesheet" type="text/css" />
     <link href="~/Styles/panel_message.css" rel="stylesheet" type="text/css" />
     <link href="~/Styles/GridView.css" rel="stylesheet" type="text/css" />
+    <link href="~/Styles/fuentes.css" rel="stylesheet" type="text/css" />
 
     <style type="text/css">
         .style1
         {
             width: 180px;
         }
+
         .style2
         {
             width: 880px;
@@ -55,8 +57,10 @@
 
         #topContent
         { height: 10%; width: 100%; }
+
         #mainContent
         { height: 80%; width: 100%; }
+
         #footerContent
         { height: 10%; width: 100%; }
 
@@ -66,20 +70,20 @@
             border: 1px solid black;  
             padding: 4px;  
         }  
+
         .contentCssClass{  
             background-color:#e59a7d;  
             color:black;  
             border: 1px dotted black;  
             padding: 4px;  
-        }  
+        }
+
         .headerSelectedCss{  
             background-color:#808080;  
             color:white;  
             border: 1px solid black;  
             padding: 4px;  
         }
-
-
     </style>
 
 </head>
