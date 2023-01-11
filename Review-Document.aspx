@@ -96,7 +96,7 @@
             <div class="row justify-content-center">
                 <div class="col-6">
                     <div  class="form-group">
-                        <asp:GridView ID="grdEstadoDocumento"  runat="server" AutoGenerateColumns="False" GridLines="None" Width="586px"
+                        <asp:GridView ID="grdEstadoDocumento"  runat="server" AutoGenerateColumns="False" GridLines="None" Width="686px"
                             AllowPaging="True" CssClass="mGrid" PagerStyle-CssClass="pgr" AlternatingRowStyle-CssClass="alt"
                             PageSize="5" OnSelectedIndexChanged="grdEstadoDocumento_SelectedIndexChanged" OnRowDataBound ="grdEstadoDocumento_RowDataBound" DataKeyNames="IdUsuario" >
                             <AlternatingRowStyle CssClass="alt" />
@@ -106,7 +106,7 @@
                                 <asp:BoundField DataField="Nom_Imagen" HeaderText="Nombre de Archivo" />
                                 <asp:BoundField DataField="Desc_Status" HeaderText="Id. Status" />
                                 <asp:BoundField DataField="Url_Imagen" HeaderText="Url_Imagen" />
-                                <asp:BoundField DataField="IdTipoDocumento" HeaderText="Tipo de Documento" visible ="false" />
+                                <asp:BoundField DataField="IdTipoDocumento" HeaderText="Id. de Documento" />
                                 <asp:TemplateField>
                                     <ItemTemplate>
                                          <asp:Button ID="BtnRechazado" runat="server" Text="Rechazado" OnClick ="BtnRechazado_Click" />

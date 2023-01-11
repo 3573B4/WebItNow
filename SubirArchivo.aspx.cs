@@ -50,22 +50,33 @@ namespace WebItNow
                                 "FROM ITM_04 " +
                                 "WHERE IdUsuario = '"+ user +"' " +
                                 "AND IdTipoDocumento = '"+ tpoDoc +"'";
+
             SqlCommand cmd = new SqlCommand(edoQuery, connect.ConectarBD);
             SqlDataAdapter da = new SqlDataAdapter(cmd);
+            
             DataTable dt = new DataTable();
             da.Fill(dt);
 
-            string edoDoc = dt.Rows[0]["IdStatus"].ToString();
-
-            if(edoDoc == "1")
+            if (dt.Rows.Count == 0)
             {
-                BtnEnviar.Enabled = true;
+                BtnEnviar.Enabled = false;
+
+                LblMessage.Text = "No existe tipo de documento, para este usuario.";
+                mpeMensaje.Show();
             }
             else
             {
-                BtnEnviar.Enabled = false;
+                string edoDoc = dt.Rows[0]["IdStatus"].ToString();
+
+                if(edoDoc == "1")
+                {
+                    BtnEnviar.Enabled = true;
+                }
+                else
+                {
+                    BtnEnviar.Enabled = false;
+                }
             }
-            
         }
 
         public void getDocRequeridos()
@@ -236,6 +247,8 @@ namespace WebItNow
 
             LblDescrpBrev.Text = TpoDocumento_DescrpBrev(IdDoc, 1);
 
+            checarStatusDoc();
+
             //ConexionBD Conectar = new ConexionBD();
             //Conectar.Abrir();
 
@@ -298,7 +311,7 @@ namespace WebItNow
 
         protected void gvEstadoDocs_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //int var = 0;
+            // int var = 0;
         }
     }
 }

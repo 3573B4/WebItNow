@@ -185,11 +185,12 @@ namespace WebItNow
                 int index = row.RowIndex;
                 
                 string sUsuario = grdEstadoDocumento.Rows[index].Cells[0].Text;
+                string sTipoDocumento = grdEstadoDocumento.Rows[index].Cells[5].Text;
 
                 grdEstadoDocumento.Rows[index].Cells[3].Text = "Completo";
 
                 // Actualizar en la tabla tbEstadoDocumento (Status = 3)
-                Update_tbEstadoDocumento(sUsuario, 3);
+                Update_tbEstadoDocumento(sUsuario, sTipoDocumento,  3);
 
                 var email = new EnvioEmail();
 
@@ -222,11 +223,12 @@ namespace WebItNow
                 string sUsuario = grdEstadoDocumento.Rows[index].Cells[0].Text;
                 string sNom_Archivo = grdEstadoDocumento.Rows[index].Cells[2].Text;
                 string sUrl_Imagen = grdEstadoDocumento.Rows[index].Cells[4].Text;
+                string sTipoDocumento = grdEstadoDocumento.Rows[index].Cells[5].Text;
 
                 string strURLFile = Server.MapPath("~/Directorio/") + sUrl_Imagen + sNom_Archivo;
 
                 // Actualizar en la tabla tbEstadoDocumento (Status = 1)
-                Update_tbEstadoDocumento(sUsuario, 1);
+                Update_tbEstadoDocumento(sUsuario, sTipoDocumento, 1);
 
                 grdEstadoDocumento.Rows[index].Cells[3].Text = "Faltante";
 
@@ -426,7 +428,7 @@ namespace WebItNow
             #endregion
         }
 
-        public void Update_tbEstadoDocumento(string pUsuarios, int pIdStatus)
+        public void Update_tbEstadoDocumento(string pUsuarios, string pIdTipoDocumento, int pIdStatus)
         {
             try
             {
@@ -437,11 +439,11 @@ namespace WebItNow
                 if (pIdStatus == 1)
                 {
                     Variables.wQuery = "Update ITM_04 Set IdStatus = " + pIdStatus + ", Nom_Imagen = Null " +
-                                    " Where IdUsuario = '" + pUsuarios + "'";
+                                    " Where IdUsuario = '" + pUsuarios + "' And IdTipoDocumento = '"+ pIdTipoDocumento + "'";
                 }
                 else
                 {
-                    Variables.wQuery = "Update ITM_04 Set IdStatus = " + pIdStatus + " Where IdUsuario = '" + pUsuarios + "'";
+                    Variables.wQuery = "Update ITM_04 Set IdStatus = " + pIdStatus + " Where IdUsuario = '" + pUsuarios + "' And IdTipoDocumento = '" + pIdTipoDocumento + "'";
                 }
 
                 SqlCommand cmd1 = new SqlCommand(Variables.wQuery, Conecta.ConectarBD);
