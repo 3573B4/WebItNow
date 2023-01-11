@@ -29,12 +29,8 @@
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
     <br />
 
-<div class="container well contenedorLogin">
-        <div class="row">
-            <div class="col-xs-12">
-                <h2> Registrar</h2>
-            </div>
-        </div>
+<div class="container col-md-4">
+                <h2 class="h2 mb-3 fw-normal">Registrar</h2>
         <div class="form-group">
             <asp:Label ID="LblUsu" runat="server" Text="Usuario" CssClass="control-label co-sm-3" Font-Bold="False"></asp:Label>
             <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server"   
@@ -70,14 +66,15 @@
                 <asp:Label ID="Lbl_Message" runat="server" ForeColor="Red" Visible="False" ></asp:Label>
             </div>
         </div>        
-        <div class="from-group">
-            <div class="d-grid col-6 mx-auto">
-                <asp:Button ID="BtnRegresar" runat="server" Text="Iniciar Sesión" Font-Bold="True" OnClick="BtnRegresar_Click" CssClass="btn btn-link"/>
-            </div>
-        </div>
-        <div class="form-group">
+        
+        <div class="form-group mt-3">
             <div class="d-grid col-6 mx-auto">
                 <asp:Button ID="BtnEnviar" runat="server" Text="Registrar" Font-Bold="True" OnClick="BtnEnviar_Click" CssClass="btn btn-primary" />
+            </div>
+        </div>
+        <div class="from-group mt-2">
+            <div class="d-grid col-6 mx-auto">
+                <asp:Button ID="BtnRegresar" runat="server" Text="Iniciar Sesión" Font-Bold="True" OnClick="BtnRegresar_Click" CssClass="btn btn-link"/>
             </div>
         </div>
         <div class="form-group">
