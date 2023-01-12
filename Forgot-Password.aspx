@@ -11,7 +11,7 @@
             modal.show();
         //alert("La sesión ha expirado.");
         //location.href = '/Login.aspx';
-    }, 120000);
+    }, 600000);
 
     function acceso() {
         location.href = '/Login.aspx';
@@ -20,7 +20,7 @@
     function mpeMensajeOnOk()
 
     {
-        Txt_Casos_B1.Focus();
+        TxtUsu.Focus();
     }
 
     </script>

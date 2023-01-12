@@ -154,12 +154,12 @@ namespace WebItNow
             {
                 //string directorio = "https://itnowtech18-my.sharepoint.com/:f:/g/personal/llg_peacock_claims/Ekb4AdD2Id1KgMI9CRoIAU4BdP795N2YLyTJxmlMmIfWUA?e=CCtbfK" + "/";
                 string directorio = "~/Directorio/";
-                string user = /*"USUARIO4"*/ Convert.ToString(Session["IdUsuario"]);
+                string user = Convert.ToString(Session["IdUsuario"]);
                 string folderName = ddlDocs.SelectedValue;
                 string directFinal = directorio + user + "/" + folderName + "/";
                 string UrlFinal = user + "/" + folderName + "/";
                 string directorioURL = Server.MapPath(directFinal);
-                string nomFile = /*folderName + "-" +*/ FileUpload1.FileName;
+                string nomFile = FileUpload1.FileName;
 
                 int tamArchivo = FileUpload1.PostedFile.ContentLength;
                 if (tamArchivo <= 40000000)
@@ -203,9 +203,13 @@ namespace WebItNow
                             string sEmail = email.CorreoElectronico(user);
                             int Envio_Ok = email.EnvioMensaje(user, sEmail, "Documento Enviado");
 
-                            LblMessage.Text = "El documento se subio exitosamente";
+                            LblMessage.Text = "El documento se envio exitosamente";
                             mpeMensaje.Show();
                         }
+                    }else if (tamArchivo==0)
+                    {
+                        LblMessage.Text = "El archivo esta dañado";
+                        mpeMensaje.Show();
                     }
                     else
                     {

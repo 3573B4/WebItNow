@@ -39,15 +39,8 @@
 <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional" >
     <ContentTemplate>
     <br />
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-sm-4">
-            <div class="row">
-                <div class="row">    
-                    <div class="col-xs-12">
-                        <h2> Validación de Documentos</h2>
-                    </div>
-                </div>
+    <div class="container col-md-4">
+                        <h2 class="h2 mb-3 fw-normal">Validación de Documentos</h2>
             <div class="form-group">
                 <asp:Label ID="LblUsu" runat="server" Text="Usuario" CssClass="control-label co-sm-3" Font-Bold="False"></asp:Label>
                 <div class="col-sm-12">
@@ -65,8 +58,8 @@
             <br />
             <div class="form-group">
                 <asp:Label ID="LblNomArchivo" runat="server" Text="Archivo para descargar" CssClass="control-label col-sm-2"></asp:Label>
-                <div class="col-sm-12">
-                        <div class="d-grid gap-2 d-md-flex justify-content-center">
+                <div class="col-12">
+                        <div class="d-grid gap-2 d-flex justify-content-center">
                             <asp:TextBox ID="TxtNomArchivo" runat="server" CssClass="form-control" placeholder="Archivo para descargar" ReadOnly="True"></asp:TextBox>
                             <asp:ImageButton ID="imgDescarga" runat="server" ImageUrl="~/Images/descargar.png" Height="35px" Width="35px" OnClick="ImgDescarga_Click" OnClientClick="clearTextBox()" />
                         </div>
@@ -84,18 +77,8 @@
                     <asp:Button ID="BtnRegresar" runat="server" Text="Regresar" Font-Bold="True" OnClick="BtnRegresar_Click" CssClass="btn btn-link"/>
                 </div>
             </div>
-        </div>
-            </div>
         <br />
-        <div class="col-12">
-            <div class="row">
-                <div class="col-xs-12">
-                    <h2> Pendientes</h2>
-                </div>
-            </div>
-            <div class="row justify-content-center">
-                <div class="col-6">
-                    <div  class="form-group">
+                    <h2 class="h2 mb-3 fw-normal">Pendientes</h2>
                         <asp:GridView ID="grdEstadoDocumento"  runat="server" AutoGenerateColumns="False" GridLines="None" Width="686px"
                             AllowPaging="True" CssClass="mGrid" PagerStyle-CssClass="pgr" AlternatingRowStyle-CssClass="alt"
                             PageSize="5" OnSelectedIndexChanged="grdEstadoDocumento_SelectedIndexChanged" OnRowDataBound ="grdEstadoDocumento_RowDataBound" DataKeyNames="IdUsuario" >
@@ -122,12 +105,9 @@
                 
                             <PagerStyle CssClass="pgr" />
                         </asp:GridView>
-                    </div>
-                </div>
+            <div class="">
                 <asp:HiddenField ID="hdfValorGrid" runat="server" Value=""/>
             </div>
-        </div>
-        </div>
         <div class="form-group">
             <div class="d-grid col-6 mx-auto">
                 <asp:Label ID="Lbl_Message" runat="server" ForeColor="Red" ></asp:Label>

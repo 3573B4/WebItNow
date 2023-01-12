@@ -5,15 +5,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
     <script language="javascript" type="text/javascript">
-        function openModal(event) {
-            $(document).ready(function () {
-
-                var ref = $('#exampleModal').modal();
-                ref = false;
-                return false;
-
-            });
-        }
+        
         var timer = setTimeout(function () {
             document.getElementById('<%=LblExpira.ClientID %>').innerHTML = 'La sesión ha expirado.';
             var modalId = '<%=mpeExpira.ClientID%>';
@@ -44,35 +36,8 @@
     
     <ContentTemplate>
     
-        <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content modal-dialog-centered">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        ...
-                        <asp:Label ID="Lbl_M_Message" runat="server" Text="" />
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="row">
-                <div class="col-xs-12">
-                    <h2>Carga segura de documentos</h2>
-                </div>
-            </div> 
-            <div class="col-sm-4">
-                <div class="row">
+    <div class="container col-md-4">
+                    <h2 class="h2 mb-3 fw-normal">Carga segura de documentos</h2>
                         
                     <div class="form-group">
                         <div class="d-grid col-4 mx-auto py-1">
@@ -86,18 +51,15 @@
                     </div>
                     <br />
                     <br />
-                    <div class="form-group">
-                        <div class="d-grid col-12 mx-auto py-3">
+                    <div class="form-floating">
                             <div class="dropdown">
-                                <asp:DropDownList ID="ddlDocs" runat="server" CssClass="btn btn-outline-secondary"  AutoPostBack="true" OnSelectedIndexChanged="ddlDocs_SelectedIndexChanged" Width="400">
+                                <asp:DropDownList ID="ddlDocs" runat="server" CssClass="btn btn-outline-secondary"  AutoPostBack="true" OnSelectedIndexChanged="ddlDocs_SelectedIndexChanged" Width="100%">
                                 </asp:DropDownList>
                             </div>
-                        </div>
                     </div>
                     <br />
                     <br />
                     <!-- empieza el acordion -->
-                    <div class="row">
                         <div class="accordion accordion" id="accordionExample">
                             <div class="accordion-item">
                                 <h2 class="accordion-header" id="headingOne">
@@ -112,7 +74,6 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
                     <!-- termina el acordion -->
                     
                     
@@ -128,21 +89,15 @@
                         </div>
                     </div>
                     
-                    <div class="form-group">
-                        <div class="col-sm-12">
-                            <div class="d-grid gap-4 d-md-flex justify-content-center">
-                                <asp:Button ID="BtnSalir" runat="server" Font-Bold="True" Text="    Salir     " OnClick="BtnSalir_Click" CssClass="btn btn-outline-primary" />
-                                <asp:Button ID="BtnEnviar" runat="server" Font-Bold="True" Text="    Subir     " OnClick="BtnEnviar_Click"  CssClass="btn btn-primary me-md-2" />
+                    <div class="form-group my-2">
+                        <div class="col-12">
+                            <div class="d-grid gap-4 d-flex justify-content-center">
+                                <asp:Button ID="BtnEnviar" runat="server" Font-Bold="True" Text="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Subir&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" OnClick="BtnEnviar_Click"  CssClass="btn btn-primary" />
+                                <asp:Button ID="BtnSalir" runat="server" Font-Bold="True" Text="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Salir&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" OnClick="BtnSalir_Click" CssClass="btn btn-outline-primary me-md-2" />
                             </div>
                         </div>
                     </div>
-                    
-                </div>
-            </div>
-            <div class="row justify-content-center">
-                <div class="col-5 mt-5">
-                    <div class="row">
-                        <asp:GridView ID="gvEstadoDocs" runat="server" AutoGenerateColumns="False" GridLines="None" Width="380px"
+                        <asp:GridView ID="gvEstadoDocs" runat="server" AutoGenerateColumns="False" GridLines="None" Width="100%"
                             AllowPaging="True" CssClass="mGrid" PagerStyle-CssClass="pgr" AlternatingRowStyle-CssClass="alt"
                             PageSize="7" OnSelectedIndexChanged="gvEstadoDocs_SelectedIndexChanged" >
                             <AlternatingRowStyle CssClass="table" />
@@ -153,7 +108,6 @@
                             </Columns>
                             <PagerStyle CssClass="pgr" />
                         </asp:GridView>
-                    </div>
                     <div class="form-group">
                         <div class="d-grid col-6 mx-auto">
                             <ajaxToolkit:ModalPopupExtender ID="mpeMensaje" runat="server" PopupControlID="pnlMensaje"
@@ -169,9 +123,6 @@
                             <asp:Label ID="lblHide" runat="server" Text="Label" Style="display: none;" />
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
     </div>
 
     <br />
