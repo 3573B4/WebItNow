@@ -30,7 +30,7 @@
     <br />
 
 <div class="container col-md-4">
-                <h2 class="h2 mb-3 fw-normal">Registrar</h2>
+        <h2 class="h2 mb-3 fw-normal">Registrar</h2>
         <div class="form-group">
             <asp:Label ID="LblUsu" runat="server" Text="Usuario" CssClass="control-label co-sm-3" Font-Bold="False"></asp:Label>
             <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server"   
