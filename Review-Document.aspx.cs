@@ -34,6 +34,12 @@ namespace WebItNow
 
         private static extern int SHGetKnownFolderPath(ref Guid id, int flags, IntPtr token, out IntPtr path);
 
+        protected void Page_PreInit(object sender, EventArgs e)
+        {
+            if (Request.Browser.IsMobileDevice)
+                MasterPageFile = "~/Site.Mobile.Master";
+        }
+
         protected void Page_Load(object sender, EventArgs e)
 		{
 
