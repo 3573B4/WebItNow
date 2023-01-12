@@ -32,46 +32,44 @@ namespace WebItNow
             if (TxtUsu.Text != "" && TxtEmail.Text != "" && TxtPass.Text != "")
             {
 
-                    // Insertar Registo Tabla tbUsuarios (UploadFiles)
-                    int result = Add_tbUsuarios(TxtUsu.Text, TxtEmail.Text, TxtPass.Text, 3, "Insert");
+                // Insertar Registo Tabla tbUsuarios (UploadFiles)
+                int result = Add_tbUsuarios(TxtUsu.Text, TxtEmail.Text, TxtPass.Text, 3, "Insert");
 
-                    if (result == 0)
+                if (result == 0)
+                {
+                    // Insertar Registros Tabla tbEstadoDocumento
+                    int idStatus = 1;
+                    int valor = Add_tbEstadoDocumento(TxtUsu.Text, idStatus);
+
+                    var email = new EnvioEmail();
+                    int Envio_Ok = email.EnvioMensaje(TxtUsu.Text.Trim(), TxtEmail.Text.Trim(), "Registro Usuario ");
+
+                    //EnvioMensaje(TxtUsu.Text.Trim(), TxtEmail.Text.Trim());
+
+                    if (Envio_Ok == 0)
                     {
-                        // Insertar Registros Tabla tbEstadoDocumento
-                        int idStatus = 1;
-                        int valor = Add_tbEstadoDocumento(TxtUsu.Text, idStatus);
-
-                        var email = new EnvioEmail();
-                        int Envio_Ok = email.EnvioMensaje(TxtUsu.Text.Trim(), TxtEmail.Text.Trim(), "Registro Usuario ");
-
-                        //EnvioMensaje(TxtUsu.Text.Trim(), TxtEmail.Text.Trim());
-
-                        if (Envio_Ok == 0)
-                        {
-                            LblMessage.Text = "Usuario fue insertado correctamente ";
-                            this.mpeMensaje.Show();
-                        }
-
-                        //string script = @"<script type='text/javascript'>
-                        //        alert('Usuario fue agregado correctamente'); </script>";
-
-                        //ScriptManager.RegisterStartupScript(this, typeof(Page), "alerta", script, false);
-
-                        //string script = "alert('Usuario fue insertado correctamente');";
-                        //ScriptManager.RegisterStartupScript(this, typeof(Page), "alerta", script, true);
-
-                        Limpia(this.Controls);
-
-                        // Response.Redirect("Login.aspx");
-                        Lbl_Message.Visible = false;
+                        LblMessage.Text = "Usuario fue insertado correctamente ";
+                        this.mpeMensaje.Show();
                     }
-                    else
-                    {
-                        Lbl_Message.Visible = true;
-                        Lbl_Message.Text = "* Estos campos son obligatorios";
-                        // LblMessage.Text = "Debes captura Usuario / Password.";
-                        // this.mpeMensaje.Show();
-                    }
+
+                    //string script = @"<script type='text/javascript'>
+                    //        alert('Usuario fue agregado correctamente'); </script>";
+
+                    //ScriptManager.RegisterStartupScript(this, typeof(Page), "alerta", script, false);
+
+                    //string script = "alert('Usuario fue insertado correctamente');";
+                    //ScriptManager.RegisterStartupScript(this, typeof(Page), "alerta", script, true);
+
+                    Limpia(this.Controls);
+
+                    // Response.Redirect("Login.aspx");
+                    Lbl_Message.Visible = false;
+                }
+            }
+            else
+            {
+                Lbl_Message.Visible = true;
+                Lbl_Message.Text = "* Estos campos son obligatorios";
             }
         }
 

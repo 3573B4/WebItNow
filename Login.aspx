@@ -48,7 +48,7 @@
         </div>
         <div class="form-group">
             <div class="d-grid col-6 mx-auto">
-                <asp:Label ID="Lbl_Message" runat="server" ForeColor="Red" Visible="False" ></asp:Label>
+                <asp:Label ID="Lbl_Message" runat="server" ForeColor="Red" Visible="False"  Width="280px" ></asp:Label>
             </div>
         </div>
         <div class="form-group mt-3">
