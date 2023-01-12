@@ -118,7 +118,7 @@
             modal.show();
         //alert("La sesión ha expirado.");
         //location.href = '/Login.aspx';
-    }, 120000);
+    }, 600000);
 
     function acceso() {
         location.href = '/Login.aspx';
@@ -151,130 +151,23 @@
                     <StaticSelectedStyle BackColor="Silver" />
                     <Items>
 <%--                    
-                        <asp:MenuItem Text="Configuracion">
-                            <asp:MenuItem Text="Usuarios" NavigateUrl="~/Usuarios.aspx"></asp:MenuItem>
-                            <asp:MenuItem Text="Bitacora" NavigateUrl="~/Bitacora.aspx"></asp:MenuItem>
-                        </asp:MenuItem>
+                    <asp:MenuItem Text="Configuracion">
+                        <asp:MenuItem Text="Usuarios" NavigateUrl="~/Usuarios.aspx"></asp:MenuItem>
+                        <asp:MenuItem Text="Bitacora" NavigateUrl="~/Bitacora.aspx"></asp:MenuItem>
+                    </asp:MenuItem>
 --%>
 
-                        <asp:MenuItem Text="Itnow">
-                            <asp:MenuItem Text="Revision Documentos" NavigateUrl="~/Review-Document.aspx"></asp:MenuItem>
-                         <%--<asp:MenuItem Text="Consulta" NavigateUrl="~/Consulta.aspx"></asp:MenuItem>
-                            <asp:MenuItem Text="Totales para desincorporados" NavigateUrl="~/Carga_Nomina.aspx"></asp:MenuItem>--%>
-                        </asp:MenuItem>
+                    <asp:MenuItem Text="Itnow">
+                        <asp:MenuItem Text="Revision Documentos" NavigateUrl="~/Review-Document.aspx"></asp:MenuItem>
+                  <%--  <asp:MenuItem Text="Consulta" NavigateUrl="~/Consulta.aspx"></asp:MenuItem>
+                        <asp:MenuItem Text="Totales para desincorporados" NavigateUrl="~/Carga_Nomina.aspx"></asp:MenuItem>  --%>
+                    </asp:MenuItem>
 
-                        <asp:MenuItem Text="Salir" NavigateUrl="~/Login.aspx">
-                        </asp:MenuItem>
+                        <asp:MenuItem Text="Salir" NavigateUrl="~/Login.aspx"></asp:MenuItem>
                     </Items>
                 </asp:Menu>
             </td>
             <td style="width:10%"></td>
-        </tr>
-    </table>
-	<br />
-	<br />
-	<br />
-    <br />
-    <table cellspacing="1" cellpadding="1" border="0">
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td>
-                <asp:Label ID="Label1" runat="server" Text="" Width="1000px" 
-                    CssClass="txtAlign" Font-Bold="True" Font-Names="Bookman Old Style"></asp:Label>
-            </td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td>
-                <asp:Label ID="Label2" runat="server" Text="" Width="1000px" 
-                    CssClass="txtAlign" Font-Bold="True" Font-Names="Bookman Old Style"></asp:Label>
-            </td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td>
-                <asp:Label ID="Label3" runat="server" Text="" Width="1000px" 
-                    CssClass="txtAlign" Font-Bold="True" Font-Names="Bookman Old Style"></asp:Label>
-            </td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td>
-                <asp:Label ID="Label4" runat="server" Text="" Width="1000px" 
-                    CssClass="txtAlign" Font-Bold="True" Font-Names="Bookman Old Style"></asp:Label>
-            </td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td>
-                <asp:Label ID="Label5" runat="server" Text="" Width="1000px" 
-                    CssClass="txtAlign" Font-Bold="True" Font-Names="Bookman Old Style"></asp:Label>
-            </td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-    </table>
-    <br />
-    <br />
-
-    <table cellspacing="1" cellpadding="1" border="0">
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td>
-                <%-- <asp:Button ID="BtnCorrespondencia" runat="server" Text="Correspondencia" Font-Bold="True" Height="52px" OnClick="BtnCorrespondencia_Click" Width="160px" /><asp:Button ID="BtnConsulta" runat="server" Text="Consulta" Font-Bold="True" Height="52px" OnClick="BtnConsulta_Click" Width="160px" /> --%>
-            </td>
-            <td>
-                <%-- <asp:Button ID="BtnCarga_Nomina" runat="server" Text="Totales p/Desincorp." Font-Bold="True" Height="52px" OnClick="BtnCarga_Nomina_Click" Width="160px" /><asp:Button ID="BtnSalir" runat="server" Text="Salir" Font-Bold="True" Height="52px" OnClick="BtnSalir_Click" Width="160px" />  --%>
-            </td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>
-                <ajaxToolkit:ModalPopupExtender ID="mpeMensaje" runat="server" PopupControlID="pnlMensaje"
-                    TargetControlID="lblOculto" BackgroundCssClass="FondoAplicacion" OnOkScript="mpeMensajeOnOk()" >
-                </ajaxToolkit:ModalPopupExtender>
-            </td>
-            <td><asp:Label ID="lblOculto" runat="server" Text="Label" Style="display: none;" /></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>
-                <ajaxToolkit:ModalPopupExtender ID="mpeExpira" runat="server" PopupControlID="pnlExpira"
-                    TargetControlID="lblHide" BackgroundCssClass="FondoAplicacion" OnOkScript="mpeExpiraOnOk()" >
-                </ajaxToolkit:ModalPopupExtender>
-            </td>
-            <td class="style3"><asp:Label ID="lblHide" runat="server" Text="Label" Style="display: none;" />
-            </td>
-            <td></td>
-            <td></td>
         </tr>
     </table>
     <br />
@@ -302,8 +195,6 @@
             <br />
             <asp:Button ID="btnClose" runat="server" OnClick="BtnClose_Click" Text="Cerrar" CssClass="btn btn-outline-primary"/>
         </div>
-
-
     </asp:Panel>
     <br />
     <asp:Panel ID="pnlExpira" runat="server" CssClass="CajaDialogo" style="display: none; border: none; border-radius: 10px; width: 400px; background-color:#FFFFFF;">

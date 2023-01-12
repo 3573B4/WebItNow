@@ -14,7 +14,6 @@ namespace WebItNow
 
             if (!Page.IsPostBack)
             {
-                //Session["UserId"] = 1;
 
                 // Permisos Usuario
                 string UsPrivilegios = System.Web.HttpContext.Current.Session["UsPrivilegios"] as String;
@@ -30,19 +29,8 @@ namespace WebItNow
                  // item3.Parent.ChildItems.Remove(item3);
                     item3.Enabled = false;
 
-                 // BtnCarga_Nomina.Enabled = false;
                 }
             }
-
-            //if (Session["UserId"] == null)
-            //{
-            //    //OnClientClick="acceso(); return false;"
-            //    LblMessage.Text = "La sesión ha expirado.";
-            //    this.mpeMensaje.Show();
-
-            //    Response.Redirect("Acceso.aspx",false);
-            //    Context.ApplicationInstance.CompleteRequest();
-            //}
 
         }
 
@@ -51,21 +39,6 @@ namespace WebItNow
             Response.Redirect("Login.aspx");
         }
 
-        protected void BtnCarga_Nomina_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("Carga_Nomina.aspx");
-        }
-
-        protected void BtnConsulta_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("Consulta.aspx");
-        }
-
-        protected void BtnCorrespondencia_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("Correspondencia.aspx", false);
-            // OnClientClick = "correspondencia(); return false;"
-        }
 
         protected void MyMenu_MenuItemClick(object sender, MenuEventArgs e)
         {
