@@ -2,182 +2,175 @@
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" type="text/javascript"></script>
+    <style type="text/css">
+        .txtAlign { Text-Align: right }
 
-<style type="text/css">
-    .txtAlign { Text-Align: right }
+        .CajaDialogo
 
-    .CajaDialogo
+        {
 
-    {
+            background-color: lightcyan;
 
-        background-color: lightcyan;
+            border-width: 4px;
 
-        border-width: 4px;
+            border-style: outset;
 
-        border-style: outset;
+            border-color: black;
 
-        border-color: black;
+            padding: 0px;
 
-        padding: 0px;
+            width: 275px;
 
-        width: 275px;
+            font-weight: bold;
 
-        font-weight: bold;
+            font-style: italic;
 
-        font-style: italic;
+        }
 
-    }
+        .CajaDialogo div
 
-    .CajaDialogo div
+        {
 
-    {
+            margin: 7px;
 
-        margin: 7px;
+            text-align: center;
 
-        text-align: center;
+        }
 
-    }
+        .FondoAplicacion
 
-    .FondoAplicacion
+        {
 
-    {
+            background-color: Gray;
 
-        background-color: Gray;
+            filter: alpha(opacity=70);
 
-        filter: alpha(opacity=70);
+            opacity: 0.7;
 
-        opacity: 0.7;
-
-    }
+        }
 			
-		* {
-			margin:0px;
-			padding:0px;
-		}
+		    * {
+			    margin:0px;
+			    padding:0px;
+		    }
 			
-		#header {
-			margin:auto;
-			width:100%;
-			background:black;
-			position:fixed;
-			font-family:Arial, Helvetica, sans-serif;
-		}
+		    #header {
+			    margin:auto;
+			    width:100%;
+			    background:black;
+			    position:fixed;
+			    font-family:Arial, Helvetica, sans-serif;
+		    }
 			
-		ul, ol {
-			list-style:none;
-		}
+		    ul, ol {
+			    list-style:none;
+		    }
 			
-		.nav {
-			width:750px;   /*Le establecemos un ancho*/
-			margin:0 auto; /*Centramos automaticamente*/
-		}
+		    .nav {
+			    width:750px;   /*Le establecemos un ancho*/
+			    margin:0 auto; /*Centramos automaticamente*/
+		    }
 
-		.nav > li {
-			float:left;
-		}
+		    .nav > li {
+			    float:left;
+		    }
 			
-		.nav li a {
-			background-color:#000;
-			color:#fff;
-			text-decoration:none;
-			padding:10px 12px;
-			display:block;
-		}
+		    .nav li a {
+			    background-color:#000;
+			    color:#fff;
+			    text-decoration:none;
+			    padding:10px 12px;
+			    display:block;
+		    }
 			
-		.nav li a:hover {
-			background-color:#434343;
-		}
+		    .nav li a:hover {
+			    background-color:#434343;
+		    }
 			
-		.nav li ul {
-			display:none;
-			position:absolute;
-			min-width:140px;
-		}
+		    .nav li ul {
+			    display:none;
+			    position:absolute;
+			    min-width:140px;
+		    }
 			
-		.nav li:hover > ul {
-			display:block;
-		}
+		    .nav li:hover > ul {
+			    display:block;
+		    }
 			
-		.nav li ul li {
-			position:relative;
-		}
+		    .nav li ul li {
+			    position:relative;
+		    }
 			
-		.nav li ul li ul {
-			right:-140px;
-			top:0px;
-		}
+		    .nav li ul li ul {
+			    right:-140px;
+			    top:0px;
+		    }
 
-</style>
+    </style>
 
-<script language="javascript" type="text/javascript">
+    <script language="javascript" type="text/javascript">
 
-    var timer = setTimeout(function () {
-        document.getElementById('<%=LblExpira.ClientID %>').innerHTML = 'La sesión ha expirado.';
-        var modalId = '<%=mpeExpira.ClientID%>';
-        var modal = $find(modalId);
-            modal.show();
-        //alert("La sesión ha expirado.");
-        //location.href = '/Login.aspx';
-    }, 600000);
+        var timer = setTimeout(function () {
+            document.getElementById('<%=LblExpira.ClientID %>').innerHTML = 'La sesión ha expirado.';
+            var modalId = '<%=mpeExpira.ClientID%>';
+            var modal = $find(modalId);
+                modal.show();
+            //alert("La sesión ha expirado.");
+            //location.href = '/Login.aspx';
+        }, 600000);
 
-    function acceso() {
-        location.href = '/Login.aspx';
-    }
+        function acceso() {
+            location.href = '/Login.aspx';
+        }
 
-    function mpeMensajeOnOk()
-    {
-        //
-    }
+        function mpeMensajeOnOk()
+        {
+            //
+        }
 
-</script>
+    </script>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
-    <table cellspacing="1" cellpadding="1" border="0" style="background-color:Black" width="100%">
-        <tr>
-            <td style="width:20%"></td>
-            <td style="width:70%"> 
-                <asp:Menu ID="Menu1" runat="server" Height="25px" Orientation="Horizontal" Width="100%"
-                    MaximumDynamicDisplayLevels ="2" BackColor="Black"
-                    DynamicHorizontalOffset="2" Font-Names="Arial,Helvetica,sans-serif" Font-Size="Medium"
-                    ForeColor="White" StaticSubMenuIndent="10px" OnMenuItemClick="MyMenu_MenuItemClick" Font-Bold="False">
-                    <DynamicHoverStyle BackColor="Gray" ForeColor="White" />
-                    <DynamicMenuItemStyle HorizontalPadding="30px" VerticalPadding="2px" />
-                    <DynamicMenuStyle BackColor="Black" />
-                    <DynamicSelectedStyle BackColor="Silver" />
-                    <StaticHoverStyle BackColor="Gray" ForeColor="White" />
-                    <StaticMenuItemStyle HorizontalPadding="30px" VerticalPadding="2px" />
-                    <StaticSelectedStyle BackColor="Silver" />
-                    <Items>
-<%--                    
-                    <asp:MenuItem Text="Configuracion">
-                        <asp:MenuItem Text="Usuarios" NavigateUrl="~/Usuarios.aspx"></asp:MenuItem>
-                        <asp:MenuItem Text="Bitacora" NavigateUrl="~/Bitacora.aspx"></asp:MenuItem>
-                    </asp:MenuItem>
---%>
 
-                    <asp:MenuItem Text="Itnow">
-                        <asp:MenuItem Text="Revision Documentos" NavigateUrl="~/Review-Document.aspx"></asp:MenuItem>
-                  <%--  <asp:MenuItem Text="Consulta" NavigateUrl="~/Consulta.aspx"></asp:MenuItem>
-                        <asp:MenuItem Text="Totales para desincorporados" NavigateUrl="~/Carga_Nomina.aspx"></asp:MenuItem>  --%>
-                    </asp:MenuItem>
-
-                        <asp:MenuItem Text="Salir" NavigateUrl="~/Login.aspx"></asp:MenuItem>
-                    </Items>
-                </asp:Menu>
-            </td>
-            <td style="width:10%"></td>
-        </tr>
-    </table>
-    <div class="form-group">
-        <div class="d-grid col-6 mx-auto">
-            <ajaxToolkit:ModalPopupExtender ID="mpeMensaje" runat="server" PopupControlID="pnlMensaje"
-                TargetControlID="lblOculto" BackgroundCssClass="FondoAplicacion" OnOkScript="mpeMensajeOnOk()" >
-            </ajaxToolkit:ModalPopupExtender>
-            <asp:Label ID="lblOculto" runat="server" Text="Label" Style="display: none;" />
+    <nav class="navbar navbar-expand-lg bg-body-tertiary ">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="Menu.aspx">&nbsp</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <%--    <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">Home</a>
+                            </li>   --%>
+                    <%--    <li class="nav-item">
+                            <a class="nav-link" href="#">Link</a>
+                            </li>   --%>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Documentos
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="Review-Document.aspx">Revision Documentos</a></li>
+                            <!--
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li>
+                                <hr class="dropdown-divider"/>
+                            </li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            -->
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Login.aspx">Salir</a>
+                    </li>
+                </ul>
+                
+            </div>
         </div>
-    </div>
+    </nav>
     <br />
     <asp:Panel ID="pnlMensaje" runat="server" CssClass="CajaDialogo" style="display: none; border: none; border-radius: 10px; width: 400px; background-color:#FFFFFF;">
         <div class=" row justify-content-end" data-bs-theme="dark">
@@ -238,10 +231,10 @@
             <td>
                 <div class="form-group">
                     <div class="d-grid col-6 mx-auto">
-                        <ajaxToolkit:ModalPopupExtender ID="ModalPopupExtender1" runat="server" PopupControlID="pnlMensaje"
+                        <ajaxToolkit:ModalPopupExtender ID="mpeMensaje" runat="server" PopupControlID="pnlMensaje"
                             TargetControlID="lblOculto" BackgroundCssClass="FondoAplicacion" OnOkScript="mpeMensajeOnOk()" >
                         </ajaxToolkit:ModalPopupExtender>
-                        <asp:Label ID="Label2" runat="server" Text="Label" Style="display: none;" />
+                        <asp:Label ID="lblOculto" runat="server" Text="Label" Style="display: none;" />
                     </div>
                 </div>
             </td>
@@ -260,4 +253,5 @@
             <td></td>
         </tr>
     </table>
+
 </asp:Content>

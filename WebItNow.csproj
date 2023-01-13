@@ -141,6 +141,7 @@
     <Content Include="Images\loader.gif" />
     <Content Include="Images\tierra-de-cristal-en-gras-131535893.jpg" />
     <Content Include="Images\icono-Subir-Archivo-morado.png" />
+    <Content Include="Menu.aspx" />
     <Content Include="Review-Document.aspx" />
     <Content Include="Site.Master" />
     <Content Include="Styles\center_controls.css" />
@@ -165,7 +166,6 @@
     <None Include="Properties\PublishProfiles\CODICE1 - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
-    <Content Include="Menu.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />

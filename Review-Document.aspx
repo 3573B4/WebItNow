@@ -2,6 +2,7 @@
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
+
     <script language="javascript" type="text/javascript">
         var timer = setTimeout(function () {
             document.getElementById('<%=LblExpira.ClientID %>').innerHTML = 'La sesión ha expirado.';
