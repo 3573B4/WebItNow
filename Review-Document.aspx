@@ -30,6 +30,10 @@
             }
         }
 
+        function realizarPostBack() {
+            __doPostBack('', '');
+        }
+
     </script>
 </asp:Content>
 
@@ -77,10 +81,11 @@
                     <asp:Button ID="BtnRegresar" runat="server" Text="Regresar" Font-Bold="True" OnClick="BtnRegresar_Click" CssClass="btn btn-link"/>
                 </div>
             </div>
-        <br />
-                    <h2 class="h2 mb-3 fw-normal">Pendientes</h2>
-                        <asp:GridView ID="grdEstadoDocumento"  runat="server" AutoGenerateColumns="False" GridLines="None" Width="686px"
-                            AllowPaging="True" CssClass="mGrid" PagerStyle-CssClass="pgr" AlternatingRowStyle-CssClass="alt"
+            <br />
+            <h2 class="h2 mb-3 fw-normal">Pendientes</h2>
+                <div style="overflow-x: auto; overflow-y:hidden">
+                    <asp:GridView ID="grdEstadoDocumento"  runat="server" AutoGenerateColumns="False" GridLines="None" Width="686px"
+                            AllowPaging="True" CssClass="footable" PagerStyle-CssClass="pgr" AlternatingRowStyle-CssClass="alt"
                             PageSize="5" OnSelectedIndexChanged="grdEstadoDocumento_SelectedIndexChanged" OnRowDataBound ="grdEstadoDocumento_RowDataBound" DataKeyNames="IdUsuario" >
                             <AlternatingRowStyle CssClass="alt" />
                             <Columns>
@@ -104,7 +109,8 @@
                             </Columns>
                 
                             <PagerStyle CssClass="pgr" />
-                        </asp:GridView>
+                    </asp:GridView>
+                </div>
             <div class="">
                 <asp:HiddenField ID="hdfValorGrid" runat="server" Value=""/>
             </div>

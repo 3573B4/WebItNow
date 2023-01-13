@@ -42,6 +42,9 @@ namespace WebItNow
                 string userId = Convert.ToString(Session["IdUsuario"]);
                 lblUsuario.Text = userId;                
             }
+
+            //* * Agrega THEAD y TBODY a GridView.
+            gvEstadoDocs.HeaderRow.TableSection = TableRowSection.TableHeader;
         }
 
         public void checarStatusDoc()
@@ -149,6 +152,7 @@ namespace WebItNow
                 gvEstadoDocs.ShowHeaderWhenEmpty = true;
                 gvEstadoDocs.EmptyDataText = "No hay resultados.";
             }
+
             gvEstadoDocs.DataSource = dt;
             gvEstadoDocs.DataBind();
 

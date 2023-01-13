@@ -32,6 +32,8 @@
             e.value = e.value.toUpperCase();
         }
     </script>
+        <!-- Estilo para Agregar THEAD y TBODY a GridView. -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery-footable/0.1.0/css/footable.min.css" rel="stylesheet" type="text/css" />
 
     <link href="~/Styles/center_controls.css" rel="stylesheet" type="text/css" />
     <link href="~/Styles/default.css" rel="stylesheet" type="text/css" />

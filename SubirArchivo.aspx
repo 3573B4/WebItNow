@@ -2,8 +2,10 @@
 <%@ Page Title="" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="SubirArchivo.aspx.cs" Inherits="WebItNow.SubirArchivo" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 
-
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
+    <!-- Estilo es para el accordion-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" type="text/javascript"></script>
+    
     <script language="javascript" type="text/javascript">
         
         var timer = setTimeout(function () {
@@ -24,9 +26,12 @@
             //
         }
 
+        $(function () {
+            $('[id*=GridView1]').footable();
+        });
+
     </script>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" type="text/javascript"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <br />    
@@ -97,8 +102,9 @@
                             </div>
                         </div>
                     </div>
+                    <div style="overflow-x: auto; overflow-y:hidden">
                         <asp:GridView ID="gvEstadoDocs" runat="server" AutoGenerateColumns="False" GridLines="None" Width="100%"
-                            AllowPaging="True" CssClass="mGrid" PagerStyle-CssClass="pgr" AlternatingRowStyle-CssClass="alt"
+                            AllowPaging="True" CssClass="footable" PagerStyle-CssClass="pgr" AlternatingRowStyle-CssClass="alt"
                             PageSize="7" OnSelectedIndexChanged="gvEstadoDocs_SelectedIndexChanged" >
                             <AlternatingRowStyle CssClass="table" />
                             <Columns>
@@ -108,6 +114,7 @@
                             </Columns>
                             <PagerStyle CssClass="pgr" />
                         </asp:GridView>
+                    </div>
                     <div class="form-group">
                         <div class="d-grid col-6 mx-auto">
                             <ajaxToolkit:ModalPopupExtender ID="mpeMensaje" runat="server" PopupControlID="pnlMensaje"

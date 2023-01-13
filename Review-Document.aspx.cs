@@ -60,6 +60,9 @@ namespace WebItNow
 
                 Variables.wDownload = false;
             }
+
+            //* * Agrega THEAD y TBODY a GridView.
+            grdEstadoDocumento.HeaderRow.TableSection = TableRowSection.TableHeader;
         }
 
         public static string GetDownloadsPath()
@@ -163,6 +166,7 @@ namespace WebItNow
 
                 grdEstadoDocumento.DataSource = dt;
                 grdEstadoDocumento.DataBind();
+
             }
             catch (Exception ex)
             {
