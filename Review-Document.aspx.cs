@@ -61,6 +61,7 @@ namespace WebItNow
                 Variables.wDownload = false;
             }
 
+
             //* * Agrega THEAD y TBODY a GridView.
             grdEstadoDocumento.HeaderRow.TableSection = TableRowSection.TableHeader;
         }
@@ -126,6 +127,15 @@ namespace WebItNow
                 e.Row.Attributes.Add("OnClick", "" + Page.ClientScript.GetPostBackClientHyperlink(this.grdEstadoDocumento, "Select$" + e.Row.RowIndex.ToString()) + ";");
         }
 
+        protected void grdEstadoDocumento_DataBound(object sender, EventArgs e)
+        {
+            //grdEstadoDocumento = ((GridView)sender);
+            //for (int i = 0; i < grdEstadoDocumento.Columns.Count; i++)
+            //{
+            //    grdEstadoDocumento.Columns[i].ItemStyle.Width = Unit.Percentage(100 / (grdEstadoDocumento.Columns.Count));
+            //}
+        }
+
         protected void DisplayCurrentPage()
         {
             // Calculate the current page number.
@@ -166,6 +176,13 @@ namespace WebItNow
 
                 grdEstadoDocumento.DataSource = dt;
                 grdEstadoDocumento.DataBind();
+
+                //Attribute to show the Plus Minus Button.
+                grdEstadoDocumento.HeaderRow.Cells[0].Attributes["data-class"] = "expand";
+
+                //Attribute to hide column in Phone.
+                grdEstadoDocumento.HeaderRow.Cells[2].Attributes["data-hide"] = "phone";
+                grdEstadoDocumento.HeaderRow.Cells[3].Attributes["data-hide"] = "phone";
 
             }
             catch (Exception ex)

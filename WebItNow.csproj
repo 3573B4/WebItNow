@@ -143,6 +143,7 @@
     <Content Include="Images\icono-Subir-Archivo-morado.png" />
     <Content Include="Menu.aspx" />
     <Content Include="Review-Document.aspx" />
+    <Content Include="Scripts\footable.min.js" />
     <Content Include="Site.Master" />
     <Content Include="Styles\center_controls.css" />
     <Content Include="favicon.ico" />
@@ -199,6 +200,7 @@
     <Content Include="Styles\panel_message.css" />
     <Content Include="Styles\default.css" />
     <Content Include="Styles\fuentes.css" />
+    <Content Include="Styles\footable.min.css" />
     <Content Include="SubirArchivo.aspx" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config" />

@@ -36,6 +36,18 @@
         }
 
     </script>
+
+
+    <script src="Scripts/jquery-3.4.1.min.js" type="text/javascript"></script>
+    <link href="~/Scripts/footable.min.js" rel="stylesheet" type="text/javascript" />
+    <link href="~/Styles/footable.min.css" rel="stylesheet" type="text/css" />
+
+    <script type="text/javascript">
+        $(function () {
+            $('[id*=GridView1]').footable();
+        });
+    </script>
+
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
@@ -84,28 +96,44 @@
             </div>
             <br />
             <h2 class="h2 mb-3 fw-normal">Pendientes</h2>
+        <%--686px--%>
                 <div style="overflow-x: auto; overflow-y:hidden">
-                    <asp:GridView ID="grdEstadoDocumento"  runat="server" AutoGenerateColumns="False" GridLines="None" Width="686px"
+                    <asp:GridView ID="grdEstadoDocumento"  runat="server" AutoGenerateColumns="False" GridLines="None" Width="1400px"
                             AllowPaging="True" CssClass="footable" PagerStyle-CssClass="pgr" AlternatingRowStyle-CssClass="alt"
-                            PageSize="5" OnSelectedIndexChanged="grdEstadoDocumento_SelectedIndexChanged" OnRowDataBound ="grdEstadoDocumento_RowDataBound" DataKeyNames="IdUsuario" >
+                            PageSize="5" OnSelectedIndexChanged="grdEstadoDocumento_SelectedIndexChanged" OnRowDataBound ="grdEstadoDocumento_RowDataBound" OnDataBound="grdEstadoDocumento_DataBound" DataKeyNames="IdUsuario" >
                             <AlternatingRowStyle CssClass="alt" />
                             <Columns>
-                                <asp:BoundField DataField="IdUsuario" HeaderText="Id. Usuario" />
-                                <asp:BoundField DataField="Descripcion" HeaderText="Tipo de Documento" />
-                                <asp:BoundField DataField="Nom_Imagen" HeaderText="Nombre de Archivo" />
-                                <asp:BoundField DataField="Desc_Status" HeaderText="Id. Status" />
-                                <asp:BoundField DataField="Url_Imagen" HeaderText="Url_Imagen" />
-                                <asp:BoundField DataField="IdTipoDocumento" HeaderText="Id. de Documento" />
+                                <asp:BoundField DataField="IdUsuario" HeaderText="Id. Usuario" >
+                                <ItemStyle Width="600px" />
+                                </asp:BoundField>
+                                <asp:BoundField DataField="Descripcion" HeaderText="Tipo de Documento" >
+                                <ItemStyle Width="1250px" />
+                                </asp:BoundField>
+                                <asp:BoundField DataField="Nom_Imagen" HeaderText="Nombre de Archivo" >
+                                <ItemStyle Width="1750px" />
+                                </asp:BoundField>
+                                <asp:BoundField DataField="Desc_Status" HeaderText="Id. Status" >
+                                <ItemStyle Width="600px" />
+                                </asp:BoundField>
+                                <asp:BoundField DataField="Url_Imagen" HeaderText="Url_Imagen" >
+                                <ItemStyle Width="600px" />
+                                </asp:BoundField>
+                                <asp:BoundField DataField="IdTipoDocumento" HeaderText="Id. de Documento" >
+                                <ItemStyle Width="600px" />
+                                </asp:BoundField>
+
                                 <asp:TemplateField>
                                     <ItemTemplate>
                                          <asp:Button ID="BtnRechazado" runat="server" Text="Rechazado" OnClick ="BtnRechazado_Click" />
                                     </ItemTemplate> 
+                                    <ItemStyle Width="200px" />
                                 </asp:TemplateField>
 
                                 <asp:TemplateField>
                                     <ItemTemplate>
                                         <asp:Button ID="BtnAceptado" runat="server" Text="Aceptado" OnClick ="BtnAceptado_Click" />
                                     </ItemTemplate> 
+                                    <ItemStyle Width="200px" />
                                 </asp:TemplateField>
                             </Columns>
                 
@@ -190,8 +218,8 @@
                     </div>
                 </div>
             </td>
-            <td></td>
-            <td></td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
         </tr>
         <tr>
             <td>
