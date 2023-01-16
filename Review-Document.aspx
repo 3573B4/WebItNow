@@ -106,14 +106,14 @@
 
                                 <asp:TemplateField>
                                     <ItemTemplate>
-                                        <asp:ImageButton ID="imgAceptado" runat="server" ImageUrl="~/Images/aceptar.jpg" Height="32px" Width="32px" OnClick="imgAceptado_Click" />
+                                        <asp:ImageButton ID="imgAceptado" runat="server" ImageUrl="~/Images/aceptar.png" Height="35px" Width="35px" OnClick="imgAceptado_Click" />
                                     </ItemTemplate> 
                                     <ItemStyle Width="80px" />
                                 </asp:TemplateField>
 
                                 <asp:TemplateField>
                                     <ItemTemplate>
-                                        <asp:ImageButton ID="imgRechazado" runat="server" ImageUrl="~/Images/cancelar.jpg" Height="32px" Width="32px" OnClick="imgRechazado_Click" />
+                                        <asp:ImageButton ID="imgRechazado" runat="server" ImageUrl="~/Images/cancelar.png" Height="35px" Width="35px" OnClick="imgRechazado_Click" />
                                     </ItemTemplate> 
                                     <ItemStyle Width="80px" />
                                 </asp:TemplateField>

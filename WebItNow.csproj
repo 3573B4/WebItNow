@@ -136,8 +136,8 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Descargas.aspx" />
-    <Content Include="Images\aceptar.jpg" />
-    <Content Include="Images\cancelar.jpg" />
+    <Content Include="Images\aceptar.png" />
+    <Content Include="Images\cancelar.png" />
     <Content Include="Images\descargar.png" />
     <Content Include="Images\edit.jpg" />
     <Content Include="Images\loader.gif" />
