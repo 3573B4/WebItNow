@@ -180,9 +180,10 @@ namespace WebItNow
 
                     // Actualizar la tabla Estado de Documento
                     string sqlUpDate = "UPDATE ITM_04 " +
-                                        "SET IdStatus = '2'," +
+                                       "    SET IdStatus = '2'," +
                                             " Url_Imagen = '" + UrlFinal + "'," +
-                                            " Nom_Imagen = '" + nomFile + "'" +
+                                            " Nom_Imagen = '" + nomFile + "'," +
+                                            "  Fec_Envio = GETDATE() " +
                                         " WHERE IdUsuario = '" + user + "'" +
                                         " AND IdTipoDocumento = '" + folderName + "'";
 
