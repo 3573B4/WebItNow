@@ -134,8 +134,7 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
-
-    <nav class="navbar navbar-expand-lg bg-body-tertiary ">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary" data-bs-theme="dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="Menu.aspx">&nbsp</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -149,13 +148,15 @@
                     <%--    <li class="nav-item">
                             <a class="nav-link" href="#">Link</a>
                             </li>   --%>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Documentos
+                    <li class="nav-item dropdown my-1">
+                        <a class="nav-link btn btn-primary dropdown-toggle text-start" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <font size="4">Documentos</font>
                         </a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="Review-Document.aspx">Revision Documentos</a></li>
                             <!--
                             <li><a class="dropdown-item" href="#">Another action</a></li>
+                            
                             <li>
                                 <hr class="dropdown-divider"/>
                             </li>
@@ -163,14 +164,19 @@
                             -->
                         </ul>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="Login.aspx">Salir</a>
+                    <li class="nav-item my-1">
+                        <a class="nav-link btn btn-primary text-start" href="Login.aspx">
+                            
+                            <font size="4">Salir</font>
+                            <%--<asp:ImageButton ID="ImgSalir" runat="server" ImageUrl="~/Images/logout-d.png" Height="45px" Width="52px" OnClick="ImgSalir_Click" CssClass="btn btn-primary my-1"/>--%>
+                        </a>
                     </li>
                 </ul>
                 
             </div>
         </div>
     </nav>
+
     <br />
     <asp:Panel ID="pnlMensaje" runat="server" CssClass="CajaDialogo" style="display: none; border: none; border-radius: 10px; width: 400px; background-color:#FFFFFF;">
         <div class=" row justify-content-end" data-bs-theme="dark">

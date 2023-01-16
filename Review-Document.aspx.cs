@@ -85,10 +85,10 @@ namespace WebItNow
 
         protected void grdEstadoDocumento_SelectedIndexChanged(object sender, EventArgs e)
         {
-            TxtUsu.Text = grdEstadoDocumento.SelectedRow.Cells[0].Text;
-            TxtTpoDocumento.Text = grdEstadoDocumento.SelectedRow.Cells[1].Text;
-            TxtNomArchivo.Text = grdEstadoDocumento.SelectedRow.Cells[2].Text;
-            TxtUrl_Imagen.Text = grdEstadoDocumento.SelectedRow.Cells[4].Text;
+            TxtUsu.Text = grdEstadoDocumento.SelectedRow.Cells[2].Text;
+            TxtTpoDocumento.Text = grdEstadoDocumento.SelectedRow.Cells[4].Text;
+            TxtNomArchivo.Text = grdEstadoDocumento.SelectedRow.Cells[5].Text;
+            TxtUrl_Imagen.Text = grdEstadoDocumento.SelectedRow.Cells[6].Text;
 
             this.hdfValorGrid.Value = this.grdEstadoDocumento.SelectedValue.ToString();
 
@@ -177,12 +177,6 @@ namespace WebItNow
                 grdEstadoDocumento.DataSource = dt;
                 grdEstadoDocumento.DataBind();
 
-                //Attribute to show the Plus Minus Button.
-                grdEstadoDocumento.HeaderRow.Cells[0].Attributes["data-class"] = "expand";
-
-                //Attribute to hide column in Phone.
-                grdEstadoDocumento.HeaderRow.Cells[2].Attributes["data-hide"] = "phone";
-                grdEstadoDocumento.HeaderRow.Cells[3].Attributes["data-hide"] = "phone";
 
             }
             catch (Exception ex)
@@ -203,16 +197,16 @@ namespace WebItNow
 			Response.Redirect("Menu.aspx");
 		}
 
-        protected void BtnAceptado_Click(object sender, EventArgs e)
+        protected void imgAceptado_Click(object sender, EventArgs e)
         {
             try
             {
 
-                GridViewRow row = ((GridViewRow)((System.Web.UI.WebControls.Button)sender).NamingContainer);
+                GridViewRow row = ((GridViewRow)((System.Web.UI.WebControls.ImageButton)sender).NamingContainer);
                 int index = row.RowIndex;
                 
-                string sUsuario = grdEstadoDocumento.Rows[index].Cells[0].Text;
-                string sTipoDocumento = grdEstadoDocumento.Rows[index].Cells[5].Text;
+                string sUsuario = grdEstadoDocumento.Rows[index].Cells[2].Text;
+                string sTipoDocumento = grdEstadoDocumento.Rows[index].Cells[7].Text;
 
                 grdEstadoDocumento.Rows[index].Cells[3].Text = "Completo";
 
@@ -239,18 +233,18 @@ namespace WebItNow
 
         }
 
-        protected void BtnRechazado_Click(object sender, EventArgs e)
+        protected void imgRechazado_Click(object sender, EventArgs e)
         {
             try
             {
 
-                GridViewRow row = ((GridViewRow)((System.Web.UI.WebControls.Button)sender).NamingContainer);
+                GridViewRow row = ((GridViewRow)((System.Web.UI.WebControls.ImageButton)sender).NamingContainer);
                 int index = row.RowIndex;
 
-                string sUsuario = grdEstadoDocumento.Rows[index].Cells[0].Text;
-                string sNom_Archivo = grdEstadoDocumento.Rows[index].Cells[2].Text;
-                string sUrl_Imagen = grdEstadoDocumento.Rows[index].Cells[4].Text;
-                string sTipoDocumento = grdEstadoDocumento.Rows[index].Cells[5].Text;
+                string sUsuario = grdEstadoDocumento.Rows[index].Cells[2].Text;
+                string sNom_Archivo = grdEstadoDocumento.Rows[index].Cells[5].Text;
+                string sUrl_Imagen = grdEstadoDocumento.Rows[index].Cells[6].Text;
+                string sTipoDocumento = grdEstadoDocumento.Rows[index].Cells[7].Text;
 
                 string strURLFile = Server.MapPath("~/Directorio/") + sUrl_Imagen + sNom_Archivo;
 
@@ -552,6 +546,13 @@ namespace WebItNow
                 this.mpeMensaje.Show();
             }
         }
+
+        protected void grdEstadoDocumento_OnPageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            grdEstadoDocumento.PageIndex = e.NewPageIndex;
+            GetEstadoDocumentos();
+        }
+
     }
 
 }

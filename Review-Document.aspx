@@ -99,11 +99,29 @@
         <%--686px--%>
                 <div style="overflow-x: auto; overflow-y:hidden">
                     <asp:GridView ID="grdEstadoDocumento"  runat="server" AutoGenerateColumns="False" GridLines="None" Width="1400px"
-                            AllowPaging="True" CssClass="footable" PagerStyle-CssClass="pgr" AlternatingRowStyle-CssClass="alt"
+                            AllowPaging="True" CssClass="footable" PagerStyle-CssClass="pgr" AlternatingRowStyle-CssClass="alt" OnPageIndexChanging="grdEstadoDocumento_OnPageIndexChanging"
                             PageSize="5" OnSelectedIndexChanged="grdEstadoDocumento_SelectedIndexChanged" OnRowDataBound ="grdEstadoDocumento_RowDataBound" OnDataBound="grdEstadoDocumento_DataBound" DataKeyNames="IdUsuario" >
                             <AlternatingRowStyle CssClass="alt" />
                             <Columns>
+
+                                <asp:TemplateField>
+                                    <ItemTemplate>
+                                        <asp:ImageButton ID="imgAceptado" runat="server" ImageUrl="~/Images/aceptar.jpg" Height="32px" Width="32px" OnClick="imgAceptado_Click" />
+                                    </ItemTemplate> 
+                                    <ItemStyle Width="80px" />
+                                </asp:TemplateField>
+
+                                <asp:TemplateField>
+                                    <ItemTemplate>
+                                        <asp:ImageButton ID="imgRechazado" runat="server" ImageUrl="~/Images/cancelar.jpg" Height="32px" Width="32px" OnClick="imgRechazado_Click" />
+                                    </ItemTemplate> 
+                                    <ItemStyle Width="80px" />
+                                </asp:TemplateField>
+
                                 <asp:BoundField DataField="IdUsuario" HeaderText="Id. Usuario" >
+                                <ItemStyle Width="600px" />
+                                </asp:BoundField>
+                                <asp:BoundField DataField="Desc_Status" HeaderText="Id. Status" >
                                 <ItemStyle Width="600px" />
                                 </asp:BoundField>
                                 <asp:BoundField DataField="Descripcion" HeaderText="Tipo de Documento" >
@@ -112,9 +130,6 @@
                                 <asp:BoundField DataField="Nom_Imagen" HeaderText="Nombre de Archivo" >
                                 <ItemStyle Width="1750px" />
                                 </asp:BoundField>
-                                <asp:BoundField DataField="Desc_Status" HeaderText="Id. Status" >
-                                <ItemStyle Width="600px" />
-                                </asp:BoundField>
                                 <asp:BoundField DataField="Url_Imagen" HeaderText="Url_Imagen" >
                                 <ItemStyle Width="600px" />
                                 </asp:BoundField>
@@ -122,19 +137,6 @@
                                 <ItemStyle Width="600px" />
                                 </asp:BoundField>
 
-                                <asp:TemplateField>
-                                    <ItemTemplate>
-                                         <asp:Button ID="BtnRechazado" runat="server" Text="Rechazado" OnClick ="BtnRechazado_Click" />
-                                    </ItemTemplate> 
-                                    <ItemStyle Width="200px" />
-                                </asp:TemplateField>
-
-                                <asp:TemplateField>
-                                    <ItemTemplate>
-                                        <asp:Button ID="BtnAceptado" runat="server" Text="Aceptado" OnClick ="BtnAceptado_Click" />
-                                    </ItemTemplate> 
-                                    <ItemStyle Width="200px" />
-                                </asp:TemplateField>
                             </Columns>
                 
                             <PagerStyle CssClass="pgr" />

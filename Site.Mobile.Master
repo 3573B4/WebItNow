@@ -83,18 +83,18 @@
     <form id="form1" runat="server" enctype="multipart/form-data">
     <div id="topContent" >
     <!-- <a href="Default.aspx">Control De Horas</a> -->
-    <table>
-    <tr>
-        <td class="style1">
-            <asp:Image ID="Image1" runat="server" Height="120px" ImageUrl="~/Images/Itnow.jpg" Width="224px" />
-        </td>
-        <td class="style2" align="center">
-            <h2 style="font-family: Arial, Helvetica, sans-serif">Itnow Technologies de México S.A. de C.V.</h2> 
-        </td>
-        <td class="style3">
-        </td>
-    </tr>
-    </table>
+        <table>
+        <tr>
+            <td class="style1">
+                <asp:Image ID="Image1" runat="server" Height="120px" ImageUrl="~/Images/Itnow.jpg" Width="224px" />
+            </td>
+            <td class="style2" align="center">
+                <h2 class="h2 mb-3 fw-normal" style="font-family: Arial, Helvetica, sans-serif">Itnow Technologies de México S.A. de C.V.</h2> 
+            </td>
+            <td class="style3">
+            </td>
+        </tr>
+        </table>
     </div>
     <div id="mainContent" >
         <section class="content-wrapper main-content clear-fix">
