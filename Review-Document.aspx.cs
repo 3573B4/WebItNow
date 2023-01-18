@@ -96,7 +96,6 @@ namespace WebItNow
             TxtUrl_Imagen.Text = grdEstadoDocumento.SelectedRow.Cells[6].Text;
 
             this.hdfValorGrid.Value = this.grdEstadoDocumento.SelectedValue.ToString();
-
         }
 
         //protected void grdEstadoDocumento_RowDataBound(object sender, GridViewCommandEventArgs e)
@@ -130,6 +129,14 @@ namespace WebItNow
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
                 e.Row.Attributes.Add("OnClick", "" + Page.ClientScript.GetPostBackClientHyperlink(this.grdEstadoDocumento, "Select$" + e.Row.RowIndex.ToString()) + ";");
+
+            string IdDescarga = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "IdDescarga"));
+            
+            if (IdDescarga == "1")
+            {
+                (e.Row.FindControl("imgAceptado") as ImageButton).Enabled = true;
+                (e.Row.FindControl("imgRechazado") as ImageButton).Enabled = true;
+            }
         }
 
         protected void grdEstadoDocumento_DataBound(object sender, EventArgs e)
@@ -162,7 +169,7 @@ namespace WebItNow
                 // Status de Documento = ITM_07
 
                 string strQuery = "SELECT ed.IdUsuario, ed.Nom_Imagen, td.Descripcion, ed.IdTipoDocumento, " +
-                                  "s.Descripcion as Desc_Status, ed.Url_Imagen  " +
+                                  "       s.Descripcion as Desc_Status, ed.Url_Imagen, ed.IdDescarga " +
                                   "  FROM ITM_04 ed, ITM_06 td, ITM_07 s " +
                                   " WHERE ed.IdStatus = s.IdStatus And ed.IdTipoDocumento = td.IdTpoDocumento " +
                                   "   AND ed.IdStatus IN (2,3) ";
@@ -201,88 +208,6 @@ namespace WebItNow
 		{
 			Response.Redirect("Menu.aspx");
 		}
-
-        protected void imgAceptado_Click(object sender, EventArgs e)
-        {
-            try
-            {
-
-                GridViewRow row = ((GridViewRow)((System.Web.UI.WebControls.ImageButton)sender).NamingContainer);
-                int index = row.RowIndex;
-                
-                string sUsuario = grdEstadoDocumento.Rows[index].Cells[2].Text;
-                string sTipoDocumento = grdEstadoDocumento.Rows[index].Cells[7].Text;
-
-                grdEstadoDocumento.Rows[index].Cells[3].Text = "Completo";
-
-                // Actualizar en la tabla tbEstadoDocumento (Status = 3)
-                Update_tbEstadoDocumento(sUsuario, sTipoDocumento,  3);
-
-                var email = new EnvioEmail();
-
-                // Consultar de la tabla [tbUsuarios] el [UsEmail]
-                string sEmail = email.CorreoElectronico(sUsuario);
-                int Envio_Ok =email.EnvioMensaje(sUsuario, sEmail, "Documento Aceptado ");
-
-                if (Envio_Ok == 0)
-                {
-                    /// Envio de correo Ok.
-                    Lbl_Message.Text = "* El documento ha sido aceptado.";
-                }
-            }
-            catch (Exception ex)
-            {
-                LblMessage.Text = ex.Message;
-                mpeMensaje.Show();
-            }
-
-        }
-
-        protected void imgRechazado_Click(object sender, EventArgs e)
-        {
-            try
-            {
-
-                GridViewRow row = ((GridViewRow)((System.Web.UI.WebControls.ImageButton)sender).NamingContainer);
-                int index = row.RowIndex;
-
-                string sUsuario = grdEstadoDocumento.Rows[index].Cells[2].Text;
-                string sNom_Archivo = grdEstadoDocumento.Rows[index].Cells[5].Text;
-                string sUrl_Imagen = grdEstadoDocumento.Rows[index].Cells[6].Text;
-                string sTipoDocumento = grdEstadoDocumento.Rows[index].Cells[7].Text;
-
-                string strURLFile = Server.MapPath("~/Directorio/") + sUrl_Imagen + sNom_Archivo;
-
-                // Actualizar en la tabla tbEstadoDocumento (Status = 1)
-                Update_tbEstadoDocumento(sUsuario, sTipoDocumento, 1);
-
-                grdEstadoDocumento.Rows[index].Cells[3].Text = "Faltante";
-
-                // Eliminar el archivo de Server.MapPath("~/Directorio/")
-                File.Delete(strURLFile);
-
-                // Refrescar GridView
-                GetEstadoDocumentos();
-
-                var email = new EnvioEmail();
-
-                // Consultar de la tabla [tbUsuarios] el [UsEmail]
-                string sEmail = email.CorreoElectronico(sUsuario);
-                int Envio_Ok = email.EnvioMensaje(sUsuario, sEmail, "Documento Rechazado ");
-
-                if (Envio_Ok == 0)
-                {
-                    /// Envio de correo Ok.
-                    Lbl_Message.Text = "* El documento ha sido rechazado.";
-                }
-
-            }
-            catch (Exception ex)
-            {
-                LblMessage.Text = ex.Message;
-                mpeMensaje.Show();
-            }
-        }
 
         protected void chkAceptado_OnCheckedChanged(object sender, EventArgs e)
         {
@@ -340,27 +265,6 @@ namespace WebItNow
 
         }
 
-        protected void DownloadFile(object send, EventArgs e) 
-        {
-            if (TxtNomArchivo.Text == "")
-            {
-                LblMessage.Text = "Seleccione el archivo a descargar";
-                this.mpeMensaje.Show();
-            }
-            else
-            {
-                string filePath = Server.MapPath("~/Directorio/") + TxtUrl_Imagen.Text + TxtNomArchivo.Text;
-                Variables.wDownload = true;
-
-             // DescargaArch(filePath);
-
-                Session["FilePath"] = Server.MapPath("~/Directorio/") + TxtUrl_Imagen.Text + TxtNomArchivo.Text;
-                // Response.Redirect("Descargas.aspx", true);
-                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "AbrirDescarga", string.Format("window.open('Descargas.aspx');"), true);
-
-            }
-        }
-
         protected void ImgDescarga_Click(object send, EventArgs e)
         {
             if (TxtNomArchivo.Text == "")
@@ -373,6 +277,10 @@ namespace WebItNow
                 string sFilename = TxtNomArchivo.Text;
                 string sSubdirectorio = TxtUrl_Imagen.Text;
                 Variables.wDownload = true;
+
+                // Actualizar en la tabla [ITM_04] (IdDescarga = 1)
+                string sTipoDocumento = "OTR";
+                Update_ITM_04(TxtUsu.Text, sTipoDocumento, 1);
 
                 DownloadFromAzure(sFilename, sSubdirectorio);
 
@@ -389,6 +297,132 @@ namespace WebItNow
                 //    LblMessage.Text = "El archivo no se encuentra en el repositorio";
                 //    this.mpeMensaje.Show();
                 //}
+            }
+        }
+
+        protected void imgAceptado_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+                GridViewRow row = ((GridViewRow)((System.Web.UI.WebControls.ImageButton)sender).NamingContainer);
+                int index = row.RowIndex;
+
+                string sUsuario = grdEstadoDocumento.Rows[index].Cells[2].Text;
+                string sTipoDocumento = grdEstadoDocumento.Rows[index].Cells[7].Text;
+
+                grdEstadoDocumento.Rows[index].Cells[3].Text = "Completo";
+
+                // Actualizar en la tabla tbEstadoDocumento (Status = 3)
+                Update_tbEstadoDocumento(sUsuario, sTipoDocumento, 3);
+
+                // Actualizar en la tabla [ITM_04] (IdDescarga = 1)
+                Update_ITM_04(sUsuario, sTipoDocumento, 1);
+
+                var email = new EnvioEmail();
+
+                // Consultar de la tabla [tbUsuarios] el [UsEmail]
+                string sEmail = email.CorreoElectronico(sUsuario);
+                int Envio_Ok = email.EnvioMensaje(sUsuario, sEmail, "Documento Aceptado ");
+
+                if (Envio_Ok == 0)
+                {
+                    /// Envio de correo Ok.
+                    Lbl_Message.Text = "* El documento ha sido aceptado.";
+                }
+            }
+            catch (Exception ex)
+            {
+                LblMessage.Text = ex.Message;
+                mpeMensaje.Show();
+            }
+
+        }
+
+        protected void imgRechazado_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+                GridViewRow row = ((GridViewRow)((System.Web.UI.WebControls.ImageButton)sender).NamingContainer);
+                int index = row.RowIndex;
+
+                string sUsuario = grdEstadoDocumento.Rows[index].Cells[2].Text;
+                string sNom_Archivo = grdEstadoDocumento.Rows[index].Cells[5].Text;
+                string sUrl_Imagen = grdEstadoDocumento.Rows[index].Cells[6].Text;
+                string sTipoDocumento = grdEstadoDocumento.Rows[index].Cells[7].Text;
+
+                string strURLFile = Server.MapPath("~/Directorio/") + sUrl_Imagen + sNom_Archivo;
+
+                // Actualizar en la tabla [tbEstadoDocumento] (Status = 1)
+                Update_tbEstadoDocumento(sUsuario, sTipoDocumento, 1);
+
+                // Actualizar en la tabla [ITM_04] (IdDescarga = 0)
+                Update_ITM_04(sUsuario, sTipoDocumento, 0);
+
+                grdEstadoDocumento.Rows[index].Cells[3].Text = "Faltante";
+
+                // Eliminar el archivo de Server.MapPath("~/Directorio/")
+                // File.Delete(strURLFile);
+
+                DeleteFromAzure(sNom_Archivo, sUrl_Imagen);
+
+                // Refrescar GridView
+                GetEstadoDocumentos();
+
+                var email = new EnvioEmail();
+
+                // Consultar de la tabla [tbUsuarios] el [UsEmail]
+                string sEmail = email.CorreoElectronico(sUsuario);
+                int Envio_Ok = email.EnvioMensaje(sUsuario, sEmail, "Documento Rechazado ");
+
+                if (Envio_Ok == 0)
+                {
+                    /// Envio de correo Ok.
+                    Lbl_Message.Text = "* El documento ha sido rechazado.";
+                }
+
+            }
+            catch (Exception ex)
+            {
+                LblMessage.Text = ex.Message;
+                mpeMensaje.Show();
+            }
+        }
+
+        protected void DeleteFromAzure(string sFilename, string sSubdirectorio)
+        {
+            try
+            {
+
+                // Name of the share, directory, and file
+                string ConnectionString = ConfigurationManager.AppSettings.Get("StorageConnectionString");
+                string AccountName = ConfigurationManager.AppSettings.Get("StorageAccountName");
+                string sDirName = "itnowstorage";
+
+                // Obtener una referencia de nuestra parte.
+                ShareClient share = new ShareClient(ConnectionString, AccountName);
+
+                // Obtener una referencia de nuestro directorio - directorio ubicado en el nivel raíz.
+                ShareDirectoryClient directory = share.GetDirectoryClient(sDirName);
+
+                // Obtener una referencia a un subdirectorio que no se encuentra en el nivel raíz
+                directory = directory.GetSubdirectoryClient(sSubdirectorio);
+
+                // Obtener una referencia a nuestro archivo.
+                ShareFileClient file = directory.GetFileClient(sFilename);
+
+                file.Delete();
+            }
+            catch (Exception ex)
+            {
+                // Show(ex.Message);
+                LblMessage.Text = ex.Message;
+                this.mpeMensaje.Show();
+            }
+            finally
+            {
+
             }
         }
 
@@ -428,6 +462,27 @@ namespace WebItNow
             }
             finally
             {
+
+            }
+        }
+
+        protected void DownloadFile(object send, EventArgs e)
+        {
+            if (TxtNomArchivo.Text == "")
+            {
+                LblMessage.Text = "Seleccione el archivo a descargar";
+                this.mpeMensaje.Show();
+            }
+            else
+            {
+                string filePath = Server.MapPath("~/Directorio/") + TxtUrl_Imagen.Text + TxtNomArchivo.Text;
+                Variables.wDownload = true;
+
+                // DescargaArch(filePath);
+
+                Session["FilePath"] = Server.MapPath("~/Directorio/") + TxtUrl_Imagen.Text + TxtNomArchivo.Text;
+                // Response.Redirect("Descargas.aspx", true);
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "AbrirDescarga", string.Format("window.open('Descargas.aspx');"), true);
 
             }
         }
@@ -539,6 +594,42 @@ namespace WebItNow
             }
             }
 
+        public void Update_ITM_04(string pUsuarios, string pIdTipoDocumento, int pIdDescarga)
+        {
+            ConexionBD Conecta = new ConexionBD();
+            NewMethod(Conecta);
+
+            try
+            {
+
+                SqlCommand cmd1 = new SqlCommand("sp_UpDescarga", Conecta.ConectarBD);
+                cmd1.CommandType = CommandType.StoredProcedure;
+
+                cmd1.Parameters.AddWithValue("@usuario", pUsuarios);
+                cmd1.Parameters.AddWithValue("@IdTipoDocumento", pIdTipoDocumento);
+                cmd1.Parameters.AddWithValue("@IdDescarga", pIdDescarga);
+
+                SqlDataReader dr1 = cmd1.ExecuteReader();
+
+                cmd1.Dispose();
+                dr1.Dispose();
+
+                Conecta.Cerrar();
+
+            }
+            catch (Exception ex)
+            {
+                // Show(ex.Message);
+                LblMessage.Text = ex.Message;
+                this.mpeMensaje.Show();
+            }
+            finally
+            {
+
+            }
+
+        }
+
         public bool DownloadFile(string UrlString, string DescFilePath)
         {
             string fileName = System.IO.Path.GetFileName(UrlString);
@@ -602,6 +693,11 @@ namespace WebItNow
         {
             grdEstadoDocumento.PageIndex = e.NewPageIndex;
             GetEstadoDocumentos();
+        }
+
+        private static void NewMethod(ConexionBD Conecta)
+        {
+            Conecta.Abrir();
         }
 
     }

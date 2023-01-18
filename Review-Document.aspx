@@ -96,7 +96,6 @@
             </div>
             <br />
             <h2 class="h2 mb-3 fw-normal">Pendientes</h2>
-        <%--686px--%>
                 <div style="overflow-x: auto; overflow-y:hidden">
                     <asp:GridView ID="grdEstadoDocumento"  runat="server" AutoGenerateColumns="False" GridLines="None" Width="1400px"
                             AllowPaging="True" CssClass="footable" PagerStyle-CssClass="pgr" AlternatingRowStyle-CssClass="alt" OnPageIndexChanging="grdEstadoDocumento_OnPageIndexChanging"
@@ -106,14 +105,14 @@
 
                                 <asp:TemplateField>
                                     <ItemTemplate>
-                                        <asp:ImageButton ID="imgAceptado" runat="server" ImageUrl="~/Images/aceptar.png" Height="35px" Width="35px" OnClick="imgAceptado_Click" />
+                                        <asp:ImageButton ID="imgAceptado" runat="server" ImageUrl="~/Images/aceptar.png" Height="35px" Width="35px" OnClick="imgAceptado_Click" Enabled="false" />
                                     </ItemTemplate> 
                                     <ItemStyle Width="80px" />
                                 </asp:TemplateField>
 
                                 <asp:TemplateField>
                                     <ItemTemplate>
-                                        <asp:ImageButton ID="imgRechazado" runat="server" ImageUrl="~/Images/cancelar.png" Height="35px" Width="35px" OnClick="imgRechazado_Click" />
+                                        <asp:ImageButton ID="imgRechazado" runat="server" ImageUrl="~/Images/cancelar.png" Height="35px" Width="35px" OnClick="imgRechazado_Click" Enabled="false" />
                                     </ItemTemplate> 
                                     <ItemStyle Width="80px" />
                                 </asp:TemplateField>
@@ -136,6 +135,10 @@
                                 <asp:BoundField DataField="IdTipoDocumento" HeaderText="Id. de Documento" >
                                 <ItemStyle Width="600px" />
                                 </asp:BoundField>
+                                <asp:BoundField DataField="IdDescarga" HeaderText="Descarga(s)" >
+                                <ItemStyle Width="200px" />
+                                </asp:BoundField>
+                                
 
                             </Columns>
                 
