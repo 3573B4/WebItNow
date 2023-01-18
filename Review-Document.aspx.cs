@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Threading.Tasks;
+using System.Configuration;
 using System.IO;
 using System.Runtime.InteropServices;
 
@@ -9,6 +11,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.SessionState;
 using System.Net;
+using System.Text;
 
 using System.Diagnostics;
 using System.Reflection;
@@ -19,6 +22,7 @@ using System.Data.SqlTypes;
 using System.Data.SqlClient;
 
 using System.Threading;
+using Azure.Storage.Files.Shares;
 
 namespace WebItNow
 {
@@ -49,6 +53,7 @@ namespace WebItNow
 
                 // Carga GridView
                 GetEstadoDocumentos();
+                // itnowstorage - Nombre de la cuenta de almacenamiento Azure
             }
 
             if (Variables.wDownload == true)
@@ -365,19 +370,65 @@ namespace WebItNow
             }
             else
             {
-                string filePath = Server.MapPath("~/Directorio/") + TxtUrl_Imagen.Text + TxtNomArchivo.Text;
+                string sFilename = TxtNomArchivo.Text;
+                string sSubdirectorio = TxtUrl_Imagen.Text;
                 Variables.wDownload = true;
 
-                bool fileExist = File.Exists(filePath);
-                if (fileExist)
-                {
-                    DescargaArch(filePath);
-                }
-                else
-                {
-                    LblMessage.Text = "El archivo no se encuentra en el repositorio";
-                    this.mpeMensaje.Show();
-                }
+                DownloadFromAzure(sFilename, sSubdirectorio);
+
+                //string filePath = Server.MapPath("~/Directorio/") + TxtUrl_Imagen.Text + TxtNomArchivo.Text;
+
+                //bool fileExist = File.Exists(filePath);
+
+                //if (fileExist)
+                //{
+                //  DescargaArch(filePath);
+                //}
+                //else
+                //{
+                //    LblMessage.Text = "El archivo no se encuentra en el repositorio";
+                //    this.mpeMensaje.Show();
+                //}
+            }
+        }
+
+        protected void DownloadFromAzure(string sFilename, string sSubdirectorio)
+        {
+            try
+            {
+                // Name of the share, directory, and file
+                string ConnectionString = ConfigurationManager.AppSettings.Get("StorageConnectionString");
+                string AccountName = ConfigurationManager.AppSettings.Get("StorageAccountName");
+                string sDirName = "itnowstorage";
+
+                // Obtener una referencia de nuestra parte.
+                ShareClient share = new ShareClient(ConnectionString, AccountName);
+
+                // Obtener una referencia de nuestro directorio - directorio ubicado en el nivel raíz.
+                ShareDirectoryClient directory = share.GetDirectoryClient(sDirName);
+
+                // Obtener una referencia a un subdirectorio que no se encuentra en el nivel raíz
+                directory = directory.GetSubdirectoryClient(sSubdirectorio);
+
+                // Obtener una referencia a nuestro archivo.
+                ShareFileClient file = directory.GetFileClient(sFilename);
+
+                // Descargar el archivo.
+                Response.ContentType = ContentType;
+                Response.AppendHeader("Content-Disposition", "attachment; filename=" + Path.GetFileName(file.Path));
+                Response.WriteFile(file.Path);
+                HttpContext.Current.ApplicationInstance.CompleteRequest();
+
+            }
+            catch (Exception ex)
+            {
+                // Show(ex.Message);
+                LblMessage.Text = ex.Message;
+                this.mpeMensaje.Show();
+            }
+            finally
+            {
+
             }
         }
 
