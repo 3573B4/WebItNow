@@ -175,27 +175,36 @@ namespace WebItNow
                 string UrlFinal = user + "/" + folderName + "/";
                 string directorioURL = Server.MapPath(directFinal);
                 string nomFile = FileUpload1.FileName;
-
                 int tamArchivo = FileUpload1.PostedFile.ContentLength;
-                if (tamArchivo <= 40000000)
+
+                if (FileUpload1.HasFile)
                 {
 
-                    ConexionBD Conectar = new ConexionBD();
-                    Conectar.Abrir();
-
-                    // Actualizar la tabla Estado de Documento
-                    string sqlUpDate = "UPDATE ITM_04 " +
-                                       "    SET IdStatus = '2'," +
-                                            " Url_Imagen = '" + UrlFinal + "'," +
-                                            " Nom_Imagen = '" + nomFile + "'," +
-                                            "  Fec_Envio = GETDATE() " +
-                                        " WHERE IdUsuario = '" + user + "'" +
-                                        " AND IdTipoDocumento = '" + folderName + "'";
-
-                    SqlCommand cmd = new SqlCommand(sqlUpDate, Conectar.ConectarBD);
-
-                    if (FileUpload1.HasFile)
+                    if (tamArchivo == 0 )
                     {
+                        LblMessage.Text = "El archivo esta dañado";
+                        mpeMensaje.Show();
+                        return;
+                    }
+
+                    if (tamArchivo <= 40000000)
+                    {
+
+                        ConexionBD Conectar = new ConexionBD();
+                        Conectar.Abrir();
+
+                        // Actualizar la tabla Estado de Documento
+                        string sqlUpDate = "UPDATE ITM_04 " +
+                                           "    SET IdStatus = '2'," +
+                                                " Url_Imagen = '" + UrlFinal + "'," +
+                                                " Nom_Imagen = '" + nomFile + "'," +
+                                                "  Fec_Envio = GETDATE() " +
+                                            " WHERE IdUsuario = '" + user + "'" +
+                                            " AND IdTipoDocumento = '" + folderName + "'";
+
+                        SqlCommand cmd = new SqlCommand(sqlUpDate, Conectar.ConectarBD);
+
+
                         //if (!Directory.Exists(directorioURL))
                         //{
                         //    Directory.CreateDirectory(directorioURL);
@@ -209,7 +218,7 @@ namespace WebItNow
                         //else
                         //{
 
-                            string filepath = Server.MapPath(directorio + FileUpload1.FileName);
+                        string filepath = Server.MapPath(directorio + FileUpload1.FileName);
                         FileUpload1.SaveAs(filepath);
                         string sPath = System.IO.Path.GetDirectoryName(filepath) + "/" + nomFile;
 
@@ -222,35 +231,35 @@ namespace WebItNow
                         
                         cmd.ExecuteReader();
 
-                            getDocsUsuario();
-                            checarStatusDoc();
+                        getDocsUsuario();
+                        checarStatusDoc();
 
-                            var email = new EnvioEmail();
-                            string sEmail = email.CorreoElectronico(user);
-                            int Envio_Ok = email.EnvioMensaje(user, sEmail, "Documento Enviado");
+                        var email = new EnvioEmail();
+                        string sEmail = email.CorreoElectronico(user);
+                        int Envio_Ok = email.EnvioMensaje(user, sEmail, "Documento Enviado");
 
 
                         //}
+
                     }
-                    else if (tamArchivo == 0)
-                    {
-                        LblMessage.Text = "El archivo esta dañado";
-                        mpeMensaje.Show();
-                    }
+                    
                     else
                     {
-                        LblMessage.Text = "Debe seleccionar un archivo";
-                        mpeMensaje.Show();
-
-
-                        // ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal();", true);
-                    }
-                }
-                else
-                {
-                    LblMessage.Text = "El documento Exede los 4 MB";
+                    LblMessage.Text = "El documento Exede los 40 MB";
                     mpeMensaje.Show();
 
+                    }
+
+                }
+                
+
+                else
+                {
+                    LblMessage.Text = "Debe seleccionar un archivo";
+                    mpeMensaje.Show();
+
+
+                    // ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal();", true);
                 }
             }
             catch (Exception ex)

@@ -90,7 +90,7 @@
                 <div class="col-12">
                         <div class="d-grid gap-2 d-flex justify-content-center">
                             <asp:TextBox ID="TxtNomArchivo" runat="server" CssClass="form-control" placeholder="Archivo para descargar" ReadOnly="True"></asp:TextBox>
-                            <asp:ImageButton ID="imgDescarga" runat="server" ImageUrl="~/Images/descargar.png" Height="35px" Width="35px" OnClick="ImgDescarga_Click" OnClientClick="timedRefresh(2000)" />
+                            <asp:ImageButton ID="imgDescarga" runat="server" ImageUrl="~/Images/descargar.png" Height="35px" Width="35px" OnClick="ImgDescarga_Click" OnClientClick="timedRefresh(2000)" Enabled ="false" />
                         </div>
                 </div>
             </div>

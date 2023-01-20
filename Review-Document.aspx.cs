@@ -99,6 +99,9 @@ namespace WebItNow
             TxtNomArchivo.Text = grdEstadoDocumento.SelectedRow.Cells[5].Text;
             TxtUrl_Imagen.Text = grdEstadoDocumento.SelectedRow.Cells[6].Text;
 
+            imgDescarga.Enabled = true;
+
+
             this.hdfValorGrid.Value = this.grdEstadoDocumento.SelectedValue.ToString();
         }
 
@@ -289,6 +292,7 @@ namespace WebItNow
                 // Descargar el archivo.
                 DownloadFromAzure(sFilename, sSubdirectorio);
 
+                imgDescarga.Enabled = false;
                 //string filePath = Server.MapPath("~/Directorio/") + TxtUrl_Imagen.Text + TxtNomArchivo.Text;
 
                 //bool fileExist = File.Exists(filePath);
@@ -505,6 +509,7 @@ namespace WebItNow
                 // comenzando desde la raíz..
                 var remaining = new Queue<ShareDirectoryClient>();
                 remaining.Enqueue(share.GetRootDirectoryClient());
+
                 while (remaining.Count > 0)
                 {
                     // Obtener todos los archivos y subdirectorios del siguiente directorio
