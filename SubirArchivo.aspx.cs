@@ -347,59 +347,59 @@ namespace WebItNow
 
         public void UploadToAzure(string sFilename, string sPath)
         {
-            //try
-            //{
+            try
+            {
 
-            string ConnectionString = ConfigurationManager.AppSettings.Get("StorageConnectionString");
-            string AccountName = ConfigurationManager.AppSettings.Get("StorageAccountName");
+                string ConnectionString = ConfigurationManager.AppSettings.Get("StorageConnectionString");
+                string AccountName = ConfigurationManager.AppSettings.Get("StorageAccountName");
 
-            // Name of the directory, and file
-            string dirName = "itnowstorage";
-            string fileName = sFilename;
+                // Name of the directory, and file
+                string dirName = "itnowstorage";
+                string fileName = sFilename;
 
-            // Get a reference from our share 
-            ShareClient share = new ShareClient(ConnectionString, AccountName);
+                // Get a reference from our share 
+                ShareClient share = new ShareClient(ConnectionString, AccountName);
 
-            // Get a reference from our directory - directory located on root level
-            ShareDirectoryClient directory = share.GetDirectoryClient(dirName);
-            
-            string sUsuario = Convert.ToString(Session["IdUsuario"]);
-            string sTpoDocumento = ddlDocs.SelectedValue;
+                // Get a reference from our directory - directory located on root level
+                ShareDirectoryClient directory = share.GetDirectoryClient(dirName);
 
-            //CloudStorageAccount storageAccount = CloudStorageAccount.Parse(CloudConfigurationManager.GetSetting("StorageConnectionString"));
-            //CloudFileClient fileclient = storageAccount.CreateCloudFileClient();
-            //CloudFileShare share1 = fileclient.GetShareReference("vault");
+                string sUsuario = Convert.ToString(Session["IdUsuario"]);
+                string sTpoDocumento = ddlDocs.SelectedValue;
 
-            //CloudFileDirectory rootdir = share1.GetRootDirectoryReference();
-            //// Dim dir = rootdir.GetDirectoryReference("testing")
-            //var dir = rootdir.GetDirectoryReference("itnowstorage/USUARIO2");
+                //CloudStorageAccount storageAccount = CloudStorageAccount.Parse(CloudConfigurationManager.GetSetting("StorageConnectionString"));
+                //CloudFileClient fileclient = storageAccount.CreateCloudFileClient();
+                //CloudFileShare share1 = fileclient.GetShareReference("vault");
 
-            //dir.CreateIfNotExists();
+                //CloudFileDirectory rootdir = share1.GetRootDirectoryReference();
+                //var dir = rootdir.GetDirectoryReference("itnowstorage/USUARIO2");
 
-
-            //if (directory.Exists())
-            //    {
-            //        // CreateDirectory
-            //        directory.CreateSubdirectory(sUsuario);
-            //        directory = directory.GetSubdirectoryClient(sUsuario);
-            //        directory = directory.CreateSubdirectory(sTpoDocumento);
-            //    }
-            //    else
-            //    {
-            //        // Get a reference to a subdirectory not located on root level
-            //        directory = directory.GetSubdirectoryClient(sUsuario);
-            //        directory = directory.GetSubdirectoryClient(sTpoDocumento);
-            //    }
-
-            // Get a reference to a subdirectory not located on root level
-            directory = directory.GetSubdirectoryClient(sUsuario);
-            directory = directory.GetSubdirectoryClient(sTpoDocumento);
-
-            // Get a reference to our file
-            ShareFileClient file = directory.GetFileClient(fileName);
+                //dir.CreateIfNotExists();
 
 
-            if (file.Exists())
+                //if (directory.Exists())
+                //    {
+                //        // CreateDirectory
+                //        directory.CreateSubdirectory(sUsuario);
+                //        directory = directory.GetSubdirectoryClient(sUsuario);
+                //        directory = directory.CreateSubdirectory(sTpoDocumento);
+                //    }
+                //    else
+                //    {
+                //        // Get a reference to a subdirectory not located on root level
+                //        directory = directory.GetSubdirectoryClient(sUsuario);
+                //        directory = directory.GetSubdirectoryClient(sTpoDocumento);
+                //    }
+
+                // CreateDirectory
+                directory.CreateSubdirectory(sUsuario);
+                directory = directory.GetSubdirectoryClient(sUsuario);
+                directory = directory.CreateSubdirectory(sTpoDocumento);
+
+                // Get a reference to our file
+                ShareFileClient file = directory.GetFileClient(fileName);
+
+
+                if (file.Exists())
                 {
                     LblMessage.Text = "El documento ya existe";
                     mpeMensaje.Show();
@@ -407,7 +407,6 @@ namespace WebItNow
                 else
                 {
                     // Si el documento no existe
-
                     // Max. 4MB (4194304 Bytes in binary) allowed
                     const int uploadLimit = 40000000;
 
@@ -420,6 +419,7 @@ namespace WebItNow
                             file.UploadRange(
                             new HttpRange(0, stream.Length),
                             stream);
+
                             LblMessage.Text = "El documento se envio exitosamente";
                             mpeMensaje.Show();
                         }
@@ -428,10 +428,10 @@ namespace WebItNow
                             int bytesRead;
                             long index = 0;
                             byte[] buffer = new byte[uploadLimit];
-                            // Stream is larger than the limit so we need to upload in chunks
+                            // La transmisión es más grande que el límite, por lo que debemos cargarla en fragmentos
                             while ((bytesRead = stream.Read(buffer, 0, buffer.Length)) > 0)
                             {
-                                // Create a memory stream for the buffer to upload
+                                // Cree un flujo de memoria para que el búfer lo cargue
                                 MemoryStream ms = new MemoryStream(buffer, 0, bytesRead);
                                 file.UploadRange(new HttpRange(index, ms.Length), ms);
                                 index += ms.Length; // increment the index to the account for bytes already written
@@ -440,13 +440,12 @@ namespace WebItNow
                     }
                 }
 
-            //}
-                //catch (Exception ex)
-                //{
-                //    LblMessage.Text = ex.Message;
-                //    mpeMensaje.Show();
-                //}
 
+            } catch (Exception ex)
+            {
+                LblMessage.Text = ex.Message;
+                this.mpeMensaje.Show();
+            }
         }
     }
     }

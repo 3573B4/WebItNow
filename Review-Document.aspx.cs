@@ -26,6 +26,7 @@ using System.Data.SqlClient;
 using System.Threading;
 using Azure.Storage.Files.Shares;
 using Microsoft.WindowsAzure.Storage.File;
+using Azure.Storage.Files.Shares.Models;
 
 namespace WebItNow
 {
@@ -36,8 +37,6 @@ namespace WebItNow
 
         // NYWVH-HT4XC-R2WYW-9Y3CM-X4V3Y
         private static Guid FolderDownloads = new Guid("374DE290-123F-4565-9164-39C4925E467B");
-        private object isoStore;
-        private object share;
 
         [DllImport("shell32.dll", CharSet = CharSet.Auto)]
 
@@ -418,9 +417,12 @@ namespace WebItNow
                 // Obtener una referencia a nuestro archivo.
                 ShareFileClient file = directory.GetFileClient(sFilename);
 
-                file.Delete();
+                //  file.Delete();
+                //  directory.Delete();
 
-                directory.Delete();
+                DeleteDirectorios(string.Empty, sFilename);
+                DeleteDirectorios(sTipoDocumento, string.Empty);
+                DeleteDirectorios(sUsuario, string.Empty);
 
             }
             catch (Exception ex)
@@ -472,6 +474,54 @@ namespace WebItNow
             finally
             {
 
+            }
+        }
+
+        protected void DeleteDirectorios(string sDirectorio, string sFilename)
+        {
+            // Name of the share, directory, and file
+            string ConnectionString = ConfigurationManager.AppSettings.Get("StorageConnectionString");
+            string AccountName = ConfigurationManager.AppSettings.Get("StorageAccountName");
+
+            try
+            {
+
+                ShareClient share = new ShareClient(ConnectionString, AccountName);
+
+                // Realizar un seguimiento de los directorios restantes,
+                // comenzando desde la raíz..
+                var remaining = new Queue<ShareDirectoryClient>();
+                remaining.Enqueue(share.GetRootDirectoryClient());
+                while (remaining.Count > 0)
+                {
+                    // Obtener todos los archivos y subdirectorios del siguiente directorio
+                    ShareDirectoryClient dir = remaining.Dequeue();
+                    foreach (ShareFileItem item in dir.GetFilesAndDirectories())
+                    {
+                        // Directorios
+                        if (item.IsDirectory)
+                        {
+                            remaining.Enqueue(dir.GetSubdirectoryClient(item.Name));
+                            if (item.Name == sDirectorio)
+                            {
+                                dir.DeleteSubdirectory(item.Name);
+                            }
+                        }
+                        else
+                        {
+                            if (item.Name == sFilename)
+                            {
+                                dir.DeleteFile(sFilename);
+                            }
+                        }
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                LblMessage.Text = ex.Message;
+                this.mpeMensaje.Show();
             }
         }
 
