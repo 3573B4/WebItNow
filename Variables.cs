@@ -18,6 +18,7 @@ namespace WebItNow
         public static string wFileName;
         public static string wQuery;
         public static string wPrivilegios;
+        public static string wEdoDoc;
         public static Boolean wDownload = true;
 
 

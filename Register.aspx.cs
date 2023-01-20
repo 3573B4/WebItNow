@@ -43,7 +43,7 @@ namespace WebItNow
 
                 if (result == 0)
                 {
-                    // Insertar Registros Tabla tbEstadoDocumento
+                    // Insertar Registros Tabla tbEstadoDocumento [ITM_04]
                     int idStatus = 1;
                     int valor = Add_tbEstadoDocumento(TxtUsu.Text, idStatus);
 
@@ -155,9 +155,11 @@ namespace WebItNow
 
                     string IdTpoDocumento = Convert.ToString(row[0]);
 
+                    int iIdStatus = 0;
+                    int iIdDescarga = 0;
                     // Insert en la tabla Estado de Documento
-                    SqlCommand cmd1 = new SqlCommand("Insert into ITM_04 (IdUsuario, IdTipoDocumento, IdStatus) " +
-                                        "Values ('" + pUsuarios + "', '" + IdTpoDocumento + "', " + pIdStatus + ")", Conecta.ConectarBD);
+                    SqlCommand cmd1 = new SqlCommand("Insert into ITM_04 (IdUsuario, IdTipoDocumento, IdStatus, IdDescarga) " +
+                                        "Values ('" + pUsuarios + "', '" + IdTpoDocumento + "', " + iIdStatus + ", " + iIdDescarga + ")", Conecta.ConectarBD);
 
                     SqlDataReader dr1 = cmd1.ExecuteReader();
 

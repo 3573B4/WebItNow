@@ -417,12 +417,12 @@ namespace WebItNow
                 // Obtener una referencia a nuestro archivo.
                 ShareFileClient file = directory.GetFileClient(sFilename);
 
-                //  file.Delete();
+                file.Delete();
                 //  directory.Delete();
 
-                DeleteDirectorios(string.Empty, sFilename);
-                DeleteDirectorios(sTipoDocumento, string.Empty);
-                DeleteDirectorios(sUsuario, string.Empty);
+                //DeleteDirectorios(string.Empty, sFilename);
+                //DeleteDirectorios(sTipoDocumento, string.Empty);
+                //DeleteDirectorios(sUsuario, string.Empty);
 
             }
             catch (Exception ex)
@@ -456,13 +456,26 @@ namespace WebItNow
                 directory = directory.GetSubdirectoryClient(sSubdirectorio);
 
                 // Obtener una referencia a nuestro archivo.
-                ShareFileClient file = directory.GetFileClient(sFilename);
+                ShareFileClient rutafile = directory.GetFileClient(sFilename);
 
-                // Descargar el archivo.
+                //// Descargar el archivo.
+                //Session["Filename"] = sFilename;
+                //Session["Subdirectorio"] = sSubdirectorio;
+
                 Response.ContentType = ContentType;
-                Response.AppendHeader("Content-Disposition", "attachment; filename=" + Path.GetFileName(file.Path));
-                Response.WriteFile(file.Path);
+                Response.AppendHeader("Content-Disposition", "attachment; filename=" + Path.GetFileName(rutafile.Path));
+                Response.WriteFile(rutafile.Path);
                 HttpContext.Current.ApplicationInstance.CompleteRequest();
+
+                // Actualizar controles
+                GetEstadoDocumentos();
+
+                TxtUsu.Text = string.Empty;
+                TxtTpoDocumento.Text = string.Empty;
+                TxtNomArchivo.Text = string.Empty;
+                TxtUrl_Imagen.Text = string.Empty;
+
+            //    ClientScript.RegisterStartupScript(GetType(), "Javascript", "javaScript:clearTextBox();", true);
 
             }
             catch (Exception ex)

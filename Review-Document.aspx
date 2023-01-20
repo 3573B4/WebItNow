@@ -31,22 +31,34 @@
             }
         }
 
+        function setFormSubmitToFalse() {
+            setTimeout(function () { _spFormOnSubmitCalled = false; }, 3000);
+            return true;
+        }
+
+        function timedRefresh(timeoutPeriod) {
+            setTimeout("location.reload(true);", timeoutPeriod);
+        }
+
         function realizarPostBack() {
             __doPostBack('', '');
         }
 
-    </script>
+        function openPageDescargas() {
 
+            window.open('Descargas.aspx');
+            return true;
+        }
+
+        $(function () {
+            $('[id*=GridView1]').footable();
+        });
+
+    </script>
 
     <script src="Scripts/jquery-3.4.1.min.js" type="text/javascript"></script>
     <link href="~/Scripts/footable.min.js" rel="stylesheet" type="text/javascript" />
     <link href="~/Styles/footable.min.css" rel="stylesheet" type="text/css" />
-
-    <script type="text/javascript">
-        $(function () {
-            $('[id*=GridView1]').footable();
-        });
-    </script>
 
 </asp:Content>
 
@@ -78,7 +90,7 @@
                 <div class="col-12">
                         <div class="d-grid gap-2 d-flex justify-content-center">
                             <asp:TextBox ID="TxtNomArchivo" runat="server" CssClass="form-control" placeholder="Archivo para descargar" ReadOnly="True"></asp:TextBox>
-                            <asp:ImageButton ID="imgDescarga" runat="server" ImageUrl="~/Images/descargar.png" Height="35px" Width="35px" OnClick="ImgDescarga_Click" OnClientClick="clearTextBox()" />
+                            <asp:ImageButton ID="imgDescarga" runat="server" ImageUrl="~/Images/descargar.png" Height="35px" Width="35px" OnClick="ImgDescarga_Click" OnClientClick="timedRefresh(2000)" />
                         </div>
                 </div>
             </div>

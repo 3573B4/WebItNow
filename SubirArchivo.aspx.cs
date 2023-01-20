@@ -80,9 +80,9 @@ namespace WebItNow
             }
             else
             {
-                string edoDoc = dt.Rows[0]["IdStatus"].ToString();
+                 Variables.wEdoDoc = dt.Rows[0]["IdStatus"].ToString();
 
-                if (edoDoc == "1")
+                if (Variables.wEdoDoc == "0" || Variables.wEdoDoc == "1" )
                 {
                     BtnEnviar.Enabled = true;
                 }
@@ -168,7 +168,7 @@ namespace WebItNow
             try
             {
                 //string directorio = "https://itnowtech18-my.sharepoint.com/:f:/g/personal/llg_peacock_claims/Ekb4AdD2Id1KgMI9CRoIAU4BdP795N2YLyTJxmlMmIfWUA?e=CCtbfK" + "/";
-                string directorio = "~/Directorio/";
+                string directorio = "~/itnowstorage/";
                 string user = Convert.ToString(Session["IdUsuario"]);
                 string folderName = ddlDocs.SelectedValue;
                 string directFinal = directorio + user + "/" + folderName + "/";
@@ -196,7 +196,6 @@ namespace WebItNow
 
                     if (FileUpload1.HasFile)
                     {
-
                         //if (!Directory.Exists(directorioURL))
                         //{
                         //    Directory.CreateDirectory(directorioURL);
@@ -210,7 +209,7 @@ namespace WebItNow
                         //else
                         //{
 
-                        string filepath = Server.MapPath(directorio + FileUpload1.FileName);
+                            string filepath = Server.MapPath(directorio + FileUpload1.FileName);
                         FileUpload1.SaveAs(filepath);
                         string sPath = System.IO.Path.GetDirectoryName(filepath) + "/" + nomFile;
 
@@ -376,28 +375,22 @@ namespace WebItNow
                 //dir.CreateIfNotExists();
 
 
-                //if (directory.Exists())
-                //    {
-                //        // CreateDirectory
-                //        directory.CreateSubdirectory(sUsuario);
-                //        directory = directory.GetSubdirectoryClient(sUsuario);
-                //        directory = directory.CreateSubdirectory(sTpoDocumento);
-                //    }
-                //    else
-                //    {
-                //        // Get a reference to a subdirectory not located on root level
-                //        directory = directory.GetSubdirectoryClient(sUsuario);
-                //        directory = directory.GetSubdirectoryClient(sTpoDocumento);
-                //    }
-
-                // CreateDirectory
-                directory.CreateSubdirectory(sUsuario);
-                directory = directory.GetSubdirectoryClient(sUsuario);
-                directory = directory.CreateSubdirectory(sTpoDocumento);
+                if (Variables.wEdoDoc == "0")
+                {
+                    // CreateDirectory
+                    directory.CreateSubdirectory(sUsuario);
+                    directory = directory.GetSubdirectoryClient(sUsuario);
+                    directory = directory.CreateSubdirectory(sTpoDocumento);
+                }
+                else
+                {
+                    // Get a reference to a subdirectory not located on root level
+                    directory = directory.GetSubdirectoryClient(sUsuario);
+                    directory = directory.GetSubdirectoryClient(sTpoDocumento);
+                }
 
                 // Get a reference to our file
                 ShareFileClient file = directory.GetFileClient(fileName);
-
 
                 if (file.Exists())
                 {
