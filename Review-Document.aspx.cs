@@ -2,6 +2,8 @@
 using System.Threading.Tasks;
 using System.Configuration;
 using System.IO;
+using System.IO.IsolatedStorage;
+
 using System.Runtime.InteropServices;
 
 using System.Collections.Generic;
@@ -23,6 +25,7 @@ using System.Data.SqlClient;
 
 using System.Threading;
 using Azure.Storage.Files.Shares;
+using Microsoft.WindowsAzure.Storage.File;
 
 namespace WebItNow
 {
@@ -33,6 +36,8 @@ namespace WebItNow
 
         // NYWVH-HT4XC-R2WYW-9Y3CM-X4V3Y
         private static Guid FolderDownloads = new Guid("374DE290-123F-4565-9164-39C4925E467B");
+        private object isoStore;
+        private object share;
 
         [DllImport("shell32.dll", CharSet = CharSet.Auto)]
 
@@ -282,6 +287,7 @@ namespace WebItNow
                 string sTipoDocumento = "OTR";
                 Update_ITM_04(TxtUsu.Text, sTipoDocumento, 1);
 
+                // Descargar el archivo.
                 DownloadFromAzure(sFilename, sSubdirectorio);
 
                 //string filePath = Server.MapPath("~/Directorio/") + TxtUrl_Imagen.Text + TxtNomArchivo.Text;
@@ -365,7 +371,7 @@ namespace WebItNow
                 // Eliminar el archivo de Server.MapPath("~/Directorio/")
                 // File.Delete(strURLFile);
 
-                DeleteFromAzure(sNom_Archivo, sUrl_Imagen);
+                DeleteFromAzure(sNom_Archivo, sUrl_Imagen, sUsuario, sTipoDocumento);
 
                 // Refrescar GridView
                 GetEstadoDocumentos();
@@ -390,7 +396,7 @@ namespace WebItNow
             }
         }
 
-        protected void DeleteFromAzure(string sFilename, string sSubdirectorio)
+        protected void DeleteFromAzure(string sFilename, string sSubdirectorio, string sUsuario, string sTipoDocumento)
         {
             try
             {
@@ -413,6 +419,9 @@ namespace WebItNow
                 ShareFileClient file = directory.GetFileClient(sFilename);
 
                 file.Delete();
+
+                directory.Delete();
+
             }
             catch (Exception ex)
             {
