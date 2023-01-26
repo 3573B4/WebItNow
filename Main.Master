@@ -88,6 +88,26 @@
             border: 1px solid black;  
             padding: 4px;  
         }
+/*      
+        .dj-banner{margin: 30px 0; position: relative;}
+        .dj-banner .dj-bg{background-image: url(/images/bg-img-banner.png); background-repeat: no-repeat; background-position: center; background-size: cover; width: 100%;}
+        .dj-banner .dj-bg img{display: block; margin: 20px auto; padding: 20px 0;}
+        .dj-banner .dj-text{text-align: center; padding-bottom: 20px;}
+        @media screen and (min-width:768px){
+            .dj-banner .dj-bg img{margin-right: 100px;}
+            .dj-banner .dj-text{position: absolute; top: 50%; left: 10%; transform: translate(-10%, -50%); width: 50%; text-align: left;}
+            .dj-banner .dj-text h1{font-size: calc(2*1.5vw);}
+            .dj-banner .dj-text p{font-size: calc(1.2*1.5vw);}
+        }
+
+*/
+        #banners125 {
+        margin: 0; padding: 0;
+        width:100%;
+        overflow-x: hidden;
+        display:inline-block;  
+        }
+
     </style>
 
 </head>
@@ -95,18 +115,23 @@
     <form id="form1" runat="server" enctype="multipart/form-data">
          <div id="topContent" >
             <!-- <a href="Default.aspx">Control De Horas</a> -->
+            <div id="banners125">
+                <asp:Image ID="Image2" Width="100%" Height="150px" runat="server" ImageUrl="~/Images/imgItnow.jpeg" />
+            </div>
+<%--        
             <table>
             <tr>
                 <td class="style1">
-                    <asp:Image ID="Image1" runat="server" Height="120px" ImageUrl="~/Images/Itnow.jpg" Width="224px" />
+                <!--    <asp:Image ID="Image1" runat="server" Height="120px" ImageUrl="~/Images/imgItnow.jpeg" Width="224px" /> -->
                 </td>
                 <td class="style2" align="center">
-                    <h2 class="h2 mb-3 fw-normal" style="font-family: Arial, Helvetica, sans-serif">Itnow Technologies de México S.A. de C.V.</h2> 
+                <!--    <h2 class="h2 mb-3 fw-normal" style="font-family: Arial, Helvetica, sans-serif">Itnow Technologies de México S.A. de C.V.</h2>  -->
                 </td>
                 <td class="style3">
                 </td>
             </tr>
             </table>
+--%>
         </div>
         <div id="mainContent" >
          <asp:ContentPlaceHolder id="MainContent" runat="server">

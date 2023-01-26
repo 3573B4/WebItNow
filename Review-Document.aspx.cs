@@ -1,32 +1,23 @@
 ﻿using System;
-using System.Threading.Tasks;
 using System.Configuration;
 using System.IO;
-using System.IO.IsolatedStorage;
 
 using System.Runtime.InteropServices;
 
 using System.Collections.Generic;
-using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Web.SessionState;
 using System.Net;
-using System.Text;
-
-using System.Diagnostics;
-using System.Reflection;
-//using System.Windows.Forms;
 
 using System.Data;
-using System.Data.SqlTypes;
 using System.Data.SqlClient;
 
-using System.Threading;
+using Azure;
 using Azure.Storage.Files.Shares;
-using Microsoft.WindowsAzure.Storage.File;
 using Azure.Storage.Files.Shares.Models;
+using System.Windows;
+using System.Windows.Forms;
 
 namespace WebItNow
 {
@@ -283,6 +274,7 @@ namespace WebItNow
             {
                 string sFilename = TxtNomArchivo.Text;
                 string sSubdirectorio = TxtUrl_Imagen.Text;
+
                 Variables.wDownload = true;
 
                 // Actualizar en la tabla [ITM_04] (IdDescarga = 1)
@@ -293,6 +285,7 @@ namespace WebItNow
                 DownloadFromAzure(sFilename, sSubdirectorio);
 
                 imgDescarga.Enabled = false;
+
                 //string filePath = Server.MapPath("~/Directorio/") + TxtUrl_Imagen.Text + TxtNomArchivo.Text;
 
                 //bool fileExist = File.Exists(filePath);
@@ -449,6 +442,8 @@ namespace WebItNow
                 string ConnectionString = ConfigurationManager.AppSettings.Get("StorageConnectionString");
                 string AccountName = ConfigurationManager.AppSettings.Get("StorageAccountName");
                 string sDirName = "itnowstorage";
+                string directorioURL = Server.MapPath("~/itnowstorage/" + sFilename);
+                long tamaño = 0;
 
                 // Obtener una referencia de nuestra parte.
                 ShareClient share = new ShareClient(ConnectionString, AccountName);
@@ -460,15 +455,63 @@ namespace WebItNow
                 directory = directory.GetSubdirectoryClient(sSubdirectorio);
 
                 // Obtener una referencia a nuestro archivo.
-                ShareFileClient rutafile = directory.GetFileClient(sFilename);
+                ShareFileClient file = directory.GetFileClient(sFilename);
 
-                //// Descargar el archivo.
-                //Session["Filename"] = sFilename;
-                //Session["Subdirectorio"] = sSubdirectorio;
+                // Descargar el archivo.
+                ShareFileDownloadInfo download = file.Download();
+                using (FileStream stream = File.OpenWrite(directorioURL))
+                {
+                    download.Content.CopyTo(stream);
+                    tamaño = stream.Length;
+                    stream.Flush();
+                    stream.Close();
+                }
 
-                Response.ContentType = ContentType;
-                Response.AppendHeader("Content-Disposition", "attachment; filename=" + Path.GetFileName(rutafile.Path));
-                Response.WriteFile(rutafile.Path);
+                string extension = Path.GetExtension(file.Path);
+                var strMimeType = "";
+
+                if (extension != null)
+                {
+                    switch (extension.ToLower())
+                    {
+                        case ".htm":
+                        case ".html":
+                            strMimeType = "text/HTML";
+                            break;
+                        case ".txt":
+                            strMimeType = "text/plain";
+                            break;
+                        case ".doc":
+
+                        case ".docx":
+
+                        case ".rtf":
+                            strMimeType = "Application/msword";
+                            break;
+                        case ".pdf":
+                            strMimeType = "application/pdf";
+                            break;
+                        case ".zip":
+                            strMimeType = "application/zip";
+                            break;
+                        case ".xlsx":
+                            strMimeType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+                            break;
+                        case "xls":
+                            strMimeType = "application/vnd.ms-excel";
+                            break;
+
+                    }
+
+                }
+
+                Response.Buffer = true;
+                Response.ContentType = strMimeType;
+                Response.ContentEncoding = System.Text.Encoding.UTF8;
+                Response.AppendHeader("Content-Disposition", "attachment; filename=" + Path.GetFileName(directorioURL));
+                Response.TransmitFile(directorioURL);
+                Response.Flush();
+
                 HttpContext.Current.ApplicationInstance.CompleteRequest();
 
                 // Actualizar controles
@@ -479,8 +522,8 @@ namespace WebItNow
                 TxtNomArchivo.Text = string.Empty;
                 TxtUrl_Imagen.Text = string.Empty;
 
-            //    ClientScript.RegisterStartupScript(GetType(), "Javascript", "javaScript:clearTextBox();", true);
-
+            //  System.Threading.Thread.Sleep(5000);
+                File.Delete(directorioURL);
             }
             catch (Exception ex)
             {

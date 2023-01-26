@@ -17,6 +17,8 @@ namespace WebItNow
     {
         protected void Page_PreInit(object sender, EventArgs e)
         {
+            //Session["DownloadsPath"] = GetDownloadFolderPath();
+
             if (Request.Browser.IsMobileDevice)
                 MasterPageFile = "~/Site.Mobile.Master";
         }
@@ -29,6 +31,9 @@ namespace WebItNow
 
                 // Permisos Usuario
                 System.Web.HttpContext.Current.Session["UsPrivilegios"] = "3";
+
+                //LblMessage.Text = (string)Session["DownloadsPath"];
+                //this.mpeMensaje.Show();
             }
         }
 
@@ -147,6 +152,33 @@ namespace WebItNow
         protected void BtnClose_Click(object sender, EventArgs e)
         {
 
+        }
+
+        public static string GetHomePath()
+        {
+            // Not in .NET 2.0
+            // System.Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+            if (System.Environment.OSVersion.Platform == System.PlatformID.Unix)
+                return System.Environment.GetEnvironmentVariable("HOME");
+
+            return System.Environment.ExpandEnvironmentVariables("%HOMEDRIVE%%HOMEPATH%");
+        }
+
+        public static string GetDownloadFolderPath()
+        {
+            if (System.Environment.OSVersion.Platform == System.PlatformID.Unix)
+            {
+                string pathDownload = System.IO.Path.Combine(GetHomePath(), "Downloads");
+                return pathDownload;
+            }
+
+            return System.Convert.ToString(
+                Microsoft.Win32.Registry.GetValue(
+                     @"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders"
+                    , "{374DE290-123F-4565-9164-39C4925E467B}"
+                    , String.Empty
+                )
+            );
         }
 
     }

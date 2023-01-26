@@ -77,24 +77,35 @@
             border: 1px solid black;  
             padding: 4px;  
         }
+
+        #banners125 {
+        margin: 0; padding: 0;
+        width:100%;
+        overflow-x: hidden;
+        display:inline-block;
+        }
     </style>
 </head>
 <body>
     <form id="form1" runat="server" enctype="multipart/form-data">
     <div id="topContent" >
     <!-- <a href="Default.aspx">Control De Horas</a> -->
-        <table>
+        <div id="banners125">
+            <asp:Image ID="Image2" Width="100%" Height="150px" runat="server" ImageUrl="~/Images/imgItnow.jpeg" />
+        </div>
+
+<%--    <table>
         <tr>
             <td class="style1">
-                <asp:Image ID="Image1" runat="server" Height="120px" ImageUrl="~/Images/Itnow.jpg" Width="224px" />
+            <!--    <asp:Image ID="Image1" runat="server" Height="120px" ImageUrl="~/Images/imgItnow.jpeg" Width="224px" /> -->
             </td>
             <td class="style2" align="center">
-                <h2 class="h2 mb-3 fw-normal" style="font-family: Arial, Helvetica, sans-serif">Itnow Technologies de México S.A. de C.V.</h2> 
+            <!--    <h2 class="h2 mb-3 fw-normal" style="font-family: Arial, Helvetica, sans-serif">Itnow Technologies de México S.A. de C.V.</h2> -->
             </td>
             <td class="style3">
             </td>
         </tr>
-        </table>
+        </table>--%>
     </div>
     <div id="mainContent" >
         <section class="content-wrapper main-content clear-fix">

@@ -418,9 +418,29 @@ namespace WebItNow
                         file.Create(stream.Length);
                         if (stream.Length <= uploadLimit)
                         {
-                            file.UploadRange(
-                            new HttpRange(0, stream.Length),
-                            stream);
+                            //file.UploadRange(
+                            //new HttpRange(0, stream.Length),
+                            //stream);
+
+                            int blockSize = 30 * 1024;
+                            long offset = 0;    // Definir desplazamiento de rango http.
+                            BinaryReader reader = new BinaryReader(stream);
+                            while (true)
+                            {
+                                byte[] buffer = reader.ReadBytes(blockSize);
+                                if (buffer.Length == 0)
+                                    break;
+
+                                MemoryStream uploadChunk = new MemoryStream();
+                                uploadChunk.Write(buffer, 0, buffer.Length);
+                                uploadChunk.Position = 0;
+
+                                HttpRange httpRange = new HttpRange(offset, buffer.Length);
+                                var resp = file.UploadRange(httpRange, uploadChunk);
+                                offset += buffer.Length;    // Cambia el desplazamiento por el número de bytes ya escritos.
+                            }
+
+                            reader.Close();
 
                             LblMessage.Text = "El documento se envio exitosamente";
                             mpeMensaje.Show();
