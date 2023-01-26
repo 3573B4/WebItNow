@@ -422,7 +422,7 @@ namespace WebItNow
                             //new HttpRange(0, stream.Length),
                             //stream);
 
-                            int blockSize = 30 * 1024;
+                            int blockSize = 32 * 1024;
                             long offset = 0;    // Definir desplazamiento de rango http.
                             BinaryReader reader = new BinaryReader(stream);
                             while (true)

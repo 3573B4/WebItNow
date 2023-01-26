@@ -443,7 +443,6 @@ namespace WebItNow
                 string AccountName = ConfigurationManager.AppSettings.Get("StorageAccountName");
                 string sDirName = "itnowstorage";
                 string directorioURL = Server.MapPath("~/itnowstorage/" + sFilename);
-                long tamaño = 0;
 
                 // Obtener una referencia de nuestra parte.
                 ShareClient share = new ShareClient(ConnectionString, AccountName);
@@ -462,7 +461,6 @@ namespace WebItNow
                 using (FileStream stream = File.OpenWrite(directorioURL))
                 {
                     download.Content.CopyTo(stream);
-                    tamaño = stream.Length;
                     stream.Flush();
                     stream.Close();
                 }
@@ -505,14 +503,35 @@ namespace WebItNow
 
                 }
 
-                Response.Buffer = true;
-                Response.ContentType = strMimeType;
-                Response.ContentEncoding = System.Text.Encoding.UTF8;
-                Response.AppendHeader("Content-Disposition", "attachment; filename=" + Path.GetFileName(directorioURL));
-                Response.TransmitFile(directorioURL);
-                Response.Flush();
 
-                HttpContext.Current.ApplicationInstance.CompleteRequest();
+                if (extension == ".xlsx")
+                {
+                    string direccion = directorioURL;
+                    System.IO.FileStream fs = null;
+
+                    fs = System.IO.File.Open(direccion, System.IO.FileMode.Open);
+                    byte[] btFile = new byte[fs.Length];
+                    fs.Read(btFile, 0, Convert.ToInt32(fs.Length));
+                    fs.Close();
+
+                    Response.AddHeader("Content-disposition", "attachment; filename=" + Path.GetFileName(directorioURL));
+                    Response.ContentType = "application/octet-stream";
+                    Response.BinaryWrite(btFile);
+                    Response.Flush();
+                    Response.End();
+                }
+                else
+                {
+
+                    Response.Buffer = true;
+                    Response.ContentType = strMimeType;
+                    Response.ContentEncoding = System.Text.Encoding.UTF8;
+                    Response.AppendHeader("Content-Disposition", "attachment; filename=" + Path.GetFileName(directorioURL));
+                    Response.TransmitFile(directorioURL);
+                    Response.Flush();
+
+                    HttpContext.Current.ApplicationInstance.CompleteRequest();
+                }
 
                 // Actualizar controles
                 GetEstadoDocumentos();
