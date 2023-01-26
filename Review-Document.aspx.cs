@@ -503,7 +503,6 @@ namespace WebItNow
 
                 }
 
-
                 if (extension == ".xlsx")
                 {
                     string direccion = directorioURL;
@@ -546,7 +545,6 @@ namespace WebItNow
             }
             catch (Exception ex)
             {
-                // Show(ex.Message);
                 LblMessage.Text = ex.Message;
                 this.mpeMensaje.Show();
             }
