@@ -70,11 +70,10 @@ namespace WebItNow
             }
         }
 
-        protected void grdEstadoDocumento_SelectedIndexChanged(object sender, EventArgs e)
+        protected void grdEstadoDocumento_OnPageIndexChanging(object sender, GridViewPageEventArgs e)
         {
-        //  imgDescarga.Enabled = true;
-
-            this.hdfValorGrid.Value = this.grdEstadoDocumento.SelectedValue.ToString();
+            grdEstadoDocumento.PageIndex = e.NewPageIndex;
+            GetEstadoDocumentos();
         }
 
         protected void grdEstadoDocumento_PageIndexChanged(Object sender, EventArgs e)
@@ -95,16 +94,8 @@ namespace WebItNow
             {
                 (e.Row.FindControl("imgAceptado") as ImageButton).Enabled = true;
                 (e.Row.FindControl("imgRechazado") as ImageButton).Enabled = true;
+                (e.Row.FindControl("imgDescarga") as ImageButton).Enabled = true;
             }
-        }
-
-        protected void grdEstadoDocumento_DataBound(object sender, EventArgs e)
-        {
-            //grdEstadoDocumento = ((GridView)sender);
-            //for (int i = 0; i < grdEstadoDocumento.Columns.Count; i++)
-            //{
-            //    grdEstadoDocumento.Columns[i].ItemStyle.Width = Unit.Percentage(100 / (grdEstadoDocumento.Columns.Count));
-            //}
         }
 
         protected void DisplayCurrentPage()
@@ -191,41 +182,6 @@ namespace WebItNow
            // imgDownload.Enabled = false;
         }
 
-        protected void imgDownload_Click(object sender, ImageClickEventArgs e)
-        {
-            GridViewRow row = ((GridViewRow)((System.Web.UI.WebControls.ImageButton)sender).NamingContainer);
-            int index = row.RowIndex;
-
-            string sNom_Archivo = grdEstadoDocumento.Rows[index].Cells[5].Text;
-            string sUrl_Imagen = grdEstadoDocumento.Rows[index].Cells[6].Text;
-
-            try
-            {
-                /// <param name="strURLFile"> URL del archivo que se desea descargar </param>
-                /// <param name="strPathToSave"> Ruta donde se desea almacenar el archivo </param>
-
-                // System.Web.HttpContext.Current.Session["FileName"] = TxtNomArchivo.Text;
-                // string dlDir = "";
-
-                string strURLFile = Server.MapPath("~/Directorio/") + sUrl_Imagen + sNom_Archivo;
-             //   string strPathToSave = TxtPathDownload.Text + "\\"  + TxtNomArchivo.Text;
-
-             // downloadFileToSpecificPath(strURLFile, strPathToSave);
-             // imgDownload.Enabled = false;
-
-            }
-            catch (Exception ex)
-            {
-                LblMessage.Text = ex.Message;
-            }
-            finally
-            {
-                LblMessage.Text = "El documento se descargo exitosamente";
-                this.mpeMensaje.Show();
-            }
-
-        }
-
         protected void imgAceptado_Click(object sender, EventArgs e)
         {
             try
@@ -234,10 +190,10 @@ namespace WebItNow
                 GridViewRow row = ((GridViewRow)((System.Web.UI.WebControls.ImageButton)sender).NamingContainer);
                 int index = row.RowIndex;
 
-                string sUsuario = grdEstadoDocumento.Rows[index].Cells[2].Text;
-                string sTipoDocumento = grdEstadoDocumento.Rows[index].Cells[7].Text;
+                string sUsuario = grdEstadoDocumento.Rows[index].Cells[3].Text;
+                string sTipoDocumento = grdEstadoDocumento.Rows[index].Cells[8].Text;
 
-                grdEstadoDocumento.Rows[index].Cells[3].Text = "Completo";
+                grdEstadoDocumento.Rows[index].Cells[4].Text = "Completo";
 
                 // Actualizar en la tabla tbEstadoDocumento (Status = 3)
                 Update_tbEstadoDocumento(sUsuario, sTipoDocumento, 3);
@@ -273,10 +229,11 @@ namespace WebItNow
                 GridViewRow row = ((GridViewRow)((System.Web.UI.WebControls.ImageButton)sender).NamingContainer);
                 int index = row.RowIndex;
 
-                string sUsuario = grdEstadoDocumento.Rows[index].Cells[2].Text;
-                string sNom_Archivo = grdEstadoDocumento.Rows[index].Cells[5].Text;
-                string sUrl_Imagen = grdEstadoDocumento.Rows[index].Cells[6].Text;
-                string sTipoDocumento = grdEstadoDocumento.Rows[index].Cells[7].Text;
+
+                string sUsuario = grdEstadoDocumento.Rows[index].Cells[3].Text;
+                string sNom_Archivo = grdEstadoDocumento.Rows[index].Cells[6].Text;
+                string sUrl_Imagen = grdEstadoDocumento.Rows[index].Cells[7].Text;
+                string sTipoDocumento = grdEstadoDocumento.Rows[index].Cells[8].Text;
 
                 string strURLFile = Server.MapPath("~/Directorio/") + sUrl_Imagen + sNom_Archivo;
 
@@ -286,7 +243,7 @@ namespace WebItNow
                 // Actualizar en la tabla [ITM_04] (IdDescarga = 0)
                 Update_ITM_04(sUsuario, sTipoDocumento, 0);
 
-                grdEstadoDocumento.Rows[index].Cells[3].Text = "Faltante";
+                grdEstadoDocumento.Rows[index].Cells[4].Text = "Faltante";
 
                 // Eliminar el archivo de Server.MapPath("~/Directorio/")
                 // File.Delete(strURLFile);
@@ -318,24 +275,32 @@ namespace WebItNow
 
         protected void ImgDescarga_Click(object sender, EventArgs e)
         {
+            try
+            {
 
-            GridViewRow row = ((GridViewRow)((System.Web.UI.WebControls.ImageButton)sender).NamingContainer);
-            int index = row.RowIndex;
+                GridViewRow row = ((GridViewRow)((System.Web.UI.WebControls.ImageButton)sender).NamingContainer);
+                int index = row.RowIndex;
 
-            string sUsuario = grdEstadoDocumento.Rows[index].Cells[3].Text;
-            string sNomArchivo = grdEstadoDocumento.Rows[index].Cells[6].Text;
-            string sSubdirectorio = grdEstadoDocumento.Rows[index].Cells[7].Text;
-            string sTipoDocumento = grdEstadoDocumento.Rows[index].Cells[8].Text;
+                string sUsuario = grdEstadoDocumento.Rows[index].Cells[3].Text;
+                string sNomArchivo = grdEstadoDocumento.Rows[index].Cells[6].Text;
+                string sSubdirectorio = grdEstadoDocumento.Rows[index].Cells[7].Text;
+                string sTipoDocumento = grdEstadoDocumento.Rows[index].Cells[8].Text;
 
-            Variables.wDownload = true;
+                Variables.wDownload = true;
 
-            // Actualizar en la tabla [ITM_04] (IdDescarga = 1)
-            Update_ITM_04(sUsuario, sTipoDocumento, 1);
+                // Actualizar en la tabla [ITM_04] (IdDescarga = 1)
+                Update_ITM_04(sUsuario, sTipoDocumento, 1);
 
-            // Descargar el archivo.
-            DownloadFromAzure(sNomArchivo, sSubdirectorio);
+                // Descargar el archivo.
+                DownloadFromAzure(sNomArchivo, sSubdirectorio);
 
-            //  imgDescarga.Enabled = false;
+                //  imgDescarga.Enabled = false;
+            }
+            catch (Exception ex)
+            {
+                LblMessage.Text = ex.Message;
+                this.mpeMensaje.Show();
+            }
 
         }
 
@@ -460,6 +425,7 @@ namespace WebItNow
                     Response.BinaryWrite(btFile);
                     Response.Flush();
                     Response.End();
+                //  HttpContext.Current.ApplicationInstance.CompleteRequest();
                 }
                 else
                 {
@@ -754,12 +720,6 @@ namespace WebItNow
                 LblMessage.Text = ex.Message;
                 this.mpeMensaje.Show();
             }
-        }
-
-        protected void grdEstadoDocumento_OnPageIndexChanging(object sender, GridViewPageEventArgs e)
-        {
-            grdEstadoDocumento.PageIndex = e.NewPageIndex;
-            GetEstadoDocumentos();
         }
 
         private static void NewMethod(ConexionBD Conecta)

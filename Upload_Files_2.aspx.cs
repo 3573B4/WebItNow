@@ -100,7 +100,7 @@ namespace WebItNow
 
                         checarStatusDoc();
 
-                        Response.Redirect("PagMessage.aspx");
+                        Response.Redirect("Page_Message.aspx");
 
                         //var email = new EnvioEmail();
                         //string sEmail = email.CorreoElectronico(user);

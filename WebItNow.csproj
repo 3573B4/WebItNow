@@ -271,7 +271,7 @@
     <Content Include="Images\tierra-de-cristal-en-gras-131535893.jpg" />
     <Content Include="Images\icono-Subir-Archivo-morado.png" />
     <Content Include="Menu.aspx" />
-    <Content Include="PagMessage.aspx" />
+    <Content Include="Page_Message.aspx" />
     <Content Include="Review_Document.aspx" />
     <Content Include="Scripts\footable.min.js" />
     <Content Include="Site.Master" />
@@ -398,12 +398,12 @@
     <Compile Include="Menu.aspx.designer.cs">
       <DependentUpon>Menu.aspx</DependentUpon>
     </Compile>
-    <Compile Include="PagMessage.aspx.cs">
-      <DependentUpon>PagMessage.aspx</DependentUpon>
+    <Compile Include="Page_Message.aspx.cs">
+      <DependentUpon>Page_Message.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="PagMessage.aspx.designer.cs">
-      <DependentUpon>PagMessage.aspx</DependentUpon>
+    <Compile Include="Page_Message.aspx.designer.cs">
+      <DependentUpon>Page_Message.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Review_Document.aspx.cs">

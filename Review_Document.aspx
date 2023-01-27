@@ -76,7 +76,7 @@
         <div style="overflow-x: auto; overflow-y:hidden">
             <asp:GridView ID="grdEstadoDocumento"  runat="server" AutoGenerateColumns="False" GridLines="None" Width="1400px"
                     AllowPaging="True" CssClass="footable" PagerStyle-CssClass="pgr" AlternatingRowStyle-CssClass="alt" OnPageIndexChanging="grdEstadoDocumento_OnPageIndexChanging"
-                    PageSize="10" OnSelectedIndexChanged="grdEstadoDocumento_SelectedIndexChanged" OnRowDataBound ="grdEstadoDocumento_RowDataBound" OnDataBound="grdEstadoDocumento_DataBound" DataKeyNames="IdUsuario" >
+                    PageSize="10" OnRowDataBound ="grdEstadoDocumento_RowDataBound" DataKeyNames="IdUsuario" >
                     <AlternatingRowStyle CssClass="alt" />
                     <Columns>
 
@@ -96,7 +96,7 @@
 
                         <asp:TemplateField>
                             <ItemTemplate>
-                                <asp:ImageButton ID="imgDescarga" runat="server" ImageUrl="~/Images/descargar.png" Height="35px" Width="35px" OnClick="ImgDescarga_Click" Enabled="false" />
+                                <asp:ImageButton ID="imgDescarga" runat="server" ImageUrl="~/Images/descargar.png" Height="35px" Width="35px" OnClick="ImgDescarga_Click" Enabled="true" />
                             </ItemTemplate> 
                             <ItemStyle Width="80px" />
                         </asp:TemplateField>
@@ -231,7 +231,7 @@
 
     </ContentTemplate>
     <Triggers>
-        <asp:PostBackTrigger ControlID="imgDescarga" />
+        <%--<asp:PostBackTrigger ControlID="imgDescarga" />--%>
     </Triggers>
 </asp:UpdatePanel> 
 </asp:Content>
