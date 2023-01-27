@@ -111,7 +111,7 @@
                 <div style="overflow-x: auto; overflow-y:hidden">
                     <asp:GridView ID="grdEstadoDocumento"  runat="server" AutoGenerateColumns="False" GridLines="None" Width="1400px"
                             AllowPaging="True" CssClass="footable" PagerStyle-CssClass="pgr" AlternatingRowStyle-CssClass="alt" OnPageIndexChanging="grdEstadoDocumento_OnPageIndexChanging"
-                            PageSize="5" OnSelectedIndexChanged="grdEstadoDocumento_SelectedIndexChanged" OnRowDataBound ="grdEstadoDocumento_RowDataBound" OnDataBound="grdEstadoDocumento_DataBound" DataKeyNames="IdUsuario" >
+                            PageSize="10" OnSelectedIndexChanged="grdEstadoDocumento_SelectedIndexChanged" OnRowDataBound ="grdEstadoDocumento_RowDataBound" OnDataBound="grdEstadoDocumento_DataBound" DataKeyNames="IdUsuario" >
                             <AlternatingRowStyle CssClass="alt" />
                             <Columns>
 

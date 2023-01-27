@@ -350,7 +350,7 @@ namespace WebItNow
 
         protected void gvEstadoDocs_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // int var = 0;
+
         }
 
         public void UploadToAzure(string sFilename, string sPath)

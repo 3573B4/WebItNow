@@ -38,7 +38,6 @@
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
     <br />
 
-    
     <ContentTemplate>
     
     <div class="container col-md-4">
@@ -80,8 +79,6 @@
                             </div>
                         </div>
                     <!-- termina el acordion -->
-                    
-                    
 
                     <div class="form-group">
                         <div class="input-group mx-auto pt-3">
@@ -102,6 +99,7 @@
                             </div>
                         </div>
                     </div>
+
                     <div style="overflow-x: auto; overflow-y:hidden">
                         <asp:GridView ID="gvEstadoDocs" runat="server" AutoGenerateColumns="False" GridLines="None" Width="100%"
                             AllowPaging="True" CssClass="footable" PagerStyle-CssClass="pgr" AlternatingRowStyle-CssClass="alt"

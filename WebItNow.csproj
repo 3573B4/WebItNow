@@ -271,6 +271,7 @@
     <Content Include="Images\tierra-de-cristal-en-gras-131535893.jpg" />
     <Content Include="Images\icono-Subir-Archivo-morado.png" />
     <Content Include="Menu.aspx" />
+    <Content Include="PagMessage.aspx" />
     <Content Include="Review-Document.aspx" />
     <Content Include="Scripts\footable.min.js" />
     <Content Include="Site.Master" />
@@ -332,6 +333,8 @@
     <Content Include="Styles\fuentes.css" />
     <Content Include="Styles\footable.min.css" />
     <Content Include="SubirArchivo.aspx" />
+    <Content Include="Upload_Files_1.aspx" />
+    <Content Include="Upload_Files_2.aspx" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config" />
     <Content Include="Bundle.config" />
@@ -395,6 +398,13 @@
     <Compile Include="Menu.aspx.designer.cs">
       <DependentUpon>Menu.aspx</DependentUpon>
     </Compile>
+    <Compile Include="PagMessage.aspx.cs">
+      <DependentUpon>PagMessage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PagMessage.aspx.designer.cs">
+      <DependentUpon>PagMessage.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Review-Document.aspx.cs">
       <DependentUpon>Review-Document.aspx</DependentUpon>
@@ -430,6 +440,20 @@
     </Compile>
     <Compile Include="SubirArchivo.aspx.designer.cs">
       <DependentUpon>SubirArchivo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Upload_Files_1.aspx.cs">
+      <DependentUpon>Upload_Files_1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Upload_Files_1.aspx.designer.cs">
+      <DependentUpon>Upload_Files_1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Upload_Files_2.aspx.cs">
+      <DependentUpon>Upload_Files_2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Upload_Files_2.aspx.designer.cs">
+      <DependentUpon>Upload_Files_2.aspx</DependentUpon>
     </Compile>
     <Compile Include="Variables.cs" />
     <Compile Include="ViewSwitcher.ascx.cs">
