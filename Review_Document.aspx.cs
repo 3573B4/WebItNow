@@ -21,9 +21,8 @@ using System.Windows.Forms;
 
 namespace WebItNow
 {
-
-	public partial class Review_Document : System.Web.UI.Page
-	{
+    public partial class Review_Document : System.Web.UI.Page
+    {
         public string Descripcion { get; set; }
 
         // NYWVH-HT4XC-R2WYW-9Y3CM-X4V3Y
@@ -40,36 +39,16 @@ namespace WebItNow
         }
 
         protected void Page_Load(object sender, EventArgs e)
-		{
-
+        {
             if (!Page.IsPostBack)
             {
                 // Carga GridView
                 GetEstadoDocumentos();
             }
 
-
             //* * Agrega THEAD y TBODY a GridView.
             grdEstadoDocumento.HeaderRow.TableSection = TableRowSection.TableHeader;
         }
-
-        public static string GetDownloadsPath()
-        {
-            if (Environment.OSVersion.Version.Major < 6) throw new NotSupportedException();
-
-            IntPtr pathPtr = IntPtr.Zero;
-
-            try
-            {
-                SHGetKnownFolderPath(ref FolderDownloads, 0, IntPtr.Zero, out pathPtr);
-                return Marshal.PtrToStringUni(pathPtr);
-            }
-            finally
-            {
-                Marshal.FreeCoTaskMem(pathPtr);
-            }
-        }
-
         protected void grdEstadoDocumento_OnPageIndexChanging(object sender, GridViewPageEventArgs e)
         {
             grdEstadoDocumento.PageIndex = e.NewPageIndex;
@@ -89,7 +68,7 @@ namespace WebItNow
                 e.Row.Attributes.Add("OnClick", "" + Page.ClientScript.GetPostBackClientHyperlink(this.grdEstadoDocumento, "Select$" + e.Row.RowIndex.ToString()) + ";");
 
             string IdDescarga = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "IdDescarga"));
-            
+
             if (IdDescarga == "1")
             {
                 (e.Row.FindControl("imgAceptado") as ImageButton).Enabled = true;
@@ -155,9 +134,9 @@ namespace WebItNow
         }
 
         protected void BtnRegresar_Click(object sender, EventArgs e)
-		{
-			Response.Redirect("Menu.aspx");
-		}
+        {
+            Response.Redirect("Menu.aspx");
+        }
 
         protected void chkAceptado_OnCheckedChanged(object sender, EventArgs e)
         {
@@ -175,11 +154,11 @@ namespace WebItNow
             //string strPathToSave = TxtPathDownload.Text + "\\" + "Captura de pantalla (3).png";
 
             string strURLFile = Server.MapPath("~/Directorio/") + "wordpress-6.1.1.zip";
-         //   string strPathToSave = TxtPathDownload.Text + "/" + "wordpress-6.1.1.zip";
+            //   string strPathToSave = TxtPathDownload.Text + "/" + "wordpress-6.1.1.zip";
 
-        //    downloadFileToSpecificPath(strURLFile, strPathToSave);
+            //    downloadFileToSpecificPath(strURLFile, strPathToSave);
 
-           // imgDownload.Enabled = false;
+            // imgDownload.Enabled = false;
         }
 
         protected void imgAceptado_Click(object sender, EventArgs e)
@@ -304,6 +283,31 @@ namespace WebItNow
 
         }
 
+        protected void BtnPruebas_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string sUsuario = "USUARIO1";
+                string sNomArchivo = "Nomenclatura_tablas.xlsx";
+                string sSubdirectorio = "USUARIO1/OTR/";
+                string sTipoDocumento = "OTR";
+
+                Variables.wDownload = true;
+
+                // Actualizar en la tabla [ITM_04] (IdDescarga = 1)
+                Update_ITM_04(sUsuario, sTipoDocumento, 1);
+
+                // Descargar el archivo.
+                DownloadFromAzure(sNomArchivo, sSubdirectorio);
+
+                //  imgDescarga.Enabled = false;
+            }
+            catch (Exception ex)
+            {
+                LblMessage.Text = ex.Message;
+                this.mpeMensaje.Show();
+            }
+        }
         protected void DeleteFromAzure(string sFilename, string sSubdirectorio, string sUsuario, string sTipoDocumento)
         {
             try
@@ -423,7 +427,7 @@ namespace WebItNow
                     Response.AddHeader("Content-disposition", "attachment; filename=" + Path.GetFileName(directorioURL));
                     Response.ContentType = "application/octet-stream";
                     Response.BinaryWrite(btFile);
-                    Response.Flush();
+                //  Response.Flush();
                     Response.End();
                 //  HttpContext.Current.ApplicationInstance.CompleteRequest();
                 }
@@ -443,8 +447,8 @@ namespace WebItNow
                 // Actualizar controles
                 GetEstadoDocumentos();
 
-            //  System.Threading.Thread.Sleep(5000);
-                File.Delete(directorioURL);
+                //  System.Threading.Thread.Sleep(5000);
+                //  File.Delete(directorioURL);
             }
             catch (Exception ex)
             {
@@ -530,7 +534,7 @@ namespace WebItNow
             Response.ContentType = ContentType;
             Response.AppendHeader("Content-Disposition", "attachment; filename=" + Path.GetFileName(filePath));
             Response.WriteFile(filePath);
-         // Response.End();
+            // Response.End();
             HttpContext.Current.ApplicationInstance.CompleteRequest();
         }
 
@@ -604,7 +608,7 @@ namespace WebItNow
                 if (pIdStatus == 1)
                 {
                     Variables.wQuery = "Update ITM_04 Set IdStatus = " + pIdStatus + ", Nom_Imagen = Null, Fec_Rechazado = GETDATE()" +
-                                    " Where IdUsuario = '" + pUsuarios + "' And IdTipoDocumento = '"+ pIdTipoDocumento + "'";
+                                    " Where IdUsuario = '" + pUsuarios + "' And IdTipoDocumento = '" + pIdTipoDocumento + "'";
                 }
                 else
                 {
@@ -630,7 +634,7 @@ namespace WebItNow
             {
 
             }
-            }
+        }
 
         public void Update_ITM_04(string pUsuarios, string pIdTipoDocumento, int pIdDescarga)
         {
@@ -726,7 +730,5 @@ namespace WebItNow
         {
             Conecta.Abrir();
         }
-
     }
-
 }

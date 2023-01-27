@@ -1,8 +1,7 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" EnableEventValidation="false" CodeBehind="Review_Document.aspx.cs" Inherits="WebItNow.Review_Document" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="Review_Document.aspx.cs" Inherits="WebItNow.Review_Document" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
-
     <script language="javascript" type="text/javascript">
         var timer = setTimeout(function () {
             document.getElementById('<%=LblExpira.ClientID %>').innerHTML = 'La sesión ha expirado.';
@@ -59,11 +58,9 @@
     <script src="Scripts/jquery-3.4.1.min.js" type="text/javascript"></script>
     <link href="~/Scripts/footable.min.js" rel="stylesheet" type="text/javascript" />
     <link href="~/Styles/footable.min.css" rel="stylesheet" type="text/css" />
-
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-
 <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
 <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional" >
     <ContentTemplate>
@@ -141,6 +138,7 @@
         <div class="from-group">
             <div class="d-grid col-6 mx-auto">
                 <asp:Button ID="BtnRegresar" runat="server" Text="Regresar" Font-Bold="True" OnClick="BtnRegresar_Click" CssClass="btn btn-link"/>
+                <asp:Button ID="BtnPruebas" runat="server" Text="Pruebas" OnClick="BtnPruebas_Click" />
             </div>
         </div>
     </div>
@@ -231,7 +229,7 @@
 
     </ContentTemplate>
     <Triggers>
-        <%--<asp:PostBackTrigger ControlID="imgDescarga" />--%>
+        <asp:PostBackTrigger ControlID="BtnPruebas"/>
     </Triggers>
 </asp:UpdatePanel> 
 </asp:Content>
