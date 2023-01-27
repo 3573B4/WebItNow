@@ -100,6 +100,9 @@ namespace WebItNow
 
                         checarStatusDoc();
 
+                        Session["IdUsuario"] = user;
+                        Session["Asunto"] = "Documento Enviado";
+
                         Response.Redirect("Page_Message.aspx");
 
                         //var email = new EnvioEmail();

@@ -18,8 +18,8 @@ namespace WebItNow
         {
             if (!IsPostBack)
             {
-                string userId = Convert.ToString(Session["IdUsuario"]);
-                lblUsuario.Text = userId;
+                string sUsuario = Convert.ToString(Session["IdUsuario"]);
+                lblUsuario.Text = sUsuario;
             }
         }
 
@@ -29,13 +29,22 @@ namespace WebItNow
             {
                 string sMensajeTextArea = TxtAreaMensaje.Value;
 
-                string user = Convert.ToString(Session["IdUsuario"]);
+                string sUsuario = Convert.ToString(Session["IdUsuario"]);
+                string sAsunto = Convert.ToString(Session["Asunto"]);
 
                 var email = new EnvioEmail();
-                string sEmail = email.CorreoElectronico(user);
-                int Envio_Ok = email.EnvioMensaje(user, sEmail, "Documento Motivo");
+                string sEmail = email.CorreoElectronico(sUsuario);
+                int Envio_Ok = email.EnvioMensaje(sUsuario, sEmail, sAsunto);
 
-                Response.Redirect("Upload_Files.aspx");
+                if (sAsunto == "Documento Enviado")
+                { 
+                    Response.Redirect("Upload_Files.aspx");
+                } 
+                else if (sAsunto == "Documento Aceptado" || sAsunto == "Documento Rechazado")
+                {
+                    Response.Redirect("Review_Document.aspx");
+                }
+
             }
             catch(Exception ex)
             {

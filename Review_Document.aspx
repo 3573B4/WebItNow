@@ -72,8 +72,8 @@
         <br />
         <div style="overflow-x: auto; overflow-y:hidden">
             <asp:GridView ID="grdEstadoDocumento"  runat="server" AutoGenerateColumns="False" GridLines="None" Width="1400px"
-                    AllowPaging="True" CssClass="footable" PagerStyle-CssClass="pgr" AlternatingRowStyle-CssClass="alt" OnPageIndexChanging="grdEstadoDocumento_OnPageIndexChanging"
-                    PageSize="10" OnRowDataBound ="grdEstadoDocumento_RowDataBound" DataKeyNames="IdUsuario" >
+                    AllowPaging="True" CssClass="footable" PagerStyle-CssClass="pgr" AlternatingRowStyle-CssClass="alt" OnPageIndexChanging="grdEstadoDocumento_OnPageIndexChanging" 
+                    OnRowDataBound ="grdEstadoDocumento_RowDataBound" DataKeyNames="IdUsuario" >
                     <AlternatingRowStyle CssClass="alt" />
                     <Columns>
 
@@ -81,25 +81,25 @@
                             <ItemTemplate>
                                 <asp:ImageButton ID="imgAceptado" runat="server" ImageUrl="~/Images/aceptar.png" Height="35px" Width="35px" OnClick="imgAceptado_Click" Enabled="false" />
                             </ItemTemplate> 
-                            <ItemStyle Width="80px" />
+                            <ItemStyle Width="60px" />
                         </asp:TemplateField>
 
                         <asp:TemplateField>
                             <ItemTemplate>
                                 <asp:ImageButton ID="imgRechazado" runat="server" ImageUrl="~/Images/cancelar.png" Height="35px" Width="35px" OnClick="imgRechazado_Click" Enabled="false" />
                             </ItemTemplate> 
-                            <ItemStyle Width="80px" />
+                            <ItemStyle Width="60px" />
                         </asp:TemplateField>
 
                         <asp:TemplateField>
                             <ItemTemplate>
-                                <asp:ImageButton ID="imgDescarga" runat="server" ImageUrl="~/Images/descargar.png" Height="35px" Width="35px" OnClick="ImgDescarga_Click" Enabled="true" />
-                            </ItemTemplate> 
-                            <ItemStyle Width="80px" />
+                                <asp:ImageButton ID="imgDescarga" runat="server" ImageUrl="~/Images/descargar.png" Height="35px" Width="35px" OnClick="ImgDescarga_Click" OnClientClick="timedRefresh(2000)" Enabled="true" />
+                            </ItemTemplate>
+                            <ItemStyle Width="60px" />
                         </asp:TemplateField>
 
                         <asp:BoundField DataField="IdUsuario" HeaderText="Id. Usuario" >
-                        <ItemStyle Width="600px" />
+                        <ItemStyle Width="600px" /> 
                         </asp:BoundField>
                         <asp:BoundField DataField="Desc_Status" HeaderText="Id. Status" >
                         <ItemStyle Width="600px" />
@@ -138,7 +138,6 @@
         <div class="from-group">
             <div class="d-grid col-6 mx-auto">
                 <asp:Button ID="BtnRegresar" runat="server" Text="Regresar" Font-Bold="True" OnClick="BtnRegresar_Click" CssClass="btn btn-link"/>
-                <asp:Button ID="BtnPruebas" runat="server" Text="Pruebas" OnClick="BtnPruebas_Click" />
             </div>
         </div>
     </div>
@@ -229,7 +228,7 @@
 
     </ContentTemplate>
     <Triggers>
-        <asp:PostBackTrigger ControlID="BtnPruebas"/>
+        <asp:PostBackTrigger ControlID="grdEstadoDocumento" />
     </Triggers>
 </asp:UpdatePanel> 
 </asp:Content>

@@ -332,7 +332,6 @@
     <Content Include="Styles\default.css" />
     <Content Include="Styles\fuentes.css" />
     <Content Include="Styles\footable.min.css" />
-    <Content Include="SubirArchivo.aspx" />
     <Content Include="Upload_Files.aspx" />
     <Content Include="Upload_Files_2.aspx" />
     <Content Include="ViewSwitcher.ascx" />
@@ -433,13 +432,6 @@
     </Compile>
     <Compile Include="Register.aspx.designer.cs">
       <DependentUpon>Register.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="SubirArchivo.aspx.cs">
-      <DependentUpon>SubirArchivo.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="SubirArchivo.aspx.designer.cs">
-      <DependentUpon>SubirArchivo.aspx</DependentUpon>
     </Compile>
     <Compile Include="Upload_Files.aspx.cs">
       <DependentUpon>Upload_Files.aspx</DependentUpon>

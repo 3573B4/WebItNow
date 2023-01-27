@@ -41,7 +41,7 @@
                 <asp:Label ID="lblUsuario" runat="server" Text=""></asp:Label>
             </div>
             <div class="form-group my-3">
-                <asp:Label ID="LblMotivo" runat="server" Text="Motivo de rechazo/aceptado/Enviado" Font-Size="Large"></asp:Label>
+                <asp:Label ID="LblMotivo" runat="server" Text="Motivo de Rechazo / Aceptado / Enviado" Font-Size="Large"></asp:Label>
             </div>
             <div class="form-group my-3">
                 <textarea rows="6" cols="64" id="TxtAreaMensaje" runat="server" class="form-control"/>

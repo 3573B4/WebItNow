@@ -49,6 +49,7 @@ namespace WebItNow
             //* * Agrega THEAD y TBODY a GridView.
             grdEstadoDocumento.HeaderRow.TableSection = TableRowSection.TableHeader;
         }
+
         protected void grdEstadoDocumento_OnPageIndexChanging(object sender, GridViewPageEventArgs e)
         {
             grdEstadoDocumento.PageIndex = e.NewPageIndex;
@@ -73,7 +74,7 @@ namespace WebItNow
             {
                 (e.Row.FindControl("imgAceptado") as ImageButton).Enabled = true;
                 (e.Row.FindControl("imgRechazado") as ImageButton).Enabled = true;
-                (e.Row.FindControl("imgDescarga") as ImageButton).Enabled = true;
+            //  (e.Row.FindControl("imgDescargas") as ImageButton).Enabled = true;
             }
         }
 
@@ -180,17 +181,21 @@ namespace WebItNow
                 // Actualizar en la tabla [ITM_04] (IdDescarga = 1)
                 Update_ITM_04(sUsuario, sTipoDocumento, 1);
 
-                var email = new EnvioEmail();
+                Session["IdUsuario"] = sUsuario;
+                Session["Asunto"] = "Documento Aceptado";
 
-                // Consultar de la tabla [tbUsuarios] el [UsEmail]
-                string sEmail = email.CorreoElectronico(sUsuario);
-                int Envio_Ok = email.EnvioMensaje(sUsuario, sEmail, "Documento Aceptado ");
+                Response.Redirect("Page_Message.aspx");
 
-                if (Envio_Ok == 0)
-                {
-                    /// Envio de correo Ok.
-                    Lbl_Message.Text = "* El documento ha sido aceptado.";
-                }
+                //var email = new EnvioEmail();
+
+                //// Consultar de la tabla [tbUsuarios] el [UsEmail]
+                //string sEmail = email.CorreoElectronico(sUsuario);
+                //int Envio_Ok = email.EnvioMensaje(sUsuario, sEmail, "Documento Aceptado ");
+
+                //if (Envio_Ok == 0)
+                //{
+                //    Lbl_Message.Text = "* El documento ha sido aceptado.";
+                //}
             }
             catch (Exception ex)
             {
@@ -232,17 +237,21 @@ namespace WebItNow
                 // Refrescar GridView
                 GetEstadoDocumentos();
 
-                var email = new EnvioEmail();
+                Session["IdUsuario"] = sUsuario;
+                Session["Asunto"] = "Documento Rechazado";
 
-                // Consultar de la tabla [tbUsuarios] el [UsEmail]
-                string sEmail = email.CorreoElectronico(sUsuario);
-                int Envio_Ok = email.EnvioMensaje(sUsuario, sEmail, "Documento Rechazado ");
+                Response.Redirect("Page_Message.aspx");
 
-                if (Envio_Ok == 0)
-                {
-                    /// Envio de correo Ok.
-                    Lbl_Message.Text = "* El documento ha sido rechazado.";
-                }
+                //var email = new EnvioEmail();
+
+                //// Consultar de la tabla [tbUsuarios] el [UsEmail]
+                //string sEmail = email.CorreoElectronico(sUsuario);
+                //int Envio_Ok = email.EnvioMensaje(sUsuario, sEmail, "Documento Rechazado");
+
+                //if (Envio_Ok == 0)
+                //{
+                //    Lbl_Message.Text = "* El documento ha sido rechazado.";
+                //}
 
             }
             catch (Exception ex)
@@ -283,31 +292,6 @@ namespace WebItNow
 
         }
 
-        protected void BtnPruebas_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                string sUsuario = "USUARIO1";
-                string sNomArchivo = "Nomenclatura_tablas.xlsx";
-                string sSubdirectorio = "USUARIO1/OTR/";
-                string sTipoDocumento = "OTR";
-
-                Variables.wDownload = true;
-
-                // Actualizar en la tabla [ITM_04] (IdDescarga = 1)
-                Update_ITM_04(sUsuario, sTipoDocumento, 1);
-
-                // Descargar el archivo.
-                DownloadFromAzure(sNomArchivo, sSubdirectorio);
-
-                //  imgDescarga.Enabled = false;
-            }
-            catch (Exception ex)
-            {
-                LblMessage.Text = ex.Message;
-                this.mpeMensaje.Show();
-            }
-        }
         protected void DeleteFromAzure(string sFilename, string sSubdirectorio, string sUsuario, string sTipoDocumento)
         {
             try
@@ -704,31 +688,10 @@ namespace WebItNow
             }
         }
 
-        protected void DownloadFile_bk(object sender, EventArgs e)
-        {
-            GridViewRow row = ((GridViewRow)((System.Web.UI.WebControls.ImageButton)sender).NamingContainer);
-            int index = row.RowIndex;
-
-            string sNomArchivo = grdEstadoDocumento.Rows[index].Cells[6].Text;
-            string sSubdirectorio = grdEstadoDocumento.Rows[index].Cells[7].Text;
-
-            try
-            {
-                string filePath = Server.MapPath("~/Directorio/") + sSubdirectorio + sNomArchivo;
-                Variables.wDownload = true;
-
-                DescargaArch(filePath);
-            }
-            catch (Exception ex)
-            {
-                LblMessage.Text = ex.Message;
-                this.mpeMensaje.Show();
-            }
-        }
-
         private static void NewMethod(ConexionBD Conecta)
         {
             Conecta.Abrir();
         }
+
     }
 }
