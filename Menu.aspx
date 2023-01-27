@@ -153,7 +153,7 @@
                             <font size="4">Documentos</font>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="Review-Document.aspx">Revision Documentos</a></li>
+                            <li><a class="dropdown-item" href="Review_Document.aspx">Revision Documentos</a></li>
                             <!--
                             <li><a class="dropdown-item" href="#">Another action</a></li>
                             

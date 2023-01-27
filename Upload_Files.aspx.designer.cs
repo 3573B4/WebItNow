@@ -11,7 +11,7 @@ namespace WebItNow
 {
 
 
-    public partial class Upload_Files_1
+    public partial class Upload_Files
     {
 
         /// <summary>

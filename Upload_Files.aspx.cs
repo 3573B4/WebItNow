@@ -6,7 +6,7 @@ using System.Web.UI;
 
 namespace WebItNow
 {
-    public partial class Upload_Files_1 : System.Web.UI.Page
+    public partial class Upload_Files : System.Web.UI.Page
     {
         protected void Page_PreInit(object sender, EventArgs e)
         {

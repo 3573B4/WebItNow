@@ -272,7 +272,7 @@
     <Content Include="Images\icono-Subir-Archivo-morado.png" />
     <Content Include="Menu.aspx" />
     <Content Include="PagMessage.aspx" />
-    <Content Include="Review-Document.aspx" />
+    <Content Include="Review_Document.aspx" />
     <Content Include="Scripts\footable.min.js" />
     <Content Include="Site.Master" />
     <Content Include="Styles\Aceptar.jpg" />
@@ -333,7 +333,7 @@
     <Content Include="Styles\fuentes.css" />
     <Content Include="Styles\footable.min.css" />
     <Content Include="SubirArchivo.aspx" />
-    <Content Include="Upload_Files_1.aspx" />
+    <Content Include="Upload_Files.aspx" />
     <Content Include="Upload_Files_2.aspx" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config" />
@@ -406,12 +406,12 @@
       <DependentUpon>PagMessage.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Review-Document.aspx.cs">
-      <DependentUpon>Review-Document.aspx</DependentUpon>
+    <Compile Include="Review_Document.aspx.cs">
+      <DependentUpon>Review_Document.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Review-Document.aspx.designer.cs">
-      <DependentUpon>Review-Document.aspx</DependentUpon>
+    <Compile Include="Review_Document.aspx.designer.cs">
+      <DependentUpon>Review_Document.aspx</DependentUpon>
     </Compile>
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
@@ -441,12 +441,12 @@
     <Compile Include="SubirArchivo.aspx.designer.cs">
       <DependentUpon>SubirArchivo.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Upload_Files_1.aspx.cs">
-      <DependentUpon>Upload_Files_1.aspx</DependentUpon>
+    <Compile Include="Upload_Files.aspx.cs">
+      <DependentUpon>Upload_Files.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Upload_Files_1.aspx.designer.cs">
-      <DependentUpon>Upload_Files_1.aspx</DependentUpon>
+    <Compile Include="Upload_Files.aspx.designer.cs">
+      <DependentUpon>Upload_Files.aspx</DependentUpon>
     </Compile>
     <Compile Include="Upload_Files_2.aspx.cs">
       <DependentUpon>Upload_Files_2.aspx</DependentUpon>

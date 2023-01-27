@@ -42,9 +42,5 @@ namespace WebItNow
 
         }
 
-        //protected void ImgSalir_Click(object sender, ImageClickEventArgs e)
-        //{
-        //    Response.Redirect("Login.aspx");
-        //}
     }
 }
