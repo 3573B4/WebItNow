@@ -114,22 +114,13 @@ namespace WebItNow
         protected global::System.Web.UI.WebControls.Label LblTpoDocumento;
 
         /// <summary>
-        /// Control RequiredFieldValidator2.
+        /// Control ddlTpoDocumento.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator2;
-
-        /// <summary>
-        /// Control TxtTpoDocumento.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TxtTpoDocumento;
+        protected global::System.Web.UI.WebControls.DropDownList ddlTpoDocumento;
 
         /// <summary>
         /// Control Lbl_Message.

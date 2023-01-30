@@ -19,7 +19,7 @@ namespace WebItNow
         {
             if (!Page.IsPostBack)
             {
-
+                GetTpoDocumento();
             }
         }
 
@@ -39,7 +39,7 @@ namespace WebItNow
             if (TxtNom.Text != "" && TxtEmail.Text != "" && TxtReferencia.Text != "")
             {
                 // Insertar Registo Tabla ITM_11 (Solicitud Documento)
-                int result = Add_Solicitud(TxtNom.Text, TxtEmail.Text, TxtReferencia.Text, TxtTpoDocumento.Text);
+                int result = Add_Solicitud(TxtNom.Text, TxtEmail.Text, TxtReferencia.Text, ddlTpoDocumento.SelectedValue);
 
                 if (result == 0)
                 {
@@ -145,6 +145,40 @@ namespace WebItNow
         private static void NewMethod(ConexionBD Conecta)
         {
             Conecta.Abrir();
+        }
+
+        protected void ddlTpoDocumento_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        public void GetTpoDocumento()
+        {
+            ConexionBD Conecta = new ConexionBD();
+            Conecta.Abrir();
+
+            // Consulta a la tabla Tipo de Documento
+            string sqlQuery = "SELECT IdTpoDocumento, Descripcion " +
+                                "FROM ITM_06 " +
+                                "WHERE Status = '1'";
+
+            SqlCommand cmd = new SqlCommand(sqlQuery, Conecta.ConectarBD);
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+
+            ddlTpoDocumento.DataSource = dt;
+
+            ddlTpoDocumento.DataValueField = "IdTpoDocumento";
+            ddlTpoDocumento.DataTextField = "Descripcion";
+
+            ddlTpoDocumento.DataBind();
+
+            cmd.Dispose();
+            da.Dispose();
+
+            Conecta.Cerrar();
+
         }
 
     }

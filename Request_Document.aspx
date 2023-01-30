@@ -30,7 +30,7 @@
 
 <div class="container col-md-4">
         <h2 class="h2 mb-3 fw-normal">Solicitud de Documento</h2>
-        <div class="form-group">
+        <div class="form-group mt-3">
             <asp:Label ID="LblNom" runat="server" Text="Nombre" CssClass="control-label co-sm-3" Font-Bold="False"></asp:Label>
             <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server"   
                 ControlToValidate="TxtNom" ErrorMessage="*" ForeColor="Red">
@@ -40,7 +40,7 @@
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group mt-3">
             <asp:Label ID="LblEmail" runat="server" Text="Correo electrónico" CssClass="control-label col-sm-2"></asp:Label>
             <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server"   
                 ControlToValidate="TxtEmail" ErrorMessage="*" ForeColor="Red">
@@ -50,7 +50,7 @@
             </div>
         </div>        
 
-        <div class="form-group">
+        <div class="form-group mt-3">
             <asp:Label ID="LblReferencia" runat="server" Text="Referencia" CssClass="control-label col-sm-2"></asp:Label>
             <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server"   
                 ControlToValidate="TxtReferencia" ErrorMessage="*" ForeColor="Red">
@@ -60,17 +60,18 @@
             </div>
         </div>
 
-        <div class="form-group">
-            <asp:Label ID="LblTpoDocumento" runat="server" Text="Tpo. Documento" CssClass="control-label col-sm-2"></asp:Label>
-            <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server"   
-                ControlToValidate="TxtTpoDocumento" ErrorMessage="*" ForeColor="Red">
-                </asp:RequiredFieldValidator>
-            <div class="col-sm-12">
-                <asp:TextBox ID="TxtTpoDocumento" runat="server" CssClass="form-control" placeholder="Tipo de Documento" onkeyup="mayus(this);" MaxLength="10" ></asp:TextBox>
-            </div>
+        <div class="form-group mt-3">
+            <asp:Label ID="LblTpoDocumento" runat="server" Text="Tipo de Documento" CssClass="control-label col-sm-2"></asp:Label>
         </div>
 
-        <div class="form-group">
+        <div class="form-floating">
+                <div class="dropdown">
+                    <asp:DropDownList ID="ddlTpoDocumento" runat="server" CssClass="btn btn-outline-secondary"  AutoPostBack="true" OnSelectedIndexChanged="ddlTpoDocumento_SelectedIndexChanged" Width="100%">
+                    </asp:DropDownList>
+                </div>
+        </div>
+
+        <div class="form-group  mt-3">
             <div class="d-grid col-6 mx-auto">
                 <asp:Label ID="Lbl_Message" runat="server" ForeColor="Red" Visible="False"  Width="280px" ></asp:Label>
             </div>
