@@ -153,15 +153,11 @@
                             <font size="4">Documentos</font>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="Review_Document.aspx">Revision Documentos</a></li>
-                            <!--
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            
-                            <li>
-                                <hr class="dropdown-divider"/>
-                            </li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
-                            -->
+                            <li><a class="dropdown-item" href="Review_Document.aspx">Revision Documento</a></li>
+                            <li><hr class="dropdown-divider"/></li>
+                            <li><a class="dropdown-item" href="Request_Document.aspx">Solicitar Documento</a></li>
+                            <li><hr class="dropdown-divider"/></li>
+                            <li><a class="dropdown-item" href="#">Consultas</a></li>
                         </ul>
                     </li>
                     <li class="nav-item my-1">

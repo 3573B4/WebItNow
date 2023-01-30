@@ -272,6 +272,7 @@
     <Content Include="Images\icono-Subir-Archivo-morado.png" />
     <Content Include="Menu.aspx" />
     <Content Include="Page_Message.aspx" />
+    <Content Include="Request_Document.aspx" />
     <Content Include="Review_Document.aspx" />
     <Content Include="Scripts\footable.min.js" />
     <Content Include="Site.Master" />
@@ -405,6 +406,13 @@
       <DependentUpon>Page_Message.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Request_Document.aspx.cs">
+      <DependentUpon>Request_Document.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Request_Document.aspx.designer.cs">
+      <DependentUpon>Request_Document.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Review_Document.aspx.cs">
       <DependentUpon>Review_Document.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

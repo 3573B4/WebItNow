@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
 using System.Data;
-using System.Data.SqlTypes;
 using System.Data.SqlClient;
 
 namespace WebItNow
@@ -57,14 +53,6 @@ namespace WebItNow
                         LblMessage.Text = "Usuario fue insertado correctamente ";
                         this.mpeMensaje.Show();
                     }
-
-                    //string script = @"<script type='text/javascript'>
-                    //        alert('Usuario fue agregado correctamente'); </script>";
-
-                    //ScriptManager.RegisterStartupScript(this, typeof(Page), "alerta", script, false);
-
-                    //string script = "alert('Usuario fue insertado correctamente');";
-                    //ScriptManager.RegisterStartupScript(this, typeof(Page), "alerta", script, true);
 
                     Limpia(this.Controls);
 

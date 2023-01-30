@@ -65,7 +65,7 @@
 <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional" >
     <ContentTemplate>
     <br />
-    <div class="container col-md-4">
+    <div class="container col-md-6">
         <h2 class="h2 mb-3 fw-normal">Validación de Documentos</h2>
         <br />
         <h2 class="h2 mb-3 fw-normal">Pendientes</h2>
@@ -79,22 +79,22 @@
 
                         <asp:TemplateField>
                             <ItemTemplate>
-                                <asp:ImageButton ID="imgAceptado" runat="server" ImageUrl="~/Images/aceptar.png" Height="35px" Width="35px" OnClick="imgAceptado_Click" Enabled="false" />
-                            </ItemTemplate> 
-                            <ItemStyle Width="60px" />
-                        </asp:TemplateField>
-
-                        <asp:TemplateField>
-                            <ItemTemplate>
-                                <asp:ImageButton ID="imgRechazado" runat="server" ImageUrl="~/Images/cancelar.png" Height="35px" Width="35px" OnClick="imgRechazado_Click" Enabled="false" />
-                            </ItemTemplate> 
-                            <ItemStyle Width="60px" />
-                        </asp:TemplateField>
-
-                        <asp:TemplateField>
-                            <ItemTemplate>
-                                <asp:ImageButton ID="imgDescarga" runat="server" ImageUrl="~/Images/descargar.png" Height="35px" Width="35px" OnClick="ImgDescarga_Click" OnClientClick="timedRefresh(2000)" Enabled="true" />
+                                <asp:ImageButton ID="imgDescarga" runat="server" ImageUrl="~/Images/descargar.png" Height="32px" Width="32px" OnClick="ImgDescarga_Click" OnClientClick="timedRefresh(2000)" Enabled="true" />
                             </ItemTemplate>
+                            <ItemStyle Width="60px" />
+                        </asp:TemplateField>
+
+                        <asp:TemplateField>
+                            <ItemTemplate>
+                                <asp:ImageButton ID="imgAceptado" runat="server" ImageUrl="~/Images/aceptar.png" Height="32px" Width="32px" OnClick="imgAceptado_Click" Enabled="false" />
+                            </ItemTemplate> 
+                            <ItemStyle Width="60px" />
+                        </asp:TemplateField>
+
+                        <asp:TemplateField>
+                            <ItemTemplate>
+                                <asp:ImageButton ID="imgRechazado" runat="server" ImageUrl="~/Images/cancelar.png" Height="32px" Width="32px" OnClick="imgRechazado_Click" Enabled="false" />
+                            </ItemTemplate> 
                             <ItemStyle Width="60px" />
                         </asp:TemplateField>
 

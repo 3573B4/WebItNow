@@ -32,7 +32,7 @@ namespace WebItNow
 
         public void getDocsUsuario()
         {
-            string user = /*"USUARIO4"*/ Convert.ToString(Session["IdUsuario"]);
+            string user = Convert.ToString(Session["IdUsuario"]);
             ConexionBD Conectar = new ConexionBD();
             Conectar.Abrir();
 

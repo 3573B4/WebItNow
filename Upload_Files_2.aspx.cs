@@ -271,7 +271,7 @@ namespace WebItNow
 
         protected void BtnRegresar_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Upload_Files_1.aspx");
+            Response.Redirect("Upload_Files.aspx");
         }
 
         public void UploadToAzure(string sFilename, string sPath)
