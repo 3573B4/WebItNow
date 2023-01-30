@@ -29,6 +29,11 @@ namespace WebItNow
                     BtnRegresar.Visible = false;
                     LblMotivo.Text = "Motivo de Enviado";
                 }
+                else if (sAsunto == "Solicitud Documento")
+                {
+                    BtnRegresar.Visible = false;
+                    LblMotivo.Text = "Motivo de Solicitud";
+                }
 
                 if (sAsunto == "Documento Aceptado")
                 {
@@ -52,8 +57,17 @@ namespace WebItNow
                 string sAsunto = Convert.ToString(Session["Asunto"]);
 
                 var email = new EnvioEmail();
-                string sEmail = email.CorreoElectronico(sUsuario);
-                int Envio_Ok = email.EnvioMensaje(sUsuario, sEmail, sAsunto, TxtAreaMensaje.Value);
+                if (sAsunto != "Solicitud Documento")
+                {
+                    string sEmail = email.CorreoElectronico(sUsuario);
+                    int Envio_Ok = email.EnvioMensaje(sUsuario, sEmail, sAsunto, TxtAreaMensaje.Value);
+                }
+                else
+                {
+                    string sEmail = Convert.ToString(Session["Email"]);
+                    int Envio_Ok = email.EnvioMensaje(sUsuario, sEmail, sAsunto, TxtAreaMensaje.Value);
+                }
+
 
                 if (sAsunto == "Documento Enviado")
                 { 
@@ -63,6 +77,11 @@ namespace WebItNow
                 {
                     Response.Redirect("Review_Document.aspx");
                 }
+                else if (sAsunto == "Solicitud Documento")
+                {
+                    Response.Redirect("Request_Document.aspx");
+                }
+                    
 
             }
             catch(Exception ex)
@@ -79,6 +98,10 @@ namespace WebItNow
             if (sAsunto == "Documento Aceptado" || sAsunto == "Documento Rechazado")
             {
                 Response.Redirect("Review_Document.aspx");
+            }
+            else if (sAsunto == "Solicitud Documento")
+            {
+                Response.Redirect("Request_Document.aspx");
             }
         }
 

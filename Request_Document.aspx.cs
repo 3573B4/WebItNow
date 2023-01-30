@@ -43,14 +43,21 @@ namespace WebItNow
 
                 if (result == 0)
                 {
-                    var email = new EnvioEmail();
-                    int Envio_Ok = email.EnvioMensaje(TxtNom.Text.Trim(), TxtEmail.Text.Trim(), "Solicitud Documento", string.Empty);
 
-                    if (Envio_Ok == 0)
-                    {
-                        LblMessage.Text = "Solicitud enviada correctamente ";
-                        this.mpeMensaje.Show();
-                    }
+                    Session["IdUsuario"] = TxtNom.Text;
+                    Session["Asunto"] = "Solicitud Documento";
+                    Session["Email"] = TxtEmail.Text.Trim();
+
+                    Response.Redirect("Page_Message.aspx");
+
+                    //var email = new EnvioEmail();
+                    //int Envio_Ok = email.EnvioMensaje(TxtNom.Text.Trim(), TxtEmail.Text.Trim(), "Solicitud Documento", string.Empty);
+
+                    //if (Envio_Ok == 0)
+                    //{
+                    //    LblMessage.Text = "Solicitud enviada correctamente ";
+                    //    this.mpeMensaje.Show();
+                    //}
 
                     Limpia(this.Controls);
 

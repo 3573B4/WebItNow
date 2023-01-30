@@ -40,10 +40,12 @@ namespace WebItNow
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            // Carga GridView
+            GetEstadoDocumentos();
+
             if (!Page.IsPostBack)
             {
-                // Carga GridView
-                GetEstadoDocumentos();
+
             }
 
             //* * Agrega THEAD y TBODY a GridView.
