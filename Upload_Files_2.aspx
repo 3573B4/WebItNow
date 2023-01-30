@@ -38,19 +38,19 @@
 
     <div class="container col-md-4">
         <h2 class="h2 mb-3 fw-normal">Carga segura de documentos</h2>
-
+        <br />
         <div class="form-group">
             <div class="d-grid col-4 mx-auto py-1">
                 <asp:Label ID="lblUsuario" runat="server" Font-Size="XX-Large" ></asp:Label>
             </div>
         </div>
 
-        <div class="form-group">
+<%--        <div class="form-group">
             <div class="d-grid col-4 mx-auto py-1">
                 <asp:Label ID="indicaciones" runat="server" Text="Seleccione el archivo a subir" CssClass="control-label co-sm-3" Font-Bold="False"></asp:Label>
             </div>
-        </div>
-        <br />
+        </div>--%>
+
         <br />
         <div class="form-floating">
                 <div class="dropdown">

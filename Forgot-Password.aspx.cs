@@ -24,7 +24,7 @@ namespace WebItNow
             if (!Page.IsPostBack)
             {
                 this.Form.Attributes.Add("autocomplete", "off");
-                TxtUsu.Focus();
+                TxtEmail.Focus();
             }
 
         }
@@ -36,25 +36,17 @@ namespace WebItNow
             //Reference the TextBox.
             TextBox textBox = sender as TextBox;
 
-            //Get the ID of the TextBox.
-            //string id = textBox.ID;
-
-            //Display the Text of TextBox.
-            // ClientScript.RegisterClientScriptBlock(this.GetType(), "alert", "alert('" + textBox.Text + "');", true);
-            // ClientScript.RegisterClientScriptBlock(this.GetType(), "alert", "alert('" + Lbl_Message.Text + "');", true);
-            // TxtPass.Text = Server.HtmlEncode(TxtUsu.Text);
-
-            if (TxtUsu.Text != "")
+            if (TxtEmail.Text != "")
             {
 
                 Lbl_Message.Visible = true;
 
                 // Insertar Registo Usuario Cargas
-                int result = ValidaUser(TxtUsu.Text, Int32.Parse(Variables.wPrivilegios));
+                int result = ValidarEmail(TxtEmail.Text, Int32.Parse(Variables.wPrivilegios));
 
                 if (result == 0)
                 {
-                    TxtUsu.Text = string.Empty;
+                    TxtEmail.Text = string.Empty;
                     //Lbl_Message.Text = "* El nombre de usuario es incorrecto";
                     LblMessage.Text = "El nombre de usuario es incorrecto";
                     this.mpeMensaje.Show();
@@ -97,15 +89,18 @@ namespace WebItNow
 
                 if (TxtPass.Text == TxtConfPass.Text)
                 {
-                    var email = new EnvioEmail();
+
+                    string sUsuario = Recuperar_Usuario(TxtEmail.Text);
+
+                    var email = new EnvioEmail();   
 
                     // Consultar de la tabla [tbUsuarios] el [UsEmail]
-                    string sEmail = email.CorreoElectronico(TxtUsu.Text);
-                    int Envio_Ok = email.EnvioMensaje(TxtUsu.Text, sEmail, "Cambio Contraseña ");
+                    string sEmail = email.CorreoElectronico(sUsuario);
+                    int Envio_Ok = email.EnvioMensaje(sUsuario, sEmail, "Cambio Contraseña",string.Empty);
 
                     if (Envio_Ok == 0)
                     {
-                        int result = UpdatePassword(TxtUsu.Text, sEmail, TxtPass.Text, Int32.Parse(Variables.wPrivilegios), "Update");
+                        int result = UpdatePassword(sUsuario, sEmail, TxtPass.Text, Int32.Parse(Variables.wPrivilegios), "Update");
                         if (result == 0)
                         {
                             LblMessage.Text = "Contraseña se actualizo correctamente ";
@@ -166,6 +161,89 @@ namespace WebItNow
             }
 
             return -1;
+        }
+
+        public int ValidarEmail(String pUsuarios, int pUsPrivilegios)
+        {
+            ConexionBD Conecta = new ConexionBD();
+            NewMethod(Conecta);
+
+            try
+            {
+
+                SqlCommand cmd1 = new SqlCommand("sp_tbEmail", Conecta.ConectarBD);
+                cmd1.CommandType = CommandType.StoredProcedure;
+
+                cmd1.Parameters.AddWithValue("@email", pUsuarios);
+                cmd1.Parameters.AddWithValue("@privilegios", pUsPrivilegios);
+                SqlDataReader dr1 = cmd1.ExecuteReader();
+
+                if (dr1.Read())
+                {
+
+                    return dr1.GetInt32(0);
+
+                }
+
+                cmd1.Dispose();
+                dr1.Dispose();
+
+                Conecta.Cerrar();
+
+                return 0;
+
+            }
+            catch (Exception ex)
+            {
+                // Show(ex.Message);
+                LblMessage.Text = ex.Message;
+                this.mpeMensaje.Show();
+            }
+            finally
+            {
+
+            }
+
+            return -1;
+        }
+
+        public string Recuperar_Usuario (String pEmail)
+        {
+
+            try
+            {
+
+                ConexionBD Conecta = new ConexionBD();
+                NewMethod(Conecta);
+
+                SqlCommand cmd1 = new SqlCommand("Select IdUsuario From ITM_02 Where UsEmail = '" + pEmail + "'", Conecta.ConectarBD);
+                SqlDataReader dr1 = cmd1.ExecuteReader();
+
+                while (dr1.Read())
+                {
+                    return dr1["IdUsuario"].ToString().Trim();
+                }
+
+                cmd1.Dispose();
+                dr1.Dispose();
+
+                Conecta.Cerrar();
+
+                return String.Empty;
+
+            }
+            catch (Exception ex)
+            {
+                // Show(ex.Message);
+                LblMessage.Text = ex.Message;
+                this.mpeMensaje.Show();
+            }
+            finally
+            {
+
+            }
+
+            return String.Empty;
         }
 
         private static void NewMethod(ConexionBD Conecta)

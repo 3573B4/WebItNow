@@ -24,31 +24,31 @@ namespace WebItNow
         protected global::System.Web.UI.ScriptManager ScriptManager1;
 
         /// <summary>
-        /// Control LblUsu.
+        /// Control LblEmail.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LblUsu;
+        protected global::System.Web.UI.WebControls.Label LblEmail;
 
         /// <summary>
-        /// Control RequiredFieldValidator4.
+        /// Control RequiredFieldValidator2.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator4;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator2;
 
         /// <summary>
-        /// Control TxtUsu.
+        /// Control TxtEmail.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TxtUsu;
+        protected global::System.Web.UI.WebControls.TextBox TxtEmail;
 
         /// <summary>
         /// Control LblPass.

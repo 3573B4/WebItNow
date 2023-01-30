@@ -44,7 +44,7 @@ namespace WebItNow
                 if (result == 0)
                 {
                     var email = new EnvioEmail();
-                    int Envio_Ok = email.EnvioMensaje(TxtNom.Text.Trim(), TxtEmail.Text.Trim(), "Solicitud Documento ");
+                    int Envio_Ok = email.EnvioMensaje(TxtNom.Text.Trim(), TxtEmail.Text.Trim(), "Solicitud Documento", string.Empty);
 
                     if (Envio_Ok == 0)
                     {

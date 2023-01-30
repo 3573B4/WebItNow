@@ -32,14 +32,14 @@ namespace WebItNow
 
         public void getDocsUsuario()
         {
-            string user = Convert.ToString(Session["IdUsuario"]);
+            string sUsuario = Convert.ToString(Session["IdUsuario"]);
             ConexionBD Conectar = new ConexionBD();
             Conectar.Abrir();
 
             string sqlQuery = "SELECT ed.IdUsuario, ed.IdTipoDocumento, ed.Nom_Imagen, td.Descripcion, s.Descripcion as Desc_Status  " +
                                   "  FROM ITM_04 ed, ITM_06 td, ITM_07 s " +
                                   " WHERE ed.IdStatus = s.IdStatus And ed.IdTipoDocumento = td.IdTpoDocumento " +
-                                  "   AND IdUsuario = '" + user + "'";
+                                  "   AND IdUsuario = '" + sUsuario + "'";
 
             SqlCommand ejecucion = new SqlCommand(sqlQuery, Conectar.ConectarBD);
             SqlDataAdapter da = new SqlDataAdapter(ejecucion);

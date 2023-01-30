@@ -44,7 +44,7 @@ namespace WebItNow
                     int valor = Add_tbEstadoDocumento(TxtUsu.Text, idStatus);
 
                     var email = new EnvioEmail();
-                    int Envio_Ok = email.EnvioMensaje(TxtUsu.Text.Trim(), TxtEmail.Text.Trim(), "Registro Usuario ");
+                    int Envio_Ok = email.EnvioMensaje(TxtUsu.Text.Trim(), TxtEmail.Text.Trim(), "Registro Usuario ", string.Empty);
 
                     //EnvioMensaje(TxtUsu.Text.Trim(), TxtEmail.Text.Trim());
 
@@ -218,9 +218,53 @@ namespace WebItNow
             return -1;
         }
 
+        public int ValidaEmail(String pEmail, int pUsPrivilegios)
+        {
+            ConexionBD Conecta = new ConexionBD();
+            NewMethod(Conecta);
+
+            try
+            {
+
+                SqlCommand cmd1 = new SqlCommand("sp_tbEmail", Conecta.ConectarBD);
+                cmd1.CommandType = CommandType.StoredProcedure;
+
+                cmd1.Parameters.AddWithValue("@email", pEmail);
+                cmd1.Parameters.AddWithValue("@privilegios", pUsPrivilegios);
+                SqlDataReader dr1 = cmd1.ExecuteReader();
+
+                if (dr1.Read())
+                {
+
+                    return dr1.GetInt32(0);
+
+                }
+
+                cmd1.Dispose();
+                dr1.Dispose();
+
+                Conecta.Cerrar();
+
+                return 0;
+
+            }
+            catch (Exception ex)
+            {
+                // Show(ex.Message);
+                LblMessage.Text = ex.Message;
+                this.mpeMensaje.Show();
+            }
+            finally
+            {
+
+            }
+
+            return -1;
+        }
+
         protected void TxtUsu_TextChanged(object sender, EventArgs e)
         {
-            // Validar si existe Usuario en la tabla tbUsuarios
+            // Validar si existe Usuario en la tabla ITM_02 (tbUsuarios)
             Variables.wPrivilegios = "3";
             int Usuario_Existe = ValidaUser(TxtUsu.Text, Int32.Parse(Variables.wPrivilegios));
 
@@ -229,12 +273,32 @@ namespace WebItNow
                 TxtUsu.Text = string.Empty;
                 TxtEmail.Focus();
 
-                LblMessage.Text = "El nombre de usuario es incorrecto";
+                LblMessage.Text = "El nombre de usuario ya existe";
                 this.mpeMensaje.Show();
             }
             else
             {
                 TxtEmail.Focus();
+            }
+        }
+
+        protected void TxtEmail_TextChanged(object sender, EventArgs e)
+        {
+            // Validar si existe Email en la tabla ITM_02 (tbUsuarios)
+            Variables.wPrivilegios = "3";
+            int Email_Existe = ValidaEmail(TxtEmail.Text, Int32.Parse(Variables.wPrivilegios));
+
+                if (Email_Existe == 1)
+            {
+                TxtEmail.Text = string.Empty;
+                TxtEmail.Focus();
+
+                LblMessage.Text = "El Correo electrónico ya existe";
+                this.mpeMensaje.Show();
+            }
+            else
+            {
+                TxtPass.Focus();
             }
         }
 

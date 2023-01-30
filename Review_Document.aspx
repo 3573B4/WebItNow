@@ -141,6 +141,7 @@
             </div>
         </div>
     </div>
+
     <br />
     <asp:Panel ID="pnlMensaje" runat="server" CssClass="CajaDialogo" style="display: none; border: none; border-radius: 10px; width: 400px; background-color:#FFFFFF;">
         <div class=" row justify-content-end" data-bs-theme="dark">

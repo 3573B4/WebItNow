@@ -37,7 +37,7 @@
                 ControlToValidate="TxtUsu" ErrorMessage="*" ForeColor="Red">
                 </asp:RequiredFieldValidator>
             <div class="col-sm-12">
-                <asp:TextBox ID="TxtUsu" runat="server" CssClass="form-control" placeholder="Usuario" onkeyup="mayus(this);" OnTextChanged="TxtUsu_TextChanged" AutoPostBack="true" ></asp:TextBox>
+                <asp:TextBox ID="TxtUsu" runat="server" CssClass="form-control" placeholder="Usuario" onkeyup="mayus(this);" OnTextChanged="TxtUsu_TextChanged" AutoPostBack="true" MaxLength="16" ></asp:TextBox>
             </div>
         </div>
 
@@ -47,7 +47,7 @@
                 ControlToValidate="TxtEmail" ErrorMessage="*" ForeColor="Red">
                 </asp:RequiredFieldValidator>
             <div class="col-sm-12">
-                <asp:TextBox ID="TxtEmail" runat="server" CssClass="form-control" placeholder="Ingresa tu e-mail" MaxLength="50" TextMode="Email"></asp:TextBox>
+                <asp:TextBox ID="TxtEmail" runat="server" CssClass="form-control" placeholder="Ingresa tu e-mail" MaxLength="50" OnTextChanged="TxtEmail_TextChanged" AutoPostBack="true" TextMode="Email"></asp:TextBox>
             </div>
         </div>        
 
@@ -57,7 +57,7 @@
                 ControlToValidate="TxtPass" ErrorMessage="*" ForeColor="Red">
                 </asp:RequiredFieldValidator>
             <div class="col-sm-12">
-                <asp:TextBox ID="TxtPass" runat="server" CssClass="form-control" placeholder="Crea una contraseña" onkeyup="mayus(this);" MaxLength="10" TextMode="Password"></asp:TextBox>
+                <asp:TextBox ID="TxtPass" runat="server" CssClass="form-control" placeholder="Crea una contraseña" onkeyup="mayus(this);" MaxLength="16" TextMode="Password"></asp:TextBox>
             </div>
         </div>
 

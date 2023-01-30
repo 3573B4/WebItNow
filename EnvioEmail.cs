@@ -43,13 +43,13 @@ namespace WebItNow
             return sEmail;
         }
 
-        public int EnvioMensaje(String pUsuarios, String pEmail, string pMensaje)
+        public int EnvioMensaje(String pUsuarios, String pEmail, string pAsunto, string pBody)
         {
             string wDe = "martin.baltierra@itnow.mx";
             string wPara = pEmail;
             string wCC = "martin.baltierra@itnow.mx";
-            string wAsunto = pMensaje;
-            string wMensaje = "Mensaje de Registro";
+            string wAsunto = pAsunto;
+            string wMensaje = "Mensaje de Registro" + "<br/>" + pBody;
 
             System.Net.Mail.MailMessage correo = new System.Net.Mail.MailMessage();
             correo.From = new System.Net.Mail.MailAddress(wDe);
@@ -58,7 +58,7 @@ namespace WebItNow
             correo.Subject = wAsunto;
             wMensaje += "\n\nFecha y hora GMT: " +
                 DateTime.Now.ToLocalTime().ToString("dd/MM/yyyy HH:mm:ss");
-            correo.Body = wMensaje;
+            correo.Body = wMensaje ;
             correo.IsBodyHtml = false;
             correo.Priority = System.Net.Mail.MailPriority.Normal;
             //

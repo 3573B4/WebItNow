@@ -35,46 +35,56 @@
 
     <ContentTemplate>
 
-        <div class="container col-md-4">
-            <h2 class="h2 mb-3 fw-normal">Pantalla de mensaje</h2>
-            <div class="form-group my-3">
-                <asp:Label ID="lblUsuario" runat="server" Text=""></asp:Label>
-            </div>
-            <div class="form-group my-3">
-                <asp:Label ID="LblMotivo" runat="server" Text="Motivo de Rechazo / Aceptado / Enviado" Font-Size="Large"></asp:Label>
-            </div>
-            <div class="form-group my-3">
-                <textarea rows="6" cols="64" id="TxtAreaMensaje" runat="server" class="form-control"/>
-            </div>
-            <div class="form-group">
-                <asp:Button ID="BtnEnviar" runat="server" Text="Enviar" CssClass="btn btn-primary" OnClick="BtnEnviar_Click"/>
-            </div>
-            <div class="form-group">
-                <div class="d-grid col-6 mx-auto">
-                    <ajaxToolkit:ModalPopupExtender ID="mpeMensaje" runat="server" PopupControlID="pnlMensaje"
-                        TargetControlID="lblOculto" BackgroundCssClass="FondoAplicacion" OnOkScript="mpeMensajeOnOk()">
-                    </ajaxToolkit:ModalPopupExtender>
-                    <asp:Label ID="lblOculto" runat="server" Text="Label" Style="display: none;" />
-                </div>
-                <br />
-                <div class="d-grid col-6 mx-auto">
-                    <ajaxToolkit:ModalPopupExtender ID="mpeExpira" runat="server" PopupControlID="pnlExpira"
-                        TargetControlID="lblHide" BackgroundCssClass="FondoAplicacion" OnOkScript="mpeExpiraOnOk()">
-                    </ajaxToolkit:ModalPopupExtender>
-                    <asp:Label ID="lblHide" runat="server" Text="Label" Style="display: none;" />
-                </div>
-            </div>
+    <div class="container col-md-4">
+        <h2 class="h2 mb-3 fw-normal">Pantalla de mensaje</h2>
+        <div class="form-group my-3">
+            <asp:Label ID="lblUsuario" runat="server" Text=""></asp:Label>
+        </div>
+        <div class="form-group my-3">
+            <asp:Label ID="LblMotivo" runat="server" Text="" Font-Size="Large"></asp:Label>
+        </div>
+        <div class="form-group my-3">
+            <textarea rows="6" cols="64" id="TxtAreaMensaje" runat="server" class="form-control"/>
+        </div>
+<%--    <div class="form-group">
+            <asp:Button ID="BtnEnviar" runat="server" Text="Enviar" CssClass="btn btn-primary" OnClick="BtnEnviar_Click"/>
+        </div>--%>
 
+        <div class="form-group mt-3">
+            <div class="col-12">                
+                <div class="d-grid gap-2 d-flex justify-content-center">
+                    <asp:Button ID="BtnEnviar" runat="server" Text="Enviar"  Font-Bold="True"  CssClass="btn btn-primary me-md-2" OnClick="BtnEnviar_Click"/>
+                    <asp:Button ID="BtnRegresar" runat="server" Font-Bold="True" Text="Regresar" OnClick="BtnRegresar_Click" CssClass="btn btn-outline-primary"/>
+                </div>
+            </div>
         </div>
 
-            <asp:Panel ID="pnlMensaje" runat="server" CssClass="CajaDialogo" style="display: none; border: none; border-radius: 10px; width: 400px; background-color:#FFFFFF;">
+        <div class="form-group">
+            <div class="d-grid col-6 mx-auto">
+                <ajaxToolkit:ModalPopupExtender ID="mpeMensaje" runat="server" PopupControlID="pnlMensaje"
+                    TargetControlID="lblOculto" BackgroundCssClass="FondoAplicacion" OnOkScript="mpeMensajeOnOk()">
+                </ajaxToolkit:ModalPopupExtender>
+                <asp:Label ID="lblOculto" runat="server" Text="Label" Style="display: none;" />
+            </div>
+            <br />
+            <div class="d-grid col-6 mx-auto">
+                <ajaxToolkit:ModalPopupExtender ID="mpeExpira" runat="server" PopupControlID="pnlExpira"
+                    TargetControlID="lblHide" BackgroundCssClass="FondoAplicacion" OnOkScript="mpeExpiraOnOk()">
+                </ajaxToolkit:ModalPopupExtender>
+                <asp:Label ID="lblHide" runat="server" Text="Label" Style="display: none;" />
+            </div>
+        </div>
+
+    </div>
+
+    <asp:Panel ID="pnlMensaje" runat="server" CssClass="CajaDialogo" style="display: none; border: none; border-radius: 10px; width: 400px; background-color:#FFFFFF;">
             <div class=" row justify-content-end" data-bs-theme="dark">
                 <div class="col-1">
                     <asp:Button runat="server" type="button" class="btn-close" aria-label="Close" />
                 </div>
             </div>
             <div>
-                 <br />
+                    <br />
                 <hr class="dropdown-divider" />
             </div>
         

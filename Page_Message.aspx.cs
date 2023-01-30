@@ -11,6 +11,7 @@ namespace WebItNow
     {
         protected void Page_PreInit(object sender, EventArgs e)
         {
+
             if (Request.Browser.IsMobileDevice)
                 MasterPageFile = "~/Site.Mobile.Master";
         }
@@ -19,7 +20,25 @@ namespace WebItNow
             if (!IsPostBack)
             {
                 string sUsuario = Convert.ToString(Session["IdUsuario"]);
+                string sAsunto = Convert.ToString(Session["Asunto"]);
+
                 lblUsuario.Text = sUsuario;
+
+                if (sAsunto == "Documento Enviado")
+                {
+                    BtnRegresar.Visible = false;
+                    LblMotivo.Text = "Motivo de Enviado";
+                }
+
+                if (sAsunto == "Documento Aceptado")
+                {
+                    LblMotivo.Text = "Motivo de Aceptado";
+                }
+                else if (sAsunto == "Documento Rechazado")
+                {
+                    LblMotivo.Text = "Motivo de Rechazo";
+                }
+
             }
         }
 
@@ -34,7 +53,7 @@ namespace WebItNow
 
                 var email = new EnvioEmail();
                 string sEmail = email.CorreoElectronico(sUsuario);
-                int Envio_Ok = email.EnvioMensaje(sUsuario, sEmail, sAsunto);
+                int Envio_Ok = email.EnvioMensaje(sUsuario, sEmail, sAsunto, TxtAreaMensaje.Value);
 
                 if (sAsunto == "Documento Enviado")
                 { 
@@ -50,6 +69,16 @@ namespace WebItNow
             {
                 LblMessage.Text = ex.Message;
                 this.mpeMensaje.Show();
+            }
+        }
+
+        protected void BtnRegresar_Click(object sender, EventArgs e)
+        {
+            string sAsunto = Convert.ToString(Session["Asunto"]);
+
+            if (sAsunto == "Documento Aceptado" || sAsunto == "Documento Rechazado")
+            {
+                Response.Redirect("Review_Document.aspx");
             }
         }
 
