@@ -79,21 +79,21 @@
 
                         <asp:TemplateField>
                             <ItemTemplate>
-                                <asp:ImageButton ID="imgDescarga" runat="server" ImageUrl="~/Images/descargar.png" Height="32px" Width="32px" OnClick="ImgDescarga_Click" OnClientClick="timedRefresh(2000)" Enabled="true" />
+                                <asp:ImageButton ID="imgDescarga" runat="server" ImageUrl="~/Images/descargar.ico" OnClick="ImgDescarga_Click" OnClientClick="timedRefresh(2000)" Enabled="true" />
                             </ItemTemplate>
                             <ItemStyle Width="60px" />
                         </asp:TemplateField>
 
                         <asp:TemplateField>
                             <ItemTemplate>
-                                <asp:ImageButton ID="imgAceptado" runat="server" ImageUrl="~/Images/aceptar.png" Height="32px" Width="32px" OnClick="imgAceptado_Click" Enabled="false" />
+                                <asp:ImageButton ID="imgAceptado" runat="server" ImageUrl="~/Images/aceptar.ico"  OnClick="imgAceptado_Click" Enabled="false" />
                             </ItemTemplate> 
                             <ItemStyle Width="60px" />
                         </asp:TemplateField>
 
                         <asp:TemplateField>
                             <ItemTemplate>
-                                <asp:ImageButton ID="imgRechazado" runat="server" ImageUrl="~/Images/cancelar.png" Height="32px" Width="32px" OnClick="imgRechazado_Click" Enabled="false" />
+                                <asp:ImageButton ID="imgRechazado" runat="server" ImageUrl="~/Images/cancelar.ico" OnClick="imgRechazado_Click" Enabled="false" />
                             </ItemTemplate> 
                             <ItemStyle Width="60px" />
                         </asp:TemplateField>

@@ -47,8 +47,7 @@ namespace WebItNow
                 if (result == 0)
                 {
                     TxtEmail.Text = string.Empty;
-                    //Lbl_Message.Text = "* El nombre de usuario es incorrecto";
-                    LblMessage.Text = "El nombre de usuario es incorrecto";
+                    LblMessage.Text = "Ingrese un correo electrónico valido";
                     this.mpeMensaje.Show();
                 }
                 else

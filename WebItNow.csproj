@@ -261,9 +261,9 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Descargas.aspx" />
-    <Content Include="Images\aceptar.png" />
-    <Content Include="Images\cancelar.png" />
-    <Content Include="Images\descargar.png" />
+    <Content Include="Images\aceptar.ico" />
+    <Content Include="Images\cancelar.ico" />
+    <Content Include="Images\descargar.ico" />
     <Content Include="Images\edit.jpg" />
     <Content Include="Images\imgItnow.jpeg" />
     <Content Include="Images\imgItnow.jpg" />
@@ -296,6 +296,7 @@
     <Content Include="Main.Master" />
     <Content Include="fonts\Tahoma-Bold.ttf" />
     <Content Include="fonts\Tahoma.ttf" />
+    <Content Include="WebForm1.aspx" />
     <None Include="Properties\PublishProfiles\CODICE1 - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
@@ -341,6 +342,13 @@
     <Content Include="Site.Mobile.Master" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="WebForm1.aspx.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForm1.aspx.designer.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+    </Compile>
     <Content Include="ThumbGen.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="About.aspx.cs">

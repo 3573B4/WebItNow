@@ -83,7 +83,7 @@
         <div class="form-group my-2">
             <div class="col-12">
                 <div class="d-grid gap-4 d-flex justify-content-center">
-                    <asp:Button ID="BtnEnviar" runat="server" Font-Bold="True" Text="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Subir&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" OnClick="BtnEnviar_Click"  CssClass="btn btn-primary" />
+                    <asp:Button ID="BtnEnviar" runat="server" Font-Bold="True" Text="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Subir&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" OnClick="BtnEnviar_Click" CssClass="btn btn-primary" />
                     <asp:Button ID="BtnRegresar" runat="server" Font-Bold="True" Text="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Regresar&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" OnClick="BtnRegresar_Click" CssClass="btn btn-outline-primary me-md-2" />
                 </div>
             </div>
@@ -104,6 +104,7 @@
                 <asp:Label ID="lblHide" runat="server" Text="Label" Style="display: none;" />
             </div>
         </div>
+
     </div>
 
     <asp:Panel ID="pnlMensaje" runat="server" CssClass="CajaDialogo" style="display: none; border: none; border-radius: 10px; width: 400px; background-color:#FFFFFF;">

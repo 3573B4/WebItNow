@@ -18,6 +18,8 @@ using Azure.Storage.Files.Shares;
 using Azure.Storage.Files.Shares.Models;
 using System.Windows;
 using System.Windows.Forms;
+using Microsoft.WindowsAzure.Storage;
+using Microsoft.WindowsAzure.Storage.Blob;
 
 namespace WebItNow
 {
@@ -355,12 +357,19 @@ namespace WebItNow
 
                 // Descargar el archivo.
                 ShareFileDownloadInfo download = file.Download();
+
                 using (FileStream stream = File.OpenWrite(directorioURL))
                 {
                     download.Content.CopyTo(stream);
                     stream.Flush();
                     stream.Close();
                 }
+
+                //while (true)
+                //{                   
+                //    if (File.Exists(directorioURL))
+                //        break;
+                //}
 
                 string extension = Path.GetExtension(file.Path);
                 var strMimeType = "";
@@ -419,13 +428,25 @@ namespace WebItNow
                 }
                 else
                 {
+                    string direccion = directorioURL;
+                    System.IO.FileStream fs = null;
 
-                    Response.Buffer = true;
-                    Response.ContentType = strMimeType;
-                    Response.ContentEncoding = System.Text.Encoding.UTF8;
-                    Response.AppendHeader("Content-Disposition", "attachment; filename=" + Path.GetFileName(directorioURL));
-                    Response.TransmitFile(directorioURL);
-                    Response.Flush();
+                    fs = System.IO.File.Open(direccion, System.IO.FileMode.Open);
+                    byte[] btFile = new byte[fs.Length];
+                    fs.Read(btFile, 0, Convert.ToInt32(fs.Length));
+                    fs.Close();
+
+                    //Response.Buffer = true;
+                    //Response.ContentType = strMimeType;
+                    //Response.ContentEncoding = System.Text.Encoding.UTF8;
+                    //Response.AppendHeader("Content-Disposition", "attachment; filename=" + Path.GetFileName(directorioURL));
+                    //Response.TransmitFile(directorioURL);
+                    //Response.Flush();
+
+                    Response.AddHeader("Content-disposition", "attachment; filename=" + Path.GetFileName(directorioURL));
+                    Response.ContentType = "application/octet-stream";
+                    Response.BinaryWrite(btFile);
+                    Response.End();
 
                     HttpContext.Current.ApplicationInstance.CompleteRequest();
                 }
@@ -434,7 +455,7 @@ namespace WebItNow
                 GetEstadoDocumentos();
 
                 //  System.Threading.Thread.Sleep(5000);
-                //  File.Delete(directorioURL);
+                File.Delete(directorioURL);
             }
             catch (Exception ex)
             {
