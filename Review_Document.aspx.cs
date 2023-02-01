@@ -358,9 +358,12 @@ namespace WebItNow
                 // Descargar el archivo.
                 ShareFileDownloadInfo download = file.Download();
 
+                Int32 tamaño = file.Path.Length;
+
                 using (FileStream stream = File.OpenWrite(directorioURL))
                 {
-                    download.Content.CopyTo(stream);
+                    //                              32768  
+                    download.Content.CopyTo(stream, 327680);
                     stream.Flush();
                     stream.Close();
                 }
@@ -428,34 +431,29 @@ namespace WebItNow
                 }
                 else
                 {
-                    string direccion = directorioURL;
-                    System.IO.FileStream fs = null;
+                    if (File.Exists(directorioURL))
+                    {
+                        Response.ClearContent();
+                    //  Response.Buffer = true;
+                        Response.ContentType = strMimeType;
+                        Response.ContentEncoding = System.Text.Encoding.UTF8;
+                        Response.AppendHeader("Content-Disposition", "attachment; filename=" + Path.GetFileName(directorioURL));
+                        Response.TransmitFile(directorioURL);
+                    //  Response.Flush();
 
-                    fs = System.IO.File.Open(direccion, System.IO.FileMode.Open);
-                    byte[] btFile = new byte[fs.Length];
-                    fs.Read(btFile, 0, Convert.ToInt32(fs.Length));
-                    fs.Close();
-
-                    //Response.Buffer = true;
-                    //Response.ContentType = strMimeType;
-                    //Response.ContentEncoding = System.Text.Encoding.UTF8;
-                    //Response.AppendHeader("Content-Disposition", "attachment; filename=" + Path.GetFileName(directorioURL));
-                    //Response.TransmitFile(directorioURL);
-                    //Response.Flush();
-
-                    Response.AddHeader("Content-disposition", "attachment; filename=" + Path.GetFileName(directorioURL));
-                    Response.ContentType = "application/octet-stream";
-                    Response.BinaryWrite(btFile);
-                    Response.End();
-
-                    HttpContext.Current.ApplicationInstance.CompleteRequest();
+                        HttpContext.Current.ApplicationInstance.CompleteRequest();
+                    }
+                    else
+                    {
+                        Response.End();
+                    }
                 }
 
                 // Actualizar controles
                 GetEstadoDocumentos();
 
                 //  System.Threading.Thread.Sleep(5000);
-                File.Delete(directorioURL);
+                //  File.Delete(directorioURL);
             }
             catch (Exception ex)
             {

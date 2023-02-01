@@ -157,7 +157,7 @@
                             <li><hr class="dropdown-divider"/></li>
                             <li><a class="dropdown-item" href="Request_Document.aspx">Solicitar Documento</a></li>
                             <li><hr class="dropdown-divider"/></li>
-                            <li><a class="dropdown-item" href="#">Consultas</a></li>
+                            <li><a class="dropdown-item" href="Consulta_Document.aspx">Consultas</a></li>
                         </ul>
                     </li>
                     <li class="nav-item my-1">

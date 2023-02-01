@@ -63,7 +63,7 @@ namespace WebItNow
 
                 if (FileUpload1.HasFile)
                 {
-                    System.Threading.Thread.Sleep(5000);
+                //  System.Threading.Thread.Sleep(5000);
 
                     if (tamArchivo == 0)
                     {

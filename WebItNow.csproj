@@ -271,6 +271,7 @@
     <Content Include="Images\tierra-de-cristal-en-gras-131535893.jpg" />
     <Content Include="Images\icono-Subir-Archivo-morado.png" />
     <Content Include="Menu.aspx" />
+    <Content Include="Consulta_Document.aspx" />
     <Content Include="Page_Message.aspx" />
     <Content Include="Request_Document.aspx" />
     <Content Include="Review_Document.aspx" />
@@ -296,7 +297,6 @@
     <Content Include="Main.Master" />
     <Content Include="fonts\Tahoma-Bold.ttf" />
     <Content Include="fonts\Tahoma.ttf" />
-    <Content Include="WebForm1.aspx" />
     <None Include="Properties\PublishProfiles\CODICE1 - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
@@ -342,13 +342,6 @@
     <Content Include="Site.Mobile.Master" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="WebForm1.aspx.cs">
-      <DependentUpon>WebForm1.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebForm1.aspx.designer.cs">
-      <DependentUpon>WebForm1.aspx</DependentUpon>
-    </Compile>
     <Content Include="ThumbGen.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="About.aspx.cs">
@@ -405,6 +398,13 @@
     </Compile>
     <Compile Include="Menu.aspx.designer.cs">
       <DependentUpon>Menu.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Consulta_Document.aspx.cs">
+      <DependentUpon>Consulta_Document.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Consulta_Document.aspx.designer.cs">
+      <DependentUpon>Consulta_Document.aspx</DependentUpon>
     </Compile>
     <Compile Include="Page_Message.aspx.cs">
       <DependentUpon>Page_Message.aspx</DependentUpon>
