@@ -38,6 +38,8 @@ namespace WebItNow
         {
             if (Request.Browser.IsMobileDevice)
                 MasterPageFile = "~/Site.Mobile.Master";
+
+            // Server.ScriptTimeout = 3600;
         }
 
         protected void Page_Load(object sender, EventArgs e)
@@ -335,6 +337,7 @@ namespace WebItNow
 
         protected void DownloadFromAzure(string sFilename, string sSubdirectorio)
         {
+            long tamaño = 0;
             try
             {
                 // Name of the share, directory, and file
@@ -358,10 +361,12 @@ namespace WebItNow
                 // Descargar el archivo.
                 ShareFileDownloadInfo download = file.Download();
 
-                Int32 tamaño = file.Path.Length;
+               // Int32 tamaño = file.Path.Length;
 
                 using (FileStream stream = File.OpenWrite(directorioURL))
                 {
+                    tamaño = stream.Length;
+
                     //                              32768  
                     download.Content.CopyTo(stream, 327680);
                     stream.Flush();
@@ -431,15 +436,17 @@ namespace WebItNow
                 }
                 else
                 {
+
                     if (File.Exists(directorioURL))
                     {
-                        Response.ClearContent();
-                    //  Response.Buffer = true;
+                        Response.Clear();
+                        Response.Buffer = true;
                         Response.ContentType = strMimeType;
                         Response.ContentEncoding = System.Text.Encoding.UTF8;
                         Response.AppendHeader("Content-Disposition", "attachment; filename=" + Path.GetFileName(directorioURL));
+                    //  Response.TransmitFile(directorioURL, 0, tamaño);
                         Response.TransmitFile(directorioURL);
-                    //  Response.Flush();
+                        Response.Flush();
 
                         HttpContext.Current.ApplicationInstance.CompleteRequest();
                     }
@@ -712,6 +719,68 @@ namespace WebItNow
         private static void NewMethod(ConexionBD Conecta)
         {
             Conecta.Abrir();
+        }
+
+        public static string ReturnFiletype(string fileExtension)
+        {
+            switch (fileExtension)
+            {
+                case ".htm":
+                case ".html":
+                case ".log":
+                    return "text/HTML";
+                case ".txt":
+                    return "text/plain";
+                case ".doc":
+                    return "application/ms-word";
+                case ".tiff":
+                case ".tif":
+                    return "image/tiff";
+                case ".asf":
+                    return "video/x-ms-asf";
+                case ".avi":
+                    return "video/avi";
+                case ".zip":
+                    return "application/zip";
+                case ".xls":
+                case ".csv":
+                    return "application/vnd.ms-excel";
+                case ".gif":
+                    return "image/gif";
+                case ".jpg":
+                case "jpeg":
+                    return "image/jpeg";
+                case ".bmp":
+                    return "image/bmp";
+                case ".wav":
+                    return "audio/wav";
+                case ".mp3":
+                    return "audio/mpeg3";
+                case ".mpg":
+                case "mpeg":
+                    return "video/mpeg";
+                case ".rtf":
+                    return "application/rtf";
+                case ".asp":
+                    return "text/asp";
+                case ".pdf":
+                    return "application/pdf";
+                case ".fdf":
+                    return "application/vnd.fdf";
+                case ".ppt":
+                    return "application/mspowerpoint";
+                case ".dwg":
+                    return "image/vnd.dwg";
+                case ".msg":
+                    return "application/msoutlook";
+                case ".xml":
+                case ".sdxl":
+                    return "application/xml";
+                case ".xdp":
+                    return "application/vnd.adobe.xdp+xml";
+                default:
+                    return "application/octet-stream";
+            }
         }
 
     }

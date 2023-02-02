@@ -128,10 +128,9 @@
         </div>
         <div class="">
             <asp:HiddenField ID="hdfValorGrid" runat="server" Value=""/>
-        </div>
-        <div class="form-group">
+            <br />
             <div class="d-grid col-6 mx-auto">
-                <asp:Label ID="Lbl_Message" runat="server" ForeColor="Red" ></asp:Label>
+                <asp:Label ID="Lbl_Message" runat="server" ForeColor="Red"></asp:Label>
             </div>
         </div>
         <br />

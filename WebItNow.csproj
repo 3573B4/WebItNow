@@ -255,6 +255,7 @@
   <ItemGroup>
     <Content Include="About.aspx" />
     <Content Include="Captcha.aspx" />
+    <Content Include="Consulta_Document.aspx" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -271,7 +272,6 @@
     <Content Include="Images\tierra-de-cristal-en-gras-131535893.jpg" />
     <Content Include="Images\icono-Subir-Archivo-morado.png" />
     <Content Include="Menu.aspx" />
-    <Content Include="Consulta_Document.aspx" />
     <Content Include="Page_Message.aspx" />
     <Content Include="Request_Document.aspx" />
     <Content Include="Review_Document.aspx" />
@@ -360,6 +360,13 @@
       <DependentUpon>Captcha.aspx</DependentUpon>
     </Compile>
     <Compile Include="ConexionBD.cs" />
+    <Compile Include="Consulta_Document.aspx.cs">
+      <DependentUpon>Consulta_Document.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Consulta_Document.aspx.designer.cs">
+      <DependentUpon>Consulta_Document.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Descargas.aspx.cs">
       <DependentUpon>Descargas.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -398,13 +405,6 @@
     </Compile>
     <Compile Include="Menu.aspx.designer.cs">
       <DependentUpon>Menu.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Consulta_Document.aspx.cs">
-      <DependentUpon>Consulta_Document.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Consulta_Document.aspx.designer.cs">
-      <DependentUpon>Consulta_Document.aspx</DependentUpon>
     </Compile>
     <Compile Include="Page_Message.aspx.cs">
       <DependentUpon>Page_Message.aspx</DependentUpon>

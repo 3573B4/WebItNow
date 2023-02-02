@@ -2,7 +2,7 @@
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
-    
+    <script type="text/javascript" src="Scripts/jquery-3.4.1.min.js"></script>
     <script language="javascript" type="text/javascript">
         
         var timer = setTimeout(function () {
@@ -26,6 +26,26 @@
         $(function () {
             $('[id*=GridView1]').footable();
         });
+
+        function ShowProgress() {
+            setTimeout(function () {
+                //var modal = $('<div />');
+                //modal.addClass("modal");
+                //$('body').append(modal);
+                //$('modal-dialog-centered').append(modal);
+                //modal.addClass("modal-dialog-centered");
+                var loading = $(".modal");
+                //loading.addClass("modal-dialog-centered");
+                loading.show();
+                var top = Math.max($(window).height() / 2 - loading[0].offsetHeight / 2, 0);
+                var left = Math.max($(window).width() / 2 - loading[0].offsetWidth / 2, 0);
+                loading.css({ top: top, left: left });
+            }, 200);
+        }
+        $('form').live("submit", function () {
+            ShowProgress();
+        });
+
 
     </script>
 
@@ -83,8 +103,31 @@
         <div class="form-group my-2">
             <div class="col-12">
                 <div class="d-grid gap-4 d-flex justify-content-center">
-                    <asp:Button ID="BtnEnviar" runat="server" Font-Bold="True" Text="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Subir&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" OnClick="BtnEnviar_Click" CssClass="btn btn-primary" />
+                    <asp:Button ID="BtnEnviar" runat="server" Font-Bold="True" Text="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Subir&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" OnClick="BtnEnviar_Click" OnClientClick="ShowProgress()" CssClass="btn btn-primary" />
                     <asp:Button ID="BtnRegresar" runat="server" Font-Bold="True" Text="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Regresar&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" OnClick="BtnRegresar_Click" CssClass="btn btn-outline-primary me-md-2" />
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <%--<h1 class="modal-title fs-5" id="exampleModalLabel">Modal Espera</h1>--%>
+                    </div>
+                    <div class="modal-body">
+                        <%--<div class="Text-center">
+                            <img src="Images/loader.gif" alt="" />
+                        </div>--%>
+                        <div class="text-center">
+                            <div class="spinner-border" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                    </div>
                 </div>
             </div>
         </div>

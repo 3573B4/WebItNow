@@ -33,6 +33,9 @@ namespace WebItNow
             if (!IsPostBack)
             {
 
+                string script = "$(document).ready(function () { $('[id*=BtnEnviar]').click(); });";
+                ClientScript.RegisterStartupScript(this.GetType(), "load", script, true);
+
                 BtnEnviar.Enabled = true;
                 getDocRequeridos();
 
@@ -93,7 +96,10 @@ namespace WebItNow
                         FileUpload1.SaveAs(filepath);
                         string sPath = System.IO.Path.GetDirectoryName(filepath) + "/" + nomFile;
 
-                        UploadToAzure(nomFile, sPath);
+                        System.Threading.Thread.Sleep(5000);
+                        this.UploadToAzure(nomFile, sPath);
+
+                        //UploadToAzure(nomFile, sPath);
 
                         // DELETE AL ARCHIVO --> (sPath)
                         File.Delete(sPath);
