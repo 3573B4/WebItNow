@@ -33,8 +33,8 @@ namespace WebItNow
             if (!IsPostBack)
             {
 
-            //   string script = "$(document).ready(function () { $('[id*=BtnEnviar]').click(); });";
-            //   ClientScript.RegisterStartupScript(this.GetType(), "load", script, true);
+                //string script = "$(document).ready(function () { $('[id*=BtnEnviar]').click(); });";
+                //ClientScript.RegisterStartupScript(this.GetType(), "load", script, true);
 
                 BtnEnviar.Enabled = true;
                 getDocRequeridos();
@@ -63,10 +63,11 @@ namespace WebItNow
                 string directorioURL = Server.MapPath(directFinal);
                 string nomFile = FileUpload1.FileName;
                 int tamArchivo = FileUpload1.PostedFile.ContentLength;
+                string extensionFile = Path.GetExtension(FileUpload1.FileName);
 
                 if (FileUpload1.HasFile)
                 {
-                //  System.Threading.Thread.Sleep(5000);
+                    //  System.Threading.Thread.Sleep(5000);
 
                     if (tamArchivo == 0)
                     {
@@ -74,61 +75,67 @@ namespace WebItNow
                         mpeMensaje.Show();
                         return;
                     }
-
-                    if (tamArchivo <= 70000000)
+                    if ((extensionFile == ".exe") || (extensionFile == ".js") || (extensionFile == ".jar") || (extensionFile == ".jdk"))
                     {
-
-                        ConexionBD Conectar = new ConexionBD();
-                        Conectar.Abrir();
-
-                        // Actualizar la tabla Estado de Documento
-                        string sqlUpDate = "UPDATE ITM_04 " +
-                                           "    SET IdStatus = '2'," +
-                                                " Url_Imagen = '" + UrlFinal + "'," +
-                                                " Nom_Imagen = '" + nomFile + "'," +
-                                                "  Fec_Envio = GETDATE() " +
-                                            " WHERE IdUsuario = '" + user + "'" +
-                                            " AND IdTipoDocumento = '" + folderName + "'";
-
-                        SqlCommand cmd = new SqlCommand(sqlUpDate, Conectar.ConectarBD);
-
-                        string filepath = Server.MapPath(directorio + FileUpload1.FileName);
-                        FileUpload1.SaveAs(filepath);
-                        string sPath = System.IO.Path.GetDirectoryName(filepath) + "/" + nomFile;
-
-                        System.Threading.Thread.Sleep(5000);
-                        this.UploadToAzure(nomFile, sPath);
-
-                        //UploadToAzure(nomFile, sPath);
-
-                        // DELETE AL ARCHIVO --> (sPath)
-                        File.Delete(sPath);
-
-                        cmd.ExecuteReader();
-
-                        checarStatusDoc();
-
-                        Session["IdUsuario"] = user;
-                        Session["Asunto"] = "Documento Enviado";
-
-                        Response.Redirect("Page_Message.aspx");
-
-                        //var email = new EnvioEmail();
-                        //string sEmail = email.CorreoElectronico(user);
-                        //int Envio_Ok = email.EnvioMensaje(user, sEmail, "Documento Enviado");
-
+                        LblMessage.Text = "El archivo tiene un formato invalido";
+                        mpeMensaje.Show();
                     }
-
                     else
                     {
-                        LblMessage.Text = "El documento Excede los 70 MB";
-                        mpeMensaje.Show();
+                        
+                        // 64 mb es = a 67,108,864 bytes
+                        if (tamArchivo <= 70000000)
+                        {
 
+                            ConexionBD Conectar = new ConexionBD();
+                            Conectar.Abrir();
+
+                            // Actualizar la tabla Estado de Documento
+                            string sqlUpDate = "UPDATE ITM_04 " +
+                                               "    SET IdStatus = '2'," +
+                                                    " Url_Imagen = '" + UrlFinal + "'," +
+                                                    " Nom_Imagen = '" + nomFile + "'," +
+                                                    "  Fec_Envio = GETDATE() " +
+                                                " WHERE IdUsuario = '" + user + "'" +
+                                                " AND IdTipoDocumento = '" + folderName + "'";
+
+                            SqlCommand cmd = new SqlCommand(sqlUpDate, Conectar.ConectarBD);
+
+                            string filepath = Server.MapPath(directorio + FileUpload1.FileName);
+                            FileUpload1.SaveAs(filepath);
+                            string sPath = System.IO.Path.GetDirectoryName(filepath) + "/" + nomFile;
+
+                            System.Threading.Thread.Sleep(5000);
+                            this.UploadToAzure(nomFile, sPath);
+
+                            //UploadToAzure(nomFile, sPath);
+
+                            // DELETE AL ARCHIVO --> (sPath)
+                            File.Delete(sPath);
+
+                            cmd.ExecuteReader();
+
+                            checarStatusDoc();
+
+                            Session["IdUsuario"] = user;
+                            Session["Asunto"] = "Documento Enviado";
+
+                            Response.Redirect("Page_Message.aspx");
+
+                            //var email = new EnvioEmail();
+                            //string sEmail = email.CorreoElectronico(user);
+                            //int Envio_Ok = email.EnvioMensaje(user, sEmail, "Documento Enviado");
+
+                        }
+
+                        else
+                        {
+                            LblMessage.Text = "El documento Excede los 70 MB";
+                            mpeMensaje.Show();
+
+                        }
                     }
-
                 }
-
-
                 else
                 {
                     LblMessage.Text = "Debe seleccionar un archivo";

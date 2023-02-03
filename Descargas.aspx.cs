@@ -54,7 +54,7 @@ namespace WebItNow
 
         protected void DownloadFromAzure(string sFilename, string sSubdirectorio)
         {
-            long tamaño = 0;
+            // long tamaño = 0;
             try
             {
                 // Name of the share, directory, and file
@@ -82,7 +82,7 @@ namespace WebItNow
 
                 using (FileStream stream = File.OpenWrite(directorioURL))
                 {
-                    tamaño = stream.Length;
+                    // tamaño = stream.Length;
 
                     //                              32768  
                     download.Content.CopyTo(stream, 327680);
@@ -155,7 +155,7 @@ namespace WebItNow
                         Response.ContentType = strMimeType;
                         Response.ContentEncoding = System.Text.Encoding.UTF8;
                         Response.AppendHeader("Content-Disposition", "attachment; filename=" + Path.GetFileName(directorioURL));
-                        //  Response.TransmitFile(directorioURL, 0, tamaño);
+                    //  Response.TransmitFile(directorioURL, 0, tamaño);
                         Response.TransmitFile(directorioURL);
                         Response.Flush();
 

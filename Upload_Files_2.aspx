@@ -29,17 +29,34 @@
 
         function ShowProgress() {
             setTimeout(function () {
+
+                //var loading = document.getElementsByClassName("modal");
+                //for (var i = 0; i < loading.length; i++) {
+                //    loading[i].className += "-dialog modal-dialog-centered";
+                //}
+
                 //var modal = $('<div />');
                 //modal.addClass("modal");
                 //$('body').append(modal);
                 //$('modal-dialog-centered').append(modal);
                 //modal.addClass("modal-dialog-centered");
                 var loading = $(".modal");
-                //loading.addClass("modal-dialog-centered");
+                //loading.addClass(' modal-dialog-centered');
+                //loading.addClass(' col-4');
+                //loading.addClass("-");
+                //loading.addClass("dialog");
+                //loading.addClass(" ");
+                //loading.addClass("modal");
+                //loading.addClass("-");
+                //loading.addClass("dialog");
+                //loading.addClass("-");
+                //loading.addClass("centered");
                 loading.show();
-                var top = Math.max($(window).height() / 2 - loading[0].offsetHeight / 2, 0);
-                var left = Math.max($(window).width() / 2 - loading[0].offsetWidth / 2, 0);
-                loading.css({ top: top, left: left });
+                //var top = Math.max($(window).height() / 2 - loading[0].offsetHeight / 2, 0);
+                //var left = Math.max($(window).width() / 2 - loading[0].offsetWidth / 2, 0);
+                //loading.css({ top: top, left: left });
+                
+                //loading.css({ width: 500 });
             }, 200);
         }
         $('form').live("submit", function () {
@@ -99,7 +116,7 @@
                 <asp:Label ID="Lbl_Message" runat="server" ForeColor="Red" Visible="false"></asp:Label>
             </div>
         </div>
-
+        
         <div class="form-group my-2">
             <div class="col-12">
                 <div class="d-grid gap-4 d-flex justify-content-center">
@@ -114,12 +131,10 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <%--<h1 class="modal-title fs-5" id="exampleModalLabel">Modal Espera</h1>--%>
+                        
                     </div>
                     <div class="modal-body">
-                        <%--<div class="Text-center">
-                            <img src="Images/loader.gif" alt="" />
-                        </div>--%>
+                        
                         <div class="text-center">
                             <div class="spinner-border" role="status">
                                 <span class="visually-hidden">Loading...</span>

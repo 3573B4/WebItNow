@@ -78,17 +78,17 @@
         <h2 class="h2 mb-3 fw-normal">Pendientes</h2>
         <br />
         <div style="overflow-x: auto; overflow-y:hidden">
-            <asp:GridView ID="grdEstadoDocumento"  runat="server" AutoGenerateColumns="False" GridLines="None" Width="1400px"
-                    AllowPaging="True" CssClass="footable" PagerStyle-CssClass="pgr" AlternatingRowStyle-CssClass="alt" OnPageIndexChanging="grdEstadoDocumento_OnPageIndexChanging" 
-                    OnRowDataBound ="grdEstadoDocumento_RowDataBound" OnRowCommand="grdEstadoDocumento_RowCommand"
-                    OnRowCreated  ="grdEstadoDocumento_RowCreated" DataKeyNames="IdUsuario" >
+            <asp:GridView ID="GrdEstadoDocumento"  runat="server" AutoGenerateColumns="False" GridLines="None" Width="1400px"
+                    AllowPaging="True" CssClass="footable" PagerStyle-CssClass="pgr" AlternatingRowStyle-CssClass="alt" 
+                    OnPageIndexChanging="GrdEstadoDocumento_OnPageIndexChanging" 
+                    OnRowDataBound ="GrdEstadoDocumento_RowDataBound"  OnRowCommand="GrdEstadoDocumento_RowCommand" DataKeyNames="IdUsuario" >
                     <AlternatingRowStyle CssClass="alt" />
                     <Columns>
 
                         <asp:TemplateField>
                             <ItemTemplate>
                         <%--    <asp:ImageButton ID="imgDescarga" runat="server" ImageUrl="~/Images/descargar.ico" OnClick="ImgDescarga_Click" OnClientClick="timedRefresh(2000)" Enabled="true" />     --%>
-                                <asp:ImageButton ID="imgDescarga" runat="server" Height="26px" Width="26px" ImageUrl="~/Images/descargar.ico" ClientIDMode="Static" OnClick="ImgDescarga_Click" Enabled="true" />
+                                <asp:ImageButton ID="imgDescarga" CommandName="Descarga" runat="server" Height="26px" Width="26px" ImageUrl="~/Images/descargar.ico" OnClick="ImgDescarga_Click" Enabled="true" />
                             </ItemTemplate>
                         </asp:TemplateField>
 
