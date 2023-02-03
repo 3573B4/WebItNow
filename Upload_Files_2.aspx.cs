@@ -33,8 +33,8 @@ namespace WebItNow
             if (!IsPostBack)
             {
 
-                string script = "$(document).ready(function () { $('[id*=BtnEnviar]').click(); });";
-                ClientScript.RegisterStartupScript(this.GetType(), "load", script, true);
+            //   string script = "$(document).ready(function () { $('[id*=BtnEnviar]').click(); });";
+            //   ClientScript.RegisterStartupScript(this.GetType(), "load", script, true);
 
                 BtnEnviar.Enabled = true;
                 getDocRequeridos();
@@ -75,7 +75,7 @@ namespace WebItNow
                         return;
                     }
 
-                    if (tamArchivo <= 40000000)
+                    if (tamArchivo <= 70000000)
                     {
 
                         ConexionBD Conectar = new ConexionBD();
@@ -121,7 +121,7 @@ namespace WebItNow
 
                     else
                     {
-                        LblMessage.Text = "El documento Excede los 40 MB";
+                        LblMessage.Text = "El documento Excede los 70 MB";
                         mpeMensaje.Show();
 
                     }
@@ -329,7 +329,7 @@ namespace WebItNow
                 {
                     // Si el documento no existe
                     // Max. 4MB (4194304 Bytes in binary) allowed
-                    const int uploadLimit = 40000000;
+                    const int uploadLimit = 70000000;
 
                     // Upload the file
                     using (FileStream stream = File.OpenRead(sPath))

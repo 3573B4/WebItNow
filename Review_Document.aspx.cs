@@ -20,6 +20,8 @@ using System.Windows;
 using System.Windows.Forms;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Blob;
+using System.Text;
+
 
 namespace WebItNow
 {
@@ -33,6 +35,7 @@ namespace WebItNow
         [DllImport("shell32.dll", CharSet = CharSet.Auto)]
 
         private static extern int SHGetKnownFolderPath(ref Guid id, int flags, IntPtr token, out IntPtr path);
+
 
         protected void Page_PreInit(object sender, EventArgs e)
         {
@@ -54,6 +57,9 @@ namespace WebItNow
 
             //* * Agrega THEAD y TBODY a GridView.
             grdEstadoDocumento.HeaderRow.TableSection = TableRowSection.TableHeader;
+
+        //  RegisterPostBackControl();
+
         }
 
         protected void grdEstadoDocumento_OnPageIndexChanging(object sender, GridViewPageEventArgs e)
@@ -69,7 +75,7 @@ namespace WebItNow
             DisplayCurrentPage();
         }
 
-        protected void grdEstadoDocumento_RowDataBound(object sender, System.Web.UI.WebControls.GridViewRowEventArgs e)
+        protected void grdEstadoDocumento_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
                 e.Row.Attributes.Add("OnClick", "" + Page.ClientScript.GetPostBackClientHyperlink(this.grdEstadoDocumento, "Select$" + e.Row.RowIndex.ToString()) + ";");
@@ -80,8 +86,25 @@ namespace WebItNow
             {
                 (e.Row.FindControl("imgAceptado") as ImageButton).Enabled = true;
                 (e.Row.FindControl("imgRechazado") as ImageButton).Enabled = true;
-            //  (e.Row.FindControl("imgDescargas") as ImageButton).Enabled = true;
+            //  (e.Row.FindControl("imgDescarga") as ImageButton).Enabled = true;
             }
+        }
+
+        protected void grdEstadoDocumento_RowCommand(object sender, System.Web.UI.WebControls.GridViewCommandEventArgs e) 
+        {
+            //if (e.CommandName == "Select")
+            //{
+            //    UpdatePanel1.Update();
+            //}
+        }
+
+        protected void grdEstadoDocumento_RowCreated(object sender, System.Web.UI.WebControls.GridViewRowEventArgs e)
+        {
+            //if (e.Row.RowType == DataControlRowType.DataRow)
+            //{
+            //    ImageButton imgB = (ImageButton)e.Row.FindControl("imgDescarga");
+            //    ScriptManager.GetCurrent(this).RegisterPostBackControl(imgB);
+            //}
         }
 
         protected void DisplayCurrentPage()
@@ -271,6 +294,7 @@ namespace WebItNow
         {
             try
             {
+                UpdatePanel1.Update();
 
                 GridViewRow row = ((GridViewRow)((System.Web.UI.WebControls.ImageButton)sender).NamingContainer);
                 int index = row.RowIndex;
@@ -285,8 +309,16 @@ namespace WebItNow
                 // Actualizar en la tabla [ITM_04] (IdDescarga = 1)
                 Update_ITM_04(sUsuario, sTipoDocumento, 1);
 
+                // Actualizar controles
+                GetEstadoDocumentos();
+
                 // Descargar el archivo.
                 DownloadFromAzure(sNomArchivo, sSubdirectorio);
+
+                //Session["Filename"] = sNomArchivo;
+                //Session["Subdirectorio"] = sSubdirectorio;
+
+                //Response.Redirect("Descargas.aspx", false);
 
                 //  imgDescarga.Enabled = false;
             }
@@ -294,6 +326,12 @@ namespace WebItNow
             {
                 LblMessage.Text = ex.Message;
                 this.mpeMensaje.Show();
+            }
+            finally
+            {
+                //string ejecutar = "timedRefresh(2000);";
+                //ClientScript.RegisterClientScriptBlock(this.GetType(), "script", ejecutar, false);
+                ClientScript.RegisterStartupScript(this.GetType(), "script", "timedRefresh(2000);", true);
             }
 
         }
@@ -337,7 +375,8 @@ namespace WebItNow
 
         protected void DownloadFromAzure(string sFilename, string sSubdirectorio)
         {
-            long tamaño = 0;
+
+        long tamaño = 0;
             try
             {
                 // Name of the share, directory, and file
@@ -361,7 +400,7 @@ namespace WebItNow
                 // Descargar el archivo.
                 ShareFileDownloadInfo download = file.Download();
 
-               // Int32 tamaño = file.Path.Length;
+                // Int32 tamaño = file.Path.Length;
 
                 using (FileStream stream = File.OpenWrite(directorioURL))
                 {
@@ -455,9 +494,6 @@ namespace WebItNow
                         Response.End();
                     }
                 }
-
-                // Actualizar controles
-                GetEstadoDocumentos();
 
                 //  System.Threading.Thread.Sleep(5000);
                 //  File.Delete(directorioURL);
@@ -783,5 +819,30 @@ namespace WebItNow
             }
         }
 
+        private void RegisterPostBackControl()
+        {
+            foreach (GridViewRow row in grdEstadoDocumento.Rows)
+            {
+                ImageButton imgB = row.FindControl("imgDescarga") as ImageButton;
+                ScriptManager.GetCurrent(this).RegisterPostBackControl(imgB);
+            }
+        }
+
+        protected void BtnDescargas_Click(object sender, EventArgs e)
+        {
+            // Actualizar en la tabla [ITM_04] (IdDescarga = 1)
+            Update_ITM_04("ALEJANDRO", "OTR", 1);
+
+            // Actualizar controles
+            GetEstadoDocumentos();
+
+            Session["Filename"] = "Inventario antes del Robo Suc 47_compressed .pdf";
+            Session["Subdirectorio"] = "ALEJANDRO/OTR/";
+
+            // System.Threading.Thread.Sleep(10000);
+            // DownloadFromAzure(sFilename, sSubdirectorio);
+            Response.Redirect("Descargas.aspx");
+
+        }
     }
 }

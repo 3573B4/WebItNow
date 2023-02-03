@@ -55,13 +55,20 @@
 
     </script>
 
+    <link rel="stylesheet" type="text/css" href="loading-bar.css"/>
+    <script type="text/javascript" src="loading-bar.js"></script>
+
     <script src="Scripts/jquery-3.4.1.min.js" type="text/javascript"></script>
     <link href="~/Scripts/footable.min.js" rel="stylesheet" type="text/javascript" />
     <link href="~/Styles/footable.min.css" rel="stylesheet" type="text/css" />
+
+    public static void RegisterClientScriptBlock (System.Web.UI.Control control, Type type, string key, string script, bool addScriptTags);
+
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-<asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+<asp:ScriptManager ID="ScriptManager1" runat="server">
+    </asp:ScriptManager>
 <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional" >
     <ContentTemplate>
     <br />
@@ -73,36 +80,35 @@
         <div style="overflow-x: auto; overflow-y:hidden">
             <asp:GridView ID="grdEstadoDocumento"  runat="server" AutoGenerateColumns="False" GridLines="None" Width="1400px"
                     AllowPaging="True" CssClass="footable" PagerStyle-CssClass="pgr" AlternatingRowStyle-CssClass="alt" OnPageIndexChanging="grdEstadoDocumento_OnPageIndexChanging" 
-                    OnRowDataBound ="grdEstadoDocumento_RowDataBound" DataKeyNames="IdUsuario" >
+                    OnRowDataBound ="grdEstadoDocumento_RowDataBound" OnRowCommand="grdEstadoDocumento_RowCommand"
+                    OnRowCreated  ="grdEstadoDocumento_RowCreated" DataKeyNames="IdUsuario" >
                     <AlternatingRowStyle CssClass="alt" />
                     <Columns>
 
                         <asp:TemplateField>
                             <ItemTemplate>
-                                <asp:ImageButton ID="imgDescarga" runat="server" ImageUrl="~/Images/descargar.ico" OnClick="ImgDescarga_Click" OnClientClick="timedRefresh(2000)" Enabled="true" />
+                        <%--    <asp:ImageButton ID="imgDescarga" runat="server" ImageUrl="~/Images/descargar.ico" OnClick="ImgDescarga_Click" OnClientClick="timedRefresh(2000)" Enabled="true" />     --%>
+                                <asp:ImageButton ID="imgDescarga" runat="server" Height="26px" Width="26px" ImageUrl="~/Images/descargar.ico" ClientIDMode="Static" OnClick="ImgDescarga_Click" Enabled="true" />
                             </ItemTemplate>
-                            <ItemStyle Width="60px" />
                         </asp:TemplateField>
 
                         <asp:TemplateField>
                             <ItemTemplate>
-                                <asp:ImageButton ID="imgAceptado" runat="server" ImageUrl="~/Images/aceptar.ico"  OnClick="imgAceptado_Click" Enabled="false" />
+                                <asp:ImageButton ID="imgAceptado" runat="server" Height="26px" Width="26px" ImageUrl="~/Images/aceptar.ico"  OnClick="imgAceptado_Click" Enabled="false" />
                             </ItemTemplate> 
-                            <ItemStyle Width="60px" />
                         </asp:TemplateField>
 
                         <asp:TemplateField>
                             <ItemTemplate>
-                                <asp:ImageButton ID="imgRechazado" runat="server" ImageUrl="~/Images/cancelar.ico" OnClick="imgRechazado_Click" Enabled="false" />
+                                <asp:ImageButton ID="imgRechazado" runat="server" Height="26px" Width="26px" ImageUrl="~/Images/cancelar.ico" OnClick="imgRechazado_Click" Enabled="false" />
                             </ItemTemplate> 
-                            <ItemStyle Width="60px" />
                         </asp:TemplateField>
 
                         <asp:BoundField DataField="IdUsuario" HeaderText="Id. Usuario" >
                         <ItemStyle Width="600px" /> 
                         </asp:BoundField>
                         <asp:BoundField DataField="Desc_Status" HeaderText="Id. Status" >
-                        <ItemStyle Width="600px" />
+                        <ItemStyle Width="400px" />
                         </asp:BoundField>
                         <asp:BoundField DataField="Descripcion" HeaderText="Tipo de Documento" >
                         <ItemStyle Width="1250px" />
@@ -119,13 +125,13 @@
                         <asp:BoundField DataField="IdDescarga" HeaderText="Descarga(s)" >
                         <ItemStyle Width="200px" />
                         </asp:BoundField>
-                                
 
                     </Columns>
                 
                     <PagerStyle CssClass="pgr" />
             </asp:GridView>
         </div>
+
         <div class="">
             <asp:HiddenField ID="hdfValorGrid" runat="server" Value=""/>
             <br />
@@ -133,7 +139,14 @@
                 <asp:Label ID="Lbl_Message" runat="server" ForeColor="Red"></asp:Label>
             </div>
         </div>
+<%--
+        <div class="from-group">
+            <div class="d-grid col-6 mx-auto">
+                <asp:Button ID="BtnDescargas" runat="server" Text="Descarga Pruebas" OnClick="BtnDescargas_Click" CssClass="btn btn-outline-primary" Visible="true" /> 
+            </div>
+        </div>
         <br />
+--%>
         <div class="from-group">
             <div class="d-grid col-6 mx-auto">
                 <asp:Button ID="BtnRegresar" runat="server" Text="Regresar" Font-Bold="True" OnClick="BtnRegresar_Click" CssClass="btn btn-link"/>
@@ -227,8 +240,10 @@
     </table>
 
     </ContentTemplate>
+
     <Triggers>
         <asp:PostBackTrigger ControlID="grdEstadoDocumento" />
+<%--    <asp:PostBackTrigger ControlID="BtnDescargas" />    --%>
     </Triggers>
-</asp:UpdatePanel> 
+</asp:UpdatePanel>
 </asp:Content>
