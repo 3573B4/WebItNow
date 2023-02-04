@@ -53,6 +53,17 @@
             $('[id*=GridView1]').footable();
         });
 
+        function ShowProgress() {
+            setTimeout(function () {
+                var loading = $(".modal");
+                loading.show();
+
+            }, 200);
+        }
+        $('form').live("submit", function () {
+            ShowProgress();
+        });
+
     </script>
 
     <link rel="stylesheet" type="text/css" href="loading-bar.css"/>
@@ -81,26 +92,26 @@
             <asp:GridView ID="GrdEstadoDocumento"  runat="server" AutoGenerateColumns="False" GridLines="None" Width="1400px"
                     AllowPaging="True" CssClass="footable" PagerStyle-CssClass="pgr" AlternatingRowStyle-CssClass="alt" 
                     OnPageIndexChanging="GrdEstadoDocumento_OnPageIndexChanging" 
-                    OnRowDataBound ="GrdEstadoDocumento_RowDataBound"  OnRowCommand="GrdEstadoDocumento_RowCommand" DataKeyNames="IdUsuario" >
+                    OnRowDataBound ="GrdEstadoDocumento_RowDataBound" DataKeyNames="IdUsuario" >
                     <AlternatingRowStyle CssClass="alt" />
                     <Columns>
 
                         <asp:TemplateField>
                             <ItemTemplate>
                         <%--    <asp:ImageButton ID="imgDescarga" runat="server" ImageUrl="~/Images/descargar.ico" OnClick="ImgDescarga_Click" OnClientClick="timedRefresh(2000)" Enabled="true" />     --%>
-                                <asp:ImageButton ID="imgDescarga" CommandName="Descarga" runat="server" Height="26px" Width="26px" ImageUrl="~/Images/descargar.ico" OnClick="ImgDescarga_Click" Enabled="true" />
+                                <asp:ImageButton ID="ImgDescarga" runat="server" Height="26px" Width="26px" ImageUrl="~/Images/descargar.ico" OnClick="ImgDescarga_Click" Enabled="true" />
                             </ItemTemplate>
                         </asp:TemplateField>
 
                         <asp:TemplateField>
                             <ItemTemplate>
-                                <asp:ImageButton ID="imgAceptado" runat="server" Height="26px" Width="26px" ImageUrl="~/Images/aceptar.ico"  OnClick="imgAceptado_Click" Enabled="false" />
+                                <asp:ImageButton ID="ImgAceptado" runat="server" Height="26px" Width="26px" ImageUrl="~/Images/aceptar.ico"  OnClick="ImgAceptado_Click" Enabled="true" />
                             </ItemTemplate> 
                         </asp:TemplateField>
 
                         <asp:TemplateField>
                             <ItemTemplate>
-                                <asp:ImageButton ID="imgRechazado" runat="server" Height="26px" Width="26px" ImageUrl="~/Images/cancelar.ico" OnClick="imgRechazado_Click" Enabled="false" />
+                                <asp:ImageButton ID="ImgRechazado" runat="server" Height="26px" Width="26px" ImageUrl="~/Images/cancelar.ico" OnClick="ImgRechazado_Click" Enabled="true" />
                             </ItemTemplate> 
                         </asp:TemplateField>
 
@@ -152,6 +163,26 @@
                 <asp:Button ID="BtnRegresar" runat="server" Text="Regresar" Font-Bold="True" OnClick="BtnRegresar_Click" CssClass="btn btn-link"/>
             </div>
         </div>
+
+        <!-- Modal -->
+        <div class="modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header"> </div>
+                    <div class="modal-body">
+                        
+                        <div class="text-center">
+                            <div class="spinner-border" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 
     <br />

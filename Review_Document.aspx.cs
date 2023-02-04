@@ -36,7 +36,6 @@ namespace WebItNow
 
         private static extern int SHGetKnownFolderPath(ref Guid id, int flags, IntPtr token, out IntPtr path);
 
-
         protected void Page_PreInit(object sender, EventArgs e)
         {
             if (Request.Browser.IsMobileDevice)
@@ -88,14 +87,6 @@ namespace WebItNow
                 (e.Row.FindControl("imgAceptado") as ImageButton).Enabled = true;
                 (e.Row.FindControl("imgRechazado") as ImageButton).Enabled = true;
                 (e.Row.FindControl("imgDescarga") as ImageButton).Enabled = true;
-            }
-        }
-
-        protected void GrdEstadoDocumento_RowCommand(object sender, System.Web.UI.WebControls.GridViewCommandEventArgs e) 
-        {
-            if (e.CommandName == "Descarga")
-            {
-                UpdatePanel1.Update();
             }
         }
 
@@ -303,6 +294,8 @@ namespace WebItNow
 
                 // Actualizar controles
                 GetEstadoDocumentos();
+
+             // System.Threading.Thread.Sleep(5000);
 
                 // Descargar el archivo.
                 DownloadFromAzure(sNomArchivo, sSubdirectorio);
