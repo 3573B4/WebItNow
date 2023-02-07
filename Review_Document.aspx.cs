@@ -58,8 +58,6 @@ namespace WebItNow
             //* * Agrega THEAD y TBODY a GridView.
             GrdEstadoDocumento.HeaderRow.TableSection = TableRowSection.TableHeader;
 
-        //  RegisterPostBackControl();
-
         }
 
         protected void GrdEstadoDocumento_OnPageIndexChanging(object sender, GridViewPageEventArgs e)
@@ -798,15 +796,6 @@ namespace WebItNow
                     return "application/vnd.adobe.xdp+xml";
                 default:
                     return "application/octet-stream";
-            }
-        }
-
-        private void RegisterPostBackControl()
-        {
-            foreach (GridViewRow row in GrdEstadoDocumento.Rows)
-            {
-                ImageButton imgB = row.FindControl("imgDescarga") as ImageButton;
-                ScriptManager.GetCurrent(this).RegisterPostBackControl(imgB);
             }
         }
 

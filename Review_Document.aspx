@@ -64,13 +64,6 @@
             ShowProgress();
         });
 
-
-        function postbackButtonClick() {
-            updateProgress = $find("<%= updProgressTab.ClientID %>");
-            window.setTimeout("updateProgress.set_visible(true)", updateProgress.get_displayAfter());
-            return true;
-        }
-
     </script>
 
     <link rel="stylesheet" type="text/css" href="loading-bar.css"/>

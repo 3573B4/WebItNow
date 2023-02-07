@@ -34,13 +34,13 @@ namespace WebItNow
             {
 
                 BtnEnviar.Enabled = true;
-                getDocRequeridos();
+                GetDocRequeridos();
 
                 //// * * Obtener Descripcion breve documento
                 string IdDoc = ddlDocs.SelectedValue.ToString();
                 TxtDescrpBrev.Text = TpoDocumento_DescrpBrev(IdDoc, 1);
 
-                checarStatusDoc();
+                ChecarStatusDoc();
 
                 string userId = Convert.ToString(Session["IdUsuario"]);
                 lblUsuario.Text = userId;
@@ -112,7 +112,7 @@ namespace WebItNow
 
                             cmd.ExecuteReader();
 
-                            checarStatusDoc();
+                            ChecarStatusDoc();
 
                             Session["IdUsuario"] = user;
                             Session["Asunto"] = "Documento Enviado";
@@ -147,7 +147,7 @@ namespace WebItNow
             }
         }
 
-        public void getDocRequeridos()
+        public void GetDocRequeridos()
         {
             ConexionBD conectar = new ConexionBD();
             conectar.Abrir();
@@ -226,7 +226,7 @@ namespace WebItNow
             return string.Empty;
         }
 
-        public void checarStatusDoc()
+        public void ChecarStatusDoc()
         {
             string user = Convert.ToString(Session["IdUsuario"]);
             string tpoDoc = ddlDocs.SelectedValue;
@@ -267,13 +267,13 @@ namespace WebItNow
             }
         }
 
-        protected void ddlDocs_SelectedIndexChanged(object sender, EventArgs e)
+        protected void DdlDocs_SelectedIndexChanged(object sender, EventArgs e)
         {
             string IdDoc = ddlDocs.SelectedValue.ToString();
 
             TxtDescrpBrev.Text = TpoDocumento_DescrpBrev(IdDoc, 1);
 
-            checarStatusDoc();
+            ChecarStatusDoc();
         }
 
         protected void BtnClose_Click(object sender, EventArgs e)
