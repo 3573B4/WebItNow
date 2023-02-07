@@ -2,8 +2,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
 <script type ="text/javascript">
 function Cerrar()
-{
-
+    {
         window.close();
     }
 </script>

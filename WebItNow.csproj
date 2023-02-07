@@ -282,6 +282,7 @@
     <Content Include="Images\imgItnow.jpg" />
     <Content Include="Images\loader.gif" />
     <Content Include="Images\sample.gif" />
+    <Content Include="Images\Spinner-1s-200px.gif" />
     <Content Include="Images\tierra-de-cristal-en-gras-131535893.jpg" />
     <Content Include="Images\icono-Subir-Archivo-morado.png" />
     <Content Include="Menu.aspx" />

@@ -24,29 +24,9 @@ namespace WebItNow
                     string sFilename = (string)Session["Filename"];
                     string sSubdirectorio = (string)Session["Subdirectorio"];
 
+                 // System.Threading.Thread.Sleep(10000);
                     DownloadFromAzure(sFilename, sSubdirectorio);
 
-                    //// Name of the share, directory, and file
-                    //string ConnectionString = ConfigurationManager.AppSettings.Get("StorageConnectionString");
-                    //string AccountName = ConfigurationManager.AppSettings.Get("StorageAccountName");
-                    //string sDirName = "itnowstorage";
-
-                    //// Obtener una referencia de nuestra parte.
-                    //ShareClient share = new ShareClient(ConnectionString, AccountName);
-
-                    //// Obtener una referencia de nuestro directorio - directorio ubicado en el nivel raíz.
-                    //ShareDirectoryClient directory = share.GetDirectoryClient(sDirName);
-
-                    //// Obtener una referencia a un subdirectorio que no se encuentra en el nivel raíz
-                    //directory = directory.GetSubdirectoryClient(sSubdirectorio);
-
-                    //// Obtener una referencia a nuestro archivo.
-                    //ShareFileClient rutaFile = directory.GetFileClient(sFilename);
-
-                    //Response.ContentType = ContentType;
-                    //Response.AppendHeader("Content-Disposition", "attachment; filename=" + Path.GetFileName(rutaFile.Path));
-                    //Response.WriteFile(rutaFile.Path);
-                    //Response.End();
                 }
                 
             }

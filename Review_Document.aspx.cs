@@ -277,8 +277,6 @@ namespace WebItNow
         {
             try
             {
-                // UpdatePanel1.Update();
-
                 GridViewRow row = ((GridViewRow)((System.Web.UI.WebControls.ImageButton)sender).NamingContainer);
                 int index = row.RowIndex;
 
@@ -295,17 +293,17 @@ namespace WebItNow
                 // Actualizar controles
                 GetEstadoDocumentos();
 
-             // System.Threading.Thread.Sleep(5000);
+                System.Threading.Thread.Sleep(10000);
 
                 // Descargar el archivo.
-                DownloadFromAzure(sNomArchivo, sSubdirectorio);
+                // DownloadFromAzure(sNomArchivo, sSubdirectorio);
 
-                //Session["Filename"] = sNomArchivo;
-                //Session["Subdirectorio"] = sSubdirectorio;
+                Session["Filename"] = sNomArchivo;
+                Session["Subdirectorio"] = sSubdirectorio;
 
-                //Response.Redirect("Descargas.aspx", false);
+                Response.Redirect("Descargas.aspx", false);
 
-                //  imgDescarga.Enabled = false;
+            //  imgDescarga.Enabled = false;
             }
             catch (Exception ex)
             {
@@ -469,8 +467,9 @@ namespace WebItNow
                     //  Response.TransmitFile(directorioURL, 0, tamaño);
                         Response.TransmitFile(directorioURL);
                         Response.Flush();
+                        Response.End();
 
-                        HttpContext.Current.ApplicationInstance.CompleteRequest();
+                    //  HttpContext.Current.ApplicationInstance.CompleteRequest();
                     }
                     else
                     {
@@ -827,9 +826,12 @@ namespace WebItNow
             Session["Filename"] = "Inventario antes del Robo Suc 47_compressed .pdf";
             Session["Subdirectorio"] = "ALEJANDRO/OTR/";
 
-            // System.Threading.Thread.Sleep(10000);
-            // DownloadFromAzure(sFilename, sSubdirectorio);
-            Response.Redirect("Descargas.aspx");
+            string sFilename = "Inventario antes del Robo Suc 47_compressed .pdf";
+            string sSubdirectorio = "ALEJANDRO/OTR/";
+
+            System.Threading.Thread.Sleep(10000);
+            DownloadFromAzure(sFilename, sSubdirectorio);
+            //Response.Redirect("Descargas.aspx", false);
 
         }
     }

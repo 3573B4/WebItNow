@@ -33,9 +33,6 @@ namespace WebItNow
             if (!IsPostBack)
             {
 
-                //string script = "$(document).ready(function () { $('[id*=BtnEnviar]').click(); });";
-                //ClientScript.RegisterStartupScript(this.GetType(), "load", script, true);
-
                 BtnEnviar.Enabled = true;
                 getDocRequeridos();
 

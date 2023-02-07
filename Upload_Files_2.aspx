@@ -63,15 +63,45 @@
             ShowProgress();
         });
 
-
     </script>
-
+    <style type="text/css">
+        .overlay  
+        {
+          position: fixed;
+          z-index: 98;
+          top: 0px;
+          left: 0px;
+          right: 0px;
+          bottom: 0px;
+          background-color: #aaa; 
+       /* filter: alpha(opacity=80);*/ 
+          opacity: 0.8; 
+        }
+        .overlayContent
+        {
+          z-index: 99;
+          margin: 250px auto;
+          width: 80px;
+          height: 80px;
+        }
+        .overlayContent h2
+        {
+            font-size: 18px;
+            font-weight: bold;
+            color: #000;
+        }
+        .overlayContent img
+        {
+          width: 80px;
+          height: 80px;
+        }
+    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <br />    
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
     <br />
-    <ContentTemplate>
+    
 
     <div class="container col-md-4">
         <h2 class="h2 mb-3 fw-normal">Carga segura de documentos</h2>
@@ -82,11 +112,13 @@
             </div>
         </div>
 
-<%--        <div class="form-group">
+<%--        
+        <div class="form-group">
             <div class="d-grid col-4 mx-auto py-1">
                 <asp:Label ID="indicaciones" runat="server" Text="Seleccione el archivo a subir" CssClass="control-label co-sm-3" Font-Bold="False"></asp:Label>
             </div>
-        </div>--%>
+        </div>
+--%>
 
         <br />
         <div class="form-floating">
@@ -116,11 +148,10 @@
                 <asp:Label ID="Lbl_Message" runat="server" ForeColor="Red" Visible="false"></asp:Label>
             </div>
         </div>
-        
         <div class="form-group my-2">
             <div class="col-12">
                 <div class="d-grid gap-4 d-flex justify-content-center">
-                    <asp:Button ID="BtnEnviar" runat="server" Font-Bold="True" Text="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Subir&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" OnClick="BtnEnviar_Click" OnClientClick="ShowProgress()" CssClass="btn btn-primary" />
+                    <asp:Button ID="BtnEnviar" runat="server" Font-Bold="True" Text="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Subir&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" OnClick="BtnEnviar_Click" OnClientClick="ShowProgress();" CssClass="btn btn-primary" />
                     <asp:Button ID="BtnRegresar" runat="server" Font-Bold="True" Text="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Regresar&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" OnClick="BtnRegresar_Click" CssClass="btn btn-outline-primary me-md-2" />
                 </div>
             </div>
@@ -221,5 +252,4 @@
 
     </asp:Panel>   
 
-    </ContentTemplate>
 </asp:Content>

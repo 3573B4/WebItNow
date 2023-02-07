@@ -64,6 +64,13 @@
             ShowProgress();
         });
 
+
+        function postbackButtonClick() {
+            updateProgress = $find("<%= updProgressTab.ClientID %>");
+            window.setTimeout("updateProgress.set_visible(true)", updateProgress.get_displayAfter());
+            return true;
+        }
+
     </script>
 
     <link rel="stylesheet" type="text/css" href="loading-bar.css"/>
@@ -73,14 +80,12 @@
     <link href="~/Scripts/footable.min.js" rel="stylesheet" type="text/javascript" />
     <link href="~/Styles/footable.min.css" rel="stylesheet" type="text/css" />
 
-    public static void RegisterClientScriptBlock (System.Web.UI.Control control, Type type, string key, string script, bool addScriptTags);
-
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-<asp:ScriptManager ID="ScriptManager1" runat="server">
-    </asp:ScriptManager>
-<asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional" >
+<asp:ScriptManager ID="ScriptManager1" runat="server"> </asp:ScriptManager>
+
+<asp:UpdatePanel ID="UpdatePanel" runat="server" UpdateMode="Conditional" >
     <ContentTemplate>
     <br />
     <div class="container col-md-6">
@@ -98,7 +103,7 @@
 
                         <asp:TemplateField>
                             <ItemTemplate>
-                        <%--    <asp:ImageButton ID="imgDescarga" runat="server" ImageUrl="~/Images/descargar.ico" OnClick="ImgDescarga_Click" OnClientClick="timedRefresh(2000)" Enabled="true" />     --%>
+                        <%--    <asp:ImageButton ID="imgDescarga" runat="server" ImageUrl="~/Images/descargar.ico" OnClick="ImgDescarga_Click" OnClientClick="timedRefresh(2000)" Enabled="true"  />     --%>
                                 <asp:ImageButton ID="ImgDescarga" runat="server" Height="26px" Width="26px" ImageUrl="~/Images/descargar.ico" OnClick="ImgDescarga_Click" Enabled="true" />
                             </ItemTemplate>
                         </asp:TemplateField>
@@ -150,14 +155,13 @@
                 <asp:Label ID="Lbl_Message" runat="server" ForeColor="Red"></asp:Label>
             </div>
         </div>
-<%--
-        <div class="from-group">
-            <div class="d-grid col-6 mx-auto">
-                <asp:Button ID="BtnDescargas" runat="server" Text="Descarga Pruebas" OnClick="BtnDescargas_Click" CssClass="btn btn-outline-primary" Visible="true" /> 
+<%--    <div class="from-group">
+              <div class="d-grid col-6 mx-auto">
+                <asp:Button ID="BtnDescargas" runat="server" Text="Descarga Pruebas" OnClick="BtnDescargas_Click" CausesValidation="false" OnClientClick="return postbackButtonClick();" CssClass="btn btn-outline-primary" Visible="true" /> 
             </div>
         </div>
-        <br />
 --%>
+        <br />
         <div class="from-group">
             <div class="d-grid col-6 mx-auto">
                 <asp:Button ID="BtnRegresar" runat="server" Text="Regresar" Font-Bold="True" OnClick="BtnRegresar_Click" CssClass="btn btn-link"/>
@@ -184,7 +188,6 @@
         </div>
 
     </div>
-
     <br />
     <asp:Panel ID="pnlMensaje" runat="server" CssClass="CajaDialogo" style="display: none; border: none; border-radius: 10px; width: 400px; background-color:#FFFFFF;">
         <div class=" row justify-content-end" data-bs-theme="dark">
@@ -274,7 +277,7 @@
 
     <Triggers>
         <asp:PostBackTrigger ControlID="grdEstadoDocumento" />
-<%--    <asp:PostBackTrigger ControlID="BtnDescargas" />    --%>
+    <%--<asp:PostBackTrigger ControlID="BtnDescargas" />--%>    
     </Triggers>
 </asp:UpdatePanel>
 </asp:Content>
