@@ -68,6 +68,7 @@ namespace WebItNow
                 TxtNomArchivo.Text = string.Empty;
                 TxtUrl_Imagen.Text = string.Empty;
 
+                imgDescarga.Enabled = false;
                 Variables.wDownload = false;
             }
 
@@ -205,6 +206,13 @@ namespace WebItNow
                 GrdEstadoDocumento.DataSource = dt;
                 GrdEstadoDocumento.DataBind();
 
+                //Attribute to show the Plus Minus Button.
+                GrdEstadoDocumento.HeaderRow.Cells[2].Attributes["data-class"] = "expand";
+
+                //Attribute to hide column in Phone.
+                GrdEstadoDocumento.HeaderRow.Cells[3].Attributes["data-hide"] = "phone";
+                GrdEstadoDocumento.HeaderRow.Cells[4].Attributes["data-hide"] = "phone";
+
                 //* * Agrega THEAD y TBODY a GridView.
                 GrdEstadoDocumento.HeaderRow.TableSection = TableRowSection.TableHeader;
             }
@@ -257,8 +265,8 @@ namespace WebItNow
                 GridViewRow row = ((GridViewRow)((System.Web.UI.WebControls.ImageButton)sender).NamingContainer);
                 int index = row.RowIndex;
 
-                string sUsuario = GrdEstadoDocumento.Rows[index].Cells[3].Text;
-                string sTipoDocumento = GrdEstadoDocumento.Rows[index].Cells[8].Text;
+                string sUsuario = GrdEstadoDocumento.Rows[index].Cells[2].Text;
+                string sTipoDocumento = GrdEstadoDocumento.Rows[index].Cells[7].Text;
 
                 GrdEstadoDocumento.Rows[index].Cells[4].Text = "Completo";
 
@@ -301,10 +309,10 @@ namespace WebItNow
                 int index = row.RowIndex;
 
 
-                string sUsuario = GrdEstadoDocumento.Rows[index].Cells[3].Text;
-                string sNom_Archivo = GrdEstadoDocumento.Rows[index].Cells[6].Text;
-                string sUrl_Imagen = GrdEstadoDocumento.Rows[index].Cells[7].Text;
-                string sTipoDocumento = GrdEstadoDocumento.Rows[index].Cells[8].Text;
+                string sUsuario = GrdEstadoDocumento.Rows[index].Cells[2].Text;
+                string sNom_Archivo = GrdEstadoDocumento.Rows[index].Cells[5].Text;
+                string sUrl_Imagen = GrdEstadoDocumento.Rows[index].Cells[6].Text;
+                string sTipoDocumento = GrdEstadoDocumento.Rows[index].Cells[7].Text;
 
                 string strURLFile = Server.MapPath("~/Directorio/") + sUrl_Imagen + sNom_Archivo;
 
@@ -381,10 +389,10 @@ namespace WebItNow
                 System.Threading.Thread.Sleep(10000);
                 DownloadFromAzure(sFilename, sSubdirectorio);
 
-                imgDescarga.Enabled = false;
+            //  imgDescarga.Enabled = false;
 
                 string mensaje = "window.open('Descargas.aspx');";
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "popup", mensaje, true);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "OPEN_WINDOW", mensaje, true);
 
 
                 //// Actualizar en la tabla [ITM_04] (IdDescarga = 1)

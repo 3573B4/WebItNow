@@ -123,7 +123,7 @@
         <br />
         <div class="form-floating">
                 <div class="dropdown">
-                    <asp:DropDownList ID="ddlDocs" runat="server" CssClass="btn btn-outline-secondary"  AutoPostBack="true" OnSelectedIndexChanged="ddlDocs_SelectedIndexChanged" Width="100%">
+                    <asp:DropDownList ID="ddlDocs" runat="server" CssClass="btn btn-outline-secondary"  AutoPostBack="true" OnSelectedIndexChanged="DdlDocs_SelectedIndexChanged" Width="100%">
                     </asp:DropDownList>
                 </div>
         </div>

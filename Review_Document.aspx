@@ -77,9 +77,13 @@
     <link rel="stylesheet" type="text/css" href="loading-bar.css"/>
     <script type="text/javascript" src="loading-bar.js"></script>
 
-    <script src="Scripts/jquery-3.4.1.min.js" type="text/javascript"></script>
+<%--    <script src="Scripts/jquery-3.4.1.min.js" type="text/javascript"></script>
     <link href="~/Scripts/footable.min.js" rel="stylesheet" type="text/javascript" />
-    <link href="~/Styles/footable.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Styles/footable.min.css" rel="stylesheet" type="text/css" />--%>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery-footable/0.1.0/css/footable.min.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-footable/0.1.0/js/footable.min.js"></script>
 
     <style type="text/css">
         .modal
@@ -94,6 +98,7 @@
             min-height: 100%;
             width: 100%;
         }
+/*        
         .loading
         {
             font-family: Arial;
@@ -106,16 +111,36 @@
             background-color: White;
             z-index: 999;
         }
+*/
+        .loading {
+            position: fixed;
+            top: 0; right: 0;
+            bottom: 0; left: 0;
+            /*background: #fff;*/
+
+            z-index: 98;
+            background-color: #aaa; 
+        /*filter: alpha(opacity=80);*/ 
+            opacity: 0.8; 
+        }
+        .loader {
+            left: 50%;
+            margin-left: -4em;
+            font-size: 10px;
+            border: .8em solid rgba(218, 219, 223, 1);
+            border-left: .8em solid rgba(58, 166, 165, 1);
+            animation: spin 1.1s infinite linear;
+        }
         .center img{
             height: 128px;
             width:  128px;
             background-color:transparent;
-            opacity: 0.5;
+            opacity: 0.8;
             position: fixed;
             z-index: 98;
             top:45%;
             left: 45%;
-            /*position: absolute;*/
+            position: absolute;
         }
     </style>
 
@@ -157,37 +182,40 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 <asp:ScriptManager ID="ScriptManager1" runat="server"> </asp:ScriptManager>
+
+<%--    initializeRequest y endRequest  --%>
 <script type="text/javascript">  
 
     var prm = Sys.WebForms.PageRequestManager.getInstance();
-    // Add initializeRequest and endRequest  
+    // Agregar initializeRequest y endRequest
     prm.add_initializeRequest(prm_InitializeRequest);
     prm.add_endRequest(prm_EndRequest);
 
-    // Called when async postback begins  
+    // Llamado cuando comienza la devolución de datos asíncrona
     function prm_InitializeRequest(sender, args) {
-        // get the divImage and set it to visible  
+        // Obtener el divImage y configurarlo en visible
         var panelProg = $get('divImage');
         panelProg.style.display = '';
 
-        // Disable button that caused a postback  
+        // Deshabilitar el botón que provocó una devolución de datos
         $get(args._postBackElement.id).disabled = true;
     }
 
-    // Called when async postback ends  
+    // Llamado cuando finaliza la devolución de datos asincrónica
     function prm_EndRequest(sender, args) {
-        // get the divImage and hide it again  
+        // obtener el divImage y ocultarlo de nuevo
         var panelProg = $get('divImage');
         panelProg.style.display = 'none';
 
-        // Enable button that caused a postback  
-        $get(sender._postBackSettings.sourceElement.id).disabled = false;
+        // Habilitar el botón que provocó una devolución de datos
+        // $get(sender._postBackSettings.sourceElement.id).disabled = false;
     }
+
 </script>
     
 <asp:UpdateProgress ID="UpdateProgress1" runat="server" AssociatedUpdatePanelID="UpdatePanel1" DynamicLayout="true">
     <ProgressTemplate>
-    <div id="divImage" class ="overlay">
+    <div id="divImage" class ="loading">
         <div class="center">
     <%--    <asp:Image ID="imgLoading" runat="server" ImageUrl="Images\ajax-loader.gif" Width="34px" />Processing...  --%>
             <img alt="" src="Images\ajax-loader.gif" />
@@ -206,7 +234,7 @@
         </ProgressTemplate>
     </asp:UpdateProgress>--%>
 
-<asp:UpdatePanel ID="UpdatePanel" runat="server" UpdateMode="Conditional" >
+<asp:UpdatePanel ID="UpdatePanel" runat="server" >
     <ContentTemplate>
     <br />
     <div class="container col-md-6">
@@ -215,23 +243,23 @@
         <h2 class="h2 mb-3 fw-normal">Pendientes</h2>
         <br />
 
-            <asp:UpdatePanel ID="UpdatePanel1" runat="server">
-                <ContentTemplate>
-                <div class="row g-3 mb-3">
-                    <div class="col-lg-4 col-md-4 ">
-                        <asp:TextBox ID="TxtUsu" runat="server" CssClass="form-control" placeholder="Usuario" ReadOnly="True"></asp:TextBox>
-                    </div>
-                    <asp:TextBox ID="TxtTpoDocumento" runat="server" CssClass="form-control" placeholder="Tipo de Documento" ReadOnly="True" Visible="false"></asp:TextBox>
-                    <asp:TextBox ID="TxtUrl_Imagen" runat="server" CssClass="form-control" placeholder="Ruta del archivo" Enabled="False" Visible="false" ></asp:TextBox>
-                    <div class="col-lg-6 col-md-6">
-                    <asp:TextBox ID="TxtNomArchivo" runat="server" CssClass="form-control" placeholder="Archivo para descargar" ReadOnly="True"></asp:TextBox>
-                    </div>
-                    <div class="col-auto">
-                    <asp:ImageButton ID="imgDescarga" runat="server" ImageUrl="~/Images/descargar.png" Height="35px" Width="35px" OnClick="ImgDescarga_Click" Enabled ="false" />
-                    </div>
+        <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
+            <ContentTemplate>
+            <div class="row g-3 mb-3">
+                <div class="col-lg-4 col-md-4 ">
+                    <asp:TextBox ID="TxtUsu" runat="server" CssClass="form-control" placeholder="Usuario" ReadOnly="True"></asp:TextBox>
                 </div>
-                </ContentTemplate>
-            </asp:UpdatePanel>
+                <asp:TextBox ID="TxtTpoDocumento" runat="server" CssClass="form-control" placeholder="Tipo de Documento" ReadOnly="True" Visible="false"></asp:TextBox>
+                <asp:TextBox ID="TxtUrl_Imagen" runat="server" CssClass="form-control" placeholder="Ruta del archivo" Enabled="False" Visible="false" ></asp:TextBox>
+                <div class="col-lg-7 col-md-7">
+                <asp:TextBox ID="TxtNomArchivo" runat="server" CssClass="form-control" placeholder="Archivo para descargar" ReadOnly="True"></asp:TextBox>
+                </div>
+                <div class="col-auto">
+                <asp:ImageButton ID="imgDescarga" runat="server" ImageUrl="~/Images/descargar.png" Height="35px" Width="35px" OnClick="ImgDescarga_Click" Enabled ="false" />
+                </div>
+            </div>
+            </ContentTemplate>
+        </asp:UpdatePanel>
 
         <div style="overflow-x: auto; overflow-y:hidden">
             <asp:GridView ID="GrdEstadoDocumento"  runat="server" AutoGenerateColumns="False" GridLines="None" Width="1400px"
@@ -431,9 +459,9 @@
     </ContentTemplate>
 
     <Triggers>
-    <asp:PostBackTrigger ControlID="grdEstadoDocumento" />      
+        <asp:PostBackTrigger ControlID="grdEstadoDocumento" />
 <%--    <asp:PostBackTrigger ControlID="BtnDescargas" />    --%>
-<%--    <asp:PostBackTrigger ControlID="imgDescarga" /> --%>
+        <%--<asp:PostBackTrigger ControlID="imgDescarga" />--%>
     </Triggers>
 </asp:UpdatePanel>
 
