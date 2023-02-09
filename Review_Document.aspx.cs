@@ -46,18 +46,50 @@ namespace WebItNow
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+
             // Carga GridView
             GetEstadoDocumentos();
 
             if (!Page.IsPostBack)
             {
 
+                //    string script = "$(document).ready(function () { $('[id*=btnSubmit]').click(); });";
+                //    ClientScript.RegisterStartupScript(this.GetType(), "load", script, true);
+
+
+                ////* * Agrega THEAD y TBODY a GridView.
+                //GrdEstadoDocumento.HeaderRow.TableSection = TableRowSection.TableHeader;
             }
 
-            //* * Agrega THEAD y TBODY a GridView.
-            GrdEstadoDocumento.HeaderRow.TableSection = TableRowSection.TableHeader;
+            if (Variables.wDownload == true)
+            {
+                TxtUsu.Text = string.Empty;
+                TxtTpoDocumento.Text = string.Empty;
+                TxtNomArchivo.Text = string.Empty;
+                TxtUrl_Imagen.Text = string.Empty;
 
+                Variables.wDownload = false;
+            }
+
+
+        }
+
+        protected void GrdEstadoDocumento_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            TxtUsu.Text = GrdEstadoDocumento.SelectedRow.Cells[2].Text;
+            TxtNomArchivo.Text = GrdEstadoDocumento.SelectedRow.Cells[5].Text;
+            TxtUrl_Imagen.Text = GrdEstadoDocumento.SelectedRow.Cells[6].Text;
+            TxtTpoDocumento.Text = GrdEstadoDocumento.SelectedRow.Cells[7].Text;
+
+            imgDescarga.Enabled = true;
+
+            Variables.wUsu = GrdEstadoDocumento.SelectedRow.Cells[2].Text;
+            Variables.wFileName = GrdEstadoDocumento.SelectedRow.Cells[5].Text;
+            Variables.wURL_Imagen = GrdEstadoDocumento.SelectedRow.Cells[6].Text;
+            Variables.wTpoDocumento = GrdEstadoDocumento.SelectedRow.Cells[7].Text;
+
+
+            this.hdfValorGrid.Value = this.GrdEstadoDocumento.SelectedValue.ToString();
         }
 
         protected void GrdEstadoDocumento_OnPageIndexChanging(object sender, GridViewPageEventArgs e)
@@ -84,8 +116,52 @@ namespace WebItNow
             {
                 (e.Row.FindControl("imgAceptado") as ImageButton).Enabled = true;
                 (e.Row.FindControl("imgRechazado") as ImageButton).Enabled = true;
-                (e.Row.FindControl("imgDescarga") as ImageButton).Enabled = true;
+            //  (e.Row.FindControl("imgDescarga") as ImageButton).Enabled = true;
             }
+        }
+
+        protected void GrdEstadoDocumento_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+
+
+
+            //// Actualizar en la tabla [ITM_04] (IdDescarga = 1)
+            //Update_ITM_04(sUsuario, sTipoDocumento, 1);
+
+            //// Actualizar controles
+            //GetEstadoDocumentos();
+
+            //System.Threading.Thread.Sleep(10000);
+            //this.DownloadFromAzure(sFilename, sSubdirectorio);
+
+            //if (e.CommandName == "cmdpost")
+            //{
+            //    int rowIndex = Convert.ToInt32(e.CommandArgument);
+            //    GridViewRow row = GrdEstadoDocumento.Rows[rowIndex];
+
+            //    string sUsuario = row.Cells[3].Text;
+            //    string sNomArchivo = row.Cells[6].Text;
+            //    string sSubdirectorio = row.Cells[7].Text;
+            //    string sTipoDocumento = row.Cells[8].Text;
+
+            //    Variables.wDownload = true;
+
+            //    // Actualizar en la tabla [ITM_04] (IdDescarga = 1)
+            //    Update_ITM_04(sUsuario, sTipoDocumento, 1);
+
+            //    // Actualizar controles
+            //    GetEstadoDocumentos();
+
+            //    Session["Filename"] = sNomArchivo;
+
+            //    System.Threading.Thread.Sleep(10000);
+            //    DownloadFromAzure(sNomArchivo, sSubdirectorio);
+
+            //    // Descargar el archivo.
+            //    string mensaje = "window.open('Descargas.aspx');";
+            //    ScriptManager.RegisterStartupScript(this, this.GetType(), "popup", mensaje, true);
+
+            //}
         }
 
         protected void DisplayCurrentPage()
@@ -129,7 +205,8 @@ namespace WebItNow
                 GrdEstadoDocumento.DataSource = dt;
                 GrdEstadoDocumento.DataBind();
 
-
+                //* * Agrega THEAD y TBODY a GridView.
+                GrdEstadoDocumento.HeaderRow.TableSection = TableRowSection.TableHeader;
             }
             catch (Exception ex)
             {
@@ -275,33 +352,56 @@ namespace WebItNow
         {
             try
             {
-                GridViewRow row = ((GridViewRow)((System.Web.UI.WebControls.ImageButton)sender).NamingContainer);
-                int index = row.RowIndex;
+                //GridViewRow row = ((GridViewRow)((System.Web.UI.WebControls.ImageButton)sender).NamingContainer);
+                //int index = row.RowIndex;
 
-                string sUsuario = GrdEstadoDocumento.Rows[index].Cells[3].Text;
-                string sNomArchivo = GrdEstadoDocumento.Rows[index].Cells[6].Text;
-                string sSubdirectorio = GrdEstadoDocumento.Rows[index].Cells[7].Text;
-                string sTipoDocumento = GrdEstadoDocumento.Rows[index].Cells[8].Text;
+                //string sUsuario = GrdEstadoDocumento.Rows[index].Cells[3].Text;
+                //string sNomArchivo = GrdEstadoDocumento.Rows[index].Cells[6].Text;
+                //string sSubdirectorio = GrdEstadoDocumento.Rows[index].Cells[7].Text;
+                //string sTipoDocumento = GrdEstadoDocumento.Rows[index].Cells[8].Text;
+
+                //string sUsuario = TxtUsu.Text;
+                //string sTipoDocumento = TxtTpoDocumento.Text;
+                //string sFilename = TxtNomArchivo.Text;
+                //string sSubdirectorio = TxtUrl_Imagen.Text;
 
                 Variables.wDownload = true;
 
                 // Actualizar en la tabla [ITM_04] (IdDescarga = 1)
-                Update_ITM_04(sUsuario, sTipoDocumento, 1);
+                Update_ITM_04(Variables.wUsu, Variables.wTpoDocumento, 1);
 
                 // Actualizar controles
                 GetEstadoDocumentos();
 
+                Session["Filename"] = Variables.wFileName;
+
+                string sFilename = Variables.wFileName;
+                string sSubdirectorio = Variables.wURL_Imagen;
+
                 System.Threading.Thread.Sleep(10000);
+                DownloadFromAzure(sFilename, sSubdirectorio);
+
+                imgDescarga.Enabled = false;
+
+                string mensaje = "window.open('Descargas.aspx');";
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "popup", mensaje, true);
+
+
+                //// Actualizar en la tabla [ITM_04] (IdDescarga = 1)
+                //Update_ITM_04(sUsuario, sTipoDocumento, 1);
+
+                //// Actualizar controles
+                //GetEstadoDocumentos();
+
+                //Session["Filename"] = sNomArchivo;
+
+                //System.Threading.Thread.Sleep(10000);
+                //DownloadFromAzure(sNomArchivo, sSubdirectorio);
 
                 // Descargar el archivo.
-                // DownloadFromAzure(sNomArchivo, sSubdirectorio);
+                //string mensaje = "window.open('Descargas.aspx');";
+                //ScriptManager.RegisterStartupScript(this, this.GetType(), "popup", mensaje, true);
 
-                Session["Filename"] = sNomArchivo;
-                Session["Subdirectorio"] = sSubdirectorio;
-
-                Response.Redirect("Descargas.aspx", false);
-
-            //  imgDescarga.Enabled = false;
             }
             catch (Exception ex)
             {
@@ -391,92 +491,92 @@ namespace WebItNow
                     stream.Close();
                 }
 
-                //while (true)
-                //{                   
-                //    if (File.Exists(directorioURL))
-                //        break;
+                ////while (true)
+                ////{                   
+                ////    if (File.Exists(directorioURL))
+                ////        break;
+                ////}
+
+                //string extension = Path.GetExtension(file.Path);
+                //var strMimeType = "";
+
+                //if (extension != null)
+                //{
+                //    switch (extension.ToLower())
+                //    {
+                //        case ".htm":
+                //        case ".html":
+                //            strMimeType = "text/HTML";
+                //            break;
+                //        case ".txt":
+                //            strMimeType = "text/plain";
+                //            break;
+                //        case ".doc":
+
+                //        case ".docx":
+
+                //        case ".rtf":
+                //            strMimeType = "Application/msword";
+                //            break;
+                //        case ".pdf":
+                //            strMimeType = "application/pdf";
+                //            break;
+                //        case ".zip":
+                //            strMimeType = "application/zip";
+                //            break;
+                //        case ".xlsx":
+                //            strMimeType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+                //            break;
+                //        case "xls":
+                //            strMimeType = "application/vnd.ms-excel";
+                //            break;
+
+                //    }
+
                 //}
 
-                string extension = Path.GetExtension(file.Path);
-                var strMimeType = "";
+                //if (extension == ".xlsx")
+                //{
+                //    string direccion = directorioURL;
+                //    System.IO.FileStream fs = null;
 
-                if (extension != null)
-                {
-                    switch (extension.ToLower())
-                    {
-                        case ".htm":
-                        case ".html":
-                            strMimeType = "text/HTML";
-                            break;
-                        case ".txt":
-                            strMimeType = "text/plain";
-                            break;
-                        case ".doc":
+                //    fs = System.IO.File.Open(direccion, System.IO.FileMode.Open);
+                //    byte[] btFile = new byte[fs.Length];
+                //    fs.Read(btFile, 0, Convert.ToInt32(fs.Length));
+                //    fs.Close();
 
-                        case ".docx":
+                //    Response.AddHeader("Content-disposition", "attachment; filename=" + Path.GetFileName(directorioURL));
+                //    Response.ContentType = "application/octet-stream";
+                //    Response.BinaryWrite(btFile);
+                ////  Response.Flush();
+                //    Response.End();
+                ////  HttpContext.Current.ApplicationInstance.CompleteRequest();
+                //}
+                //else
+                //{
 
-                        case ".rtf":
-                            strMimeType = "Application/msword";
-                            break;
-                        case ".pdf":
-                            strMimeType = "application/pdf";
-                            break;
-                        case ".zip":
-                            strMimeType = "application/zip";
-                            break;
-                        case ".xlsx":
-                            strMimeType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
-                            break;
-                        case "xls":
-                            strMimeType = "application/vnd.ms-excel";
-                            break;
+                //    if (File.Exists(directorioURL))
+                //    {
+                //        Response.Clear();
+                //        Response.Buffer = true;
+                //        Response.ContentType = strMimeType;
+                //        Response.ContentEncoding = System.Text.Encoding.UTF8;
+                //        Response.AppendHeader("Content-Disposition", "attachment; filename=" + Path.GetFileName(directorioURL));
+                //    //  Response.TransmitFile(directorioURL, 0, tamaño);
+                //        Response.TransmitFile(directorioURL);
+                //        Response.Flush();
+                //        Response.End();
 
-                    }
+                //    //  HttpContext.Current.ApplicationInstance.CompleteRequest();
+                //    }
+                //    else
+                //    {
+                //        Response.End();
+                //    }
+                //}
 
-                }
-
-                if (extension == ".xlsx")
-                {
-                    string direccion = directorioURL;
-                    System.IO.FileStream fs = null;
-
-                    fs = System.IO.File.Open(direccion, System.IO.FileMode.Open);
-                    byte[] btFile = new byte[fs.Length];
-                    fs.Read(btFile, 0, Convert.ToInt32(fs.Length));
-                    fs.Close();
-
-                    Response.AddHeader("Content-disposition", "attachment; filename=" + Path.GetFileName(directorioURL));
-                    Response.ContentType = "application/octet-stream";
-                    Response.BinaryWrite(btFile);
-                //  Response.Flush();
-                    Response.End();
-                //  HttpContext.Current.ApplicationInstance.CompleteRequest();
-                }
-                else
-                {
-
-                    if (File.Exists(directorioURL))
-                    {
-                        Response.Clear();
-                        Response.Buffer = true;
-                        Response.ContentType = strMimeType;
-                        Response.ContentEncoding = System.Text.Encoding.UTF8;
-                        Response.AppendHeader("Content-Disposition", "attachment; filename=" + Path.GetFileName(directorioURL));
-                    //  Response.TransmitFile(directorioURL, 0, tamaño);
-                        Response.TransmitFile(directorioURL);
-                        Response.Flush();
-                        Response.End();
-
-                    //  HttpContext.Current.ApplicationInstance.CompleteRequest();
-                    }
-                    else
-                    {
-                        Response.End();
-                    }
-                }
-
-                //  System.Threading.Thread.Sleep(5000);
-                //  File.Delete(directorioURL);
+                ////  System.Threading.Thread.Sleep(5000);
+                ////  File.Delete(directorioURL);
             }
             catch (Exception ex)
             {
@@ -806,22 +906,42 @@ namespace WebItNow
 
         protected void BtnDescargas_Click(object sender, EventArgs e)
         {
+
+            string sUsuario = TxtUsu.Text;
+            string sTipoDocumento = TxtTpoDocumento.Text;
+            //string sFilename = TxtNomArchivo.Text;
+            //string sSubdirectorio = TxtUrl_Imagen.Text;
+
+            //Variables.wUsu = GrdEstadoDocumento.SelectedRow.Cells[2].Text;
+            //Variables.wFileName = GrdEstadoDocumento.SelectedRow.Cells[5].Text;
+            //Variables.wURL_Imagen = GrdEstadoDocumento.SelectedRow.Cells[6].Text;
+            //Variables.wTpoDocumento = GrdEstadoDocumento.SelectedRow.Cells[7].Text;
+            imgDescarga.Enabled = false;
+
             // Actualizar en la tabla [ITM_04] (IdDescarga = 1)
-            Update_ITM_04("ALEJANDRO", "OTR", 1);
+            Update_ITM_04(Variables.wUsu, Variables.wTpoDocumento, 1);
 
             // Actualizar controles
             GetEstadoDocumentos();
 
-            Session["Filename"] = "Inventario antes del Robo Suc 47_compressed .pdf";
-            Session["Subdirectorio"] = "ALEJANDRO/OTR/";
+            Session["Filename"] = Variables.wFileName;
 
-            string sFilename = "Inventario antes del Robo Suc 47_compressed .pdf";
-            string sSubdirectorio = "ALEJANDRO/OTR/";
+            string sFilename = Variables.wFileName;
+            string sSubdirectorio = Variables.wURL_Imagen;
 
             System.Threading.Thread.Sleep(10000);
             DownloadFromAzure(sFilename, sSubdirectorio);
-            //Response.Redirect("Descargas.aspx", false);
 
+            string mensaje = "window.open('Descargas.aspx');";
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "popup", mensaje, true);
+
+        }
+
+        protected void BtnDownload_Click(object sender, EventArgs e)
+        {
+            // Descargar el archivo.
+            Session["Filename"] = "Inventario antes del Robo Suc 47_compressed .pdf";
+            Response.Redirect("Descargas.aspx", true);
         }
     }
 }

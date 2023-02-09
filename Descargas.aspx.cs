@@ -19,58 +19,24 @@ namespace WebItNow
         {
             if (!Page.IsPostBack)
             {
-                if (Session["Subdirectorio"] != null)
+                if (Session["Filename"] != null)
                 {
                     string sFilename = (string)Session["Filename"];
-                    string sSubdirectorio = (string)Session["Subdirectorio"];
 
                  // System.Threading.Thread.Sleep(10000);
-                    DownloadFromAzure(sFilename, sSubdirectorio);
-
+                    DownloadFromAzure(sFilename);
                 }
-                
+
             }
         }
 
-        protected void DownloadFromAzure(string sFilename, string sSubdirectorio)
+        protected void DownloadFromAzure(string sFilename)
         {
-            // long tamaño = 0;
             try
             {
-                // Name of the share, directory, and file
-                string ConnectionString = ConfigurationManager.AppSettings.Get("StorageConnectionString");
-                string AccountName = ConfigurationManager.AppSettings.Get("StorageAccountName");
-                string sDirName = "itnowstorage";
                 string directorioURL = Server.MapPath("~/itnowstorage/" + sFilename);
 
-                // Obtener una referencia de nuestra parte.
-                ShareClient share = new ShareClient(ConnectionString, AccountName);
-
-                // Obtener una referencia de nuestro directorio - directorio ubicado en el nivel raíz.
-                ShareDirectoryClient directory = share.GetDirectoryClient(sDirName);
-
-                // Obtener una referencia a un subdirectorio que no se encuentra en el nivel raíz
-                directory = directory.GetSubdirectoryClient(sSubdirectorio);
-
-                // Obtener una referencia a nuestro archivo.
-                ShareFileClient file = directory.GetFileClient(sFilename);
-
-                // Descargar el archivo.
-                ShareFileDownloadInfo download = file.Download();
-
-                // Int32 tamaño = file.Path.Length;
-
-                using (FileStream stream = File.OpenWrite(directorioURL))
-                {
-                    // tamaño = stream.Length;
-
-                    //                              32768  
-                    download.Content.CopyTo(stream, 327680);
-                    stream.Flush();
-                    stream.Close();
-                }
-
-                string extension = Path.GetExtension(file.Path);
+                string extension = Path.GetExtension(sFilename);
                 var strMimeType = "";
 
                 if (extension != null)
@@ -121,9 +87,9 @@ namespace WebItNow
                     Response.AddHeader("Content-disposition", "attachment; filename=" + Path.GetFileName(directorioURL));
                     Response.ContentType = "application/octet-stream";
                     Response.BinaryWrite(btFile);
-                    //  Response.Flush();
+                //  Response.Flush();
                     Response.End();
-                    //  HttpContext.Current.ApplicationInstance.CompleteRequest();
+                //  HttpContext.Current.ApplicationInstance.CompleteRequest();
                 }
                 else
                 {
@@ -139,7 +105,8 @@ namespace WebItNow
                         Response.TransmitFile(directorioURL);
                         Response.Flush();
 
-                        HttpContext.Current.ApplicationInstance.CompleteRequest();
+                        Response.End();
+                    //  HttpContext.Current.ApplicationInstance.CompleteRequest();
                     }
                     else
                     {
