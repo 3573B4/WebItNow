@@ -16,12 +16,6 @@ using System.Data.SqlClient;
 using Azure;
 using Azure.Storage.Files.Shares;
 using Azure.Storage.Files.Shares.Models;
-using System.Windows;
-using System.Windows.Forms;
-using Microsoft.WindowsAzure.Storage;
-using Microsoft.WindowsAzure.Storage.Blob;
-using System.Text;
-
 
 namespace WebItNow
 {
@@ -67,6 +61,11 @@ namespace WebItNow
                 TxtTpoDocumento.Text = string.Empty;
                 TxtNomArchivo.Text = string.Empty;
                 TxtUrl_Imagen.Text = string.Empty;
+
+                Variables.wUsu = string.Empty;
+                Variables.wTpoDocumento = string.Empty;
+                Variables.wFileName = string.Empty;
+                Variables.wURL_Imagen = string.Empty;
 
                 imgDescarga.Enabled = false;
                 Variables.wDownload = false;
@@ -205,13 +204,6 @@ namespace WebItNow
 
                 GrdEstadoDocumento.DataSource = dt;
                 GrdEstadoDocumento.DataBind();
-
-                //Attribute to show the Plus Minus Button.
-                GrdEstadoDocumento.HeaderRow.Cells[2].Attributes["data-class"] = "expand";
-
-                //Attribute to hide column in Phone.
-                GrdEstadoDocumento.HeaderRow.Cells[3].Attributes["data-hide"] = "phone";
-                GrdEstadoDocumento.HeaderRow.Cells[4].Attributes["data-hide"] = "phone";
 
                 //* * Agrega THEAD y TBODY a GridView.
                 GrdEstadoDocumento.HeaderRow.TableSection = TableRowSection.TableHeader;
@@ -370,8 +362,8 @@ namespace WebItNow
 
                 //string sUsuario = TxtUsu.Text;
                 //string sTipoDocumento = TxtTpoDocumento.Text;
-                //string sFilename = TxtNomArchivo.Text;
-                //string sSubdirectorio = TxtUrl_Imagen.Text;
+                //string Filename = TxtNomArchivo.Text;
+                //string Subdirectorio = TxtUrl_Imagen.Text;
 
                 Variables.wDownload = true;
 
@@ -389,11 +381,10 @@ namespace WebItNow
                 System.Threading.Thread.Sleep(10000);
                 DownloadFromAzure(sFilename, sSubdirectorio);
 
-            //  imgDescarga.Enabled = false;
-
                 string mensaje = "window.open('Descargas.aspx');";
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "OPEN_WINDOW", mensaje, true);
 
+                //  imgDescarga.Enabled = false;
 
                 //// Actualizar en la tabla [ITM_04] (IdDescarga = 1)
                 //Update_ITM_04(sUsuario, sTipoDocumento, 1);

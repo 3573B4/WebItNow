@@ -23,6 +23,7 @@ namespace WebItNow
                 string sAsunto = Convert.ToString(Session["Asunto"]);
 
                 lblUsuario.Text = sUsuario;
+                BtnRegresar.Visible = false;
 
                 if (sAsunto == "Documento Enviado")
                 {

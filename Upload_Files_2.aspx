@@ -3,6 +3,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
     <script type="text/javascript" src="Scripts/jquery-3.4.1.min.js"></script>
+
     <script language="javascript" type="text/javascript">
         
         var timer = setTimeout(function () {
@@ -27,44 +28,74 @@
             $('[id*=GridView1]').footable();
         });
 
-        function ShowProgress() {
-            setTimeout(function () {
-
-                //var loading = document.getElementsByClassName("modal");
-                //for (var i = 0; i < loading.length; i++) {
-                //    loading[i].className += "-dialog modal-dialog-centered";
-                //}
-
-                //var modal = $('<div />');
-                //modal.addClass("modal");
-                //$('body').append(modal);
-                //$('modal-dialog-centered').append(modal);
-                //modal.addClass("modal-dialog-centered");
-                var loading = $(".modal");
-                //loading.addClass(' modal-dialog-centered');
-                //loading.addClass(' col-4');
-                //loading.addClass("-");
-                //loading.addClass("dialog");
-                //loading.addClass(" ");
-                //loading.addClass("modal");
-                //loading.addClass("-");
-                //loading.addClass("dialog");
-                //loading.addClass("-");
-                //loading.addClass("centered");
-                loading.show();
-                //var top = Math.max($(window).height() / 2 - loading[0].offsetHeight / 2, 0);
-                //var left = Math.max($(window).width() / 2 - loading[0].offsetWidth / 2, 0);
-                //loading.css({ top: top, left: left });
-                
-                //loading.css({ width: 500 });
-            }, 200);
+        function showProgress() {
+            var updateProgress = $get("<%= UpdateProgress1.ClientID %>");
+            updateProgress.style.display = "block";
         }
+
+        //function ShowProgress() {
+        //    setTimeout(function () {
+
+        //        //var loading = document.getElementsByClassName("modal");
+        //        //for (var i = 0; i < loading.length; i++) {
+        //        //    loading[i].className += "-dialog modal-dialog-centered";
+        //        //}
+
+        //        //var modal = $('<div />');
+        //        //modal.addClass("modal");
+        //        //$('body').append(modal);
+        //        //$('modal-dialog-centered').append(modal);
+        //        //modal.addClass("modal-dialog-centered");
+        //        var loading = $(".modal");
+        //        //loading.addClass(' modal-dialog-centered');
+        //        //loading.addClass(' col-4');
+        //        //loading.addClass("-");
+        //        //loading.addClass("dialog");
+        //        //loading.addClass(" ");
+        //        //loading.addClass("modal");
+        //        //loading.addClass("-");
+        //        //loading.addClass("dialog");
+        //        //loading.addClass("-");
+        //        //loading.addClass("centered");
+        //        loading.show();
+        //        //var top = Math.max($(window).height() / 2 - loading[0].offsetHeight / 2, 0);
+        //        //var left = Math.max($(window).width() / 2 - loading[0].offsetWidth / 2, 0);
+        //        //loading.css({ top: top, left: left });
+                
+        //        //loading.css({ width: 500 });
+        //    }, 200);
+        //}
+
         $('form').live("submit", function () {
             ShowProgress();
         });
 
     </script>
+
     <style type="text/css">
+        .loading {
+            position: fixed;
+            top: 0; right: 0;
+            bottom: 0; left: 0;
+            /*background: #fff;*/
+
+            z-index: 98;
+            background-color: #aaa; 
+        /*filter: alpha(opacity=80);*/ 
+            opacity: 0.8; 
+        }
+
+        .center img{
+            height: 128px;
+            width:  128px;
+            background-color:transparent;
+            opacity: 0.8;
+            position: fixed;
+            z-index: 98;
+            top:45%;
+            left: 45%;
+            position: absolute;
+        }
         .overlay  
         {
           position: fixed;
@@ -96,13 +127,44 @@
           height: 80px;
         }
     </style>
+
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <br />    
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
     <br />
     
+    <script type="text/javascript">  
 
+        var prm = Sys.WebForms.PageRequestManager.getInstance();
+        // Agregar initializeRequest y endRequest
+        prm.add_initializeRequest(prm_InitializeRequest);
+        prm.add_endRequest(prm_EndRequest);
+
+        // Llamado cuando comienza la devolución de datos asíncrona
+        function prm_InitializeRequest(sender, args) {
+            // Obtener el divImage y configurarlo en visible
+            var panelProg = $get('divImage');
+            panelProg.style.display = '';
+
+            // Deshabilitar el botón que provocó una devolución de datos
+            $get(args._postBackElement.id).disabled = true;
+        }
+
+        // Llamado cuando finaliza la devolución de datos asincrónica
+        function prm_EndRequest(sender, args) {
+            // obtener el divImage y ocultarlo de nuevo
+            var panelProg = $get('divImage');
+            panelProg.style.display = 'none';
+
+            // Habilitar el botón que provocó una devolución de datos
+            $get(sender._postBackSettings.sourceElement.id).disabled = false;
+        }
+
+    </script>
+
+<asp:UpdatePanel ID="UpdatePanel" runat="server">
+    <ContentTemplate>
     <div class="container col-md-4">
         <h2 class="h2 mb-3 fw-normal">Carga segura de documentos</h2>
         <br />
@@ -151,12 +213,20 @@
         <div class="form-group my-2">
             <div class="col-12">
                 <div class="d-grid gap-4 d-flex justify-content-center">
-                    <asp:Button ID="BtnEnviar" runat="server" Font-Bold="True" Text="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Subir&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" OnClick="BtnEnviar_Click" OnClientClick="ShowProgress();" CssClass="btn btn-primary" />
+                <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
+                    <ContentTemplate>
+                    <asp:Button ID="BtnEnviar" runat="server" Font-Bold="True" Text="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Subir&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" OnClick="BtnEnviar_Click" OnClientClick="showProgress()" CssClass="btn btn-primary" />
+                    </ContentTemplate>
+                </asp:UpdatePanel>
                     <asp:Button ID="BtnRegresar" runat="server" Font-Bold="True" Text="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Regresar&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" OnClick="BtnRegresar_Click" CssClass="btn btn-outline-primary me-md-2" />
                 </div>
             </div>
         </div>
-
+        </ContentTemplate>
+        <Triggers>
+            <asp:PostBackTrigger ControlID="BtnEnviar" />
+        </Triggers>
+    </asp:UpdatePanel>
         <!-- Modal -->
         <div class="modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -250,6 +320,17 @@
                 <asp:Button ID="BtnClose_Expira" OnClientClick="acceso(); return false;" runat="server" Text="Cerrar" CssClass="btn btn-outline-primary"/>
         </div>
 
-    </asp:Panel>   
+    </asp:Panel>
+
+<asp:UpdateProgress ID="UpdateProgress1" runat="server" AssociatedUpdatePanelID="UpdatePanel1" DynamicLayout="true">
+    <ProgressTemplate>
+    <div id="divImage" class ="loading">
+        <div class="center">
+    <%--    <asp:Image ID="imgLoading" runat="server" ImageUrl="Images\ajax-loader.gif" Width="34px" />Processing...  --%>
+            <img alt="" src="Images\ajax-loader.gif" />
+        </div>
+    </div>
+    </ProgressTemplate>
+</asp:UpdateProgress>
 
 </asp:Content>

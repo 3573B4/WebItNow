@@ -58,14 +58,15 @@ namespace WebItNow
                 string directFinal = directorio + user + "/" + folderName + "/";
                 string UrlFinal = user + "/" + folderName + "/";
                 string directorioURL = Server.MapPath(directFinal);
+
                 string nomFile = FileUpload1.FileName;
+                string fileName = System.IO.Path.GetFileName(FileUpload1.FileName);
+
                 int tamArchivo = FileUpload1.PostedFile.ContentLength;
                 string extensionFile = Path.GetExtension(FileUpload1.FileName);
 
                 if (FileUpload1.HasFile)
                 {
-                    //  System.Threading.Thread.Sleep(5000);
-
                     if (tamArchivo == 0)
                     {
                         LblMessage.Text = "El archivo esta dañado";
@@ -102,7 +103,7 @@ namespace WebItNow
                             FileUpload1.SaveAs(filepath);
                             string sPath = System.IO.Path.GetDirectoryName(filepath) + "/" + nomFile;
 
-                            System.Threading.Thread.Sleep(5000);
+                            System.Threading.Thread.Sleep(10000);
                             this.UploadToAzure(nomFile, sPath);
 
                             //UploadToAzure(nomFile, sPath);

@@ -77,13 +77,10 @@
     <link rel="stylesheet" type="text/css" href="loading-bar.css"/>
     <script type="text/javascript" src="loading-bar.js"></script>
 
-<%--    <script src="Scripts/jquery-3.4.1.min.js" type="text/javascript"></script>
+    <script src="Scripts/jquery-3.4.1.min.js" type="text/javascript"></script>
     <link href="~/Scripts/footable.min.js" rel="stylesheet" type="text/javascript" />
-    <link href="~/Styles/footable.min.css" rel="stylesheet" type="text/css" />--%>
+    <link href="~/Styles/footable.min.css" rel="stylesheet" type="text/css" />
 
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery-footable/0.1.0/css/footable.min.css" rel="stylesheet" type="text/css" />
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-footable/0.1.0/js/footable.min.js"></script>
 
     <style type="text/css">
         .modal
@@ -213,17 +210,6 @@
 
 </script>
     
-<asp:UpdateProgress ID="UpdateProgress1" runat="server" AssociatedUpdatePanelID="UpdatePanel1" DynamicLayout="true">
-    <ProgressTemplate>
-    <div id="divImage" class ="loading">
-        <div class="center">
-    <%--    <asp:Image ID="imgLoading" runat="server" ImageUrl="Images\ajax-loader.gif" Width="34px" />Processing...  --%>
-            <img alt="" src="Images\ajax-loader.gif" />
-        </div>
-    </div>
-    </ProgressTemplate>
-</asp:UpdateProgress>
-
 <%--    <asp:UpdateProgress ID="UpdateProgress1" runat="server" AssociatedUpdatePanelID="UpdatePanel1" DynamicLayout="true">
         <ProgressTemplate>
         <div class="overlay" />
@@ -271,13 +257,13 @@
                     <Columns>
                         <asp:TemplateField>
                             <ItemTemplate>
-                                <asp:ImageButton ID="ImgAceptado" runat="server" Height="26px" Width="26px" ImageUrl="~/Images/aceptar.ico" OnClick="ImgAceptado_Click" Enabled="true" />
+                                <asp:ImageButton ID="ImgAceptado" runat="server" Height="26px" Width="26px" ImageUrl="~/Images/aceptar.ico" OnClick="ImgAceptado_Click" Enabled="false" />
                             </ItemTemplate> 
                         </asp:TemplateField>
 
                         <asp:TemplateField>
                             <ItemTemplate>
-                                <asp:ImageButton ID="ImgRechazado" runat="server" Height="26px" Width="26px" ImageUrl="~/Images/cancelar.ico" OnClick="ImgRechazado_Click" Enabled="true" />
+                                <asp:ImageButton ID="ImgRechazado" runat="server" Height="26px" Width="26px" ImageUrl="~/Images/cancelar.ico" OnClick="ImgRechazado_Click" Enabled="false" />
                             </ItemTemplate> 
                         </asp:TemplateField>
 
@@ -461,8 +447,19 @@
     <Triggers>
         <asp:PostBackTrigger ControlID="grdEstadoDocumento" />
 <%--    <asp:PostBackTrigger ControlID="BtnDescargas" />    --%>
-        <%--<asp:PostBackTrigger ControlID="imgDescarga" />--%>
+<%--    <asp:PostBackTrigger ControlID="imgDescarga" />     --%>
     </Triggers>
 </asp:UpdatePanel>
+
+<asp:UpdateProgress ID="UpdateProgress1" runat="server" AssociatedUpdatePanelID="UpdatePanel1" DynamicLayout="true">
+    <ProgressTemplate>
+    <div id="divImage" class ="loading">
+        <div class="center">
+    <%--    <asp:Image ID="imgLoading" runat="server" ImageUrl="Images\ajax-loader.gif" Width="34px" />Processing...  --%>
+            <img alt="" src="Images\ajax-loader.gif" />
+        </div>
+    </div>
+    </ProgressTemplate>
+</asp:UpdateProgress>
 
 </asp:Content>
