@@ -81,6 +81,7 @@ namespace WebItNow
             TxtUrl_Imagen.Text = GrdEstadoDocumento.SelectedRow.Cells[6].Text;
             TxtTpoDocumento.Text = GrdEstadoDocumento.SelectedRow.Cells[7].Text;
 
+            // Habilitar el boton de Descargas
             imgDescarga.Enabled = true;
 
             Variables.wUsu = GrdEstadoDocumento.SelectedRow.Cells[2].Text;

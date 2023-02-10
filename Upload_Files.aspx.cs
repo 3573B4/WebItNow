@@ -72,19 +72,17 @@ namespace WebItNow
 
         protected void grdEstadoDocs_RowDataBound(object sender, System.Web.UI.WebControls.GridViewRowEventArgs e)
         {
-            //if (e.Row.RowType == DataControlRowType.DataRow)
-            //    e.Row.Attributes.Add("OnClick", "" + Page.ClientScript.GetPostBackClientHyperlink(this.grdEstadoDocs, "Select$" + e.Row.RowIndex.ToString()) + ";");
 
-            //string Desc_status = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "Desc_status"));
+            if (e.Row.RowType == DataControlRowType.DataRow)
+                e.Row.Attributes.Add("OnClick", "" + Page.ClientScript.GetPostBackClientHyperlink(this.grdEstadoDocs, "Select$" + e.Row.RowIndex.ToString()) + ";");
 
-            //if (Desc_status == "Faltante")
-            //{
-            //    (e.Row.FindControl("imgCargaDocumento") as ImageButton).Enabled = true;
-            //}
-            //else
-            //{
-            //    (e.Row.FindControl("imgCargaDocumento") as ImageButton).Enabled = false;
-            //}
+            string IdStatus = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "Desc_status"));
+
+            if (IdStatus == "Revision" || IdStatus == "Completo")
+            {
+                (e.Row.FindControl("BtnCargaDocumento") as Button).Enabled = false;
+
+            }
         }
 
         protected void DisplayCurrentPage()

@@ -287,13 +287,13 @@
     <Content Include="Images\cancelar.ico" />
     <Content Include="Images\descargar.ico" />
     <Content Include="Images\edit.jpg" />
+    <Content Include="Images\email-icon.png" />
     <Content Include="Images\imgItnow.jpeg" />
     <Content Include="Images\imgItnow.jpg" />
     <Content Include="Images\loader.gif" />
-    <Content Include="Images\sample.gif" />
     <Content Include="Images\Spinner-1s-200px.gif" />
-    <Content Include="Images\tierra-de-cristal-en-gras-131535893.jpg" />
     <Content Include="Images\icono-Subir-Archivo-morado.png" />
+    <Content Include="Images\whatsapp-logo_icon.png" />
     <Content Include="Menu.aspx" />
     <Content Include="Page_Message.aspx" />
     <Content Include="Request_Document.aspx" />

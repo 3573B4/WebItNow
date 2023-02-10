@@ -48,7 +48,12 @@ namespace WebItNow
             }
         }
 
-        protected void BtnEnviar_Click(object sender, EventArgs e)
+        protected void BtnEnviarWhats_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void BtnEnviarEmail_Click(object sender, EventArgs e)
         {
             try
             {

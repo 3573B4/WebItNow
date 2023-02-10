@@ -51,13 +51,22 @@ namespace WebItNow
         protected global::System.Web.UI.HtmlControls.HtmlTextArea TxtAreaMensaje;
 
         /// <summary>
-        /// Control BtnEnviar.
+        /// Control imgWhatsApp.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button BtnEnviar;
+        protected global::System.Web.UI.WebControls.ImageButton imgWhatsApp;
+
+        /// <summary>
+        /// Control imgEmail.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton imgEmail;
 
         /// <summary>
         /// Control BtnRegresar.

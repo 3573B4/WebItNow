@@ -229,24 +229,6 @@
         <h2 class="h2 mb-3 fw-normal">Pendientes</h2>
         <br />
 
-        <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
-            <ContentTemplate>
-            <div class="row g-3 mb-3">
-                <div class="col-lg-4 col-md-4 ">
-                    <asp:TextBox ID="TxtUsu" runat="server" CssClass="form-control" placeholder="Usuario" ReadOnly="True"></asp:TextBox>
-                </div>
-                <asp:TextBox ID="TxtTpoDocumento" runat="server" CssClass="form-control" placeholder="Tipo de Documento" ReadOnly="True" Visible="false"></asp:TextBox>
-                <asp:TextBox ID="TxtUrl_Imagen" runat="server" CssClass="form-control" placeholder="Ruta del archivo" Enabled="False" Visible="false" ></asp:TextBox>
-                <div class="col-lg-7 col-md-7">
-                <asp:TextBox ID="TxtNomArchivo" runat="server" CssClass="form-control" placeholder="Archivo para descargar" ReadOnly="True"></asp:TextBox>
-                </div>
-                <div class="col-auto">
-                <asp:ImageButton ID="imgDescarga" runat="server" ImageUrl="~/Images/descargar.png" Height="35px" Width="35px" OnClick="ImgDescarga_Click" Enabled ="false" />
-                </div>
-            </div>
-            </ContentTemplate>
-        </asp:UpdatePanel>
-
         <div style="overflow-x: auto; overflow-y:hidden">
             <asp:GridView ID="GrdEstadoDocumento"  runat="server" AutoGenerateColumns="False" GridLines="None" Width="1400px"
                     AllowPaging="True" CssClass="footable" PagerStyle-CssClass="pgr" AlternatingRowStyle-CssClass="alt" 
@@ -302,6 +284,32 @@
                 <asp:Label ID="Lbl_Message" runat="server" ForeColor="Red"></asp:Label>
             </div>
         </div>
+        <br />
+        <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
+            <ContentTemplate>
+                <div class="row g-3 mb-3">
+                    <div class="col-lg-4 col-md-4 ">
+                    <asp:Label ID="LblUsu" runat="server" Text="Usuario Seleccionado" CssClass="control-label col-sm-2" Font-Size="Small"></asp:Label>
+                    </div>
+                    <div class="col-lg-7 col-md-7">
+                    <asp:Label ID="LblNomArchivo" runat="server" Text="Archivo Seleccionado" CssClass="control-label col-sm-2" Font-Size="Small"></asp:Label>
+                    </div>
+                </div>
+            <div class="row g-3 mb-3">
+                <div class="col-lg-4 col-md-4 ">
+                    <asp:TextBox ID="TxtUsu" runat="server" CssClass="form-control" ReadOnly="True"></asp:TextBox>
+                </div>
+                <asp:TextBox ID="TxtTpoDocumento" runat="server" CssClass="form-control" placeholder="Tipo de Documento" ReadOnly="True" Visible="false"></asp:TextBox>
+                <asp:TextBox ID="TxtUrl_Imagen" runat="server" CssClass="form-control" placeholder="Ruta del archivo" Enabled="False" Visible="false" ></asp:TextBox>
+                <div class="col-lg-7 col-md-7">
+                <asp:TextBox ID="TxtNomArchivo" runat="server" CssClass="form-control" ReadOnly="True"></asp:TextBox>
+                </div>
+                <div class="col-auto">
+                <asp:ImageButton ID="imgDescarga" runat="server" ImageUrl="~/Images/descargar.png" Height="35px" Width="35px" OnClick="ImgDescarga_Click" Enabled ="false" />
+                </div>
+            </div>
+            </ContentTemplate>
+        </asp:UpdatePanel>
 
         
 <%--        <div class="loading" align="center">
@@ -310,7 +318,8 @@
             <img src="loader.gif" alt="" />
         </div>--%>
 
-<%--        <div class="from-group">
+<%--        
+        <div class="from-group">
             <div class="d-grid col-6 mx-auto">
                 <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                     <ContentTemplate>
@@ -318,9 +327,11 @@
                     </ContentTemplate>
                 </asp:UpdatePanel>
             </div>
-        </div>--%>
+        </div>
+--%>
 
-<%--        <div class="from-group">
+<%--        
+        <div class="from-group">
             <div class="d-grid col-6 mx-auto">
                 <asp:UpdatePanel ID="UpdatePanel2" runat="server">
                     <ContentTemplate>
@@ -328,8 +339,8 @@
                     </ContentTemplate>
                 </asp:UpdatePanel>
             </div>
-        </div>--%>
-
+        </div>
+--%>
         <br />
         <div class="from-group">
             <div class="d-grid col-6 mx-auto">

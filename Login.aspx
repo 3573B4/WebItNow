@@ -12,7 +12,7 @@
     <div class="container col-md-4">
         <h2 class="h2 mb-3 fw-normal"> Iniciar Sesión</h2>
         <div class="form-group">
-            <asp:Label ID="LblUsu" runat="server" Text="Usuario" CssClass="control-label co-sm-2"></asp:Label>
+            <asp:Label ID="LblUsu" runat="server" Text="Usuario" CssClass="control-label col-sm-2"></asp:Label>
             <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server"   
                 ControlToValidate="TxtUsu" ErrorMessage="*" ForeColor="Red">
                 </asp:RequiredFieldValidator>

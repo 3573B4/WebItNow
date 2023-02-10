@@ -29,6 +29,7 @@
 
     </script>
 </asp:Content>
+
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
@@ -55,10 +56,15 @@
             <asp:Button ID="BtnEnviar" runat="server" Text="Enviar" CssClass="btn btn-primary" OnClick="BtnEnviar_Click"/>
         </div>--%>
 
-        <div class="form-group mt-3">
+        <div class="form-group mt-4">
             <div class="col-12">                
-                <div class="d-grid gap-2 d-flex justify-content-center">
-                    <asp:Button ID="BtnEnviar" runat="server" Text="Enviar"  Font-Bold="True"  CssClass="btn btn-primary me-md-2" OnClick="BtnEnviar_Click"/>
+                <div class="d-grid gap-4 d-flex justify-content-center">
+                    <%--CssClass="btn btn-outline-success p-1"--%>
+                    <asp:ImageButton ID="imgWhatsApp" runat="server" ImageUrl="~/Images/whatsapp-logo_icon.png"  Height ="45px" Width="45px" OnClick="BtnEnviarWhats_Click" Enabled ="false" />
+                    <%--CssClass="btn btn-outline-primary p-1"--%> 
+                    <asp:ImageButton ID="imgEmail" runat="server" ImageUrl="~/Images/email-icon.png" Height="45px" Width="45px" OnClick="BtnEnviarEmail_Click" />
+
+                    <%--<asp:Button ID="BtnEnviar" runat="server" Text="Enviar"  Font-Bold="True"  CssClass="btn btn-primary me-md-2" OnClick="BtnEnviar_Click"/>--%>
                     <asp:Button ID="BtnRegresar" runat="server" Font-Bold="True" Text="Regresar" OnClick="BtnRegresar_Click" CssClass="btn btn-outline-primary"/>
                 </div>
             </div>
