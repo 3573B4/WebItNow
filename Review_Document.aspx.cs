@@ -382,7 +382,7 @@ namespace WebItNow
                 DownloadFromAzure(sFilename, sSubdirectorio);
 
                 string mensaje = "window.open('Descargas.aspx');";
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "OPEN_WINDOW", mensaje, true);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "OpenWindow", mensaje, true);
 
                 //  imgDescarga.Enabled = false;
 

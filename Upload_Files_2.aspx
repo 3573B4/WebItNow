@@ -80,7 +80,7 @@
             /*background: #fff;*/
 
             z-index: 98;
-            background-color: #aaa; 
+            background-color: #fafafa; 
         /*filter: alpha(opacity=80);*/ 
             opacity: 0.8; 
         }
