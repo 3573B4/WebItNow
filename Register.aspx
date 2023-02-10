@@ -46,6 +46,8 @@
             <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server"   
                 ControlToValidate="TxtEmail" ErrorMessage="*" ForeColor="Red">
                 </asp:RequiredFieldValidator>
+                <asp:RegularExpressionValidator id="regEmail" ControlToValidate="TxtEmail" Text="" Runat="server" 
+                                                ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" /> 
             <div class="col-sm-12">
                 <asp:TextBox ID="TxtEmail" runat="server" CssClass="form-control" placeholder="Ingresa tu e-mail" MaxLength="50" OnTextChanged="TxtEmail_TextChanged" AutoPostBack="true" TextMode="Email"></asp:TextBox>
             </div>

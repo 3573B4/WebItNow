@@ -107,6 +107,8 @@ namespace WebItNow
 
                         Response.End();
                     //  HttpContext.Current.ApplicationInstance.CompleteRequest();
+
+                        File.Delete(directorioURL);
                     }
                     else
                     {
