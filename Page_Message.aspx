@@ -40,7 +40,7 @@
 
         <div class="form-group">
             <div class="d-grid col-4 mx-auto py-1">
-                <asp:Label ID="lblUsuario" runat="server" Font-Size="XX-Large" ></asp:Label>
+                <asp:Label ID="lblUsuario" runat="server" Font-Size="X-Large" ></asp:Label>
             </div>
         </div>
 
