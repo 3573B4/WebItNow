@@ -22,27 +22,31 @@ namespace WebItNow
                 string sUsuario = Convert.ToString(Session["IdUsuario"]);
                 string sAsunto = Convert.ToString(Session["Asunto"]);
 
-                lblUsuario.Text = sUsuario;
+             // lblUsuario.Text = sUsuario;
                 BtnRegresar.Visible = false;
 
                 if (sAsunto == "Documento Enviado")
                 {
                     BtnRegresar.Visible = false;
-                    LblMotivo.Text = "Motivo de Enviado";
+                    //LblMotivo.Text = "Motivo de Enviado";
+                    LblMotivo.Text = "Deseas agregar algún comentario o instrucción adicional al documento.";
                 }
                 else if (sAsunto == "Solicitud Documento")
                 {
                     BtnRegresar.Visible = false;
-                    LblMotivo.Text = "Motivo de Solicitud";
+                    LblMotivo.Text = "Agregar comentario o instrucción especifica:";
                 }
 
                 if (sAsunto == "Documento Aceptado")
                 {
-                    LblMotivo.Text = "Motivo de Aceptado";
+                    //LblMotivo.Text = "Motivo de Aceptado";
+                    LblMotivo.Text = "Agregar observación o comentario.";
+
                 }
                 else if (sAsunto == "Documento Rechazado")
                 {
-                    LblMotivo.Text = "Motivo de Rechazo";
+                    //LblMotivo.Text = "Motivo de Rechazo";
+                    LblMotivo.Text = "Indique el motivo por el cual fue rechazado el archivo.";
                 }
 
             }

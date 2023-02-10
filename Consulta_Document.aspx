@@ -39,12 +39,18 @@
 <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional" >
     <ContentTemplate>
         <div class="container col-lg-6">
-            <h2 class="h2 mb-3 fw-normal mt-5">Consultas de Documentos</h2>
+            <h2 class="h2 mb-3 fw-normal mt-5">Reporte de archivos por estatus</h2>
             
-            <div class="form-group">
+<%--            <div class="form-group">
                 <div class="d-grid col-4 mx-auto py-1">
                     <asp:Label ID="lblUsuario" runat="server" Font-Size="XX-Large" ></asp:Label>
                 </div>
+            </div>--%>
+
+            <div class="form-group mb-4">
+                <div class="d-grid col-12 justify-content-center mx-auto py-1">
+                    <asp:Label ID="lblUsuario" runat="server" Font-Size="X-Large" ></asp:Label>
+                 </div>
             </div>
 
             <div class="form-floating my-3">
@@ -70,12 +76,12 @@
                         </asp:TemplateField>
                         <asp:BoundField DataField="IdUsuario" HeaderText="Usuario" />
                         <asp:BoundField DataField="Referencia" HeaderText="Referencia" />
-                        <asp:BoundField DataField="Fec_Envio" HeaderText="Fecha Envio" />
-                        <asp:BoundField DataField="Nom_Imagen" HeaderText="Archivo" />
-                        <asp:BoundField DataField="Desc_status" HeaderText="Status" />
+                        <asp:BoundField DataField="Fec_Envio" HeaderText="Recepción" />
+                        <%--<asp:BoundField DataField="Nom_Imagen" HeaderText="Archivo" />--%>
+                        <asp:BoundField DataField="Desc_status" HeaderText="Estatus" />
                         <asp:BoundField DataField="Descripcion" HeaderText="Tipo de Documento" />
-                        <asp:BoundField DataField="Fec_Aceptado" HeaderText="Fecha Aceptado" />
-                        <asp:BoundField DataField="Fec_Rechazado" HeaderText="Fecha Rechazo" />
+                        <asp:BoundField DataField="Fec_Aceptado" HeaderText="Aprobación" />
+                        <asp:BoundField DataField="Fec_Rechazado" HeaderText="Rechazo" />
                         <asp:BoundField DataField="Url_Imagen" HeaderText="Directorio" />
                         <asp:BoundField DataField="IdDescarga" HeaderText="Descargas" />
                     </Columns>

@@ -224,9 +224,9 @@
     <ContentTemplate>
     <br />
     <div class="container col-md-6">
-        <h2 class="h2 mb-3 fw-normal">Validación de Documentos</h2>
+        <h2 class="h2 mb-3 fw-normal">Aprobación de Documentos</h2>
         <br />
-        <h2 class="h2 mb-3 fw-normal">Pendientes</h2>
+        <h2 class="h2 mb-5 fw-normal">Archivos Recibidos</h2>
         <br />
 
         <div style="overflow-x: auto; overflow-y:hidden">
@@ -249,10 +249,10 @@
                             </ItemTemplate> 
                         </asp:TemplateField>
 
-                        <asp:BoundField DataField="IdUsuario" HeaderText="Id. Usuario" >
+                        <asp:BoundField DataField="IdUsuario" HeaderText="Usuario" >
                         <ItemStyle Width="600px" /> 
                         </asp:BoundField>
-                        <asp:BoundField DataField="Desc_Status" HeaderText="Id. Status" >
+                        <asp:BoundField DataField="Desc_Status" HeaderText="Estatus" >
                         <ItemStyle Width="400px" />
                         </asp:BoundField>
                         <asp:BoundField DataField="Descripcion" HeaderText="Tipo de Documento" >
@@ -289,10 +289,13 @@
             <ContentTemplate>
                 <div class="row g-3 mb-3">
                     <div class="col-lg-4 col-md-4 ">
-                    <asp:Label ID="LblUsu" runat="server" Text="Usuario Seleccionado" CssClass="control-label col-sm-2" Font-Size="Small"></asp:Label>
+                        <asp:Label ID="LblUsu" runat="server" Text="Usuario Seleccionado" CssClass="control-label col-sm-2" Font-Size="Small"></asp:Label>
                     </div>
-                    <div class="col-lg-7 col-md-7">
-                    <asp:Label ID="LblNomArchivo" runat="server" Text="Archivo Seleccionado" CssClass="control-label col-sm-2" Font-Size="Small"></asp:Label>
+                    <div class="col-lg-6 col-md-6">
+                        <asp:Label ID="LblNomArchivo" runat="server" Text="Archivo Seleccionado" CssClass="control-label col-sm-2" Font-Size="Small"></asp:Label>
+                    </div>
+                    <div class="col-lg-2 col-md-2 text-end">
+                        <asp:Label ID="LblDescarga" runat="server" Text="Descargar" CssClass="control-label col-sm-2" Font-Size="Small"></asp:Label>
                     </div>
                 </div>
             <div class="row g-3 mb-3">

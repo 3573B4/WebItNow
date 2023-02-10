@@ -23,7 +23,7 @@ namespace WebItNow
                 getDocsUsuario();
 
                 string userId = Convert.ToString(Session["IdUsuario"]);
-                lblUsuario.Text = userId;
+                lblUsuario.Text = "Bienvenido: " + userId;
             }
 
             //* * Agrega THEAD y TBODY a GridView.

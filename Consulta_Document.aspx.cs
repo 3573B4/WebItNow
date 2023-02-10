@@ -24,7 +24,7 @@ namespace WebItNow
 
 
                 string userId = Convert.ToString(Session["IdUsuario"]);
-                lblUsuario.Text = userId;
+                lblUsuario.Text = "Bienvenido: " + userId;
             }
 
             getCamposGV();

@@ -30,9 +30,12 @@
     <br />
 
 <div class="container col-md-4">
-        <h2 class="h2 mb-3 fw-normal">Registrar</h2>
-        <div class="form-group">
-            <asp:Label ID="LblUsu" runat="server" Text="Usuario" CssClass="control-label co-sm-3" Font-Bold="False"></asp:Label>
+        <h2 class="h2 mb-3 fw-normal">Alta de Usuario</h2>
+        <div class="form-group mt-5">
+            <asp:Label ID="LblDesc" runat="server" Text="Estimado cliente, favor de proporcionar un nombre de usuario con una longitud de 6 a 15 caracteres. Un correo electrónico donde recibirás las notificaciones del sistema y tu contraseña de acceso." CssClass="control-label co-sm-2" Font-Size="Small" Font-Bold="False"></asp:Label>
+        </div>
+        <div class="form-group mt-4">
+            <asp:Label ID="LblUsu" runat="server" Text="Usuario" CssClass="control-label co-sm-2" Font-Size="Small" Font-Bold="False"></asp:Label>
             <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server"   
                 ControlToValidate="TxtUsu" ErrorMessage="*" ForeColor="Red">
                 </asp:RequiredFieldValidator>
@@ -42,7 +45,7 @@
         </div>
 
         <div class="form-group">
-            <asp:Label ID="LblEmail" runat="server" Text="Correo electrónico" CssClass="control-label col-sm-2"></asp:Label>
+            <asp:Label ID="LblEmail" runat="server" Text="Correo electrónico" CssClass="control-label col-sm-2" Font-Size="Small"></asp:Label>
             <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server"   
                 ControlToValidate="TxtEmail" ErrorMessage="*" ForeColor="Red">
                 </asp:RequiredFieldValidator>
@@ -54,7 +57,7 @@
         </div>        
 
         <div class="form-group">
-            <asp:Label ID="LblPass" runat="server" Text="Contraseña" CssClass="control-label col-sm-2"></asp:Label>
+            <asp:Label ID="LblPass" runat="server" Text="Contraseña" CssClass="control-label col-sm-2" Font-Size="Small"></asp:Label>
             <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server"   
                 ControlToValidate="TxtPass" ErrorMessage="*" ForeColor="Red">
                 </asp:RequiredFieldValidator>
@@ -62,13 +65,19 @@
                 <asp:TextBox ID="TxtPass" runat="server" CssClass="form-control" placeholder="Crea una contraseña" onkeyup="mayus(this);" MaxLength="16" TextMode="Password"></asp:TextBox>
             </div>
         </div>
-
+        <br />
+        <div class="form-group">
+            <div class="col-sm-12">
+                <asp:CheckBox ID="chkPrivacidad" runat="server" Text="&nbsp;&nbsp;Acepto el Aviso de Privacidad" Font-Size="Small" />
+            </div>
+        </div>
+        <br />
         <div class="form-group">
             <div class="d-grid col-6 mx-auto">
                 <asp:Label ID="Lbl_Message" runat="server" ForeColor="Red" Visible="False"  Width="280px" ></asp:Label>
             </div>
         </div>        
-        
+        <br />
         <div class="form-group mt-3">
             <div class="d-grid col-6 mx-auto">
                 <asp:Button ID="BtnEnviar" runat="server" Text="Registrar" Font-Bold="True" OnClick="BtnEnviar_Click" CssClass="btn btn-primary" />

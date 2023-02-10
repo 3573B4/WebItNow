@@ -37,15 +37,17 @@
     <ContentTemplate>
 
     <div class="container col-md-4">
-        <h2 class="h2 mb-3 fw-normal">Pantalla de mensaje</h2>
+        <h2 class="h2 mt-3 mb-5 fw-normal">Tu petición a sido procesada.</h2>
 
+<%--        
         <div class="form-group">
             <div class="d-grid col-4 mx-auto py-1">
                 <asp:Label ID="lblUsuario" runat="server" Font-Size="X-Large" ></asp:Label>
             </div>
         </div>
+--%>
 
-        <div class="form-group my-3">
+        <div class="form-group my-3 ">
             <asp:Label ID="LblMotivo" runat="server" Text="" Font-Size="Large"></asp:Label>
         </div>
 

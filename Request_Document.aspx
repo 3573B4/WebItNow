@@ -29,9 +29,9 @@
     <br />
 
 <div class="container col-md-4">
-        <h2 class="h2 mb-3 fw-normal">Solicitud de Documento</h2>
+        <h2 class="h2 mb-5 fw-normal">Solicitud de Documentos</h2>
         <div class="form-group mt-3">
-            <asp:Label ID="LblNom" runat="server" Text="Nombre" CssClass="control-label co-sm-3" Font-Bold="False"></asp:Label>
+            <asp:Label ID="LblNom" runat="server" Text="Nombre de Cliente o destinatario:" CssClass="control-label co-sm-3" Font-Bold="False"></asp:Label>
             <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server"   
                 ControlToValidate="TxtNom" ErrorMessage="*" ForeColor="Red">
                 </asp:RequiredFieldValidator>
@@ -41,7 +41,7 @@
         </div>
 
         <div class="form-group mt-3">
-            <asp:Label ID="LblEmail" runat="server" Text="Correo electrónico" CssClass="control-label col-sm-2"></asp:Label>
+            <asp:Label ID="LblEmail" runat="server" Text="Correo electrónico:" CssClass="control-label col-sm-2"></asp:Label>
             <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server"   
                 ControlToValidate="TxtEmail" ErrorMessage="*" ForeColor="Red">
                 </asp:RequiredFieldValidator>
@@ -51,7 +51,7 @@
         </div>        
 
         <div class="form-group mt-3">
-            <asp:Label ID="LblReferencia" runat="server" Text="Referencia" CssClass="control-label col-sm-2"></asp:Label>
+            <asp:Label ID="LblReferencia" runat="server" Text="Referencia:" CssClass="control-label col-sm-2"></asp:Label>
             <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server"   
                 ControlToValidate="TxtReferencia" ErrorMessage="*" ForeColor="Red">
                 </asp:RequiredFieldValidator>
@@ -61,7 +61,7 @@
         </div>
 
         <div class="form-group mt-3">
-            <asp:Label ID="LblTpoDocumento" runat="server" Text="Tipo de Documento" CssClass="control-label col-sm-2"></asp:Label>
+            <asp:Label ID="LblTpoDocumento" runat="server" Text="Tipo de documento a solicitar:" CssClass="control-label col-sm-2"></asp:Label>
         </div>
 
         <div class="form-floating">
@@ -79,7 +79,7 @@
         
         <div class="form-group mt-3">
             <div class="d-grid col-6 mx-auto">
-                <asp:Button ID="BtnEnviar" runat="server" Text="Solicitud" Font-Bold="True" OnClick="BtnEnviar_Click" CssClass="btn btn-primary" />
+                <asp:Button ID="BtnEnviar" runat="server" Text="Solicitar" Font-Bold="True" OnClick="BtnEnviar_Click" CssClass="btn btn-primary" />
             </div>
         </div>
         <div class="from-group">

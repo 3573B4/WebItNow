@@ -12,7 +12,7 @@
     <div class="container col-md-4">
         <h2 class="h2 mb-3 fw-normal"> Iniciar Sesión</h2>
         <div class="form-group">
-            <asp:Label ID="LblUsu" runat="server" Text="Usuario" CssClass="control-label col-sm-2"></asp:Label>
+            <asp:Label ID="LblUsu" runat="server" Text="Usuario" CssClass="control-label col-sm-2" Font-Size="Small"></asp:Label>
             <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server"   
                 ControlToValidate="TxtUsu" ErrorMessage="*" ForeColor="Red">
                 </asp:RequiredFieldValidator>
@@ -21,7 +21,7 @@
             </div>
         </div>
         <div class="form-group">
-            <asp:Label ID="LblPass" runat="server" Text="Contraseña" CssClass="control-label col-sm-2"></asp:Label>
+            <asp:Label ID="LblPass" runat="server" Text="Contraseña" CssClass="control-label col-sm-2" Font-Size="Small"></asp:Label>
             <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server"   
                 ControlToValidate="TxtPass" ErrorMessage="*" ForeColor="Red">
                 </asp:RequiredFieldValidator>
@@ -38,7 +38,7 @@
                 </div>
         </div>
         <div class="from-group">
-            <asp:Label ID="lblVerificacion" runat="server" CssClass="control-label col-sm-2" Text="Código de verificación" ></asp:Label>
+            <asp:Label ID="lblVerificacion" runat="server" CssClass="control-label col-sm-2" Text="Código de verificación" Font-Size="Small"></asp:Label>
             <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server"   
                 ControlToValidate="txtVerificationCode" ErrorMessage="*" ForeColor="Red">
                 </asp:RequiredFieldValidator>

@@ -32,7 +32,7 @@
     <div class="container col-md-4">
         <h2 class="h2 mb-3 fw-normal">Recuperación Contraseña</h2>
         <div class="form-group">
-            <asp:Label ID="LblEmail" runat="server" Text="Correo electrónico" CssClass="control-label col-sm-2"></asp:Label>
+            <asp:Label ID="LblEmail" runat="server" Text="Correo electrónico" CssClass="control-label col-sm-2" Font-Size="Small"></asp:Label>
             <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server"   
                 ControlToValidate="TxtEmail" ErrorMessage="*" ForeColor="Red">
                 </asp:RequiredFieldValidator>
@@ -52,7 +52,7 @@
             </div>
         </div>--%>
         <div class="form-group">
-            <asp:Label ID="LblPass" runat="server" Text="Contraseña" CssClass="control-label col-sm-2"></asp:Label>
+            <asp:Label ID="LblPass" runat="server" Text="Contraseña" CssClass="control-label col-sm-2" Font-Size="Small"></asp:Label>
             <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server"   
                 ControlToValidate="TxtPass" ErrorMessage="*" ForeColor="Red">
             </asp:RequiredFieldValidator>
@@ -61,7 +61,7 @@
             </div>
         </div>
         <div class="form-group">
-            <asp:Label ID="Label1" runat="server" Text="Confirmar contraseña" CssClass="control-label col-sm-2"></asp:Label>
+            <asp:Label ID="Label1" runat="server" Text="Confirmar contraseña" CssClass="control-label col-sm-2" Font-Size="Small"></asp:Label>
             <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server"   
                 ControlToValidate="TxtConfPass" ErrorMessage="*" ForeColor="Red">
                 </asp:RequiredFieldValidator>

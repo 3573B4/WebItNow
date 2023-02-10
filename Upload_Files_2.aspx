@@ -166,11 +166,12 @@
 <asp:UpdatePanel ID="UpdatePanel" runat="server">
     <ContentTemplate>
     <div class="container col-md-4">
-        <h2 class="h2 mb-3 fw-normal">Carga segura de documentos</h2>
+        <h2 class="h2 mb-3 fw-normal">CARGA SEGURA DE DOCUMENTOS</h2>
         <br />
-        <div class="form-group">
-            <div class="d-grid col-4 mx-auto py-1">
-                <asp:Label ID="lblUsuario" runat="server" Font-Size="XX-Large" ></asp:Label>
+
+        <div class="form-group ">
+            <div class="d-grid col-12 justify-content-center mx-auto py-1">
+                <asp:Label ID="lblUsuario" runat="server" Font-Size="X-Large" ></asp:Label>
             </div>
         </div>
 
@@ -193,7 +194,7 @@
         <br />
 
         <div class="form-group">
-            <asp:Label ID="LblInstrucciones" runat="server" Text="Instrucciones" CssClass="control-label co-sm-3 " Font-Bold="False"></asp:Label>
+            <asp:Label ID="LblInstrucciones" runat="server" Text="Instrucciones" CssClass="control-label co-sm-2" Font-Size="Small" Font-Bold="False"></asp:Label>
             <div class="col-sm-12">
                 <asp:TextBox ID="TxtDescrpBrev" runat="server" CssClass="form-control mt-2" placeholder="Usuario" ReadOnly="True"></asp:TextBox>
             </div>
@@ -328,6 +329,7 @@
         <div class="center">
     <%--    <asp:Image ID="imgLoading" runat="server" ImageUrl="Images\ajax-loader.gif" Width="34px" />Processing...  --%>
             <img alt="" src="Images\ajax-loader.gif" />
+            Espera un momento tu archivo está siendo procesado y protegido...
         </div>
     </div>
     </ProgressTemplate>

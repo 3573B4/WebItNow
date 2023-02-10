@@ -37,10 +37,10 @@
     <ContentTemplate>
     
     <div class="container col-md-8">
-        <h2 class="h2 mb-3 fw-normal">Carga segura de documentos</h2>
+        <h2 class="h2 mb-3 fw-normal">CARGA SEGURA DE DOCUMENTOS</h2>
 
-        <div class="form-group">
-            <div class="d-grid col-2 mx-auto py-1">
+        <div class="form-group ">
+            <div class="d-grid col-12 justify-content-center mx-auto py-1">
                 <asp:Label ID="lblUsuario" runat="server" Font-Size="X-Large" ></asp:Label>
             </div>
         </div>
@@ -56,9 +56,9 @@
                         PageSize="10" OnPageIndexChanging="grdEstadoDocs_OnPageIndexChanging" OnRowDataBound="grdEstadoDocs_RowDataBound"  >
                         <AlternatingRowStyle CssClass="table" />
                         <Columns>
-                            <asp:BoundField DataField="Descripcion" HeaderText="Tipo Documento" />
-                            <asp:BoundField DataField="Nom_Imagen" HeaderText="Documento" />
-                            <asp:BoundField DataField="Desc_status" HeaderText="Status" />
+                            <asp:BoundField DataField="Descripcion" HeaderText="Documento" />
+                            <asp:BoundField DataField="Nom_Imagen" HeaderText="Nombre de archivo" />
+                            <asp:BoundField DataField="Desc_status" HeaderText="Estatus" />
 
                         <asp:TemplateField>
                             <ItemTemplate>
