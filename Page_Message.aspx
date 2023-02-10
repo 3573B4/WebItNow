@@ -37,12 +37,17 @@
 
     <div class="container col-md-4">
         <h2 class="h2 mb-3 fw-normal">Pantalla de mensaje</h2>
-        <div class="form-group my-3">
-            <asp:Label ID="lblUsuario" runat="server" Text=""></asp:Label>
+
+        <div class="form-group">
+            <div class="d-grid col-4 mx-auto py-1">
+                <asp:Label ID="lblUsuario" runat="server" Font-Size="XX-Large" ></asp:Label>
+            </div>
         </div>
+
         <div class="form-group my-3">
             <asp:Label ID="LblMotivo" runat="server" Text="" Font-Size="Large"></asp:Label>
         </div>
+
         <div class="form-group my-3">
             <textarea rows="6" cols="64" id="TxtAreaMensaje" runat="server" class="form-control"/>
         </div>
