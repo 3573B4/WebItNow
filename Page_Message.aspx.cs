@@ -65,8 +65,29 @@ namespace WebItNow
 
                 string sUsuario = Convert.ToString(Session["IdUsuario"]);
                 string sAsunto = Convert.ToString(Session["Asunto"]);
+                string sPredeterminado = string.Empty;
 
-                var email = new EnvioEmail();
+                if (sAsunto == "Documento Aceptado")
+                {
+                    sPredeterminado = "Estimado cliente su archivo fue aprobado por nuestro personal en nuestra plataforma de carga segura. Gracias.";
+                }
+                else if (sAsunto == "Documento Rechazado")
+                {
+                    sPredeterminado = "Estimado cliente. Lamentamos informarle que el archivo cargado en nuestro sistema no cumple con los parametros establecidos, por favor reintente subir su archivo en nuestro sistema de carga segura.";
+                }
+                else if (sAsunto == "Documento Enviado")
+                {
+                    sPredeterminado = "Estimado cliente. Su archivo fue cargado exitosamente en nuestra plataforma de carga segura. A la brevedad sera revisado y validado por alguno de nuestros operadores";
+                }
+
+
+
+
+                    var email = new EnvioEmail();
+
+
+                TxtAreaMensaje.Value = sPredeterminado + TxtAreaMensaje.Value;
+
                 if (sAsunto != "Solicitud Documento")
                 {
                     string sEmail = email.CorreoElectronico(sUsuario);

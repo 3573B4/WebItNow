@@ -329,7 +329,6 @@
         <div class="center">
     <%--    <asp:Image ID="imgLoading" runat="server" ImageUrl="Images\ajax-loader.gif" Width="34px" />Processing...  --%>
             <img alt="" src="Images\ajax-loader.gif" />
-            Espera un momento tu archivo está siendo procesado y protegido...
         </div>
     </div>
     </ProgressTemplate>
