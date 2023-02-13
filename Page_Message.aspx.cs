@@ -29,23 +29,27 @@ namespace WebItNow
                 {
                     BtnRegresar.Visible = false;
                     //LblMotivo.Text = "Motivo de Enviado";
+                    lblHeader.Text = "Tu petición a sido procesada.";
                     LblMotivo.Text = "Deseas agregar algún comentario o instrucción adicional al documento.";
                 }
                 else if (sAsunto == "Solicitud Documento")
                 {
                     BtnRegresar.Visible = false;
+                    lblHeader.Text = "Tu petición a sido procesada.";
                     LblMotivo.Text = "Agregar comentario o instrucción especifica:";
                 }
 
                 if (sAsunto == "Documento Aceptado")
                 {
                     //LblMotivo.Text = "Motivo de Aceptado";
+                    lblHeader.Text = "Tu petición a sido procesada.";
                     LblMotivo.Text = "Agregar observación o comentario.";
 
                 }
                 else if (sAsunto == "Documento Rechazado")
                 {
                     //LblMotivo.Text = "Motivo de Rechazo";
+                    lblHeader.Text = "Tu petición a sido procesada.";
                     LblMotivo.Text = "Indique el motivo por el cual fue rechazado el archivo.";
                 }
 
@@ -69,15 +73,15 @@ namespace WebItNow
 
                 if (sAsunto == "Documento Aceptado")
                 {
-                    sPredeterminado = "Estimado cliente su archivo fue aprobado por nuestro personal en nuestra plataforma de carga segura. Gracias.";
+                    sPredeterminado = "Estimado cliente su archivo fue aprobado por nuestro personal en nuestra plataforma de carga segura. Gracias. ";
                 }
                 else if (sAsunto == "Documento Rechazado")
                 {
-                    sPredeterminado = "Estimado cliente. Lamentamos informarle que el archivo cargado en nuestro sistema no cumple con los parametros establecidos, por favor reintente subir su archivo en nuestro sistema de carga segura.";
+                    sPredeterminado = "Estimado cliente. Lamentamos informarle que el archivo cargado en nuestro sistema no cumple con los parametros establecidos, por favor reintente subir su archivo en nuestro sistema de carga segura. ";
                 }
                 else if (sAsunto == "Documento Enviado")
                 {
-                    sPredeterminado = "Estimado cliente. Su archivo fue cargado exitosamente en nuestra plataforma de carga segura. A la brevedad sera revisado y validado por alguno de nuestros operadores";
+                    sPredeterminado = "Estimado cliente. Su archivo fue cargado exitosamente en nuestra plataforma de carga segura. A la brevedad sera revisado y validado por alguno de nuestros operadores. ";
                 }
 
 

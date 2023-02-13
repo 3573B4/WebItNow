@@ -134,7 +134,7 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary" data-bs-theme="dark">
+    <nav class="navbar navbar-expand-lg" style="background-color:aquamarine;">
         <div class="container-fluid">
             <a class="navbar-brand" href="Menu.aspx">&nbsp</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -149,7 +149,7 @@
                             <a class="nav-link" href="#">Link</a>
                             </li>   --%>
                     <li class="nav-item dropdown my-1">
-                        <a class="nav-link btn btn-primary dropdown-toggle text-start" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="nav-link btn dropdown-toggle text-start" style="background-color:aquamarine;" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <font size="4">Documentos</font>
                         </a>
                         <ul class="dropdown-menu">
@@ -160,9 +160,8 @@
                             <li><a class="dropdown-item" href="Consulta_Document.aspx">Consultas</a></li>
                         </ul>
                     </li>
-                    <li class="nav-item my-1">
-                        <a class="nav-link btn btn-primary text-start" href="Login.aspx">
-                            
+                    <li class="nav-item my-1 mx-1">
+                        <a class="nav-link btn text-start" style="background-color:aquamarine;" href="Login.aspx">
                             <font size="4">Salir</font>
                             <%--<asp:ImageButton ID="ImgSalir" runat="server" ImageUrl="~/Images/logout-d.png" Height="45px" Width="52px" OnClick="ImgSalir_Click" CssClass="btn btn-primary my-1"/>--%>
                         </a>

@@ -13,6 +13,7 @@
     <meta http-equiv="Cache-Control" content="no-cache" />
     <meta http-equiv="Pragma" content="no-cache" />
     <meta http-equiv="Expires" content="0" />
+    <meta name="description" content="@Html.Raw(ViewBag.description)" />
 
     <script language="javascript" type="text/javascript">
 
@@ -117,7 +118,7 @@
          <div id="topContent" >
             <!-- <a href="Default.aspx">Control De Horas</a> -->
             <div id="banners125">
-                <asp:Image ID="imgBanner" Width="100%" Height="80px" runat="server" ImageUrl="~/Images/banner_codise.png" />
+                <asp:Image ID="imgBanner" Width="100%" Height="120px" runat="server" ImageUrl="~/Images/banner_codise.png" />
             </div>
 
 <%--        
