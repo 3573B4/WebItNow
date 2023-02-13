@@ -327,8 +327,8 @@
     <ProgressTemplate>
     <div id="divImage" class ="loading">
         <div class="center">
-    <%--    <asp:Image ID="imgLoading" runat="server" ImageUrl="Images\ajax-loader.gif" Width="34px" />Processing...  --%>
-            <img alt="" src="Images\ajax-loader.gif" />
+    <%--    <asp:Image ID="imgLoading" runat="server" ImageUrl="Images\ajax-loader.gif" Width="34px" />  --%>
+            <img alt="Processing..." src="Images\ajax-loader.gif" />
         </div>
     </div>
     </ProgressTemplate>

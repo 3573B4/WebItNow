@@ -210,16 +210,6 @@
 
 </script>
     
-<%--    <asp:UpdateProgress ID="UpdateProgress1" runat="server" AssociatedUpdatePanelID="UpdatePanel1" DynamicLayout="true">
-        <ProgressTemplate>
-        <div class="overlay" />
-            <div class="overlayContent">
-                <h2>Loading...</h2>
-                <img src="Images/ajax-loader.gif" alt="Loading" border="1" />
-            </div>
-        </ProgressTemplate>
-    </asp:UpdateProgress>--%>
-
 <asp:UpdatePanel ID="UpdatePanel" runat="server" >
     <ContentTemplate>
     <br />
@@ -469,11 +459,21 @@
     <ProgressTemplate>
     <div id="divImage" class ="loading">
         <div class="center">
-    <%--    <asp:Image ID="imgLoading" runat="server" ImageUrl="Images\ajax-loader.gif" Width="34px" />Processing...  --%>
-            <img alt="" src="Images\ajax-loader.gif" />
+    <%--    <asp:Image ID="imgLoading" runat="server" ImageUrl="Images\ajax-loader.gif" Width="34px" />  --%>
+            <img alt="Processing..." src="Images\ajax-loader.gif" />
         </div>
     </div>
     </ProgressTemplate>
 </asp:UpdateProgress>
-
+<%--    
+    <asp:UpdateProgress ID="UpdateProgress1" runat="server" AssociatedUpdatePanelID="UpdatePanel1" DynamicLayout="true">
+        <ProgressTemplate>
+        <div class="overlay" />
+            <div class="overlayContent">
+                <h2>Loading...</h2>
+                <img src="Images/ajax-loader.gif" alt="Loading" border="1" />
+            </div>
+        </ProgressTemplate>
+    </asp:UpdateProgress>
+--%>
 </asp:Content>
