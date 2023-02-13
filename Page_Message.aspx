@@ -49,7 +49,7 @@
 --%>
 
         <div class="form-group my-3 ">
-            <asp:Label ID="LblMotivo" runat="server" Text="" Font-Size="Large"></asp:Label>
+            <asp:Label ID="LblMotivo" runat="server" Text="" Font-Size="Medium"></asp:Label>
         </div>
 
         <div class="form-group my-3">

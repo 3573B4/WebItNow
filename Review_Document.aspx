@@ -242,6 +242,9 @@
                         <asp:BoundField DataField="IdUsuario" HeaderText="Usuario" >
                         <ItemStyle Width="600px" /> 
                         </asp:BoundField>
+                        <asp:BoundField DataField="Referencia" HeaderText="Referencia" >
+                        <ItemStyle Width="400px" /> 
+                        </asp:BoundField>
                         <asp:BoundField DataField="Desc_Status" HeaderText="Estatus" >
                         <ItemStyle Width="400px" />
                         </asp:BoundField>

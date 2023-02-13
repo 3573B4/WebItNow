@@ -274,6 +274,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="About.aspx" />
+    <Content Include="Acceso.aspx" />
     <Content Include="Captcha.aspx" />
     <Content Include="Consulta_Document.aspx" />
     <Content Include="Content\bootstrap-theme.css" />
@@ -291,6 +292,7 @@
     <Content Include="Images\email-icon.png" />
     <Content Include="Images\imgItnow.jpeg" />
     <Content Include="Images\loader.gif" />
+    <Content Include="Images\loading.gif" />
     <Content Include="Images\Spinner-1s-200px.gif" />
     <Content Include="Images\icono-Subir-Archivo-morado.png" />
     <Content Include="Images\whatsapp-logo_icon.png" />
@@ -373,6 +375,13 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ThumbGen.cs" />
+    <Compile Include="Acceso.aspx.cs">
+      <DependentUpon>Acceso.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Acceso.aspx.designer.cs">
+      <DependentUpon>Acceso.aspx</DependentUpon>
+    </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="About.aspx.cs">
       <DependentUpon>About.aspx</DependentUpon>

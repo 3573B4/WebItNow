@@ -77,17 +77,17 @@ namespace WebItNow
         protected void GrdEstadoDocumento_SelectedIndexChanged(object sender, EventArgs e)
         {
             TxtUsu.Text = Server.HtmlDecode(GrdEstadoDocumento.SelectedRow.Cells[2].Text); 
-            TxtNomArchivo.Text = Server.HtmlDecode(GrdEstadoDocumento.SelectedRow.Cells[5].Text);
-            TxtUrl_Imagen.Text = Server.HtmlDecode(GrdEstadoDocumento.SelectedRow.Cells[6].Text);
-            TxtTpoDocumento.Text = Server.HtmlDecode(GrdEstadoDocumento.SelectedRow.Cells[7].Text);
+            TxtNomArchivo.Text = Server.HtmlDecode(GrdEstadoDocumento.SelectedRow.Cells[6].Text);
+            TxtUrl_Imagen.Text = Server.HtmlDecode(GrdEstadoDocumento.SelectedRow.Cells[7].Text);
+            TxtTpoDocumento.Text = Server.HtmlDecode(GrdEstadoDocumento.SelectedRow.Cells[8].Text);
 
             // Habilitar el boton de Descargas
             imgDescarga.Enabled = true;
 
             Variables.wUsu = Server.HtmlDecode(GrdEstadoDocumento.SelectedRow.Cells[2].Text);
-            Variables.wFileName = Server.HtmlDecode(GrdEstadoDocumento.SelectedRow.Cells[5].Text);
-            Variables.wURL_Imagen = Server.HtmlDecode(GrdEstadoDocumento.SelectedRow.Cells[6].Text);
-            Variables.wTpoDocumento = Server.HtmlDecode(GrdEstadoDocumento.SelectedRow.Cells[7].Text);
+            Variables.wFileName = Server.HtmlDecode(GrdEstadoDocumento.SelectedRow.Cells[6].Text);
+            Variables.wURL_Imagen = Server.HtmlDecode(GrdEstadoDocumento.SelectedRow.Cells[7].Text);
+            Variables.wTpoDocumento = Server.HtmlDecode(GrdEstadoDocumento.SelectedRow.Cells[8].Text);
 
 
             this.hdfValorGrid.Value = this.GrdEstadoDocumento.SelectedValue.ToString();
@@ -123,9 +123,6 @@ namespace WebItNow
 
         protected void GrdEstadoDocumento_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-
-
-
             //// Actualizar en la tabla [ITM_04] (IdDescarga = 1)
             //Update_ITM_04(sUsuario, sTipoDocumento, 1);
 
@@ -185,7 +182,7 @@ namespace WebItNow
                 // Tipo de Documento = ITM_06
                 // Status de Documento = ITM_07
 
-                string strQuery = "SELECT ed.IdUsuario, ed.Nom_Imagen, td.Descripcion, ed.IdTipoDocumento, " +
+                string strQuery = "SELECT ed.IdUsuario, ed.Referencia, ed.Nom_Imagen, td.Descripcion, ed.IdTipoDocumento, " +
                                   "       s.Descripcion as Desc_Status, ed.Url_Imagen, ed.IdDescarga " +
                                   "  FROM ITM_04 ed, ITM_06 td, ITM_07 s " +
                                   " WHERE ed.IdStatus = s.IdStatus And ed.IdTipoDocumento = td.IdTpoDocumento " +
@@ -259,9 +256,9 @@ namespace WebItNow
                 int index = row.RowIndex;
 
                 string sUsuario = GrdEstadoDocumento.Rows[index].Cells[2].Text;
-                string sTipoDocumento = GrdEstadoDocumento.Rows[index].Cells[7].Text;
+                string sTipoDocumento = GrdEstadoDocumento.Rows[index].Cells[8].Text;
 
-                GrdEstadoDocumento.Rows[index].Cells[4].Text = "Completo";
+                GrdEstadoDocumento.Rows[index].Cells[5].Text = "Completo";
 
                 // Actualizar en la tabla tbEstadoDocumento (Status = 3)
                 Update_tbEstadoDocumento(sUsuario, sTipoDocumento, 3);
@@ -303,9 +300,9 @@ namespace WebItNow
 
 
                 string sUsuario = GrdEstadoDocumento.Rows[index].Cells[2].Text;
-                string sNom_Archivo = GrdEstadoDocumento.Rows[index].Cells[5].Text;
-                string sUrl_Imagen = GrdEstadoDocumento.Rows[index].Cells[6].Text;
-                string sTipoDocumento = GrdEstadoDocumento.Rows[index].Cells[7].Text;
+                string sNom_Archivo = GrdEstadoDocumento.Rows[index].Cells[6].Text;
+                string sUrl_Imagen = GrdEstadoDocumento.Rows[index].Cells[7].Text;
+                string sTipoDocumento = GrdEstadoDocumento.Rows[index].Cells[8].Text;
 
                 string strURLFile = Server.MapPath("~/Directorio/") + sUrl_Imagen + sNom_Archivo;
 
@@ -315,7 +312,7 @@ namespace WebItNow
                 // Actualizar en la tabla [ITM_04] (IdDescarga = 0)
                 Update_ITM_04(sUsuario, sTipoDocumento, 0);
 
-                GrdEstadoDocumento.Rows[index].Cells[4].Text = "Faltante";
+                GrdEstadoDocumento.Rows[index].Cells[5].Text = "Faltante";
 
                 // Eliminar el archivo de Server.MapPath("~/Directorio/")
                 // File.Delete(strURLFile);

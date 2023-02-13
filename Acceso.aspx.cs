@@ -1,127 +1,87 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Text;
-
 using System.Data;
-using System.Data.SqlTypes;
 using System.Data.SqlClient;
-
-// using Microsoft.Office.Interop.Excel;
 
 namespace WebItNow
 {
+	public partial class Acceso : System.Web.UI.Page
+	{
+        protected void Page_PreInit(object sender, EventArgs e)
+        {
+            //Session["DownloadsPath"] = GetDownloadFolderPath();
 
-    public partial class Acceso : System.Web.UI.Page
-    {
+            if (Request.Browser.IsMobileDevice)
+                MasterPageFile = "~/Site.Mobile.Master";
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
             {
                 this.Form.Attributes.Add("autocomplete", "off");
-            }
 
+                // Permisos Usuario
+                System.Web.HttpContext.Current.Session["UsPrivilegios"] = "3";
+
+                //LblMessage.Text = (string)Session["DownloadsPath"];
+                //this.mpeMensaje.Show();
+            }
         }
 
         protected void BtnAceptar_Click(object sender, EventArgs e)
         {
-            if (TxtUsu.Text == "" || TxtPass.Text == "" || txtVerificationCode.Text == "")
+            if (TxtRef.Text == "" || TxtEmail.Text == "" || txtVerificationCode.Text == "")
             {
-                LblMessage.Text = "Debes captura Usuario / Clave / " + "<br/>" + "Código de verificación.";
-                this.mpeMensaje.Show();
+                Lbl_Message.Visible = true;
+                Lbl_Message.Text = "* Estos campos son obligatorios";
+
+                lblCaptchaMessage.Text = "";
+                //LblMessage.Text = "Debes capturar Usuario / Clave / " + "<br/>" + "Código de verificación.";
+                //this.mpeMensaje.Show();
             }
-            else if(txtVerificationCode.Text.ToLower() != Session["CaptchaVerify"].ToString())
-                {
-                    lblCaptchaMessage.Text = "Por favor ingrese el captcha correcto";
-                    lblCaptchaMessage.ForeColor = System.Drawing.Color.Red;
-                }
+            else if (txtVerificationCode.Text.ToLower() != Session["CaptchaVerify"].ToString())
+            {
+                lblCaptchaMessage.Text = "Por favor ingrese el captcha correcto";
+                lblCaptchaMessage.ForeColor = System.Drawing.Color.Red;
+            }
             else
             {
 
-                int result = Autenticar(TxtUsu.Text, TxtPass.Text);
+                string result = Autenticar(TxtRef.Text, TxtEmail.Text);
 
-                if (result >= 1)
+                if (result != null)
                 {
+
+                    // IdUsuario
+                    System.Web.HttpContext.Current.Session["IdUsuario"] = TxtRef.Text;
+                    // Permisos Usuario
+                    System.Web.HttpContext.Current.Session["UsPrivilegios"] = result;
+
                     // Permisos Usuario
                     // System.Web.HttpContext.Current.Session["UsPrivilegios"] = dr1["UsPrivilegios"].ToString().Trim();
-                    
-                    Response.Redirect("Menu.aspx");
+
+                    string UsPrivilegios = Convert.ToString(Session["UsPrivilegios"]);
+
+                    if (UsPrivilegios == "3")
+                    {
+                        Response.Redirect("Upload_Files.aspx");
+                    }
+                    else
+                    {
+                        Response.Redirect("menu.aspx");
+                    }
+
+                    Lbl_Message.Visible = false;
+
                 }
-                else if (result == 0)
+                else
                 {
-                    LblMessage.Text = "Usuario y/o Contraseña Incorrectos";
+                    // "Usuario y/o Contraseña Incorrectos";
+                    LblMessage.Text = "No fue posible iniciar sesión." + "<br/>" + "Confirme su nombre de usuario y contraseña.";
                     this.mpeMensaje.Show();
                 }
-
-                /*
-                                ConexionBD Conecta = new ConexionBD();
-                                NewMethod(Conecta);
-
-                                try
-                                {
-                                    SqlCommand cmd1 = new SqlCommand("Select * From tbUsuarios Where Usuario = '" + TxtUsu.Text + "' and UsPassword = '" + TxtPass.Text + "'", Conecta.ConectarBD);
-                                    SqlDataReader dr1 = cmd1.ExecuteReader();
-
-                                    //Application.EnableVisualStyles();
-                                    //Application.SetCompatibleTextRenderingDefault(false);
-
-                                    if (dr1.Read())
-                                    {
-                                        //           Application.Run(new Menu());
-
-                                        //Menu frm = new Menu();
-                                        //frm.Show();
-                                        //this.Visible = false;
-
-                                        // Permisos Usuario
-                                        // System.Web.HttpContext.Current.Session["UsPrivilegios"] = dr1["UsPrivilegios"].ToString().Trim();
-
-                                        if (txtVerificationCode.Text.ToLower() == Session["CaptchaVerify"].ToString())
-                                        {
-                                            Response.Redirect("Menu.aspx");
-                                        }
-                                        else
-                                        {
-                                            lblCaptchaMessage.Text = "Por favor ingrese el captcha correcto";
-                                            lblCaptchaMessage.ForeColor = System.Drawing.Color.Red;
-                                        }
-                                    }
-                                    else
-                                    {
-                                        //string message = "Usuario no Autorizado";
-
-                                        //System.Text.StringBuilder sb = new System.Text.StringBuilder();
-
-                                        //sb.Append("alert('");
-                                        //sb.Append(message);
-                                        //sb.Append("');");
-
-                                        //ClientScript.RegisterOnSubmitStatement(this.GetType(), "alert", sb.ToString());
-                                        // ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "ShowPopup", "alert('Usuario no Autorizado.');", true);
-
-                                        LblMessage.Text = "Usuario no Autorizado.";
-                                        this.mpeMensaje.Show();
-                                    }
-
-                                    cmd1.Dispose();
-                                    dr1.Dispose();
-
-                                    Conecta.Cerrar();
-                                }
-                                catch (Exception ex)
-                                {
-                                    Console.WriteLine(ex.ToString());
-                                }
-                */
             }
-        }
-
-        private static void NewMethod(ConexionBD Conecta)
-        {
-            Conecta.Abrir();
         }
 
         protected void BtnRegistrarse_Click(object sender, EventArgs e)
@@ -129,7 +89,12 @@ namespace WebItNow
             Response.Redirect("Register.aspx");
         }
 
-        public int Autenticar(String pUsuarios, String pContrasena)
+        private static void NewMethod(ConexionBD Conecta)
+        {
+            Conecta.Abrir();
+        }
+
+        public string Autenticar(String pReferencia, String pEmail)
         {
             ConexionBD Conecta = new ConexionBD();
             NewMethod(Conecta);
@@ -137,20 +102,24 @@ namespace WebItNow
             try
             {
 
-                SqlCommand cmd1 = new SqlCommand("sp_Login", Conecta.ConectarBD);
+                SqlCommand cmd1 = new SqlCommand("sp_Acceso", Conecta.ConectarBD);
                 cmd1.CommandType = CommandType.StoredProcedure;
 
-                cmd1.Parameters.AddWithValue("@usuario", pUsuarios);
-                cmd1.Parameters.AddWithValue("@password", pContrasena);
+                cmd1.Parameters.AddWithValue("@referencia", pReferencia);
+                cmd1.Parameters.AddWithValue("@email", pEmail);
 
                 SqlDataReader dr1 = cmd1.ExecuteReader();
 
-                if (dr1.Read())
+                while (dr1.Read())
                 {
-
-                    return dr1.GetInt32(0);
-                    
+                    return dr1["UsPrivilegios"].ToString().Trim();
                 }
+                //if (dr1.Read())
+                //{
+
+                //    return dr1.GetInt32(0);
+
+                //}
 
                 cmd1.Dispose();
                 dr1.Dispose();
@@ -169,8 +138,39 @@ namespace WebItNow
 
             }
 
-            return -1;
+            return null;
         }
 
+        protected void BtnClose_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        public static string GetHomePath()
+        {
+            // Not in .NET 2.0
+            // System.Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+            if (System.Environment.OSVersion.Platform == System.PlatformID.Unix)
+                return System.Environment.GetEnvironmentVariable("HOME");
+
+            return System.Environment.ExpandEnvironmentVariables("%HOMEDRIVE%%HOMEPATH%");
+        }
+
+        public static string GetDownloadFolderPath()
+        {
+            if (System.Environment.OSVersion.Platform == System.PlatformID.Unix)
+            {
+                string pathDownload = System.IO.Path.Combine(GetHomePath(), "Downloads");
+                return pathDownload;
+            }
+
+            return System.Convert.ToString(
+                Microsoft.Win32.Registry.GetValue(
+                     @"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders"
+                    , "{374DE290-123F-4565-9164-39C4925E467B}"
+                    , String.Empty
+                )
+            );
+        }
     }
 }
