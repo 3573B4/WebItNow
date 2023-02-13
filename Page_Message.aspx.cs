@@ -29,27 +29,27 @@ namespace WebItNow
                 {
                     BtnRegresar.Visible = false;
                     //LblMotivo.Text = "Motivo de Enviado";
-                    lblHeader.Text = "Tu petición a sido procesada.";
+                    lblHeader.Text = "Tu documento se encuentra procesado.";
                     LblMotivo.Text = "Deseas agregar algún comentario o instrucción adicional al documento.";
                 }
                 else if (sAsunto == "Solicitud Documento")
                 {
                     BtnRegresar.Visible = false;
-                    lblHeader.Text = "Tu petición a sido procesada.";
+                    lblHeader.Text = "Tu solicitud de archivo se encuentra en proceso.";
                     LblMotivo.Text = "Agregar comentario o instrucción especifica:";
                 }
 
                 if (sAsunto == "Documento Aceptado")
                 {
                     //LblMotivo.Text = "Motivo de Aceptado";
-                    lblHeader.Text = "Tu petición a sido procesada.";
+                    lblHeader.Text = "Documento aprobado exitosamente.";
                     LblMotivo.Text = "Agregar observación o comentario.";
 
                 }
                 else if (sAsunto == "Documento Rechazado")
                 {
                     //LblMotivo.Text = "Motivo de Rechazo";
-                    lblHeader.Text = "Tu petición a sido procesada.";
+                    lblHeader.Text = "Archivo no aprobado.";
                     LblMotivo.Text = "Indique el motivo por el cual fue rechazado el archivo.";
                 }
 
@@ -73,22 +73,22 @@ namespace WebItNow
 
                 if (sAsunto == "Documento Aceptado")
                 {
-                    sPredeterminado = "Estimado cliente su archivo fue aprobado por nuestro personal en nuestra plataforma de carga segura. Gracias. ";
+                    sPredeterminado = "Estimado cliente su archivo fue aprobado por nuestro personal en nuestra plataforma de carga segura. Gracias. \n";
                 }
                 else if (sAsunto == "Documento Rechazado")
                 {
-                    sPredeterminado = "Estimado cliente. Lamentamos informarle que el archivo cargado en nuestro sistema no cumple con los parametros establecidos, por favor reintente subir su archivo en nuestro sistema de carga segura. ";
+                    sPredeterminado = "Estimado cliente. Lamentamos informarle que el archivo cargado en nuestro sistema no cumple con los parametros establecidos, \n" + "por favor reintente subir su archivo en nuestro sistema de carga segura. \n";
                 }
                 else if (sAsunto == "Documento Enviado")
                 {
-                    sPredeterminado = "Estimado cliente. Su archivo fue cargado exitosamente en nuestra plataforma de carga segura. A la brevedad sera revisado y validado por alguno de nuestros operadores. ";
+                    sPredeterminado = "Estimado cliente. Su archivo fue cargado exitosamente en nuestra plataforma de carga segura. \n" + "A la brevedad sera revisado y validado por alguno de nuestros operadores. Muchas gracias. \n";
+                }
+                else if (sAsunto != "Solicitud Documento")
+                {
+                    sPredeterminado = "";
                 }
 
-
-
-
                     var email = new EnvioEmail();
-
 
                 TxtAreaMensaje.Value = sPredeterminado + TxtAreaMensaje.Value;
 
@@ -103,7 +103,6 @@ namespace WebItNow
                     int Envio_Ok = email.EnvioMensaje(sUsuario, sEmail, sAsunto, TxtAreaMensaje.Value);
                 }
 
-
                 if (sAsunto == "Documento Enviado")
                 { 
                     Response.Redirect("Upload_Files.aspx");
@@ -116,7 +115,6 @@ namespace WebItNow
                 {
                     Response.Redirect("Request_Document.aspx");
                 }
-                    
 
             }
             catch(Exception ex)

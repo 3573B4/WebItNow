@@ -49,7 +49,7 @@ namespace WebItNow
             string wPara = pEmail;
             string wCC = "martin.baltierra@itnow.mx";
             string wAsunto = pAsunto;
-            string wMensaje = "Mensaje de Registro :  \n" + pBody;
+            string wMensaje = "Observaciones registradas: :  \n" + pBody;
 
             System.Net.Mail.MailMessage correo = new System.Net.Mail.MailMessage();
             correo.From = new System.Net.Mail.MailAddress(wDe);
