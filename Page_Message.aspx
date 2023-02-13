@@ -38,7 +38,7 @@
 
     <div class="container col-md-4">
         <%--<h2 class="h2 mt-3 mb-5 fw-normal">Tu petición a sido procesada.</h2>--%>
-        <h2 class="h2 mt-3 mb-5 fw-normal">+<asp:Label ID="lblHeader" runat="server" Text=""></asp:Label></h2>
+        <h2 class="h2 mt-3 mb-5 fw-normal"><asp:Label ID="lblHeader" runat="server" Text=""></asp:Label></h2>
 <%--        
         <div class="form-group">
             <div class="d-grid col-4 mx-auto py-1">

@@ -91,7 +91,7 @@
     <div id="topContent" >
     <!-- <a href="Default.aspx">Control De Horas</a> -->
         <div id="banners125">
-            <asp:Image ID="imgBanner" Width="100%" Height="150px" runat="server" ImageUrl="~/Images/banner_codise.png" />
+            <asp:Image ID="imgBanner" Width="100%" Height="120px" runat="server" ImageUrl="~/Images/banner_codise.png" />
         </div>
 
 <%--    <table>

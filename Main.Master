@@ -120,7 +120,6 @@
             <div id="banners125">
                 <asp:Image ID="imgBanner" Width="100%" Height="120px" runat="server" ImageUrl="~/Images/banner_codise.png" />
             </div>
-
 <%--        
             <table>
             <tr>

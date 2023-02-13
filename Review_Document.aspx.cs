@@ -76,18 +76,18 @@ namespace WebItNow
 
         protected void GrdEstadoDocumento_SelectedIndexChanged(object sender, EventArgs e)
         {
-            TxtUsu.Text = GrdEstadoDocumento.SelectedRow.Cells[2].Text;
-            TxtNomArchivo.Text = GrdEstadoDocumento.SelectedRow.Cells[5].Text;
-            TxtUrl_Imagen.Text = GrdEstadoDocumento.SelectedRow.Cells[6].Text;
-            TxtTpoDocumento.Text = GrdEstadoDocumento.SelectedRow.Cells[7].Text;
+            TxtUsu.Text = Server.HtmlDecode(GrdEstadoDocumento.SelectedRow.Cells[2].Text); 
+            TxtNomArchivo.Text = Server.HtmlDecode(GrdEstadoDocumento.SelectedRow.Cells[5].Text);
+            TxtUrl_Imagen.Text = Server.HtmlDecode(GrdEstadoDocumento.SelectedRow.Cells[6].Text);
+            TxtTpoDocumento.Text = Server.HtmlDecode(GrdEstadoDocumento.SelectedRow.Cells[7].Text);
 
             // Habilitar el boton de Descargas
             imgDescarga.Enabled = true;
 
-            Variables.wUsu = GrdEstadoDocumento.SelectedRow.Cells[2].Text;
-            Variables.wFileName = GrdEstadoDocumento.SelectedRow.Cells[5].Text;
-            Variables.wURL_Imagen = GrdEstadoDocumento.SelectedRow.Cells[6].Text;
-            Variables.wTpoDocumento = GrdEstadoDocumento.SelectedRow.Cells[7].Text;
+            Variables.wUsu = Server.HtmlDecode(GrdEstadoDocumento.SelectedRow.Cells[2].Text);
+            Variables.wFileName = Server.HtmlDecode(GrdEstadoDocumento.SelectedRow.Cells[5].Text);
+            Variables.wURL_Imagen = Server.HtmlDecode(GrdEstadoDocumento.SelectedRow.Cells[6].Text);
+            Variables.wTpoDocumento = Server.HtmlDecode(GrdEstadoDocumento.SelectedRow.Cells[7].Text);
 
 
             this.hdfValorGrid.Value = this.GrdEstadoDocumento.SelectedValue.ToString();
