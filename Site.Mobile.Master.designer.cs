@@ -33,13 +33,22 @@ namespace WebItNow
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
 
         /// <summary>
-        /// Control imgBanner.
+        /// Control ImgCodise.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image imgBanner;
+        protected global::System.Web.UI.WebControls.Image ImgCodise;
+
+        /// <summary>
+        /// Control ImgPeacock.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image ImgPeacock;
 
         /// <summary>
         /// Control MainContent.

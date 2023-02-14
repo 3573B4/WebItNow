@@ -285,7 +285,9 @@
     <Content Include="Descargas.aspx" />
     <Content Include="Images\aceptar.ico" />
     <Content Include="Images\ajax-loader.gif" />
+    <Content Include="Images\banner_Codice_mediano.png" />
     <Content Include="Images\banner_codise.png" />
+    <Content Include="Images\banner_Peacock.png" />
     <Content Include="Images\cancelar.ico" />
     <Content Include="Images\descargar.ico" />
     <Content Include="Images\edit.jpg" />

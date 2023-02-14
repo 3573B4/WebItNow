@@ -90,10 +90,28 @@
     <form id="form1" runat="server" enctype="multipart/form-data">
     <div id="topContent" >
     <!-- <a href="Default.aspx">Control De Horas</a> -->
+<%--        
         <div id="banners125">
             <asp:Image ID="imgBanner" Width="100%" Height="120px" runat="server" ImageUrl="~/Images/banner_codise.png" />
         </div>
+--%>
 
+        <div class="row" style="background-color:mediumturquoise; width: 102%; height:80px;">
+            <div class="col-6">
+                <div class="row justify-content-start">
+                    <div class="col-4 my-1 ps-5">
+                        <asp:Image ID="ImgCodise" Width="60px" Height="70px" runat="server" ImageUrl="~/Images/banner_Codice_mediano.png" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="row justify-content-end">
+                    <div class="col-xl-4 col-lg-5 col-md-6 col-sm-6 justify-content-end my-2 pe-5">
+                        <asp:Image ID="ImgPeacock" Width="170px" Height="50px" runat="server" ImageUrl="~/Images/banner_Peacock.png" />
+                    </div>
+                </div>
+            </div>
+        </div>
 <%--    <table>
         <tr>
             <td class="style1">
