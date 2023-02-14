@@ -110,7 +110,34 @@
         display:inline-block;  
         }
 
+        .foter  {
+        position: fixed;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        background-color: mediumturquoise;
+        color: white;
+        margin-top: 8rem;
+        text-align: center;
+        bottom: 0;
+        }
     </style>
+
+<%--    <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+    <script type="text/javascript">  
+       $(window).bind("load", function () {
+           var footer = $("#footer");
+           var pos = footer.position();
+           var height = $(window).height();
+           height = height - pos.top;
+           height = height - footer.height();
+           if (height > 0) {
+               footer.css({
+                   'margin-top': height + 'px'
+               });
+           }
+       });
+    </script>--%>
+
 
 </head>
 <body>
@@ -158,6 +185,9 @@
         <asp:ContentPlaceHolder id="MainContent" runat="server">
              <%--Aqui dentro van los objetos de nuestro web forma--%>
          </asp:ContentPlaceHolder>
+        </div>
+        <div id="footerContent" class="foter centrar-texto">
+            <h7 class="h7 mt-4 mb-5 fw-bold">© 2023 Todos los derechos reservados |Itnow Technologies de México S.A. de C.V.</h7>
         </div>
     </form>
 
