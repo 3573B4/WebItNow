@@ -36,7 +36,7 @@ namespace WebItNow
         protected void BtnEnviar_Click(object sender, EventArgs e)
         {
             // Validar que los campos hayan sido capturados
-            if (TxtNom.Text != "" && TxtEmail.Text != "" && TxtReferencia.Text != "")
+            if (TxtReferencia.Text != "" && TxtNom.Text != "" && TxtEmail.Text != "" )
             {
                 // Insertar Registo Tabla ITM_11 (Solicitud Documento)
                 int result = Add_Solicitud(TxtNom.Text, TxtEmail.Text, TxtReferencia.Text, ddlTpoDocumento.SelectedValue);
@@ -44,7 +44,7 @@ namespace WebItNow
                 if (result == 0)
                 {
 
-                    Session["IdUsuario"] = TxtNom.Text;
+                    Session["Referencia"] = TxtReferencia.Text;
                     Session["Asunto"] = "Solicitud Documento";
                     Session["Email"] = TxtEmail.Text.Trim();
 
@@ -69,6 +69,92 @@ namespace WebItNow
                 Lbl_Message.Visible = true;
                 Lbl_Message.Text = "* Estos campos son obligatorios";
             }
+        }
+
+        public void OnTextChanged(object sender, EventArgs e)
+        {
+
+            Variables.wPrivilegios = System.Web.HttpContext.Current.Session["UsPrivilegios"] as string;
+            //Reference the TextBox.
+            TextBox textBox = sender as TextBox;
+
+            if (TxtReferencia.Text != "")
+            {
+
+                Lbl_Message.Visible = true;
+
+                // Insertar Registo Usuario Cargas
+                int result = ValidarReferencia(TxtReferencia.Text, Int32.Parse(Variables.wPrivilegios));
+
+                if (result == 0)
+                {
+                    TxtReferencia.Text = string.Empty;
+                    TxtEmail.Text = string.Empty;
+                    TxtNom.Text = string.Empty;
+
+                    LblMessage.Text = "Ingrese una referencia valida";
+                    this.mpeMensaje.Show();
+                }
+                else
+                {
+                    Lbl_Message.Text = "";
+                    Lbl_Message.Visible = false;
+                    TxtReferencia.Focus();
+                }
+
+            }
+            else
+            {
+                Lbl_Message.Visible = true;
+                Lbl_Message.Text = "* Este campo es obligatorio";
+            }
+
+        }
+
+        public int ValidarReferencia(String pReferencia, int pUsPrivilegios)
+        {
+
+            try
+            {
+
+                ConexionBD Conecta = new ConexionBD();
+                NewMethod(Conecta);
+
+                // Consulta a la tabla : Usuarios = ITM_02
+                string strQuery = "SELECT UsReferencia, UsEmail, UsAsegurado " +
+                                  "  FROM ITM_02 ed " +
+                                  " WHERE UsReferencia = '" + pReferencia + "'";
+
+                SqlCommand cmd = new SqlCommand(strQuery, Conecta.ConectarBD);
+
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+
+                foreach (DataRow row in dt.Rows)
+                {
+                    TxtEmail.Text = Convert.ToString(row[1]);
+                    TxtNom.Text = Convert.ToString(row[2]);
+
+                    return 1;
+                }
+
+                cmd.Dispose();
+                Conecta.Cerrar();
+
+            }
+            catch (Exception ex)
+            {
+                // Show(ex.Message);
+                LblMessage.Text = ex.Message;
+                this.mpeMensaje.Show();
+            }
+            finally
+            {
+
+            }
+
+            return 0;
         }
 
         public int Add_Solicitud(String pNombre, String pUsEmail, String pReferencia, String pTpoDocumento)

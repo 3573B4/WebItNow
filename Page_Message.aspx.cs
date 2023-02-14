@@ -19,7 +19,7 @@ namespace WebItNow
         {
             if (!IsPostBack)
             {
-                string sUsuario = Convert.ToString(Session["IdUsuario"]);
+                string sReferencia = Convert.ToString(Session["Referencia"]);
                 string sAsunto = Convert.ToString(Session["Asunto"]);
 
              // lblUsuario.Text = sUsuario;
@@ -67,7 +67,7 @@ namespace WebItNow
             {
                 string sMensajeTextArea = TxtAreaMensaje.Value;
 
-                string sUsuario = Convert.ToString(Session["IdUsuario"]);
+                string sReferencia = Convert.ToString(Session["Referencia"]);
                 string sAsunto = Convert.ToString(Session["Asunto"]);
                 string sPredeterminado = string.Empty;
 
@@ -88,19 +88,19 @@ namespace WebItNow
                     sPredeterminado = "";
                 }
 
-                    var email = new EnvioEmail();
+                var email = new EnvioEmail();
 
                 TxtAreaMensaje.Value = sPredeterminado + TxtAreaMensaje.Value;
 
                 if (sAsunto != "Solicitud Documento")
                 {
-                    string sEmail = email.CorreoElectronico(sUsuario);
-                    int Envio_Ok = email.EnvioMensaje(sUsuario, sEmail, sAsunto, TxtAreaMensaje.Value);
+                    string sEmail = email.CorreoElectronico(sReferencia);
+                    int Envio_Ok = email.EnvioMensaje(sReferencia, sEmail, sAsunto, TxtAreaMensaje.Value);
                 }
                 else
                 {
                     string sEmail = Convert.ToString(Session["Email"]);
-                    int Envio_Ok = email.EnvioMensaje(sUsuario, sEmail, sAsunto, TxtAreaMensaje.Value);
+                    int Envio_Ok = email.EnvioMensaje(sReferencia, sEmail, sAsunto, TxtAreaMensaje.Value);
                 }
 
                 if (sAsunto == "Documento Enviado")

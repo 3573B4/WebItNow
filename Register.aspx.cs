@@ -25,26 +25,26 @@ namespace WebItNow
 
         protected void BtnRegresar_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Login.aspx");
+            Response.Redirect("Acceso.aspx");
         }
 
         protected void BtnEnviar_Click(object sender, EventArgs e)
         {
             //* Validar si el usuario existe o es nuevo
-            if (TxtUsu.Text != "" && TxtEmail.Text != "" && TxtPass.Text != "")
+            if (TxtRef.Text != "" && TxtEmail.Text != "")
             {
 
                 // Insertar Registo Tabla tbUsuarios (UploadFiles)
-                int result = Add_tbUsuarios(TxtUsu.Text, TxtEmail.Text, TxtPass.Text, 3, "Insert");
+                int result = Add_tbUsuarios(TxtRef.Text, TxtEmail.Text, string.Empty, 3, "Insert");
 
                 if (result == 0)
                 {
                     // Insertar Registros Tabla tbEstadoDocumento [ITM_04]
                     int idStatus = 1;
-                    int valor = Add_tbEstadoDocumento(TxtUsu.Text, idStatus);
+                    int valor = Add_tbEstadoDocumento(TxtRef.Text, idStatus);
 
                     var email = new EnvioEmail();
-                    int Envio_Ok = email.EnvioMensaje(TxtUsu.Text.Trim(), TxtEmail.Text.Trim(), "Registro Usuario ", string.Empty);
+                    int Envio_Ok = email.EnvioMensaje(TxtRef.Text.Trim(), TxtEmail.Text.Trim(), "Registro Referencia ", string.Empty);
 
                     //EnvioMensaje(TxtUsu.Text.Trim(), TxtEmail.Text.Trim());
 
@@ -262,15 +262,15 @@ namespace WebItNow
             return -1;
         }
 
-        protected void TxtUsu_TextChanged(object sender, EventArgs e)
+        protected void TxtRef_TextChanged(object sender, EventArgs e)
         {
             // Validar si existe Usuario en la tabla ITM_02 (tbUsuarios)
             Variables.wPrivilegios = "3";
-            int Usuario_Existe = ValidaUser(TxtUsu.Text, Int32.Parse(Variables.wPrivilegios));
+            int Usuario_Existe = ValidaUser(TxtRef.Text, Int32.Parse(Variables.wPrivilegios));
 
             if (Usuario_Existe == 1)
             {
-                TxtUsu.Text = string.Empty;
+                TxtRef.Text = string.Empty;
                 TxtEmail.Focus();
 
                 LblMessage.Text = "El nombre de usuario ya existe";
@@ -298,7 +298,7 @@ namespace WebItNow
             }
             else
             {
-                TxtPass.Focus();
+                TxtEmail.Focus();
             }
         }
 

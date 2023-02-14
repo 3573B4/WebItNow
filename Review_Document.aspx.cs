@@ -57,12 +57,12 @@ namespace WebItNow
 
             if (Variables.wDownload == true)
             {
-                TxtUsu.Text = string.Empty;
+                TxtRef.Text = string.Empty;
                 TxtTpoDocumento.Text = string.Empty;
                 TxtNomArchivo.Text = string.Empty;
                 TxtUrl_Imagen.Text = string.Empty;
 
-                Variables.wUsu = string.Empty;
+                Variables.wRef = string.Empty;
                 Variables.wTpoDocumento = string.Empty;
                 Variables.wFileName = string.Empty;
                 Variables.wURL_Imagen = string.Empty;
@@ -76,18 +76,18 @@ namespace WebItNow
 
         protected void GrdEstadoDocumento_SelectedIndexChanged(object sender, EventArgs e)
         {
-            TxtUsu.Text = Server.HtmlDecode(GrdEstadoDocumento.SelectedRow.Cells[2].Text); 
-            TxtNomArchivo.Text = Server.HtmlDecode(GrdEstadoDocumento.SelectedRow.Cells[6].Text);
-            TxtUrl_Imagen.Text = Server.HtmlDecode(GrdEstadoDocumento.SelectedRow.Cells[7].Text);
-            TxtTpoDocumento.Text = Server.HtmlDecode(GrdEstadoDocumento.SelectedRow.Cells[8].Text);
+            TxtRef.Text = Server.HtmlDecode(GrdEstadoDocumento.SelectedRow.Cells[2].Text); 
+            TxtNomArchivo.Text = Server.HtmlDecode(GrdEstadoDocumento.SelectedRow.Cells[5].Text);
+            TxtUrl_Imagen.Text = Server.HtmlDecode(GrdEstadoDocumento.SelectedRow.Cells[6].Text);
+            TxtTpoDocumento.Text = Server.HtmlDecode(GrdEstadoDocumento.SelectedRow.Cells[7].Text);
 
             // Habilitar el boton de Descargas
             imgDescarga.Enabled = true;
 
-            Variables.wUsu = Server.HtmlDecode(GrdEstadoDocumento.SelectedRow.Cells[2].Text);
-            Variables.wFileName = Server.HtmlDecode(GrdEstadoDocumento.SelectedRow.Cells[6].Text);
-            Variables.wURL_Imagen = Server.HtmlDecode(GrdEstadoDocumento.SelectedRow.Cells[7].Text);
-            Variables.wTpoDocumento = Server.HtmlDecode(GrdEstadoDocumento.SelectedRow.Cells[8].Text);
+            Variables.wRef = Server.HtmlDecode(GrdEstadoDocumento.SelectedRow.Cells[2].Text);
+            Variables.wFileName = Server.HtmlDecode(GrdEstadoDocumento.SelectedRow.Cells[5].Text);
+            Variables.wURL_Imagen = Server.HtmlDecode(GrdEstadoDocumento.SelectedRow.Cells[6].Text);
+            Variables.wTpoDocumento = Server.HtmlDecode(GrdEstadoDocumento.SelectedRow.Cells[7].Text);
 
 
             this.hdfValorGrid.Value = this.GrdEstadoDocumento.SelectedValue.ToString();
@@ -124,7 +124,7 @@ namespace WebItNow
         protected void GrdEstadoDocumento_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             //// Actualizar en la tabla [ITM_04] (IdDescarga = 1)
-            //Update_ITM_04(sUsuario, sTipoDocumento, 1);
+            //Update_ITM_04(sReferencia, sTipoDocumento, 1);
 
             //// Actualizar controles
             //GetEstadoDocumentos();
@@ -137,7 +137,7 @@ namespace WebItNow
             //    int rowIndex = Convert.ToInt32(e.CommandArgument);
             //    GridViewRow row = GrdEstadoDocumento.Rows[rowIndex];
 
-            //    string sUsuario = row.Cells[3].Text;
+            //    string sReferencia = row.Cells[3].Text;
             //    string sNomArchivo = row.Cells[6].Text;
             //    string sSubdirectorio = row.Cells[7].Text;
             //    string sTipoDocumento = row.Cells[8].Text;
@@ -145,7 +145,7 @@ namespace WebItNow
             //    Variables.wDownload = true;
 
             //    // Actualizar en la tabla [ITM_04] (IdDescarga = 1)
-            //    Update_ITM_04(sUsuario, sTipoDocumento, 1);
+            //    Update_ITM_04(sReferencia, sTipoDocumento, 1);
 
             //    // Actualizar controles
             //    GetEstadoDocumentos();
@@ -255,18 +255,18 @@ namespace WebItNow
                 GridViewRow row = ((GridViewRow)((System.Web.UI.WebControls.ImageButton)sender).NamingContainer);
                 int index = row.RowIndex;
 
-                string sUsuario = GrdEstadoDocumento.Rows[index].Cells[2].Text;
-                string sTipoDocumento = GrdEstadoDocumento.Rows[index].Cells[8].Text;
+                string sReferencia = GrdEstadoDocumento.Rows[index].Cells[2].Text;
+                string sTipoDocumento = GrdEstadoDocumento.Rows[index].Cells[7].Text;
 
-                GrdEstadoDocumento.Rows[index].Cells[5].Text = "Completo";
+                GrdEstadoDocumento.Rows[index].Cells[3].Text = "Completo";
 
                 // Actualizar en la tabla tbEstadoDocumento (Status = 3)
-                Update_tbEstadoDocumento(sUsuario, sTipoDocumento, 3);
+                Update_tbEstadoDocumento(sReferencia, sTipoDocumento, 3);
 
                 // Actualizar en la tabla [ITM_04] (IdDescarga = 1)
-                Update_ITM_04(sUsuario, sTipoDocumento, 1);
+                Update_ITM_04(sReferencia, sTipoDocumento, 1);
 
-                Session["IdUsuario"] = sUsuario;
+                Session["Referencia"] = sReferencia;
                 Session["Asunto"] = "Documento Aceptado";
 
                 Response.Redirect("Page_Message.aspx");
@@ -274,8 +274,8 @@ namespace WebItNow
                 //var email = new EnvioEmail();
 
                 //// Consultar de la tabla [tbUsuarios] el [UsEmail]
-                //string sEmail = email.CorreoElectronico(sUsuario);
-                //int Envio_Ok = email.EnvioMensaje(sUsuario, sEmail, "Documento Aceptado ");
+                //string sEmail = email.CorreoElectronico(sReferencia);
+                //int Envio_Ok = email.EnvioMensaje(sReferencia, sEmail, "Documento Aceptado ");
 
                 //if (Envio_Ok == 0)
                 //{
@@ -299,20 +299,20 @@ namespace WebItNow
                 int index = row.RowIndex;
 
 
-                string sUsuario = GrdEstadoDocumento.Rows[index].Cells[2].Text;
-                string sNom_Archivo = GrdEstadoDocumento.Rows[index].Cells[6].Text;
-                string sUrl_Imagen = GrdEstadoDocumento.Rows[index].Cells[7].Text;
-                string sTipoDocumento = GrdEstadoDocumento.Rows[index].Cells[8].Text;
+                string sReferencia = GrdEstadoDocumento.Rows[index].Cells[2].Text;
+                string sNom_Archivo = GrdEstadoDocumento.Rows[index].Cells[5].Text;
+                string sUrl_Imagen = GrdEstadoDocumento.Rows[index].Cells[6].Text;
+                string sTipoDocumento = GrdEstadoDocumento.Rows[index].Cells[7].Text;
 
                 string strURLFile = Server.MapPath("~/Directorio/") + sUrl_Imagen + sNom_Archivo;
 
                 // Actualizar en la tabla [tbEstadoDocumento] (Status = 1)
-                Update_tbEstadoDocumento(sUsuario, sTipoDocumento, 1);
+                Update_tbEstadoDocumento(sReferencia, sTipoDocumento, 1);
 
                 // Actualizar en la tabla [ITM_04] (IdDescarga = 0)
-                Update_ITM_04(sUsuario, sTipoDocumento, 0);
+                Update_ITM_04(sReferencia, sTipoDocumento, 0);
 
-                GrdEstadoDocumento.Rows[index].Cells[5].Text = "Faltante";
+                GrdEstadoDocumento.Rows[index].Cells[3].Text = "Faltante";
 
                 // Eliminar el archivo de Server.MapPath("~/Directorio/")
                 // File.Delete(strURLFile);
@@ -322,7 +322,7 @@ namespace WebItNow
                 // Refrescar GridView
                 GetEstadoDocumentos();
 
-                Session["IdUsuario"] = sUsuario;
+                Session["Referencia"] = sReferencia;
                 Session["Asunto"] = "Documento Rechazado";
 
                 Response.Redirect("Page_Message.aspx");
@@ -330,8 +330,8 @@ namespace WebItNow
                 //var email = new EnvioEmail();
 
                 //// Consultar de la tabla [tbUsuarios] el [UsEmail]
-                //string sEmail = email.CorreoElectronico(sUsuario);
-                //int Envio_Ok = email.EnvioMensaje(sUsuario, sEmail, "Documento Rechazado");
+                //string sEmail = email.CorreoElectronico(sReferencia);
+                //int Envio_Ok = email.EnvioMensaje(sReferencia, sEmail, "Documento Rechazado");
 
                 //if (Envio_Ok == 0)
                 //{
@@ -353,12 +353,12 @@ namespace WebItNow
                 //GridViewRow row = ((GridViewRow)((System.Web.UI.WebControls.ImageButton)sender).NamingContainer);
                 //int index = row.RowIndex;
 
-                //string sUsuario = GrdEstadoDocumento.Rows[index].Cells[3].Text;
+                //string sReferencia = GrdEstadoDocumento.Rows[index].Cells[3].Text;
                 //string sNomArchivo = GrdEstadoDocumento.Rows[index].Cells[6].Text;
                 //string sSubdirectorio = GrdEstadoDocumento.Rows[index].Cells[7].Text;
                 //string sTipoDocumento = GrdEstadoDocumento.Rows[index].Cells[8].Text;
 
-                //string sUsuario = TxtUsu.Text;
+                //string sReferencia = TxtRef.Text;
                 //string sTipoDocumento = TxtTpoDocumento.Text;
                 //string Filename = TxtNomArchivo.Text;
                 //string Subdirectorio = TxtUrl_Imagen.Text;
@@ -366,7 +366,7 @@ namespace WebItNow
                 Variables.wDownload = true;
 
                 // Actualizar en la tabla [ITM_04] (IdDescarga = 1)
-                Update_ITM_04(Variables.wUsu, Variables.wTpoDocumento, 1);
+                Update_ITM_04(Variables.wRef, Variables.wTpoDocumento, 1);
 
                 // Actualizar controles
                 GetEstadoDocumentos();
@@ -385,7 +385,7 @@ namespace WebItNow
                 //  imgDescarga.Enabled = false;
 
                 //// Actualizar en la tabla [ITM_04] (IdDescarga = 1)
-                //Update_ITM_04(sUsuario, sTipoDocumento, 1);
+                //Update_ITM_04(sReferencia, sTipoDocumento, 1);
 
                 //// Actualizar controles
                 //GetEstadoDocumentos();
@@ -722,7 +722,7 @@ namespace WebItNow
             #endregion
         }
 
-        public void Update_tbEstadoDocumento(string pUsuarios, string pIdTipoDocumento, int pIdStatus)
+        public void Update_tbEstadoDocumento(string pReferencia, string pIdTipoDocumento, int pIdStatus)
         {
             try
             {
@@ -733,11 +733,11 @@ namespace WebItNow
                 if (pIdStatus == 1)
                 {
                     Variables.wQuery = "Update ITM_04 Set IdStatus = " + pIdStatus + ", Nom_Imagen = Null, Fec_Rechazado = GETDATE()" +
-                                    " Where IdUsuario = '" + pUsuarios + "' And IdTipoDocumento = '" + pIdTipoDocumento + "'";
+                                    " Where Referencia = '" + pReferencia + "' And IdTipoDocumento = '" + pIdTipoDocumento + "'";
                 }
                 else
                 {
-                    Variables.wQuery = "Update ITM_04 Set IdStatus = " + pIdStatus + ", Fec_Aceptado = GETDATE() Where IdUsuario = '" + pUsuarios + "' And IdTipoDocumento = '" + pIdTipoDocumento + "'";
+                    Variables.wQuery = "Update ITM_04 Set IdStatus = " + pIdStatus + ", Fec_Aceptado = GETDATE() Where Referencia = '" + pReferencia + "' And IdTipoDocumento = '" + pIdTipoDocumento + "'";
                 }
 
                 SqlCommand cmd1 = new SqlCommand(Variables.wQuery, Conecta.ConectarBD);
@@ -761,7 +761,7 @@ namespace WebItNow
             }
         }
 
-        public void Update_ITM_04(string pUsuarios, string pIdTipoDocumento, int pIdDescarga)
+        public void Update_ITM_04(string pReferencia, string pIdTipoDocumento, int pIdDescarga)
         {
             ConexionBD Conecta = new ConexionBD();
             NewMethod(Conecta);
@@ -772,7 +772,7 @@ namespace WebItNow
                 SqlCommand cmd1 = new SqlCommand("sp_UpDescarga", Conecta.ConectarBD);
                 cmd1.CommandType = CommandType.StoredProcedure;
 
-                cmd1.Parameters.AddWithValue("@usuario", pUsuarios);
+                cmd1.Parameters.AddWithValue("@referencia", pReferencia);
                 cmd1.Parameters.AddWithValue("@IdTipoDocumento", pIdTipoDocumento);
                 cmd1.Parameters.AddWithValue("@IdDescarga", pIdDescarga);
 
@@ -904,19 +904,19 @@ namespace WebItNow
         protected void BtnDescargas_Click(object sender, EventArgs e)
         {
 
-            string sUsuario = TxtUsu.Text;
+            string sReferencia = TxtRef.Text;
             string sTipoDocumento = TxtTpoDocumento.Text;
             //string sFilename = TxtNomArchivo.Text;
             //string sSubdirectorio = TxtUrl_Imagen.Text;
 
-            //Variables.wUsu = GrdEstadoDocumento.SelectedRow.Cells[2].Text;
+            //Variables.wRef = GrdEstadoDocumento.SelectedRow.Cells[2].Text;
             //Variables.wFileName = GrdEstadoDocumento.SelectedRow.Cells[5].Text;
             //Variables.wURL_Imagen = GrdEstadoDocumento.SelectedRow.Cells[6].Text;
             //Variables.wTpoDocumento = GrdEstadoDocumento.SelectedRow.Cells[7].Text;
             imgDescarga.Enabled = false;
 
             // Actualizar en la tabla [ITM_04] (IdDescarga = 1)
-            Update_ITM_04(Variables.wUsu, Variables.wTpoDocumento, 1);
+            Update_ITM_04(Variables.wRef, Variables.wTpoDocumento, 1);
 
             // Actualizar controles
             GetEstadoDocumentos();

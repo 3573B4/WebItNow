@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" compilerOptions="/codepage:utf8" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="Request_Document.aspx.cs" Inherits="WebItNow.Request_Document" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="Request_Document.aspx.cs" Inherits="WebItNow.Request_Document" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
@@ -31,12 +31,12 @@
 <div class="container col-md-4">
         <h2 class="h2 mb-5 fw-normal">Solicitud de Documentos</h2>
         <div class="form-group mt-3">
-            <asp:Label ID="LblNom" runat="server" Text="Nombre de Cliente o destinatario:" CssClass="control-label co-sm-3" Font-Bold="False"></asp:Label>
-            <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server"   
-                ControlToValidate="TxtNom" ErrorMessage="*" ForeColor="Red">
+            <asp:Label ID="LblReferencia" runat="server" Text="Referencia:" CssClass="control-label col-sm-2"></asp:Label>
+            <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server"   
+                ControlToValidate="TxtReferencia" ErrorMessage="*" ForeColor="Red">
                 </asp:RequiredFieldValidator>
             <div class="col-sm-12">
-                <asp:TextBox ID="TxtNom" runat="server" CssClass="form-control" placeholder="Nombre" onkeyup="mayus(this);" ></asp:TextBox>
+                <asp:TextBox ID="TxtReferencia" runat="server" CssClass="form-control" placeholder="Referencia" MaxLength="10" OnTextChanged ="OnTextChanged" AutoPostBack="true" ></asp:TextBox>
             </div>
         </div>
 
@@ -46,17 +46,17 @@
                 ControlToValidate="TxtEmail" ErrorMessage="*" ForeColor="Red">
                 </asp:RequiredFieldValidator>
             <div class="col-sm-12">
-                <asp:TextBox ID="TxtEmail" runat="server" CssClass="form-control" placeholder="Ingresa tu e-mail" MaxLength="50" TextMode="Email"></asp:TextBox>
+                <asp:TextBox ID="TxtEmail" runat="server" CssClass="form-control" MaxLength="50" TextMode="Email" ReadOnly="True"></asp:TextBox>
             </div>
-        </div>        
+        </div>   
 
         <div class="form-group mt-3">
-            <asp:Label ID="LblReferencia" runat="server" Text="Referencia:" CssClass="control-label col-sm-2"></asp:Label>
-            <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server"   
-                ControlToValidate="TxtReferencia" ErrorMessage="*" ForeColor="Red">
+            <asp:Label ID="LblNom" runat="server" Text="Nombre de Cliente o destinatario:" CssClass="control-label co-sm-3" Font-Bold="False"></asp:Label>
+            <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server"   
+                ControlToValidate="TxtNom" ErrorMessage="*" ForeColor="Red">
                 </asp:RequiredFieldValidator>
             <div class="col-sm-12">
-                <asp:TextBox ID="TxtReferencia" runat="server" CssClass="form-control" placeholder="Referencia" onkeyup="mayus(this);" MaxLength="10" ></asp:TextBox>
+                <asp:TextBox ID="TxtNom" runat="server" CssClass="form-control"  ReadOnly="True" ></asp:TextBox>
             </div>
         </div>
 

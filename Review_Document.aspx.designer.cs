@@ -69,13 +69,13 @@ namespace WebItNow
         protected global::System.Web.UI.UpdatePanel UpdatePanel1;
 
         /// <summary>
-        /// Control LblUsu.
+        /// Control LblRef.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LblUsu;
+        protected global::System.Web.UI.WebControls.Label LblRef;
 
         /// <summary>
         /// Control LblNomArchivo.
@@ -96,13 +96,13 @@ namespace WebItNow
         protected global::System.Web.UI.WebControls.Label LblDescarga;
 
         /// <summary>
-        /// Control TxtUsu.
+        /// Control TxtRef.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TxtUsu;
+        protected global::System.Web.UI.WebControls.TextBox TxtRef;
 
         /// <summary>
         /// Control TxtTpoDocumento.

@@ -12,7 +12,7 @@
     <div class="container col-md-4">
         <h2 class="h2 mb-3 fw-normal"> Iniciar Sesión</h2>
         <div class="form-group">
-            <asp:Label ID="LblUsu" runat="server" Text="Referencia" CssClass="control-label col-sm-2" Font-Size="Small"></asp:Label>
+            <asp:Label ID="LblRef" runat="server" Text="Referencia" CssClass="control-label col-sm-2" Font-Size="Small"></asp:Label>
             <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server"   
                 ControlToValidate="TxtRef" ErrorMessage="*" ForeColor="Red">
                 </asp:RequiredFieldValidator>
@@ -21,12 +21,12 @@
             </div>
         </div>
         <div class="form-group">
-            <asp:Label ID="LblEmail" runat="server" Text="Email" CssClass="control-label col-sm-2" Font-Size="Small"></asp:Label>
+            <asp:Label ID="LblEmail" runat="server" Text="Correo electrónico" CssClass="control-label col-sm-2" Font-Size="Small"></asp:Label>
             <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server"   
                 ControlToValidate="TxtEmail" ErrorMessage="*" ForeColor="Red">
                 </asp:RequiredFieldValidator>
             <div class="col-sm-12">
-                <asp:TextBox ID="TxtEmail" runat="server" CssClass="form-control" placeholder="Ingresa tu e-mail" MaxLength="50" TextMode="Password"></asp:TextBox>
+                <asp:TextBox ID="TxtEmail" runat="server" CssClass="form-control" placeholder="Ingresa tu e-mail" MaxLength="50" ></asp:TextBox>
             </div>
         </div>
         <div class="from-group">
@@ -55,15 +55,15 @@
             <div class="col-12">                
                 <div class="d-grid gap-2 d-flex justify-content-center">
                     <asp:Button ID="BtnAceptar" runat="server" Text="Iniciar sesión"  Font-Bold="True"  CssClass="btn btn-primary me-md-2" OnClick="BtnAceptar_Click"/>
-                    <asp:Button ID="BtnRegistrarse" runat="server" Font-Bold="True" Text="Registrarse" OnClick="BtnRegistrarse_Click" CssClass="btn btn-outline-primary"/>
+                    <%--<asp:Button ID="BtnRegistrarse" runat="server" Font-Bold="True" Text="Registrarse" OnClick="BtnRegistrarse_Click" CssClass="btn btn-outline-primary"/>--%>
                 </div>
             </div>
         </div>
-        <div class="from-group">
+<%--        <div class="from-group">
             <div class="d-grid mx-auto">
                 <button onclick="location.href='Forgot-Password.aspx'" class="btn btn-link">Olvidé mi contraseña</button>
             </div>
-        </div>
+        </div>--%>
         <div class="form-group">
             <div class="d-grid gap-2 d-md-flex justify-content-center">
                 <ajaxToolkit:ModalPopupExtender ID="mpeMensaje" runat="server" PopupControlID="pnlMensaje"

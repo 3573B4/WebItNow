@@ -42,8 +42,8 @@ namespace WebItNow
 
                 ChecarStatusDoc();
 
-                string userId = Convert.ToString(Session["IdUsuario"]);
-                lblUsuario.Text = "Bienvenido: " + userId;
+                string sReferencia = Convert.ToString(Session["Referencia"]);
+                lblUsuario.Text = "Referencia: " + sReferencia;
             }
         }
 
@@ -53,10 +53,10 @@ namespace WebItNow
             {
                 //string directorio = "https://itnowtech18-my.sharepoint.com/:f:/g/personal/llg_peacock_claims/Ekb4AdD2Id1KgMI9CRoIAU4BdP795N2YLyTJxmlMmIfWUA?e=CCtbfK" + "/";
                 string directorio = "~/itnowstorage/";
-                string user = Convert.ToString(Session["IdUsuario"]);
+                string sReferencia = Convert.ToString(Session["Referencia"]);
                 string folderName = ddlDocs.SelectedValue;
-                string directFinal = directorio + user + "/" + folderName + "/";
-                string UrlFinal = user + "/" + folderName + "/";
+                string directFinal = directorio + sReferencia + "/" + folderName + "/";
+                string UrlFinal = sReferencia + "/" + folderName + "/";
                 string directorioURL = Server.MapPath(directFinal);
 
                 string nomFile = FileUpload1.FileName;
@@ -94,7 +94,7 @@ namespace WebItNow
                                                     " Url_Imagen = '" + UrlFinal + "'," +
                                                     " Nom_Imagen = '" + nomFile + "'," +
                                                     "  Fec_Envio = GETDATE() " +
-                                                " WHERE IdUsuario = '" + user + "'" +
+                                                " WHERE Referencia = '" + sReferencia + "'" +
                                                 " AND IdTipoDocumento = '" + folderName + "'";
 
                             SqlCommand cmd = new SqlCommand(sqlUpDate, Conectar.ConectarBD);
@@ -115,7 +115,7 @@ namespace WebItNow
 
                             ChecarStatusDoc();
 
-                            Session["IdUsuario"] = user;
+                            Session["Referencia"] = sReferencia;
                             Session["Asunto"] = "Documento Enviado";
 
                             Response.Redirect("Page_Message.aspx");
@@ -229,7 +229,7 @@ namespace WebItNow
 
         public void ChecarStatusDoc()
         {
-            string user = Convert.ToString(Session["IdUsuario"]);
+            string sReferencia = Convert.ToString(Session["Referencia"]);
             string tpoDoc = ddlDocs.SelectedValue;
             ConexionBD connect = new ConexionBD();
             connect.Abrir();
@@ -237,7 +237,7 @@ namespace WebItNow
             // Consulta a la tabla Estado de Documento
             string edoQuery = " SELECT IdUsuario, IdTipoDocumento, IdStatus " +
                                 "FROM ITM_04 " +
-                                "WHERE IdUsuario = '" + user + "' " +
+                                "WHERE Referencia = '" + sReferencia + "' " +
                                 "AND IdTipoDocumento = '" + tpoDoc + "'";
 
             SqlCommand cmd = new SqlCommand(edoQuery, connect.ConectarBD);
@@ -250,7 +250,7 @@ namespace WebItNow
             {
                 BtnEnviar.Enabled = false;
 
-                LblMessage.Text = "No existe tipo de documento, para este usuario.";
+                LblMessage.Text = "No existe tipo de documento, para esta referencia.";
                 mpeMensaje.Show();
             }
             else
@@ -305,20 +305,20 @@ namespace WebItNow
                 // Get a reference from our directory - directory located on root level
                 ShareDirectoryClient directory = share.GetDirectoryClient(dirName);
 
-                string sUsuario = Convert.ToString(Session["IdUsuario"]);
+                string sReferencia = Convert.ToString(Session["Referencia"]);
                 string sTpoDocumento = ddlDocs.SelectedValue;
 
                 if (Variables.wEdoDoc == "0")
                 {
                     // CreateDirectory
-                    directory.CreateSubdirectory(sUsuario);
-                    directory = directory.GetSubdirectoryClient(sUsuario);
+                    directory.CreateSubdirectory(sReferencia);
+                    directory = directory.GetSubdirectoryClient(sReferencia);
                     directory = directory.CreateSubdirectory(sTpoDocumento);
                 }
                 else
                 {
                     // Get a reference to a subdirectory not located on root level
-                    directory = directory.GetSubdirectoryClient(sUsuario);
+                    directory = directory.GetSubdirectoryClient(sReferencia);
                     directory = directory.GetSubdirectoryClient(sTpoDocumento);
                 }
 

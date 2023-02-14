@@ -17,7 +17,7 @@
         }, 600000);
 
         function acceso() {
-            location.href = '/Login.aspx';
+            location.href = '/Acceso.aspx';
         }
 
         function mpeMensajeOnOk() {
@@ -32,39 +32,6 @@
             var updateProgress = $get("<%= UpdateProgress1.ClientID %>");
             updateProgress.style.display = "block";
         }
-
-        //function ShowProgress() {
-        //    setTimeout(function () {
-
-        //        //var loading = document.getElementsByClassName("modal");
-        //        //for (var i = 0; i < loading.length; i++) {
-        //        //    loading[i].className += "-dialog modal-dialog-centered";
-        //        //}
-
-        //        //var modal = $('<div />');
-        //        //modal.addClass("modal");
-        //        //$('body').append(modal);
-        //        //$('modal-dialog-centered').append(modal);
-        //        //modal.addClass("modal-dialog-centered");
-        //        var loading = $(".modal");
-        //        //loading.addClass(' modal-dialog-centered');
-        //        //loading.addClass(' col-4');
-        //        //loading.addClass("-");
-        //        //loading.addClass("dialog");
-        //        //loading.addClass(" ");
-        //        //loading.addClass("modal");
-        //        //loading.addClass("-");
-        //        //loading.addClass("dialog");
-        //        //loading.addClass("-");
-        //        //loading.addClass("centered");
-        //        loading.show();
-        //        //var top = Math.max($(window).height() / 2 - loading[0].offsetHeight / 2, 0);
-        //        //var left = Math.max($(window).width() / 2 - loading[0].offsetWidth / 2, 0);
-        //        //loading.css({ top: top, left: left });
-                
-        //        //loading.css({ width: 500 });
-        //    }, 200);
-        //}
 
         $('form').live("submit", function () {
             ShowProgress();
@@ -228,6 +195,7 @@
             <asp:PostBackTrigger ControlID="BtnEnviar" />
         </Triggers>
     </asp:UpdatePanel>
+
         <!-- Modal -->
         <div class="modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -264,8 +232,6 @@
                 <asp:Label ID="lblHide" runat="server" Text="Label" Style="display: none;" />
             </div>
         </div>
-
-    </div>
 
     <asp:Panel ID="pnlMensaje" runat="server" CssClass="CajaDialogo" style="display: none; border: none; border-radius: 10px; width: 400px; background-color:#FFFFFF;">
         <div class=" row justify-content-end" data-bs-theme="dark">

@@ -23,8 +23,8 @@ namespace WebItNow
                 getStatus();
 
 
-                string userId = Convert.ToString(Session["IdUsuario"]);
-                lblUsuario.Text = "Bienvenido: " + userId;
+                string sReferencia = Convert.ToString(Session["Referencia"]);
+                lblRef.Text = "Bienvenido: " + sReferencia;
             }
 
             getCamposGV();
@@ -70,8 +70,7 @@ namespace WebItNow
                 conectar.Abrir();
 
                 // Consulta a la tabla Estado de Documento
-                string sqlQuery = "SELECT ed.IdUsuario, " +
-                                         "ed.Referencia, " +
+                string sqlQuery = "SELECT ed.Referencia, " +
                                          "td.Descripcion, " +
                                          "ed.Url_Imagen, " +
                                          "ed.Nom_Imagen, " +
@@ -109,7 +108,7 @@ namespace WebItNow
 
         protected void BtnSalir_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Login.aspx");
+            Response.Redirect("Acceso.aspx");
 
         }
 

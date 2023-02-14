@@ -22,8 +22,8 @@ namespace WebItNow
                 // * * Obtener Descripcion breve documento
                 getDocsUsuario();
 
-                string userId = Convert.ToString(Session["IdUsuario"]);
-                lblUsuario.Text = "Bienvenido: " + userId;
+                string sReferencia = Convert.ToString(Session["Referencia"]);
+                lblReferencia.Text = "Referencia: " + sReferencia;
             }
 
             //* * Agrega THEAD y TBODY a GridView.
@@ -32,14 +32,14 @@ namespace WebItNow
 
         public void getDocsUsuario()
         {
-            string sUsuario = Convert.ToString(Session["IdUsuario"]);
+            string sReferencia = Convert.ToString(Session["Referencia"]);
             ConexionBD Conectar = new ConexionBD();
             Conectar.Abrir();
 
-            string sqlQuery = "SELECT ed.IdUsuario, ed.IdTipoDocumento, ed.Nom_Imagen, td.Descripcion, s.Descripcion as Desc_Status  " +
+            string sqlQuery = "SELECT ed.Referencia, ed.IdTipoDocumento, ed.Nom_Imagen, td.Descripcion, s.Descripcion as Desc_Status  " +
                                   "  FROM ITM_04 ed, ITM_06 td, ITM_07 s " +
                                   " WHERE ed.IdStatus = s.IdStatus And ed.IdTipoDocumento = td.IdTpoDocumento " +
-                                  "   AND IdUsuario = '" + sUsuario + "'";
+                                  "   AND Referencia = '" + sReferencia + "'";
 
             SqlCommand ejecucion = new SqlCommand(sqlQuery, Conectar.ConectarBD);
             SqlDataAdapter da = new SqlDataAdapter(ejecucion);
@@ -99,7 +99,7 @@ namespace WebItNow
 
         protected void BtnSalir_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Login.aspx");
+            Response.Redirect("Acceso.aspx");
         }
 
         protected void BtnCargaDocumento_Click(object sender, EventArgs e)

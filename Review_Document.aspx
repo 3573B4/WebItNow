@@ -16,7 +16,7 @@
         }, 600000);
 
         function acceso() {
-            location.href = '/Login.aspx';
+            location.href = '/Acceso.aspx';
         }
 
         function mpeMensajeOnOk() {
@@ -95,20 +95,7 @@
             min-height: 100%;
             width: 100%;
         }
-/*        
-        .loading
-        {
-            font-family: Arial;
-            font-size: 10pt;
-            border: 5px solid #67CFF5;
-            width: 200px;
-            height: 100px;
-            display: none;
-            position: fixed;
-            background-color: White;
-            z-index: 999;
-        }
-*/
+
         .loading {
             position: fixed;
             top: 0; right: 0;
@@ -120,6 +107,7 @@
         /*filter: alpha(opacity=80);*/ 
             opacity: 0.8; 
         }
+
         .loader {
             left: 50%;
             margin-left: -4em;
@@ -128,6 +116,7 @@
             border-left: .8em solid rgba(58, 166, 165, 1);
             animation: spin 1.1s infinite linear;
         }
+
         .center img{
             height: 128px;
             width:  128px;
@@ -239,9 +228,11 @@
                             </ItemTemplate> 
                         </asp:TemplateField>
 
+<%--                    
                         <asp:BoundField DataField="IdUsuario" HeaderText="Usuario" >
                         <ItemStyle Width="600px" /> 
                         </asp:BoundField>
+--%>
                         <asp:BoundField DataField="Referencia" HeaderText="Referencia" >
                         <ItemStyle Width="400px" /> 
                         </asp:BoundField>
@@ -282,7 +273,7 @@
             <ContentTemplate>
                 <div class="row g-3 mb-3">
                     <div class="col-lg-4 col-md-4 ">
-                        <asp:Label ID="LblUsu" runat="server" Text="Usuario Seleccionado" CssClass="control-label col-sm-2" Font-Size="Small"></asp:Label>
+                        <asp:Label ID="LblRef" runat="server" Text="Referencia Seleccionada" CssClass="control-label col-sm-2" Font-Size="Small"></asp:Label>
                     </div>
                     <div class="col-lg-6 col-md-6">
                         <asp:Label ID="LblNomArchivo" runat="server" Text="Archivo Seleccionado" CssClass="control-label col-sm-2" Font-Size="Small"></asp:Label>
@@ -293,15 +284,15 @@
                 </div>
             <div class="row g-3 mb-3">
                 <div class="col-lg-4 col-md-4 ">
-                    <asp:TextBox ID="TxtUsu" runat="server" CssClass="form-control" ReadOnly="True"></asp:TextBox>
+                    <asp:TextBox ID="TxtRef" runat="server" CssClass="form-control" ReadOnly="True"></asp:TextBox>
                 </div>
                 <asp:TextBox ID="TxtTpoDocumento" runat="server" CssClass="form-control" placeholder="Tipo de Documento" ReadOnly="True" Visible="false"></asp:TextBox>
                 <asp:TextBox ID="TxtUrl_Imagen" runat="server" CssClass="form-control" placeholder="Ruta del archivo" Enabled="False" Visible="false" ></asp:TextBox>
                 <div class="col-lg-7 col-md-7">
-                <asp:TextBox ID="TxtNomArchivo" runat="server" CssClass="form-control" ReadOnly="True"></asp:TextBox>
+                    <asp:TextBox ID="TxtNomArchivo" runat="server" CssClass="form-control" ReadOnly="True"></asp:TextBox>
                 </div>
                 <div class="col-auto">
-                <asp:ImageButton ID="imgDescarga" runat="server" ImageUrl="~/Images/descargar.png" Height="35px" Width="35px" OnClick="ImgDescarga_Click" Enabled ="false" />
+                    <asp:ImageButton ID="imgDescarga" runat="server" ImageUrl="~/Images/descargar.png" Height="35px" Width="35px" OnClick="ImgDescarga_Click" Enabled ="false" />
                 </div>
             </div>
             </ContentTemplate>

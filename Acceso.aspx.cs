@@ -54,7 +54,7 @@ namespace WebItNow
                 {
 
                     // IdUsuario
-                    System.Web.HttpContext.Current.Session["IdUsuario"] = TxtRef.Text;
+                    System.Web.HttpContext.Current.Session["Referencia"] = TxtRef.Text;
                     // Permisos Usuario
                     System.Web.HttpContext.Current.Session["UsPrivilegios"] = result;
 

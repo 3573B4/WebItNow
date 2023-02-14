@@ -11,7 +11,7 @@ namespace WebItNow
 {
     public class EnvioEmail
     {
-        public string CorreoElectronico(string pUsuario)
+        public string CorreoElectronico(string pReferencia)
         {
             string sEmail = string.Empty;
 
@@ -19,7 +19,7 @@ namespace WebItNow
             Conecta.Abrir();
 
             // Consulta en la tabla Usuarios
-            SqlCommand cmd1 = new SqlCommand("Select UsEmail From ITM_02 Where IdUsuario = '" + pUsuario + "'", Conecta.ConectarBD);
+            SqlCommand cmd1 = new SqlCommand("Select UsEmail From ITM_02 Where UsReferencia = '" + pReferencia + "'", Conecta.ConectarBD);
             SqlDataReader dr1 = cmd1.ExecuteReader();
 
             if (dr1.HasRows)

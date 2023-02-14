@@ -15,7 +15,7 @@
         }, 600000);
 
         function acceso() {
-            location.href = '/Login.aspx';
+            location.href = '/Acceso.aspx';
         }
 
         function mpeMensajeOnOk() {
@@ -49,7 +49,7 @@
 
             <div class="form-group mb-4">
                 <div class="d-grid col-12 justify-content-center mx-auto py-1">
-                    <asp:Label ID="lblUsuario" runat="server" Font-Size="X-Large" ></asp:Label>
+                    <asp:Label ID="lblRef" runat="server" Font-Size="X-Large" ></asp:Label>
                  </div>
             </div>
 
@@ -74,7 +74,7 @@
                                 <%--aqui va el boton de descarga--%>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:BoundField DataField="IdUsuario" HeaderText="Usuario" />
+                        <%--<asp:BoundField DataField="IdUsuario" HeaderText="Usuario" />--%>
                         <asp:BoundField DataField="Referencia" HeaderText="Referencia" />
                         <asp:BoundField DataField="Fec_Envio" HeaderText="Recepción" />
                         <%--<asp:BoundField DataField="Nom_Imagen" HeaderText="Archivo" />--%>

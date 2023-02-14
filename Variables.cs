@@ -13,6 +13,7 @@ namespace WebItNow
         /// 
 
         public static string wUsu;
+        public static string wRef;
         public static string wFileName;
         public static string wTpoDocumento;
         public static string wURL_Imagen;
