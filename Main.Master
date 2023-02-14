@@ -186,6 +186,7 @@
              <%--Aqui dentro van los objetos de nuestro web forma--%>
          </asp:ContentPlaceHolder>
         </div>
+
         <div id="footerContent" class="foter centrar-texto">
             <h7 class="h7 mt-4 mb-5 fw-bold">© 2023 Todos los derechos reservados |Itnow Technologies de México S.A. de C.V.</h7>
         </div>

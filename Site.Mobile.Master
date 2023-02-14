@@ -78,11 +78,23 @@
             padding: 4px;  
         }
 
+
         #banners125 {
         margin: 0; padding: 0;
         width:100%;
         overflow-x: hidden;
         display:inline-block;
+        }
+
+        .foter  {
+        position: fixed;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        background-color: mediumturquoise;
+        color: white;
+        margin-top: 8rem;
+        text-align: center;
+        bottom: 0;
         }
     </style>
 </head>
@@ -133,6 +145,10 @@
         </section>
 
     <!-- <friendlyUrls:ViewSwitcher runat="server" /> -->
+    </div>
+
+    <div id="footerContent" class="foter centrar-texto">
+        <h7 class="h7 mt-4 mb-5 fw-bold">© 2023 Todos los derechos reservados |Itnow Technologies de México S.A. de C.V.</h7>
     </div>
 
     </form>
