@@ -8,7 +8,7 @@ using System.Data.SqlClient;
 
 using OfficeOpenXml;
 using System.IO;
-
+using SpreadsheetLight;
 
 namespace WebItNow
 {
@@ -35,7 +35,9 @@ namespace WebItNow
 
         protected void BtnCargaExcel_Click(object sender, EventArgs e)
         {
-            importReadExcelFile();
+            //importReadExcelFile();
+            Cargar_Excel();
+
 
             // Eliminar archivo .xlsx del repositorio (solucion).
         }
@@ -343,7 +345,6 @@ namespace WebItNow
             Conecta.Abrir();
         }
 
-
         protected void importReadExcelFile()
         {
 
@@ -357,8 +358,8 @@ namespace WebItNow
                     //var excel = new ExcelPackage(Upload.FileContent);
                     //var dt = excel.ToDataTable();
 
-                    var dt = ExcelDataToDataTable("Referencia.xlsx", "Hoja1", true);
-                    var table = "ITM_03";
+                    var dt = ExcelDataToDataTable("Carga_Referencia.xlsx", "Hoja1", true);
+                    var table = "ITM_02";
 
                     using (var conn = new SqlConnection("Server=tcp:codice1.database.windows.net,1433;Initial Catalog=Itnow;Persist Security Info=False; User ID=DB_Codice; Password=Itnow2023; MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"))
                     {
@@ -415,6 +416,86 @@ namespace WebItNow
             });
 
             return dt;
+        }
+
+        private void Cargar_Excel()
+        {
+
+            string directorioURL = HttpContext.Current.Server.MapPath("~/itnowstorage/" + "Carga_Referencia.xlsx");
+
+            SLDocument sl = new SLDocument(directorioURL);
+            SLWorksheetStatistics propiedades = sl.GetWorksheetStatistics();
+            int ultimaFila = propiedades.EndRowIndex;
+
+            ConexionBD conectar = new ConexionBD();
+            conectar.Abrir();
+
+            //string error = "";
+
+            for (int x = 2; x <= ultimaFila; x++)
+            {
+                string referencia = sl.GetCellValueAsString("A" + x);
+
+                if (existeProducto(referencia))
+                {
+                    LblMessage.Text += "ya existe referencia" + referencia + "\n";
+                    mpeMensaje.Show();
+                }
+                else
+                {
+
+                    string sqlString = "INSERT INTO ITM_02 (UsReferencia, UsEmail, Aseguradora, UsAsegurado, Tipo_Asegurado, Nombre_Contacto, " +
+                                                            "Apellidos_Contacto, UsTelefono, RFC_Contacto, Perfil_Contacto ) " +
+                                    " VALUES (@referencia, @email, @aseguradora, @asegurado, @tpoasegurado, @nomcontacto, @apecontacto, " +
+                                    " @telefono, @rfc, @perfil )";
+                    try
+                    {
+
+                        SqlCommand cmd = new SqlCommand(sqlString, conectar.ConectarBD);
+
+                        cmd.Parameters.AddWithValue("@referencia", sl.GetCellValueAsString("A" + x));
+                        cmd.Parameters.AddWithValue("@email", sl.GetCellValueAsString("B" + x));
+                        cmd.Parameters.AddWithValue("@aseguradora", sl.GetCellValueAsString("C" + x));
+                        cmd.Parameters.AddWithValue("@asegurado", sl.GetCellValueAsString("D" + x));
+                        cmd.Parameters.AddWithValue("@tpoasegurado", sl.GetCellValueAsString("E" + x));
+                        cmd.Parameters.AddWithValue("@nomcontacto", sl.GetCellValueAsString("F" + x));
+                        cmd.Parameters.AddWithValue("@apecontacto", sl.GetCellValueAsString("G" + x));
+                        cmd.Parameters.AddWithValue("@telefono", sl.GetCellValueAsString("H" + x));
+                        cmd.Parameters.AddWithValue("@rfc", sl.GetCellValueAsString("I" + x));
+                        cmd.Parameters.AddWithValue("@perfil", sl.GetCellValueAsString("J" + x));
+
+
+                        int result =  cmd.ExecuteNonQuery();
+                    }
+                    catch (Exception ex)
+                    {
+                        LblMessage.Text = ex.Message;
+                        mpeMensaje.Show();
+                    }
+
+                }
+            }
+            LblMessage.Text = "Plantilla Cargada";
+            mpeMensaje.Show();
+        }
+        private bool existeProducto(string sReferencia)
+        {
+            ConexionBD conectar = new ConexionBD();
+            conectar.Abrir();
+
+            string queryString = "SELECT UsReferencia FROM ITM_02 WHERE UsReferencia='" + sReferencia + "'";
+            SqlCommand cmd2 = new SqlCommand(queryString, conectar.ConectarBD);
+
+            int num = Convert.ToInt32(cmd2.ExecuteScalar());
+
+            if (num > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
     }

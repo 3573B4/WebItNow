@@ -78,24 +78,6 @@ namespace WebItNow
         protected global::System.Web.UI.WebControls.Label LblRef;
 
         /// <summary>
-        /// Control LblNomArchivo.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LblNomArchivo;
-
-        /// <summary>
-        /// Control LblDescarga.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LblDescarga;
-
-        /// <summary>
         /// Control TxtRef.
         /// </summary>
         /// <remarks>
@@ -123,6 +105,15 @@ namespace WebItNow
         protected global::System.Web.UI.WebControls.TextBox TxtUrl_Imagen;
 
         /// <summary>
+        /// Control LblNomArchivo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LblNomArchivo;
+
+        /// <summary>
         /// Control TxtNomArchivo.
         /// </summary>
         /// <remarks>
@@ -130,6 +121,15 @@ namespace WebItNow
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TxtNomArchivo;
+
+        /// <summary>
+        /// Control LblDescarga.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LblDescarga;
 
         /// <summary>
         /// Control imgDescarga.
