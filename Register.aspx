@@ -76,21 +76,33 @@
                 <asp:Label ID="Lbl_Message" runat="server" ForeColor="Red" Visible="False"  Width="280px" ></asp:Label>
             </div>
         </div>        
-        <br />
-        <div class="form-group mt-3">
+        <div class="form-group mt-0">
             <div class="d-grid col-6 mx-auto">
                 <asp:Button ID="BtnEnviar" runat="server" Text="Registrar" Font-Bold="True" OnClick="BtnEnviar_Click" CssClass="btn btn-primary" />
             </div>
         </div>
+<%--        <div class="form-group">
+            <div class="input-group mx-auto mt-3 pt-3">
+                <asp:FileUpload ID="Upload" runat="server" CssClass="form-control"></asp:FileUpload>
+            </div>
+        </div>--%>
+
+        <div class="input-group mt-3">
+          <asp:FileUpload ID="Upload" runat="server" CssClass="form-control" a></asp:FileUpload>
+            <asp:Button ID="BtnCargaExcel" runat="server" Text="Upload" Font-Bold="True" OnClick="BtnCargaExcel_Click" CssClass="btn btn-outline-secondary" />
+          <%--<label class="input-group-text" for="Upload">Upload</label>--%>
+        </div>    
+<%--        
+        <div class="form-group mt-3">
+            <div class="d-grid col-6 mx-auto">
+                <asp:Button ID="BtnCargaExcel" runat="server" Text="Carga Excel" Font-Bold="True" OnClick="BtnCargaExcel_Click" CssClass="btn btn-primary" />
+            </div>
+        </div>
+--%>
+
         <div class="from-group mt-2">
             <div class="d-grid col-6 mx-auto">
                 <asp:Button ID="BtnRegresar" runat="server" Text="Regresar" Font-Bold="True" OnClick="BtnRegresar_Click" CssClass="btn btn-link"/>
-            </div>
-        </div>
-            <div class="form-group mt-3">
-            <div class="d-grid col-6 mx-auto">
-                <asp:FileUpload ID="Upload" runat="server" />
-                <asp:Button ID="BtnCargaExcel" runat="server" Text="Carga Excel" Font-Bold="True" OnClick="BtnCargaExcel_Click" CssClass="btn btn-primary" />
             </div>
         </div>
         <div class="form-group">

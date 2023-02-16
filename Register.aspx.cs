@@ -366,18 +366,28 @@ namespace WebItNow
                         bulkCopy.DestinationTableName = table;
                         conn.Open();
                         var schema = conn.GetSchema("Columns", new[] { null, null, table, null });
-                        foreach (DataColumn sourceColumn in dt.Columns)
+                        try
                         {
-                            foreach (DataRow row in schema.Rows)
+
+                            foreach (DataColumn sourceColumn in dt.Columns)
                             {
-                                if (string.Equals(sourceColumn.ColumnName, (string)row["COLUMN_NAME"], StringComparison.OrdinalIgnoreCase))
+                                foreach (DataRow row in schema.Rows)
                                 {
-                                    bulkCopy.ColumnMappings.Add(sourceColumn.ColumnName, (string)row["COLUMN_NAME"]);
-                                    break;
+                                    if (string.Equals(sourceColumn.ColumnName, (string)row["COLUMN_NAME"], StringComparison.OrdinalIgnoreCase))
+                                    {
+                                        bulkCopy.ColumnMappings.Add(sourceColumn.ColumnName, (string)row["COLUMN_NAME"]);
+                                        break;
+                                    }
                                 }
                             }
                         }
-                        bulkCopy.WriteToServer(dt);
+                        catch(Exception ex)
+                        {
+                            LblMessage.Text = ex.Message;
+                            this.mpeMensaje.Show();
+                        }
+
+                            bulkCopy.WriteToServer(dt);
                     }
                 }
             }
