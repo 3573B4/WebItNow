@@ -11,15 +11,7 @@
     <br />
     <div class="container col-md-4">
         <h2 class="h2 mb-3 fw-normal"> Iniciar Sesión</h2>
-        <div class="form-group">
-            <asp:Label ID="LblRef" runat="server" Text="Referencia" CssClass="control-label col-sm-2" Font-Size="Small"></asp:Label>
-            <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server"   
-                ControlToValidate="TxtRef" ErrorMessage="*" ForeColor="Red">
-                </asp:RequiredFieldValidator>
-            <div class="col-sm-12">
-                <asp:TextBox ID="TxtRef" runat="server" CssClass="form-control" placeholder="Referencia" onkeyup="mayus(this);" MaxLength="10" ></asp:TextBox>
-            </div>
-        </div>
+
         <div class="form-group">
             <asp:Label ID="LblEmail" runat="server" Text="Correo electrónico" CssClass="control-label col-sm-2" Font-Size="Small"></asp:Label>
             <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server"   
@@ -29,6 +21,17 @@
                 <asp:TextBox ID="TxtEmail" runat="server" CssClass="form-control" placeholder="Ingresa tu e-mail" MaxLength="50" ></asp:TextBox>
             </div>
         </div>
+
+        <div class="form-group">
+            <asp:Label ID="LblRef" runat="server" Text="Referencia" CssClass="control-label col-sm-2" Font-Size="Small"></asp:Label>
+            <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server"   
+                ControlToValidate="TxtRef" ErrorMessage="*" ForeColor="Red">
+                </asp:RequiredFieldValidator>
+            <div class="col-sm-12">
+                <asp:TextBox ID="TxtRef" runat="server" CssClass="form-control" placeholder="Referencia" onkeyup="mayus(this);" MaxLength="10" ></asp:TextBox>
+            </div>
+        </div>
+
         <div class="from-group">
                 <div class="d-grid col-4 mx-auto">
                     <br />

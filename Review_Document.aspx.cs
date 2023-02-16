@@ -80,6 +80,7 @@ namespace WebItNow
             TxtNomArchivo.Text = Server.HtmlDecode(GrdEstadoDocumento.SelectedRow.Cells[5].Text);
             TxtUrl_Imagen.Text = Server.HtmlDecode(GrdEstadoDocumento.SelectedRow.Cells[6].Text);
             TxtTpoDocumento.Text = Server.HtmlDecode(GrdEstadoDocumento.SelectedRow.Cells[7].Text);
+            TxtAsegurado.Text = Server.HtmlDecode(GrdEstadoDocumento.SelectedRow.Cells[9].Text);
 
             // Habilitar el boton de Descargas
             imgDescarga.Enabled = true;
@@ -183,9 +184,11 @@ namespace WebItNow
                 // Status de Documento = ITM_07
 
                 string strQuery = "SELECT ed.IdUsuario, ed.Referencia, ed.Nom_Imagen, td.Descripcion, ed.IdTipoDocumento, " +
-                                  "       s.Descripcion as Desc_Status, ed.Url_Imagen, ed.IdDescarga " +
-                                  "  FROM ITM_04 ed, ITM_06 td, ITM_07 s " +
-                                  " WHERE ed.IdStatus = s.IdStatus And ed.IdTipoDocumento = td.IdTpoDocumento " +
+                                  "       s.Descripcion as Desc_Status, ed.Url_Imagen, ed.IdDescarga, tr.UsAsegurado " +
+                                  "  FROM ITM_02 tr, ITM_04 ed, ITM_06 td, ITM_07 s " +
+                                  " WHERE ed.IdUsuario = tr.IdUsuario " + 
+                                  "   AND ed.IdStatus = s.IdStatus " + 
+                                  "   AND ed.IdTipoDocumento = td.IdTpoDocumento " +
                                   "   AND ed.IdStatus IN (2,3) ";
 
                 SqlCommand cmd = new SqlCommand(strQuery, Conecta.ConectarBD);

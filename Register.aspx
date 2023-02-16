@@ -10,8 +10,6 @@
         var modal = $find(modalId);
         modal.show();
 
-        //alert("La sesión ha expirado.");
-        //location.href = '/Login.aspx';
     }, 600000);
 
     function acceso() {
@@ -56,7 +54,8 @@
             </div>
         </div>        
         <br />
-<%--        <div class="form-group">
+<%--        
+        <div class="form-group">
             <asp:Label ID="LblPass" runat="server" Text="Contraseña" CssClass="control-label col-sm-2" Font-Size="Small"></asp:Label>
             <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server"   
                 ControlToValidate="TxtPass" ErrorMessage="*" ForeColor="Red">
@@ -64,7 +63,8 @@
             <div class="col-sm-12">
                 <asp:TextBox ID="TxtPass" runat="server" CssClass="form-control" placeholder="Crea una contraseña" onkeyup="mayus(this);" MaxLength="16" TextMode="Password"></asp:TextBox>
             </div>
-        </div>--%>
+        </div>
+--%>
         <div class="form-group">
             <div class="col-sm-12">
                 <asp:CheckBox ID="chkPrivacidad" runat="server" Text="&nbsp;&nbsp;Acepto el Aviso de Privacidad" Font-Size="Small" />
@@ -84,7 +84,13 @@
         </div>
         <div class="from-group mt-2">
             <div class="d-grid col-6 mx-auto">
-                <asp:Button ID="BtnRegresar" runat="server" Text="Iniciar Sesión" Font-Bold="True" OnClick="BtnRegresar_Click" CssClass="btn btn-link"/>
+                <asp:Button ID="BtnRegresar" runat="server" Text="Regresar" Font-Bold="True" OnClick="BtnRegresar_Click" CssClass="btn btn-link"/>
+            </div>
+        </div>
+            <div class="form-group mt-3">
+            <div class="d-grid col-6 mx-auto">
+                <asp:FileUpload ID="Upload" runat="server" />
+                <asp:Button ID="BtnCargaExcel" runat="server" Text="Carga Excel" Font-Bold="True" OnClick="BtnCargaExcel_Click" CssClass="btn btn-primary" />
             </div>
         </div>
         <div class="form-group">

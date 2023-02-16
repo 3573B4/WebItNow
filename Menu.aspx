@@ -160,6 +160,16 @@
                             <li><a class="dropdown-item" href="Consulta_Document.aspx">Consultas</a></li>
                         </ul>
                     </li>
+
+                    <li class="nav-item dropdown my-1">
+                        <a class="nav-link btn dropdown-toggle text-start" style="background-color:mediumturquoise;" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <font size="4">Registros</font>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="Register.aspx">Altas Referencia</a></li>
+                        </ul>
+                    </li>
+
                     <li class="nav-item my-1 mx-1">
                         <a class="nav-link btn text-start" style="background-color:mediumturquoise;" href="Acceso.aspx">
                             <font size="4">Salir</font>

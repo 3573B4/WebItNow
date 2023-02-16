@@ -1,9 +1,14 @@
 ﻿using System;
+using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
 using System.Data;
 using System.Data.SqlClient;
+
+using OfficeOpenXml;
+using System.IO;
+
 
 namespace WebItNow
 {
@@ -25,7 +30,14 @@ namespace WebItNow
 
         protected void BtnRegresar_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Acceso.aspx");
+            Response.Redirect("Menu.aspx");
+        }
+
+        protected void BtnCargaExcel_Click(object sender, EventArgs e)
+        {
+            importReadExcelFile();
+
+            // Eliminar archivo .xlsx del repositorio (solucion).
         }
 
         protected void BtnEnviar_Click(object sender, EventArgs e)
@@ -329,6 +341,70 @@ namespace WebItNow
         private static void NewMethod(ConexionBD Conecta)
         {
             Conecta.Abrir();
+        }
+
+
+        protected void importReadExcelFile()
+        {
+
+            if (IsPostBack && Upload.HasFile)
+            {
+                if (Path.GetExtension(Upload.FileName).Equals(".xlsx"))
+                {
+
+                    // Subir el archivo al repositorio (solucion) - wwwroot
+
+                    //var excel = new ExcelPackage(Upload.FileContent);
+                    //var dt = excel.ToDataTable();
+
+                    var dt = ExcelDataToDataTable("Referencia.xlsx", "Hoja1", true);
+                    var table = "ITM_03";
+
+                    using (var conn = new SqlConnection("Server=tcp:codice1.database.windows.net,1433;Initial Catalog=Itnow;Persist Security Info=False; User ID=DB_Codice; Password=Itnow2023; MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"))
+                    {
+                        var bulkCopy = new SqlBulkCopy(conn);
+                        bulkCopy.DestinationTableName = table;
+                        conn.Open();
+                        var schema = conn.GetSchema("Columns", new[] { null, null, table, null });
+                        foreach (DataColumn sourceColumn in dt.Columns)
+                        {
+                            foreach (DataRow row in schema.Rows)
+                            {
+                                if (string.Equals(sourceColumn.ColumnName, (string)row["COLUMN_NAME"], StringComparison.OrdinalIgnoreCase))
+                                {
+                                    bulkCopy.ColumnMappings.Add(sourceColumn.ColumnName, (string)row["COLUMN_NAME"]);
+                                    break;
+                                }
+                            }
+                        }
+                        bulkCopy.WriteToServer(dt);
+                    }
+                }
+            }
+
+        }
+
+        public static DataTable ExcelDataToDataTable(string filePath, string sheetName, bool hasHeader = true)
+        {
+            string directorioURL = HttpContext.Current.Server.MapPath("~/itnowstorage/" + filePath);
+            var dt = new DataTable();
+            var fi = new FileInfo(directorioURL);
+
+            // Check if the file exists
+            if (!fi.Exists)
+                throw new Exception("File " + filePath + " Does Not Exists");
+
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+            var xlPackage = new ExcelPackage(fi);
+            // get the first worksheet in the workbook
+            var worksheet = xlPackage.Workbook.Worksheets[sheetName];
+
+            dt = worksheet.Cells[1, 1, worksheet.Dimension.End.Row, worksheet.Dimension.End.Column].ToDataTable(c =>
+            {
+                c.FirstRowIsColumnNames = true;
+            });
+
+            return dt;
         }
 
     }

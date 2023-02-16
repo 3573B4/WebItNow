@@ -162,6 +162,11 @@
           width: 80px;
           height: 80px;
         }
+
+        .hide {
+            display: none!important;
+        }
+
     </style>
 
 </asp:Content>
@@ -209,7 +214,7 @@
         <br />
 
         <div style="overflow-x: auto; overflow-y:hidden">
-            <asp:GridView ID="GrdEstadoDocumento"  runat="server" AutoGenerateColumns="False" GridLines="None" Width="1400px"
+            <asp:GridView ID="GrdEstadoDocumento"  runat="server" AutoGenerateColumns="False" GridLines="None" Width="900px"
                     AllowPaging="True" CssClass="footable" PagerStyle-CssClass="pgr" AlternatingRowStyle-CssClass="alt" 
                     OnPageIndexChanging="GrdEstadoDocumento_OnPageIndexChanging" OnRowCommand="GrdEstadoDocumento_RowCommand"
                     OnSelectedIndexChanged="GrdEstadoDocumento_SelectedIndexChanged"
@@ -234,27 +239,30 @@
                         </asp:BoundField>
 --%>
                         <asp:BoundField DataField="Referencia" HeaderText="Referencia" >
-                        <ItemStyle Width="400px" /> 
+                        <ItemStyle Width="150px" /> 
                         </asp:BoundField>
                         <asp:BoundField DataField="Desc_Status" HeaderText="Estatus" >
-                        <ItemStyle Width="400px" />
+                        <ItemStyle Width="150px" />
                         </asp:BoundField>
                         <asp:BoundField DataField="Descripcion" HeaderText="Tipo de Documento" >
-                        <ItemStyle Width="1250px" />
+                        <ItemStyle Width="850px" />
                         </asp:BoundField>
                         <asp:BoundField DataField="Nom_Imagen" HeaderText="Nombre de Archivo" >
-                        <ItemStyle Width="1750px" />
+                        <ItemStyle Width="850" />
                         </asp:BoundField>
-                        <asp:BoundField DataField="Url_Imagen" HeaderText="Url_Imagen" >
-                        <ItemStyle Width="600px" />
+                        <asp:BoundField DataField="Url_Imagen"  >
+                        <ItemStyle Width="0px" Font-Size="0pt" />
                         </asp:BoundField>
-                        <asp:BoundField DataField="IdTipoDocumento" HeaderText="Id. de Documento" >
-                        <ItemStyle Width="600px" />
+                        <asp:BoundField DataField="IdTipoDocumento"  >
+                        <ItemStyle Width="0px" Font-Size="0pt" />
                         </asp:BoundField>
-                        <asp:BoundField DataField="IdDescarga" HeaderText="Descarga(s)" >
-                        <ItemStyle Width="200px" />
+                        <asp:BoundField DataField="IdDescarga"  >
+                        <ItemStyle Width="0px" Font-Size="0pt" />
                         </asp:BoundField>
-
+                        <asp:BoundField DataField="UsAsegurado"  >
+                        <ItemStyle Width="0px" Font-Size="0pt" />
+                        </asp:BoundField>
+                        <%--ItemStyle-CssClass="hide"--%>
                     </Columns>
                 
                     <PagerStyle CssClass="pgr" />
@@ -271,19 +279,19 @@
         <br />
         <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
             <ContentTemplate>
-                <div class="row g-3 mb-3">
-                    <div class="col-lg-4 col-md-4 ">
-                        <asp:Label ID="LblRef" runat="server" Text="Referencia Seleccionada" CssClass="control-label col-sm-2" Font-Size="Small"></asp:Label>
-                    </div>
-                    <div class="col-lg-6 col-md-6">
-                        <asp:Label ID="LblNomArchivo" runat="server" Text="Archivo Seleccionado" CssClass="control-label col-sm-2" Font-Size="Small"></asp:Label>
-                    </div>
-                    <div class="col-lg-2 col-md-2 text-end">
-                        <asp:Label ID="LblDescarga" runat="server" Text="Descargar" CssClass="control-label col-sm-2" Font-Size="Small"></asp:Label>
-                    </div>
-                </div>
             <div class="row g-3 mb-3">
                 <div class="col-lg-4 col-md-4 ">
+                    <asp:Label ID="LblRef" runat="server" Text="Referencia Seleccionada" CssClass="control-label col-sm-2" Font-Size="Small"></asp:Label>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <asp:Label ID="LblNomArchivo" runat="server" Text="Archivo Seleccionado" CssClass="control-label col-sm-2" Font-Size="Small"></asp:Label>
+                </div>
+                <div class="col-lg-2 col-md-2 text-end">
+                    <asp:Label ID="LblDescarga" runat="server" Text="Descargar" CssClass="control-label col-sm-2" Font-Size="Small"></asp:Label>
+                </div>
+            </div>
+            <div class="row g-3 mb-3">
+                <div class="col-lg-4 col-md-4">
                     <asp:TextBox ID="TxtRef" runat="server" CssClass="form-control" ReadOnly="True"></asp:TextBox>
                 </div>
                 <asp:TextBox ID="TxtTpoDocumento" runat="server" CssClass="form-control" placeholder="Tipo de Documento" ReadOnly="True" Visible="false"></asp:TextBox>
@@ -295,17 +303,20 @@
                     <asp:ImageButton ID="imgDescarga" runat="server" ImageUrl="~/Images/descargar.png" Height="35px" Width="35px" OnClick="ImgDescarga_Click" Enabled ="false" />
                 </div>
             </div>
+            <div class="row g-3 mb-3">
+
+                <div class="col-lg-4 col-md-4 pt-3 ">
+                    <asp:Label ID="lblAsegurado" runat="server" Text="Nombre de Cliente :" CssClass="control-label col-sm-2" Font-Size="Small"></asp:Label>
+                </div>
+
+                <div class="col-lg-8 col-md-4 ">
+                    <asp:TextBox ID="TxtAsegurado" runat="server" CssClass="form-control" ReadOnly="True"></asp:TextBox>
+                </div>
+            </div>
             </ContentTemplate>
         </asp:UpdatePanel>
 
-        
-<%--        <div class="loading" align="center">
-            Loading. Please wait.<br />
-            <br />
-            <img src="loader.gif" alt="" />
-        </div>--%>
-
-<%--        
+<%-- 
         <div class="from-group">
             <div class="d-grid col-6 mx-auto">
                 <asp:UpdatePanel ID="UpdatePanel1" runat="server">
@@ -459,15 +470,5 @@
     </div>
     </ProgressTemplate>
 </asp:UpdateProgress>
-<%--    
-    <asp:UpdateProgress ID="UpdateProgress1" runat="server" AssociatedUpdatePanelID="UpdatePanel1" DynamicLayout="true">
-        <ProgressTemplate>
-        <div class="overlay" />
-            <div class="overlayContent">
-                <h2>Loading...</h2>
-                <img src="Images/ajax-loader.gif" alt="Loading" border="1" />
-            </div>
-        </ProgressTemplate>
-    </asp:UpdateProgress>
---%>
+
 </asp:Content>
