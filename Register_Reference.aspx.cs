@@ -445,9 +445,9 @@ namespace WebItNow
                 {
 
                     string sqlString = "INSERT INTO ITM_02 (UsReferencia, UsEmail, Aseguradora, UsAsegurado, Tipo_Asegurado, Nombre_Contacto, " +
-                                                            "Apellidos_Contacto, UsTelefono, RFC_Contacto, Perfil_Contacto ) " +
+                                                            "Apellidos_Contacto, UsTelefono, RFC_Contacto, Perfil_Contacto, Siniestro ) " +
                                     " VALUES (@referencia, @email, @aseguradora, @asegurado, @tpoasegurado, @nomcontacto, @apecontacto, " +
-                                    " @telefono, @rfc, @perfil )";
+                                    " @telefono, @rfc, @perfil, @siniestro )";
                     try
                     {
 
@@ -463,6 +463,7 @@ namespace WebItNow
                         cmd.Parameters.AddWithValue("@telefono", sl.GetCellValueAsString("H" + x));
                         cmd.Parameters.AddWithValue("@rfc", sl.GetCellValueAsString("I" + x));
                         cmd.Parameters.AddWithValue("@perfil", sl.GetCellValueAsString("J" + x));
+                        cmd.Parameters.AddWithValue("@siniestro", sl.GetCellValueAsString("K" + x));
 
 
                         int result =  cmd.ExecuteNonQuery();
@@ -475,7 +476,7 @@ namespace WebItNow
 
                 }
             }
-            LblMessage.Text = "Plantilla Cargada";
+            LblMessage.Text = "Documento Excel Cargado";
             mpeMensaje.Show();
         }
         private bool existeProducto(string sReferencia)

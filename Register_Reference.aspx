@@ -28,10 +28,12 @@
     <br />
 
 <div class="container col-md-4">
-        <h2 class="h2 mb-3 fw-normal">Alta de Referencia</h2>
+        <h2 class="h2 mb-3 fw-normal">Carga de Datos</h2>
+<%--
         <div class="form-group mt-5">
             <asp:Label ID="LblDesc" runat="server" Text="Estimado cliente, favor de proporcionar un nombre de usuario con una longitud de 6 a 15 caracteres. Un correo electrónico donde recibirás las notificaciones del sistema y tu contraseña de acceso." CssClass="control-label co-sm-2" Font-Size="Small" Font-Bold="False"></asp:Label>
         </div>
+--%>
         <div class="form-group mt-4">
             <asp:Label ID="LblRef" runat="server" Text="Referencia" CssClass="control-label co-sm-2" Font-Size="Small" Font-Bold="False"></asp:Label>
             <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server"   
