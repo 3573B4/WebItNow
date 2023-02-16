@@ -218,7 +218,7 @@
                     AllowPaging="True" CssClass="footable" PagerStyle-CssClass="pgr" AlternatingRowStyle-CssClass="alt" 
                     OnPageIndexChanging="GrdEstadoDocumento_OnPageIndexChanging" OnRowCommand="GrdEstadoDocumento_RowCommand"
                     OnSelectedIndexChanged="GrdEstadoDocumento_SelectedIndexChanged"
-                    OnRowDataBound ="GrdEstadoDocumento_RowDataBound" DataKeyNames="IdUsuario" >
+                    OnRowDataBound ="GrdEstadoDocumento_RowDataBound" DataKeyNames="Referencia" >
                     <AlternatingRowStyle CssClass="alt" />
                     <Columns>
                         <asp:TemplateField>
@@ -233,11 +233,6 @@
                             </ItemTemplate> 
                         </asp:TemplateField>
 
-<%--                    
-                        <asp:BoundField DataField="IdUsuario" HeaderText="Usuario" >
-                        <ItemStyle Width="600px" /> 
-                        </asp:BoundField>
---%>
                         <asp:BoundField DataField="Referencia" HeaderText="Referencia" >
                         <ItemStyle Width="150px" /> 
                         </asp:BoundField>

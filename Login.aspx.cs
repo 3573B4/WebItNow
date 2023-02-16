@@ -73,7 +73,7 @@ namespace WebItNow
 
                     if (UsPrivilegios == "3")
                     {
-                        Response.Redirect("Upload_Files.aspx");
+                      //  Response.Redirect("Upload_Files.aspx");
                     }
                     else
                     {

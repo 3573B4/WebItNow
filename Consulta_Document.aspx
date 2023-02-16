@@ -89,7 +89,7 @@
                 </asp:GridView>
             </div>
             <div class="form-group d-grid col-md-3 mx-auto pt-3">
-                <asp:Button ID="BtnRegresar" runat="server" Text="Regresar" Font-Bold="True" OnClick="BtnRegresar_Click" CssClass="btn btn-primary"/>
+                <asp:Button ID="BtnRegresar" runat="server" Text="Regresar" Font-Bold="True" OnClick="BtnRegresar_Click" CssClass="btn btn-link"/>
             </div>
             <div class="form-group">
                 <div class="d-grid col-6 mx-auto">

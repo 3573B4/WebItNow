@@ -69,7 +69,7 @@ namespace WebItNow
                     }
                     else
                     {
-                        Response.Redirect("menu.aspx");
+                        // Response.Redirect("menu.aspx");
                     }
 
                     Lbl_Message.Visible = false;

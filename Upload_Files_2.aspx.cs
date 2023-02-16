@@ -235,7 +235,7 @@ namespace WebItNow
             connect.Abrir();
 
             // Consulta a la tabla Estado de Documento
-            string edoQuery = " SELECT IdUsuario, IdTipoDocumento, IdStatus " +
+            string edoQuery = " SELECT IdTipoDocumento, IdStatus " +
                                 "FROM ITM_04 " +
                                 "WHERE Referencia = '" + sReferencia + "' " +
                                 "AND IdTipoDocumento = '" + tpoDoc + "'";

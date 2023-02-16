@@ -28,7 +28,7 @@
                 ControlToValidate="TxtRef" ErrorMessage="*" ForeColor="Red">
                 </asp:RequiredFieldValidator>
             <div class="col-sm-12">
-                <asp:TextBox ID="TxtRef" runat="server" CssClass="form-control" placeholder="Referencia" onkeyup="mayus(this);" MaxLength="10" ></asp:TextBox>
+                <asp:TextBox ID="TxtRef" runat="server" CssClass="form-control" placeholder="Referencia" MaxLength="10" ></asp:TextBox>
             </div>
         </div>
 
