@@ -5,7 +5,7 @@ using System.Data.SqlClient;
 
 namespace WebItNow
 {
-	public partial class Acceso : System.Web.UI.Page
+	public partial class Access : System.Web.UI.Page
 	{
         protected void Page_PreInit(object sender, EventArgs e)
         {

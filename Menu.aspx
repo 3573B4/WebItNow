@@ -166,12 +166,12 @@
                             <font size="4">Registros</font>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="Register.aspx">Altas Referencia</a></li>
+                            <li><a class="dropdown-item" href="Register_Reference.aspx">Altas Referencia</a></li>
                         </ul>
                     </li>
 
                     <li class="nav-item my-1 mx-1">
-                        <a class="nav-link btn text-start" style="background-color:mediumturquoise;" href="Acceso.aspx">
+                        <a class="nav-link btn text-start" style="background-color:mediumturquoise;" href="Login.aspx">
                             <font size="4">Salir</font>
                             <%--<asp:ImageButton ID="ImgSalir" runat="server" ImageUrl="~/Images/logout-d.png" Height="45px" Width="52px" OnClick="ImgSalir_Click" CssClass="btn btn-primary my-1"/>--%>
                         </a>

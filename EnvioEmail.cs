@@ -42,6 +42,37 @@ namespace WebItNow
 
             return sEmail;
         }
+        public string CorreoElectronico_User(string pUsuario)
+        {
+            string sEmail = string.Empty;
+
+            ConexionBD Conecta = new ConexionBD();
+            Conecta.Abrir();
+
+            // Consulta en la tabla Usuarios
+            SqlCommand cmd1 = new SqlCommand("Select UsEmail From ITM_01 Where IdUsuario = '" + pUsuario + "'", Conecta.ConectarBD);
+            SqlDataReader dr1 = cmd1.ExecuteReader();
+
+            if (dr1.HasRows)
+            {
+
+                while (dr1.Read())
+                {
+                    sEmail = dr1["UsEmail"].ToString().Trim();
+                }
+            }
+            else
+            {
+                return sEmail;
+            }
+
+            cmd1.Dispose();
+            dr1.Dispose();
+
+            Conecta.Cerrar();
+
+            return sEmail;
+        }
 
         public int EnvioMensaje(String pUsuarios, String pEmail, string pAsunto, string pBody)
         {

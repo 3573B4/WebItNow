@@ -94,7 +94,7 @@ namespace WebItNow
                     var email = new EnvioEmail();   
 
                     // Consultar de la tabla [tbUsuarios] el [UsEmail]
-                    string sEmail = email.CorreoElectronico(sUsuario);
+                    string sEmail = email.CorreoElectronico_User(sUsuario);
                     int Envio_Ok = email.EnvioMensaje(sUsuario, sEmail, "Cambio Contraseña",string.Empty);
 
                     if (Envio_Ok == 0)
@@ -215,7 +215,7 @@ namespace WebItNow
                 ConexionBD Conecta = new ConexionBD();
                 NewMethod(Conecta);
 
-                SqlCommand cmd1 = new SqlCommand("Select IdUsuario From ITM_02 Where UsEmail = '" + pEmail + "'", Conecta.ConectarBD);
+                SqlCommand cmd1 = new SqlCommand("Select IdUsuario From ITM_01 Where UsEmail = '" + pEmail + "'", Conecta.ConectarBD);
                 SqlDataReader dr1 = cmd1.ExecuteReader();
 
                 while (dr1.Read())

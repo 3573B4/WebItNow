@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="Register.aspx.cs" Inherits="WebItNow.Register" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="Register_User.aspx.cs" Inherits="WebItNow.Register_User" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
@@ -10,10 +10,12 @@
         var modal = $find(modalId);
         modal.show();
 
+        //alert("La sesión ha expirado.");
+        //location.href = '/Login.aspx';
     }, 600000);
 
     function acceso() {
-        location.href = '/Acceso.aspx';
+        location.href = '/Login.aspx';
     }
 
     function mpeMensajeOnOk() {
@@ -28,17 +30,17 @@
     <br />
 
 <div class="container col-md-4">
-        <h2 class="h2 mb-3 fw-normal">Alta de Referencia</h2>
+        <h2 class="h2 mb-3 fw-normal">Alta de Usuario</h2>
         <div class="form-group mt-5">
             <asp:Label ID="LblDesc" runat="server" Text="Estimado cliente, favor de proporcionar un nombre de usuario con una longitud de 6 a 15 caracteres. Un correo electrónico donde recibirás las notificaciones del sistema y tu contraseña de acceso." CssClass="control-label co-sm-2" Font-Size="Small" Font-Bold="False"></asp:Label>
         </div>
         <div class="form-group mt-4">
-            <asp:Label ID="LblRef" runat="server" Text="Referencia" CssClass="control-label co-sm-2" Font-Size="Small" Font-Bold="False"></asp:Label>
+            <asp:Label ID="LblUsu" runat="server" Text="Usuario" CssClass="control-label co-sm-2" Font-Size="Small" Font-Bold="False"></asp:Label>
             <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server"   
-                ControlToValidate="TxtRef" ErrorMessage="*" ForeColor="Red">
+                ControlToValidate="TxtUsu" ErrorMessage="*" ForeColor="Red">
                 </asp:RequiredFieldValidator>
             <div class="col-sm-12">
-                <asp:TextBox ID="TxtRef" runat="server" CssClass="form-control" placeholder="Referencia"  OnTextChanged="TxtRef_TextChanged" AutoPostBack="true" MaxLength="16" ></asp:TextBox>
+                <asp:TextBox ID="TxtUsu" runat="server" CssClass="form-control" placeholder="Usuario" onkeyup="mayus(this);" OnTextChanged="TxtUsu_TextChanged" AutoPostBack="true" MaxLength="16" ></asp:TextBox>
             </div>
         </div>
 
@@ -53,8 +55,7 @@
                 <asp:TextBox ID="TxtEmail" runat="server" CssClass="form-control" placeholder="Ingresa tu e-mail" MaxLength="50" OnTextChanged="TxtEmail_TextChanged" AutoPostBack="true" TextMode="Email"></asp:TextBox>
             </div>
         </div>        
-        <br />
-<%--        
+
         <div class="form-group">
             <asp:Label ID="LblPass" runat="server" Text="Contraseña" CssClass="control-label col-sm-2" Font-Size="Small"></asp:Label>
             <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server"   
@@ -64,7 +65,7 @@
                 <asp:TextBox ID="TxtPass" runat="server" CssClass="form-control" placeholder="Crea una contraseña" onkeyup="mayus(this);" MaxLength="16" TextMode="Password"></asp:TextBox>
             </div>
         </div>
---%>
+        <br />
         <div class="form-group">
             <div class="col-sm-12">
                 <asp:CheckBox ID="chkPrivacidad" runat="server" Text="&nbsp;&nbsp;Acepto el Aviso de Privacidad" Font-Size="Small" />
@@ -76,33 +77,15 @@
                 <asp:Label ID="Lbl_Message" runat="server" ForeColor="Red" Visible="False"  Width="280px" ></asp:Label>
             </div>
         </div>        
-        <div class="form-group mt-0">
+        <br />
+        <div class="form-group mt-3">
             <div class="d-grid col-6 mx-auto">
                 <asp:Button ID="BtnEnviar" runat="server" Text="Registrar" Font-Bold="True" OnClick="BtnEnviar_Click" CssClass="btn btn-primary" />
             </div>
         </div>
-<%--        <div class="form-group">
-            <div class="input-group mx-auto mt-3 pt-3">
-                <asp:FileUpload ID="Upload" runat="server" CssClass="form-control"></asp:FileUpload>
-            </div>
-        </div>--%>
-
-        <div class="input-group mt-3">
-          <asp:FileUpload ID="Upload" runat="server" CssClass="form-control" a></asp:FileUpload>
-            <asp:Button ID="BtnCargaExcel" runat="server" Text="Upload" Font-Bold="True" OnClick="BtnCargaExcel_Click" CssClass="btn btn-outline-secondary" />
-          <%--<label class="input-group-text" for="Upload">Upload</label>--%>
-        </div>    
-<%--        
-        <div class="form-group mt-3">
-            <div class="d-grid col-6 mx-auto">
-                <asp:Button ID="BtnCargaExcel" runat="server" Text="Carga Excel" Font-Bold="True" OnClick="BtnCargaExcel_Click" CssClass="btn btn-primary" />
-            </div>
-        </div>
---%>
-
         <div class="from-group mt-2">
             <div class="d-grid col-6 mx-auto">
-                <asp:Button ID="BtnRegresar" runat="server" Text="Regresar" Font-Bold="True" OnClick="BtnRegresar_Click" CssClass="btn btn-link"/>
+                <asp:Button ID="BtnRegresar" runat="server" Text="Iniciar Sesión" Font-Bold="True" OnClick="BtnRegresar_Click" CssClass="btn btn-link"/>
             </div>
         </div>
         <div class="form-group">

@@ -1,18 +1,13 @@
 ﻿using System;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
 using System.Data;
 using System.Data.SqlClient;
 
-using OfficeOpenXml;
-using System.IO;
-
-
 namespace WebItNow
 {
-    public partial class Register : System.Web.UI.Page
+    public partial class Register_User : System.Web.UI.Page
     {
         protected void Page_PreInit(object sender, EventArgs e)
         {
@@ -30,33 +25,26 @@ namespace WebItNow
 
         protected void BtnRegresar_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Menu.aspx");
-        }
-
-        protected void BtnCargaExcel_Click(object sender, EventArgs e)
-        {
-            importReadExcelFile();
-
-            // Eliminar archivo .xlsx del repositorio (solucion).
+            Response.Redirect("Login.aspx");
         }
 
         protected void BtnEnviar_Click(object sender, EventArgs e)
         {
             //* Validar si el usuario existe o es nuevo
-            if (TxtRef.Text != "" && TxtEmail.Text != "")
+            if (TxtUsu.Text != "" && TxtEmail.Text != "" && TxtPass.Text != "")
             {
 
                 // Insertar Registo Tabla tbUsuarios (UploadFiles)
-                int result = Add_tbUsuarios(TxtRef.Text, TxtEmail.Text, string.Empty, 3, "Insert");
+                int result = Add_tbUsuarios(TxtUsu.Text, TxtEmail.Text, TxtPass.Text, 2, "Insert");
 
                 if (result == 0)
                 {
                     // Insertar Registros Tabla tbEstadoDocumento [ITM_04]
-                    int idStatus = 1;
-                    int valor = Add_tbEstadoDocumento(TxtRef.Text, idStatus);
+                    // int idStatus = 1;
+                    // int valor = Add_tbEstadoDocumento(TxtUsu.Text, idStatus);
 
                     var email = new EnvioEmail();
-                    int Envio_Ok = email.EnvioMensaje(TxtRef.Text.Trim(), TxtEmail.Text.Trim(), "Registro Referencia ", string.Empty);
+                    int Envio_Ok = email.EnvioMensaje(TxtUsu.Text.Trim(), TxtEmail.Text.Trim(), "Registro Usuario ", string.Empty);
 
                     //EnvioMensaje(TxtUsu.Text.Trim(), TxtEmail.Text.Trim());
 
@@ -274,15 +262,15 @@ namespace WebItNow
             return -1;
         }
 
-        protected void TxtRef_TextChanged(object sender, EventArgs e)
+        protected void TxtUsu_TextChanged(object sender, EventArgs e)
         {
             // Validar si existe Usuario en la tabla ITM_02 (tbUsuarios)
             Variables.wPrivilegios = "3";
-            int Usuario_Existe = ValidaUser(TxtRef.Text, Int32.Parse(Variables.wPrivilegios));
+            int Usuario_Existe = ValidaUser(TxtUsu.Text, Int32.Parse(Variables.wPrivilegios));
 
             if (Usuario_Existe == 1)
             {
-                TxtRef.Text = string.Empty;
+                TxtUsu.Text = string.Empty;
                 TxtEmail.Focus();
 
                 LblMessage.Text = "El nombre de usuario ya existe";
@@ -310,7 +298,7 @@ namespace WebItNow
             }
             else
             {
-                TxtEmail.Focus();
+                TxtPass.Focus();
             }
         }
 
@@ -341,80 +329,6 @@ namespace WebItNow
         private static void NewMethod(ConexionBD Conecta)
         {
             Conecta.Abrir();
-        }
-
-
-        protected void importReadExcelFile()
-        {
-
-            if (IsPostBack && Upload.HasFile)
-            {
-                if (Path.GetExtension(Upload.FileName).Equals(".xlsx"))
-                {
-
-                    // Subir el archivo al repositorio (solucion) - wwwroot
-
-                    //var excel = new ExcelPackage(Upload.FileContent);
-                    //var dt = excel.ToDataTable();
-
-                    var dt = ExcelDataToDataTable("Referencia.xlsx", "Hoja1", true);
-                    var table = "ITM_03";
-
-                    using (var conn = new SqlConnection("Server=tcp:codice1.database.windows.net,1433;Initial Catalog=Itnow;Persist Security Info=False; User ID=DB_Codice; Password=Itnow2023; MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"))
-                    {
-                        var bulkCopy = new SqlBulkCopy(conn);
-                        bulkCopy.DestinationTableName = table;
-                        conn.Open();
-                        var schema = conn.GetSchema("Columns", new[] { null, null, table, null });
-                        try
-                        {
-
-                            foreach (DataColumn sourceColumn in dt.Columns)
-                            {
-                                foreach (DataRow row in schema.Rows)
-                                {
-                                    if (string.Equals(sourceColumn.ColumnName, (string)row["COLUMN_NAME"], StringComparison.OrdinalIgnoreCase))
-                                    {
-                                        bulkCopy.ColumnMappings.Add(sourceColumn.ColumnName, (string)row["COLUMN_NAME"]);
-                                        break;
-                                    }
-                                }
-                            }
-                        }
-                        catch(Exception ex)
-                        {
-                            LblMessage.Text = ex.Message;
-                            this.mpeMensaje.Show();
-                        }
-
-                            bulkCopy.WriteToServer(dt);
-                    }
-                }
-            }
-
-        }
-
-        public static DataTable ExcelDataToDataTable(string filePath, string sheetName, bool hasHeader = true)
-        {
-            string directorioURL = HttpContext.Current.Server.MapPath("~/itnowstorage/" + filePath);
-            var dt = new DataTable();
-            var fi = new FileInfo(directorioURL);
-
-            // Check if the file exists
-            if (!fi.Exists)
-                throw new Exception("File " + filePath + " Does Not Exists");
-
-            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
-            var xlPackage = new ExcelPackage(fi);
-            // get the first worksheet in the workbook
-            var worksheet = xlPackage.Workbook.Worksheets[sheetName];
-
-            dt = worksheet.Cells[1, 1, worksheet.Dimension.End.Row, worksheet.Dimension.End.Column].ToDataTable(c =>
-            {
-                c.FirstRowIsColumnNames = true;
-            });
-
-            return dt;
         }
 
     }

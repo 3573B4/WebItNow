@@ -30,7 +30,7 @@ namespace WebItNow
                 this.Form.Attributes.Add("autocomplete", "off");
 
                 // Permisos Usuario
-                System.Web.HttpContext.Current.Session["UsPrivilegios"] = "3";
+                System.Web.HttpContext.Current.Session["UsPrivilegios"] = "2";
 
                 //LblMessage.Text = (string)Session["DownloadsPath"];
                 //this.mpeMensaje.Show();
@@ -94,7 +94,7 @@ namespace WebItNow
 
         protected void BtnRegistrarse_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Register.aspx");
+            Response.Redirect("Register_User.aspx");
         }
 
         private static void NewMethod(ConexionBD Conecta)

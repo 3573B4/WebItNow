@@ -99,7 +99,7 @@ namespace WebItNow
 
         protected void BtnSalir_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Acceso.aspx");
+            Response.Redirect("Access.aspx");
         }
 
         protected void BtnCargaDocumento_Click(object sender, EventArgs e)

@@ -289,7 +289,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="About.aspx" />
-    <Content Include="Acceso.aspx" />
+    <Content Include="Access.aspx" />
     <Content Include="Captcha.aspx" />
     <Content Include="Consulta_Document.aspx" />
     <Content Include="Content\bootstrap-theme.css" />
@@ -315,6 +315,7 @@
     <Content Include="Images\whatsapp-logo_icon.png" />
     <Content Include="Menu.aspx" />
     <Content Include="Page_Message.aspx" />
+    <Content Include="Register_User.aspx" />
     <Content Include="Request_Document.aspx" />
     <Content Include="Review_Document.aspx" />
     <Content Include="Scripts\footable.min.js" />
@@ -376,7 +377,7 @@
     <Content Include="Scripts\WebForms\WebForms.js" />
     <Content Include="Scripts\WebForms\WebParts.js" />
     <Content Include="Scripts\WebForms\WebUIValidation.js" />
-    <Content Include="Register.aspx" />
+    <Content Include="Register_Reference.aspx" />
     <Content Include="Styles\GridView.css" />
     <Content Include="Styles\loading-bar.css" />
     <Content Include="Styles\loading-bar.min.css" />
@@ -393,12 +394,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ThumbGen.cs" />
-    <Compile Include="Acceso.aspx.cs">
-      <DependentUpon>Acceso.aspx</DependentUpon>
+    <Compile Include="Access.aspx.cs">
+      <DependentUpon>Access.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Acceso.aspx.designer.cs">
-      <DependentUpon>Acceso.aspx</DependentUpon>
+    <Compile Include="Access.aspx.designer.cs">
+      <DependentUpon>Access.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="About.aspx.cs">
@@ -471,6 +472,13 @@
       <DependentUpon>Page_Message.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Register_User.aspx.cs">
+      <DependentUpon>Register_User.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Register_User.aspx.designer.cs">
+      <DependentUpon>Register_User.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Request_Document.aspx.cs">
       <DependentUpon>Request_Document.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -499,12 +507,12 @@
     <Compile Include="Site.Mobile.Master.designer.cs">
       <DependentUpon>Site.Mobile.Master</DependentUpon>
     </Compile>
-    <Compile Include="Register.aspx.cs">
-      <DependentUpon>Register.aspx</DependentUpon>
+    <Compile Include="Register_Reference.aspx.cs">
+      <DependentUpon>Register_Reference.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Register.aspx.designer.cs">
-      <DependentUpon>Register.aspx</DependentUpon>
+    <Compile Include="Register_Reference.aspx.designer.cs">
+      <DependentUpon>Register_Reference.aspx</DependentUpon>
     </Compile>
     <Compile Include="Upload_Files.aspx.cs">
       <DependentUpon>Upload_Files.aspx</DependentUpon>
