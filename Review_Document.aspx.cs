@@ -736,11 +736,11 @@ namespace WebItNow
                 if (pIdStatus == 1)
                 {
                     Variables.wQuery = "Update ITM_04 Set IdStatus = " + pIdStatus + ", Nom_Imagen = Null, Fec_Rechazado = GETDATE()" +
-                                    " Where Referencia = '" + pReferencia + "' And IdTipoDocumento = '" + pIdTipoDocumento + "'";
+                                    " Where Referencia LIKE '%' + '" + pReferencia + "'  + '%' And IdTipoDocumento = '" + pIdTipoDocumento + "'";
                 }
                 else
                 {
-                    Variables.wQuery = "Update ITM_04 Set IdStatus = " + pIdStatus + ", Fec_Aceptado = GETDATE() Where Referencia = '" + pReferencia + "' And IdTipoDocumento = '" + pIdTipoDocumento + "'";
+                    Variables.wQuery = "Update ITM_04 Set IdStatus = " + pIdStatus + ", Fec_Aceptado = GETDATE() Where Referencia LIKE '%' + '" + pReferencia + "'  + '%' And IdTipoDocumento = '" + pIdTipoDocumento + "'";
                 }
 
                 SqlCommand cmd1 = new SqlCommand(Variables.wQuery, Conecta.ConectarBD);

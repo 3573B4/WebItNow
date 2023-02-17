@@ -35,11 +35,44 @@ namespace WebItNow
 
         protected void BtnCargaExcel_Click(object sender, EventArgs e)
         {
-            //importReadExcelFile();
-            Cargar_Excel();
+            string directorio = "~/itnowstorage/";
+            //string directorioURL = Server.MapPath(directorio);
+            string nomFile = Upload.FileName;
+         // string fileName = System.IO.Path.GetFileName(Upload.FileName);
 
+            int tamArchivo = Upload.PostedFile.ContentLength;
+            string extensionFile = Path.GetExtension(Upload.FileName);
 
-            // Eliminar archivo .xlsx del repositorio (solucion).
+            if (Upload.HasFile)
+            {
+                if ((extensionFile == ".xlsx") || (extensionFile == ".xls"))
+                {
+                    if (tamArchivo <= 70000000)
+                    {
+                        string filepath = Server.MapPath(directorio + Upload.FileName);
+                        Upload.SaveAs(filepath);
+                        string sPath = Path.GetDirectoryName(filepath) + "/" + nomFile;
+
+                        System.Threading.Thread.Sleep(3000);
+                        this.Cargar_Excel(directorio, nomFile);
+
+                        // Eliminar archivo .xlsx del repositorio (solucion).
+                        File.Delete(sPath);
+                    }
+                }
+                else
+                {
+                    LblMessage.Text = "El archivo tiene  que ser un formato .xlsx";
+                    mpeMensaje.Show();
+                }
+
+            }
+            else
+            {
+                LblMessage.Text = "Debe seleccionar un archivo";
+                mpeMensaje.Show();
+            }
+
         }
 
         protected void BtnEnviar_Click(object sender, EventArgs e)
@@ -134,7 +167,7 @@ namespace WebItNow
             return -1;
         }
 
-        public int Add_tbEstadoDocumento(String pUsuarios, int pIdStatus)
+        public int Add_tbEstadoDocumento(String pReferencia, int pIdStatus)
         {
             try
             {
@@ -160,8 +193,8 @@ namespace WebItNow
                     int iIdStatus = 0;
                     int iIdDescarga = 0;
                     // Insert en la tabla Estado de Documento
-                    SqlCommand cmd1 = new SqlCommand("Insert into ITM_04 (IdUsuario, IdTipoDocumento, IdStatus, IdDescarga) " +
-                                        "Values ('" + pUsuarios + "', '" + IdTpoDocumento + "', " + iIdStatus + ", " + iIdDescarga + ")", Conecta.ConectarBD);
+                    SqlCommand cmd1 = new SqlCommand("Insert into ITM_04 (Referencia, IdTipoDocumento, IdStatus, IdDescarga) " +
+                                        "Values ('" + pReferencia + "', '" + IdTpoDocumento + "', " + iIdStatus + ", " + iIdDescarga + ")", Conecta.ConectarBD);
 
                     SqlDataReader dr1 = cmd1.ExecuteReader();
 
@@ -345,83 +378,10 @@ namespace WebItNow
             Conecta.Abrir();
         }
 
-        protected void importReadExcelFile()
+        private void Cargar_Excel(string directorio, string nomFile)
         {
 
-            if (IsPostBack && Upload.HasFile)
-            {
-                if (Path.GetExtension(Upload.FileName).Equals(".xlsx"))
-                {
-
-                    // Subir el archivo al repositorio (solucion) - wwwroot
-
-                    //var excel = new ExcelPackage(Upload.FileContent);
-                    //var dt = excel.ToDataTable();
-
-                    var dt = ExcelDataToDataTable("Carga_Referencia.xlsx", "Hoja1", true);
-                    var table = "ITM_02";
-
-                    using (var conn = new SqlConnection("Server=tcp:codice1.database.windows.net,1433;Initial Catalog=Itnow;Persist Security Info=False; User ID=DB_Codice; Password=Itnow2023; MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"))
-                    {
-                        var bulkCopy = new SqlBulkCopy(conn);
-                        bulkCopy.DestinationTableName = table;
-                        conn.Open();
-                        var schema = conn.GetSchema("Columns", new[] { null, null, table, null });
-                        try
-                        {
-
-                            foreach (DataColumn sourceColumn in dt.Columns)
-                            {
-                                foreach (DataRow row in schema.Rows)
-                                {
-                                    if (string.Equals(sourceColumn.ColumnName, (string)row["COLUMN_NAME"], StringComparison.OrdinalIgnoreCase))
-                                    {
-                                        bulkCopy.ColumnMappings.Add(sourceColumn.ColumnName, (string)row["COLUMN_NAME"]);
-                                        break;
-                                    }
-                                }
-                            }
-                        }
-                        catch(Exception ex)
-                        {
-                            LblMessage.Text = ex.Message;
-                            this.mpeMensaje.Show();
-                        }
-
-                            bulkCopy.WriteToServer(dt);
-                    }
-                }
-            }
-
-        }
-
-        public static DataTable ExcelDataToDataTable(string filePath, string sheetName, bool hasHeader = true)
-        {
-            string directorioURL = HttpContext.Current.Server.MapPath("~/itnowstorage/" + filePath);
-            var dt = new DataTable();
-            var fi = new FileInfo(directorioURL);
-
-            // Check if the file exists
-            if (!fi.Exists)
-                throw new Exception("File " + filePath + " Does Not Exists");
-
-            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
-            var xlPackage = new ExcelPackage(fi);
-            // get the first worksheet in the workbook
-            var worksheet = xlPackage.Workbook.Worksheets[sheetName];
-
-            dt = worksheet.Cells[1, 1, worksheet.Dimension.End.Row, worksheet.Dimension.End.Column].ToDataTable(c =>
-            {
-                c.FirstRowIsColumnNames = true;
-            });
-
-            return dt;
-        }
-
-        private void Cargar_Excel()
-        {
-
-            string directorioURL = HttpContext.Current.Server.MapPath("~/itnowstorage/" + "Carga_Referencia.xlsx");
+            string directorioURL = HttpContext.Current.Server.MapPath(directorio + nomFile);
 
             SLDocument sl = new SLDocument(directorioURL);
             SLWorksheetStatistics propiedades = sl.GetWorksheetStatistics();
@@ -434,11 +394,11 @@ namespace WebItNow
 
             for (int x = 2; x <= ultimaFila; x++)
             {
-                string referencia = sl.GetCellValueAsString("A" + x);
+                string sReferencia = sl.GetCellValueAsString("A" + x);
 
-                if (existeProducto(referencia))
+                if (existeProducto(sReferencia))
                 {
-                    LblMessage.Text += "ya existe referencia" + referencia + "\n";
+                    LblMessage.Text += "ya existe referencia" + sReferencia + "\n";
                     mpeMensaje.Show();
                 }
                 else
@@ -467,6 +427,10 @@ namespace WebItNow
 
 
                         int result =  cmd.ExecuteNonQuery();
+
+                        // Insertar Registros Tabla tbEstadoDocumento [ITM_04]
+                        int idStatus = 1;
+                        int valor = Add_tbEstadoDocumento(sReferencia, idStatus);
                     }
                     catch (Exception ex)
                     {
@@ -479,6 +443,7 @@ namespace WebItNow
             LblMessage.Text = "Documento Excel Cargado";
             mpeMensaje.Show();
         }
+
         private bool existeProducto(string sReferencia)
         {
             ConexionBD conectar = new ConexionBD();

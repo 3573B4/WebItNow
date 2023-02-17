@@ -123,7 +123,7 @@ namespace WebItNow
                 // Consulta a la tabla : Usuarios = ITM_02
                 string strQuery = "SELECT UsReferencia, UsEmail, UsAsegurado " +
                                   "  FROM ITM_02 ed " +
-                                  " WHERE UsReferencia = '" + pReferencia + "'";
+                                  " WHERE UsReferencia LIKE '%' + '" + pReferencia + "'  + '%' ";
 
                 SqlCommand cmd = new SqlCommand(strQuery, Conecta.ConectarBD);
 

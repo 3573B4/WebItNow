@@ -336,7 +336,6 @@
     <Content Include="Request_Document.aspx" />
     <Content Include="Review_Document.aspx" />
     <Content Include="Scripts\footable.min.js" />
-    <Content Include="itnowstorage\Carga_Referencia.xlsx" />
     <None Include="Scripts\jquery-1.4.1-vsdoc.js" />
     <Content Include="Scripts\jquery-1.4.1.js" />
     <Content Include="Scripts\jquery-1.4.1.min.js" />
@@ -558,6 +557,7 @@
     <Folder Include="App_Code\" />
     <Folder Include="App_Data\" />
     <Folder Include="Directorio\" />
+    <Folder Include="itnowstorage\" />
     <Folder Include="Uploads\" />
   </ItemGroup>
   <ItemGroup>

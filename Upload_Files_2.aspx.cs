@@ -94,7 +94,7 @@ namespace WebItNow
                                                     " Url_Imagen = '" + UrlFinal + "'," +
                                                     " Nom_Imagen = '" + nomFile + "'," +
                                                     "  Fec_Envio = GETDATE() " +
-                                                " WHERE Referencia = '" + sReferencia + "'" +
+                                                " WHERE Referencia LIKE '%' + '" + sReferencia + "'  + '%' " +
                                                 " AND IdTipoDocumento = '" + folderName + "'";
 
                             SqlCommand cmd = new SqlCommand(sqlUpDate, Conectar.ConectarBD);
@@ -237,7 +237,7 @@ namespace WebItNow
             // Consulta a la tabla Estado de Documento
             string edoQuery = " SELECT IdTipoDocumento, IdStatus " +
                                 "FROM ITM_04 " +
-                                "WHERE Referencia = '" + sReferencia + "' " +
+                                "WHERE Referencia LIKE '%' + '" + sReferencia + "'  + '%' " +
                                 "AND IdTipoDocumento = '" + tpoDoc + "'";
 
             SqlCommand cmd = new SqlCommand(edoQuery, connect.ConectarBD);

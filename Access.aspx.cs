@@ -78,7 +78,7 @@ namespace WebItNow
                 else
                 {
                     // "Usuario y/o Contraseña Incorrectos";
-                    LblMessage.Text = "No fue posible iniciar sesión." + "<br/>" + "Confirme su nombre de usuario y contraseña.";
+                    LblMessage.Text = "No fue posible iniciar sesión." + "<br/>" + "Confirme su Correo electrónico ó Referencia.";
                     this.mpeMensaje.Show();
                 }
             }

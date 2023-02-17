@@ -17,7 +17,7 @@
         }, 600000);
 
         function acceso() {
-            location.href = '/Acceso.aspx';
+            location.href = '/Access.aspx';
         }
 
         function mpeMensajeOnOk() {

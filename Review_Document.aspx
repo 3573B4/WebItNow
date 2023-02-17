@@ -16,7 +16,7 @@
         }, 600000);
 
         function acceso() {
-            location.href = '/Acceso.aspx';
+            location.href = '/Login.aspx';
         }
 
         function mpeMensajeOnOk() {
@@ -292,7 +292,7 @@
             </div>
             <div class="row g-3">
                 <div class="col-lg-4 col-md-5 col-sm-4 mt-3 ">
-                    <asp:Label ID="lblAsegurado" runat="server" Text="Nombre de Cliente o Destinatario:" CssClass="control-label" Font-Size="Small"></asp:Label>
+                    <asp:Label ID="lblAsegurado" runat="server" Text="Nombre de Cliente :" CssClass="control-label" Font-Size="Small"></asp:Label>
                 </div>
                 <div class="col-lg-8 col-md-7 col-sm-8">
                     <asp:TextBox ID="TxtAsegurado" runat="server" CssClass="form-control" ReadOnly="True"></asp:TextBox>
