@@ -444,12 +444,12 @@ namespace WebItNow
             mpeMensaje.Show();
         }
 
-        private bool existeProducto(string sReferencia)
+        private bool existeProducto(string pReferencia)
         {
             ConexionBD conectar = new ConexionBD();
             conectar.Abrir();
 
-            string queryString = "SELECT UsReferencia FROM ITM_02 WHERE UsReferencia='" + sReferencia + "'";
+            string queryString = "SELECT UsReferencia FROM ITM_02 WHERE UsReferencia LIKE '%' + '" + pReferencia + "'  + '%'";
             SqlCommand cmd2 = new SqlCommand(queryString, conectar.ConectarBD);
 
             int num = Convert.ToInt32(cmd2.ExecuteScalar());
