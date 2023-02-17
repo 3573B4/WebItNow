@@ -25,7 +25,7 @@ namespace WebItNow
 
         protected void BtnRegresar_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Login.aspx");
+            Response.Redirect("Menu.aspx");
         }
 
         protected void BtnEnviar_Click(object sender, EventArgs e)
@@ -264,8 +264,8 @@ namespace WebItNow
 
         protected void TxtUsu_TextChanged(object sender, EventArgs e)
         {
-            // Validar si existe Usuario en la tabla ITM_02 (tbUsuarios)
-            Variables.wPrivilegios = "3";
+            // Validar si existe Usuario en la tabla ITM_01 (tbLogin)
+            Variables.wPrivilegios = "2";
             int Usuario_Existe = ValidaUser(TxtUsu.Text, Int32.Parse(Variables.wPrivilegios));
 
             if (Usuario_Existe == 1)

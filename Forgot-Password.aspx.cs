@@ -68,7 +68,7 @@ namespace WebItNow
 
         protected void BtnRegresar_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Login.aspx");
+            Response.Redirect("Menu.aspx");
         }
 
         protected void BtnClose_Click(object sender, EventArgs e) 

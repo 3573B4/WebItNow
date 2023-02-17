@@ -166,6 +166,10 @@
                             <font size="4">Registros</font>
                         </a>
                         <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="Register_User.aspx">Altas Usuarios</a></li>
+                            <li><hr class="dropdown-divider"/></li>
+                            <li><a class="dropdown-item" href="Forgot-Password.aspx">Cambio de Contraseña</a></li>
+                            <li><hr class="dropdown-divider"/></li>
                             <li><a class="dropdown-item" href="Register_Reference.aspx">Altas Referencia</a></li>
                         </ul>
                     </li>

@@ -54,7 +54,7 @@ namespace WebItNow
                         string sPath = Path.GetDirectoryName(filepath) + "/" + nomFile;
 
                         System.Threading.Thread.Sleep(3000);
-                        this.Cargar_Excel(directorio, nomFile);
+                        this.Cargar_Excel(sPath, nomFile);
 
                         // Eliminar archivo .xlsx del repositorio (solucion).
                         File.Delete(sPath);
@@ -381,9 +381,9 @@ namespace WebItNow
         private void Cargar_Excel(string directorio, string nomFile)
         {
 
-            string directorioURL = HttpContext.Current.Server.MapPath(directorio + nomFile);
+           // string directorioURL = HttpContext.Current.Server.MapPath(directorio + nomFile);
 
-            SLDocument sl = new SLDocument(directorioURL);
+            SLDocument sl = new SLDocument(directorio);
             SLWorksheetStatistics propiedades = sl.GetWorksheetStatistics();
             int ultimaFila = propiedades.EndRowIndex;
 
@@ -446,22 +446,33 @@ namespace WebItNow
 
         private bool existeProducto(string pReferencia)
         {
-            ConexionBD conectar = new ConexionBD();
-            conectar.Abrir();
-
-            string queryString = "SELECT UsReferencia FROM ITM_02 WHERE UsReferencia LIKE '%' + '" + pReferencia + "'  + '%'";
-            SqlCommand cmd2 = new SqlCommand(queryString, conectar.ConectarBD);
-
-            int num = Convert.ToInt32(cmd2.ExecuteScalar());
-
-            if (num > 0)
+            try
             {
-                return true;
+
+                ConexionBD conectar = new ConexionBD();
+                conectar.Abrir();
+
+                string queryString = "SELECT UsReferencia FROM ITM_02 WHERE UsReferencia LIKE '%' + '" + pReferencia + "'  + '%'";
+                SqlCommand cmd2 = new SqlCommand(queryString, conectar.ConectarBD);
+
+                int num = Convert.ToInt32(cmd2.ExecuteScalar());
+
+                if (num > 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
-            else
+            catch(Exception ex)
             {
-                return false;
+                LblMessage.Text = ex.Message;
+                mpeMensaje.Show();
             }
+
+            return false;
         }
 
     }
