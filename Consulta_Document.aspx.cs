@@ -23,7 +23,7 @@ namespace WebItNow
                 getStatus();
 
 
-                string sReferencia = Convert.ToString(Session["Referencia"]);
+                string sReferencia = Convert.ToString(Session["IdUsuario"]);
                 lblRef.Text = "Bienvenido: " + sReferencia;
             }
 

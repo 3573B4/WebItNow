@@ -223,13 +223,13 @@
                     <Columns>
                         <asp:TemplateField>
                             <ItemTemplate>
-                                <asp:ImageButton ID="ImgAceptado" runat="server" Height="26px" Width="26px" ImageUrl="~/Images/aceptar.ico" OnClick="ImgAceptado_Click" Enabled="false" />
+                                <asp:ImageButton ID="ImgAceptado" runat="server" Height="26px" Width="26px" ImageUrl="~/Images/aceptar_new.png" OnClick="ImgAceptado_Click" Enabled="false" />
                             </ItemTemplate> 
                         </asp:TemplateField>
 
                         <asp:TemplateField>
                             <ItemTemplate>
-                                <asp:ImageButton ID="ImgRechazado" runat="server" Height="26px" Width="26px" ImageUrl="~/Images/cancelar.ico" OnClick="ImgRechazado_Click" Enabled="false" />
+                                <asp:ImageButton ID="ImgRechazado" runat="server" Height="26px" Width="26px" ImageUrl="~/Images/rechazar_new.png" OnClick="ImgRechazado_Click" Enabled="false" />
                             </ItemTemplate> 
                         </asp:TemplateField>
 
@@ -237,7 +237,7 @@
                         <ItemStyle Width="150px" /> 
                         </asp:BoundField>
                         <asp:BoundField DataField="Desc_Status" HeaderText="Estatus" >
-                        <ItemStyle Width="150px" />
+                        <ItemStyle Width="250px" />
                         </asp:BoundField>
                         <asp:BoundField DataField="Descripcion" HeaderText="Tipo de Documento" >
                         <ItemStyle Width="850px" />
@@ -286,8 +286,8 @@
                     <asp:TextBox ID="TxtNomArchivo" runat="server" CssClass="form-control" ReadOnly="True"></asp:TextBox>
                 </div>
                 <div class="col-lg-1 col-md-2 col-sm-2 text-center">
-                    <asp:Label ID="LblDescarga" runat="server" Text="Descargar" CssClass="control-label" Font-Size="Small"></asp:Label>
-                    <asp:ImageButton ID="imgDescarga" runat="server" CssClass="btn p-0" ImageUrl="~/Images/descargar.png" Height="35px" Width="35px" OnClick="ImgDescarga_Click" Enabled ="false" />
+                    <%--<asp:Label ID="LblDescarga" runat="server" Text="Descargar" CssClass="control-label" Font-Size="Small"></asp:Label>--%>
+                    <asp:ImageButton ID="imgDescarga" runat="server" ImageUrl="~/Images/descargar_new.png" Height="35px" Width="35px" OnClick="ImgDescarga_Click" Enabled ="false" />
                 </div>
             </div>
             <div class="row g-3">

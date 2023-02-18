@@ -153,9 +153,9 @@
                             <font size="4">Documentos</font>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="Review_Document.aspx">Revision Documento</a></li>
+                            <li><a class="dropdown-item" href="Request_Document.aspx">Solicitudes</a></li>
                             <li><hr class="dropdown-divider"/></li>
-                            <li><a class="dropdown-item" href="Request_Document.aspx">Solicitar Documento</a></li>
+                            <li><a class="dropdown-item" href="Review_Document.aspx">Validación</a></li>
                             <li><hr class="dropdown-divider"/></li>
                             <li><a class="dropdown-item" href="Consulta_Document.aspx">Consultas</a></li>
                         </ul>
@@ -163,14 +163,14 @@
 
                     <li class="nav-item dropdown my-1">
                         <a class="nav-link btn dropdown-toggle text-start" style="background-color:mediumturquoise;" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <font size="4">Registros</font>
+                            <font size="4">Configuración</font>
                         </a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="Register_User.aspx">Altas Usuarios</a></li>
                             <li><hr class="dropdown-divider"/></li>
-                            <li><a class="dropdown-item" href="Forgot-Password.aspx">Cambio de Contraseña</a></li>
+                            <li><a class="dropdown-item" href="Forgot-Password.aspx">Cambio Contraseña</a></li>
                             <li><hr class="dropdown-divider"/></li>
-                            <li><a class="dropdown-item" href="Register_Reference.aspx">Altas Referencia</a></li>
+                            <li><a class="dropdown-item" href="Register_Reference.aspx">Alta de Asunto</a></li>
                         </ul>
                     </li>
 

@@ -75,44 +75,44 @@ namespace WebItNow
 
         }
 
-        protected void BtnEnviar_Click(object sender, EventArgs e)
-        {
-            //* Validar si el usuario existe o es nuevo
-            if (TxtRef.Text != "" && TxtEmail.Text != "")
-            {
+        //protected void BtnEnviar_Click(object sender, EventArgs e)
+        //{
+        //    //* Validar si el usuario existe o es nuevo
+        //    if (TxtRef.Text != "" && TxtEmail.Text != "")
+        //    {
 
-                // Insertar Registo Tabla tbUsuarios (UploadFiles)
-                int result = Add_tbUsuarios(TxtRef.Text, TxtEmail.Text, string.Empty, 3, "Insert");
+        //        // Insertar Registo Tabla tbUsuarios (UploadFiles)
+        //        int result = Add_tbUsuarios(TxtRef.Text, TxtEmail.Text, string.Empty, 3, "Insert");
 
-                if (result == 0)
-                {
-                    // Insertar Registros Tabla tbEstadoDocumento [ITM_04]
-                    int idStatus = 1;
-                    int valor = Add_tbEstadoDocumento(TxtRef.Text, idStatus);
+        //        if (result == 0)
+        //        {
+        //            // Insertar Registros Tabla tbEstadoDocumento [ITM_04]
+        //            int idStatus = 1;
+        //            int valor = Add_tbEstadoDocumento(TxtRef.Text, idStatus);
 
-                    var email = new EnvioEmail();
-                    int Envio_Ok = email.EnvioMensaje(TxtRef.Text.Trim(), TxtEmail.Text.Trim(), "Registro Referencia ", string.Empty);
+        //            var email = new EnvioEmail();
+        //            int Envio_Ok = email.EnvioMensaje(TxtRef.Text.Trim(), TxtEmail.Text.Trim(), "Registro Referencia ", string.Empty);
 
-                    //EnvioMensaje(TxtUsu.Text.Trim(), TxtEmail.Text.Trim());
+        //            //EnvioMensaje(TxtUsu.Text.Trim(), TxtEmail.Text.Trim());
 
-                    if (Envio_Ok == 0)
-                    {
-                        LblMessage.Text = "Usuario fue insertado correctamente ";
-                        this.mpeMensaje.Show();
-                    }
+        //            if (Envio_Ok == 0)
+        //            {
+        //                LblMessage.Text = "Usuario fue insertado correctamente ";
+        //                this.mpeMensaje.Show();
+        //            }
 
-                    Limpia(this.Controls);
+        //            Limpia(this.Controls);
 
-                    // Response.Redirect("Login.aspx");
-                    Lbl_Message.Visible = false;
-                }
-            }
-            else
-            {
-                Lbl_Message.Visible = true;
-                Lbl_Message.Text = "* Estos campos son obligatorios";
-            }
-        }
+        //            // Response.Redirect("Login.aspx");
+        //            Lbl_Message.Visible = false;
+        //        }
+        //    }
+        //    else
+        //    {
+        //        Lbl_Message.Visible = true;
+        //        Lbl_Message.Text = "* Estos campos son obligatorios";
+        //    }
+        //}
 
         protected void BtnClose_Click(object sender, EventArgs e)
         {
@@ -309,45 +309,45 @@ namespace WebItNow
             return -1;
         }
 
-        protected void TxtRef_TextChanged(object sender, EventArgs e)
-        {
-            // Validar si existe Usuario en la tabla ITM_02 (tbUsuarios)
-            Variables.wPrivilegios = "3";
-            int Usuario_Existe = ValidaUser(TxtRef.Text, Int32.Parse(Variables.wPrivilegios));
+        //protected void TxtRef_TextChanged(object sender, EventArgs e)
+        //{
+        //    // Validar si existe Usuario en la tabla ITM_02 (tbUsuarios)
+        //    Variables.wPrivilegios = "3";
+        //    int Usuario_Existe = ValidaUser(TxtRef.Text, Int32.Parse(Variables.wPrivilegios));
 
-            if (Usuario_Existe == 1)
-            {
-                TxtRef.Text = string.Empty;
-                TxtEmail.Focus();
+        //    if (Usuario_Existe == 1)
+        //    {
+        //        TxtRef.Text = string.Empty;
+        //        TxtEmail.Focus();
 
-                LblMessage.Text = "El nombre de usuario ya existe";
-                this.mpeMensaje.Show();
-            }
-            else
-            {
-                TxtEmail.Focus();
-            }
-        }
+        //        LblMessage.Text = "El nombre de usuario ya existe";
+        //        this.mpeMensaje.Show();
+        //    }
+        //    else
+        //    {
+        //        TxtEmail.Focus();
+        //    }
+        //}
 
-        protected void TxtEmail_TextChanged(object sender, EventArgs e)
-        {
-            // Validar si existe Email en la tabla ITM_02 (tbUsuarios)
-            Variables.wPrivilegios = "3";
-            int Email_Existe = ValidaEmail(TxtEmail.Text, Int32.Parse(Variables.wPrivilegios));
+        //protected void TxtEmail_TextChanged(object sender, EventArgs e)
+        //{
+        //    // Validar si existe Email en la tabla ITM_02 (tbUsuarios)
+        //    Variables.wPrivilegios = "3";
+        //    int Email_Existe = ValidaEmail(TxtEmail.Text, Int32.Parse(Variables.wPrivilegios));
 
-                if (Email_Existe == 1)
-            {
-                TxtEmail.Text = string.Empty;
-                TxtEmail.Focus();
+        //        if (Email_Existe == 1)
+        //    {
+        //        TxtEmail.Text = string.Empty;
+        //        TxtEmail.Focus();
 
-                LblMessage.Text = "El Correo electrónico ya existe";
-                this.mpeMensaje.Show();
-            }
-            else
-            {
-                TxtEmail.Focus();
-            }
-        }
+        //        LblMessage.Text = "El Correo electrónico ya existe";
+        //        this.mpeMensaje.Show();
+        //    }
+        //    else
+        //    {
+        //        TxtEmail.Focus();
+        //    }
+        //}
 
         public void Limpia(ControlCollection controles)
         {

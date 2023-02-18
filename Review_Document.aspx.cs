@@ -261,7 +261,7 @@ namespace WebItNow
                 string sReferencia = GrdEstadoDocumento.Rows[index].Cells[2].Text;
                 string sTipoDocumento = GrdEstadoDocumento.Rows[index].Cells[7].Text;
 
-                GrdEstadoDocumento.Rows[index].Cells[3].Text = "Completo";
+                GrdEstadoDocumento.Rows[index].Cells[3].Text = "Revisado";
 
                 // Actualizar en la tabla tbEstadoDocumento (Status = 3)
                 Update_tbEstadoDocumento(sReferencia, sTipoDocumento, 3);
@@ -315,7 +315,7 @@ namespace WebItNow
                 // Actualizar en la tabla [ITM_04] (IdDescarga = 0)
                 Update_ITM_04(sReferencia, sTipoDocumento, 0);
 
-                GrdEstadoDocumento.Rows[index].Cells[3].Text = "Faltante";
+                GrdEstadoDocumento.Rows[index].Cells[3].Text = "Solicitado";
 
                 // Eliminar el archivo de Server.MapPath("~/Directorio/")
                 // File.Delete(strURLFile);

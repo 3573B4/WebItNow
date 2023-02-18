@@ -250,8 +250,9 @@ namespace WebItNow
             {
                 BtnEnviar.Enabled = false;
 
-                LblMessage.Text = "No existe tipo de documento, para esta referencia.";
-                mpeMensaje.Show();
+
+                //LblMessage.Text = "No existe tipo de documento, para esta referencia.";
+                //mpeMensaje.Show();
             }
             else
             {
