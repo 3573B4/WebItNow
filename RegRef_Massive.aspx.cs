@@ -1,18 +1,16 @@
 ﻿using System;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
 using System.Data;
 using System.Data.SqlClient;
 
-using OfficeOpenXml;
 using System.IO;
 using SpreadsheetLight;
 
 namespace WebItNow
 {
-    public partial class Register_Reference : System.Web.UI.Page
+    public partial class RegRef_Massive : System.Web.UI.Page
     {
         protected void Page_PreInit(object sender, EventArgs e)
         {
@@ -37,20 +35,22 @@ namespace WebItNow
         {
             string directorio = "~/itnowstorage/";
             //string directorioURL = Server.MapPath(directorio);
-            string nomFile = Upload.FileName;
-         // string fileName = System.IO.Path.GetFileName(Upload.FileName);
 
-            int tamArchivo = Upload.PostedFile.ContentLength;
-            string extensionFile = Path.GetExtension(Upload.FileName);
+            string nomFile = FileUpload1.FileName;
+            string fileName = System.IO.Path.GetFileName(FileUpload1.FileName);
 
-            if (Upload.HasFile)
+            int tamArchivo = FileUpload1.PostedFile.ContentLength;
+            string extensionFile = Path.GetExtension(FileUpload1.FileName);
+
+
+            if (FileUpload1.HasFile)
             {
                 if ((extensionFile == ".xlsx") || (extensionFile == ".xls"))
                 {
                     if (tamArchivo <= 70000000)
                     {
-                        string filepath = Server.MapPath(directorio + Upload.FileName);
-                        Upload.SaveAs(filepath);
+                        string filepath = Server.MapPath(directorio + FileUpload1.FileName);
+                        FileUpload1.SaveAs(filepath);
                         string sPath = Path.GetDirectoryName(filepath) + "/" + nomFile;
 
                         System.Threading.Thread.Sleep(3000);

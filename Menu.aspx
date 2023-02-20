@@ -170,7 +170,14 @@
                             <li><hr class="dropdown-divider"/></li>
                             <li><a class="dropdown-item" href="Forgot-Password.aspx">Cambio Contraseña</a></li>
                             <li><hr class="dropdown-divider"/></li>
-                            <li><a class="dropdown-item" href="Register_Reference.aspx">Alta de Asunto</a></li>
+                            <li><a class="dropdown-item">Alta de Asunto</a></li>
+                            <li><hr class="dropdown-divider"/>
+                                <ul>
+                                    <li><a class="dropdown-item" href="RegRef_Individual.aspx">Individual</a></li>
+                                    <li><hr class="dropdown-divider"/></li>
+                                    <li><a class="dropdown-item" href="RegRef_Massive.aspx">Masivo</a></li>
+                                </ul>
+                            </li>
                         </ul>
                     </li>
 

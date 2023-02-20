@@ -286,7 +286,7 @@
                     <asp:TextBox ID="TxtNomArchivo" runat="server" CssClass="form-control" ReadOnly="True"></asp:TextBox>
                 </div>
                 <div class="col-lg-1 col-md-2 col-sm-2 text-center">
-                    <%--<asp:Label ID="LblDescarga" runat="server" Text="Descargar" CssClass="control-label" Font-Size="Small"></asp:Label>--%>
+                    <asp:Label ID="LblDescarga" runat="server" Text="Descargar" CssClass="control-label" Font-Size="Small"></asp:Label>
                     <asp:ImageButton ID="imgDescarga" runat="server" ImageUrl="~/Images/descargar_new.png" Height="35px" Width="35px" OnClick="ImgDescarga_Click" Enabled ="false" />
                 </div>
             </div>

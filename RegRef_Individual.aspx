@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="Register_Reference.aspx.cs" Inherits="WebItNow.Register_Reference" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="RegRef_Individual.aspx.cs" Inherits="WebItNow.RegRef_Individual" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
@@ -34,7 +34,7 @@
             <asp:Label ID="LblDesc" runat="server" Text="Estimado cliente, favor de proporcionar un nombre de usuario con una longitud de 6 a 15 caracteres. Un correo electrónico donde recibirás las notificaciones del sistema y tu contraseña de acceso." CssClass="control-label co-sm-2" Font-Size="Small" Font-Bold="False"></asp:Label>
         </div>
 --%>
-<%--
+
         <div class="form-group mt-4">
             <asp:Label ID="LblRef" runat="server" Text="Referencia" CssClass="control-label co-sm-2" Font-Size="Small" Font-Bold="False"></asp:Label>
             <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server"   
@@ -84,20 +84,7 @@
                 <asp:Button ID="BtnEnviar" runat="server" Text="Registrar" Font-Bold="True" OnClick="BtnEnviar_Click" CssClass="btn btn-primary" />
             </div>
         </div>
---%>
 
-        <div class="input-group mt-5">
-          <asp:FileUpload ID="Upload" runat="server" CssClass="form-control" a></asp:FileUpload>
-            <asp:Button ID="BtnCargaExcel" runat="server" Text="Upload" Font-Bold="True" OnClick="BtnCargaExcel_Click" CssClass="btn btn-outline-secondary" />
-          <%--<label class="input-group-text" for="Upload">Upload</label>--%>
-        </div>    
-<%--        
-        <div class="form-group mt-3">
-            <div class="d-grid col-6 mx-auto">
-                <asp:Button ID="BtnCargaExcel" runat="server" Text="Carga Excel" Font-Bold="True" OnClick="BtnCargaExcel_Click" CssClass="btn btn-primary" />
-            </div>
-        </div>
---%>
 
         <div class="from-group mt-2">
             <div class="d-grid col-6 mx-auto">

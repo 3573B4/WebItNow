@@ -78,7 +78,7 @@ namespace WebItNow
 
             string IdStatus = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "Desc_status"));
 
-            if (IdStatus == "Revision" || IdStatus == "Completo")
+            if (IdStatus == "Por Revisar" || IdStatus == "Revisado")
             {
                 (e.Row.FindControl("BtnCargaDocumento") as Button).Enabled = false;
 

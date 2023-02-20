@@ -336,6 +336,7 @@
     <Content Include="Menu.aspx" />
     <Content Include="Page_Message.aspx" />
     <Content Include="Register_User.aspx" />
+    <Content Include="RegRef_Individual.aspx" />
     <Content Include="Request_Document.aspx" />
     <Content Include="Review_Document.aspx" />
     <Content Include="Scripts\footable.min.js" />
@@ -396,7 +397,7 @@
     <Content Include="Scripts\WebForms\WebForms.js" />
     <Content Include="Scripts\WebForms\WebParts.js" />
     <Content Include="Scripts\WebForms\WebUIValidation.js" />
-    <Content Include="Register_Reference.aspx" />
+    <Content Include="RegRef_Massive.aspx" />
     <Content Include="Styles\GridView.css" />
     <Content Include="Styles\loading-bar.css" />
     <Content Include="Styles\loading-bar.min.css" />
@@ -498,6 +499,13 @@
     <Compile Include="Register_User.aspx.designer.cs">
       <DependentUpon>Register_User.aspx</DependentUpon>
     </Compile>
+    <Compile Include="RegRef_Individual.aspx.cs">
+      <DependentUpon>RegRef_Individual.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RegRef_Individual.aspx.designer.cs">
+      <DependentUpon>RegRef_Individual.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Request_Document.aspx.cs">
       <DependentUpon>Request_Document.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -526,12 +534,12 @@
     <Compile Include="Site.Mobile.Master.designer.cs">
       <DependentUpon>Site.Mobile.Master</DependentUpon>
     </Compile>
-    <Compile Include="Register_Reference.aspx.cs">
-      <DependentUpon>Register_Reference.aspx</DependentUpon>
+    <Compile Include="RegRef_Massive.aspx.cs">
+      <DependentUpon>RegRef_Massive.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Register_Reference.aspx.designer.cs">
-      <DependentUpon>Register_Reference.aspx</DependentUpon>
+    <Compile Include="RegRef_Massive.aspx.designer.cs">
+      <DependentUpon>RegRef_Massive.aspx</DependentUpon>
     </Compile>
     <Compile Include="Upload_Files.aspx.cs">
       <DependentUpon>Upload_Files.aspx</DependentUpon>
