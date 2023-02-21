@@ -179,8 +179,8 @@
                                 </ul>
                             </li>--%>
                             <li>
-                                <ul class="nav-item dropend">
-                                    <asp:Button ID="Button1" runat="server" Text="Alta de Asunto" class="btn dropdown-toggle p-0 m-0" data-bs-toggle="dropdown" aria-expanded="false" BorderStyle="None" />                                    
+                                <ul class="nav-item dropend p-0 ms-3">
+                                    <asp:Button ID="BtnAltaAsunto" runat="server" Text="Alta de Asunto" class="btn dropdown-toggle p-0 m-0" data-bs-toggle="dropdown" aria-expanded="false" BorderStyle="None" />                                    
                                     <ul class="dropdown-menu">
                                         <li><a class="dropdown-item" href="RegRef_Individual.aspx">Individual</a></li>
                                         <li><hr class="dropdown-divider"/></li>
