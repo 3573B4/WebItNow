@@ -55,8 +55,10 @@ namespace WebItNow
                 string directorio = "~/itnowstorage/";
                 string sReferencia = Convert.ToString(Session["Referencia"]);
                 string folderName = ddlDocs.SelectedValue;
-                string directFinal = directorio + sReferencia + "/" + folderName + "/";
-                string UrlFinal = sReferencia + "/" + folderName + "/";
+                //string directFinal = directorio + sReferencia + "/" + folderName + "/";
+                //string UrlFinal = sReferencia + "/" + folderName + "/";
+                string directFinal = directorio + sReferencia + "/" ;
+                string UrlFinal = sReferencia + "/" ;
                 string directorioURL = Server.MapPath(directFinal);
 
                 string nomFile = FileUpload1.FileName;
@@ -101,7 +103,7 @@ namespace WebItNow
 
                             string filepath = Server.MapPath(directorio + FileUpload1.FileName);
                             FileUpload1.SaveAs(filepath);
-                            string sPath = System.IO.Path.GetDirectoryName(filepath) + "/" + nomFile;
+                            string sPath = System.IO.Path.GetDirectoryName(filepath) + "\\" + nomFile;
 
                             System.Threading.Thread.Sleep(10000);
                             this.UploadToAzure(nomFile, sPath);
@@ -309,19 +311,22 @@ namespace WebItNow
                 string sReferencia = Convert.ToString(Session["Referencia"]);
                 string sTpoDocumento = ddlDocs.SelectedValue;
 
-                if (Variables.wEdoDoc == "0")
-                {
-                    // CreateDirectory
-                    directory.CreateSubdirectory(sReferencia);
-                    directory = directory.GetSubdirectoryClient(sReferencia);
-                    directory = directory.CreateSubdirectory(sTpoDocumento);
-                }
-                else
-                {
-                    // Get a reference to a subdirectory not located on root level
-                    directory = directory.GetSubdirectoryClient(sReferencia);
-                    directory = directory.GetSubdirectoryClient(sTpoDocumento);
-                }
+                //if (Variables.wEdoDoc == "0")
+                //{
+                //    // CreateDirectory
+                //    directory.CreateSubdirectory(sReferencia);
+                //    directory = directory.GetSubdirectoryClient(sReferencia);
+                //    directory = directory.CreateSubdirectory(sTpoDocumento);
+                //}
+                //else
+                //{
+                //    // Get a reference to a subdirectory not located on root level
+                //    directory = directory.GetSubdirectoryClient(sReferencia);
+                //    directory = directory.GetSubdirectoryClient(sTpoDocumento);
+                //}
+
+                // Get a reference to a subdirectory not located on root level
+                directory = directory.GetSubdirectoryClient(sReferencia);
 
                 // Get a reference to our file
                 ShareFileClient file = directory.GetFileClient(fileName);
