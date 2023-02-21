@@ -170,12 +170,22 @@
                             <li><hr class="dropdown-divider"/></li>
                             <li><a class="dropdown-item" href="Forgot-Password.aspx">Cambio Contraseña</a></li>
                             <li><hr class="dropdown-divider"/></li>
-                            <li><a class="dropdown-item">Alta de Asunto</a></li>
+<%--                        <li><a class="dropdown-item">Alta de Asunto</a></li>
                             <li><hr class="dropdown-divider"/>
                                 <ul>
                                     <li><a class="dropdown-item" href="RegRef_Individual.aspx">Individual</a></li>
                                     <li><hr class="dropdown-divider"/></li>
                                     <li><a class="dropdown-item" href="RegRef_Massive.aspx">Masivo</a></li>
+                                </ul>
+                            </li>--%>
+                            <li>
+                                <ul class="nav-item dropend">
+                                    <asp:Button ID="Button1" runat="server" Text="Alta de Asunto" class="btn dropdown-toggle p-0 m-0" data-bs-toggle="dropdown" aria-expanded="false" BorderStyle="None" />                                    
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="RegRef_Individual.aspx">Individual</a></li>
+                                        <li><hr class="dropdown-divider"/></li>
+                                        <li><a class="dropdown-item" href="RegRef_Massive.aspx">Masivo</a></li>
+                                    </ul>
                                 </ul>
                             </li>
                         </ul>

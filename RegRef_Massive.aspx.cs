@@ -45,27 +45,37 @@ namespace WebItNow
 
             if (FileUpload1.HasFile)
             {
-                if ((extensionFile == ".xlsx") || (extensionFile == ".xls"))
+                modGeneral modGeneral1 = new modGeneral();
+
+                if (modGeneral1.validarCaracter(nomFile))
                 {
-                    if (tamArchivo <= 70000000)
+
+                    if ((extensionFile == ".xlsx") || (extensionFile == ".xls"))
                     {
-                        string filepath = Server.MapPath(directorio + FileUpload1.FileName);
-                        FileUpload1.SaveAs(filepath);
-                        string sPath = Path.GetDirectoryName(filepath) + "/" + nomFile;
+                        if (tamArchivo <= 70000000)
+                        {
+                            string filepath = Server.MapPath(directorio + FileUpload1.FileName);
+                            FileUpload1.SaveAs(filepath);
+                            string sPath = Path.GetDirectoryName(filepath) + "/" + nomFile;
 
-                        System.Threading.Thread.Sleep(3000);
-                        this.Cargar_Excel(sPath, nomFile);
+                            System.Threading.Thread.Sleep(3000);
+                            this.Cargar_Excel(sPath, nomFile);
 
-                        // Eliminar archivo .xlsx del repositorio (solucion).
-                        File.Delete(sPath);
+                            // Eliminar archivo .xlsx del repositorio (solucion).
+                            File.Delete(sPath);
+                        }
+                    }
+                    else
+                    {
+                        LblMessage.Text = "El archivo tiene que ser un formato .xlsx";
+                        mpeMensaje.Show();
                     }
                 }
                 else
                 {
-                    LblMessage.Text = "El archivo tiene  que ser un formato .xlsx";
+                    LblMessage.Text = "Nombre del archivo, no debe contener caracteres especiales";
                     mpeMensaje.Show();
                 }
-
             }
             else
             {

@@ -484,6 +484,7 @@
     <Compile Include="Menu.aspx.designer.cs">
       <DependentUpon>Menu.aspx</DependentUpon>
     </Compile>
+    <Compile Include="modGeneral.cs" />
     <Compile Include="Page_Message.aspx.cs">
       <DependentUpon>Page_Message.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
