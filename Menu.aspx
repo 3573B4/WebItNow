@@ -178,16 +178,24 @@
                                     <li><a class="dropdown-item" href="RegRef_Massive.aspx">Masivo</a></li>
                                 </ul>
                             </li>--%>
-                            <li>
-                                <ul class="nav-item dropend p-0 ms-3">
+                            <li class="nav-item dropend p-0 ms-3">
                                     <asp:Button ID="BtnAltaAsunto" runat="server" Text="Alta de Asunto" class="btn dropdown-toggle p-0 m-0" data-bs-toggle="dropdown" aria-expanded="false" BorderStyle="None" />                                    
                                     <ul class="dropdown-menu">
                                         <li><a class="dropdown-item" href="RegRef_Individual.aspx">Individual</a></li>
                                         <li><hr class="dropdown-divider"/></li>
                                         <li><a class="dropdown-item" href="RegRef_Massive.aspx">Masivo</a></li>
                                     </ul>
-                                </ul>
+
                             </li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item dropdown my-1">
+                        <a class="nav-link btn dropdown-toggle text-start" style="background-color:mediumturquoise;" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <font size="4">Catalogos</font>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Tipo de Documento</a></li>
                         </ul>
                     </li>
 

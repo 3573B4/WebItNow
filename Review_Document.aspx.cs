@@ -259,6 +259,7 @@ namespace WebItNow
                 int index = row.RowIndex;
 
                 string sReferencia = GrdEstadoDocumento.Rows[index].Cells[2].Text;
+                string sFileName = Server.HtmlDecode(GrdEstadoDocumento.Rows[index].Cells[5].Text);
                 string sTipoDocumento = GrdEstadoDocumento.Rows[index].Cells[7].Text;
 
                 GrdEstadoDocumento.Rows[index].Cells[3].Text = "Revisado";
@@ -268,6 +269,10 @@ namespace WebItNow
 
                 // Actualizar en la tabla [ITM_04] (IdDescarga = 1)
                 Update_ITM_04(sReferencia, sTipoDocumento, 1);
+
+                // Copiar el archivo al almacenamiento (codisestorage)
+                modGeneral modGral = new modGeneral();
+                modGral.CopyFileAzure(sReferencia, sFileName);
 
                 Session["Referencia"] = sReferencia;
                 Session["Asunto"] = "Documento Aceptado";
