@@ -106,7 +106,7 @@ namespace WebItNow
                     // CreateDirectory - Consecutivo
                     directory_codise.CreateSubdirectory(Convert.ToString(iConsecutivo));
 
-                    string destFilePath = sDirName_CODISE + "/" + año + "/" + mes +  "/" + dia + "/" + iConsecutivo + "/" + sFileName;
+                    string destFilePath = sDirName_CODISE + "/" + año + "/" + mes + "/" + dia + "/" + iConsecutivo + "/" + sFileName;
 
                     // Get a reference to the destination file
                     ShareFileClient destFile = new ShareFileClient(ConnectionString, sDirName_CODISE, destFilePath);
@@ -119,7 +119,8 @@ namespace WebItNow
                         Console.WriteLine($"{sourceFile.Uri} copied to {destFile.Uri}");
                     }
                 }
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 string sError = ex.Message;
             }
@@ -129,5 +130,6 @@ namespace WebItNow
         {
             Conecta.Abrir();
         }
+
     }
 }

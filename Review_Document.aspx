@@ -437,7 +437,6 @@
     </table>
 
     </ContentTemplate>
-
     <Triggers>
         <asp:PostBackTrigger ControlID="grdEstadoDocumento" />
 <%--    <asp:PostBackTrigger ControlID="BtnDescargas" />    --%>

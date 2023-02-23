@@ -106,7 +106,7 @@ namespace WebItNow
                             string sPath = System.IO.Path.GetDirectoryName(filepath) + "\\" + nomFile;
 
                             System.Threading.Thread.Sleep(10000);
-                            this.UploadToAzure(nomFile, sPath);
+                            UploadToAzure(nomFile, sPath);
 
                             //UploadToAzure(nomFile, sPath);
 
@@ -311,6 +311,17 @@ namespace WebItNow
                 string sReferencia = Convert.ToString(Session["Referencia"]);
                 string sTpoDocumento = ddlDocs.SelectedValue;
 
+                // Get a reference to a subdirectory not located on root level
+                directory = directory.GetSubdirectoryClient(sReferencia);
+
+                if (!directory.Exists())
+                {
+                    directory = directory.GetSubdirectoryClient("../");
+                    // CreateDirectory - Día
+                    directory.CreateSubdirectory(sReferencia);
+                    directory = directory.GetSubdirectoryClient(sReferencia);
+                }
+
                 //if (Variables.wEdoDoc == "0")
                 //{
                 //    // CreateDirectory
@@ -324,9 +335,6 @@ namespace WebItNow
                 //    directory = directory.GetSubdirectoryClient(sReferencia);
                 //    directory = directory.GetSubdirectoryClient(sTpoDocumento);
                 //}
-
-                // Get a reference to a subdirectory not located on root level
-                directory = directory.GetSubdirectoryClient(sReferencia);
 
                 // Get a reference to our file
                 ShareFileClient file = directory.GetFileClient(fileName);

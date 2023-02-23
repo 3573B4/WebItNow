@@ -87,13 +87,13 @@ namespace WebItNow
         protected global::System.Web.UI.WebControls.TextBox TxtEmail;
 
         /// <summary>
-        /// Control LblPass.
+        /// Control LblTelefono.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LblPass;
+        protected global::System.Web.UI.WebControls.Label LblTelefono;
 
         /// <summary>
         /// Control RequiredFieldValidator5.
@@ -105,13 +105,13 @@ namespace WebItNow
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator5;
 
         /// <summary>
-        /// Control TxtPass.
+        /// Control TxtTelefono.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TxtPass;
+        protected global::System.Web.UI.WebControls.TextBox TxtTelefono;
 
         /// <summary>
         /// Control chkPrivacidad.

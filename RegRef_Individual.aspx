@@ -59,12 +59,12 @@
         <br />
        
         <div class="form-group">
-            <asp:Label ID="LblPass" runat="server" Text="Contraseña" CssClass="control-label col-sm-2" Font-Size="Small"></asp:Label>
+            <asp:Label ID="LblTelefono" runat="server" Text="Telefono" CssClass="control-label col-sm-2" Font-Size="Small"></asp:Label>
             <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server"   
-                ControlToValidate="TxtPass" ErrorMessage="*" ForeColor="Red">
+                ControlToValidate="TxtTelefono" ErrorMessage="*" ForeColor="Red">
                 </asp:RequiredFieldValidator>
             <div class="col-sm-12">
-                <asp:TextBox ID="TxtPass" runat="server" CssClass="form-control" placeholder="Crea una contraseña" onkeyup="mayus(this);" MaxLength="16" TextMode="Password"></asp:TextBox>
+                <asp:TextBox ID="TxtTelefono" runat="server" CssClass="form-control" placeholder="Telefono" MaxLength="10" ></asp:TextBox>
             </div>
         </div>
 
