@@ -45,7 +45,7 @@ namespace WebItNow
             return true;
         }
 
-        public void CopyFileAzure(string sReferencia, string sFileName)
+        public void CopyFileAzure(string sReferencia, string sFileName, int iConsecutivo)
         {
             try
             {
@@ -74,8 +74,6 @@ namespace WebItNow
                 if (sourceFile.Exists())
                 {
                     string sDirName_CODISE = "codisestorage";
-                    int iConsecutivo = 0;
-                    int valor = 0;
 
                     var dateAndTime = DateTime.Now;
                     var Date = dateAndTime.ToShortDateString();
@@ -103,23 +101,10 @@ namespace WebItNow
                         // CreateDirectory - Día
                         directory_codise.CreateSubdirectory(dia);
                         directory_codise = directory_codise.GetSubdirectoryClient(dia);
-
-                        // CreateDirectory - Consecutivo
-                        iConsecutivo = 1;
-                        directory_codise.CreateSubdirectory(Convert.ToString(iConsecutivo));
-
-                        //valor = sp_Consecutivo(iConsecutivo, Date, "Insert");
                     }
 
-                    //iConsecutivo = sp_Consecutivo(iConsecutivo, Date, "Select");
-                    //iConsecutivo += 1;
-
-                    //if (iConsecutivo != 1)
-                    //{
-                    //    // Obtener valor ultimo consecutivo por dia.
-                    //    iConsecutivo = sp_Consecutivo(iConsecutivo, Date, "Select");
-                    //    iConsecutivo += 1;
-                    //}
+                    // CreateDirectory - Consecutivo
+                    directory_codise.CreateSubdirectory(Convert.ToString(iConsecutivo));
 
                     string destFilePath = sDirName_CODISE + "/" + año + "/" + mes +  "/" + dia + "/" + iConsecutivo + "/" + sFileName;
 
@@ -138,53 +123,6 @@ namespace WebItNow
             {
                 string sError = ex.Message;
             }
-        }
-
-        public int sp_Consecutivo(int pConsecutivo, String pFecha, string pStatementType)
-        {
-            ConexionBD Conecta = new ConexionBD();
-            NewMethod(Conecta);
-
-            try
-            {
-
-                SqlCommand cmd1 = new SqlCommand("sp_Consecutivo_StatementType", Conecta.ConectarBD);
-                cmd1.CommandType = CommandType.StoredProcedure;
-
-                cmd1.Parameters.AddWithValue("@idconsecutivo", pConsecutivo);
-                cmd1.Parameters.AddWithValue("@dfecha", pFecha);
-                cmd1.Parameters.AddWithValue("@StatementType", pStatementType);
-
-                SqlDataReader dr1 = cmd1.ExecuteReader();
-
-                if (dr1.Read())
-                {
-
-                    return dr1.GetInt32(0);
-
-                }
-
-                cmd1.Dispose();
-                dr1.Dispose();
-
-                Conecta.Cerrar();
-
-                return 0;
-
-            }
-            catch (Exception ex)
-            {
-                // Show(ex.Message);
-                // LblMessage.Text = ex.Message;
-                // this.mpeMensaje.Show();
-                Console.WriteLine($"{ex.Message}");
-            }
-            finally
-            {
-
-            }
-
-            return -1;
         }
 
         private static void NewMethod(ConexionBD Conecta)

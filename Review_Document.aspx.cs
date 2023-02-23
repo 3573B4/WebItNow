@@ -189,7 +189,7 @@ namespace WebItNow
                                   " WHERE tr.UsReferencia = ed.Referencia" +
                                   "   AND ed.IdStatus = s.IdStatus " + 
                                   "   AND ed.IdTipoDocumento = td.IdTpoDocumento " +
-                                  "   AND ed.IdStatus IN (2,3) ";
+                                  "   AND ed.IdStatus IN (2) ";
 
                 SqlCommand cmd = new SqlCommand(strQuery, Conecta.ConectarBD);
 
@@ -270,9 +270,31 @@ namespace WebItNow
                 // Actualizar en la tabla [ITM_04] (IdDescarga = 1)
                 Update_ITM_04(sReferencia, sTipoDocumento, 1);
 
+                int iConsecutivo = 0;
+                var dateAndTime = DateTime.Now;
+                var Date = dateAndTime.ToShortDateString();
+
+                // Obtener valor ultimo consecutivo por dia.
+                iConsecutivo = sp_Consecutivo(iConsecutivo, DateTime.Parse(Date), "Select");
+                
+                if (iConsecutivo == 0)
+                {
+                    // Inserta el registro con el primer consecutivo del dia
+                    iConsecutivo = sp_Consecutivo(0, DateTime.Parse(Date), "Insert");
+                    iConsecutivo += 1;
+                }
+                else
+                {
+                    iConsecutivo += 1;
+                }
+
                 // Copiar el archivo al almacenamiento (codisestorage)
                 modGeneral modGral = new modGeneral();
-                modGral.CopyFileAzure(sReferencia, sFileName);
+                modGral.CopyFileAzure(sReferencia, sFileName, iConsecutivo);
+
+                iConsecutivo = sp_Consecutivo(iConsecutivo, DateTime.Parse(Date), "Update");
+
+                DeleteFromAzure(sFileName, sReferencia);
 
                 Session["Referencia"] = sReferencia;
                 Session["Asunto"] = "Documento Aceptado";
@@ -803,6 +825,53 @@ namespace WebItNow
 
             }
 
+        }
+
+        public int sp_Consecutivo(int pConsecutivo, DateTime pFecha, string pStatementType)
+        {
+            ConexionBD Conecta = new ConexionBD();
+            NewMethod(Conecta);
+
+            try
+            {
+
+                SqlCommand cmd1 = new SqlCommand("sp_Consecutivo_StatementType", Conecta.ConectarBD);
+                cmd1.CommandType = CommandType.StoredProcedure;
+
+                cmd1.Parameters.AddWithValue("@idconsecutivo", pConsecutivo);
+                cmd1.Parameters.AddWithValue("@dfecha", pFecha);
+                cmd1.Parameters.AddWithValue("@StatementType", pStatementType);
+
+                SqlDataReader dr1 = cmd1.ExecuteReader();
+
+                if (dr1.Read())
+                {
+
+                    return dr1.GetInt32(0);
+
+                }
+
+                cmd1.Dispose();
+                dr1.Dispose();
+
+                Conecta.Cerrar();
+
+                return 0;
+
+            }
+            catch (Exception ex)
+            {
+                // Show(ex.Message);
+                // LblMessage.Text = ex.Message;
+                // this.mpeMensaje.Show();
+                Console.WriteLine($"{ex.Message}");
+            }
+            finally
+            {
+
+            }
+
+            return -1;
         }
 
         public bool DownloadFile(string UrlString, string DescFilePath)

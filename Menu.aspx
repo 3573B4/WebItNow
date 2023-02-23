@@ -195,7 +195,7 @@
                             <font size="4">Catalogos</font>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Tipo de Documento</a></li>
+                            <li><a class="dropdown-item" href="Catalog_TpoDocument.aspx">Tipo de Documento</a></li>
                         </ul>
                     </li>
 
