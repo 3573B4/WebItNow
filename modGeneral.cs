@@ -45,6 +45,25 @@ namespace WebItNow
             return true;
         }
 
+        public bool valTextGrande(string textGrande)
+        {
+            char[] a = { '{', '}', '/', '[', ']', '`', '^', '~', '+', '*', '´', '¨', '¿', '¡', '?', '\\', '=', ')', '(', '&', '%', '$', '#', '"', '!', '|', '°', '¬', '-', '_' };
+
+            for (int i = 0; i < textGrande.Length; i++)
+            {
+                for (int j = 0; j < a.Length; j++)
+                {
+                    if (textGrande[i] == a[j])
+                    {
+
+                        return false;
+                        //break;
+                    }
+                }
+            }
+            return true;
+        }
+
         public void CopyFileAzure(string sReferencia, string sFileName, int iConsecutivo)
         {
             try

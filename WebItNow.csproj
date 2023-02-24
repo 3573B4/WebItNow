@@ -307,8 +307,8 @@
   <ItemGroup>
     <Content Include="About.aspx" />
     <Content Include="Access.aspx" />
-    <Content Include="Catalog_TpoDocument.aspx" />
     <Content Include="Captcha.aspx" />
+    <Content Include="Catalog_TpoDocument.aspx" />
     <Content Include="Consulta_Document.aspx" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -422,13 +422,6 @@
     <Compile Include="Access.aspx.designer.cs">
       <DependentUpon>Access.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Catalog_TpoDocument.aspx.cs">
-      <DependentUpon>Catalog_TpoDocument.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Catalog_TpoDocument.aspx.designer.cs">
-      <DependentUpon>Catalog_TpoDocument.aspx</DependentUpon>
-    </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="About.aspx.cs">
       <DependentUpon>About.aspx</DependentUpon>
@@ -444,6 +437,13 @@
     </Compile>
     <Compile Include="Captcha.aspx.designer.cs">
       <DependentUpon>Captcha.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Catalog_TpoDocument.aspx.cs">
+      <DependentUpon>Catalog_TpoDocument.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Catalog_TpoDocument.aspx.designer.cs">
+      <DependentUpon>Catalog_TpoDocument.aspx</DependentUpon>
     </Compile>
     <Compile Include="ConexionBD.cs" />
     <Compile Include="Consulta_Document.aspx.cs">

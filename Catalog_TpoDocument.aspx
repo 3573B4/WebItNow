@@ -56,7 +56,7 @@
             <asp:Label ID="LblNameDoc" runat="server" Text="Nombre del Documento"></asp:Label>
             <asp:TextBox ID="TxtNameDoc" runat="server" CssClass="form-control mt-1" placeholder="Nombre del Archivo"></asp:TextBox>
         </div>
-
+        <asp:TextBox ID="TxtIdTpoDocumento" runat="server" CssClass="form-control" Visible="false" ></asp:TextBox>
         <div class="justify-content-center mt-3">
             <asp:Label ID="LblInstrucciones" runat="server" Text="Instrucciones"></asp:Label>
             <textarea rows="2" cols="64" id="TxtAreaMensaje" runat="server" class="form-control mt-1"/>
@@ -68,6 +68,7 @@
         
         <div class="d-grid gap-4 d-flex justify-content-center mt-2 mb-3">
             <asp:Button ID="BtnAgregar" runat="server" Text="Agregar" OnClick="BtnAgregar_Click" CssClass="btn btn-primary px-4" />
+            <asp:Button ID="BtnUpdate" runat="server" Text="Actualizar" OnClick="BtnUpdate_Click" CssClass="btn btn-primary" />
         </div>
 
 
@@ -75,7 +76,7 @@
             <asp:GridView ID="GrdTpoDocumento" runat="server" AutoGenerateColumns="False" GridLines="None" Width="100%"
                 AllowPaging="True" CssClass="footable" PagerStyle-CssClass="pgr" AlternatingRowStyle-CssClass="alt" 
                 OnSelectedIndexChanged="GrdTpoDocumento_SelectedIndexChanged" OnRowDataBound="GrdTpoDocumento_RowDataBound"
-                DataKeyNames="IdTpoDocumento">
+                OnPageIndexChanging="GrdTpoDocumento_PageIndexChanging" DataKeyNames="IdTpoDocumento">
                 <AlternatingRowStyle CssClass="alt" />
                 <Columns>
                     <asp:BoundField DataField="IdTpoDocumento" HeaderText="Id documento" />

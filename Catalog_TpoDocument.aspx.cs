@@ -22,8 +22,9 @@ namespace WebItNow
 
             if (!IsPostBack)
             {
-
+                
             }
+            BtnUpdate.Enabled = false;
             //GrdTpoDocumento.HeaderRow.TableSection = TableRowSection.TableHeader;
         }
 
@@ -160,9 +161,65 @@ namespace WebItNow
         }
         protected void GrdTpoDocumento_SelectedIndexChanged(object sender, EventArgs e)
         {
+            TxtIdTpoDocumento.Text = Server.HtmlDecode(GrdTpoDocumento.SelectedRow.Cells[0].Text);
             TxtNameDoc.Text = Server.HtmlDecode(GrdTpoDocumento.SelectedRow.Cells[1].Text);
             TxtAreaMensaje.Value = Server.HtmlDecode(GrdTpoDocumento.SelectedRow.Cells[2].Text);
+
+            BtnAgregar.Enabled = false;
+            BtnUpdate.Enabled = true;
         }
 
+        protected void BtnUpdate_Click(object sender, EventArgs e)
+        {
+            if(TxtAreaMensaje.Value != "" || TxtNameDoc.Text != "")
+            {
+                if(TxtAreaMensaje.Value.Length <= 100 || TxtNameDoc.Text.Length <= 25)
+                {
+                    modGeneral funGenal = new modGeneral();
+                    if(funGenal.valTextGrande(TxtAreaMensaje.Value) == true)
+                    {
+                        string sIdTpoDoc = TxtIdTpoDocumento.Text;
+                        ConexionBD Conecta = new ConexionBD();
+                        Conecta.Abrir();
+                        
+                        string sqlString = "UPDATE ITM_06 " +
+                                                " SET Descripcion = TRIM(' ' FROM '"+ TxtNameDoc.Text +"'), " + 
+                                                    " DescrpBrev = TRIM(' ' FROM '" + TxtAreaMensaje.Value + "') " + 
+                                                " WHERE IdTpoDocumento = '"+ sIdTpoDoc +"'"; 
+                
+                        SqlCommand cmd = new SqlCommand(sqlString, Conecta.ConectarBD);
+
+                        cmd.ExecuteReader();
+                        
+                        GetTpoDoc();
+
+                        TxtNameDoc.Text = string.Empty;
+                        TxtAreaMensaje.Value = string.Empty;
+
+                    }
+                    else
+                    {
+                        Lbl_Message.Visible = true;
+                        Lbl_Message.Text = "* no accepta caracteres raros.";
+                    }
+                }
+                else
+                {
+                    Lbl_Message.Visible = true;
+                    Lbl_Message.Text = "* Excede los limites de caracteres.";
+                }
+            }
+            else
+            {
+                Lbl_Message.Visible = true;
+                Lbl_Message.Text = "* Los campos son abligatorios.";
+            }
+        }
+
+        protected void GrdTpoDocumento_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            GrdTpoDocumento.PageIndex = e.NewPageIndex;
+            GetTpoDoc();
+        }
     }
 }
