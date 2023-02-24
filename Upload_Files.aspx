@@ -53,16 +53,17 @@
                 <div style="overflow-x: auto; overflow-y:hidden">
                     <asp:GridView ID="grdEstadoDocs" runat="server" AutoGenerateColumns="False" GridLines="None" Width="100%"
                         AllowPaging="True" CssClass="footable" PagerStyle-CssClass="pgr" AlternatingRowStyle-CssClass="alt" 
-                        PageSize="10" OnPageIndexChanging="grdEstadoDocs_OnPageIndexChanging" OnRowDataBound="grdEstadoDocs_RowDataBound"  >
+                        PageSize="10" OnSelectedIndexChanged="grdEstadoDocs_OnSelectedIndexChanged" OnRowCommand="grdEstadoDocs_RowCommand"
+                        OnPageIndexChanging="grdEstadoDocs_OnPageIndexChanging" OnRowDataBound="grdEstadoDocs_RowDataBound" DataKeyNames="IdTipoDocumento">
                         <AlternatingRowStyle CssClass="table" />
                         <Columns>
+                            <asp:BoundField DataField="IdTipoDocumento" HeaderText="Id" />
                             <asp:BoundField DataField="Descripcion" HeaderText="Documento" />
                             <asp:BoundField DataField="Nom_Imagen" HeaderText="Nombre de archivo" />
                             <asp:BoundField DataField="Desc_status" HeaderText="Estatus" />
-
                         <asp:TemplateField>
                             <ItemTemplate>
-                                 <asp:Button ID="BtnCargaDocumento" runat="server" Text="Carga Documento" Font-Bold="True" OnClick="BtnCargaDocumento_Click" CssClass="btn btn-primary" />
+                                 <asp:Button ID="BtnCargaDocumento" runat="server" Text="Carga Documento" Font-Bold="True" CommandName="CargaDocumento" CommandArgument="<%# ((GridViewRow)Container).RowIndex %>" CssClass="btn btn-primary" />
                             </ItemTemplate> 
                         </asp:TemplateField>
 

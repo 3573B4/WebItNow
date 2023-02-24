@@ -51,7 +51,6 @@
         /*filter: alpha(opacity=80);*/ 
             opacity: 0.8; 
         }
-
         .center img{
             height: 128px;
             width:  128px;
@@ -97,10 +96,8 @@
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <br />    
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
     <br />
-    
     <script type="text/javascript">  
 
         var prm = Sys.WebForms.PageRequestManager.getInstance();
@@ -151,11 +148,16 @@
 --%>
 
         <br />
+<%--        
         <div class="form-floating">
                 <div class="dropdown">
                     <asp:DropDownList ID="ddlDocs" runat="server" CssClass="btn btn-outline-secondary"  AutoPostBack="true" OnSelectedIndexChanged="DdlDocs_SelectedIndexChanged" Width="100%">
                     </asp:DropDownList>
                 </div>
+        </div>
+--%>
+        <div class="form-group">
+            <asp:Label ID="LblDescripcion" runat="server" Text="" CssClass="form-control text-center" Font-Size="Medium" ></asp:Label>
         </div>
         <br />
         <br />
@@ -182,19 +184,14 @@
             <div class="col-12">
                 <div class="d-grid gap-4 d-flex justify-content-center">
                     <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
-                    <ContentTemplate>
-                        <asp:Button ID="BtnEnviar" runat="server" Font-Bold="True" Text="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Subir&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" OnClick="BtnEnviar_Click" OnClientClick="showProgress()" CssClass="btn btn-primary" />
-                    </ContentTemplate>
+                        <ContentTemplate>
+                            <asp:Button ID="BtnEnviar" runat="server" Font-Bold="True" Text="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Subir&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" OnClick="BtnEnviar_Click" OnClientClick="showProgress()" CssClass="btn btn-primary" />
+                        </ContentTemplate>
                     </asp:UpdatePanel>
                     <asp:Button ID="BtnRegresar" runat="server" Font-Bold="True" Text="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Regresar&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" OnClick="BtnRegresar_Click" CssClass="btn btn-outline-primary me-md-2" />
                 </div>
             </div>
         </div>
-        </ContentTemplate>
-        <Triggers>
-            <asp:PostBackTrigger ControlID="BtnEnviar" />
-        </Triggers>
-    </asp:UpdatePanel>
 
     <!-- Modal -->
     <div class="modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -288,6 +285,12 @@
         </div>
 
     </asp:Panel>
+
+    </ContentTemplate>
+        <Triggers>
+            <asp:PostBackTrigger ControlID="BtnEnviar" />
+        </Triggers>
+</asp:UpdatePanel>
 
 <asp:UpdateProgress ID="UpdateProgress1" runat="server" AssociatedUpdatePanelID="UpdatePanel1" DynamicLayout="true">
     <ProgressTemplate>

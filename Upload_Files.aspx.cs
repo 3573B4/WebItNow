@@ -57,7 +57,11 @@ namespace WebItNow
 
         }
 
-        protected void grdEstadoDocs_PageIndexChanged(Object sender, EventArgs e)
+        protected void grdEstadoDocs_OnSelectedIndexChanged(object sender, EventArgs e)
+        {
+            Session["TpoDocumento"] = grdEstadoDocs.SelectedRow.Cells[0].Text;
+        }
+        protected void grdEstadoDocs_PageIndexChanged(object sender, EventArgs e)
         {
             // Call a helper method to display the current page number 
             // when the user navigates to a different page.
@@ -77,6 +81,7 @@ namespace WebItNow
                 e.Row.Attributes.Add("OnClick", "" + Page.ClientScript.GetPostBackClientHyperlink(this.grdEstadoDocs, "Select$" + e.Row.RowIndex.ToString()) + ";");
 
             string IdStatus = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "Desc_status"));
+
 
             if (IdStatus == "Por Revisar" || IdStatus == "Revisado")
             {
@@ -104,8 +109,21 @@ namespace WebItNow
 
         protected void BtnCargaDocumento_Click(object sender, EventArgs e)
         {
+
             Response.Redirect("Upload_Files_2.aspx");
         }
 
+        protected void grdEstadoDocs_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            if (e.CommandName == "CargaDocumento")
+            {
+                //Obteniendo indice de la fila seleccionada
+                int index = Convert.ToInt32(e.CommandArgument);
+
+                Session["TpoDocumento"] = grdEstadoDocs.DataKeys[index].Value;
+                //Session["TpoDocumento"] = grdEstadoDocs.SelectedRow.Cells[0].Text;
+                Response.Redirect("Upload_Files_2.aspx");
+            }
+        }
     }
 }

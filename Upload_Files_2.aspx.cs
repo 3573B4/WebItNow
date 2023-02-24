@@ -34,11 +34,14 @@ namespace WebItNow
             {
 
                 BtnEnviar.Enabled = true;
-                GetDocRequeridos();
+                string sTpoDocumento = Convert.ToString(Session["TpoDocumento"]);
+
+                GetDocRequeridos(sTpoDocumento);
 
                 //// * * Obtener Descripcion breve documento
-                string IdDoc = ddlDocs.SelectedValue.ToString();
-                TxtDescrpBrev.Text = TpoDocumento_DescrpBrev(IdDoc, 1);
+                // string IdDoc = ddlDocs.SelectedValue.ToString();
+
+                // TxtDescrpBrev.Text = TpoDocumento_DescrpBrev(IdDoc, 1);
 
                 ChecarStatusDoc();
 
@@ -54,7 +57,8 @@ namespace WebItNow
                 //string directorio = "https://itnowtech18-my.sharepoint.com/:f:/g/personal/llg_peacock_claims/Ekb4AdD2Id1KgMI9CRoIAU4BdP795N2YLyTJxmlMmIfWUA?e=CCtbfK" + "/";
                 string directorio = "~/itnowstorage/";
                 string sReferencia = Convert.ToString(Session["Referencia"]);
-                string folderName = ddlDocs.SelectedValue;
+            //  string folderName = ddlDocs.SelectedValue;
+                string folderName = Convert.ToString(Session["TpoDocumento"]);
                 //string directFinal = directorio + sReferencia + "/" + folderName + "/";
                 //string UrlFinal = sReferencia + "/" + folderName + "/";
                 string directFinal = directorio + sReferencia + "/" ;
@@ -106,7 +110,7 @@ namespace WebItNow
                             string sPath = System.IO.Path.GetDirectoryName(filepath) + "\\" + nomFile;
 
                             System.Threading.Thread.Sleep(10000);
-                            UploadToAzure(nomFile, sPath);
+                            this.UploadToAzure(nomFile, sPath);
 
                             //UploadToAzure(nomFile, sPath);
 
@@ -120,7 +124,8 @@ namespace WebItNow
                             Session["Referencia"] = sReferencia;
                             Session["Asunto"] = "Documento Enviado";
 
-                            Response.Redirect("Page_Message.aspx");
+                            Response.Redirect("Page_Message.aspx",true);
+                         // Server.Transfer("Page_Message.aspx");
 
                             //var email = new EnvioEmail();
                             //string sEmail = email.CorreoElectronico(user);
@@ -150,38 +155,28 @@ namespace WebItNow
             }
         }
 
-        public void GetDocRequeridos()
+        public void GetDocRequeridos(string sTpoDocumento)
         {
             ConexionBD conectar = new ConexionBD();
             conectar.Abrir();
 
             // Consulta a la tabla Tipo de Documento
-            string sqlQuery = "SELECT IdTpoDocumento, Descripcion " +
+            string sqlQuery = "SELECT IdTpoDocumento, Descripcion, DescrpBrev " +
                                 "FROM ITM_06 " +
-                                "WHERE Status = '1'";
+                                "WHERE IdTpoDocumento = '" + sTpoDocumento + "' " +
+                                "  AND Status = '1'";
 
             SqlCommand cmd = new SqlCommand(sqlQuery, conectar.ConectarBD);
-            SqlDataAdapter da = new SqlDataAdapter(cmd);
-            DataTable dt = new DataTable();
-            da.Fill(dt);
+            SqlDataReader dt = cmd.ExecuteReader();
 
-            ddlDocs.DataSource = dt;
-
-            ddlDocs.DataValueField = "IdTpoDocumento";
-            ddlDocs.DataTextField = "Descripcion";
-
-            ddlDocs.DataBind();
-
-            //cmd.Dispose();
-            //da.Dispose();
-            //conectar.Cerrar();
-
-            //ListItem i;
-            //foreach(DataRow row in dt.Rows)
-            //{
-            //    i = new ListItem(row["Descripcion"].ToString(), row["IdTpoDocumento"].ToString());
-            //    ddlDocs.Items.Add(i);
-            //}
+            if (dt.HasRows)
+            {
+                while (dt.Read())
+                {
+                    LblDescripcion.Text = dt["Descripcion"].ToString().Trim();
+                    TxtDescrpBrev.Text = dt["DescrpBrev"].ToString().Trim();
+                }
+            }
 
         }
 
@@ -232,7 +227,9 @@ namespace WebItNow
         public void ChecarStatusDoc()
         {
             string sReferencia = Convert.ToString(Session["Referencia"]);
-            string tpoDoc = ddlDocs.SelectedValue;
+        //  string tpoDoc = ddlDocs.SelectedValue;
+            string tpoDoc = Convert.ToString(Session["TpoDocumento"]);
+
             ConexionBD connect = new ConexionBD();
             connect.Abrir();
 
@@ -266,15 +263,15 @@ namespace WebItNow
                 }
                 else
                 {
-                    BtnEnviar.Enabled = false;
+                    //  BtnEnviar.Enabled = false;
                 }
             }
         }
 
         protected void DdlDocs_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string IdDoc = ddlDocs.SelectedValue.ToString();
-
+        //  string IdDoc = ddlDocs.SelectedValue.ToString();
+            string IdDoc = Convert.ToString(Session["TpoDocumento"]);
             TxtDescrpBrev.Text = TpoDocumento_DescrpBrev(IdDoc, 1);
 
             ChecarStatusDoc();
@@ -309,7 +306,8 @@ namespace WebItNow
                 ShareDirectoryClient directory = share.GetDirectoryClient(dirName);
 
                 string sReferencia = Convert.ToString(Session["Referencia"]);
-                string sTpoDocumento = ddlDocs.SelectedValue;
+            //  string sTpoDocumento = ddlDocs.SelectedValue;
+                string sTpoDocumento = Convert.ToString(Session["TpoDocumento"]);
 
                 // Get a reference to a subdirectory not located on root level
                 directory = directory.GetSubdirectoryClient(sReferencia);
