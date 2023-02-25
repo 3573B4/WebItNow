@@ -24,6 +24,7 @@ namespace WebItNow
             {
                 
             }
+            BtnCancelar.Visible = false;
             BtnUpdate.Enabled = false;
             //GrdTpoDocumento.HeaderRow.TableSection = TableRowSection.TableHeader;
         }
@@ -67,7 +68,9 @@ namespace WebItNow
 
                         string sqlString = "INSERT INTO ITM_06 " +
                             " (IdTpoDocumento, Descripcion, DescrpBrev) " +
-                            " VALUES ('"+ sIdTpoDoc + "','"+ TxtNameDoc.Text +"','"+ TxtAreaMensaje.Value +"')";
+                            " VALUES ('"+ sIdTpoDoc + "', " +
+                            " TRIM(' ' FROM '"+ TxtNameDoc.Text +"')," +
+                            " TRIM(' ' FROM '"+ TxtAreaMensaje.Value +"'))";
                         SqlCommand cmd = new SqlCommand(sqlString, Conecta.ConectarBD);
 
                         cmd.ExecuteReader();
@@ -165,8 +168,9 @@ namespace WebItNow
             TxtNameDoc.Text = Server.HtmlDecode(GrdTpoDocumento.SelectedRow.Cells[1].Text);
             TxtAreaMensaje.Value = Server.HtmlDecode(GrdTpoDocumento.SelectedRow.Cells[2].Text);
 
-            BtnAgregar.Enabled = false;
+            BtnAgregar.Visible = false;
             BtnUpdate.Enabled = true;
+            BtnCancelar.Visible = true;
         }
 
         protected void BtnUpdate_Click(object sender, EventArgs e)
@@ -220,6 +224,16 @@ namespace WebItNow
         {
             GrdTpoDocumento.PageIndex = e.NewPageIndex;
             GetTpoDoc();
+        }
+
+        protected void BtnCancelar_Click(object sender, EventArgs e)
+        {
+            TxtNameDoc.Text = string.Empty;
+            TxtAreaMensaje.Value = string.Empty;
+
+            BtnAgregar.Visible = true;
+            BtnUpdate.Enabled = false;
+            BtnCancelar.Visible = false;
         }
     }
 }

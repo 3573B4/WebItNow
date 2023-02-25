@@ -121,5 +121,11 @@ namespace WebItNow
         {
             Response.Redirect("Menu.aspx");
         }
+
+        protected void grdConsultaDocumento_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            grdConsultaDocumento.PageIndex = e.NewPageIndex;
+            getCamposGV();
+        }
     }
 }

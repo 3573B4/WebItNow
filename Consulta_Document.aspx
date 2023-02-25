@@ -64,7 +64,7 @@
             <div style="overflow-x: auto; overflow-y:hidden">
                 <asp:GridView ID="grdConsultaDocumento" runat="server" AutoGenerateColumns="False" GridLines="None" Width="100%"
                     AllowPaging="True" CssClass="footable" PagerStyle-CssClass="pgr" AlternatingRowStyle-CssClass="alt"
-                    PageSize="7"  >
+                    OnPageIndexChanging="grdConsultaDocumento_PageIndexChanging" PageSize="7"  >
                     <AlternatingRowStyle CssClass="alt" />
                     <Columns>
                         <asp:TemplateField>
