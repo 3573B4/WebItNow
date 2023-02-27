@@ -112,7 +112,9 @@ namespace WebItNow
                     directory_codise = directory_codise.GetSubdirectoryClient(año);
                     directory_codise = directory_codise.GetSubdirectoryClient(mes);
                     directory_codise = directory_codise.GetSubdirectoryClient(dia);
-                    //directory_codise.CreateSubdirectory("prueba");
+
+                    string extencion = Path.GetExtension(sFileName);
+                    string sFileName_New = mes + dia + "_" + iConsecutivo + extencion;
 
                     if (!directory_codise.Exists())
                     {
@@ -125,7 +127,7 @@ namespace WebItNow
                     // CreateDirectory - Consecutivo
                     directory_codise.CreateSubdirectory(Convert.ToString(iConsecutivo));
 
-                    string destFilePath = sDirName_CODISE + "/" + año + "/" + mes + "/" + dia + "/" + iConsecutivo + "/" + sFileName;
+                    string destFilePath = sDirName_CODISE + "/" + año + "/" + mes + "/" + dia + "/" + iConsecutivo + "/" + sFileName_New;
 
                     // Get a reference to the destination file
                     ShareFileClient destFile = new ShareFileClient(ConnectionString, sDirName_CODISE, destFilePath);

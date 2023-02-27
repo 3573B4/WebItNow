@@ -53,7 +53,7 @@
                 <div style="overflow-x: auto; overflow-y:hidden">
                     <asp:GridView ID="grdEstadoDocs" runat="server" AutoGenerateColumns="False" GridLines="None" Width="100%"
                         AllowPaging="True" CssClass="footable" PagerStyle-CssClass="pgr" AlternatingRowStyle-CssClass="alt" 
-                        PageSize="10" OnSelectedIndexChanged="grdEstadoDocs_OnSelectedIndexChanged" OnRowCommand="grdEstadoDocs_RowCommand"
+                        PageSize="10" OnRowCommand="grdEstadoDocs_RowCommand"
                         OnPageIndexChanging="grdEstadoDocs_OnPageIndexChanging" OnRowDataBound="grdEstadoDocs_RowDataBound" DataKeyNames="IdTipoDocumento">
                         <AlternatingRowStyle CssClass="table" />
                         <Columns>
