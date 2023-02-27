@@ -327,6 +327,7 @@
     <Content Include="Images\descargar_new.png" />
     <Content Include="Images\edit.jpg" />
     <Content Include="Images\email-icon.png" />
+    <Content Include="Images\excel.png" />
     <Content Include="Images\imgItnow.jpeg" />
     <Content Include="Images\loader.gif" />
     <Content Include="Images\loading.gif" />
@@ -341,6 +342,7 @@
     <Content Include="Request_Document.aspx" />
     <Content Include="Review_Document.aspx" />
     <Content Include="Scripts\footable.min.js" />
+    <Content Include="Plantillas\Carga_Referencia.xlsx" />
     <None Include="Scripts\jquery-1.4.1-vsdoc.js" />
     <Content Include="Scripts\jquery-1.4.1.js" />
     <Content Include="Scripts\jquery-1.4.1.min.js" />

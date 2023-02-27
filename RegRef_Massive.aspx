@@ -124,6 +124,10 @@
     <div class="container col-md-4">
         <h2 class="h2 mb-3 fw-normal">Carga de Datos</h2>
         <div class="input-group">
+            <asp:Label ID="LblExcel" CssClass="form-control col-md-5 p-2" runat="server" Text="Descarga plantilla Excel" Font-Size="Medium"></asp:Label>
+            <asp:ImageButton ID="imgExcel" runat="server" CssClass="col-md-2 mx-1" Height="40px" Width="40px" ImageUrl="~/Images/excel.png" OnClick="imgExcel_Click" />
+        </div>
+        <div class="input-group pt-2 ">
             <asp:FileUpload ID="FileUpload1" runat="server" CssClass="form-control" />
             <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
                 <ContentTemplate>

@@ -33,6 +33,24 @@ namespace WebItNow
         protected global::System.Web.UI.UpdatePanel UpdatePanel;
 
         /// <summary>
+        /// Control LblExcel.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LblExcel;
+
+        /// <summary>
+        /// Control imgExcel.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton imgExcel;
+
+        /// <summary>
         /// Control FileUpload1.
         /// </summary>
         /// <remarks>

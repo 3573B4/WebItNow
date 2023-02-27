@@ -124,6 +124,26 @@ namespace WebItNow
         //    }
         //}
 
+
+        protected void imgExcel_Click(object sender, EventArgs e)
+        {
+            string directorioURL = Server.MapPath("~/Plantillas/Carga_Referencia.xlsx");
+
+            string direccion = directorioURL;
+            System.IO.FileStream fs = null;
+
+            fs = System.IO.File.Open(direccion, System.IO.FileMode.Open);
+            byte[] btFile = new byte[fs.Length];
+            fs.Read(btFile, 0, Convert.ToInt32(fs.Length));
+            fs.Close();
+
+            Response.AddHeader("Content-disposition", "attachment; filename=" + Path.GetFileName(directorioURL));
+            Response.ContentType = "application/octet-stream";
+            Response.BinaryWrite(btFile);
+            Response.End();
+            //  HttpContext.Current.ApplicationInstance.CompleteRequest();
+        }
+
         protected void BtnClose_Click(object sender, EventArgs e)
         {
 
