@@ -125,7 +125,11 @@
         <h2 class="h2 mb-3 fw-normal">Carga de Datos</h2>
         <div class="input-group">
             <asp:Label ID="LblExcel" CssClass="form-control col-md-5 p-2" runat="server" Text="Descarga plantilla Excel" Font-Size="Medium"></asp:Label>
-            <asp:ImageButton ID="imgExcel" runat="server" CssClass="col-md-2 mx-1" Height="40px" Width="40px" ImageUrl="~/Images/excel.png" OnClick="imgExcel_Click" />
+            <asp:UpdatePanel ID="UpdatePanel2" runat="server" UpdateMode="Conditional">
+                <ContentTemplate>
+            <asp:ImageButton ID="imgExcel" runat="server" CssClass="col-md-2 mx-1" Height="40px" Width="40px" ImageUrl="~/Images/excel.png" OnClick="imgExcel_Click" OnClientClick="showProgress()" />
+                </ContentTemplate>
+            </asp:UpdatePanel>
         </div>
         <div class="input-group pt-2 ">
             <asp:FileUpload ID="FileUpload1" runat="server" CssClass="form-control" />
@@ -233,11 +237,22 @@
     </table>
     </ContentTemplate>
     <Triggers>
+        <asp:PostBackTrigger ControlID="imgExcel" />
         <asp:PostBackTrigger ControlID="BtnCargaExcel" />
     </Triggers>
 </asp:UpdatePanel>
 
 <asp:UpdateProgress ID="UpdateProgress1" runat="server" AssociatedUpdatePanelID="UpdatePanel1" DynamicLayout="true">
+    <ProgressTemplate>
+    <div id="divImage" class ="loading">
+        <div class="center">
+                <img alt="Processing..." src="Images\ajax-loader.gif" />
+        </div>
+    </div>
+    </ProgressTemplate>
+</asp:UpdateProgress>
+
+<asp:UpdateProgress ID="UpdateProgress2" runat="server" AssociatedUpdatePanelID="UpdatePanel2" DynamicLayout="true">
     <ProgressTemplate>
     <div id="divImage" class ="loading">
         <div class="center">
