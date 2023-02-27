@@ -7,6 +7,9 @@ using System.Data.SqlClient;
 
 using System.IO;
 using SpreadsheetLight;
+using System.Configuration;
+using Azure.Storage.Files.Shares;
+using Azure.Storage.Files.Shares.Models;
 
 namespace WebItNow
 {
@@ -124,26 +127,76 @@ namespace WebItNow
         //    }
         //}
 
-
         protected void imgExcel_Click(object sender, EventArgs e)
         {
-            string directorioURL = Server.MapPath("~/Plantillas/Carga_Referencia.xlsx");
+            try
+            {
 
-            string direccion = directorioURL;
-            System.IO.FileStream fs = null;
+                Session["Filename"] = "Carga_Referencia.xlsx";
 
-            fs = System.IO.File.Open(direccion, System.IO.FileMode.Open);
-            byte[] btFile = new byte[fs.Length];
-            fs.Read(btFile, 0, Convert.ToInt32(fs.Length));
-            fs.Close();
+                string sFilename = "Carga_Referencia.xlsx";
+                string sSubdirectorio = "Plantillas/";
 
-            Response.AddHeader("Content-disposition", "attachment; filename=" + Path.GetFileName(directorioURL));
-            Response.ContentType = "application/octet-stream";
-            Response.BinaryWrite(btFile);
-            Response.End();
-            //  HttpContext.Current.ApplicationInstance.CompleteRequest();
+                System.Threading.Thread.Sleep(2000);
+                DownloadFromAzure(sFilename, sSubdirectorio);
+
+                string mensaje = "window.open('Descargas.aspx');";
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "OpenWindow", mensaje, true);
+
+            } catch (Exception ex)
+            {
+                LblMessage.Text = ex.Message;
+                mpeMensaje.Show();
+            }
+
         }
 
+        protected void DownloadFromAzure(string sFilename, string sSubdirectorio)
+        {
+
+            try
+            {
+                // Name of the share, directory, and file
+                string ConnectionString = ConfigurationManager.AppSettings.Get("StorageConnectionString");
+                string AccountName = ConfigurationManager.AppSettings.Get("StorageAccountName");
+                string sDirName = "itnowstorage";
+                string directorioURL = Server.MapPath("~/itnowstorage/" + sFilename);
+
+                // Obtener una referencia de nuestra parte.
+                ShareClient share = new ShareClient(ConnectionString, AccountName);
+
+                // Obtener una referencia de nuestro directorio - directorio ubicado en el nivel raíz.
+                ShareDirectoryClient directory = share.GetDirectoryClient(sDirName);
+
+                // Obtener una referencia a un subdirectorio que no se encuentra en el nivel raíz
+                directory = directory.GetSubdirectoryClient(sSubdirectorio);
+
+                // Obtener una referencia a nuestro archivo.
+                ShareFileClient file = directory.GetFileClient(sFilename);
+
+                // Descargar el archivo.
+                ShareFileDownloadInfo download = file.Download();
+
+                using (FileStream stream = File.OpenWrite(directorioURL))
+                {
+
+                    //                              32768  
+                    download.Content.CopyTo(stream, 327680);
+                    stream.Flush();
+                    stream.Close();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                LblMessage.Text = ex.Message;
+                this.mpeMensaje.Show();
+            }
+            finally
+            {
+
+            }
+        }
         protected void BtnClose_Click(object sender, EventArgs e)
         {
 
