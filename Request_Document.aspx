@@ -2,6 +2,7 @@
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
+    <script type="text/javascript" src="Scripts/jquery-3.4.1.min.js"></script>
     <script language="javascript" type="text/javascript">
 
     var timer = setTimeout(function () {
@@ -22,82 +23,113 @@
         //
     }
 
+    function doClick(buttonName, e) {
+        //the purpose of this function is to allow the enter key to 
+        //point to the correct button to click.
+        var key;
+
+        if (window.event)
+            key = window.event.keyCode;     //IE
+        else
+            key = e.which;     //firefox
+
+        if (key == 13) {
+            //Get the button the user wants to have clicked
+            var btn = document.getElementById(buttonName);
+            if (btn != null) { //If we find the button click it
+                btn.click();
+                event.keyCode = 0
+            }
+        }
+    }
+
+
     </script>
+
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
-    <br />
+<asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+<br />
+<asp:UpdatePanel ID="UpdatePanel2" runat="server">
+    <ContentTemplate>
 
-<div class="container col-md-4">
-        <h2 class="h2 mb-5 fw-normal">Solicitud de Documentos</h2>
-        <div class="form-group mt-3">
-            <asp:Label ID="LblReferencia" runat="server" Text="Referencia:" CssClass="control-label col-sm-2"></asp:Label>
-            <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server"   
-                ControlToValidate="TxtReferencia" ErrorMessage="*" ForeColor="Red">
+    <div class="container col-md-4">
+            <h2 class="h2 mb-5 fw-normal">Solicitud de Documentos</h2>
+            <div class="form-group mt-3">
+                <asp:Label ID="LblReferencia" runat="server" Text="Referencia:" CssClass="control-label col-sm-2"></asp:Label>
+                <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server"   
+                    ControlToValidate="TxtReferencia" ErrorMessage="*" ForeColor="Red">
                 </asp:RequiredFieldValidator>
-            <div class="col-sm-12">
-                <asp:TextBox ID="TxtReferencia" runat="server" CssClass="form-control" placeholder="Referencia" MaxLength="10" OnTextChanged ="OnTextChanged" AutoPostBack="true" ></asp:TextBox>
+
+                    <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
+                        <ContentTemplate>
+                        <div class="input-group">
+                            <asp:TextBox ID="TxtReferencia" class="form-control" runat="server" OnTextChanged ="TxtRef_OnTextChanged" Style="text-transform: uppercase" AutoComplete="off" AutoPostBack="true" ></asp:TextBox>
+                            <asp:DropDownList ID="ddlReferencias" runat="server" AppendDataBoundItems="true" OnSelectedIndexChanged="ddlReferencias_SelectedIndexChanged" CssClass="btn btn-light" AutoPostBack="true" >
+                            </asp:DropDownList>
+                        </div>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
             </div>
-        </div>
 
-        <div class="form-group mt-3">
-            <asp:Label ID="LblEmail" runat="server" Text="Correo electrónico:" CssClass="control-label col-sm-2"></asp:Label>
-            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server"   
-                ControlToValidate="TxtEmail" ErrorMessage="*" ForeColor="Red">
-                </asp:RequiredFieldValidator>
-            <div class="col-sm-12">
-                <asp:TextBox ID="TxtEmail" runat="server" CssClass="form-control" MaxLength="50" TextMode="Email" ReadOnly="True"></asp:TextBox>
-            </div>
-        </div>   
-
-        <div class="form-group mt-3">
-            <asp:Label ID="LblNom" runat="server" Text="Nombre de Cliente o Destinatario:" CssClass="control-label co-sm-3" Font-Bold="False"></asp:Label>
-            <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server"   
-                ControlToValidate="TxtNom" ErrorMessage="*" ForeColor="Red">
-                </asp:RequiredFieldValidator>
-            <div class="col-sm-12">
-                <asp:TextBox ID="TxtNom" runat="server" CssClass="form-control"  ReadOnly="True" ></asp:TextBox>
-            </div>
-        </div>
-
-        <div class="form-group mt-3">
-            <asp:Label ID="LblTpoDocumento" runat="server" Text="Tipo de documento a solicitar:" CssClass="control-label col-sm-2"></asp:Label>
-        </div>
-
-        <div class="form-floating">
-                <div class="dropdown">
-                    <asp:DropDownList ID="ddlTpoDocumento" runat="server" CssClass="btn btn-outline-secondary"  AutoPostBack="true" OnSelectedIndexChanged="ddlTpoDocumento_SelectedIndexChanged" Width="100%">
-                    </asp:DropDownList>
+            <div class="form-group mt-3">
+                <asp:Label ID="LblEmail" runat="server" Text="Correo electrónico:" CssClass="control-label col-sm-2"></asp:Label>
+                <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server"   
+                    ControlToValidate="TxtEmail" ErrorMessage="*" ForeColor="Red">
+                    </asp:RequiredFieldValidator>
+                <div class="col-sm-12">
+                    <asp:TextBox ID="TxtEmail" runat="server" CssClass="form-control" MaxLength="50" TextMode="Email" ReadOnly="True"></asp:TextBox>
                 </div>
-        </div>
+            </div>   
 
-        <div class="form-group  mt-3">
-            <div class="d-grid col-6 mx-auto">
-                <asp:Label ID="Lbl_Message" runat="server" ForeColor="Red" Visible="False"  Width="280px" ></asp:Label>
+            <div class="form-group mt-3">
+                <asp:Label ID="LblNom" runat="server" Text="Nombre de Cliente o Destinatario:" CssClass="control-label co-sm-3" Font-Bold="False"></asp:Label>
+                <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server"   
+                    ControlToValidate="TxtNom" ErrorMessage="*" ForeColor="Red">
+                    </asp:RequiredFieldValidator>
+                <div class="col-sm-12">
+                    <asp:TextBox ID="TxtNom" runat="server" CssClass="form-control"  ReadOnly="True" ></asp:TextBox>
+                </div>
             </div>
-        </div>        
+
+            <div class="form-group mt-3">
+                <asp:Label ID="LblTpoDocumento" runat="server" Text="Tipo de documento a solicitar:" CssClass="control-label col-sm-2"></asp:Label>
+            </div>
+
+            <div class="form-floating">
+                    <div class="dropdown">
+                        <asp:DropDownList ID="ddlTpoDocumento" runat="server" CssClass="btn btn-outline-secondary"  AutoPostBack="true" OnSelectedIndexChanged="ddlTpoDocumento_SelectedIndexChanged" Width="100%">
+                        </asp:DropDownList>
+                    </div>
+            </div>
+
+            <div class="form-group  mt-3">
+                <div class="d-grid col-6 mx-auto">
+                    <asp:Label ID="Lbl_Message" runat="server" ForeColor="Red" Visible="False"  Width="280px" ></asp:Label>
+                </div>
+            </div>        
         
-        <div class="form-group mt-3">
-            <div class="d-grid col-6 mx-auto">
-                <asp:Button ID="BtnEnviar" runat="server" Text="Solicitar" Font-Bold="True" OnClick="BtnEnviar_Click" CssClass="btn btn-primary" />
+            <div class="form-group mt-3">
+                <div class="d-grid col-6 mx-auto">
+                    <asp:Button ID="BtnEnviar" runat="server" Text="Solicitar" Font-Bold="True" OnClick="BtnEnviar_Click" CssClass="btn btn-primary" />
+                </div>
             </div>
-        </div>
-        <div class="from-group">
-            <div class="d-grid col-6 mx-auto">
-                <asp:Button ID="BtnRegresar" runat="server" Text="Regresar" Font-Bold="True" OnClick="BtnRegresar_Click" CssClass="btn btn-link"/>
+            <div class="from-group">
+                <div class="d-grid col-6 mx-auto">
+                    <asp:Button ID="BtnRegresar" runat="server" Text="Regresar" Font-Bold="True" OnClick="BtnRegresar_Click" CssClass="btn btn-link"/>
+                </div>
             </div>
-        </div>
 
 
-        <div class="form-group">
-            <div class="d-grid col-6 mx-auto">
-                <ajaxToolkit:ModalPopupExtender ID="mpeMensaje" runat="server" PopupControlID="pnlMensaje"
-                    TargetControlID="lblOculto" BackgroundCssClass="FondoAplicacion" OnOkScript="mpeMensajeOnOk()" >
-                </ajaxToolkit:ModalPopupExtender>
-                <asp:Label ID="lblOculto" runat="server" Text="Label" Style="display: none;" />
+            <div class="form-group">
+                <div class="d-grid col-6 mx-auto">
+                    <ajaxToolkit:ModalPopupExtender ID="mpeMensaje" runat="server" PopupControlID="pnlMensaje"
+                        TargetControlID="lblOculto" BackgroundCssClass="FondoAplicacion" OnOkScript="mpeMensajeOnOk()" >
+                    </ajaxToolkit:ModalPopupExtender>
+                    <asp:Label ID="lblOculto" runat="server" Text="Label" Style="display: none;" />
+                </div>
             </div>
         </div>
-    </div>
     <br />
     <asp:Panel ID="pnlMensaje" runat="server" CssClass="CajaDialogo" style="display: none; border: none; border-radius: 10px; width: 400px; background-color:#FFFFFF;">
         <div class=" row justify-content-end" data-bs-theme="dark">
@@ -153,7 +185,6 @@
 
     </asp:Panel>
     <br />
-
     <table cellspacing="1" cellpadding="1" border="0">
         <tr>
             <td>
@@ -177,5 +208,10 @@
             <td></td>
         </tr>
     </table>
-
+    <br />
+    </ContentTemplate>
+    <Triggers>
+        <asp:PostBackTrigger ControlID="ddlReferencias" />
+    </Triggers>
+</asp:UpdatePanel>
 </asp:Content>

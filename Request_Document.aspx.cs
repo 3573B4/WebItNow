@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Web.Services;
 
 using System.Data;
 using System.Data.SqlClient;
+using System.Collections.Generic;
+using System.Configuration;
 
 namespace WebItNow
 {
@@ -19,7 +22,9 @@ namespace WebItNow
         {
             if (!Page.IsPostBack)
             {
+                //Txt_Ref.Attributes.Add("onKeyPress", "doClick('" + btnSearch.ClientID + "',event)");
                 GetTpoDocumento();
+                Llena_ddlReferencia("**");
             }
         }
 
@@ -36,7 +41,7 @@ namespace WebItNow
         protected void BtnEnviar_Click(object sender, EventArgs e)
         {
             // Validar que los campos hayan sido capturados
-            if (TxtReferencia.Text != "" && TxtNom.Text != "" && TxtEmail.Text != "" )
+            if (TxtReferencia.Text != "" && TxtNom.Text != "" && TxtEmail.Text != "")
             {
                 // Insertar Registo Tabla ITM_11 (Solicitud Documento)
                 int result = Add_Solicitud(TxtNom.Text, TxtEmail.Text, TxtReferencia.Text, ddlTpoDocumento.SelectedValue);
@@ -111,6 +116,11 @@ namespace WebItNow
 
         }
 
+        public void TxtRef_OnTextChanged(object sender, EventArgs e)
+        {
+            Llena_ddlReferencia(TxtReferencia.Text);
+        }
+
         public int ValidarReferencia(String pReferencia, int pUsPrivilegios)
         {
 
@@ -168,10 +178,10 @@ namespace WebItNow
                 SqlCommand cmd1 = new SqlCommand("sp_tbSolicitud", Conecta.ConectarBD);
                 cmd1.CommandType = CommandType.StoredProcedure;
 
-                cmd1.Parameters.AddWithValue("@nombre", pNombre);
-                cmd1.Parameters.AddWithValue("@email", pUsEmail);
                 cmd1.Parameters.AddWithValue("@referencia", pReferencia);
                 cmd1.Parameters.AddWithValue("@TpoDocumento", pTpoDocumento);
+                cmd1.Parameters.AddWithValue("@nombre", pNombre);
+                cmd1.Parameters.AddWithValue("@email", pUsEmail);
 
                 SqlDataReader dr1 = cmd1.ExecuteReader();
 
@@ -267,5 +277,94 @@ namespace WebItNow
 
         }
 
+        public void Llena_ddlReferencia(string StrRef)
+        {
+            try
+            {
+                ddlReferencias.Items.Clear();
+
+                ConexionBD conectar = new ConexionBD();
+                conectar.Abrir();
+
+                // Consulta a la tabla Tipo de Documento
+                string sqlQuery = "SELECT UsReferencia " +
+                                    " FROM ITM_02 " +
+                                    " WHERE UsReferencia Like '" + "%" + StrRef + "%" + "'";
+
+                SqlCommand cmd = new SqlCommand(sqlQuery, conectar.ConectarBD);
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+
+                ddlReferencias.Items.Insert(0, "-- Seleccionar --");
+                ddlReferencias.DataSource = dt;
+
+                ddlReferencias.DataValueField = "UsReferencia";
+                ddlReferencias.DataTextField = "UsReferencia";
+
+                ddlReferencias.DataBind();
+
+                if (dt.Rows.Count == 0)
+                {
+                    ddlReferencias.Enabled = false;
+                }
+                else
+                {
+                    ddlReferencias.Enabled = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                LblMessage.Text = ex.Message;
+                mpeMensaje.Show();
+            }
+
+        }
+
+        protected void ddlReferencias_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (ddlReferencias.SelectedValue != "-- Seleccionar --")
+            { 
+                TxtReferencia.Text = ddlReferencias.SelectedValue;
+                GetDatosReferencia();
+            }
+        }
+
+        public void GetDatosReferencia()
+        {
+            Variables.wPrivilegios = System.Web.HttpContext.Current.Session["UsPrivilegios"] as string;
+
+            if (TxtReferencia.Text != "")
+            {
+
+                Lbl_Message.Visible = true;
+
+                // Insertar Registo Usuario Cargas
+                int result = ValidarReferencia(TxtReferencia.Text, Int32.Parse(Variables.wPrivilegios));
+
+                if (result == 0)
+                {
+                    TxtReferencia.Text = string.Empty;
+                    TxtEmail.Text = string.Empty;
+                    TxtNom.Text = string.Empty;
+
+                    LblMessage.Text = "Ingrese una referencia valida";
+                    this.mpeMensaje.Show();
+                }
+                else
+                {
+                    Lbl_Message.Text = "";
+                    Lbl_Message.Visible = false;
+                    TxtReferencia.Focus();
+                }
+
+            }
+            else
+            {
+                Lbl_Message.Visible = true;
+                Lbl_Message.Text = "* Este campo es obligatorio";
+            }
+        }
     }
+
 }

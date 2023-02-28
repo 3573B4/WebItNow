@@ -51,7 +51,31 @@
         <h2 class="h2 my-3 fw-normal">Alta de documento</h2>
 
         <asp:Label ID="LblDescripcion" runat="server" CssClass="" Text="Incerte el nombre del archivo a pedir y en seguida las instrucciones de como se debe subir el archivo a pedir"></asp:Label>
+        
+        <%--<div class="row justify-content-center g-1 mt-3">--%>
+            <div class="form-floating my-3">
+                <asp:Label ID="LblProceso" runat="server" Text="Proceso"></asp:Label>
+                <asp:DropDownList ID="ddlProceso" runat="server" CssClass="btn btn-outline-secondary mt-1" AppendDataBoundItems="true" Width="100%">
+                    <asp:ListItem Value="0"> -- Seleccionar -- </asp:ListItem>
+                </asp:DropDownList>
+            </div>
 
+            <div class="form-floating">
+                <asp:Label ID="LblSubProceso" runat="server" Text="Sub Proceso"></asp:Label>
+                <asp:DropDownList ID="ddlSubProceso" runat="server" CssClass="btn btn-outline-secondary mt-1" AppendDataBoundItems="true" Width="100%" >
+                    <asp:ListItem Value="0"> -- Seleccionar -- </asp:ListItem>
+                </asp:DropDownList>
+            </div>
+
+            <%--<div class="form-floating col-md-3">
+                <asp:DropDownList ID="ddlstatusActivado" runat="server" CssClass="btn btn-outline-secondary" AppendDataBoundItems="true" AutoPostBack="true" Width="100%" >
+                    <asp:ListItem Value="1">Activos</asp:ListItem>
+                    <asp:ListItem Value="0">Inactivos</asp:ListItem>
+                </asp:DropDownList>
+            </div>
+        </div>--%>
+
+        
         <div class="mt-3">
             <asp:Label ID="LblNameDoc" runat="server" Text="Nombre del Documento"></asp:Label>
             <asp:TextBox ID="TxtNameDoc" runat="server" CssClass="form-control mt-1" placeholder="Nombre del Archivo"></asp:TextBox>
@@ -62,10 +86,20 @@
             <textarea rows="2" cols="64" id="TxtAreaMensaje" runat="server" class="form-control mt-1"/>
         </div>
 
-        <div class="d-grid gap-4 d-flex justify-content-center">
+        <div class="d-grid gap-4 d-flex justify-content-center mt-3">
             <asp:Label ID="Lbl_Message" runat="server" ForeColor="Red" Visible="False"  Width="280px"></asp:Label>
         </div>
-        
+        <%--<div class="mt-3">
+            <div class="form-check form-check-inline">
+                <asp:RadioButton  type="hidden" runat="server" class="form-check-input" ID="rbtnActivo" Checked="true" GroupName="Activos" />
+                <label class="form-check-label" > Activo </label>
+            </div>
+            <div class="form-check form-check-inline">
+                <asp:RadioButton  type="hidden" Name="rbtnDesactivo" ID="rbtnDesactivo" runat="server" class="form-check-input" GroupName="Activos" />
+                <label class="form-check-label" > Inactivo </label>
+            </div>
+        </div>--%>
+
         <div class="d-grid gap-4 d-flex justify-content-center mt-2 mb-3">
             <asp:Button ID="BtnAgregar" runat="server" Text="Agregar" OnClick="BtnAgregar_Click" CssClass="btn btn-primary px-4" />
             <asp:Button ID="BtnUpdate" runat="server" Text="Actualizar" OnClick="BtnUpdate_Click" CssClass="btn btn-primary" />
@@ -133,7 +167,6 @@
             <asp:PostBackTrigger ControlID ="GrdTpoDocumento" />
         </Triggers>
 </asp:UpdatePanel>
-
     <asp:Panel ID="pnlMensaje" runat="server" CssClass="CajaDialogo" style="display: none; border: none; border-radius: 10px; width: 400px; background-color:#FFFFFF;">
         <div class=" row justify-content-end" data-bs-theme="dark">
             <div class="col-1">
