@@ -1,9 +1,8 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="Request_Document.aspx.cs" Inherits="WebItNow.Request_Document" %>
+﻿    <%@ Page Title="" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="Request_Document.aspx.cs" Inherits="WebItNow.Request_Document" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
-    <script type="text/javascript" src="Scripts/jquery-3.4.1.min.js"></script>
-    <script language="javascript" type="text/javascript">
+<script language="javascript" type="text/javascript">
 
     var timer = setTimeout(function () {
         document.getElementById('<%=LblExpira.ClientID %>').innerHTML = 'La sesión ha expirado.';
@@ -23,113 +22,96 @@
         //
     }
 
-    function doClick(buttonName, e) {
-        //the purpose of this function is to allow the enter key to 
-        //point to the correct button to click.
-        var key;
-
-        if (window.event)
-            key = window.event.keyCode;     //IE
-        else
-            key = e.which;     //firefox
-
-        if (key == 13) {
-            //Get the button the user wants to have clicked
-            var btn = document.getElementById(buttonName);
-            if (btn != null) { //If we find the button click it
-                btn.click();
-                event.keyCode = 0
-            }
-        }
-    }
+    $(function () {
+        $('[id*=GridView1]').footable();
+    });
 
 
-    </script>
+    document.onkeydown = function (evt) { return (evt ? evt.which : event.keyCode) != 13; }
+
+</script>
+
+    <link href="~/Scripts/footable.min.js" rel="stylesheet" type="text/javascript" />
+    <link href="~/Styles/footable.min.css" rel="stylesheet" type="text/css" />
 
 </asp:Content>
+
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-<asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
-<br />
-<asp:UpdatePanel ID="UpdatePanel2" runat="server">
-    <ContentTemplate>
-
-    <div class="container col-md-4">
-            <h2 class="h2 mb-5 fw-normal">Solicitud de Documentos</h2>
-            <div class="form-group mt-3">
-                <asp:Label ID="LblReferencia" runat="server" Text="Referencia:" CssClass="control-label col-sm-2"></asp:Label>
-                <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server"   
-                    ControlToValidate="TxtReferencia" ErrorMessage="*" ForeColor="Red">
-                </asp:RequiredFieldValidator>
-
-                    <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
+    <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+    <br />
+<asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
+<ContentTemplate>
+    <div class="container col-md-6">
+        <h2 class="h2 mb-5 fw-normal">Solicitud de Documentos</h2>
+        <div class="form-group mt-3">
+            <div class="row">
+            <div class="col-md-6">
+                <asp:Label ID="LblRef" runat="server" Text="Referencia:" CssClass="control-label col-sm-2"></asp:Label>
+                <div class="input-group mt-1 mb-3">
+                    <asp:TextBox ID="TxtRef" runat="server" CssClass="form-control" Style="text-transform: uppercase"  AutoComplete="off" MaxLength="12" ></asp:TextBox>
+                    <asp:UpdatePanel ID="UpdatePanel2" runat="server" UpdateMode="Conditional">
                         <ContentTemplate>
-                        <div class="input-group">
-                            <asp:TextBox ID="TxtReferencia" class="form-control" runat="server" OnTextChanged ="TxtRef_OnTextChanged" Style="text-transform: uppercase" AutoComplete="off" AutoPostBack="true" ></asp:TextBox>
-                            <asp:DropDownList ID="ddlReferencias" runat="server" AppendDataBoundItems="true" OnSelectedIndexChanged="ddlReferencias_SelectedIndexChanged" CssClass="btn btn-light" AutoPostBack="true" >
-                            </asp:DropDownList>
-                        </div>
+                            <asp:ImageButton ID="ImgBusReference" runat="server" CssClass="p-1" ImageUrl="~/Images/search_find.png" Height="32px" Width="32px" OnClick="ImgBusReference_Click" />
                         </ContentTemplate>
                     </asp:UpdatePanel>
-            </div>
-
-            <div class="form-group mt-3">
-                <asp:Label ID="LblEmail" runat="server" Text="Correo electrónico:" CssClass="control-label col-sm-2"></asp:Label>
-                <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server"   
-                    ControlToValidate="TxtEmail" ErrorMessage="*" ForeColor="Red">
-                    </asp:RequiredFieldValidator>
-                <div class="col-sm-12">
-                    <asp:TextBox ID="TxtEmail" runat="server" CssClass="form-control" MaxLength="50" TextMode="Email" ReadOnly="True"></asp:TextBox>
-                </div>
-            </div>   
-
-            <div class="form-group mt-3">
-                <asp:Label ID="LblNom" runat="server" Text="Nombre de Cliente o Destinatario:" CssClass="control-label co-sm-3" Font-Bold="False"></asp:Label>
-                <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server"   
-                    ControlToValidate="TxtNom" ErrorMessage="*" ForeColor="Red">
-                    </asp:RequiredFieldValidator>
-                <div class="col-sm-12">
-                    <asp:TextBox ID="TxtNom" runat="server" CssClass="form-control"  ReadOnly="True" ></asp:TextBox>
                 </div>
             </div>
-
-            <div class="form-group mt-3">
-                <asp:Label ID="LblTpoDocumento" runat="server" Text="Tipo de documento a solicitar:" CssClass="control-label col-sm-2"></asp:Label>
-            </div>
-
-            <div class="form-floating">
-                    <div class="dropdown">
-                        <asp:DropDownList ID="ddlTpoDocumento" runat="server" CssClass="btn btn-outline-secondary"  AutoPostBack="true" OnSelectedIndexChanged="ddlTpoDocumento_SelectedIndexChanged" Width="100%">
-                        </asp:DropDownList>
-                    </div>
-            </div>
-
-            <div class="form-group  mt-3">
-                <div class="d-grid col-6 mx-auto">
-                    <asp:Label ID="Lbl_Message" runat="server" ForeColor="Red" Visible="False"  Width="280px" ></asp:Label>
-                </div>
-            </div>        
-        
-            <div class="form-group mt-3">
-                <div class="d-grid col-6 mx-auto">
-                    <asp:Button ID="BtnEnviar" runat="server" Text="Solicitar" Font-Bold="True" OnClick="BtnEnviar_Click" CssClass="btn btn-primary" />
+            <div class="col-md-6">
+                <asp:Label ID="LblCliente" runat="server" Text="Cliente:" CssClass="control-label col-sm-2"></asp:Label>            
+                <div class="input-group mt-1 mb-3">
+                    <asp:TextBox ID="TxtCliente" runat="server" CssClass="form-control" Style="text-transform: uppercase"  AutoComplete="off" MaxLength="12" ></asp:TextBox>
+                    <asp:UpdatePanel ID="UpdatePanel3" runat="server" UpdateMode="Conditional">
+                        <ContentTemplate>
+                            <asp:ImageButton ID="ImgBusCustomer" runat="server" CssClass="p-1" ImageUrl="~/Images/search_find.png" Height="32px" Width="32px" OnClick="ImgBusCustomer_Click" />
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
                 </div>
             </div>
-            <div class="from-group">
-                <div class="d-grid col-6 mx-auto">
-                    <asp:Button ID="BtnRegresar" runat="server" Text="Regresar" Font-Bold="True" OnClick="BtnRegresar_Click" CssClass="btn btn-link"/>
-                </div>
-            </div>
-
-
-            <div class="form-group">
-                <div class="d-grid col-6 mx-auto">
-                    <ajaxToolkit:ModalPopupExtender ID="mpeMensaje" runat="server" PopupControlID="pnlMensaje"
-                        TargetControlID="lblOculto" BackgroundCssClass="FondoAplicacion" OnOkScript="mpeMensajeOnOk()" >
-                    </ajaxToolkit:ModalPopupExtender>
-                    <asp:Label ID="lblOculto" runat="server" Text="Label" Style="display: none;" />
-                </div>
             </div>
         </div>
+        <asp:Panel ID="pnlRef" runat="server" >
+            <div style="overflow-x: hidden; overflow-y: auto; height:225px;">
+                <asp:GridView ID="GrdRef" runat="server" AutoGenerateColumns="False" GridLines="None" Width="100%" AllowPaging = "False"
+                    CssClass="footable" PagerStyle-CssClass="pgr" AlternatingRowStyle-CssClass="alt"
+                    OnSelectedIndexChanged="GrdRef_SelectedIndexChanged" OnRowDataBound="GrdRef_RowDataBound" >
+                    <AlternatingRowStyle CssClass="alt" />
+                    <Columns>
+                        <asp:TemplateField>
+                            <ItemTemplate>
+                                <asp:ImageButton ID="ImgSelect" runat="server" Height="24px" Width="24px" ImageUrl="~/Images/aceptar.ico" OnClick="ImgSelect_Click" />
+                            </ItemTemplate> 
+                        </asp:TemplateField>
+
+                        <asp:BoundField DataField="UsReferencia" HeaderText="Referencia" ></asp:BoundField>
+                        <asp:BoundField DataField="Aseguradora" HeaderText="Aseguradora" ></asp:BoundField>
+                        <asp:BoundField DataField="Siniestro" HeaderText="Siniestro" ></asp:BoundField>
+                        <asp:BoundField DataField="UsEmail" HeaderText="Email" ></asp:BoundField>
+                    </Columns>
+                </asp:GridView>
+            </div>
+        </asp:Panel>
+    </div>
+    <div class="container col-md-4">
+        <div class="form-group  mt-3">
+            <div class="d-grid col-6 mx-auto">
+                <asp:Label ID="Lbl_Message" runat="server" ForeColor="Red" Visible="False"  Width="280px" ></asp:Label>
+            </div>
+        </div>        
+        
+        <div class="form-group mt-3">
+            <div class="d-grid col-6 mx-auto">
+            <%--<asp:Button ID="BtnNewReference" runat="server" Text="Referencia Nueva" Font-Bold="True" OnClick="BtnNewReference_Click" CssClass="btn btn-primary" />--%>
+            <%--<asp:Button ID="BtnExistReference" runat="server" Text="Referencia Existente" Font-Bold="True" OnClick="BtnExistReference_Click" CssClass="btn btn-primary" />--%>
+            </div>
+        </div>
+
+        <div class="from-group">
+            <div class="d-grid col-6 mx-auto">
+                <asp:Button ID="BtnRegresar" runat="server" Text="Regresar" Font-Bold="True" OnClick="BtnRegresar_Click" CssClass="btn btn-link mb-5 pb-4"/>
+            </div>
+        </div>
+
+    </div>
     <br />
     <asp:Panel ID="pnlMensaje" runat="server" CssClass="CajaDialogo" style="display: none; border: none; border-radius: 10px; width: 400px; background-color:#FFFFFF;">
         <div class=" row justify-content-end" data-bs-theme="dark">
@@ -188,11 +170,11 @@
     <table cellspacing="1" cellpadding="1" border="0">
         <tr>
             <td>
-                <ajaxToolkit:ModalPopupExtender ID="ModalPopupExtender1" runat="server" PopupControlID="pnlMensaje"
+                <ajaxToolkit:ModalPopupExtender ID="mpeMensaje" runat="server" PopupControlID="pnlMensaje"
                     TargetControlID="lblOculto" BackgroundCssClass="FondoAplicacion" OnOkScript="mpeMensajeOnOk()" >
                 </ajaxToolkit:ModalPopupExtender>
             </td>
-            <td><asp:Label ID="Label1" runat="server" Text="Label" Style="display: none;" /></td>
+            <td><asp:Label ID="lblOculto" runat="server" Text="Label" Style="display: none;" /></td>
             <td></td>
             <td></td>
         </tr>
@@ -209,9 +191,11 @@
         </tr>
     </table>
     <br />
-    </ContentTemplate>
+</ContentTemplate>
     <Triggers>
-        <asp:PostBackTrigger ControlID="ddlReferencias" />
+        <asp:PostBackTrigger ControlID="GrdRef" />
+        <asp:PostBackTrigger ControlID="ImgBusReference" />
+        <asp:PostBackTrigger ControlID="ImgBusCustomer" />
     </Triggers>
 </asp:UpdatePanel>
 </asp:Content>

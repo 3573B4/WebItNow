@@ -24,15 +24,6 @@ namespace WebItNow
         protected global::System.Web.UI.ScriptManager ScriptManager1;
 
         /// <summary>
-        /// Control UpdatePanel1.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel1;
-
-        /// <summary>
         /// Control LblDescripcion.
         /// </summary>
         /// <remarks>
@@ -159,13 +150,13 @@ namespace WebItNow
         protected global::System.Web.UI.WebControls.Button BtnCancelar;
 
         /// <summary>
-        /// Control GrdTpoDocumento.
+        /// Control grdTpoDocumento.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GrdTpoDocumento;
+        protected global::System.Web.UI.WebControls.GridView grdTpoDocumento;
 
         /// <summary>
         /// Control BtnRegresar.
@@ -195,24 +186,6 @@ namespace WebItNow
         protected global::System.Web.UI.WebControls.Label lblOculto;
 
         /// <summary>
-        /// Control mpeExpira.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::AjaxControlToolkit.ModalPopupExtender mpeExpira;
-
-        /// <summary>
-        /// Control lblHide.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblHide;
-
-        /// <summary>
         /// Control pnlMensaje.
         /// </summary>
         /// <remarks>
@@ -238,32 +211,5 @@ namespace WebItNow
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnClose;
-
-        /// <summary>
-        /// Control pnlExpira.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlExpira;
-
-        /// <summary>
-        /// Control LblExpira.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LblExpira;
-
-        /// <summary>
-        /// Control BtnClose_Expira.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button BtnClose_Expira;
     }
 }
