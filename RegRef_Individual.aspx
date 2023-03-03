@@ -59,6 +59,16 @@
         <br />
        
         <div class="form-group">
+            <asp:Label ID="LblAsegurado" runat="server" Text="Nombre de Cliente o Asegurado" CssClass="control-label col-sm-2" Font-Size="Small"></asp:Label>
+            <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server"   
+                ControlToValidate="TxtAsegurado" ErrorMessage="*" ForeColor="Red">
+                </asp:RequiredFieldValidator>
+            <div class="col-sm-12">
+                <asp:TextBox ID="TxtAsegurado" runat="server" CssClass="form-control" placeholder="Nombre de Cliente" MaxLength="50" ></asp:TextBox>
+            </div>
+        </div>
+
+        <div class="form-group">
             <asp:Label ID="LblTelefono" runat="server" Text="Telefono" CssClass="control-label col-sm-2" Font-Size="Small"></asp:Label>
             <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server"   
                 ControlToValidate="TxtTelefono" ErrorMessage="*" ForeColor="Red">

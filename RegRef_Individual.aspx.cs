@@ -37,7 +37,7 @@ namespace WebItNow
             {
 
                 // Insertar Registo Tabla tbUsuarios (UploadFiles)
-                int result = Add_tbReferencia(TxtRef.Text, TxtEmail.Text, TxtTelefono.Text, 3, "Insert");
+                int result = Add_tbReferencia(TxtRef.Text, TxtEmail.Text, TxtAsegurado.Text, TxtTelefono.Text, 3, "Insert");
 
                 if (result == 0)
                 {
@@ -74,7 +74,7 @@ namespace WebItNow
 
         }
 
-        public int Add_tbReferencia(String pReferencia, String pUsEmail, String pTelefono, int pUsPrivilegios, string pStatementType)
+        public int Add_tbReferencia(String pReferencia, String pUsEmail, string pAsegurado, String pTelefono, int pUsPrivilegios, string pStatementType)
         {
             ConexionBD Conecta = new ConexionBD();
             NewMethod(Conecta);
@@ -87,6 +87,7 @@ namespace WebItNow
 
                 cmd1.Parameters.AddWithValue("@referencia", pReferencia);
                 cmd1.Parameters.AddWithValue("@email", pUsEmail);
+                cmd1.Parameters.AddWithValue("@telefono", pAsegurado);
                 cmd1.Parameters.AddWithValue("@telefono", pTelefono);
                 cmd1.Parameters.AddWithValue("@privilegios", pUsPrivilegios);
                 cmd1.Parameters.AddWithValue("@StatementType", pStatementType);

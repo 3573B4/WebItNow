@@ -49,7 +49,7 @@ namespace WebItNow
             System.Web.Security.FormsAuthentication.SignOut();
             Session.Abandon();
 
-            Response.Redirect("Menu.aspx");
+            Response.Redirect("Request_Document.aspx");
         }
 
         protected void BtnClose_Click(object sender, EventArgs e)
