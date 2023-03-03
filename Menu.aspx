@@ -153,15 +153,7 @@
                             <font size="4">Documentos</font>
                         </a>
                         <ul class="dropdown-menu">
-                            <%--<li><a class="dropdown-item" href="Request_Document.aspx">Solicitudes</a></li>--%>
-                            <li class="nav-item dropend p-0 ms-3">
-                                    <asp:Button ID="BtnSolicitudes" runat="server" Text="Solicitudes" class="btn dropdown-toggle p-0 m-0" data-bs-toggle="dropdown" aria-expanded="false" BorderStyle="None" />                                    
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="Request_Document_1.aspx">Nuevas</a></li>
-                                        <li><hr class="dropdown-divider"/></li>
-                                        <li><a class="dropdown-item" href="Request_Document.aspx">Existentes</a></li>
-                                    </ul>
-                            </li>
+                            <li><a class="dropdown-item" href="Request_Document.aspx">Solicitudes</a></li>
                             <li><hr class="dropdown-divider"/></li>
                             <li><a class="dropdown-item" href="Review_Document.aspx">Validación</a></li>
                             <li><hr class="dropdown-divider"/></li>
@@ -186,8 +178,8 @@
                                     <li><a class="dropdown-item" href="RegRef_Massive.aspx">Masivo</a></li>
                                 </ul>
                             </li>--%>
-                            <li class="nav-item dropend p-0 ms-3">
-                                    <asp:Button ID="BtnAltaAsunto" runat="server" Text="Alta de Asunto" class="btn dropdown-toggle p-0 m-0" data-bs-toggle="dropdown" aria-expanded="false" BorderStyle="None" />                                    
+                            <li class="nav-item dropend p-0">
+                                    <asp:Button ID="BtnAltaAsunto" runat="server" Text="&nbsp;&nbsp;&nbsp;Alta de Asunto" class="btn dropdown-toggle dropdown-item p-0 m-0" data-bs-toggle="dropdown" aria-expanded="false" BorderStyle="None" />                                    
                                     <ul class="dropdown-menu">
                                         <li><a class="dropdown-item" href="RegRef_Individual.aspx">Individual</a></li>
                                         <li><hr class="dropdown-divider"/></li>

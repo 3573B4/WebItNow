@@ -39,6 +39,9 @@ namespace WebItNow
         }
         protected void BtnRegresar_Click(object sender, EventArgs e)
         {
+            System.Web.Security.FormsAuthentication.SignOut();
+            Session.Abandon();
+
             Response.Redirect("Menu.aspx");
         }
 
@@ -49,9 +52,9 @@ namespace WebItNow
 
         protected void BtnNewReference_Click(object sender, EventArgs e)
         {
-            TxtRef.Text = string.Empty;
-            Session["Referencia"] = TxtRef.Text;
-            Response.Redirect("Request_Document_1.aspx");
+            //TxtRef.Text = string.Empty;
+            //Session["Referencia"] = TxtRef.Text;
+            Response.Redirect("RegRef_Individual.aspx");
         }
 
         protected void BtnExistReference_Click(object sender, EventArgs e)
@@ -61,7 +64,6 @@ namespace WebItNow
             //Session["Aseguradora"] = "Seguros Afirme S.A. de C.V. Afirme Grupo Financiero - AFI";
 
             //Response.Redirect("Request_Document_1.aspx");
-
         }
 
         public void Limpia(ControlCollection controles)
@@ -172,9 +174,11 @@ namespace WebItNow
             string sSiniestro = GrdRef.Rows[index].Cells[3].Text;
             string sEmail = GrdRef.Rows[index].Cells[4].Text;
 
+            //Session["Asunto"] = "Solicitud Documento-Exist";
             Session["Referencia"] = sReferencia;
             Session["Aseguradora"] = sAseguradora;
             Session["Email"] = sEmail;
+
 
             Response.Redirect("Request_Document_1.aspx");
         }

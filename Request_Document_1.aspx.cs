@@ -22,14 +22,14 @@ namespace WebItNow
         {
             if (!Page.IsPostBack)
             {
-                if (Convert.ToString(Session["Referencia"]) == string.Empty)
-                {
-                    TxtReferencia.ReadOnly = false;
-                    TxtEmail.ReadOnly = false;
-                    TxtNom.ReadOnly = false;
-                }
-                else
-                {
+                //if (Convert.ToString(Session["Referencia"]) == string.Empty)
+                //{
+                //    TxtReferencia.ReadOnly = false;
+                //    TxtEmail.ReadOnly = false;
+                //    TxtNom.ReadOnly = false;
+                //}
+                //else
+                //{
                     TxtReferencia.ReadOnly = true;
                     TxtEmail.ReadOnly = true;
                     TxtNom.ReadOnly = true;
@@ -38,13 +38,17 @@ namespace WebItNow
                     TxtEmail.Text = Convert.ToString(Session["Email"]);
                     TxtNom.Text = Convert.ToString(Session["Aseguradora"]);
 
-                }
+                //}
+
                 GetTpoDocumento();
             }
         }
 
         protected void BtnRegresar_Click(object sender, EventArgs e)
         {
+            System.Web.Security.FormsAuthentication.SignOut();
+            Session.Abandon();
+
             Response.Redirect("Menu.aspx");
         }
 
@@ -64,8 +68,18 @@ namespace WebItNow
                 if (result == 0)
                 {
 
-                    Session["Referencia"] = TxtReferencia.Text;
+                    // Validar de que formulario fue llamado
+                    //if (Convert.ToString(Session["Asunto"]) == string.Empty)
+                    //{
+                    //    Session["Asunto"] = "Solicitud Documento-New";
+                    //} 
+                    //else
+                    //{
+                    //    Session["Asunto"] = "Solicitud Documento-Exist";
+                    //}
+
                     Session["Asunto"] = "Solicitud Documento";
+                    Session["Referencia"] = TxtReferencia.Text;
                     Session["Email"] = TxtEmail.Text.Trim();
 
                     Response.Redirect("Page_Message.aspx");

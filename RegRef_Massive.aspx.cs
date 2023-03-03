@@ -197,6 +197,7 @@ namespace WebItNow
 
             }
         }
+
         protected void BtnClose_Click(object sender, EventArgs e)
         {
 
@@ -468,6 +469,11 @@ namespace WebItNow
 
             SLDocument sl = new SLDocument(directorio);
             SLWorksheetStatistics propiedades = sl.GetWorksheetStatistics();
+            int numeroColumnas = propiedades.NumberOfColumns;
+            int numeroCeldas = propiedades.NumberOfCells;
+
+            int ultFila = numeroCeldas / numeroColumnas;
+
             int ultimaFila = propiedades.EndRowIndex;
 
             ConexionBD conectar = new ConexionBD();
@@ -475,50 +481,55 @@ namespace WebItNow
 
             //string error = "";
 
-            for (int x = 2; x <= ultimaFila; x++)
+            for (int x = 2; x <= ultFila; x++)
             {
                 string sReferencia = sl.GetCellValueAsString("A" + x);
 
-                if (existeProducto(sReferencia))
-                {
-                    LblMessage.Text += "ya existe referencia" + sReferencia + "\n";
-                    mpeMensaje.Show();
-                }
-                else
+                if (sReferencia != string.Empty)
                 {
 
-                    string sqlString = "INSERT INTO ITM_02 (UsReferencia, UsEmail, Aseguradora, UsAsegurado, Tipo_Asegurado, Nombre_Contacto, " +
-                                                            "Apellidos_Contacto, UsTelefono, RFC_Contacto, Perfil_Contacto, Siniestro ) " +
-                                    " VALUES (@referencia, @email, @aseguradora, @asegurado, @tpoasegurado, @nomcontacto, @apecontacto, " +
-                                    " @telefono, @rfc, @perfil, @siniestro )";
-                    try
+                    if (existeProducto(sReferencia))
                     {
-
-                        SqlCommand cmd = new SqlCommand(sqlString, conectar.ConectarBD);
-
-                        cmd.Parameters.AddWithValue("@referencia", sl.GetCellValueAsString("A" + x));
-                        cmd.Parameters.AddWithValue("@email", sl.GetCellValueAsString("B" + x));
-                        cmd.Parameters.AddWithValue("@aseguradora", sl.GetCellValueAsString("C" + x));
-                        cmd.Parameters.AddWithValue("@asegurado", sl.GetCellValueAsString("D" + x));
-                        cmd.Parameters.AddWithValue("@tpoasegurado", sl.GetCellValueAsString("E" + x));
-                        cmd.Parameters.AddWithValue("@nomcontacto", sl.GetCellValueAsString("F" + x));
-                        cmd.Parameters.AddWithValue("@apecontacto", sl.GetCellValueAsString("G" + x));
-                        cmd.Parameters.AddWithValue("@telefono", sl.GetCellValueAsString("H" + x));
-                        cmd.Parameters.AddWithValue("@rfc", sl.GetCellValueAsString("I" + x));
-                        cmd.Parameters.AddWithValue("@perfil", sl.GetCellValueAsString("J" + x));
-                        cmd.Parameters.AddWithValue("@siniestro", sl.GetCellValueAsString("K" + x));
-
-
-                        int result =  cmd.ExecuteNonQuery();
-
-                        // Insertar Registros Tabla tbEstadoDocumento [ITM_04]
-                        int idStatus = 1;
-                        int valor = Add_tbEstadoDocumento(sReferencia, idStatus);
-                    }
-                    catch (Exception ex)
-                    {
-                        LblMessage.Text = ex.Message;
+                        LblMessage.Text += "ya existe referencia" + sReferencia + "\n";
                         mpeMensaje.Show();
+                    }
+                    else
+                    {
+
+                        string sqlString = "INSERT INTO ITM_02 (UsReferencia, UsEmail, Aseguradora, UsAsegurado, Tipo_Asegurado, Nombre_Contacto, " +
+                                                                "Apellidos_Contacto, UsTelefono, RFC_Contacto, Perfil_Contacto, Siniestro ) " +
+                                        " VALUES (@referencia, @email, @aseguradora, @asegurado, @tpoasegurado, @nomcontacto, @apecontacto, " +
+                                        " @telefono, @rfc, @perfil, @siniestro )";
+                        try
+                        {
+
+                            SqlCommand cmd = new SqlCommand(sqlString, conectar.ConectarBD);
+
+                            cmd.Parameters.AddWithValue("@referencia", sl.GetCellValueAsString("A" + x));
+                            cmd.Parameters.AddWithValue("@email", sl.GetCellValueAsString("B" + x));
+                            cmd.Parameters.AddWithValue("@aseguradora", sl.GetCellValueAsString("C" + x));
+                            cmd.Parameters.AddWithValue("@asegurado", sl.GetCellValueAsString("D" + x));
+                            cmd.Parameters.AddWithValue("@tpoasegurado", sl.GetCellValueAsString("E" + x));
+                            cmd.Parameters.AddWithValue("@nomcontacto", sl.GetCellValueAsString("F" + x));
+                            cmd.Parameters.AddWithValue("@apecontacto", sl.GetCellValueAsString("G" + x));
+                            cmd.Parameters.AddWithValue("@telefono", sl.GetCellValueAsString("H" + x));
+                            cmd.Parameters.AddWithValue("@rfc", sl.GetCellValueAsString("I" + x));
+                            cmd.Parameters.AddWithValue("@perfil", sl.GetCellValueAsString("J" + x));
+                            cmd.Parameters.AddWithValue("@siniestro", sl.GetCellValueAsString("K" + x));
+
+
+                            int result =  cmd.ExecuteNonQuery();
+
+                            // Insertar Registros Tabla tbEstadoDocumento [ITM_04]
+                            int idStatus = 1;
+                            int valor = Add_tbEstadoDocumento(sReferencia, idStatus);
+                        }
+                        catch (Exception ex)
+                        {
+                            LblMessage.Text = ex.Message;
+                            mpeMensaje.Show();
+                        }
+
                     }
 
                 }

@@ -308,7 +308,7 @@
     <Content Include="About.aspx" />
     <Content Include="Access.aspx" />
     <Content Include="Captcha.aspx" />
-    <Content Include="Catalog_TpoDoument.aspx" />
+    <Content Include="Catalog_TpoDocument.aspx" />
     <Content Include="Consulta_Document.aspx" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -440,12 +440,12 @@
     <Compile Include="Captcha.aspx.designer.cs">
       <DependentUpon>Captcha.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Catalog_TpoDoument.aspx.cs">
-      <DependentUpon>Catalog_TpoDoument.aspx</DependentUpon>
+    <Compile Include="Catalog_TpoDocument.aspx.cs">
+      <DependentUpon>Catalog_TpoDocument.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Catalog_TpoDoument.aspx.designer.cs">
-      <DependentUpon>Catalog_TpoDoument.aspx</DependentUpon>
+    <Compile Include="Catalog_TpoDocument.aspx.designer.cs">
+      <DependentUpon>Catalog_TpoDocument.aspx</DependentUpon>
     </Compile>
     <Compile Include="ConexionBD.cs" />
     <Compile Include="Consulta_Document.aspx.cs">

@@ -12,15 +12,15 @@
         
         <h2 class="h2 my-3 fw-normal">Alta de documento</h2>
 
-        <asp:Label ID="LblDescripcion" runat="server" CssClass="" Text="Incerte el nombre del archivo a pedir y en seguida las instrucciones de como se debe subir el archivo a pedir"></asp:Label>
+        <asp:Label ID="LblDescripcion" runat="server" CssClass="" Text="Inserte el nombre del archivo a pedir y en seguida las instrucciones de como se debe subir el archivo a pedir."></asp:Label>
         
-        <div class="form-floating">
+        <div class="form-floating mt-3">
             <asp:Label ID="LblProceso" runat="server" Text="Proceso"></asp:Label>
             <asp:DropDownList ID="ddlProceso" runat="server" CssClass="btn btn-outline-secondary mt-1" AutoPostBack="true" OnSelectedIndexChanged="DropDownList1_SelectedIndexChanged" Width="100%">
            
             </asp:DropDownList>
         </div>
-        <div class="form-floating">
+        <div class="form-floating my-3">
             <asp:Label ID="LblSubProceso" runat="server" Text="Sub Proceso"></asp:Label>
             <asp:DropDownList ID="ddlSubProceso" runat="server" CssClass="btn btn-outline-secondary mt-1" AutoPostBack="true" Width="100%" OnSelectedIndexChanged="ddlSubProceso_SelectedIndexChanged" >
 
