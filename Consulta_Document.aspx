@@ -31,6 +31,7 @@
     <script src="Scripts/jquery-3.4.1.min.js" type="text/javascript"></script>
     <link href="~/Scripts/footable.min.js" rel="stylesheet" type="text/javascript" />
     <link href="~/Styles/footable.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Styles/paginacion.css" rel="stylesheet" type="text/css" />
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
@@ -85,7 +86,7 @@
                         <asp:BoundField DataField="Url_Imagen" HeaderText="Directorio" />
                         <asp:BoundField DataField="IdDescarga" HeaderText="Descargas" />
                     </Columns>
-                    <PagerStyle CssClass="pgr" />
+                    <PagerStyle HorizontalAlign = "Center" CssClass="pgr" />
                 </asp:GridView>
             </div>
             <div class="form-group d-grid col-md-3 mx-auto pt-3">

@@ -125,7 +125,13 @@ namespace WebItNow
         protected void grdConsultaDocumento_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
             grdConsultaDocumento.PageIndex = e.NewPageIndex;
+
             getCamposGV();
+        }
+
+        public IEnumerable<int> GetPages()
+        {
+            return Enumerable.Range(1, grdConsultaDocumento.PageCount);
         }
     }
 }

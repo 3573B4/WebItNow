@@ -410,6 +410,7 @@
     <Content Include="Styles\GridView.css" />
     <Content Include="Styles\loading-bar.css" />
     <Content Include="Styles\loading-bar.min.css" />
+    <Content Include="Styles\paginacion.css" />
     <Content Include="Styles\panel_message.css" />
     <Content Include="Styles\default.css" />
     <Content Include="Styles\fuentes.css" />
