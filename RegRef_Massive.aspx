@@ -135,7 +135,7 @@
             <asp:FileUpload ID="FileUpload1" runat="server" CssClass="form-control" />
             <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
                 <ContentTemplate>
-                    <asp:Button ID="BtnCargaExcel" runat="server" Font-Bold="True" Text="Upload" OnClick="BtnCargaExcel_Click" OnClientClick="showProgress()" CssClass="btn btn-outline-secondary" BorderColor="#CCCCCC" />
+                    <asp:Button ID="BtnCargaExcel" runat="server" Font-Bold="True" Text="Subir" OnClick="BtnCargaExcel_Click" OnClientClick="showProgress()" CssClass="btn btn-outline-secondary" BorderColor="#CCCCCC" />
                 </ContentTemplate>
             </asp:UpdatePanel>
         </div>

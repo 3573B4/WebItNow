@@ -97,9 +97,11 @@
         </div>        
         
         <div class="form-group mt-3">
-                <asp:Label ID="LblNewReference" runat="server" Text="Crear nuevo requerimiento de :"  Font-Bold="True" Font-Size="Medium"></asp:Label>
-                <asp:Button ID="BtnNewReference" runat="server" Text="Referencia Nueva" Font-Bold="True" OnClick="BtnNewReference_Click" CssClass="btn btn-primary ms-4 mb-3" />
+            <div class="d-grid col-6 mx-auto">
+            <%--<asp:Label ID="LblNewReference" runat="server" Text="Crear nuevo requerimiento de :"  Font-Bold="True" Font-Size="Medium"></asp:Label>--%>
+                <asp:Button ID="BtnNewReference" runat="server" Text="Crear Nueva Referencia" Font-Bold="True" OnClick="BtnNewReference_Click" CssClass="btn btn-primary ms-4 mb-3" />
             <%--<asp:Button ID="BtnExistReference" runat="server" Text="Referencia Existente" Font-Bold="True" OnClick="BtnExistReference_Click" CssClass="btn btn-primary" />--%>
+            </div>
         </div>
 
         <div class="from-group">

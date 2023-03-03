@@ -51,7 +51,7 @@
         </div>   
 
         <div class="form-group mt-3">
-            <asp:Label ID="LblNom" runat="server" Text="Nombre de Cliente o Destinatario:" CssClass="control-label co-sm-3" Font-Bold="False"></asp:Label>
+            <asp:Label ID="LblNom" runat="server" Text="Nombre de Cliente o Asegurado:" CssClass="control-label co-sm-3" Font-Bold="False"></asp:Label>
             <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server"   
                 ControlToValidate="TxtNom" ErrorMessage="*" ForeColor="Red">
             </asp:RequiredFieldValidator>
