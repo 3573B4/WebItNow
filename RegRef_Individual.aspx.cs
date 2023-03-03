@@ -5,8 +5,6 @@ using System.Web.UI.WebControls;
 using System.Data;
 using System.Data.SqlClient;
 
-using System.IO;
-
 namespace WebItNow
 {
     public partial class RegRef_Individual : System.Web.UI.Page
@@ -52,7 +50,7 @@ namespace WebItNow
 
                     if (Envio_Ok == 0)
                     {
-                        LblMessage.Text = "Usuario fue insertado correctamente ";
+                        LblMessage.Text = "Alta de Asunto, agregada correctamente ";
                         this.mpeMensaje.Show();
                     }
 
@@ -87,7 +85,7 @@ namespace WebItNow
 
                 cmd1.Parameters.AddWithValue("@referencia", pReferencia);
                 cmd1.Parameters.AddWithValue("@email", pUsEmail);
-                cmd1.Parameters.AddWithValue("@telefono", pAsegurado);
+                cmd1.Parameters.AddWithValue("@asegurado", pAsegurado);
                 cmd1.Parameters.AddWithValue("@telefono", pTelefono);
                 cmd1.Parameters.AddWithValue("@privilegios", pUsPrivilegios);
                 cmd1.Parameters.AddWithValue("@StatementType", pStatementType);
@@ -177,7 +175,7 @@ namespace WebItNow
             return -1;
         }
 
-        public int ValidaUser(String pUsuarios, int pUsPrivilegios)
+        public int ValidaReferencia(String pReferencia, int pUsPrivilegios)
         {
             ConexionBD Conecta = new ConexionBD();
             NewMethod(Conecta);
@@ -185,10 +183,10 @@ namespace WebItNow
             try
             {
 
-                SqlCommand cmd1 = new SqlCommand("sp_tbUsuario", Conecta.ConectarBD);
+                SqlCommand cmd1 = new SqlCommand("sp_tbValidaReferencia", Conecta.ConectarBD);
                 cmd1.CommandType = CommandType.StoredProcedure;
 
-                cmd1.Parameters.AddWithValue("@usuario", pUsuarios);
+                cmd1.Parameters.AddWithValue("@referencia", pReferencia);
                 cmd1.Parameters.AddWithValue("@privilegios", pUsPrivilegios);
                 SqlDataReader dr1 = cmd1.ExecuteReader();
 
@@ -269,14 +267,14 @@ namespace WebItNow
         {
             // Validar si existe Usuario en la tabla ITM_02 (tbReferencia)
             Variables.wPrivilegios = "3";
-            int Usuario_Existe = ValidaUser(TxtRef.Text, Int32.Parse(Variables.wPrivilegios));
+            int Usuario_Existe = ValidaReferencia(TxtRef.Text, Int32.Parse(Variables.wPrivilegios));
 
             if (Usuario_Existe == 1)
             {
                 TxtRef.Text = string.Empty;
                 TxtEmail.Focus();
 
-                LblMessage.Text = "El nombre de usuario ya existe";
+                LblMessage.Text = "La referencia ya se encuentra registrada";
                 this.mpeMensaje.Show();
             }
             else
@@ -287,22 +285,22 @@ namespace WebItNow
 
         protected void TxtEmail_TextChanged(object sender, EventArgs e)
         {
-            // Validar si existe Email en la tabla ITM_02 (tbReferencia)
-            Variables.wPrivilegios = "3";
-            int Email_Existe = ValidaEmail(TxtEmail.Text, Int32.Parse(Variables.wPrivilegios));
+            //// Validar si existe Email en la tabla ITM_02 (tbReferencia)
+            //Variables.wPrivilegios = "3";
+            //int Email_Existe = ValidaEmail(TxtEmail.Text, Int32.Parse(Variables.wPrivilegios));
 
-            if (Email_Existe == 1)
-            {
-                TxtEmail.Text = string.Empty;
-                TxtEmail.Focus();
+            //if (Email_Existe == 1)
+            //{
+            //    TxtEmail.Text = string.Empty;
+            //    TxtEmail.Focus();
 
-                LblMessage.Text = "El Correo electrónico ya existe";
-                this.mpeMensaje.Show();
-            }
-            else
-            {
-                TxtEmail.Focus();
-            }
+            //    LblMessage.Text = "El Correo electrónico ya existe";
+            //    this.mpeMensaje.Show();
+            //}
+            //else
+            //{
+            //    TxtEmail.Focus();
+            //}
         }
 
         public void Limpia(ControlCollection controles)

@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using Microsoft.Exchange.WebServices.Data;
 
-using System.Data;
-using System.Data.SqlTypes;
 using System.Data.SqlClient;
 
 namespace WebItNow
@@ -42,6 +38,7 @@ namespace WebItNow
 
             return sEmail;
         }
+
         public string CorreoElectronico_User(string pUsuario)
         {
             string sEmail = string.Empty;
@@ -101,22 +98,70 @@ namespace WebItNow
             //---------------------------------------------
             smtp.Host = "smtp.ionos.mx";
             smtp.Port = 587; //465; //25
-            smtp.Credentials = new System.Net.NetworkCredential("martin.baltierra@itnow.mx", "Baltierra2022#");
+            smtp.Credentials = new System.Net.NetworkCredential("sistemas@itnow.mx", "System1623#");
             smtp.EnableSsl = true;
 
             try
             {
                 smtp.Send(correo);
-             // Lbl_Message.Text = "Mensaje enviado satisfactoriamente";
+                return 0;
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex.Message);
+                return 1;
+            }
+        }
+
+
+        public int EnvioExchange(String pUsuarios, String pEmail, string pAsunto, string pBody)
+        {
+            try
+            {
+                string wPara = pEmail;
+                string wAsunto = pAsunto;
+                string wMensaje = "Observaciones registradas :  \n" + pBody;
+
+                wMensaje += "\n\nFecha y hora GMT: " +
+                    DateTime.Now.ToLocalTime().ToString("dd/MM/yyyy HH:mm:ss");
+
+                ExchangeService service = new ExchangeService(ExchangeVersion.Exchange2007_SP1);
+                
+                service.Credentials = new WebCredentials("sistemas@peacock.claims", "System1623#");
+                service.TraceEnabled = true;
+                service.TraceFlags = TraceFlags.All;
+                service.AutodiscoverUrl("sistemas@peacock.claims", RedirectionUrlValidationCallback);
+                
+                EmailMessage email = new EmailMessage(service);
+
+                email.ToRecipients.Add(wPara);
+                email.Subject = wAsunto;
+                email.Body = new MessageBody(wMensaje);
+                email.Send();
 
                 return 0;
             }
             catch (Exception ex)
             {
                 Console.Write(ex.Message);
-              // Lbl_Message.Text = "ERROR: " + ex.Message;
                 return 1;
             }
+        }
+
+        private static bool RedirectionUrlValidationCallback(string redirectionUrl)
+        {
+            // El valor predeterminado para la devolución de llamada de validación es rechazar la URL.
+            bool result = false;
+            Uri redirectionUri = new Uri(redirectionUrl);
+            // Valida el contenido de la URL de redirección. 
+            // En esta simple validación devolución de llamada, la URL de redirección se considera válida si utiliza HTTPS
+            // para cifrar las credenciales de autenticación. 
+            if (redirectionUri.Scheme == "https")
+            {
+                result = true;
+            }
+
+            return result;
         }
     }
 }
