@@ -438,7 +438,6 @@ namespace WebItNow
         public bool ValidarCheckBox()
         {
             int cont = 0;
-            return false;
 
             foreach (GridViewRow row in GrdTpoDocumento.Rows)
             {
@@ -453,7 +452,9 @@ namespace WebItNow
             {
                 return true;
             }
-            
+
+            return false;
+
         }
 
         public void ObtenerDatosGrid()

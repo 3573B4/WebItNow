@@ -25,8 +25,10 @@
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
-    <br />
+<asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+<br />
+<asp:UpdatePanel ID="UpdatePanel1" runat="server">
+    <ContentTemplate>
 
 <div class="container col-md-4">
         <h2 class="h2 mb-5 fw-normal">Solicitud de Documentos</h2>
@@ -86,7 +88,6 @@
         </div>
 --%>
         <div class="form-group mt-3" >
-
         <asp:Panel ID="pnlTpoDocumento" runat="server" >
             <div style="overflow-x: hidden; overflow-y: auto; height:120px;">
                 <asp:GridView ID="GrdTpoDocumento" runat="server" AutoGenerateColumns="False" GridLines="None" Width="100%" AllowPaging = "False"
@@ -119,18 +120,21 @@
                 <asp:Label ID="Lbl_Message" runat="server" ForeColor="Red" Visible="False"  Width="280px" ></asp:Label>
             </div>
         </div>        
-        
-        <div class="form-group mt-3">
-            <div class="d-grid col-6 mx-auto">
-                <asp:Button ID="BtnEnviar" runat="server" Text="Solicitar" Font-Bold="True" OnClick="BtnEnviar_Click" CssClass="btn btn-primary" />
+    <asp:UpdatePanel ID="UpdatePanel2" runat="server" UpdateMode="Conditional">
+        <ContentTemplate>
+            <div class="form-group mt-3">
+                <div class="d-grid col-6 mx-auto">
+                    <asp:Button ID="BtnEnviar" runat="server" Text="Solicitar" Font-Bold="True" OnClick="BtnEnviar_Click" CssClass="btn btn-primary" />
+                </div>
             </div>
-        </div>
+        </ContentTemplate>
+    </asp:UpdatePanel>
+
         <div class="from-group">
             <div class="d-grid col-6 mx-auto">
                 <asp:Button ID="BtnRegresar" runat="server" Text="Regresar" Font-Bold="True" OnClick="BtnRegresar_Click" CssClass="btn btn-link"/>
             </div>
         </div>
-
 
         <div class="form-group">
             <div class="d-grid col-6 mx-auto">
@@ -221,4 +225,9 @@
         </tr>
     </table>
 
+    </ContentTemplate>
+    <Triggers>
+        <asp:PostBackTrigger ControlID="BtnEnviar" />
+    </Triggers>
+</asp:UpdatePanel>
 </asp:Content>
