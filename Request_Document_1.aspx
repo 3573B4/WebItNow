@@ -31,47 +31,90 @@
 <div class="container col-md-4">
         <h2 class="h2 mb-5 fw-normal">Solicitud de Documentos</h2>
         <div class="form-group mt-3">
-            <asp:Label ID="LblReferencia" runat="server" Text="Referencia:" CssClass="control-label col-sm-2"></asp:Label>
-            <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server"   
-                ControlToValidate="TxtReferencia" ErrorMessage="*" ForeColor="Red">
-            </asp:RequiredFieldValidator>
+            <asp:Label ID="LblReferencia" runat="server" Text="Referencia" CssClass="control-label col-sm-2"></asp:Label>
             <div class="col-sm-12">
-                <asp:TextBox ID="TxtReferencia" runat="server" CssClass="form-control" placeholder="Referencia" MaxLength="12" ></asp:TextBox>
+                <asp:TextBox ID="TxtReferencia" runat="server" CssClass="form-control" placeholder="Referencia" ReadOnly="true" ></asp:TextBox>
             </div>
         </div>
 
         <div class="form-group mt-3">
-            <asp:Label ID="LblEmail" runat="server" Text="Correo electrónico:" CssClass="control-label col-sm-2"></asp:Label>
-            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server"   
-                ControlToValidate="TxtEmail" ErrorMessage="*" ForeColor="Red">
-            </asp:RequiredFieldValidator>
+            <asp:Label ID="LblEmail" runat="server" Text="Correo electrónico" CssClass="control-label col-sm-2"></asp:Label>
             <div class="col-sm-12">
-                <asp:TextBox ID="TxtEmail" runat="server" CssClass="form-control" placeholder="Correo electrónico" MaxLength="50" TextMode="Email" ></asp:TextBox>
+                <asp:TextBox ID="TxtEmail" runat="server" CssClass="form-control" placeholder="Correo electrónico" ReadOnly="true" ></asp:TextBox>
             </div>
         </div>   
 
         <div class="form-group mt-3">
-            <asp:Label ID="LblNom" runat="server" Text="Nombre de Cliente o Asegurado:" CssClass="control-label co-sm-3" Font-Bold="False"></asp:Label>
-            <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server"   
-                ControlToValidate="TxtNom" ErrorMessage="*" ForeColor="Red">
-            </asp:RequiredFieldValidator>
+            <asp:Label ID="LblNom" runat="server" Text="Nombre de Cliente o Asegurado" CssClass="control-label co-sm-3" Font-Bold="False"></asp:Label>
             <div class="col-sm-12">
-                <asp:TextBox ID="TxtNom" runat="server" CssClass="form-control" placeholder="Nombre de Cliente o Destinatario" ></asp:TextBox>
+                <asp:TextBox ID="TxtNom" runat="server" CssClass="form-control" placeholder="Nombre de Cliente o Destinatario" ReadOnly="true" ></asp:TextBox>
             </div>
         </div>
 
         <div class="form-group mt-3">
-            <asp:Label ID="LblTpoDocumento" runat="server" Text="Tipo de documento a solicitar:" CssClass="control-label col-sm-2"></asp:Label>
+            <asp:Label ID="LblProceso" runat="server" Text="Proceso" CssClass="control-label co-sm-3" Font-Bold="False"></asp:Label>
+            <div class="col-sm-12">
+                <asp:TextBox ID="TxtProceso" runat="server" CssClass="form-control" placeholder="Proceso" ReadOnly="true" ></asp:TextBox>
+            </div>
         </div>
 
+        <div class="form-group mt-3">
+            <asp:Label ID="LblSubProceso" runat="server" Text="SubProceso" CssClass="control-label co-sm-3" Font-Bold="False"></asp:Label>
+            <div class="col-sm-12">
+                <asp:TextBox ID="TxtSubProceso" runat="server" CssClass="form-control" placeholder="SubProceso" ReadOnly="true" ></asp:TextBox>
+            </div>
+        </div>
+<%--
+        <div class="form-floating mt-3">
+            <asp:Label ID="LblProceso" runat="server" Text="Proceso"></asp:Label>
+            <asp:DropDownList ID="ddlProceso" runat="server" CssClass="btn btn-outline-secondary mt-1" AutoPostBack="true" OnSelectedIndexChanged="ddlProceso_SelectedIndexChanged" Width="100%">
+            </asp:DropDownList>
+        </div>
+        <div class="form-floating my-3">
+            <asp:Label ID="LblSubProceso" runat="server" Text="Sub Proceso"></asp:Label>
+            <asp:DropDownList ID="ddlSubProceso" runat="server" CssClass="btn btn-outline-secondary mt-1" AutoPostBack="true" Width="100%" OnSelectedIndexChanged="ddlSubProceso_SelectedIndexChanged" >
+            </asp:DropDownList>
+        </div>
+--%>
+
+<%--        
         <div class="form-floating">
                 <div class="dropdown">
                     <asp:DropDownList ID="ddlTpoDocumento" runat="server" CssClass="btn btn-outline-secondary"  AutoPostBack="true" OnSelectedIndexChanged="ddlTpoDocumento_SelectedIndexChanged" Width="100%">
                     </asp:DropDownList>
                 </div>
         </div>
+--%>
+        <div class="form-group mt-3" >
 
-        <div class="form-group  mt-3">
+        <asp:Panel ID="pnlTpoDocumento" runat="server" >
+            <div style="overflow-x: hidden; overflow-y: auto; height:120px;">
+                <asp:GridView ID="GrdTpoDocumento" runat="server" AutoGenerateColumns="False" GridLines="None" Width="100%" AllowPaging = "False"
+                    CssClass="footable" PagerStyle-CssClass="pgr" AlternatingRowStyle-CssClass="alt" >
+                    <%--OnSelectedIndexChanged="GrdRef_SelectedIndexChanged" OnRowDataBound="GrdRef_RowDataBound" >--%>
+                    <AlternatingRowStyle CssClass="alt" />
+                    <Columns>
+                        <asp:TemplateField>
+                            <ItemTemplate>
+                                <%--<asp:ImageButton ID="ImgSelect" runat="server" Height="24px" Width="24px" ImageUrl="~/Images/aceptar.ico" OnClick="ImgSelect_Click" />--%>
+                                <asp:CheckBox ID="chkTpoDocumento" runat="server" />
+                            </ItemTemplate> 
+                        </asp:TemplateField>
+
+                        <asp:BoundField DataField="IdTpoDocumento" HeaderText="Id" ></asp:BoundField>
+                        <asp:BoundField DataField="Descripcion" HeaderText="Descripcion" ></asp:BoundField>
+                        <asp:BoundField DataField="IdProceso" >
+                            <ItemStyle Width="0px" Font-Size="0pt" />
+                        </asp:BoundField>
+                        <asp:BoundField DataField="IdSubProceso" >
+                            <ItemStyle Width="0px" Font-Size="0pt" />
+                        </asp:BoundField>
+                    </Columns>
+                </asp:GridView>
+            </div>
+        </asp:Panel>
+        </div>
+        <div class="form-group mt-3">
             <div class="d-grid col-6 mx-auto">
                 <asp:Label ID="Lbl_Message" runat="server" ForeColor="Red" Visible="False"  Width="280px" ></asp:Label>
             </div>

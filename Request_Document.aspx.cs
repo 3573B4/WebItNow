@@ -119,13 +119,21 @@ namespace WebItNow
 
             if (sColumna == "Referencia")
             {
-                strQuery = "Select UsReferencia, Aseguradora, Siniestro, UsEmail " +
-                           "  From ITM_02 Where UsReferencia Like '" + "%" + sValor + "%" + "'";
+                //strQuery = "Select UsReferencia, Aseguradora, Siniestro, UsEmail, Nombre, Descripcion " +
+                //           "  From ITM_02 r, ITM_16 p, ITM_14 s " +
+                //           " Where p.IdProceso = r.Id_Proceso " +
+                //           "   And s.IdSubproceso = r.Id_SubProceso " +
+                //           "   And UsReferencia Like '" + "%" + sValor + "%" + "'";
+
+                strQuery = "Select UsReferencia, Aseguradora, Siniestro, UsEmail, Id_Proceso, Id_Subproceso " +
+                           "  From ITM_02 " +
+                           " Where UsReferencia Like '" + "%" + sValor + "%" + "'";
 
             } else if (sColumna == "Aseguradora")
             {
-                strQuery = "Select UsReferencia, Aseguradora, Siniestro, UsEmail " +
-                           "  From ITM_02 Where Aseguradora Like '" + "%" + sValor + "%" + "'";
+                strQuery = "Select UsReferencia, Aseguradora, Siniestro, UsEmail, Id_Proceso, Id_SubProceso " +
+                           "  From ITM_02 " +
+                           " Where Aseguradora Like '" + "%" + sValor + "%" + "'";
             }
             
             SqlCommand cmd = new SqlCommand(strQuery, Conecta.ConectarBD);
@@ -171,13 +179,17 @@ namespace WebItNow
 
             string sReferencia = GrdRef.Rows[index].Cells[1].Text;
             string sAseguradora = Server.HtmlDecode(GrdRef.Rows[index].Cells[2].Text);
-            string sSiniestro = GrdRef.Rows[index].Cells[3].Text;
+            //string sSiniestro = GrdRef.Rows[index].Cells[3].Text;
             string sEmail = GrdRef.Rows[index].Cells[4].Text;
+            string sProceso = GrdRef.Rows[index].Cells[5].Text;
+            string sSubProceso = GrdRef.Rows[index].Cells[6].Text;
 
             //Session["Asunto"] = "Solicitud Documento-Exist";
             Session["Referencia"] = sReferencia;
             Session["Aseguradora"] = sAseguradora;
             Session["Email"] = sEmail;
+            Session["Proceso"] = sProceso;
+            Session["SubProceso"] = sSubProceso;
 
 
             Response.Redirect("Request_Document_1.aspx");

@@ -251,7 +251,7 @@ namespace WebItNow
             return -1;
         }
 
-        public int Add_tbEstadoDocumento(String pReferencia, int pIdStatus)
+        public int Add_tbEstadoDocumento(String pReferencia, int pProceso, int pSubProceso, int pIdStatus)
         {
             try
             {
@@ -259,7 +259,12 @@ namespace WebItNow
                 Conecta.Abrir();
 
                 // Consulta a la tabla Tipo de Documento
-                string strQuery = "Select IdTpoDocumento, Descripcion From ITM_06 Where Status = " + pIdStatus + "";
+                //string strQuery = "Select IdTpoDocumento, Descripcion From ITM_06 Where Status = " + pIdStatus + "";
+
+                // Consulta a la tabla Tipo de Documento
+                string strQuery = "Select IdTpoDocumento, Descripcion From ITM_06 " +
+                                  " Where IdProceso = " + pProceso + "" +
+                                  "   And IdSubProceso = " + pSubProceso + " And Status = " + pIdStatus + "";
 
                 SqlCommand cmd = new SqlCommand(strQuery, Conecta.ConectarBD);
 
@@ -495,11 +500,13 @@ namespace WebItNow
                     }
                     else
                     {
+                        int iProceso = Convert.ToInt32(sl.GetCellValueAsString("L" + x));
+                        int iSubProceso = Convert.ToInt32(sl.GetCellValueAsString("M" + x));
 
                         string sqlString = "INSERT INTO ITM_02 (UsReferencia, UsEmail, Aseguradora, UsAsegurado, Tipo_Asegurado, Nombre_Contacto, " +
-                                                                "Apellidos_Contacto, UsTelefono, RFC_Contacto, Perfil_Contacto, Siniestro ) " +
+                                                                "Apellidos_Contacto, UsTelefono, RFC_Contacto, Perfil_Contacto, Siniestro, Id_Proceso, Id_SubProceso ) " +
                                         " VALUES (@referencia, @email, @aseguradora, @asegurado, @tpoasegurado, @nomcontacto, @apecontacto, " +
-                                        " @telefono, @rfc, @perfil, @siniestro )";
+                                        " @telefono, @rfc, @perfil, @siniestro, @proceso, @subproceso )";
                         try
                         {
 
@@ -516,13 +523,15 @@ namespace WebItNow
                             cmd.Parameters.AddWithValue("@rfc", sl.GetCellValueAsString("I" + x));
                             cmd.Parameters.AddWithValue("@perfil", sl.GetCellValueAsString("J" + x));
                             cmd.Parameters.AddWithValue("@siniestro", sl.GetCellValueAsString("K" + x));
+                            cmd.Parameters.AddWithValue("@proceso", sl.GetCellValueAsString("L" + x));
+                            cmd.Parameters.AddWithValue("@subproceso", sl.GetCellValueAsString("M" + x));
 
 
                             int result =  cmd.ExecuteNonQuery();
 
                             // Insertar Registros Tabla tbEstadoDocumento [ITM_04]
                             int idStatus = 1;
-                            int valor = Add_tbEstadoDocumento(sReferencia, idStatus);
+                            int valor = Add_tbEstadoDocumento(sReferencia, iProceso, iSubProceso, idStatus);
                         }
                         catch (Exception ex)
                         {

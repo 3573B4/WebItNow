@@ -78,12 +78,24 @@
             </div>
         </div>
 
+        <div class="form-floating mt-3">
+            <asp:Label ID="LblProceso" runat="server" Text="Proceso"></asp:Label>
+            <asp:DropDownList ID="ddlProceso" runat="server" CssClass="btn btn-outline-secondary mt-1" AutoPostBack="true" OnSelectedIndexChanged="ddlProceso_SelectedIndexChanged" Width="100%">
+            </asp:DropDownList>
+        </div>
+        <div class="form-floating my-3">
+            <asp:Label ID="LblSubProceso" runat="server" Text="Sub Proceso"></asp:Label>
+            <asp:DropDownList ID="ddlSubProceso" runat="server" CssClass="btn btn-outline-secondary mt-1" AutoPostBack="true" Width="100%" OnSelectedIndexChanged="ddlSubProceso_SelectedIndexChanged" >
+            </asp:DropDownList>
+        </div>
+
+    <%--
         <div class="form-group">
             <div class="col-sm-12">
                 <asp:CheckBox ID="chkPrivacidad" runat="server" Text="&nbsp;&nbsp;Acepto el Aviso de Privacidad" Font-Size="Small" />
             </div>
         </div>
-        <br />
+    --%>
         <div class="form-group">
             <div class="d-grid col-6 mx-auto">
                 <asp:Label ID="Lbl_Message" runat="server" ForeColor="Red" Visible="False"  Width="280px" ></asp:Label>

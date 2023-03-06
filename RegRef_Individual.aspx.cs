@@ -19,7 +19,8 @@ namespace WebItNow
         {
             if (!Page.IsPostBack)
             {
-
+                getProcesos();
+                ddlSubProceso.Items.Insert(0, new ListItem("-- Seleccionar --", "0"));
             }
         }
 
@@ -33,15 +34,15 @@ namespace WebItNow
             //* Validar si el usuario existe o es nuevo
             if (TxtRef.Text != "" && TxtEmail.Text != "")
             {
-
-                // Insertar Registo Tabla tbUsuarios (UploadFiles)
-                int result = Add_tbReferencia(TxtRef.Text, TxtEmail.Text, TxtAsegurado.Text, TxtTelefono.Text, 3, "Insert");
+                
+                // Insertar Registo Tabla tbReferencia (Referencias Individuales)
+                int result = Add_tbReferencia(TxtRef.Text, TxtEmail.Text, TxtAsegurado.Text, TxtTelefono.Text, Convert.ToInt32(ddlProceso.SelectedValue), Convert.ToInt32(ddlSubProceso.SelectedValue), 3, "Insert");
 
                 if (result == 0)
                 {
                     // Insertar Registros Tabla tbEstadoDocumento [ITM_04]
                     int idStatus = 1;
-                    int valor = Add_tbEstadoDocumento(TxtRef.Text, idStatus);
+                    int valor = Add_tbEstadoDocumento(TxtRef.Text, Convert.ToInt32(ddlProceso.SelectedValue), Convert.ToInt32(ddlSubProceso.SelectedValue), idStatus);
 
                     var email = new EnvioEmail();
                     int Envio_Ok = email.EnvioMensaje(TxtRef.Text.Trim(), TxtEmail.Text.Trim(), "Registro Referencia ", string.Empty);
@@ -72,7 +73,7 @@ namespace WebItNow
 
         }
 
-        public int Add_tbReferencia(String pReferencia, String pUsEmail, string pAsegurado, String pTelefono, int pUsPrivilegios, string pStatementType)
+        public int Add_tbReferencia(String pReferencia, String pUsEmail, string pAsegurado, String pTelefono, int pProceso, int pSubProceso, int pUsPrivilegios, string pStatementType)
         {
             ConexionBD Conecta = new ConexionBD();
             NewMethod(Conecta);
@@ -87,6 +88,8 @@ namespace WebItNow
                 cmd1.Parameters.AddWithValue("@email", pUsEmail);
                 cmd1.Parameters.AddWithValue("@asegurado", pAsegurado);
                 cmd1.Parameters.AddWithValue("@telefono", pTelefono);
+                cmd1.Parameters.AddWithValue("@proceso", pProceso);
+                cmd1.Parameters.AddWithValue("@subproceso", pSubProceso);
                 cmd1.Parameters.AddWithValue("@privilegios", pUsPrivilegios);
                 cmd1.Parameters.AddWithValue("@StatementType", pStatementType);
 
@@ -121,7 +124,7 @@ namespace WebItNow
             return -1;
         }
 
-        public int Add_tbEstadoDocumento(String pReferencia, int pIdStatus)
+        public int Add_tbEstadoDocumento(String pReferencia, int pProceso, int pSubProceso, int pIdStatus)
         {
             try
             {
@@ -129,7 +132,9 @@ namespace WebItNow
                 Conecta.Abrir();
 
                 // Consulta a la tabla Tipo de Documento
-                string strQuery = "Select IdTpoDocumento, Descripcion From ITM_06 Where Status = " + pIdStatus + "";
+                string strQuery = "Select IdTpoDocumento, Descripcion From ITM_06 " +
+                                  " Where IdProceso = " + pProceso + "" +
+                                  "   And IdSubProceso = " + pSubProceso + " And Status = " + pIdStatus + "";
 
                 SqlCommand cmd = new SqlCommand(strQuery, Conecta.ConectarBD);
 
@@ -332,5 +337,70 @@ namespace WebItNow
             Conecta.Abrir();
         }
 
+        protected void ddlProceso_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int iProceso = Convert.ToInt32(ddlProceso.SelectedValue);
+            getSubProcesos(iProceso);
+        }
+
+        protected void ddlSubProceso_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //GetTpoDoc();
+        }
+
+        protected void getProcesos()
+        {
+            ConexionBD Conecta = new ConexionBD();
+            Conecta.Abrir();
+            string sqlQuery = "SELECT IdProceso, Nombre " +
+                                    " FROM ITM_16 " +
+                                    " WHERE IdStatus = 1 ";
+            SqlCommand cmd = new SqlCommand(sqlQuery, Conecta.ConectarBD);
+
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+
+            ddlProceso.DataSource = dt;
+
+            ddlProceso.DataValueField = "IdProceso";
+            ddlProceso.DataTextField = "Nombre";
+
+            ddlProceso.DataBind();
+            ddlProceso.Items.Insert(0, new ListItem("-- Seleccionar --", "0"));
+
+        }
+
+        protected void getSubProcesos(int iProceso)
+        {
+            try
+            {
+                ConexionBD conectar = new ConexionBD();
+                conectar.Abrir();
+
+                // Consulta a la tabla Tipo de Documento
+                string sqlQuery = "SELECT IdSubProceso, Descripcion " +
+                                    " FROM ITM_14 " +
+                                    " WHERE IdProceso = " + iProceso;
+
+                SqlCommand cmd = new SqlCommand(sqlQuery, conectar.ConectarBD);
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+
+                ddlSubProceso.DataSource = dt;
+
+                ddlSubProceso.DataValueField = "IdSubProceso";
+                ddlSubProceso.DataTextField = "Descripcion";
+
+                ddlSubProceso.DataBind();
+                ddlSubProceso.Items.Insert(0, new ListItem("-- Seleccionar --", "0"));
+            }
+            catch (Exception ex)
+            {
+                LblMessage.Text = ex.Message;
+                mpeMensaje.Show();
+            }
+        }
     }
 }

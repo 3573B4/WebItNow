@@ -347,7 +347,6 @@
     <Content Include="RegRef_Individual.aspx" />
     <Content Include="Request_Document.aspx" />
     <Content Include="Request_Document_1.aspx" />
-    <Content Include="Review_Document.aspx" />
     <Content Include="Scripts\footable.min.js" />
     <None Include="Scripts\jquery-1.4.1-vsdoc.js" />
     <Content Include="Scripts\jquery-1.4.1.js" />
@@ -537,13 +536,6 @@
     </Compile>
     <Compile Include="Request_Document_1.aspx.designer.cs">
       <DependentUpon>Request_Document_1.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Review_Document.aspx.cs">
-      <DependentUpon>Review_Document.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Review_Document.aspx.designer.cs">
-      <DependentUpon>Review_Document.aspx</DependentUpon>
     </Compile>
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>

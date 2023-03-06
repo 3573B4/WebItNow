@@ -77,7 +77,7 @@
 
         <div class="from-group">
             <div class="d-grid col-2 mx-auto">
-                <asp:Button ID="BtnSalir" runat="server" Text="Salir" Font-Bold="True" OnClick="BtnSalir_Click" CssClass="btn btn-outline-primary mt-3 mb-4 pb-5"/>
+                <asp:Button ID="BtnSalir" runat="server" Text="Salir" Font-Bold="True" OnClick="BtnSalir_Click" CssClass="btn btn-outline-primary mt-3"/>
             </div>
         </div>
 

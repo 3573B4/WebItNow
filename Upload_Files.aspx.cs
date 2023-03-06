@@ -37,9 +37,13 @@ namespace WebItNow
             Conectar.Abrir();
 
             string sqlQuery = "SELECT ed.Referencia, ed.IdTipoDocumento, ed.Nom_Imagen, td.Descripcion, s.Descripcion as Desc_Status  " +
-                                  "  FROM ITM_04 ed, ITM_06 td, ITM_07 s " +
-                                  " WHERE ed.IdStatus = s.IdStatus AND ed.IdTipoDocumento = td.IdTpoDocumento " +
-                                  "   AND Referencia LIKE '%' + '" + sReferencia + "'  + '%'";
+                                  "  FROM ITM_04 ed, ITM_06 td, ITM_07 s, ITM_15 t " +
+                                  " WHERE ed.IdStatus = s.IdStatus " +
+                                  "   AND ed.IdTipoDocumento = td.IdTpoDocumento " +
+                                  "   AND ed.Referencia LIKE '%' + '" + sReferencia + "'  + '%'" +
+                                  "   AND t.Referencia = ed.Referencia" +
+                                  "   AND t.IdTpoDocumento = ed.IdTipoDocumento" +
+                                  "   AND t.IdStatus = 1";
 
             SqlCommand ejecucion = new SqlCommand(sqlQuery, Conectar.ConectarBD);
             SqlDataAdapter da = new SqlDataAdapter(ejecucion);
