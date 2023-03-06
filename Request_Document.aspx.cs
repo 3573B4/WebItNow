@@ -179,6 +179,7 @@ namespace WebItNow
 
             try
             {
+                // ConvertEmptyStringToNull="true"
 
                 string sReferencia = GrdRef.Rows[index].Cells[1].Text;
                 string sAseguradora = Server.HtmlDecode(GrdRef.Rows[index].Cells[2].Text);

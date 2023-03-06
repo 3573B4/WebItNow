@@ -37,6 +37,9 @@ namespace WebItNow
 
                 GetTpoDocumento(Convert.ToInt32(Session["Proceso"]), Convert.ToInt32(Session["SubProceso"]));
             }
+
+            //* * Agrega THEAD y TBODY a GridView.
+            GrdTpoDocumento.HeaderRow.TableSection = TableRowSection.TableHeader;
         }
 
         protected void BtnRegresar_Click(object sender, EventArgs e)
@@ -54,52 +57,62 @@ namespace WebItNow
 
         protected void BtnEnviar_Click(object sender, EventArgs e)
         {
-            ObtenerDatosGrid();
-            // Validar que los campos hayan sido capturados
-            if (TxtReferencia.Text != "" && TxtNom.Text != "" && TxtEmail.Text != "" )
+            //int result = ValidarCheckBox();
+
+            if (ValidarCheckBox())
             {
-                // Insertar Registo Tabla ITM_11 (Solicitud Documento)
-                int result = Add_Solicitud(TxtNom.Text, TxtEmail.Text, TxtReferencia.Text, "02");
-                //int result = Add_Solicitud(TxtNom.Text, TxtEmail.Text, TxtReferencia.Text, ddlTpoDocumento.SelectedValue);
-
-                if (result == 0)
+                ObtenerDatosGrid();
+                // Validar que los campos hayan sido capturados
+                if (TxtReferencia.Text != "" && TxtNom.Text != "" && TxtEmail.Text != "" )
                 {
-                    // Validar Insert
+                    // Insertar Registo Tabla ITM_11 (Solicitud Documento)
+                    int result = Add_Solicitud(TxtNom.Text, TxtEmail.Text, TxtReferencia.Text, "02");
+                    //int result = Add_Solicitud(TxtNom.Text, TxtEmail.Text, TxtReferencia.Text, ddlTpoDocumento.SelectedValue);
 
-                    // Validar de que formulario fue llamado
-                    //if (Convert.ToString(Session["Asunto"]) == string.Empty)
-                    //{
-                    //    Session["Asunto"] = "Solicitud Documento-New";
-                    //} 
-                    //else
-                    //{
-                    //    Session["Asunto"] = "Solicitud Documento-Exist";
-                    //}
+                    if (result == 0)
+                    {
+                        // Validar Insert
 
-                    Session["Asunto"] = "Solicitud Documento";
-                    Session["Referencia"] = TxtReferencia.Text;
-                    Session["Email"] = TxtEmail.Text.Trim();
+                        // Validar de que formulario fue llamado
+                        //if (Convert.ToString(Session["Asunto"]) == string.Empty)
+                        //{
+                        //    Session["Asunto"] = "Solicitud Documento-New";
+                        //} 
+                        //else
+                        //{
+                        //    Session["Asunto"] = "Solicitud Documento-Exist";
+                        //}
 
-                    Response.Redirect("Page_Message.aspx");
+                        Session["Asunto"] = "Solicitud Documento";
+                        Session["Referencia"] = TxtReferencia.Text;
+                        Session["Email"] = TxtEmail.Text.Trim();
 
-                    //var email = new EnvioEmail();
-                    //int Envio_Ok = email.EnvioMensaje(TxtNom.Text.Trim(), TxtEmail.Text.Trim(), "Solicitud Documento", string.Empty);
+                        Response.Redirect("Page_Message.aspx");
 
-                    //if (Envio_Ok == 0)
-                    //{
-                    //    LblMessage.Text = "Solicitud enviada correctamente ";
-                    //    this.mpeMensaje.Show();
-                    //}
+                        //var email = new EnvioEmail();
+                        //int Envio_Ok = email.EnvioMensaje(TxtNom.Text.Trim(), TxtEmail.Text.Trim(), "Solicitud Documento", string.Empty);
 
-                    Limpia(this.Controls);
+                        //if (Envio_Ok == 0)
+                        //{
+                        //    LblMessage.Text = "Solicitud enviada correctamente ";
+                        //    this.mpeMensaje.Show();
+                        //}
 
-                    Lbl_Message.Visible = false;
+                        Limpia(this.Controls);
+
+                        Lbl_Message.Visible = false;
+                    }
+                }
+                else
+                {
+                    Lbl_Message.Visible = true;
+                    Lbl_Message.Text = "* Estos campos son obligatorios";
                 }
             }
             else
             {
-                Lbl_Message.Visible = true;
-                Lbl_Message.Text = "* Estos campos son obligatorios";
+                LblMessage.Text = "Debe seleccionar minimo 1 documento";
+                this.mpeMensaje.Show();
             }
         }
 
@@ -422,8 +435,30 @@ namespace WebItNow
             //grdTpoDocumento.HeaderRow.TableSection = TableRowSection.TableHeader;
         }
 
+        public bool ValidarCheckBox()
+        {
+            int cont = 0;
+            return false;
+
+            foreach (GridViewRow row in GrdTpoDocumento.Rows)
+            {
+                var chkbox = row.FindControl("chkTpoDocumento") as CheckBox;
+                if (chkbox.Checked == true)
+                {
+                    cont ++ ;
+                }
+            }
+
+            if (cont >= 1)
+            {
+                return true;
+            }
+            
+        }
+
         public void ObtenerDatosGrid()
         {
+            // DBCC CHECKIDENT (ITM_15, RESEED, 0) -- Inicializar el campo [IdTransaccion] = 0
             string sReferencia = TxtReferencia.Text;
             string valorcol0 = "0";
 
