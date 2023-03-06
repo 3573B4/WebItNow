@@ -184,7 +184,7 @@ namespace WebItNow
                 // Status de Documento = ITM_07
 
                 string strQuery = "SELECT ed.Referencia, ed.Nom_Imagen, td.Descripcion, ed.IdTipoDocumento, " +
-                                  "       s.Descripcion as Desc_Status, ed.Url_Imagen, ed.IdDescarga, tr.UsAsegurado " +
+                                  "       s.Descripcion as Desc_Status, ed.Url_Imagen, ed.IdDescarga, tr.Aseguradora " +
                                   "  FROM ITM_02 tr, ITM_04 ed, ITM_06 td, ITM_07 s " +
                                   " WHERE tr.UsReferencia = ed.Referencia" +
                                   "   AND ed.IdStatus = s.IdStatus " + 

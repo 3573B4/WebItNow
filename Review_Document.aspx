@@ -254,7 +254,7 @@
                         <asp:BoundField DataField="IdDescarga"  >
                         <ItemStyle Width="0px" Font-Size="0pt" />
                         </asp:BoundField>
-                        <asp:BoundField DataField="UsAsegurado"  >
+                        <asp:BoundField DataField="Aseguradora"  >
                         <ItemStyle Width="0px" Font-Size="0pt" />
                         </asp:BoundField>
                         <%--ItemStyle-CssClass="hide"--%>
@@ -325,7 +325,7 @@
         </div>
 --%>
         <br />
-        <div class="from-group">
+        <div class="from-group mb-4 pb-5">
             <div class="d-grid col-6 mx-auto">
                 <asp:Button ID="BtnRegresar" runat="server" Text="Regresar" Font-Bold="True" OnClick="BtnRegresar_Click" CssClass="btn btn-link"/>
             </div>

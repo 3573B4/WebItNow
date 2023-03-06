@@ -28,6 +28,8 @@ namespace WebItNow
             }
 
             getCamposGV();
+
+            //* * Agrega THEAD y TBODY a GridView.
             grdConsultaDocumento.HeaderRow.TableSection = TableRowSection.TableHeader;
         }
 
@@ -98,6 +100,8 @@ namespace WebItNow
                 grdConsultaDocumento.DataSource = dt;
                 grdConsultaDocumento.DataBind();
 
+                //* * Agrega THEAD y TBODY a GridView.
+                grdConsultaDocumento.HeaderRow.TableSection = TableRowSection.TableHeader;
             }
             catch (Exception ex)
             {
