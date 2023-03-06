@@ -83,13 +83,13 @@
                         </asp:TemplateField>
 
                         <asp:BoundField DataField="UsReferencia" HeaderText="Referencia" ></asp:BoundField>
-                        <asp:BoundField DataField="Aseguradora" HeaderText="Aseguradora" ></asp:BoundField>
-                        <asp:BoundField DataField="Siniestro" HeaderText="Siniestro" ></asp:BoundField>
-                        <asp:BoundField DataField="UsEmail" HeaderText="Email" ></asp:BoundField>
-                        <asp:BoundField DataField="Id_Proceso" >
+                        <asp:BoundField DataField="Aseguradora" HeaderText="Aseguradora" ConvertEmptyStringToNull="false"></asp:BoundField>
+                        <asp:BoundField DataField="Siniestro" HeaderText="Siniestro" ConvertEmptyStringToNull="false"></asp:BoundField>
+                        <asp:BoundField DataField="UsEmail" HeaderText="Email" ConvertEmptyStringToNull="false"></asp:BoundField>
+                        <asp:BoundField DataField="Id_Proceso" ConvertEmptyStringToNull="false">
                             <ItemStyle Width="0px" Font-Size="0pt" />
                         </asp:BoundField>
-                        <asp:BoundField DataField="Id_SubProceso" >
+                        <asp:BoundField DataField="Id_SubProceso" ConvertEmptyStringToNull="false">
                             <ItemStyle Width="0px" Font-Size="0pt" />
                         </asp:BoundField>
                     </Columns>

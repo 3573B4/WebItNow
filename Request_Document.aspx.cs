@@ -177,22 +177,38 @@ namespace WebItNow
             GridViewRow row = ((GridViewRow)((System.Web.UI.WebControls.ImageButton)sender).NamingContainer);
             int index = row.RowIndex;
 
-            string sReferencia = GrdRef.Rows[index].Cells[1].Text;
-            string sAseguradora = Server.HtmlDecode(GrdRef.Rows[index].Cells[2].Text);
-            //string sSiniestro = GrdRef.Rows[index].Cells[3].Text;
-            string sEmail = GrdRef.Rows[index].Cells[4].Text;
-            string sProceso = GrdRef.Rows[index].Cells[5].Text;
-            string sSubProceso = GrdRef.Rows[index].Cells[6].Text;
+            try
+            {
 
-            //Session["Asunto"] = "Solicitud Documento-Exist";
-            Session["Referencia"] = sReferencia;
-            Session["Aseguradora"] = sAseguradora;
-            Session["Email"] = sEmail;
-            Session["Proceso"] = sProceso;
-            Session["SubProceso"] = sSubProceso;
+                string sReferencia = GrdRef.Rows[index].Cells[1].Text;
+                string sAseguradora = Server.HtmlDecode(GrdRef.Rows[index].Cells[2].Text);
+              //string sSiniestro = GrdRef.Rows[index].Cells[3].Text;
+                string sEmail = GrdRef.Rows[index].Cells[4].Text;
+                string sProceso = Server.HtmlDecode(GrdRef.Rows[index].Cells[5].Text.Replace("&nbsp;", string.Empty));
+                string sSubProceso = Server.HtmlDecode(GrdRef.Rows[index].Cells[6].Text.Replace("&nbsp;", string.Empty));
 
+                //Session["Asunto"] = "Solicitud Documento-Exist";
+                Session["Referencia"] = sReferencia;
+                Session["Aseguradora"] = sAseguradora;
+                Session["Email"] = sEmail;
+                Session["Proceso"] = sProceso;
+                Session["SubProceso"] = sSubProceso;
 
-            Response.Redirect("Request_Document_1.aspx");
+                if (sProceso != string.Empty && sSubProceso != string.Empty)
+                {
+                    Response.Redirect("Request_Document_1.aspx");
+                }
+                else
+                {
+                    LblMessage.Text = "La referencia no esta asociada a un proceso";
+                    this.mpeMensaje.Show();
+                }
+
+            } catch (Exception ex)
+            {
+                LblMessage.Text = ex.Message;
+                this.mpeMensaje.Show();
+            }
         }
     }
 }

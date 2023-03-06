@@ -22,17 +22,10 @@ namespace WebItNow
         {
             if (!Page.IsPostBack)
             {
-                //TxtReferencia.ReadOnly = true;
-                //TxtEmail.ReadOnly = true;
-                //TxtNom.ReadOnly = true;
-                //TxtProceso.ReadOnly = true;
-                //TxtSubProceso.ReadOnly = true;
 
                 TxtReferencia.Text = Convert.ToString(Session["Referencia"]);
                 TxtEmail.Text = Convert.ToString(Session["Email"]);
                 TxtNom.Text = Convert.ToString(Session["Aseguradora"]);
-                //TxtProceso.Text = Convert.ToString(Session["Proceso"]);
-                //TxtSubProceso.Text = Convert.ToString(Session["SubProceso"]);
 
                 getProcesos(Convert.ToInt32(Session["Proceso"]));
 
@@ -41,8 +34,6 @@ namespace WebItNow
 
                 //ddlProceso.SelectedValue = Convert.ToString(Session["Proceso"]);
                 //ddlSubProceso.SelectedValue = Convert.ToString(Session["SubProceso"]);
-
-                //}
 
                 GetTpoDocumento(Convert.ToInt32(Session["Proceso"]), Convert.ToInt32(Session["SubProceso"]));
             }
@@ -459,7 +450,7 @@ namespace WebItNow
                     SqlCommand cmd1 = new SqlCommand("sp_tbTransaccion", Conecta.ConectarBD);
                     cmd1.CommandType = CommandType.StoredProcedure;
 
-                    cmd1.Parameters.AddWithValue("@idtransaccion", 1);
+                  //cmd1.Parameters.AddWithValue("@idtransaccion", 1);
                     cmd1.Parameters.AddWithValue("@idstatus", valorcol0);
                     cmd1.Parameters.AddWithValue("@referencia", sReferencia);
                     cmd1.Parameters.AddWithValue("@idtpodocumento", valorcol1);
