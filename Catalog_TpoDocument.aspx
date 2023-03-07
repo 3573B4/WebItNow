@@ -96,8 +96,9 @@
             </asp:GridView>--%>
         </div>
         <div class="d-grid gap-4 d-flex justify-content-center mt-1 mb-5 pb-4">
-            <asp:Button ID="BtnRegresar" runat="server" Text="Regresar" OnClick="BtnRegresar_Click" CssClass="btn btn-link" />
+            <asp:Button ID="BtnRegresar" runat="server" Text="Regresar" Font-Bold="True" OnClick="BtnRegresar_Click" CssClass="btn btn-link" />
         </div>
+
     </div>
     <br />
     <div class="d-grid col-6 mx-auto">

@@ -130,7 +130,7 @@
         </ContentTemplate>
     </asp:UpdatePanel>
 
-        <div class="from-group">
+        <div class="from-group mb-4 pb-5">
             <div class="d-grid col-6 mx-auto">
                 <asp:Button ID="BtnRegresar" runat="server" Text="Regresar" Font-Bold="True" OnClick="BtnRegresar_Click" CssClass="btn btn-link"/>
             </div>
