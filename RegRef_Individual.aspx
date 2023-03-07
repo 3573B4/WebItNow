@@ -80,12 +80,12 @@
 
         <div class="form-floating mt-3">
             <asp:Label ID="LblProceso" runat="server" Text="Proceso"></asp:Label>
-            <asp:DropDownList ID="ddlProceso" runat="server" CssClass="btn btn-outline-secondary mt-1" AutoPostBack="true" OnSelectedIndexChanged="ddlProceso_SelectedIndexChanged" Width="100%">
+            <asp:DropDownList ID="ddlProceso" runat="server" CssClass="btn btn-outline-secondary text-start mt-1"  AutoPostBack="true" OnSelectedIndexChanged="ddlProceso_SelectedIndexChanged" Width="100%" >
             </asp:DropDownList>
         </div>
         <div class="form-floating my-3">
             <asp:Label ID="LblSubProceso" runat="server" Text="Sub Proceso"></asp:Label>
-            <asp:DropDownList ID="ddlSubProceso" runat="server" CssClass="btn btn-outline-secondary mt-1" AutoPostBack="true" Width="100%" OnSelectedIndexChanged="ddlSubProceso_SelectedIndexChanged" >
+            <asp:DropDownList ID="ddlSubProceso" runat="server" CssClass="btn btn-outline-secondary text-start mt-1" AutoPostBack="true" OnSelectedIndexChanged="ddlSubProceso_SelectedIndexChanged" Width="100%" >
             </asp:DropDownList>
         </div>
 
@@ -179,7 +179,6 @@
 
     </asp:Panel>
     <br />
-
     <table cellspacing="1" cellpadding="1" border="0">
         <tr>
             <td>

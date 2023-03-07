@@ -2,6 +2,25 @@
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
+    <script language="javascript" type="text/javascript">
+
+        var timer = setTimeout(function () {
+            document.getElementById('<%=LblExpira.ClientID %>').innerHTML = 'La sesión ha expirado.';
+        var modalId = '<%=mpeExpira.ClientID%>';
+        var modal = $find(modalId);
+        modal.show();
+
+    }, 600000);
+
+        function acceso() {
+            location.href = '/Login.aspx';
+        }
+
+        function mpeMensajeOnOk() {
+            //
+        }
+
+    </script>
 </asp:Content>
 
 
@@ -16,13 +35,13 @@
         
         <div class="form-floating mt-3">
             <asp:Label ID="LblProceso" runat="server" Text="Proceso"></asp:Label>
-            <asp:DropDownList ID="ddlProceso" runat="server" CssClass="btn btn-outline-secondary mt-1" AutoPostBack="true" OnSelectedIndexChanged="DropDownList1_SelectedIndexChanged" Width="100%">
+            <asp:DropDownList ID="ddlProceso" runat="server" CssClass="btn btn-outline-secondary text-start mt-1" AutoPostBack="true" OnSelectedIndexChanged="DropDownList1_SelectedIndexChanged" Width="100%">
            
             </asp:DropDownList>
         </div>
         <div class="form-floating my-3">
             <asp:Label ID="LblSubProceso" runat="server" Text="Sub Proceso"></asp:Label>
-            <asp:DropDownList ID="ddlSubProceso" runat="server" CssClass="btn btn-outline-secondary mt-1" AutoPostBack="true" Width="100%" OnSelectedIndexChanged="ddlSubProceso_SelectedIndexChanged" >
+            <asp:DropDownList ID="ddlSubProceso" runat="server" CssClass="btn btn-outline-secondary text-start mt-1" AutoPostBack="true" Width="100%" OnSelectedIndexChanged="ddlSubProceso_SelectedIndexChanged" >
 
             </asp:DropDownList>
         </div>
@@ -80,14 +99,14 @@
             <asp:Button ID="BtnRegresar" runat="server" Text="Regresar" OnClick="BtnRegresar_Click" CssClass="btn btn-link" />
         </div>
     </div>
-
-
+    <br />
     <div class="d-grid col-6 mx-auto">
         <ajaxToolkit:ModalPopupExtender ID="mpeMensaje" runat="server" PopupControlID="pnlMensaje"
             TargetControlID="lblOculto" BackgroundCssClass="FondoAplicacion" OnOkScript="mpeMensajeOnOk()">
         </ajaxToolkit:ModalPopupExtender>
         <asp:Label ID="lblOculto" runat="server" Text="Label" Style="display: none;" />
     </div>
+    <br />
     <asp:Panel ID="pnlMensaje" runat="server" CssClass="CajaDialogo" style="display: none; border: none; border-radius: 10px; width: 400px; background-color:#FFFFFF;">
         <div class=" row justify-content-end" data-bs-theme="dark">
             <div class="col-1">
@@ -113,6 +132,58 @@
             <asp:Button ID="btnClose" runat="server" OnClick="btnClose_Click" Text="Cerrar" CssClass="btn btn-outline-primary"/>
         </div>
     </asp:Panel>
+    <br />
+    <asp:Panel ID="pnlExpira" runat="server" CssClass="CajaDialogo" style="display: none; border: none; border-radius: 10px; width: 400px; background-color:#FFFFFF;">
+        <div class=" row justify-content-end" data-bs-theme="dark">
+            <div class="col-1">
+                <asp:Button runat="server" OnClientClick="acceso(); return false;" type="button" class="btn-close" aria-label="Close" />
+            </div>
+        </div>
+        <div>
+                <br />
+            <hr class="dropdown-divider" />
+        </div>
+        <div>
+                <br />
+            <hr class="dropdown-divider" />
+        </div>
+        <div>
+            <asp:Label ID="LblExpira" runat="server" Text="" />
+        </div>
+        <div>
+            <br />
+            <hr class="dropdown-divider" />
+        </div>
+        <div>
+            <br />
+                <asp:Button ID="BtnClose_Expira" OnClientClick="acceso(); return false;" runat="server" Text="Cerrar" CssClass="btn btn-outline-primary"/>
+        </div>
+
+    </asp:Panel>
+    <br />
+    <table cellspacing="1" cellpadding="1" border="0">
+        <tr>
+            <td>
+                <ajaxToolkit:ModalPopupExtender ID="ModalPopupExtender1" runat="server" PopupControlID="pnlMensaje"
+                    TargetControlID="lblOculto" BackgroundCssClass="FondoAplicacion" OnOkScript="mpeMensajeOnOk()" >
+                </ajaxToolkit:ModalPopupExtender>
+            </td>
+            <td><asp:Label ID="Label1" runat="server" Text="Label" Style="display: none;" /></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>
+                <ajaxToolkit:ModalPopupExtender ID="mpeExpira" runat="server" PopupControlID="pnlExpira"
+                    TargetControlID="lblHide" BackgroundCssClass="FondoAplicacion" OnOkScript="mpeExpiraOnOk()" >
+                </ajaxToolkit:ModalPopupExtender>
+            </td>
+            <td class="style3"><asp:Label ID="lblHide" runat="server" Text="Label" Style="display: none;" />
+            </td>
+            <td></td>
+            <td></td>
+        </tr>
+    </table>
 
     
 </asp:Content>

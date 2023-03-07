@@ -477,74 +477,90 @@ namespace WebItNow
             int numeroColumnas = propiedades.NumberOfColumns;
             int numeroCeldas = propiedades.NumberOfCells;
 
-            int ultFila = numeroCeldas / numeroColumnas;
-
-            int ultimaFila = propiedades.EndRowIndex;
-
-            ConexionBD conectar = new ConexionBD();
-            conectar.Abrir();
-
-            //string error = "";
-
-            for (int x = 2; x <= ultFila; x++)
+            if (numeroColumnas <= 12)
             {
-                string sReferencia = sl.GetCellValueAsString("A" + x);
-
-                if (sReferencia != string.Empty)
+                try
                 {
+                    int ultFila = numeroCeldas / numeroColumnas;
+                //  int ultimaFila = propiedades.EndRowIndex;
 
-                    if (existeProducto(sReferencia))
-                    {
-                        LblMessage.Text += "ya existe referencia" + sReferencia + "\n";
-                        mpeMensaje.Show();
-                    }
-                    else
-                    {
-                        int iProceso = Convert.ToInt32(sl.GetCellValueAsString("L" + x));
-                        int iSubProceso = Convert.ToInt32(sl.GetCellValueAsString("M" + x));
+                    ConexionBD conectar = new ConexionBD();
+                    conectar.Abrir();
 
-                        string sqlString = "INSERT INTO ITM_02 (UsReferencia, UsEmail, Aseguradora, UsAsegurado, Tipo_Asegurado, Nombre_Contacto, " +
-                                                                "Apellidos_Contacto, UsTelefono, RFC_Contacto, Perfil_Contacto, Siniestro, Id_Proceso, Id_SubProceso ) " +
-                                        " VALUES (@referencia, @email, @aseguradora, @asegurado, @tpoasegurado, @nomcontacto, @apecontacto, " +
-                                        " @telefono, @rfc, @perfil, @siniestro, @proceso, @subproceso )";
-                        try
+                    //string error = "";
+
+                    for (int x = 2; x <= ultFila; x++)
+                    {
+                        string sReferencia = sl.GetCellValueAsString("A" + x);
+
+                        if (sReferencia != string.Empty)
                         {
 
-                            SqlCommand cmd = new SqlCommand(sqlString, conectar.ConectarBD);
+                            if (existeProducto(sReferencia))
+                            {
+                                LblMessage.Text += "ya existe referencia" + sReferencia + "\n";
+                                mpeMensaje.Show();
+                            }
+                            else
+                            {
+                                int iProceso = Convert.ToInt32(sl.GetCellValueAsString("L" + x));
+                                int iSubProceso = Convert.ToInt32(sl.GetCellValueAsString("M" + x));
 
-                            cmd.Parameters.AddWithValue("@referencia", sl.GetCellValueAsString("A" + x));
-                            cmd.Parameters.AddWithValue("@email", sl.GetCellValueAsString("B" + x));
-                            cmd.Parameters.AddWithValue("@aseguradora", sl.GetCellValueAsString("C" + x));
-                            cmd.Parameters.AddWithValue("@asegurado", sl.GetCellValueAsString("D" + x));
-                            cmd.Parameters.AddWithValue("@tpoasegurado", sl.GetCellValueAsString("E" + x));
-                            cmd.Parameters.AddWithValue("@nomcontacto", sl.GetCellValueAsString("F" + x));
-                            cmd.Parameters.AddWithValue("@apecontacto", sl.GetCellValueAsString("G" + x));
-                            cmd.Parameters.AddWithValue("@telefono", sl.GetCellValueAsString("H" + x));
-                            cmd.Parameters.AddWithValue("@rfc", sl.GetCellValueAsString("I" + x));
-                            cmd.Parameters.AddWithValue("@perfil", sl.GetCellValueAsString("J" + x));
-                            cmd.Parameters.AddWithValue("@siniestro", sl.GetCellValueAsString("K" + x));
-                            cmd.Parameters.AddWithValue("@proceso", sl.GetCellValueAsString("L" + x));
-                            cmd.Parameters.AddWithValue("@subproceso", sl.GetCellValueAsString("M" + x));
+                                string sqlString = "INSERT INTO ITM_02 (UsReferencia, UsEmail, Aseguradora, UsAsegurado, Tipo_Asegurado, Nombre_Contacto, " +
+                                                                        "Apellidos_Contacto, UsTelefono, RFC_Contacto, Perfil_Contacto, Siniestro, Id_Proceso, Id_SubProceso ) " +
+                                                " VALUES (@referencia, @email, @aseguradora, @asegurado, @tpoasegurado, @nomcontacto, @apecontacto, " +
+                                                " @telefono, @rfc, @perfil, @siniestro, @proceso, @subproceso )";
+                                try
+                                {
+
+                                    SqlCommand cmd = new SqlCommand(sqlString, conectar.ConectarBD);
+
+                                    cmd.Parameters.AddWithValue("@referencia", sl.GetCellValueAsString("A" + x));
+                                    cmd.Parameters.AddWithValue("@email", sl.GetCellValueAsString("B" + x));
+                                    cmd.Parameters.AddWithValue("@aseguradora", sl.GetCellValueAsString("C" + x));
+                                    cmd.Parameters.AddWithValue("@asegurado", sl.GetCellValueAsString("D" + x));
+                                    cmd.Parameters.AddWithValue("@tpoasegurado", sl.GetCellValueAsString("E" + x));
+                                    cmd.Parameters.AddWithValue("@nomcontacto", sl.GetCellValueAsString("F" + x));
+                                    cmd.Parameters.AddWithValue("@apecontacto", sl.GetCellValueAsString("G" + x));
+                                    cmd.Parameters.AddWithValue("@telefono", sl.GetCellValueAsString("H" + x));
+                                    cmd.Parameters.AddWithValue("@rfc", sl.GetCellValueAsString("I" + x));
+                                    cmd.Parameters.AddWithValue("@perfil", sl.GetCellValueAsString("J" + x));
+                                    cmd.Parameters.AddWithValue("@siniestro", sl.GetCellValueAsString("K" + x));
+                                    cmd.Parameters.AddWithValue("@proceso", sl.GetCellValueAsString("L" + x));
+                                    cmd.Parameters.AddWithValue("@subproceso", sl.GetCellValueAsString("M" + x));
 
 
-                            int result =  cmd.ExecuteNonQuery();
+                                    int result =  cmd.ExecuteNonQuery();
 
-                            // Insertar Registros Tabla tbEstadoDocumento [ITM_04]
-                            int idStatus = 1;
-                            int valor = Add_tbEstadoDocumento(sReferencia, iProceso, iSubProceso, idStatus);
+                                    // Insertar Registros Tabla tbEstadoDocumento [ITM_04]
+                                    int idStatus = 1;
+                                    int valor = Add_tbEstadoDocumento(sReferencia, iProceso, iSubProceso, idStatus);
+                                }
+                                catch (Exception ex)
+                                {
+                                    LblMessage.Text = ex.Message;
+                                    mpeMensaje.Show();
+                                }
+
+                            }
+
                         }
-                        catch (Exception ex)
-                        {
-                            LblMessage.Text = ex.Message;
-                            mpeMensaje.Show();
-                        }
-
                     }
 
+                    LblMessage.Text = "Documento Excel Cargado";
+                    mpeMensaje.Show();
+
+                } catch (Exception ex)
+                {
+                    LblMessage.Text = ex.Message;
+                    mpeMensaje.Show();
                 }
             }
-            LblMessage.Text = "Documento Excel Cargado";
-            mpeMensaje.Show();
+            else
+            {
+                LblMessage.Text = "Formato del documento es incorrecto ";
+                mpeMensaje.Show();
+            }
         }
 
         private bool existeProducto(string pReferencia)

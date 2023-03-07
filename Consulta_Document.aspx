@@ -57,7 +57,7 @@
 
             <div class="form-floating my-3">
                 <div class="dropdown">
-                    <asp:DropDownList ID="ddlStatusDocumento" runat="server" CssClass="btn btn-outline-secondary" AppendDataBoundItems="true" AutoPostBack="true" Width="100%">
+                    <asp:DropDownList ID="ddlStatusDocumento" runat="server" CssClass="btn btn-outline-secondary text-start mt-1" AppendDataBoundItems="true" AutoPostBack="true" Width="100%">
                         <asp:ListItem Value="0"> -- Seleccionar todos -- </asp:ListItem>
                     </asp:DropDownList>
                 </div>
