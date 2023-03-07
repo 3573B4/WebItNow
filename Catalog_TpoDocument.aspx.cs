@@ -114,50 +114,50 @@ namespace WebItNow
                         if (TxtAreaMensaje.Value.Length <= 100 || TxtNameDoc.Text.Length <= 25)
                         {
 
-                    try
-                    {
-
-                        int idTpoDoc = Convert.ToInt32(ReturnIdTpoDoc());
-                        //idTpoDoc = idTpoDoc + 1;
-                        idTpoDoc += 1;
-                        string sIdTpoDoc = Convert.ToString(idTpoDoc);
-                        if (sIdTpoDoc.Length < 2)
+                        try
                         {
-                            sIdTpoDoc = "0" + sIdTpoDoc;
+
+                            int idTpoDoc = Convert.ToInt32(ReturnIdTpoDoc());
+                            //idTpoDoc = idTpoDoc + 1;
+                            idTpoDoc += 1;
+                            string sIdTpoDoc = Convert.ToString(idTpoDoc);
+                            if (sIdTpoDoc.Length < 2)
+                            {
+                                sIdTpoDoc = "0" + sIdTpoDoc;
+                            }
+
+                            string sqlString = "INSERT INTO ITM_06 " +
+                                " (IdTpoDocumento, Descripcion, DescrpBrev, Status, IdProceso, IdSubProceso) " + //para actualizar el status
+                                " VALUES ('" + sIdTpoDoc + "', " +
+                                " TRIM(' ' FROM '" + TxtNameDoc.Text + "')," +
+                                " TRIM(' ' FROM '" + TxtAreaMensaje.Value + "')," +
+                                " 1, " + ddlProceso.SelectedValue+", "+ ddlSubProceso.SelectedValue +
+                                " )";
+
+                            //if(rbtnActivo.Checked == true)
+                            //{
+                            //    sqlString = sqlString + ", 1)";
+                            //}else if (rbtnDesactivo.Checked == true)
+                            //{
+                            //    sqlString = sqlString + ", 0)";
+                            //}
+
+                            ConexionBD Conecta = new ConexionBD();
+                            Conecta.Abrir();
+                            SqlCommand cmd = new SqlCommand(sqlString, Conecta.ConectarBD);
+
+                            cmd.ExecuteReader();
+
+                            GetTpoDoc();
+                            //GetTpoDoc(iProceso, iSubProceso);
+                            TxtNameDoc.Text = string.Empty;
+                            TxtAreaMensaje.Value = string.Empty;
                         }
-
-                        string sqlString = "INSERT INTO ITM_06 " +
-                            " (IdTpoDocumento, Descripcion, DescrpBrev, Status, IdProceso, IdSubProceso) " + //para actualizar el status
-                            " VALUES ('" + sIdTpoDoc + "', " +
-                            " TRIM(' ' FROM '" + TxtNameDoc.Text + "')," +
-                            " TRIM(' ' FROM '" + TxtAreaMensaje.Value + "')," +
-                            " 1, " + ddlProceso.SelectedValue+", "+ ddlSubProceso.SelectedValue +
-                            " )";
-
-                        //if(rbtnActivo.Checked == true)
-                        //{
-                        //    sqlString = sqlString + ", 1)";
-                        //}else if (rbtnDesactivo.Checked == true)
-                        //{
-                        //    sqlString = sqlString + ", 0)";
-                        //}
-
-                        ConexionBD Conecta = new ConexionBD();
-                        Conecta.Abrir();
-                        SqlCommand cmd = new SqlCommand(sqlString, Conecta.ConectarBD);
-
-                        cmd.ExecuteReader();
-
-                        GetTpoDoc();
-                        //GetTpoDoc(iProceso, iSubProceso);
-                        TxtNameDoc.Text = string.Empty;
-                        TxtAreaMensaje.Value = string.Empty;
-                    }
-                    catch (Exception ex)
-                    {
-                        LblMessage.Text = ex.Message;
-                        mpeMensaje.Show();
-                    }
+                        catch (Exception ex)
+                        {
+                            LblMessage.Text = ex.Message;
+                            mpeMensaje.Show();
+                        }
                 }
                         else
                         {
