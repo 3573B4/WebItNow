@@ -107,8 +107,12 @@ namespace WebItNow
             }
             else
             {
-                if (TxtAreaMensaje.Value.Length <= 100 || TxtNameDoc.Text.Length <= 25)
+                if (ddlProceso.SelectedValue != "0")
                 {
+                    if (ddlSubProceso.SelectedValue != "0")
+                    {
+                        if (TxtAreaMensaje.Value.Length <= 100 || TxtNameDoc.Text.Length <= 25)
+                        {
 
                     try
                     {
@@ -155,10 +159,22 @@ namespace WebItNow
                         mpeMensaje.Show();
                     }
                 }
+                        else
+                        {
+                            Lbl_Message.Visible = true;
+                            Lbl_Message.Text = "* El texto debe tener 100 o menos caracteres \n y menos o igual a 25 caracteres";
+                        }
+                    }
+                    else
+                    {
+                        Lbl_Message.Visible = true;
+                        Lbl_Message.Text = "* Seleccione un SubProceso";
+                    }
+                }
                 else
                 {
                     Lbl_Message.Visible = true;
-                    Lbl_Message.Text = "* El texto debe tener 100 o menos caracteres \n y menos o igual a 25 caracteres";
+                    Lbl_Message.Text = "* Seleccione un proceso";
                 }
             }
         }

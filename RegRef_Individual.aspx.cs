@@ -272,9 +272,9 @@ namespace WebItNow
         {
             // Validar si existe Usuario en la tabla ITM_02 (tbReferencia)
             Variables.wPrivilegios = "3";
-            int Usuario_Existe = ValidaReferencia(TxtRef.Text, Int32.Parse(Variables.wPrivilegios));
+            int Referencia_Existe = ValidaReferencia(TxtRef.Text, Int32.Parse(Variables.wPrivilegios));
 
-            if (Usuario_Existe == 1)
+            if (Referencia_Existe == 1)
             {
                 TxtRef.Text = string.Empty;
                 TxtEmail.Focus();

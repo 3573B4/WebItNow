@@ -195,14 +195,19 @@ namespace WebItNow
                 Session["Proceso"] = sProceso;
                 Session["SubProceso"] = sSubProceso;
 
-                if (sProceso != string.Empty && sSubProceso != string.Empty)
-                {
-                    Response.Redirect("Request_Document_1.aspx");
-                }
-                else
+                if (sProceso == "0"  && sSubProceso == "0")
                 {
                     LblMessage.Text = "La referencia no esta asociada a un proceso";
                     this.mpeMensaje.Show();
+                } 
+                else if (sProceso == string.Empty && sSubProceso == string.Empty)
+                {
+                    LblMessage.Text = "La referencia no esta asociada a un proceso";
+                    this.mpeMensaje.Show();
+                }
+                else
+                {
+                    Response.Redirect("Request_Document_1.aspx");
                 }
 
             } catch (Exception ex)

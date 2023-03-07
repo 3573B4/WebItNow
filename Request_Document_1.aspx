@@ -98,7 +98,7 @@
                         <asp:TemplateField>
                             <ItemTemplate>
                                 <%--<asp:ImageButton ID="ImgSelect" runat="server" Height="24px" Width="24px" ImageUrl="~/Images/aceptar.ico" OnClick="ImgSelect_Click" />--%>
-                                <asp:CheckBox ID="chkTpoDocumento" runat="server" />
+                                <asp:CheckBox ID="chkTpoDocumento" runat="server" Checked='<%# Convert.ToBoolean(Eval("IdStatus")) %>'/>
                             </ItemTemplate> 
                         </asp:TemplateField>
 
