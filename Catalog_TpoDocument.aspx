@@ -29,7 +29,7 @@
 
     <div class="container col-md-4">
         
-        <h2 class="h2 my-3 fw-normal">Alta de documento</h2>
+        <h2 class="h2 my-3 fw-normal mt-4">Alta de documento</h2>
 
         <asp:Label ID="LblDescripcion" runat="server" CssClass="" Text="Inserte el nombre del archivo a pedir y en seguida las instrucciones de como se debe subir el archivo a pedir."></asp:Label>
         

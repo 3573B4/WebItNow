@@ -48,8 +48,6 @@
         <br />
 
         <div class="form-group">
-            <div class="col-12">
-            <div class="d-grid gap-2 d-flex justify-content-center">
                 <div style="overflow-x: auto; overflow-y:hidden">
                     <asp:GridView ID="grdEstadoDocs" runat="server" AutoGenerateColumns="False" GridLines="None" Width="100%"
                         AllowPaging="True" CssClass="footable" PagerStyle-CssClass="pgr" AlternatingRowStyle-CssClass="alt" 
@@ -71,8 +69,6 @@
                         <PagerStyle CssClass="pgr" />
                     </asp:GridView>
                 </div>
-            </div>
-            </div>
         </div>
 
         <div class="from-group">
