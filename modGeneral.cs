@@ -64,7 +64,7 @@ namespace WebItNow
             return true;
         }
 
-        public void CopyFileAzure(string sReferencia, string sFileName, int iConsecutivo)
+        public void CopyFileAzure(string sReferencia, string sFileName, string sTpoDocumento, int iConsecutivo)
         {
             try
             {
@@ -135,10 +135,15 @@ namespace WebItNow
                     // Start the copy operation
                     destFile.StartCopy(sourceFile.Uri);
 
+                    // Actualiza columnas Url_Path_Final - Nom_Imagen_Final
+                    string Url_Path_Final = año + "/" + mes + "/" + dia + "/" + iConsecutivo + "/";
+                    Actualiza_ITM_04(sReferencia, Url_Path_Final, sFileName_New, sTpoDocumento);
+
                     if (destFile.Exists())
                     {
                         Console.WriteLine($"{sourceFile.Uri} copied to {destFile.Uri}");
                     }
+
                 }
             }
             catch (Exception ex)
@@ -150,6 +155,36 @@ namespace WebItNow
         private static void NewMethod(ConexionBD Conecta)
         {
             Conecta.Abrir();
+        }
+
+        private void Actualiza_ITM_04(string sReferencia, string pUrl_Path, string pNom_Imagen, string sTpoDocumento)
+        {
+            // Insertar tabla ITM_15
+            ConexionBD Conecta = new ConexionBD();
+            NewMethod(Conecta);
+
+            try
+            {
+                string strQuery = "Update ITM_04 " +
+                                   "   Set Url_Path_Final = '" + pUrl_Path + "'," +
+                                   "       Nom_Imagen_Final = '" + pNom_Imagen + "' " +
+                                   " Where Referencia = '" + sReferencia + "'" +
+                                   "   And IdTipoDocumento = '" + sTpoDocumento + "'";
+
+
+                SqlCommand cmd = new SqlCommand(strQuery, Conecta.ConectarBD);
+
+                cmd.ExecuteReader();
+
+            }
+            catch (Exception ex)
+            {
+                string sError = ex.Message;
+            }
+            finally
+            {
+
+            }
         }
 
     }

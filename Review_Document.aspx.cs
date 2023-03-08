@@ -300,9 +300,10 @@ namespace WebItNow
 
                 // Copiar el archivo al almacenamiento (codisestorage)
                 modGeneral modGral = new modGeneral();
-                modGral.CopyFileAzure(sReferencia, sFileName, iConsecutivo);
+                modGral.CopyFileAzure(sReferencia, sFileName, sTipoDocumento, iConsecutivo);
 
                 iConsecutivo = sp_Consecutivo(iConsecutivo, DateTime.Parse(Date), "Update");
+
 
                 DeleteFromAzure(sFileName, sReferencia);
 
