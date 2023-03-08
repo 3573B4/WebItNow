@@ -31,41 +31,57 @@ namespace WebItNow
 
         protected void BtnEnviar_Click(object sender, EventArgs e)
         {
-            //* Validar si el usuario existe o es nuevo
-            if (TxtRef.Text != "" && TxtEmail.Text != "")
+            if (ddlProceso.SelectedValue != "0")
             {
-                
-                // Insertar Registo Tabla tbReferencia (Referencias Individuales)
-                int result = Add_tbReferencia(TxtRef.Text, TxtEmail.Text, TxtAsegurado.Text, TxtTelefono.Text, Convert.ToInt32(ddlProceso.SelectedValue), Convert.ToInt32(ddlSubProceso.SelectedValue), 3, "Insert");
-
-                if (result == 0)
+                if (ddlSubProceso.SelectedValue != "0")
                 {
-                    // Insertar Registros Tabla tbEstadoDocumento [ITM_04]
-                    int idStatus = 1;
-                    int valor = Add_tbEstadoDocumento(TxtRef.Text, Convert.ToInt32(ddlProceso.SelectedValue), Convert.ToInt32(ddlSubProceso.SelectedValue), idStatus);
-
-                    var email = new EnvioEmail();
-                    int Envio_Ok = email.EnvioMensaje(TxtRef.Text.Trim(), TxtEmail.Text.Trim(), "Registro Referencia ", string.Empty);
-
-                    //EnvioMensaje(TxtUsu.Text.Trim(), TxtEmail.Text.Trim());
-
-                    if (Envio_Ok == 0)
+                    //* Validar si el usuario existe o es nuevo
+                    if (TxtRef.Text != "" && TxtEmail.Text != "")
                     {
-                        LblMessage.Text = "Alta de Asunto, agregada correctamente ";
-                        this.mpeMensaje.Show();
+                        // Insertar Registo Tabla tbReferencia (Referencias Individuales)
+                        int result = Add_tbReferencia(TxtRef.Text, TxtEmail.Text, TxtAsegurado.Text, TxtTelefono.Text, Convert.ToInt32(ddlProceso.SelectedValue), Convert.ToInt32(ddlSubProceso.SelectedValue), 3, "Insert");
+
+                        if (result == 0)
+                        {
+                            // Insertar Registros Tabla tbEstadoDocumento [ITM_04]
+                            int idStatus = 1;
+                            int valor = Add_tbEstadoDocumento(TxtRef.Text, Convert.ToInt32(ddlProceso.SelectedValue), Convert.ToInt32(ddlSubProceso.SelectedValue), idStatus);
+
+                            var email = new EnvioEmail();
+                            int Envio_Ok = email.EnvioMensaje(TxtRef.Text.Trim(), TxtEmail.Text.Trim(), "Registro Referencia ", string.Empty);
+
+                            //EnvioMensaje(TxtUsu.Text.Trim(), TxtEmail.Text.Trim());
+
+                            if (Envio_Ok == 0)
+                            {
+                                LblMessage.Text = "Alta de Asunto, agregada correctamente ";
+                                this.mpeMensaje.Show();
+                            }
+
+                            Limpia(this.Controls);
+
+                            // Response.Redirect("Login.aspx");
+                            Lbl_Message.Visible = false;
+                        }
                     }
-
-                    Limpia(this.Controls);
-
-                    // Response.Redirect("Login.aspx");
-                    Lbl_Message.Visible = false;
+                    else
+                    {
+                        Lbl_Message.Visible = true;
+                        Lbl_Message.Text = "* Estos campos son obligatorios";
+                    }
+                }
+                else
+                {
+                    LblMessage.Text = "* Seleccione un SubProceso";
+                    this.mpeMensaje.Show();
                 }
             }
             else
             {
-                Lbl_Message.Visible = true;
-                Lbl_Message.Text = "* Estos campos son obligatorios";
-            }
+                LblMessage.Text = "* Seleccione un Proceso";
+                this.mpeMensaje.Show();
+           }
+
         }
 
         protected void BtnClose_Click(object sender, EventArgs e)

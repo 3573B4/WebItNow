@@ -104,10 +104,10 @@
             border: 1px solid #C60C30;
         }
 
-            .GridPager-Danger a:hover {
-                background-color: #C60C30;
-                color: #f5f5f5;
-            }
+        .GridPager-Danger a:hover {
+            background-color: #C60C30;
+            color: #f5f5f5;
+        }
 
         .GridPager-Danger span {
             background: #C60C30;

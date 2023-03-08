@@ -44,6 +44,7 @@
     <link href="~/Styles/panel_message.css" rel="stylesheet" type="text/css" />
     <link href="~/Styles/GridView.css" rel="stylesheet" type="text/css" />
     <link href="~/Styles/fuentes.css" rel="stylesheet" type="text/css" />
+    <link href="Styles/pagination-ys.css" rel="stylesheet" />
 
     <style type="text/css">
         .style1
@@ -122,7 +123,8 @@
         }
     </style>
 
-<%--    <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+<%--    
+    <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
     <script type="text/javascript">  
        $(window).bind("load", function () {
            var footer = $("#footer");
@@ -136,7 +138,8 @@
                });
            }
        });
-    </script>--%>
+    </script>
+--%>
 
 
 </head>

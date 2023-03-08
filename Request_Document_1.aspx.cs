@@ -44,10 +44,7 @@ namespace WebItNow
 
         protected void BtnRegresar_Click(object sender, EventArgs e)
         {
-            System.Web.Security.FormsAuthentication.SignOut();
-            Session.Abandon();
-
-            Response.Redirect("Request_Document.aspx");
+            Response.Redirect("Request_Document.aspx",true);
         }
 
         protected void BtnClose_Click(object sender, EventArgs e)

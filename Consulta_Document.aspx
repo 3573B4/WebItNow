@@ -26,13 +26,12 @@
             $('[id*=GridView1]').footable();
         });
 
+
     </script>
 
     <script src="Scripts/jquery-3.4.1.min.js" type="text/javascript"></script>
     <link href="~/Scripts/footable.min.js" rel="stylesheet" type="text/javascript" />
     <link href="~/Styles/footable.min.css" rel="stylesheet" type="text/css" />
-
-    <link href="~/Styles/paginacion.css" rel="stylesheet" type="text/css" />
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
@@ -65,21 +64,21 @@
 
             <div style="overflow-x: auto; overflow-y:hidden">
                 <asp:GridView ID="grdConsultaDocumento" runat="server" AutoGenerateColumns="False" GridLines="None" Width="100%"
-                    AllowPaging="True" CssClass="footable" PagerStyle-CssClass="pgr" AlternatingRowStyle-CssClass="alt"
-                    OnPageIndexChanging="grdConsultaDocumento_PageIndexChanging" PageSize="7"  >
+                    AllowPaging="True" CssClass="footable" PagerStyle-CssClass="pagination-ys" AlternatingRowStyle-CssClass="alt"
+                    OnPageIndexChanging="grdConsultaDocumento_PageIndexChanging" PageSize="5"  >
                     <AlternatingRowStyle CssClass="alt" />
                     <Columns>
                         <asp:TemplateField>
                             <ItemTemplate>
-                                <%--<asp:ImageButton ID="imgAceptado" runat="server" ImageUrl="~/Images/aceptar.png" Height="35px" Width="35px" OnClick="imgAceptado_Click" Enabled="false" />
-                                <asp:ImageButton ID="imgRechazado" runat="server" ImageUrl="~/Images/cancelar.png" Height="35px" Width="35px" OnClick="imgRechazado_Click" Enabled="false" />--%>
+                                <%--<asp:ImageButton ID="imgAceptado" runat="server" ImageUrl="~/Images/aceptar.png" Height="35px" Width="35px" OnClick="imgAceptado_Click" Enabled="false" />   --%>
+                                <%--<asp:ImageButton ID="imgRechazado" runat="server" ImageUrl="~/Images/cancelar.png" Height="35px" Width="35px" OnClick="imgRechazado_Click" Enabled="false" />   --%>
                                 <%--aqui va el boton de descarga--%>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <%--<asp:BoundField DataField="IdUsuario" HeaderText="Usuario" />--%>
+                        <%--<asp:BoundField DataField="IdUsuario" HeaderText="Usuario" />   --%>
                         <asp:BoundField DataField="Referencia" HeaderText="Referencia" />
                         <asp:BoundField DataField="Fec_Envio" HeaderText="Recepción" />
-                        <%--<asp:BoundField DataField="Nom_Imagen" HeaderText="Archivo" />--%>
+                        <%--<asp:BoundField DataField="Nom_Imagen" HeaderText="Archivo" />  --%>
                         <asp:BoundField DataField="Desc_status" HeaderText="Estatus" />
                         <asp:BoundField DataField="Descripcion" HeaderText="Tipo de Documento" />
                         <asp:BoundField DataField="Fec_Aceptado" HeaderText="Aprobación" />
@@ -87,7 +86,7 @@
                         <asp:BoundField DataField="Url_Imagen" HeaderText="Directorio" />
                         <asp:BoundField DataField="IdDescarga" HeaderText="Descargas" />
                     </Columns>
-                    <PagerStyle CssClass="pgr" />
+                    <PagerStyle HorizontalAlign="Center" CssClass="pagination-ys" />
                 </asp:GridView>
             </div>
             <div class="form-group d-grid col-md-3 mx-auto pt-3">

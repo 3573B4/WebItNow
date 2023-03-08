@@ -21,6 +21,7 @@
 
     <webopt:bundlereference runat="server" path="~/Content/css" />
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <link href="Styles/pagination-ys.css" rel="stylesheet" />
 
     <script language="javascript" type="text/javascript">
         if (history.forward(1)) {

@@ -91,7 +91,7 @@
         <asp:Panel ID="pnlTpoDocumento" runat="server" >
             <div style="overflow-x: hidden; overflow-y: auto; height:120px;">
                 <asp:GridView ID="GrdTpoDocumento" runat="server" AutoGenerateColumns="False" GridLines="None" Width="100%" AllowPaging = "False"
-                    CssClass="footable" PagerStyle-CssClass="pgr" AlternatingRowStyle-CssClass="alt" >
+                    CssClass="footable" AlternatingRowStyle-CssClass="alt" >
                     <%--OnSelectedIndexChanged="GrdRef_SelectedIndexChanged" OnRowDataBound="GrdRef_RowDataBound" >--%>
                     <AlternatingRowStyle CssClass="alt" />
                     <Columns>

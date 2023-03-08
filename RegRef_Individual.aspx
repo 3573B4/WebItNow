@@ -41,7 +41,7 @@
                 ControlToValidate="TxtRef" ErrorMessage="*" ForeColor="Red">
                 </asp:RequiredFieldValidator>
             <div class="col-sm-12">
-                <asp:TextBox ID="TxtRef" runat="server" CssClass="form-control" placeholder="Referencia"  OnTextChanged="TxtRef_TextChanged" AutoComplete="off" AutoPostBack="true" MaxLength="16" ></asp:TextBox>
+                <asp:TextBox ID="TxtRef" runat="server" CssClass="form-control" placeholder="Referencia"  OnTextChanged="TxtRef_TextChanged" AutoComplete="off" onkeyup="mayus(this);" AutoPostBack="true" MaxLength="12" ></asp:TextBox>
             </div>
         </div>
 

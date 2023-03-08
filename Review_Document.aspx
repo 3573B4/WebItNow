@@ -215,7 +215,7 @@
 
         <div style="overflow-x: auto; overflow-y:hidden">
             <asp:GridView ID="GrdEstadoDocumento"  runat="server" AutoGenerateColumns="False" GridLines="None" Width="900px"
-                    AllowPaging="True" CssClass="footable" PagerStyle-CssClass="pgr" AlternatingRowStyle-CssClass="alt" 
+                    AllowPaging="True" CssClass="footable" PagerStyle-CssClass="pagination-ys" AlternatingRowStyle-CssClass="alt" 
                     OnPageIndexChanging="GrdEstadoDocumento_OnPageIndexChanging" OnRowCommand="GrdEstadoDocumento_RowCommand"
                     OnSelectedIndexChanged="GrdEstadoDocumento_SelectedIndexChanged"
                     OnRowDataBound ="GrdEstadoDocumento_RowDataBound" DataKeyNames="Referencia" >
@@ -259,8 +259,7 @@
                         </asp:BoundField>
                         <%--ItemStyle-CssClass="hide"--%>
                     </Columns>
-                
-                    <PagerStyle CssClass="pgr" />
+                    <PagerStyle HorizontalAlign="Center" CssClass="pagination-ys" />
             </asp:GridView>
         </div>
 

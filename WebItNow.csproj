@@ -355,7 +355,6 @@
     <Content Include="Scripts\loading-bar.js" />
     <Content Include="Scripts\loading-bar.min.js" />
     <Content Include="Site.Master" />
-    <Content Include="Styles\Aceptar.jpg" />
     <Content Include="Styles\center_controls.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -410,6 +409,7 @@
     <Content Include="Styles\GridView.css" />
     <Content Include="Styles\loading-bar.css" />
     <Content Include="Styles\loading-bar.min.css" />
+    <Content Include="Styles\pagination-ys.css" />
     <Content Include="Styles\paginacion.css" />
     <Content Include="Styles\panel_message.css" />
     <Content Include="Styles\default.css" />

@@ -82,23 +82,11 @@
                 </asp:BoundField>
             </Columns>
             </asp:GridView>
-            <%--<asp:GridView ID="grdTpoDocumento" runat="server" AutoGenerateColumns="False" GridLines="None" Width="100%"
-                AllowPaging="True" CssClass="footable" PagerStyle-CssClass="pgr" AlternatingRowStyle-CssClass="alt" 
-                OnSelectedIndexChanged="GrdTpoDocumento_SelectedIndexChanged" OnRowDataBound="GrdTpoDocumento_RowDataBound"
-                OnPageIndexChanging="GrdTpoDocumento_PageIndexChanging" DataKeyNames="IdTpoDocumento">
-                <AlternatingRowStyle CssClass="alt" />
-                <Columns>
-                    <asp:BoundField DataField="IdTpoDocumento" HeaderText="Id documento" />
-                    <asp:BoundField DataField="Descripcion" HeaderText="Tipo documento" />
-                    <asp:BoundField DataField="DescrpBrev" HeaderText="Instrucciones" />
-                </Columns>
-                <PagerStyle CssClass="pgr" />
-            </asp:GridView>--%>
         </div>
+
         <div class="d-grid gap-4 d-flex justify-content-center mt-1 mb-5 pb-4">
             <asp:Button ID="BtnRegresar" runat="server" Text="Regresar" Font-Bold="True" OnClick="BtnRegresar_Click" CssClass="btn btn-link" />
         </div>
-
     </div>
     <br />
     <div class="d-grid col-6 mx-auto">
