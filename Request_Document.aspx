@@ -42,7 +42,7 @@
 <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
 <ContentTemplate>
     <div class="container col-md-6">
-        <h2 class="h2 mb-5 fw-normal">Solicitud de Documentos</h2>
+        <h2 class="h2 mb-3 fw-normal mt-4"">Solicitud de Documentos</h2>
         <div class="form-group mt-3">
             <div class="row">
             <div class="col-md-6">

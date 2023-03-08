@@ -31,7 +31,8 @@
     <ContentTemplate>
 
 <div class="container col-md-4">
-        <h2 class="h2 mb-5 fw-normal">Solicitud de Documentos</h2>
+        <h2 class="h2 mb-3 fw-normal mt-4">Solicitud de Documentos</h2>
+    
         <div class="form-group mt-3">
             <asp:Label ID="LblReferencia" runat="server" Text="Referencia" CssClass="control-label col-sm-2"></asp:Label>
             <div class="col-sm-12">

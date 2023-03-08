@@ -208,7 +208,7 @@
     <ContentTemplate>
     <br />
     <div class="container col-md-6">
-        <h2 class="h2 mb-3 fw-normal">Aprobación de Documentos</h2>
+        <h2 class="h2 mb-3 fw-normal mt-4">Aprobación de Documentos</h2>
         <br />
         <h2 class="h2 mb-5 fw-normal">Archivos Recibidos</h2>
         <br />
@@ -218,7 +218,7 @@
                     AllowPaging="True" CssClass="footable" PagerStyle-CssClass="pagination-ys" AlternatingRowStyle-CssClass="alt" 
                     OnPageIndexChanging="GrdEstadoDocumento_OnPageIndexChanging" OnRowCommand="GrdEstadoDocumento_RowCommand"
                     OnSelectedIndexChanged="GrdEstadoDocumento_SelectedIndexChanged"
-                    OnRowDataBound ="GrdEstadoDocumento_RowDataBound" DataKeyNames="Referencia" >
+                    OnRowDataBound ="GrdEstadoDocumento_RowDataBound" DataKeyNames="Referencia" PageSize="8" >
                     <AlternatingRowStyle CssClass="alt" />
                     <Columns>
                         <asp:TemplateField>

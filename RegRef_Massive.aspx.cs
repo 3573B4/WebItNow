@@ -477,7 +477,7 @@ namespace WebItNow
             int numeroColumnas = propiedades.NumberOfColumns;
             int numeroCeldas = propiedades.NumberOfCells;
 
-            if (numeroColumnas <= 12)
+            if (numeroColumnas <= 13)
             {
                 try
                 {

@@ -122,7 +122,7 @@
 <asp:UpdatePanel ID="UpdatePanel" runat="server">
 <ContentTemplate>
     <div class="container col-md-4">
-        <h2 class="h2 mb-3 fw-normal">Carga de Datos</h2>
+        <h2 class="h2 mb-3 fw-normal mt-4">Carga de Datos</h2>
         <div class="input-group">
             <asp:Label ID="LblExcel" CssClass="form-control col-md-5 p-2" runat="server" Text="Descarga plantilla Excel" Font-Size="Medium"></asp:Label>
             <asp:UpdatePanel ID="UpdatePanel2" runat="server" UpdateMode="Conditional">

@@ -10,7 +10,7 @@
     <ContentTemplate>
     <br />
     <div class="container col-md-4">
-        <h2 class="h2 mb-3 fw-normal"> Iniciar Sesión</h2>
+        <h2 class="h2 mb-3 fw-normal mt-4"> Iniciar Sesión</h2>
 
         <div class="form-group">
             <asp:Label ID="LblEmail" runat="server" Text="Correo electrónico" CssClass="control-label col-sm-2" Font-Size="Small"></asp:Label>

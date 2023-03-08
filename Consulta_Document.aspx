@@ -40,7 +40,7 @@
 <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional" >
     <ContentTemplate>
         <div class="container col-lg-6">
-            <h2 class="h2 mb-3 fw-normal mt-5">Reporte de archivos por estatus</h2>
+            <h2 class="h2 mb-3 fw-normal mt-4">Reporte de archivos por estatus</h2>
             
 <%--            <div class="form-group">
                 <div class="d-grid col-4 mx-auto py-1">
@@ -65,7 +65,7 @@
             <div style="overflow-x: auto; overflow-y:hidden">
                 <asp:GridView ID="grdConsultaDocumento" runat="server" AutoGenerateColumns="False" GridLines="None" Width="100%"
                     AllowPaging="True" CssClass="footable" PagerStyle-CssClass="pagination-ys" AlternatingRowStyle-CssClass="alt"
-                    OnPageIndexChanging="grdConsultaDocumento_PageIndexChanging" PageSize="5"  >
+                    OnPageIndexChanging="grdConsultaDocumento_PageIndexChanging" PageSize="8" >
                     <AlternatingRowStyle CssClass="alt" />
                     <Columns>
                         <asp:TemplateField>

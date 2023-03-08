@@ -130,7 +130,7 @@
 <asp:UpdatePanel ID="UpdatePanel" runat="server">
     <ContentTemplate>
     <div class="container col-md-4">
-        <h2 class="h2 mb-3 fw-normal">CARGA SEGURA DE DOCUMENTOS</h2>
+        <h2 class="h2 mb-3 fw-normal mt-4">CARGA SEGURA DE DOCUMENTOS</h2>
         <br />
 
         <div class="form-group ">
