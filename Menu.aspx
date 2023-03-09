@@ -150,46 +150,47 @@
                             </li>   --%>
                     <li class="nav-item dropdown my-1">
                         <a class="nav-link btn dropdown-toggle text-start" style="background-color:mediumturquoise;" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <font size="4">Documentos</font>
+                            <font size="4">Expedientes</font>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="Request_Document.aspx">Solicitudes</a></li>
-                            <li><hr class="dropdown-divider"/></li>
-                            <li><a class="dropdown-item" href="Review_Document.aspx">Validación</a></li>
-                            <li><hr class="dropdown-divider"/></li>
-                            <li><a class="dropdown-item" href="Consulta_Document.aspx">Consultas</a></li>
+                        <li class="nav-item dropend p-0">
+                            <asp:Button ID="BtnAltaAsunto" runat="server" Text="&nbsp;&nbsp;&nbsp;Alta de Referencia" class="btn dropdown-toggle dropdown-item p-0 m-0" data-bs-toggle="dropdown" aria-expanded="false" BorderStyle="None" />                                    
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="RegRef_Individual.aspx">Individual</a></li>
+                                <li><hr class="dropdown-divider"/></li>
+                                <li><a class="dropdown-item" href="RegRef_Massive.aspx">Masivo</a></li>
+                            </ul>
+                        </li>
                         </ul>
                     </li>
 
                     <li class="nav-item dropdown my-1">
                         <a class="nav-link btn dropdown-toggle text-start" style="background-color:mediumturquoise;" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <font size="4">Configuración</font>
+                            <font size="4">Documentos</font>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="Request_Document.aspx">Requerimiento</a></li>
+                            <li><hr class="dropdown-divider"/></li>
+                            <li><a class="dropdown-item" href="Review_Document.aspx">Validación</a></li>
+                            <li><hr class="dropdown-divider"/></li>
+                            <li><a class="dropdown-item" href="Consulta_Document.aspx">Consultas</a></li>
+                            <li><hr class="dropdown-divider"/></li>
+                            <li><a class="dropdown-item" href="Catalog_TpoDocument.aspx">Alta tipo Documento</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item dropdown my-1">
+                        <a class="nav-link btn dropdown-toggle text-start" style="background-color:mediumturquoise;" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <font size="4">Herramientas</font>
                         </a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="Register_User.aspx">Altas Usuarios</a></li>
                             <li><hr class="dropdown-divider"/></li>
                             <li><a class="dropdown-item" href="Forgot-Password.aspx">Cambio Contraseña</a></li>
-                            <li><hr class="dropdown-divider"/></li>
-<%--                        <li><a class="dropdown-item">Alta de Asunto</a></li>
-                            <li><hr class="dropdown-divider"/>
-                                <ul>
-                                    <li><a class="dropdown-item" href="RegRef_Individual.aspx">Individual</a></li>
-                                    <li><hr class="dropdown-divider"/></li>
-                                    <li><a class="dropdown-item" href="RegRef_Massive.aspx">Masivo</a></li>
-                                </ul>
-                            </li>--%>
-                            <li class="nav-item dropend p-0">
-                                    <asp:Button ID="BtnAltaAsunto" runat="server" Text="&nbsp;&nbsp;&nbsp;Alta de Asunto" class="btn dropdown-toggle dropdown-item p-0 m-0" data-bs-toggle="dropdown" aria-expanded="false" BorderStyle="None" />                                    
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="RegRef_Individual.aspx">Individual</a></li>
-                                        <li><hr class="dropdown-divider"/></li>
-                                        <li><a class="dropdown-item" href="RegRef_Massive.aspx">Masivo</a></li>
-                                    </ul>
-
-                            </li>
                         </ul>
                     </li>
 
+<%--                    
                     <li class="nav-item dropdown my-1">
                         <a class="nav-link btn dropdown-toggle text-start" style="background-color:mediumturquoise;" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <font size="4">Catalogos</font>
@@ -198,6 +199,7 @@
                             <li><a class="dropdown-item" href="Catalog_TpoDocument.aspx">Tipo de Documento</a></li>
                         </ul>
                     </li>
+--%>
 
                     <li class="nav-item my-1 mx-1">
                         <a class="nav-link btn text-start" style="background-color:mediumturquoise;" href="Login.aspx">

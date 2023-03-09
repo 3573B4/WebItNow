@@ -323,12 +323,14 @@
     <Content Include="Content\Site.css" />
     <Content Include="Descargas.aspx" />
     <Content Include="Images\aceptar.ico" />
+    <Content Include="Images\aceptar.png" />
     <Content Include="Images\aceptar_new.png" />
     <Content Include="Images\ajax-loader.gif" />
     <Content Include="Images\banner_Codice_mediano.png" />
     <Content Include="Images\banner_codise.png" />
     <Content Include="Images\banner_Peacock.png" />
     <Content Include="Images\cancelar.ico" />
+    <Content Include="Images\cancelar.png" />
     <Content Include="Images\descargar.ico" />
     <Content Include="Images\descargar_new.png" />
     <Content Include="Images\edit.jpg" />
@@ -415,7 +417,7 @@
     <Content Include="Styles\fuentes.css" />
     <Content Include="Styles\footable.min.css" />
     <Content Include="Upload_Files.aspx" />
-    <Content Include="Upload_Files_2.aspx" />
+    <Content Include="Upload_Files_1.aspx" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config" />
     <Content Include="Bundle.config" />
@@ -572,12 +574,12 @@
     <Compile Include="Upload_Files.aspx.designer.cs">
       <DependentUpon>Upload_Files.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Upload_Files_2.aspx.cs">
-      <DependentUpon>Upload_Files_2.aspx</DependentUpon>
+    <Compile Include="Upload_Files_1.aspx.cs">
+      <DependentUpon>Upload_Files_1.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Upload_Files_2.aspx.designer.cs">
-      <DependentUpon>Upload_Files_2.aspx</DependentUpon>
+    <Compile Include="Upload_Files_1.aspx.designer.cs">
+      <DependentUpon>Upload_Files_1.aspx</DependentUpon>
     </Compile>
     <Compile Include="Variables.cs" />
     <Compile Include="ViewSwitcher.ascx.cs">

@@ -99,7 +99,7 @@ namespace WebItNow
 
                 Session["TpoDocumento"] = grdEstadoDocs.DataKeys[index].Value;
                 //Session["TpoDocumento"] = grdEstadoDocs.SelectedRow.Cells[0].Text;
-                Response.Redirect("Upload_Files_2.aspx");
+                Response.Redirect("Upload_Files_1.aspx");
             }
         }
 
@@ -123,7 +123,7 @@ namespace WebItNow
         protected void BtnCargaDocumento_Click(object sender, EventArgs e)
         {
 
-            Response.Redirect("Upload_Files_2.aspx");
+            Response.Redirect("Upload_Files_1.aspx");
         }
 
     }
