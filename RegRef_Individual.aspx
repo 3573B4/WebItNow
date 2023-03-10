@@ -65,7 +65,7 @@
                 ControlToValidate="TxtAsegurado" ErrorMessage="*" ForeColor="Red">
                 </asp:RequiredFieldValidator>
             <div class="col-sm-12">
-                <asp:TextBox ID="TxtAsegurado" runat="server" CssClass="form-control" placeholder="Nombre de Cliente" AutoComplete="off" MaxLength="50" ></asp:TextBox>
+                <asp:TextBox ID="TxtAsegurado" runat="server" CssClass="form-control" placeholder="Ingresa el nombre del destinatario" AutoComplete="off" MaxLength="50" ></asp:TextBox>
             </div>
         </div>
 

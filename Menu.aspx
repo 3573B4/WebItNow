@@ -142,28 +142,41 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item dropdown my-1">
+                        <a class="nav-link btn dropdown-toggle text-start" style="background-color:mediumturquoise;" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <font size="4">Expedientes</font>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="nav-item dropend p-0">
+                                <asp:Button ID="BtnAltaAsunto" runat="server" Text="&nbsp;&nbsp;&nbsp;Crear" class="btn dropdown-toggle dropdown-item p-0 m-0" data-bs-toggle="dropdown" aria-expanded="false" BorderStyle="None" />                                    
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="RegRef_Individual.aspx">Individual</a></li>
+                                    <li><hr class="dropdown-divider"/></li>
+                                    <li><a class="dropdown-item" href="RegRef_Massive.aspx">Masivo</a></li>
+                                </ul>
+                            </li>
+                            <li><hr class="dropdown-divider"/></li>
+                            <li><a class="dropdown-item" href="#">Consultar</a></li>
+                            <li><hr class="dropdown-divider"/></li>
+                            <li><a class="dropdown-item" href="#">Contabilizar</a></li>
+                            <li><hr class="dropdown-divider"/></li>
+                            <li><a class="dropdown-item" href="#">Concluir</a></li>
+                            <li><hr class="dropdown-divider"/></li>
+                            <li><a class="dropdown-item" href="#">Descargar</a></li>
+                            <li><hr class="dropdown-divider"/></li>
+                            <li><a class="dropdown-item" href="#">Asignar</a></li>
+                            <li><hr class="dropdown-divider"/></li>
+                            <li><a class="dropdown-item" href="#">Aprobar</a></li>
+                            <li><hr class="dropdown-divider"/></li>
+                            <li><a class="dropdown-item" href="#">Actualizar</a></li>
+                        </ul>
+                    </li>
                     <%--    <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="#">Home</a>
                             </li>   --%>
                     <%--    <li class="nav-item">
                             <a class="nav-link" href="#">Link</a>
                             </li>   --%>
-                    <li class="nav-item dropdown my-1">
-                        <a class="nav-link btn dropdown-toggle text-start" style="background-color:mediumturquoise;" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <font size="4">Expedientes</font>
-                        </a>
-                        <ul class="dropdown-menu">
-                        <li class="nav-item dropend p-0">
-                            <asp:Button ID="BtnAltaAsunto" runat="server" Text="&nbsp;&nbsp;&nbsp;Alta de Referencia" class="btn dropdown-toggle dropdown-item p-0 m-0" data-bs-toggle="dropdown" aria-expanded="false" BorderStyle="None" />                                    
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="RegRef_Individual.aspx">Individual</a></li>
-                                <li><hr class="dropdown-divider"/></li>
-                                <li><a class="dropdown-item" href="RegRef_Massive.aspx">Masivo</a></li>
-                            </ul>
-                        </li>
-                        </ul>
-                    </li>
-
                     <li class="nav-item dropdown my-1">
                         <a class="nav-link btn dropdown-toggle text-start" style="background-color:mediumturquoise;" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <font size="4">Documentos</font>
@@ -176,6 +189,16 @@
                             <li><a class="dropdown-item" href="Consulta_Document.aspx">Consultas</a></li>
                             <li><hr class="dropdown-divider"/></li>
                             <li><a class="dropdown-item" href="Catalog_TpoDocument.aspx">Alta tipo Documento</a></li>
+                            <li><hr class="dropdown-divider"/></li>
+                            <li><a class="dropdown-item" href="#">Autorizar</a></li>
+                            <li><hr class="dropdown-divider"/></li>
+                            <li><a class="dropdown-item" href="#">Emitir</a></li>
+                            <li><hr class="dropdown-divider"/></li>
+                            <li><a class="dropdown-item" href="#">Responder</a></li>
+                            <li><hr class="dropdown-divider"/></li>
+                            <li><a class="dropdown-item" href="#">Cancelar</a></li>
+                            <li><hr class="dropdown-divider"/></li>
+                            <li><a class="dropdown-item" href="#">Actualizar</a></li>
                         </ul>
                     </li>
 
@@ -189,17 +212,6 @@
                             <li><a class="dropdown-item" href="Forgot-Password.aspx">Cambio Contraseña</a></li>
                         </ul>
                     </li>
-
-<%--                    
-                    <li class="nav-item dropdown my-1">
-                        <a class="nav-link btn dropdown-toggle text-start" style="background-color:mediumturquoise;" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <font size="4">Catalogos</font>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="Catalog_TpoDocument.aspx">Tipo de Documento</a></li>
-                        </ul>
-                    </li>
---%>
 
                     <li class="nav-item my-1 mx-1">
                         <a class="nav-link btn text-start" style="background-color:mediumturquoise;" href="Login.aspx">

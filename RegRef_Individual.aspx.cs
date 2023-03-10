@@ -54,7 +54,7 @@ namespace WebItNow
 
                             if (Envio_Ok == 0)
                             {
-                                LblMessage.Text = "Alta de Asunto, agregada correctamente ";
+                                LblMessage.Text = "Su registro fue creado exitosamente";
                                 this.mpeMensaje.Show();
                             }
 
