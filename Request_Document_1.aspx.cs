@@ -30,6 +30,15 @@ namespace WebItNow
                 // Validar que los documentos existan en la tabla de transacciones
                 ValidarTpoDoc_Transaccion();
 
+                // Carga los Tipos de documentos que se pueden anexa a un asunto
+                GrdTpoDocumentNuevo();
+
+                // Inicializar tabla temporal ITM_11
+                Delete_Temporal(Convert.ToInt32(Session["Proceso"]), Convert.ToInt32(Session["SubProceso"]));
+
+                // Inserta datos a tabla temporal ITM_11
+                Insert_Temporal(Convert.ToInt32(Session["Proceso"]), Convert.ToInt32(Session["SubProceso"]));
+
                 getProcesos(Convert.ToInt32(Session["Proceso"]));
 
                 //ddlSubProceso.Items.Insert(0, new ListItem("-- Seleccionar --", "0"));
@@ -43,6 +52,8 @@ namespace WebItNow
 
             //* * Agrega THEAD y TBODY a GridView.
             GrdTpoDocumento.HeaderRow.TableSection = TableRowSection.TableHeader;
+            //* * Agrega THEAD y TBODY a GridView.
+            GrdTpoDocumentNew.HeaderRow.TableSection = TableRowSection.TableHeader;
         }
 
         protected void BtnRegresar_Click(object sender, EventArgs e)
@@ -598,12 +609,22 @@ namespace WebItNow
 
                     //return 0;
 
-                    string strQuery = "Update ITM_15 " +
-                                       "   Set IdStatus = " + valorcol0 + "" +
-                                       " Where Referencia = '" + sReferencia + "'" +
-                                       "   And IdTpoDocumento = '" + valorcol1 + "'" +
-                                       "   And IdProceso = " + valorcol3 + "" +
-                                       "   And IdSubProceso = " + valorcol4;
+                    string strQuery = "DELETE FROM ITM_15 " +
+                                      " WHERE Referencia = '" + TxtReferencia.Text + "' AND IdProceso = " + Convert.ToInt32(Session["Proceso"]) + ", " +
+                                      " AND IdSubProceso = " + Convert.ToInt32(Session["SubProceso"]) + "";
+
+                    strQuery += "INSERT INTO ITM_15 " +
+                        "SELECT tr.IdStatus, tr.Referencia, tr.IdTpoDocumento, tr.IdProceso, tr.IdSubProceso " +
+                        "  FROM ITM_11 tr " +
+                        " WHERE tr.Referencia = '" + TxtReferencia.Text + "' AND tr.IdProceso = " + Convert.ToInt32(Session["Proceso"]) + "" +
+                        "   AND tr.IdSubProceso = " + Convert.ToInt32(Session["SubProceso"]) + "";
+
+                    //strQuery += "Update ITM_15 " +
+                    //                   "   Set IdStatus = " + valorcol0 + "" +
+                    //                   " Where Referencia = '" + sReferencia + "'" +
+                    //                   "   And IdTpoDocumento = '" + valorcol1 + "'" +
+                    //                   "   And IdProceso = " + valorcol3 + "" +
+                    //                   "   And IdSubProceso = " + valorcol4;
 
                     SqlCommand cmd = new SqlCommand(strQuery, Conecta.ConectarBD);
 
@@ -693,9 +714,203 @@ namespace WebItNow
             {
                 LblMessage.Text = ex.Message;
                 this.mpeMensaje.Show();
-
             }
 
+        }
+
+        public void GrdTpoDocumentNuevo()
+        {
+            ConexionBD Conecta = new ConexionBD();
+            Conecta.Abrir();
+
+            // Consulta a la tabla Tipo de Documento
+            string sqlQuery = "Select IdTpoDocumento, Descripcion " +
+                              "  From ITM_08 " +
+                              " Where IdStatus = '1'";
+
+            SqlCommand cmd = new SqlCommand(sqlQuery, Conecta.ConectarBD);
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+
+            if (dt.Rows.Count == 0)
+            {
+                GrdTpoDocumentNew.ShowHeaderWhenEmpty = true;
+                GrdTpoDocumentNew.EmptyDataText = "No hay resultados.";
+            }
+
+            GrdTpoDocumentNew.DataSource = dt;
+            GrdTpoDocumentNew.DataBind();
+
+            //* * Agrega THEAD y TBODY a GridView.
+            GrdTpoDocumentNew.HeaderRow.TableSection = TableRowSection.TableHeader;
+
+            Conecta.Cerrar();
+        }
+
+        protected void GrdTpoDocumentNew_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+                e.Row.Attributes.Add("OnClick", "" + Page.ClientScript.GetPostBackClientHyperlink(this.GrdTpoDocumentNew, "Select$" + e.Row.RowIndex.ToString()) + ";");
+        }
+
+        protected void ImgAgregar_Click(object sender, ImageClickEventArgs e)
+        {
+            GridViewRow row = ((GridViewRow)((System.Web.UI.WebControls.ImageButton)sender).NamingContainer);
+            int index = row.RowIndex;
+
+            string sTipoDocumento = GrdTpoDocumentNew.Rows[index].Cells[1].Text;
+            string sDescripcion = Server.HtmlDecode(GrdTpoDocumentNew.Rows[index].Cells[2].Text);
+            int iProceso = Convert.ToInt32(Session["Proceso"]);
+            int iSubProceso = Convert.ToInt32(Session["SubProceso"]);
+            int iIdStatus = 0;
+
+            try
+            {
+                //Insertar elemento nuevo a tabla transaccion temporal ITM_11
+                string sqlString = "INSERT INTO ITM_11 " +
+                    " (IdStatus, Referencia, IdTpoDocumento, Descripcion, IdProceso, IdSubProceso) " + //para actualizar el status
+                    " VALUES (" + iIdStatus + ", '" + TxtReferencia.Text + "' , '" + sTipoDocumento + "', '" + sDescripcion + "'," +
+                    " " + iProceso + ", " + iSubProceso + "" +
+                    " )";
+
+                ConexionBD Conecta = new ConexionBD();
+                Conecta.Abrir();
+                SqlCommand cmd = new SqlCommand(sqlString, Conecta.ConectarBD);
+
+                cmd.ExecuteReader();
+
+                // Actualizar GrdTpoDocumento con tabla temporal ITM_11
+                Actualiza_GrdTpoDocumento(iProceso, iSubProceso);
+
+
+            }
+            catch (Exception ex)
+            {
+                LblMessage.Text = ex.Message;
+                this.mpeMensaje.Show();
+            }
+        }
+
+        protected void Actualiza_GrdTpoDocumento(int iIdProceso, int iIdSubProceso)
+        {
+            try
+            {
+                string sqlQuery = "SELECT IdTpoDocumento, Descripcion, IdProceso, IdSubProceso, IdStatus " +
+                                  "  FROM ITM_11 " +
+                                  " WHERE Referencia = '" + TxtReferencia.Text + "' AND IdProceso = " + iIdProceso + " AND IdSubProceso = " + iIdSubProceso + "";
+
+                ConexionBD Conecta = new ConexionBD();
+                Conecta.Abrir();
+
+                SqlCommand cmd = new SqlCommand(sqlQuery, Conecta.ConectarBD);
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+
+                if (dt.Rows.Count == 0)
+                {
+                    GrdTpoDocumento.ShowHeaderWhenEmpty = true;
+                    GrdTpoDocumento.EmptyDataText = "No hay resultados.";
+                }
+
+                GrdTpoDocumento.DataSource = dt;
+                GrdTpoDocumento.DataBind();
+
+                //* * Agrega THEAD y TBODY a GridView.
+                GrdTpoDocumento.HeaderRow.TableSection = TableRowSection.TableHeader;
+
+                Conecta.Cerrar();
+
+
+
+            }
+            catch (Exception ex)
+            {
+                LblMessage.Text = ex.Message;
+                this.mpeMensaje.Show();
+            }
+
+        }
+
+        protected void Insert_Temporal(int iIdProceso, int iIdSubProceso)
+        {
+            try
+            {
+                string sqlQuery = "INSERT INTO ITM_11 " +
+                    "(IdStatus, Referencia, IdTpoDocumento, Descripcion, IdProceso, IdSubProceso) " +
+                    "SELECT tr.IdStatus, tr.Referencia, tr.IdTpoDocumento, td.Descripcion , tr.IdProceso, tr.IdSubProceso " +
+                    "  FROM ITM_06 td, ITM_15 tr " +
+                    " WHERE tr.Referencia = '" + TxtReferencia.Text +"' AND tr.IdProceso = " + iIdProceso + " AND tr.IdSubProceso = " + iIdSubProceso + "" +
+                    "   AND tr.IdTpoDocumento = td.IdTpoDocumento";
+
+                ConexionBD Conecta = new ConexionBD();
+                Conecta.Abrir();
+                SqlCommand cmd = new SqlCommand(sqlQuery, Conecta.ConectarBD);
+
+                cmd.ExecuteReader();
+
+            }
+            catch (Exception ex)
+            {
+                LblMessage.Text = ex.Message;
+                this.mpeMensaje.Show();
+            }
+
+        }
+
+        protected void Delete_Temporal(int iIdProceso, int iIdSubProceso)
+        {
+            try
+            {
+                string sqlQuery = "DELETE ITM_11 " +
+                                  "WHERE Referencia = '" + TxtReferencia.Text + "'" +
+                                  "  AND IdProceso = " + iIdProceso + " AND IdSubProceso = " + iIdSubProceso + "   ";
+
+                ConexionBD Conecta = new ConexionBD();
+                Conecta.Abrir();
+                SqlCommand cmd = new SqlCommand(sqlQuery, Conecta.ConectarBD);
+
+                cmd.ExecuteReader();
+
+            }
+            catch (Exception ex)
+            {
+                LblMessage.Text = ex.Message;
+                this.mpeMensaje.Show();
+            }
+        }
+
+        protected void ImgEliminar_Click(object sender, ImageClickEventArgs e)
+        {
+            GridViewRow row = ((GridViewRow)((System.Web.UI.WebControls.ImageButton)sender).NamingContainer);
+            int index = row.RowIndex;
+
+            string sTipoDocumento = GrdTpoDocumento.Rows[index].Cells[2].Text;
+            int iProceso = Convert.ToInt32(Session["Proceso"]);
+            int iSubProceso = Convert.ToInt32(Session["SubProceso"]);
+
+            try
+            {
+                //Insertar elemento nuevo a tabla transaccion temporal ITM_11
+                string sqlString = "DELETE ITM_11 " +
+                                   "  WHERE Referencia = '" + TxtReferencia.Text + "' AND IdTpoDocumento = '" + sTipoDocumento + "' AND IdProceso = " + iProceso + " AND  IdSubProceso = " + iSubProceso + "  ";
+
+                ConexionBD Conecta = new ConexionBD();
+                Conecta.Abrir();
+                SqlCommand cmd = new SqlCommand(sqlString, Conecta.ConectarBD);
+
+                cmd.ExecuteReader();
+
+                // Actualizar GrdTpoDocumento con tabla temporal ITM_11
+                Actualiza_GrdTpoDocumento(iProceso, iSubProceso);
+
+            }
+            catch (Exception ex)
+            {
+                LblMessage.Text = ex.Message;
+                this.mpeMensaje.Show();
+            }
         }
     }
 }

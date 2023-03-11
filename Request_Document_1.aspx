@@ -67,38 +67,48 @@
                 <asp:TextBox ID="TxtSubProceso" runat="server" CssClass="form-control" placeholder="SubProceso" ReadOnly="true" ></asp:TextBox>
             </div>
         </div>
-<%--
-        <div class="form-floating mt-3">
-            <asp:Label ID="LblProceso" runat="server" Text="Proceso"></asp:Label>
-            <asp:DropDownList ID="ddlProceso" runat="server" CssClass="btn btn-outline-secondary mt-1" AutoPostBack="true" OnSelectedIndexChanged="ddlProceso_SelectedIndexChanged" Width="100%">
-            </asp:DropDownList>
+        
+        <div class="form-group mt-3 mb-3">
+            <asp:Label ID="lblNewDocumento" runat="server" Text="Agregar nuevo documento" CssClass="control-label co-sm-3 mb-1" Font-Bold="False"></asp:Label>
+            <div class="col-sm-12">
+            <asp:UpdatePanel ID="UpdatePanel3" runat="server" UpdateMode="Conditional">
+                <ContentTemplate>
+                <asp:Panel ID="pnlTpoDocumentNew" runat="server" >
+                    <div style="overflow-x: hidden; overflow-y: auto; height:120px;">
+                    <asp:GridView ID="GrdTpoDocumentNew" runat="server" AutoGenerateColumns="False" GridLines="None" Width="100%" AllowPaging = "False"
+                    CssClass="footable" AlternatingRowStyle-CssClass="alt" OnRowDataBound="GrdTpoDocumentNew_RowDataBound" >
+                    <AlternatingRowStyle CssClass="alt" />
+                    <Columns>
+                        <asp:TemplateField>
+                            <ItemTemplate>
+                                <asp:ImageButton ID="ImgAgregar" runat="server" Height="26px" Width="26px" ImageUrl="~/Images/aceptar.png" OnClick="ImgAgregar_Click" />
+                            </ItemTemplate> 
+                        </asp:TemplateField>
+                        <asp:BoundField DataField="IdTpoDocumento" HeaderText="Id" ></asp:BoundField>
+                        <asp:BoundField DataField="Descripcion" HeaderText="Descripcion" ></asp:BoundField>
+                    </Columns>
+                    </asp:GridView>
+                    </div>
+                </asp:Panel>
+                </ContentTemplate>
+            </asp:UpdatePanel>
+            </div>
         </div>
-        <div class="form-floating my-3">
-            <asp:Label ID="LblSubProceso" runat="server" Text="Sub Proceso"></asp:Label>
-            <asp:DropDownList ID="ddlSubProceso" runat="server" CssClass="btn btn-outline-secondary mt-1" AutoPostBack="true" Width="100%" OnSelectedIndexChanged="ddlSubProceso_SelectedIndexChanged" >
-            </asp:DropDownList>
-        </div>
---%>
 
-<%--        
-        <div class="form-floating">
-                <div class="dropdown">
-                    <asp:DropDownList ID="ddlTpoDocumento" runat="server" CssClass="btn btn-outline-secondary"  AutoPostBack="true" OnSelectedIndexChanged="ddlTpoDocumento_SelectedIndexChanged" Width="100%">
-                    </asp:DropDownList>
-                </div>
-        </div>
---%>
         <div class="form-group mt-3" >
         <asp:Panel ID="pnlTpoDocumento" runat="server" >
             <div style="overflow-x: hidden; overflow-y: auto; height:120px;">
                 <asp:GridView ID="GrdTpoDocumento" runat="server" AutoGenerateColumns="False" GridLines="None" Width="100%" AllowPaging = "False"
                     CssClass="footable" AlternatingRowStyle-CssClass="alt" >
-                    <%--OnSelectedIndexChanged="GrdRef_SelectedIndexChanged" OnRowDataBound="GrdRef_RowDataBound" >--%>
                     <AlternatingRowStyle CssClass="alt" />
                     <Columns>
                         <asp:TemplateField>
                             <ItemTemplate>
-                                <%--<asp:ImageButton ID="ImgSelect" runat="server" Height="24px" Width="24px" ImageUrl="~/Images/aceptar.ico" OnClick="ImgSelect_Click" />--%>
+                                <asp:ImageButton ID="ImgEliminar" runat="server" Height="26px" Width="26px" ImageUrl="~/Images/cancelar.png" OnClick="ImgEliminar_Click" />
+                            </ItemTemplate> 
+                        </asp:TemplateField>
+                        <asp:TemplateField>
+                            <ItemTemplate>
                                 <asp:CheckBox ID="chkTpoDocumento" runat="server" Checked='<%# Convert.ToBoolean(Eval("IdStatus")) %>'/>
                             </ItemTemplate> 
                         </asp:TemplateField>
@@ -120,16 +130,17 @@
             <div class="d-grid col-6 mx-auto">
                 <asp:Label ID="Lbl_Message" runat="server" ForeColor="Red" Visible="False"  Width="280px" ></asp:Label>
             </div>
-        </div>        
-    <asp:UpdatePanel ID="UpdatePanel2" runat="server" UpdateMode="Conditional">
-        <ContentTemplate>
-            <div class="form-group mt-3">
-                <div class="d-grid col-6 mx-auto">
-                    <asp:Button ID="BtnEnviar" runat="server" Text="Solicitar" Font-Bold="True" OnClick="BtnEnviar_Click" CssClass="btn btn-primary" />
+        </div>
+    
+        <asp:UpdatePanel ID="UpdatePanel2" runat="server" UpdateMode="Conditional">
+            <ContentTemplate>
+                <div class="form-group mt-3">
+                    <div class="d-grid col-6 mx-auto">
+                        <asp:Button ID="BtnEnviar" runat="server" Text="Solicitar" Font-Bold="True" OnClick="BtnEnviar_Click" CssClass="btn btn-primary" />
+                    </div>
                 </div>
-            </div>
-        </ContentTemplate>
-    </asp:UpdatePanel>
+            </ContentTemplate>
+        </asp:UpdatePanel>
 
         <div class="from-group mb-4 pb-5">
             <div class="d-grid col-6 mx-auto">
@@ -201,7 +212,6 @@
 
     </asp:Panel>
     <br />
-
     <table cellspacing="1" cellpadding="1" border="0">
         <tr>
             <td>
@@ -228,6 +238,8 @@
 
     </ContentTemplate>
     <Triggers>
+        <asp:PostBackTrigger ControlID="GrdTpoDocumento" />
+        <asp:PostBackTrigger ControlID="GrdTpoDocumentNew" />
         <asp:PostBackTrigger ControlID="BtnEnviar" />
     </Triggers>
 </asp:UpdatePanel>

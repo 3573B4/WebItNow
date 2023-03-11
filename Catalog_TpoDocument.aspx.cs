@@ -22,11 +22,13 @@ namespace WebItNow
         {
             if (!IsPostBack)
             {
+                //string sReferens = Convert.ToString(Session["wUsu"]);
                 getProcesos();
                 ddlSubProceso.Items.Insert(0, new ListItem("-- Seleccionar --", "0"));
-
+                getTpoDocumento();
                 Llenar_grdGeneral();
             }
+            
             BtnCancelar.Visible = false;
             BtnUpdate.Enabled = false;
             grdTpoDocumento.HeaderRow.TableSection = TableRowSection.TableHeader; //no va aqui por que no esta la gridView
@@ -34,25 +36,31 @@ namespace WebItNow
 
         protected void getProcesos()
         {
-            ConexionBD Conecta = new ConexionBD();
-            Conecta.Abrir();
-            string sqlQuery = "SELECT IdProceso, Nombre " +
-                                    " FROM ITM_16 " +
-                                    " WHERE IdStatus = 1 ";
-            SqlCommand cmd = new SqlCommand(sqlQuery, Conecta.ConectarBD);
+            try { 
+                ConexionBD Conecta = new ConexionBD();
+                Conecta.Abrir();
+                string sqlQuery = "SELECT IdProceso, Nombre " +
+                                        " FROM ITM_16 " +
+                                        " WHERE IdStatus = 1 ";
+                SqlCommand cmd = new SqlCommand(sqlQuery, Conecta.ConectarBD);
 
-            SqlDataAdapter da = new SqlDataAdapter(cmd);
-            DataTable dt = new DataTable();
-            da.Fill(dt);
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
 
-            ddlProceso.DataSource = dt;
+                ddlProceso.DataSource = dt;
 
-            ddlProceso.DataValueField = "IdProceso";
-            ddlProceso.DataTextField = "Nombre";
+                ddlProceso.DataValueField = "IdProceso";
+                ddlProceso.DataTextField = "Nombre";
 
-            ddlProceso.DataBind();
-            ddlProceso.Items.Insert(0, new ListItem("-- Seleccionar --", "0"));
-
+                ddlProceso.DataBind();
+                ddlProceso.Items.Insert(0, new ListItem("-- Seleccionar --", "0"));
+            }
+            catch (Exception ex)
+            {
+                LblMessage.Text = ex.Message;
+                mpeMensaje.Show();
+            }
         }
 
         protected void getSubProcesos(int iProceso)
@@ -87,6 +95,35 @@ namespace WebItNow
                 mpeMensaje.Show();
             }
         }
+        protected void getTpoDocumento()
+        {
+            try
+            {
+                ConexionBD Conecta = new ConexionBD();
+                Conecta.Abrir();
+                string sqlQuery = "SELECT IdTpoDocumento, Descripcion " +
+                                        " FROM ITM_08 " +
+                                        " WHERE IdStatus = 1 ";
+                SqlCommand cmd = new SqlCommand(sqlQuery, Conecta.ConectarBD);
+
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+
+                ddlTpoDocumento.DataSource = dt;
+
+                ddlTpoDocumento.DataValueField = "IdTpoDocumento";
+                ddlTpoDocumento.DataTextField = "Descripcion";
+
+                ddlTpoDocumento.DataBind();
+                ddlTpoDocumento.Items.Insert(0, new ListItem("-- Seleccionar --", "0"));
+            }
+            catch (Exception ex)
+            {
+                LblMessage.Text = ex.Message;
+                mpeMensaje.Show();
+            }
+        }
         protected void DropDownList1_SelectedIndexChanged(object sender, EventArgs e)
         {
             int iProceso = Convert.ToInt32(ddlProceso.SelectedValue);
@@ -100,7 +137,7 @@ namespace WebItNow
 
         protected void BtnAgregar_Click(object sender, EventArgs e)
         {
-            if (TxtNameDoc.Text == "" || TxtAreaMensaje.Value == "")
+            if (TxtAreaMensaje.Value == "")
             {
                 Lbl_Message.Visible = true;
                 Lbl_Message.Text = "* Estos campos son obligatorios";
@@ -111,54 +148,54 @@ namespace WebItNow
                 {
                     if (ddlSubProceso.SelectedValue != "0")
                     {
-                        if (TxtAreaMensaje.Value.Length <= 100 || TxtNameDoc.Text.Length <= 25)
+                        if (TxtAreaMensaje.Value.Length <= 500)
                         {
 
-                        try
-                        {
-
-                            int idTpoDoc = Convert.ToInt32(ReturnIdTpoDoc());
-                            //idTpoDoc = idTpoDoc + 1;
-                            idTpoDoc += 1;
-                            string sIdTpoDoc = Convert.ToString(idTpoDoc);
-                            if (sIdTpoDoc.Length < 2)
+                            try
                             {
-                                sIdTpoDoc = "0" + sIdTpoDoc;
+
+                                //int idTpoDoc = Convert.ToInt32(ReturnIdTpoDoc());
+                                ////idTpoDoc = idTpoDoc + 1;
+                                //idTpoDoc += 1;
+                                //string sIdTpoDoc = Convert.ToString(idTpoDoc);
+                                //if (sIdTpoDoc.Length < 2)
+                                //{
+                                //    sIdTpoDoc = "0" + sIdTpoDoc;
+                                //}
+
+                                string sqlString = "INSERT INTO ITM_06 " +
+                                    " (IdTpoDocumento, Descripcion, DescrpBrev, Status, IdProceso, IdSubProceso) " + //para actualizar el status
+                                    " VALUES ('" + ddlTpoDocumento.SelectedValue + "', " +
+                                    " TRIM(' ' FROM '" + ddlTpoDocumento.SelectedItem + "')," +
+                                    " TRIM(' ' FROM '" + TxtAreaMensaje.Value + "')," +
+                                    " 1, " + ddlProceso.SelectedValue+", "+ ddlSubProceso.SelectedValue +
+                                    " )";
+
+                                //if(rbtnActivo.Checked == true)
+                                //{
+                                //    sqlString = sqlString + ", 1)";
+                                //}else if (rbtnDesactivo.Checked == true)
+                                //{
+                                //    sqlString = sqlString + ", 0)";
+                                //}
+
+                                ConexionBD Conecta = new ConexionBD();
+                                Conecta.Abrir();
+                                SqlCommand cmd = new SqlCommand(sqlString, Conecta.ConectarBD);
+
+                                cmd.ExecuteReader();
+
+                                GetTpoDoc();
+                                //GetTpoDoc(iProceso, iSubProceso);
+                                //TxtNameDoc.Text = string.Empty;
+                                TxtAreaMensaje.Value = string.Empty;
                             }
-
-                            string sqlString = "INSERT INTO ITM_06 " +
-                                " (IdTpoDocumento, Descripcion, DescrpBrev, Status, IdProceso, IdSubProceso) " + //para actualizar el status
-                                " VALUES ('" + sIdTpoDoc + "', " +
-                                " TRIM(' ' FROM '" + TxtNameDoc.Text + "')," +
-                                " TRIM(' ' FROM '" + TxtAreaMensaje.Value + "')," +
-                                " 1, " + ddlProceso.SelectedValue+", "+ ddlSubProceso.SelectedValue +
-                                " )";
-
-                            //if(rbtnActivo.Checked == true)
-                            //{
-                            //    sqlString = sqlString + ", 1)";
-                            //}else if (rbtnDesactivo.Checked == true)
-                            //{
-                            //    sqlString = sqlString + ", 0)";
-                            //}
-
-                            ConexionBD Conecta = new ConexionBD();
-                            Conecta.Abrir();
-                            SqlCommand cmd = new SqlCommand(sqlString, Conecta.ConectarBD);
-
-                            cmd.ExecuteReader();
-
-                            GetTpoDoc();
-                            //GetTpoDoc(iProceso, iSubProceso);
-                            TxtNameDoc.Text = string.Empty;
-                            TxtAreaMensaje.Value = string.Empty;
-                        }
-                        catch (Exception ex)
-                        {
-                            LblMessage.Text = ex.Message;
-                            mpeMensaje.Show();
-                        }
-                }
+                            catch (Exception ex)
+                            {
+                                LblMessage.Text = ex.Message;
+                                mpeMensaje.Show();
+                            }
+                        }       
                         else
                         {
                             Lbl_Message.Visible = true;
@@ -214,9 +251,9 @@ namespace WebItNow
 
         protected void BtnUpdate_Click(object sender, EventArgs e)
         {
-            if (TxtAreaMensaje.Value != "" || TxtNameDoc.Text != "")
+            if (TxtAreaMensaje.Value != "")
             {
-                if (TxtAreaMensaje.Value.Length <= 100 || TxtNameDoc.Text.Length <= 25)
+                if (TxtAreaMensaje.Value.Length <= 500)
                 {
                     modGeneral funGenal = new modGeneral();
                     if (funGenal.valTextGrande(TxtAreaMensaje.Value) == true)
@@ -224,7 +261,7 @@ namespace WebItNow
                         string sIdTpoDoc = TxtIdTpoDocumento.Text;
 
                         string sqlString = "UPDATE ITM_06 " +
-                                            " SET Descripcion = TRIM(' ' FROM '" + TxtNameDoc.Text + "'), " +
+                                            " SET Descripcion = TRIM(' ' FROM '" + ddlTpoDocumento.SelectedItem + "'), " +
                                                 " DescrpBrev = TRIM(' ' FROM '" + TxtAreaMensaje.Value + "')," +
                                                 " Status = 1, " +
                                                 " IdProceso = " + ddlProceso.SelectedValue + ", " +
@@ -251,7 +288,7 @@ namespace WebItNow
 
                         GetTpoDoc();
 
-                        TxtNameDoc.Text = string.Empty;
+                        //TxtNameDoc.Text = string.Empty;
                         TxtAreaMensaje.Value = string.Empty;
 
                         BtnAgregar.Visible = true;
@@ -284,7 +321,8 @@ namespace WebItNow
 
             ddlProceso.ClearSelection();
             ddlSubProceso.ClearSelection();
-            TxtNameDoc.Text = string.Empty;
+            ddlTpoDocumento.ClearSelection();
+            //TxtNameDoc.Text = string.Empty;
             TxtAreaMensaje.Value = string.Empty;
             getProcesos();
             BtnAgregar.Visible = true;
@@ -404,7 +442,7 @@ namespace WebItNow
             //ddlProceso.ClearSelection();
             //ddlSubProceso.ClearSelection();
             TxtIdTpoDocumento.Text = Server.HtmlDecode(grdTpoDocumento.SelectedRow.Cells[0].Text);
-            TxtNameDoc.Text = Server.HtmlDecode(grdTpoDocumento.SelectedRow.Cells[1].Text);
+            //TxtNameDoc.Text = Server.HtmlDecode(grdTpoDocumento.SelectedRow.Cells[1].Text);
             TxtAreaMensaje.Value = Server.HtmlDecode(grdTpoDocumento.SelectedRow.Cells[2].Text);
 
             string sIdProceso = Server.HtmlDecode(grdTpoDocumento.SelectedRow.Cells[3].Text);
@@ -417,6 +455,9 @@ namespace WebItNow
             int iIdProceso = Convert.ToInt32(sIdProceso);
             getSubProcesos(iIdProceso);
             ddlSubProceso.SelectedValue = sIdSubProceso;
+
+            string sIdTpoDoc = Server.HtmlDecode(grdTpoDocumento.SelectedRow.Cells[0].Text);
+            ddlTpoDocumento.SelectedValue = sIdTpoDoc;
 
             BtnAgregar.Visible = false;
             BtnUpdate.Enabled = true;
@@ -500,5 +541,57 @@ namespace WebItNow
         {
             GetTpoDoc();
         }
+
+        protected void ddlTpoDocumento_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string IdTpoDocumento = ddlTpoDocumento.SelectedValue.ToString();
+            TxtAreaMensaje.Value = TpoDocumento_DescrpBrev(IdTpoDocumento, 1);
+            
+        }
+
+        public string TpoDocumento_DescrpBrev(String pIdTpoDocumento, int pIdStatus)
+        {
+            try
+            {
+                string DescrpBrev = string.Empty;
+
+                ConexionBD Conecta = new ConexionBD();
+                Conecta.Abrir();
+
+                // Consulta a la tabla Tipo de Documento
+                string strQuery = "Select IdTpoDocumento, DescripBrev From ITM_08 Where IdTpoDocumento = '" + pIdTpoDocumento + "' And IdStatus = " + pIdStatus + "";
+
+                SqlCommand cmd = new SqlCommand(strQuery, Conecta.ConectarBD);
+
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+
+                DataTable dt = new DataTable();
+
+                da.Fill(dt);
+
+                foreach (DataRow row in dt.Rows)
+                {
+                    DescrpBrev = Convert.ToString(row[1]);
+                }
+
+                Conecta.Cerrar();
+
+                return DescrpBrev;
+
+            }
+            catch (Exception ex)
+            {
+                // Show(ex.Message);
+                LblMessage.Text = ex.Message;
+                this.mpeMensaje.Show();
+            }
+            finally
+            {
+
+            }
+
+            return string.Empty;
+        }
+        
     }
 }

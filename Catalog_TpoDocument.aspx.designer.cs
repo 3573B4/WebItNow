@@ -69,22 +69,22 @@ namespace WebItNow
         protected global::System.Web.UI.WebControls.DropDownList ddlSubProceso;
 
         /// <summary>
-        /// Control LblNameDoc.
+        /// Control LblTpoDocumento.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LblNameDoc;
+        protected global::System.Web.UI.WebControls.Label LblTpoDocumento;
 
         /// <summary>
-        /// Control TxtNameDoc.
+        /// Control ddlTpoDocumento.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TxtNameDoc;
+        protected global::System.Web.UI.WebControls.DropDownList ddlTpoDocumento;
 
         /// <summary>
         /// Control TxtIdTpoDocumento.

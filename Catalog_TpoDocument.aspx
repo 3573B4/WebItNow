@@ -45,14 +45,24 @@
 
             </asp:DropDownList>
         </div>
+        <div class="form-floating my-3">
+            <asp:Label ID="LblTpoDocumento" runat="server" Text="Tipo de Documento"></asp:Label>
+            <asp:DropDownList ID="ddlTpoDocumento" runat="server" CssClass="btn btn-outline-secondary text-start mt-1" AutoPostBack="true" Width="100%" OnSelectedIndexChanged="ddlTpoDocumento_SelectedIndexChanged" >
+
+            </asp:DropDownList>
+        </div>
+
+<%--        
         <div class="mt-3">
             <asp:Label ID="LblNameDoc" runat="server" Text="Nombre del Documento"></asp:Label>
-            <asp:TextBox ID="TxtNameDoc" runat="server" CssClass="form-control mt-1" placeholder="Nombre del Archivo"></asp:TextBox>
+            <asp:TextBox ID="TxtNameDoc" runat="server" CssClass="form-control mt-1" placeholder="Nombre del Archivo"  ></asp:TextBox>
         </div>
+--%>
+
         <asp:TextBox type="hidden" ID="TxtIdTpoDocumento" runat="server" CssClass="form-control" ></asp:TextBox>
         <div class="justify-content-center mt-3">
             <asp:Label ID="LblInstrucciones" runat="server" Text="Instrucciones"></asp:Label>
-            <textarea rows="2" cols="64" id="TxtAreaMensaje" runat="server" class="form-control mt-1"/>
+            <textarea rows="2" cols="64" id="TxtAreaMensaje" runat="server" class="form-control mt-1" readonly="readonly" />
         </div>
 
         <div class="d-grid gap-4 d-flex justify-content-center mt-3">
