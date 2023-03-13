@@ -42,7 +42,7 @@ namespace WebItNow
                                   "   AND ed.IdTipoDocumento = td.IdTpoDocumento " +
                                   "   AND ed.Referencia LIKE '%' + '" + sReferencia + "'  + '%'" +
                                   "   AND t.Referencia = ed.Referencia" +
-                                  "   AND t.IdTpoDocumento = ed.IdTipoDocumento" +
+                                  "   AND t.IdTpoDocumento = td.IdTpoDocumento AND t.IdProceso = td.IdProceso  AND t.IdSubProceso = td.IdSubProceso" +
                                   "   AND t.IdStatus = 1";
 
             SqlCommand ejecucion = new SqlCommand(sqlQuery, Conectar.ConectarBD);

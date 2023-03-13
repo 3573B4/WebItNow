@@ -31,7 +31,7 @@ namespace WebItNow
             
             BtnCancelar.Visible = false;
             BtnUpdate.Enabled = false;
-            grdTpoDocumento.HeaderRow.TableSection = TableRowSection.TableHeader; //no va aqui por que no esta la gridView
+            //grdTpoDocumento.HeaderRow.TableSection = TableRowSection.TableHeader; //no va aqui por que no esta la gridView
         }
 
         protected void getProcesos()
@@ -164,7 +164,7 @@ namespace WebItNow
                                 //}
 
                                 string sqlString = "INSERT INTO ITM_06 " +
-                                    " (IdTpoDocumento, Descripcion, DescrpBrev, Status, IdProceso, IdSubProceso) " + //para actualizar el status
+                                    " (IdTpoDocumento, Descripcion, DescrpBrev, IdStatus, IdProceso, IdSubProceso) " + //para actualizar el status
                                     " VALUES ('" + ddlTpoDocumento.SelectedValue + "', " +
                                     " TRIM(' ' FROM '" + ddlTpoDocumento.SelectedItem + "')," +
                                     " TRIM(' ' FROM '" + TxtAreaMensaje.Value + "')," +
@@ -263,7 +263,7 @@ namespace WebItNow
                         string sqlString = "UPDATE ITM_06 " +
                                             " SET Descripcion = TRIM(' ' FROM '" + ddlTpoDocumento.SelectedItem + "'), " +
                                                 " DescrpBrev = TRIM(' ' FROM '" + TxtAreaMensaje.Value + "')," +
-                                                " Status = 1, " +
+                                                " IdStatus = 1, " +
                                                 " IdProceso = " + ddlProceso.SelectedValue + ", " +
                                                 " IdSubProceso = " + ddlSubProceso.SelectedValue +
                                                 " WHERE IdTpoDocumento = '" + sIdTpoDoc + "'";
@@ -342,7 +342,7 @@ namespace WebItNow
 
             string sqlQuery = "SELECT IdTpoDocumento, Descripcion, DescrpBrev, IdProceso, IdSubProceso " +
                               "  FROM ITM_06 " +
-                              " WHERE Status IN (1) " +
+                              " WHERE IdStatus IN (1) " +
                               " AND IdProceso = " + iProceso +
                               " AND IdSubProceso = " + iSubProceso; //le ponia el valor del ddl status doc
 
@@ -378,6 +378,7 @@ namespace WebItNow
 
             ////* * Agrega THEAD y TBODY a GridView.
             grdTpoDocumento.HeaderRow.TableSection = TableRowSection.TableHeader;
+
         }
 
         protected void Llenar_grdGeneral()
@@ -389,7 +390,7 @@ namespace WebItNow
 
                 string sqlQuery = "SELECT IdTpoDocumento, Descripcion, DescrpBrev, IdProceso, IdSubProceso " +
                                   "  FROM ITM_06 " +
-                                  " WHERE Status IN (1) "; //le ponia el valor del ddl status doc
+                                  " WHERE IdStatus IN (1) "; //le ponia el valor del ddl status doc
 
                 //if (rbtnActivo.Checked == true)
                 //{

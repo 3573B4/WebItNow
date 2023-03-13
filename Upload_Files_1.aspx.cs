@@ -164,7 +164,7 @@ namespace WebItNow
             string sqlQuery = "SELECT IdTpoDocumento, Descripcion, DescrpBrev " +
                                 "FROM ITM_06 " +
                                 "WHERE IdTpoDocumento = '" + sTpoDocumento + "' " +
-                                "  AND Status = '1'";
+                                "  AND IdStatus = '1'";
 
             SqlCommand cmd = new SqlCommand(sqlQuery, conectar.ConectarBD);
             SqlDataReader dt = cmd.ExecuteReader();
@@ -190,7 +190,7 @@ namespace WebItNow
                 Conecta.Abrir();
 
                 // Consulta a la tabla Tipo de Documento
-                string strQuery = "Select IdTpoDocumento, DescrpBrev From ITM_06 Where IdTpoDocumento = '" + pIdTpoDocumento + "' And Status = " + pIdStatus + "";
+                string strQuery = "Select IdTpoDocumento, DescrpBrev From ITM_06 Where IdTpoDocumento = '" + pIdTpoDocumento + "' And IdStatus = " + pIdStatus + "";
 
                 SqlCommand cmd = new SqlCommand(strQuery, Conecta.ConectarBD);
 

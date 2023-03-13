@@ -68,11 +68,11 @@
             </div>
         </div>
         
-        <div class="form-group mt-3 mb-3">
+        <div class="form-group border-bottom mt-3 mb-4">
             <asp:Label ID="lblNewDocumento" runat="server" Text="Agregar nuevo documento" CssClass="control-label co-sm-3 mb-1" Font-Bold="False"></asp:Label>
-            <div class="col-sm-12">
+            <div class="col-sm-12 mt-1">
             <asp:UpdatePanel ID="UpdatePanel3" runat="server" UpdateMode="Conditional">
-                <ContentTemplate>
+            <ContentTemplate>
                 <asp:Panel ID="pnlTpoDocumentNew" runat="server" >
                     <div style="overflow-x: hidden; overflow-y: auto; height:120px;">
                     <asp:GridView ID="GrdTpoDocumentNew" runat="server" AutoGenerateColumns="False" GridLines="None" Width="100%" AllowPaging = "False"
@@ -81,7 +81,7 @@
                     <Columns>
                         <asp:TemplateField>
                             <ItemTemplate>
-                                <asp:ImageButton ID="ImgAgregar" runat="server" Height="26px" Width="26px" ImageUrl="~/Images/aceptar.png" OnClick="ImgAgregar_Click" />
+                                <asp:ImageButton ID="ImgAgregar" runat="server" Height="20px" Width="20px" ImageUrl="~/Images/add-new-page_icon.png" OnClick="ImgAgregar_Click" />
                             </ItemTemplate> 
                         </asp:TemplateField>
                         <asp:BoundField DataField="IdTpoDocumento" HeaderText="Id" ></asp:BoundField>
@@ -95,36 +95,44 @@
             </div>
         </div>
 
-        <div class="form-group mt-3" >
-        <asp:Panel ID="pnlTpoDocumento" runat="server" >
-            <div style="overflow-x: hidden; overflow-y: auto; height:120px;">
-                <asp:GridView ID="GrdTpoDocumento" runat="server" AutoGenerateColumns="False" GridLines="None" Width="100%" AllowPaging = "False"
-                    CssClass="footable" AlternatingRowStyle-CssClass="alt" >
-                    <AlternatingRowStyle CssClass="alt" />
-                    <Columns>
-                        <asp:TemplateField>
-                            <ItemTemplate>
-                                <asp:ImageButton ID="ImgEliminar" runat="server" Height="26px" Width="26px" ImageUrl="~/Images/cancelar.png" OnClick="ImgEliminar_Click" />
-                            </ItemTemplate> 
-                        </asp:TemplateField>
-                        <asp:TemplateField>
-                            <ItemTemplate>
-                                <asp:CheckBox ID="chkTpoDocumento" runat="server" Checked='<%# Convert.ToBoolean(Eval("IdStatus")) %>'/>
-                            </ItemTemplate> 
-                        </asp:TemplateField>
+        <div class="form-group border-bottom mt-4 mb-3">
+            <div class="col-sm-12">
+            <asp:UpdatePanel ID="UpdatePanel4" runat="server" UpdateMode="Conditional">
+            <ContentTemplate>
+            <asp:Panel ID="pnlTpoDocumento" runat="server" >
+                <div style="overflow-x: hidden; overflow-y: auto; height:120px;">
+                    <asp:GridView ID="GrdTpoDocumento" runat="server" AutoGenerateColumns="False" GridLines="None" Width="100%"
+                        CssClass="footable" AlternatingRowStyle-CssClass="alt" >
+                        <%--OnRowDataBound="GrdTpoDocumento_RowDataBound" OnRowDeleting="GrdTpoDocumento_RowDeleting" >--%>
+                        <AlternatingRowStyle CssClass="alt" />
+                        <Columns>
+                            <asp:TemplateField>
+                                <ItemTemplate>
+                                    <asp:ImageButton ID="ImgEliminar" runat="server" Height="20px" Width="20px" ImageUrl="~/Images/delete-page-icon.png" OnClick="ImgEliminar_Click" />
+                                </ItemTemplate> 
+                            </asp:TemplateField>
+                            <asp:TemplateField>
+                                <ItemTemplate>
+                                    <asp:CheckBox ID="chkTpoDocumento" runat="server" Checked='<%# Convert.ToBoolean(Eval("IdStatus")) %>' OnCheckedChanged="chkTpoDocumento_CheckedChanged" AutoPostBack="True" />
+                                </ItemTemplate> 
+                            </asp:TemplateField>
 
-                        <asp:BoundField DataField="IdTpoDocumento" HeaderText="Id" ></asp:BoundField>
-                        <asp:BoundField DataField="Descripcion" HeaderText="Descripcion" ></asp:BoundField>
-                        <asp:BoundField DataField="IdProceso" >
-                            <ItemStyle Width="0px" Font-Size="0pt" />
-                        </asp:BoundField>
-                        <asp:BoundField DataField="IdSubProceso" >
-                            <ItemStyle Width="0px" Font-Size="0pt" />
-                        </asp:BoundField>
-                    </Columns>
-                </asp:GridView>
-            </div>
-        </asp:Panel>
+                            <asp:BoundField DataField="IdTpoDocumento" HeaderText="Id" ></asp:BoundField>
+                            <asp:BoundField DataField="Descripcion" HeaderText="Descripcion" ></asp:BoundField>
+                            <asp:BoundField DataField="IdProceso" >
+                                <ItemStyle Width="0px" Font-Size="0pt" />
+                            </asp:BoundField>
+                            <asp:BoundField DataField="IdSubProceso" >
+                                <ItemStyle Width="0px" Font-Size="0pt" />
+                            </asp:BoundField>
+                            <%--<asp:CommandField ShowDeleteButton="True" ButtonType="Button" />--%>
+                        </Columns>
+                    </asp:GridView>
+                </div>
+            </asp:Panel>
+            </ContentTemplate>
+            </asp:UpdatePanel>
+        </ div>
         </div>
         <div class="form-group mt-3">
             <div class="d-grid col-6 mx-auto">
@@ -132,15 +140,15 @@
             </div>
         </div>
     
-        <asp:UpdatePanel ID="UpdatePanel2" runat="server" UpdateMode="Conditional">
-            <ContentTemplate>
+<%--        <asp:UpdatePanel ID="UpdatePanel2" runat="server" UpdateMode="Conditional">
+            <ContentTemplate>--%>
                 <div class="form-group mt-3">
                     <div class="d-grid col-6 mx-auto">
                         <asp:Button ID="BtnEnviar" runat="server" Text="Solicitar" Font-Bold="True" OnClick="BtnEnviar_Click" CssClass="btn btn-primary" />
                     </div>
                 </div>
-            </ContentTemplate>
-        </asp:UpdatePanel>
+<%--            </ContentTemplate>
+        </asp:UpdatePanel>--%>
 
         <div class="from-group mb-4 pb-5">
             <div class="d-grid col-6 mx-auto">
@@ -238,9 +246,9 @@
 
     </ContentTemplate>
     <Triggers>
-        <asp:PostBackTrigger ControlID="GrdTpoDocumento" />
-        <asp:PostBackTrigger ControlID="GrdTpoDocumentNew" />
-        <asp:PostBackTrigger ControlID="BtnEnviar" />
+        <%--<asp:PostBackTrigger ControlID="GrdTpoDocumentNew" />--%>
+        <%--<asp:PostBackTrigger ControlID="GrdTpoDocumento" />--%>
+        <%--<asp:PostBackTrigger ControlID="BtnEnviar" />--%>
     </Triggers>
 </asp:UpdatePanel>
 </asp:Content>

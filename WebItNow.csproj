@@ -325,12 +325,14 @@
     <Content Include="Images\aceptar.ico" />
     <Content Include="Images\aceptar.png" />
     <Content Include="Images\aceptar_new.png" />
+    <Content Include="Images\add-new-page_icon.png" />
     <Content Include="Images\ajax-loader.gif" />
     <Content Include="Images\banner_Codice_mediano.png" />
     <Content Include="Images\banner_codise.png" />
     <Content Include="Images\banner_Peacock.png" />
     <Content Include="Images\cancelar.ico" />
     <Content Include="Images\cancelar.png" />
+    <Content Include="Images\delete-page-icon.png" />
     <Content Include="Images\descargar.ico" />
     <Content Include="Images\descargar_new.png" />
     <Content Include="Images\edit.jpg" />

@@ -83,25 +83,29 @@ namespace WebItNow
                 {
                     sPredeterminado = "Estimado cliente. Su archivo fue cargado exitosamente en nuestra plataforma de carga segura. \n" + "A la brevedad sera revisado y validado por alguno de nuestros operadores. Muchas gracias. \n";
                 }
-                else if (sAsunto != "Solicitud Documento" )
+                else if (sAsunto == "Solicitud Documento" )
                 {
-                    sPredeterminado = "";
+                    sPredeterminado = "Estimado cliente. Favor de envia la siguiente documentacion. Gracias. \n " +
+                        "https://codice1.azurewebsites.net/Access";
                 }
 
                 var email = new EnvioEmail();
 
                 TxtAreaMensaje.Value = sPredeterminado + TxtAreaMensaje.Value;
 
-                if (sAsunto != "Solicitud Documento")
-                {
-                    string sEmail = email.CorreoElectronico(sReferencia);
-                    int Envio_Ok = email.EnvioMensaje(sReferencia, sEmail, sAsunto, TxtAreaMensaje.Value);
-                }
-                else
-                {
-                    string sEmail = Convert.ToString(Session["Email"]);
-                    int Envio_Ok = email.EnvioMensaje(sReferencia, sEmail, sAsunto, TxtAreaMensaje.Value);
-                }
+                string sEmail = email.CorreoElectronico(sReferencia);
+                int Envio_Ok = email.EnvioMensaje(sReferencia, sEmail, sAsunto, TxtAreaMensaje.Value);
+
+                //if (sAsunto == "Solicitud Documento")
+                //{
+                //    string sEmail = email.CorreoElectronico(sReferencia);
+                //    int Envio_Ok = email.EnvioMensaje(sReferencia, sEmail, sAsunto, TxtAreaMensaje.Value);
+                //}
+                //else
+                //{
+                //    string sEmail = Convert.ToString(Session["Email"]);
+                //    int Envio_Ok = email.EnvioMensaje(sReferencia, sEmail, sAsunto, TxtAreaMensaje.Value);
+                //}
 
                 if (sAsunto == "Documento Enviado")
                 { 
@@ -111,13 +115,6 @@ namespace WebItNow
                 {
                     Response.Redirect("Review_Document.aspx");
                 }
-                //else if (sAsunto == "Solicitud Documento")
-                //{
-                //    System.Web.Security.FormsAuthentication.SignOut();
-                //    Session.Abandon();
-
-                //    Response.Redirect("Request_Document_1.aspx");
-                //}
                 else if (sAsunto == "Solicitud Documento")
                 {
                     System.Web.Security.FormsAuthentication.SignOut();
@@ -141,13 +138,6 @@ namespace WebItNow
             {
                 Response.Redirect("Review_Document.aspx");
             }
-            //else if (sAsunto == "Solicitud Documento-New")
-            //{
-            //    System.Web.Security.FormsAuthentication.SignOut();
-            //    Session.Abandon();
-
-            //    Response.Redirect("Request_Document_1.aspx");
-            //}
             else if (sAsunto == "Solicitud Documento")
             {
                 System.Web.Security.FormsAuthentication.SignOut();
