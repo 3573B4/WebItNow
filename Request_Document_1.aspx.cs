@@ -895,7 +895,12 @@ namespace WebItNow
                 int iSubProceso = Convert.ToInt32(Session["SubProceso"]);
 
                 DataTable dt = (DataTable)Session["data"];
-                dt.Rows.RemoveAt(index);
+
+                // validar que el renglon a eliminar sea mayor a 1
+                if (GrdTpoDocumento.Rows.Count > 1)
+                {
+                    dt.Rows.RemoveAt(index);
+                }
 
                 //Guardo los nuevos valores
                 Session["data"] = dt;

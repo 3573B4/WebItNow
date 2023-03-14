@@ -190,11 +190,13 @@ namespace WebItNow
                 string strQuery = "SELECT ed.Referencia, ed.Nom_Imagen, td.Descripcion, ed.IdTipoDocumento, " +
                                   "       s.Descripcion as Desc_Status, ed.Url_Imagen, ed.IdDescarga, tr.Aseguradora " +
                                   "  FROM ITM_02 tr, ITM_04 ed, ITM_06 td, ITM_07 s, ITM_15 t " +
-                                  " WHERE tr.UsReferencia = ed.Referencia" +
+                                  " WHERE tr.UsReferencia = ed.Referencia " +
                                   "   AND ed.IdStatus = s.IdStatus " + 
                                   "   AND ed.IdTipoDocumento = td.IdTpoDocumento " +
                                   "   AND t.Referencia = ed.Referencia " +
                                   "   AND t.IdTpoDocumento = ed.IdTipoDocumento " +
+                                  "   AND t.IdProceso = td.IdProceso " +
+                                  "   AND t.IdSubProceso = td.IdSubProceso " +
                                   "   AND t.IdStatus = 1 " +
                                   "   AND ed.IdStatus IN (2) ";
 
