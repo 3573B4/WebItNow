@@ -837,7 +837,7 @@ namespace WebItNow
                 string sDescripcion = Server.HtmlDecode(GrdTpoDocumentNew.Rows[index].Cells[2].Text);
                 int iProceso = Convert.ToInt32(Session["Proceso"]);
                 int iSubProceso = Convert.ToInt32(Session["SubProceso"]);
-                int iIdStatus = 0;
+                int iIdStatus = 1;
 
                 DataTable dt = (DataTable)Session["data"];
 

@@ -96,7 +96,8 @@
         </div>
 
         <div class="form-group border-bottom mt-4 mb-3">
-            <div class="col-sm-12">
+            <asp:Label ID="lblDocumento" runat="server" Text="Documentos a solicitar" CssClass="control-label co-sm-3 mb-1" Font-Bold="False"></asp:Label>
+            <div class="col-sm-12 mt-1">
             <asp:UpdatePanel ID="UpdatePanel4" runat="server" UpdateMode="Conditional">
             <ContentTemplate>
             <asp:Panel ID="pnlTpoDocumento" runat="server" >

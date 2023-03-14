@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -73,20 +74,25 @@ namespace WebItNow
 
                 if (sAsunto == "Documento Aceptado")
                 {
-                    sPredeterminado = "Estimado cliente su archivo fue aprobado por nuestro personal en nuestra plataforma de carga segura. Gracias. \n";
+                    sPredeterminado = "Estimado cliente su archivo fue aprobado por nuestro personal en nuestra plataforma de carga segura. Gracias. \n ";
                 }
                 else if (sAsunto == "Documento Rechazado")
                 {
-                    sPredeterminado = "Estimado cliente. Lamentamos informarle que el archivo cargado en nuestro sistema no cumple con los parametros establecidos, \n" + "por favor reintente subir su archivo en nuestro sistema de carga segura. \n";
+                    sPredeterminado = "Estimado cliente. Lamentamos informarle que el archivo cargado en nuestro sistema no cumple con los parametros establecidos, \n " + "por favor reintente subir su archivo en nuestro sistema de carga segura. \n";
                 }
                 else if (sAsunto == "Documento Enviado")
                 {
-                    sPredeterminado = "Estimado cliente. Su archivo fue cargado exitosamente en nuestra plataforma de carga segura. \n" + "A la brevedad sera revisado y validado por alguno de nuestros operadores. Muchas gracias. \n";
+                    sPredeterminado = "Estimado cliente. Su archivo fue cargado exitosamente en nuestra plataforma de carga segura. \n " + "A la brevedad sera revisado y validado por alguno de nuestros operadores. Muchas gracias. \n";
                 }
                 else if (sAsunto == "Solicitud Documento" )
                 {
-                    sPredeterminado = "Estimado cliente. Favor de envia la siguiente documentacion. Gracias. \n " +
-                        "https://codice1.azurewebsites.net/Access";
+                    string sListado = getListaDocumentos();
+
+                    sPredeterminado = "Le informamos que para la atención de su siniestro es necesario nos proporciones la siguiente información: \n \n " +
+                        sListado + " \n " +
+                        "Para realizar lo anterior es necesario acceder a nuestro sitio seguro: \n " +
+                        "https://codice1.azurewebsites.net/Access \n " +
+                        "Sus datos de acceso son su correo electrónico y la siguiente referencia " + sReferencia;
                 }
 
                 var email = new EnvioEmail();
@@ -150,6 +156,40 @@ namespace WebItNow
         protected void btnClose_Click(object sender, EventArgs e)
         {
 
+        }
+
+        protected string getListaDocumentos()
+        {
+            string listado = string.Empty;
+            string sReferencia = Convert.ToString(Session["Referencia"]);
+
+            ConexionBD Conectar = new ConexionBD();
+            Conectar.Abrir();
+            string sqlQuery = "SELECT td.Descripcion " +
+                               " FROM ITM_06 td, ITM_15 t " +
+                              " WHERE t.Referencia = '" + sReferencia + "' " +
+                                " AND t.IdProceso = td.IdProceso " +
+                                " AND t.IdSubProceso = td.IdSubProceso" +
+                                " AND t.IdTpoDocumento = td.IdTpoDocumento " +
+                                " AND t.IdStatus = 1";
+
+            SqlCommand ejecucion = new SqlCommand(sqlQuery, Conectar.ConectarBD);
+            SqlDataReader dr1 = ejecucion.ExecuteReader();
+
+            if (dr1.HasRows)
+            {
+
+                while (dr1.Read())
+                {
+                    listado = listado + dr1["Descripcion"].ToString().Trim() + " \n ";
+                }
+            }
+            else
+            {
+                return listado;
+            }
+
+            return listado;
         }
     }
 }

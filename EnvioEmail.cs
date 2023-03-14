@@ -96,14 +96,20 @@ namespace WebItNow
             //---------------------------------------------
             // Servidor de correo , Usuario, Password
             //---------------------------------------------
+            //smtp.Host = "outlook.office365.com";
+            //smtp.Port = 25; //465; //25
+
             smtp.Host = "smtp.ionos.mx";
             smtp.Port = 587; //465; //25
+
             smtp.Credentials = new System.Net.NetworkCredential("sistemas@itnow.mx", "System1623#");
             smtp.EnableSsl = true;
 
             try
             {
                 smtp.Send(correo);
+                //System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls;
+
                 return 0;
             }
             catch (Exception ex)

@@ -155,6 +155,7 @@
                                     <li><a class="dropdown-item" href="RegRef_Massive.aspx">Masivo</a></li>
                                 </ul>
                             </li>
+<%--                            
                             <li><hr class="dropdown-divider"/></li>
                             <li><a class="dropdown-item" href="#">Consultar</a></li>
                             <li><hr class="dropdown-divider"/></li>
@@ -169,6 +170,7 @@
                             <li><a class="dropdown-item" href="#">Aprobar</a></li>
                             <li><hr class="dropdown-divider"/></li>
                             <li><a class="dropdown-item" href="#">Actualizar</a></li>
+--%>
                         </ul>
                     </li>
                     <%--    <li class="nav-item">
@@ -190,6 +192,7 @@
                             <li><hr class="dropdown-divider"/></li>
                             <li><a class="dropdown-item" href="Catalog_TpoDocument.aspx">Alta tipo Documento</a></li>
                             <li><hr class="dropdown-divider"/></li>
+<%--                            
                             <li><a class="dropdown-item" href="#">Autorizar</a></li>
                             <li><hr class="dropdown-divider"/></li>
                             <li><a class="dropdown-item" href="#">Emitir</a></li>
@@ -199,6 +202,7 @@
                             <li><a class="dropdown-item" href="#">Cancelar</a></li>
                             <li><hr class="dropdown-divider"/></li>
                             <li><a class="dropdown-item" href="#">Actualizar</a></li>
+--%>
                         </ul>
                     </li>
 
