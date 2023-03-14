@@ -86,6 +86,9 @@
                         </asp:TemplateField>
                         <asp:BoundField DataField="IdTpoDocumento" HeaderText="Id" ></asp:BoundField>
                         <asp:BoundField DataField="Descripcion" HeaderText="Descripcion" ></asp:BoundField>
+                        <asp:BoundField DataField="DescripBrev" >
+                            <ItemStyle Width="0px" Font-Size="0pt" />
+                        </asp:BoundField>
                     </Columns>
                     </asp:GridView>
                     </div>
@@ -120,6 +123,9 @@
 
                             <asp:BoundField DataField="IdTpoDocumento" HeaderText="Id" ></asp:BoundField>
                             <asp:BoundField DataField="Descripcion" HeaderText="Descripcion" ></asp:BoundField>
+                            <asp:BoundField DataField="DescrpBrev" >
+                                <ItemStyle Width="0px" Font-Size="0pt" />
+                            </asp:BoundField>
                             <asp:BoundField DataField="IdProceso" >
                                 <ItemStyle Width="0px" Font-Size="0pt" />
                             </asp:BoundField>

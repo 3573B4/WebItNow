@@ -240,50 +240,6 @@ namespace WebItNow
             return -1;
         }
 
-        public int ValidaEmail(String pEmail, int pUsPrivilegios)
-        {
-            ConexionBD Conecta = new ConexionBD();
-            NewMethod(Conecta);
-
-            try
-            {
-
-                SqlCommand cmd1 = new SqlCommand("sp_tbEmail", Conecta.ConectarBD);
-                cmd1.CommandType = CommandType.StoredProcedure;
-
-                cmd1.Parameters.AddWithValue("@email", pEmail);
-                cmd1.Parameters.AddWithValue("@privilegios", pUsPrivilegios);
-                SqlDataReader dr1 = cmd1.ExecuteReader();
-
-                if (dr1.Read())
-                {
-
-                    return dr1.GetInt32(0);
-
-                }
-
-                cmd1.Dispose();
-                dr1.Dispose();
-
-                Conecta.Cerrar();
-
-                return 0;
-
-            }
-            catch (Exception ex)
-            {
-                // Show(ex.Message);
-                LblMessage.Text = ex.Message;
-                this.mpeMensaje.Show();
-            }
-            finally
-            {
-
-            }
-
-            return -1;
-        }
-
         protected void TxtRef_TextChanged(object sender, EventArgs e)
         {
             // Validar si existe Usuario en la tabla ITM_02 (tbReferencia)
@@ -293,7 +249,7 @@ namespace WebItNow
             if (Referencia_Existe == 1)
             {
                 TxtRef.Text = string.Empty;
-                TxtEmail.Focus();
+                TxtRef.Focus();
 
                 LblMessage.Text = "La referencia ya se encuentra registrada";
                 this.mpeMensaje.Show();
@@ -302,26 +258,6 @@ namespace WebItNow
             {
                 TxtEmail.Focus();
             }
-        }
-
-        protected void TxtEmail_TextChanged(object sender, EventArgs e)
-        {
-            //// Validar si existe Email en la tabla ITM_02 (tbReferencia)
-            //Variables.wPrivilegios = "3";
-            //int Email_Existe = ValidaEmail(TxtEmail.Text, Int32.Parse(Variables.wPrivilegios));
-
-            //if (Email_Existe == 1)
-            //{
-            //    TxtEmail.Text = string.Empty;
-            //    TxtEmail.Focus();
-
-            //    LblMessage.Text = "El Correo electrónico ya existe";
-            //    this.mpeMensaje.Show();
-            //}
-            //else
-            //{
-            //    TxtEmail.Focus();
-            //}
         }
 
         public void Limpia(ControlCollection controles)
@@ -418,5 +354,6 @@ namespace WebItNow
                 mpeMensaje.Show();
             }
         }
+
     }
 }

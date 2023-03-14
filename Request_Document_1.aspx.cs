@@ -70,8 +70,9 @@ namespace WebItNow
 
                     string sTpoDocumento = row.Cells[2].Text;
                     string sDescripcion =  row.Cells[3].Text;
-                    int sIdProceso = Convert.ToInt32(row.Cells[4].Text);
-                    int sIdSubProceso = Convert.ToInt32(row.Cells[5].Text);
+                    string sDescrpBrev = row.Cells[4].Text;
+                    int sIdProceso = Convert.ToInt32(row.Cells[5].Text);
+                    int sIdSubProceso = Convert.ToInt32(row.Cells[6].Text);
 
                     var chkbox = row.FindControl("chkTpoDocumento") as CheckBox;
                     if (chkbox.Checked == true)
@@ -92,7 +93,7 @@ namespace WebItNow
                         // Insertar tablas ITM_04, ITM_06
                         //Insert_Row_ITM_04(sTpoDocumento);
 
-                        Insert_Row_ITM_06(sTpoDocumento, sDescripcion, sIdProceso, sIdSubProceso);
+                        Insert_Row_ITM_06(sTpoDocumento, sDescripcion, sDescrpBrev, sIdProceso, sIdSubProceso);
 
                         // Insertar tablas ITM_15
                         Insert_Row_ITM_15(valorcol0,sTpoDocumento,sIdProceso, sIdSubProceso);
@@ -295,7 +296,7 @@ namespace WebItNow
             if (Referencia_Existe == 0)
             {
                 // Consulta a la tabla Tipo de Documento
-                sqlQuery = "Select IdTpoDocumento, Descripcion, IdProceso, IdSubProceso, 'false' as IdStatus " +
+                sqlQuery = "Select IdTpoDocumento, Descripcion, DescrpBrev, IdProceso, IdSubProceso, 'false' as IdStatus " +
                            "  From ITM_06 " +
                            " Where IdProceso = " + iIdProceso + "" +
                            "   And IdSubProceso = " + iIdSubProceso + "" +
@@ -303,14 +304,13 @@ namespace WebItNow
             }
             else
             {
-                sqlQuery = "Select tp.IdTpoDocumento, tp.Descripcion, tp.IdProceso, tp.IdSubProceso, tr.IdStatus " +
+                sqlQuery = "Select tp.IdTpoDocumento, tp.Descripcion,  DescrpBrev, tp.IdProceso, tp.IdSubProceso, tr.IdStatus " +
                             "  From ITM_06 tp, ITM_15 tr " +
                             " Where tp.IdTpoDocumento = tr.IdTpoDocumento And tp.IdProceso = tr.IdProceso And tp.IdSubProceso = tr.IdSubProceso" +
                             "   And tp.IdProceso = " + iIdProceso + "" +
                             "   And tp.IdSubProceso = " + iIdSubProceso + "" +
                             "   And tr.Referencia = '" + TxtReferencia.Text + "'" +
                             "   And tp.IdStatus = '1'";
-
             }
 
             SqlCommand cmd = new SqlCommand(sqlQuery, Conecta.ConectarBD);
@@ -334,6 +334,37 @@ namespace WebItNow
 
             Conecta.Cerrar();
 
+        }
+
+        public void GrdTpoDocumentNuevo()
+        {
+            ConexionBD Conecta = new ConexionBD();
+            Conecta.Abrir();
+
+            // Consulta a la tabla Tipo de Documento
+            string sqlQuery = "Select IdTpoDocumento, Descripcion, DescripBrev " +
+                              "  From ITM_08 " +
+                              " Where IdStatus = '1'";
+
+            SqlCommand cmd = new SqlCommand(sqlQuery, Conecta.ConectarBD);
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+
+            da.Fill(dt);
+
+            if (dt.Rows.Count == 0)
+            {
+                GrdTpoDocumentNew.ShowHeaderWhenEmpty = true;
+                GrdTpoDocumentNew.EmptyDataText = "No hay resultados.";
+            }
+
+            GrdTpoDocumentNew.DataSource = dt;
+            GrdTpoDocumentNew.DataBind();
+
+            //* * Agrega THEAD y TBODY a GridView.
+            GrdTpoDocumentNew.HeaderRow.TableSection = TableRowSection.TableHeader;
+
+            Conecta.Cerrar();
         }
 
         public int ValidaExistTransaccion(String pReferencia, string pTpoDocumento, int pIdProceso, int pIdSubproceso)
@@ -545,7 +576,7 @@ namespace WebItNow
             }
         }
 
-        public void Insert_Row_ITM_06(string valorcol1, string valorcol2, int valorcol3, int valorcol4)
+        public void Insert_Row_ITM_06(string valorcol1, string valorcol2, string valorcol3, int valorcol4, int valorcol5)
         {
             try
             {
@@ -556,8 +587,8 @@ namespace WebItNow
                 string sReferencia = TxtReferencia.Text;
 
                 // Insertar en la tabla de Transacciones ITM_06
-                string sqlQuery = "INSERT INTO ITM_06 (IdTpoDocumento, Descripcion, IdStatus, IdProceso, IdSubProceso)" +
-                              "VALUES ('" + valorcol1 + "', '" + valorcol2 + "', 1, " + valorcol3 + ", " + valorcol4 + ")";
+                string sqlQuery = "INSERT INTO ITM_06 (IdTpoDocumento, Descripcion, DescrpBrev, IdStatus, IdProceso, IdSubProceso)" +
+                              "VALUES ('" + valorcol1 + "', '" + valorcol2 + "', '" + valorcol3 + "', 1, " + valorcol4 + ", " + valorcol5 + ")";
 
                 sqlQuery += Environment.NewLine;
 
@@ -656,8 +687,8 @@ namespace WebItNow
             // DBCC CHECKIDENT (ITM_15, RESEED, 0) -- Inicializar el campo [IdTransaccion] = 0
 
             string sReferencia = TxtReferencia.Text;
-            //  bool valorcol0 = false;
-            //int valorcol0;
+            // bool valorcol0 = false;
+            // int valorcol0;
 
             // Insertar tabla ITM_15
             ConexionBD Conecta = new ConexionBD();
@@ -787,37 +818,6 @@ namespace WebItNow
 
         }
 
-        public void GrdTpoDocumentNuevo()
-        {
-            ConexionBD Conecta = new ConexionBD();
-            Conecta.Abrir();
-
-            // Consulta a la tabla Tipo de Documento
-            string sqlQuery = "Select IdTpoDocumento, Descripcion " +
-                              "  From ITM_08 " +
-                              " Where IdStatus = '1'";
-
-            SqlCommand cmd = new SqlCommand(sqlQuery, Conecta.ConectarBD);
-            SqlDataAdapter da = new SqlDataAdapter(cmd);
-            DataTable dt = new DataTable();
-
-            da.Fill(dt);
-
-            if (dt.Rows.Count == 0)
-            {
-                GrdTpoDocumentNew.ShowHeaderWhenEmpty = true;
-                GrdTpoDocumentNew.EmptyDataText = "No hay resultados.";
-            }
-
-            GrdTpoDocumentNew.DataSource = dt;
-            GrdTpoDocumentNew.DataBind();
-
-            //* * Agrega THEAD y TBODY a GridView.
-            GrdTpoDocumentNew.HeaderRow.TableSection = TableRowSection.TableHeader;
-
-            Conecta.Cerrar();
-        }
-
         protected void GrdTpoDocumentNew_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
@@ -835,6 +835,7 @@ namespace WebItNow
 
                 string sTipoDocumento = GrdTpoDocumentNew.Rows[index].Cells[1].Text;
                 string sDescripcion = Server.HtmlDecode(GrdTpoDocumentNew.Rows[index].Cells[2].Text);
+                string sDescrpBrev = Server.HtmlDecode(GrdTpoDocumentNew.Rows[index].Cells[3].Text);
                 int iProceso = Convert.ToInt32(Session["Proceso"]);
                 int iSubProceso = Convert.ToInt32(Session["SubProceso"]);
                 int iIdStatus = 1;
@@ -857,9 +858,10 @@ namespace WebItNow
 
                     workRow[0] = sTipoDocumento;
                     workRow[1] = sDescripcion;
-                    workRow[2] = iProceso;
-                    workRow[3] = iSubProceso;
-                    workRow[4] = iIdStatus;
+                    workRow[2] = sDescrpBrev;
+                    workRow[3] = iProceso;
+                    workRow[4] = iSubProceso;
+                    workRow[5] = iIdStatus;
 
                     dt.Rows.Add(workRow);
                     //dt.Rows.Add(new Object[] { "01", "Smith", 1, 1, 0 });

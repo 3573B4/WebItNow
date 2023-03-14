@@ -54,7 +54,7 @@
                 <asp:RegularExpressionValidator id="regEmail" ControlToValidate="TxtEmail" Text="" Runat="server" 
                                                 ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" /> 
             <div class="col-sm-12">
-                <asp:TextBox ID="TxtEmail" runat="server" CssClass="form-control" placeholder="Ingresa tu e-mail" MaxLength="50" OnTextChanged="TxtEmail_TextChanged" AutoComplete="off" AutoPostBack="true" TextMode="Email"></asp:TextBox>
+                <asp:TextBox ID="TxtEmail" runat="server" CssClass="form-control" placeholder="Ingresa tu e-mail" MaxLength="50" AutoComplete="off" AutoPostBack="true" TextMode="Email"></asp:TextBox>
             </div>
         </div>        
         <br />
@@ -65,7 +65,7 @@
                 ControlToValidate="TxtAsegurado" ErrorMessage="*" ForeColor="Red">
                 </asp:RequiredFieldValidator>
             <div class="col-sm-12">
-                <asp:TextBox ID="TxtAsegurado" runat="server" CssClass="form-control" placeholder="Ingresa el nombre del destinatario" AutoComplete="off" MaxLength="50" ></asp:TextBox>
+                <asp:TextBox ID="TxtAsegurado" runat="server" CssClass="form-control" placeholder="Ingresa el nombre del destinatario" AutoComplete="off" MaxLength="50"></asp:TextBox>
             </div>
         </div>
 
