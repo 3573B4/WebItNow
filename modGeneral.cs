@@ -72,13 +72,13 @@ namespace WebItNow
                 // Get the connection string from app settings
                 string ConnectionString = ConfigurationManager.AppSettings["StorageConnectionString"];
                 string AccountName = ConfigurationManager.AppSettings.Get("StorageAccountName");
-                string sDirName = "itnowstorage";
+                //string sDirName = "itnowstorage";
 
                 // Obtener una referencia de nuestra parte.
                 ShareClient share = new ShareClient(ConnectionString, AccountName);
 
                 // Obtener una referencia de nuestro directorio - directorio ubicado en el nivel raíz.
-                ShareDirectoryClient directory = share.GetDirectoryClient(sDirName);
+                ShareDirectoryClient directory = share.GetDirectoryClient(AccountName);
 
                 // Obtener una referencia a un subdirectorio que no se encuentra en el nivel raíz
                 directory = directory.GetSubdirectoryClient(sReferencia);
@@ -92,7 +92,8 @@ namespace WebItNow
                 // Ensure that the source file exists
                 if (sourceFile.Exists())
                 {
-                    string sDirName_CODISE = "codisestorage";
+                    string AccountCodice = ConfigurationManager.AppSettings.Get("StorageAccountCodice");
+                //  string sDirName_CODISE = "codisestorage";
 
                     var dateAndTime = DateTime.Now;
                     var Date = dateAndTime.ToShortDateString();
@@ -104,10 +105,10 @@ namespace WebItNow
                     string dia = myDateTime.ToString("dd");
 
                     // Obtener una referencia de nuestra parte.
-                    ShareClient share_codise = new ShareClient(ConnectionString, sDirName_CODISE);
+                    ShareClient share_codise = new ShareClient(ConnectionString, AccountCodice);
 
                     // Validar si la carpeta del dia existe
-                    ShareDirectoryClient directory_codise = share_codise.GetDirectoryClient(sDirName_CODISE);
+                    ShareDirectoryClient directory_codise = share_codise.GetDirectoryClient(AccountCodice);
 
                     directory_codise = directory_codise.GetSubdirectoryClient(año);
                     directory_codise = directory_codise.GetSubdirectoryClient(mes);
@@ -127,10 +128,10 @@ namespace WebItNow
                     // CreateDirectory - Consecutivo
                     directory_codise.CreateSubdirectory(Convert.ToString(iConsecutivo));
 
-                    string destFilePath = sDirName_CODISE + "/" + año + "/" + mes + "/" + dia + "/" + iConsecutivo + "/" + sFileName_New;
+                    string destFilePath = AccountCodice + "/" + año + "/" + mes + "/" + dia + "/" + iConsecutivo + "/" + sFileName_New;
 
                     // Get a reference to the destination file
-                    ShareFileClient destFile = new ShareFileClient(ConnectionString, sDirName_CODISE, destFilePath);
+                    ShareFileClient destFile = new ShareFileClient(ConnectionString, AccountCodice, destFilePath);
 
                     // Start the copy operation
                     destFile.StartCopy(sourceFile.Uri);

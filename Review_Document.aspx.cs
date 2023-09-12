@@ -183,10 +183,6 @@ namespace WebItNow
                 // Tipo de Documento = ITM_06
                 // Status de Documento = ITM_07
 
-
-
-
-
                 string strQuery = "SELECT ed.Referencia, ed.Nom_Imagen, td.Descripcion, ed.IdTipoDocumento, " +
                                   "       s.Descripcion as Desc_Status, ed.Url_Imagen, ed.IdDescarga, tr.Aseguradora " +
                                   "  FROM ITM_02 tr, ITM_04 ed, ITM_06 td, ITM_07 s, ITM_15 t " +
@@ -463,13 +459,13 @@ namespace WebItNow
                 // Name of the share, directory, and file
                 string ConnectionString = ConfigurationManager.AppSettings.Get("StorageConnectionString");
                 string AccountName = ConfigurationManager.AppSettings.Get("StorageAccountName");
-                string sDirName = "itnowstorage";
+                // string sDirName = "itnowstorage";
 
                 // Obtener una referencia de nuestra parte.
                 ShareClient share = new ShareClient(ConnectionString, AccountName);
 
                 // Obtener una referencia de nuestro directorio - directorio ubicado en el nivel raíz.
-                ShareDirectoryClient directory = share.GetDirectoryClient(sDirName);
+                ShareDirectoryClient directory = share.GetDirectoryClient(AccountName);
 
                 // Obtener una referencia a un subdirectorio que no se encuentra en el nivel raíz
                 directory = directory.GetSubdirectoryClient(sSubdirectorio);
@@ -501,14 +497,14 @@ namespace WebItNow
                 // Name of the share, directory, and file
                 string ConnectionString = ConfigurationManager.AppSettings.Get("StorageConnectionString");
                 string AccountName = ConfigurationManager.AppSettings.Get("StorageAccountName");
-                string sDirName = "itnowstorage";
+                // string sDirName = "itnowstorage";
                 string directorioURL = Server.MapPath("~/itnowstorage/" + sFilename);
 
                 // Obtener una referencia de nuestra parte.
                 ShareClient share = new ShareClient(ConnectionString, AccountName);
 
                 // Obtener una referencia de nuestro directorio - directorio ubicado en el nivel raíz.
-                ShareDirectoryClient directory = share.GetDirectoryClient(sDirName);
+                ShareDirectoryClient directory = share.GetDirectoryClient(AccountName);
 
                 // Obtener una referencia a un subdirectorio que no se encuentra en el nivel raíz
                 directory = directory.GetSubdirectoryClient(sSubdirectorio);

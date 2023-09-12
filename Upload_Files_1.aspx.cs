@@ -54,7 +54,6 @@ namespace WebItNow
         {
             try
             {
-                //string directorio = "https://itnowtech18-my.sharepoint.com/:f:/g/personal/llg_peacock_claims/Ekb4AdD2Id1KgMI9CRoIAU4BdP795N2YLyTJxmlMmIfWUA?e=CCtbfK" + "/";
                 string directorio = "~/itnowstorage/";
                 string sReferencia = Convert.ToString(Session["Referencia"]);
             //  string folderName = ddlDocs.SelectedValue;
@@ -296,14 +295,14 @@ namespace WebItNow
                 string AccountName = ConfigurationManager.AppSettings.Get("StorageAccountName");
 
                 // Name of the directory, and file
-                string dirName = "itnowstorage";
+                // string dirName = "itnowstorage";
                 string fileName = sFilename;
 
                 // Get a reference from our share 
                 ShareClient share = new ShareClient(ConnectionString, AccountName);
 
                 // Get a reference from our directory - directory located on root level
-                ShareDirectoryClient directory = share.GetDirectoryClient(dirName);
+                ShareDirectoryClient directory = share.GetDirectoryClient(AccountName);
 
                 string sReferencia = Convert.ToString(Session["Referencia"]);
             //  string sTpoDocumento = ddlDocs.SelectedValue;

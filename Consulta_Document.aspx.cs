@@ -89,11 +89,12 @@ namespace WebItNow
                                 " FROM ITM_04 ed, ITM_06 td, ITM_07 s, ITM_15 t " +
                                 "WHERE ed.IdStatus = s.IdStatus AND ed.IdTipoDocumento = td.IdTpoDocumento " +
                                 "  AND t.Referencia = ed.Referencia " +
-                                "  AND t.IdTpoDocumento = td.IdTpoDocumento AND t.IdProceso = td.IdProceso  AND t.IdSubProceso = td.IdSubProceso";
+                                "  AND t.IdTpoDocumento = td.IdTpoDocumento AND t.IdProceso = td.IdProceso  " +
+                                "  AND t.IdSubProceso = td.IdSubProceso AND t.IdStatus = 1 ";
 
                 if (sValorStatus != "0")
                 {
-                    sqlQuery = sqlQuery + "AND ed.IdStatus = '" + sValorStatus + "'";
+                    sqlQuery = sqlQuery + "  AND ed.IdStatus = '" + sValorStatus + "'";
                 }
 
                 SqlCommand cmd = new SqlCommand(sqlQuery, conectar.ConectarBD);

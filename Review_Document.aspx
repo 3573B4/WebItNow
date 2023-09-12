@@ -81,7 +81,6 @@
     <link href="~/Scripts/footable.min.js" rel="stylesheet" type="text/javascript" />
     <link href="~/Styles/footable.min.css" rel="stylesheet" type="text/css" />
 
-
     <style type="text/css">
         .modal
         {

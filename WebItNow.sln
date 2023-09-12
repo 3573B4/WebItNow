@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.33027.164
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebItNow", "WebItNow.csproj", "{9EBB03EA-37E9-4AEC-82F6-CD226265DC41}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebItNow-Desarrollo", "WebItNow-Desarrollo.csproj", "{9EBB03EA-37E9-4AEC-82F6-CD226265DC41}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
