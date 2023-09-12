@@ -16,14 +16,21 @@ namespace WebItNow
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            string sReferencia = Convert.ToString(Session["Referencia"]);
+            lblReferencia.Text = "Referencia: " + sReferencia;
+
+            if (sReferencia == "" || sReferencia == string.Empty || sReferencia == null)
+            {
+                Response.Redirect("Access.aspx");
+            }
 
             if (!IsPostBack)
             {
                 // * * Obtener Descripcion breve documento
                 getDocsUsuario();
 
-                string sReferencia = Convert.ToString(Session["Referencia"]);
-                lblReferencia.Text = "Referencia: " + sReferencia;
+                //string sReferencia = Convert.ToString(Session["Referencia"]);
+                //lblReferencia.Text = "Referencia: " + sReferencia;
             }
 
             //* * Agrega THEAD y TBODY a GridView.
@@ -36,16 +43,26 @@ namespace WebItNow
             ConexionBD Conectar = new ConexionBD();
             Conectar.Abrir();
 
+            //string sqlQuery = "SELECT ed.Referencia, ed.IdTipoDocumento, ed.Nom_Imagen, td.Descripcion, s.Descripcion as Desc_Status  " +
+            //                      "  FROM ITM_04 ed, ITM_06 td, ITM_07 s, ITM_15 t " +
+            //                      " WHERE ed.IdStatus = s.IdStatus " +
+            //                      "   AND ed.IdTipoDocumento = td.IdTpoDocumento " +
+            //                      "   AND ed.Referencia LIKE '%' + '" + sReferencia + "'  + '%'" +
+            //                      "   AND t.Referencia = ed.Referencia" +
+            //                      "   AND t.IdTpoDocumento = td.IdTpoDocumento AND t.IdProceso = td.IdProceso  AND t.IdSubProceso = td.IdSubProceso" +
+            //                      "   AND t.IdStatus = 1";
+
             string sqlQuery = "SELECT ed.Referencia, ed.IdTipoDocumento, ed.Nom_Imagen, td.Descripcion, s.Descripcion as Desc_Status  " +
-                                  "  FROM ITM_04 ed, ITM_06 td, ITM_07 s, ITM_15 t " +
+                                  "  FROM ITM_04 ed, ITM_08 td, ITM_07 s, ITM_15 t " +
                                   " WHERE ed.IdStatus = s.IdStatus " +
                                   "   AND ed.IdTipoDocumento = td.IdTpoDocumento " +
                                   "   AND ed.Referencia LIKE '%' + '" + sReferencia + "'  + '%'" +
                                   "   AND t.Referencia = ed.Referencia" +
-                                  "   AND t.IdTpoDocumento = td.IdTpoDocumento AND t.IdProceso = td.IdProceso  AND t.IdSubProceso = td.IdSubProceso" +
+                                  "   AND t.IdTpoDocumento = td.IdTpoDocumento " +
                                   "   AND t.IdStatus = 1";
 
             SqlCommand ejecucion = new SqlCommand(sqlQuery, Conectar.ConectarBD);
+
             SqlDataAdapter da = new SqlDataAdapter(ejecucion);
             DataTable dt = new DataTable();
             da.Fill(dt);

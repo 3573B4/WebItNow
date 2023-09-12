@@ -123,7 +123,7 @@
 
                             <asp:BoundField DataField="IdTpoDocumento" HeaderText="Id" ></asp:BoundField>
                             <asp:BoundField DataField="Descripcion" HeaderText="Descripcion" ></asp:BoundField>
-                            <asp:BoundField DataField="DescrpBrev" >
+                            <asp:BoundField DataField="DescripBrev" >
                                 <ItemStyle Width="0px" Font-Size="0pt" />
                             </asp:BoundField>
                             <asp:BoundField DataField="IdProceso" >
@@ -147,15 +147,19 @@
             </div>
         </div>
     
-<%--        <asp:UpdatePanel ID="UpdatePanel2" runat="server" UpdateMode="Conditional">
-            <ContentTemplate>--%>
+<%--        
+        <asp:UpdatePanel ID="UpdatePanel2" runat="server" UpdateMode="Conditional">
+            <ContentTemplate>
+--%>
                 <div class="form-group mt-3">
                     <div class="d-grid col-6 mx-auto">
                         <asp:Button ID="BtnEnviar" runat="server" Text="Solicitar" Font-Bold="True" OnClick="BtnEnviar_Click" CssClass="btn btn-primary" />
                     </div>
                 </div>
-<%--            </ContentTemplate>
-        </asp:UpdatePanel>--%>
+<%--
+            </ContentTemplate>
+        </asp:UpdatePanel>
+--%>
 
         <div class="from-group mb-4 pb-5">
             <div class="d-grid col-6 mx-auto">

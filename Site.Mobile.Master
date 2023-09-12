@@ -6,12 +6,14 @@
 <head runat="server">
     <meta name="viewport" content="width=device-width" />
     <title></title>
-    <asp:ContentPlaceHolder runat="server" ID="HeadContent" >
-   </asp:ContentPlaceHolder>
+
+    <asp:ContentPlaceHolder ID="HeadContent" runat="server">
+    </asp:ContentPlaceHolder>
 
     <meta http-equiv="Cache-Control" content="no-cache" />
     <meta http-equiv="Pragma" content="no-cache" />
     <meta http-equiv="Expires" content="0" />
+    <meta name="description" content="@Html.Raw(ViewBag.description)" />
 
     <script language="javascript" type="text/javascript">
 
@@ -22,7 +24,9 @@
         function mayus(e) {
             e.value = e.value.toUpperCase();
         }
+
     </script>
+
     <!-- Estilo para Agregar THEAD y TBODY a GridView. -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery-footable/0.1.0/css/footable.min.css" rel="stylesheet" type="text/css" />
 
@@ -31,126 +35,334 @@
     <link href="~/Styles/panel_message.css" rel="stylesheet" type="text/css" />
     <link href="~/Styles/GridView.css" rel="stylesheet" type="text/css" />
     <link href="~/Styles/fuentes.css" rel="stylesheet" type="text/css" />
+    <link href="Styles/pagination-ys.css" rel="stylesheet" type="text/css" />
+
+    <%--<link href="Styles/menu-style.css" rel="stylesheet" type="text/css" />--%>
+    <%--<link href="Content/bootstrap.min.css" rel="stylesheet" type="text/css" />--%>
+    <%--<link href="Content/bootstrap.min.css" rel="stylesheet" type="text/css" />--%>
 
     <style type="text/css">
-        .style1
-        {
+        .style1 {
             width: 180px;
         }
 
-        .style2
-        {
+        .style2 {
             width: 880px;
         }
 
-        .style3
-        {
+        .style3 {
             width: 180px;
         }
 
-        #topContent
-        { height: 10%; width: 100%; }
+        #topContent {
+            height: 10%;
+            width: 100%;
+        }
 
-        #mainContent
-        { height: 80%; width: 100%; }
+        #menuContent {
+            height: 10%;
+            width: 100%;
+        }
+
+        #mainContent {
+            height: 80%;
+            width: 100%;
+        }
 
         #footerContent
+        { clear: both; }
+
+/*        
+        #footerContent 
         { height: 10%; width: 100%; }
 
-        .headerCssClass{  
-            background-color:#c33803;  
-            color:white;
-            border: 1px solid black;  
-            padding: 4px;  
-        }  
+*/
 
-        .contentCssClass{  
-            background-color:#e59a7d;  
-            color:black;  
-            border: 1px dotted black;  
-            padding: 4px;  
+        .headerCssClass {
+            background-color: #c33803;
+            color: white;
+            border: 1px solid black;
+            padding: 4px;
         }
 
-        .headerSelectedCss{  
-            background-color:#808080;  
-            color:white;  
-            border: 1px solid black;  
-            padding: 4px;  
+        .contentCssClass {
+            background-color: #e59a7d;
+            color: black;
+            border: 1px dotted black;
+            padding: 4px;
         }
 
+        .headerSelectedCss {
+            background-color: #808080;
+            color: white;
+            border: 1px solid black;
+            padding: 4px;
+        }
 
         #banners125 {
-        margin: 0; padding: 0;
-        width:100%;
-        overflow-x: hidden;
-        display:inline-block;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            overflow-x: hidden;
+            display: inline-block;
         }
 
-        .foter  {
-        position: fixed;
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        background-color: mediumturquoise;
-        color: white;
-        margin-top: 8rem;
-        text-align: center;
-        bottom: 0;
+        .footer {
+            position: fixed;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            background-color: mediumturquoise;
+            color: white;
+            margin-top: 8rem;
+            text-align: center;
+            bottom: 0;
+        }
+
+
+        /* empieza los estilos del menu*/
+
+        header {
+            background: #333;
+            color: #eee;
+            width: 100%;
+        }
+
+        input#abrir-cerrar {
+            visibility: hidden;
+            position: absolute;
+            top: -9999px;
+        }
+
+
+        label[for="abrir-cerrar"] {
+            cursor: pointer;
+            padding: 1rem;
+            /*background-color:#333;*/
+            background-color: mediumturquoise;
+            color: #fff;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .cerrar {
+            display: none;
+        }
+
+        #sidebar {
+            width: 0;
+        }
+
+        #contenido {
+            margin-left: 0;
+        }
+
+        input#abrir-cerrar:checked ~ #sidebar {
+            width: 600px;
+        }
+
+        input#abrir-cerrar:checked + label[for="abrir-cerrar"], input#abrir-cerrar:checked ~ #contenido {
+            margin-left: 0px;
+            transition: margin-left .4s;
+        }
+
+
+            input#abrir-cerrar:checked + label[for="abrir-cerrar"] .cerrar {
+                display: inline;
+            }
+
+            input#abrir-cerrar:checked + label[for="abrir-cerrar"] .abrir {
+                display: none;
+            }
+
+        .sidebar {
+            position: fixed;
+            height: 85%; /*782px*/
+            width: 0;
+            top: 80px;
+            left: 0;
+            z-index: 1;
+            /*background-color: #00324b;*/
+            background-color: #f6f6f6;
+            overflow-x: hidden;
+            transition: 0.4s;
+            padding: 1rem 0;
+            box-sizing: border-box;
+        }
+
+            .sidebar .boton-cerrar {
+                position: absolute;
+                top: 0.5rem;
+                right: 1rem;
+                font-size: 2rem;
+                display: block;
+                padding: 0;
+                line-height: 1.5rem;
+                margin: 0;
+                height: 32px;
+                width: 32px;
+                text-align: center;
+                vertical-align: top;
+            }
+
+            .sidebar ul, .sidebar li {
+                margin: 0;
+                padding: 0;
+                list-style: none inside;
+            }
+
+            .sidebar ul {
+                margin: 4rem auto;
+                display: block;
+                width: 100%;
+                min-width: 200px;
+            }
+
+            .sidebar a {
+                display: block;
+                font-size: 120%;
+                color: #eee;
+                text-decoration: none;
+            }
+
+                .sidebar a:hover {
+                    color: #fff;
+                    background-color: #f90;
+                }
+
+        h1 {
+            color: #f90;
+            font-size: 180%;
+            font-weight: normal;
+        }
+
+        #contenido {
+            transition: margin-left .4s;
+            padding: 1rem;
+        }
+
+        .abrir-cerrar {
+            color: #2E88C7;
+            font-size: 1rem;
         }
     </style>
+
 </head>
 <body>
     <form id="form1" runat="server" enctype="multipart/form-data">
-    <div id="topContent" >
-    <!-- <a href="Default.aspx">Control De Horas</a> -->
-<%--        
-        <div id="banners125">
-            <asp:Image ID="imgBanner" Width="100%" Height="120px" runat="server" ImageUrl="~/Images/banner_codise.png" />
-        </div>
---%>
 
-        <div class="row" style="background-color:mediumturquoise; width: 102%; height:80px;">
-            <div class="col-6">
-                <div class="row justify-content-start">
-                    <div class="col-4 my-1 ps-5">
-                        <asp:Image ID="ImgCodise" Width="60px" Height="70px" runat="server" ImageUrl="~/Images/banner_Codice_mediano.png" />
+        <div id="topContent">
+            <div class="d-flex justify-content-between align-items-center" style="background-color:mediumturquoise; width: 100%; height:80px; position:fixed; z-index:51; display: grid; top:0;" >
+                <div class="col-1 ms-5">
+                    <div class="row justify-content-start">
+                        <div class="col-4 ">
+                            <asp:Image ID="Image1" Width="60px" Height="70px" runat="server" ImageUrl="~/Images/banner_Codice_mediano.png" />
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-6">
-                <div class="row justify-content-end">
-                    <div class="col-xl-4 col-lg-5 col-md-6 col-sm-6 justify-content-end my-2 pe-5">
+
+                <div class="col-2 ms-5">
+                    <div class="row justify-content-start">
                         <asp:Image ID="ImgPeacock" Width="170px" Height="50px" runat="server" ImageUrl="~/Images/banner_Peacock.png" />
                     </div>
                 </div>
+
             </div>
         </div>
-<%--    <table>
-        <tr>
-            <td class="style1">
-            <!--    <asp:Image ID="Image1" runat="server" Height="120px" ImageUrl="~/Images/imgItnow.jpeg" Width="224px" /> -->
-            </td>
-            <td class="style2" align="center">
-            <!--    <h2 class="h2 mb-3 fw-normal" style="font-family: Arial, Helvetica, sans-serif">Itnow Technologies de México S.A. de C.V.</h2> -->
-            </td>
-            <td class="style3">
-            </td>
-        </tr>
-        </table>--%>
-    </div>
-    <div id="mainContent" >
-        <section class="content-wrapper main-content clear-fix">
-            <asp:ContentPlaceHolder runat="server" ID="MainContent" >
-             <%--Aqui dentro van los objetos de nuestro web forma--%>
-         </asp:ContentPlaceHolder>
-        </section>
 
-    <!-- <friendlyUrls:ViewSwitcher runat="server" /> -->
-    </div>
+        <div id="menuContent" class="row" style="background-color:white; width: 100%; height:60px; position:fixed; z-index:51; display: grid; top:80px;">
+            <div class="col-2 ms-5 mt-2">
+                <button class="navbar-toggler" id="BtnMenu" type="button" runat="server" visible="false" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" style="position:fixed; z-index:51; display: grid; top:80px; left:50px;">
+                    <span class="navbar-toggler-icon" style="font-size: 38px;">&#9776;<span class="ms-2" style="font-size: 23px;">Menú</span></span>
+                </button>
+                <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menú</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </div>
+                    <hr class="dropdown-divider" />
+                    <div class="offcanvas-body">
+                        <div class="row mx-2 mb-4">
+                            <div class="card mb-3" style="background-color:#F6F6F6;">
+                                <div class="row g-0">
+                                    <%--<div class="col-md-4">
+                                    <asp:Image ID="ImgMenuPerfil" runat="server" ImageUrl="Images/default.png" CssClass="img-fluid rounded-start" />
+                                </div>--%>
+                                    <div class="col-md-8">
+                                        <div class="card-body">
+                                            <div class="">
+                                                <asp:Label ID="LblMenuBienvenido" runat="server" Text="Bienvenido:" Font-Size="Medium" CssClass="card-text"></asp:Label>
+                                            </div>
+                                            <div class="">
+                                                <asp:Label ID="LblMenuUsuario" runat="server" Text="Desarrollador" Font-Size="Larger" CssClass="card-title"></asp:Label>
+                                            </div>
+                                            <%--<div class="">
+                                                <asp:Label ID="LblMenuPrivilegios" runat="server" Text="Administrador" Font-Size="Small" CssClass="card-text text-muted"></asp:Label>
+                                            </div>--%>
+                                        </div>
+                                    </div>
+                                    <div class="col-4 d-flex justify-content-center align-items-center">
+                                        <div class="">
+                                            <asp:ImageButton ID="btnImgMenuCardLogout" runat="server" ImageUrl="Images/logout_icon.png" Width="30px" Height="30px" OnClick="btnImgMenuCardLogout_Click" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="">
+                            </div>
+                        </div>
+                        
+                        <%--Aqui dentro van el Menu Dinamico--%>
+                        <asp:Menu ID="Menu_Dinamico" runat="server" Orientation="Vertical"
+                            MaximumDynamicDisplayLevels="2"
+                            DynamicHorizontalOffset="2" Font-Names="Tahoma" Font-Size="1.0em"
+                            ForeColor="#666666" StaticSubMenuIndent="10px">
 
-    <div class="text-center" style="background-color:mediumturquoise; width:100%; height:8%; color:white; position:fixed; display: grid; bottom:0;">
-            <h7 class="h7 mt-3 fw-bold">© 2023 Todos los derechos reservados |Itnow Technologies de México S.A. de C.V.</h7>
-    </div>
+                            <DynamicHoverStyle BackColor="#666666" ForeColor="White" />
+                            <DynamicMenuItemStyle HorizontalPadding="10px" VerticalPadding="4px" />
+                            <DynamicMenuStyle BackColor="#f6f6f6" />
+                            <DynamicSelectedStyle BackColor="#dddddd" />
+
+                            <StaticHoverStyle BackColor="#666666" ForeColor="White" />
+                            <StaticMenuItemStyle HorizontalPadding="10px" VerticalPadding="4px" />
+                            <StaticSelectedStyle BackColor="#dddddd" />
+                        </asp:Menu>
+                        
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-1 me-0">
+                <div class="input-group justify-content-end">
+<%--                    
+                    <button id="btnMnddlUsuario" type="button" runat="server" visible="false" class="btn btn-outline-light dropdown-toggle " data-bs-toggle="dropdown" aria-expanded="false" style="border: 0px;">
+                        <span class="">
+                            <asp:Label ID="LblMenuDdlUsuario" runat="server" Text="Desarrollador" Visible="false"></asp:Label>
+                        </span>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="Login.aspx">Cerrar seccion</a></li>
+                    </ul>
+--%>
+                </div>
+            </div>
+        </div>
+
+        <div id="mainContent" style="position: relative; top: 130px; z-index: 50;">
+            <asp:ContentPlaceHolder ID="MainContent" runat="server">
+                <%-- Aqui dentro van los objetos de nuestro web forma --%>
+            </asp:ContentPlaceHolder>
+        </div>
+
+        <div id="footerContent">
+            <asp:ContentPlaceHolder id="FooterContent" runat="server">
+                <div class="text-center" style="background-color:mediumturquoise; width:100%; height:8%; color:white; position:fixed; z-index:51; display: grid; bottom:0;">
+                    <h7 class="h7 mt-3 fw-bold">© 2023 Todos los derechos reservados | Itnow Technologies de México S.A. de C.V. </h7>
+                </div>
+            </asp:ContentPlaceHolder>                
+        </div>
 
     </form>
+    <script src="Scripts/bootstrap.bundle.min.js" type="text/javascript"></script>
+
 </body>
 </html>

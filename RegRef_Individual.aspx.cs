@@ -26,18 +26,20 @@ namespace WebItNow
 
         protected void BtnRegresar_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Menu.aspx");
+            // Response.Redirect("Menu.aspx", true);
+            Response.Redirect("Mnu_Dinamico.aspx", true);
         }
 
         protected void BtnEnviar_Click(object sender, EventArgs e)
         {
-            if (ddlProceso.SelectedValue != "0")
+            //* Validar si el usuario existe o es nuevo
+            if (TxtRef.Text != "" && TxtEmail.Text != "" && TxtAsegurado.Text != "")
             {
-                if (ddlSubProceso.SelectedValue != "0")
+                if (ddlProceso.SelectedValue != "0")
                 {
-                    //* Validar si el usuario existe o es nuevo
-                    if (TxtRef.Text != "" && TxtEmail.Text != "")
+                    if (ddlSubProceso.SelectedValue != "0")
                     {
+                    
                         // Insertar Registo Tabla tbReferencia (Referencias Individuales)
                         int result = Add_tbReferencia(TxtRef.Text, TxtEmail.Text, TxtAsegurado.Text, TxtTelefono.Text, Convert.ToInt32(ddlProceso.SelectedValue), Convert.ToInt32(ddlSubProceso.SelectedValue), 3, "Insert");
 
@@ -47,8 +49,23 @@ namespace WebItNow
                             int idStatus = 1;
                             int valor = Add_tbEstadoDocumento(TxtRef.Text, Convert.ToInt32(ddlProceso.SelectedValue), Convert.ToInt32(ddlSubProceso.SelectedValue), idStatus);
 
+                            string sAsunto = "Creación de Reporte: " + TxtRef.Text;
+                            string sBody = "Estimado Cliente: \n " + " \n ";
+
+                            sBody += "Enviamos este mensaje para hacer de su conocimiento que hemos iniciado la atención del reporte: " + TxtRef.Text + " \n " +
+                            "Le informamos que a la brevedad alguno de nuestros colaboradores se estará poniendo en contacto con usted, o en su defecto, \n " +
+                            "le estaremos solicitando la información necesaria a este correo electrónico. \n " +
+                            "En caso de cualquier duda, puede ingresar a este vínculo, donde podrá buscar y encontrar lo que requiera: \n " +
+                            "https://peacock.zendesk.com/hc/es-419" + "\n \n ";
+                            sBody += "Alternativamente, puede contactarnos en cualquiera de los siguientes medios, donde con gusto lo atenderemos: \n " + " \n " +
+                            "* Asistente virtual en " + "https://www.peacock.claims \n " +
+                            "* WhatsApp: + 52 55-9035-4806 \n " +
+                            "* Correo electrónico: " + "contacto@peacock.claims \n " +
+                            "* Vía Teléfono: + 5255-8525-7200 y +52 55-8932-4700 \n " + " \n ";
+                            sBody += "Agradecemos de antemano su confianza y preferencia. Esperamos que su experiencia de servicio sea satisfactoria.";
+
                             var email = new EnvioEmail();
-                            int Envio_Ok = email.EnvioMensaje(TxtRef.Text.Trim(), TxtEmail.Text.Trim(), "Registro Referencia ", string.Empty);
+                            int Envio_Ok = email.EnvioMensaje(TxtRef.Text.Trim(), TxtEmail.Text.Trim(), sAsunto, sBody);
 
                             //EnvioMensaje(TxtUsu.Text.Trim(), TxtEmail.Text.Trim());
 
@@ -62,26 +79,33 @@ namespace WebItNow
 
                             // Response.Redirect("Login.aspx");
                             Lbl_Message.Visible = false;
+                            
+                            RequiredFieldValidator1.Display = ValidatorDisplay.None;
+                            RequiredFieldValidator2.Display = ValidatorDisplay.None;
+                            RequiredFieldValidator3.Display = ValidatorDisplay.None;
+                            RequiredFieldValidator4.Display = ValidatorDisplay.None;
+                            RequiredFieldValidator5.Display = ValidatorDisplay.None;
+
                         }
+                    
                     }
                     else
                     {
                         Lbl_Message.Visible = true;
-                        Lbl_Message.Text = "* Estos campos son obligatorios";
+                        Lbl_Message.Text = "* Seleccione un SubProceso";
                     }
                 }
                 else
                 {
-                    LblMessage.Text = "* Seleccione un SubProceso";
-                    this.mpeMensaje.Show();
-                }
+                    Lbl_Message.Visible = true;
+                    Lbl_Message.Text = "* Seleccione un Proceso";
+               }
             }
             else
             {
-                LblMessage.Text = "* Seleccione un Proceso";
-                this.mpeMensaje.Show();
-           }
-
+                Lbl_Message.Visible = true;
+                Lbl_Message.Text = "* Estos campos son obligatorios";
+            }
         }
 
         protected void BtnClose_Click(object sender, EventArgs e)
@@ -150,7 +174,7 @@ namespace WebItNow
                 // Consulta a la tabla Tipo de Documento
                 string strQuery = "Select IdTpoDocumento, Descripcion From ITM_06 " +
                                   " Where IdProceso = " + pProceso + "" +
-                                  "   And IdSubProceso = " + pSubProceso + " And Status = " + pIdStatus + "";
+                                  "   And IdSubProceso = " + pSubProceso + " And IdStatus = " + pIdStatus + "";
 
                 SqlCommand cmd = new SqlCommand(strQuery, Conecta.ConectarBD);
 
@@ -266,8 +290,10 @@ namespace WebItNow
             {
                 if (control is TextBox)
                     ((TextBox)control).Text = string.Empty;
+             // else if (control is DropDownList)
+             //     ((DropDownList)control).Items.Clear();
                 else if (control is DropDownList)
-                    ((DropDownList)control).Items.Clear();
+                    ((DropDownList)control).SelectedIndex = 0;
                 else if (control is RadioButtonList)
                     ((RadioButtonList)control).ClearSelection();
                 else if (control is CheckBoxList)

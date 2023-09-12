@@ -2,6 +2,8 @@
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
+<%@ OutputCache Location="None" %>
+
     <script type="text/javascript" src="Scripts/jquery-3.4.1.min.js"></script>
 
     <script language="javascript" type="text/javascript">
@@ -24,6 +26,10 @@
             //
         }
 
+        function timedRefresh(timeoutPeriod) {
+            setTimeout("location.reload(true);", timeoutPeriod);
+        }
+
         $(function () {
             $('[id*=GridView1]').footable();
         });
@@ -33,10 +39,70 @@
             updateProgress.style.display = "block";
         }
 
-        $('form').live("submit", function () {
-            ShowProgress();
-        });
+        //$('form').live("submit", function () {
+        //    ShowProgress();
+        //});
 
+    </script>
+
+    <script type="text/javascript">
+        var _validFilejpeg = [".jpeg", ".jpg", ".bmp", ".pdf", ".zip", ".rar"];
+
+        function validateForSize(oInput, minSize, maxSizejpeg) {
+            //if there is a need of specifying any other type, just add that particular type in var  _validFilejpeg
+            if (oInput.type == "file") {
+                var sFileName = oInput.value;
+                if (sFileName.length > 0) {
+                    var blnValid = false;
+                    for (var j = 0; j < _validFilejpeg.length; j++) {
+                        var sCurExtension = _validFilejpeg[j];
+                        if (sFileName.substr(sFileName.length - sCurExtension.length, sCurExtension.length)
+                            .toLowerCase() == sCurExtension.toLowerCase()) {
+                            blnValid = true;
+                            break;
+                        }
+                    }
+
+                    if (!blnValid) {
+
+                        document.getElementById('<%=LblMessage.ClientID %>').innerHTML = 'El archivo tiene un formato invalido';
+                        $find('bMpeModalCargando').show();
+
+                        //alert("Sorry, this file is invalid, allowed extension is: " + _validFilejpeg.join(", "));
+                        oInput.value = "";
+                        return false;
+                    }
+                }
+            }
+
+            fileSizeValidatejpeg(oInput, minSize, maxSizejpeg);
+        }
+
+        function fileSizeValidatejpeg(fdata, minSize, maxSizejpeg) {
+            if (fdata.files && fdata.files[0]) {
+                var fsize = fdata.files[0].size / 1024; //The files property of an input element returns a FileList. fdata is an input element,fdata.files[0] returns a File object at the index 0.
+                //alert(fsize)
+                if (fsize > maxSizejpeg) {
+
+                    document.getElementById('<%=LblMessage.ClientID %>').innerHTML = 'El documento Excede los 120 MB';
+                    $find('bMpeModalCargando').show();
+
+                    //alert('This file size is: ' + fsize.toFixed(2) +
+                    //    "KB. Files should be in " + (minSize) + " to " + (maxSizejpeg) + " KB ");
+
+                    fdata.value = ""; //so that the file name is not displayed on the side of the choose file button
+                    return false;
+                } else if (fsize < minSize){
+                    document.getElementById('<%=LblMessage.ClientID %>').innerHTML = 'El archivo esta dañado';
+                    $find('bMpeModalCargando').show();
+
+                    fdata.value = ""; // para que el nombre del archivo no se muestre al lado del botón de elegir archivo
+                    return false;
+                } else {
+                    console.log("");
+                }
+            }
+        }
     </script>
 
     <style type="text/css">
@@ -95,6 +161,7 @@
     </style>
 
 </asp:Content>
+
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
     <br />
@@ -169,8 +236,13 @@
         </div>
 
         <div class="form-group">
+<%--            
             <div class="input-group mx-auto pt-3">
                 <asp:FileUpload ID="FileUpload1" runat="server" CssClass="form-control"></asp:FileUpload>
+            </div>
+--%>
+            <div class="input-group mx-auto pt-3">
+                <input id="oFile" type="file" name="oFile" onchange="validateForSize(this,1,122880);" class="form-control" />
             </div>
         </div>
 
@@ -184,7 +256,7 @@
                 <div class="d-grid gap-4 d-flex justify-content-center">
                     <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
                         <ContentTemplate>
-                            <asp:Button ID="BtnEnviar" runat="server" Font-Bold="True" Text="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Subir&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" OnClick="BtnEnviar_Click" OnClientClick="showProgress()" CssClass="btn btn-primary" />
+                            <asp:Button ID="BtnEnviar" runat="server" type="submit" Font-Bold="True" Text="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Subir&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" OnClick="BtnEnviar_Click" OnClientClick="showProgress()" CssClass="btn btn-primary" />
                         </ContentTemplate>
                     </asp:UpdatePanel>
                     <asp:Button ID="BtnRegresar" runat="server" Font-Bold="True" Text="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Regresar&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" OnClick="BtnRegresar_Click" CssClass="btn btn-outline-primary me-md-2" />
@@ -215,8 +287,8 @@
 
     <div class="form-group">
         <div class="d-grid col-6 mx-auto">
-            <ajaxToolkit:ModalPopupExtender ID="mpeMensaje" runat="server" PopupControlID="pnlMensaje"
-                TargetControlID="lblOculto" BackgroundCssClass="FondoAplicacion" OnOkScript="mpeMensajeOnOk()">
+            <ajaxToolkit:ModalPopupExtender ID="mpeMensaje" runat="server" PopupControlID="pnlMensaje" 
+                TargetControlID="lblOculto" BackgroundCssClass="FondoAplicacion" OnOkScript="mpeMensajeOnOk()" BehaviorID="bMpeModalCargando" >
             </ajaxToolkit:ModalPopupExtender>
             <asp:Label ID="lblOculto" runat="server" Text="Label" Style="display: none;" />
         </div>
@@ -291,7 +363,7 @@
         </Triggers>
 </asp:UpdatePanel>
 
-<asp:UpdateProgress ID="UpdateProgress1" runat="server" AssociatedUpdatePanelID="UpdatePanel1" DynamicLayout="true">
+<asp:UpdateProgress ID="UpdateProgress1" runat="server" AssociatedUpdatePanelID="UpdatePanel" DynamicLayout="true">
     <ProgressTemplate>
     <div id="divImage" class ="loading">
         <div class="center">

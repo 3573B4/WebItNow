@@ -23,7 +23,6 @@
     </script>
 </asp:Content>
 
-
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
 
@@ -83,7 +82,7 @@
             <Columns>
                 <asp:BoundField DataField="IdTpoDocumento" HeaderText="Id Documento" />
                 <asp:BoundField DataField="Descripcion" HeaderText="Tipo documento" />
-                <asp:BoundField DataField="DescrpBrev" HeaderText="Instrucciones" />
+                <asp:BoundField DataField="DescripBrev" HeaderText="Instrucciones" />
                 <asp:BoundField DataField="IdProceso" >
                     <ItemStyle Width="0px" Font-Size="0pt" />
                 </asp:BoundField>
@@ -95,7 +94,7 @@
         </div>
 
         <div class="d-grid gap-4 d-flex justify-content-center mt-1 mb-5 pb-4">
-            <asp:Button ID="BtnRegresar" runat="server" Text="Regresar" Font-Bold="True" OnClick="BtnRegresar_Click" CssClass="btn btn-link" />
+            <asp:Button ID="BtnRegresar" runat="server" Text="Regresar" Font-Bold="True" OnClick="BtnRegresar_Click" CssClass="btn btn-link" Visible="false" />
         </div>
     </div>
     <br />

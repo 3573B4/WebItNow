@@ -1,24 +1,9 @@
 ﻿using System;
 using System.IO;
-using System.Collections.Generic;
 using System.Configuration;
-using System.Linq;
-using System.Web;
-using System.Runtime.InteropServices;
-
-using Azure;
-using Azure.Storage.Blobs;
-using Azure.Storage.Sas;
-using Azure.Storage.Files.Shares;
-using Azure.Storage.Files.Shares.Models;
-
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Net;
-
-using System.Data;
 using System.Data.SqlClient;
 
+using Azure.Storage.Files.Shares;
 
 
 namespace WebItNow
@@ -48,6 +33,44 @@ namespace WebItNow
         public bool valTextGrande(string textGrande)
         {
             char[] a = { '{', '}', '/', '[', ']', '`', '^', '~', '+', '*', '´', '¨', '¿', '¡', '?', '\\', '=', ')', '(', '&', '%', '$', '#', '"', '!', '|', '°', '¬', '-', '_' };
+
+            for (int i = 0; i < textGrande.Length; i++)
+            {
+                for (int j = 0; j < a.Length; j++)
+                {
+                    if (textGrande[i] == a[j])
+                    {
+
+                        return false;
+                        //break;
+                    }
+                }
+            }
+            return true;
+        }
+
+        public bool valTxtNumeros(string textGrande)
+        {
+            char[] a = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
+
+            for (int i = 0; i < textGrande.Length; i++)
+            {
+                for (int j = 0; j < a.Length; j++)
+                {
+                    if (textGrande[i] == a[j])
+                    {
+
+                        return false;
+                        //break;
+                    }
+                }
+            }
+            return true;
+        }
+
+        public bool valTxtHora(string textGrande)
+        {
+            char[] a = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', ':' };
 
             for (int i = 0; i < textGrande.Length; i++)
             {
@@ -157,6 +180,7 @@ namespace WebItNow
         {
             Conecta.Abrir();
         }
+
 
         private void Actualiza_ITM_04(string sReferencia, string pUrl_Path, string pNom_Imagen, string sTpoDocumento)
         {

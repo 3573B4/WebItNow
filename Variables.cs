@@ -23,8 +23,12 @@ namespace WebItNow
         public static string wQuery;
         public static string wPrivilegios;
         public static string wEdoDoc;
-        public static Boolean wDownload = true;
 
+        public static Boolean wDownload = true;
+        public static Boolean wExiste = true;
+
+        public static int wProceso;
+        public static int wIdNota;
 
         public struct UsPrivilegios
         {
@@ -50,8 +54,8 @@ namespace WebItNow
         // Carga Totales Nomina
         public static int wId_Carga;
         public static int wCasos_B;
-        public static decimal wAportaciones_B;
         public static int wCasos_C;
+        public static decimal wAportaciones_B;
         public static decimal wAportaciones_C;
 
 

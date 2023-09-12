@@ -24,6 +24,15 @@ namespace WebItNow
         protected global::System.Web.UI.ScriptManager ScriptManager1;
 
         /// <summary>
+        /// Control UpdatePanel1.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UpdatePanel1;
+
+        /// <summary>
         /// Control LblRef.
         /// </summary>
         /// <remarks>
@@ -33,13 +42,13 @@ namespace WebItNow
         protected global::System.Web.UI.WebControls.Label LblRef;
 
         /// <summary>
-        /// Control RequiredFieldValidator4.
+        /// Control RequiredFieldValidator1.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator4;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator1;
 
         /// <summary>
         /// Control TxtRef.
@@ -60,13 +69,13 @@ namespace WebItNow
         protected global::System.Web.UI.WebControls.Label LblEmail;
 
         /// <summary>
-        /// Control RequiredFieldValidator1.
+        /// Control RequiredFieldValidator2.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator1;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator2;
 
         /// <summary>
         /// Control regEmail.
@@ -96,13 +105,13 @@ namespace WebItNow
         protected global::System.Web.UI.WebControls.Label LblAsegurado;
 
         /// <summary>
-        /// Control RequiredFieldValidator2.
+        /// Control RequiredFieldValidator3.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator2;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator3;
 
         /// <summary>
         /// Control TxtAsegurado.
@@ -123,15 +132,6 @@ namespace WebItNow
         protected global::System.Web.UI.WebControls.Label LblTelefono;
 
         /// <summary>
-        /// Control RequiredFieldValidator5.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator5;
-
-        /// <summary>
         /// Control TxtTelefono.
         /// </summary>
         /// <remarks>
@@ -148,6 +148,15 @@ namespace WebItNow
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label LblProceso;
+
+        /// <summary>
+        /// Control RequiredFieldValidator4.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator4;
 
         /// <summary>
         /// Control ddlProceso.
@@ -168,6 +177,15 @@ namespace WebItNow
         protected global::System.Web.UI.WebControls.Label LblSubProceso;
 
         /// <summary>
+        /// Control RequiredFieldValidator5.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator5;
+
+        /// <summary>
         /// Control ddlSubProceso.
         /// </summary>
         /// <remarks>
@@ -175,6 +193,15 @@ namespace WebItNow
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlSubProceso;
+
+        /// <summary>
+        /// Control chkPrivacidad.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox chkPrivacidad;
 
         /// <summary>
         /// Control Lbl_Message.

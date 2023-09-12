@@ -2,6 +2,7 @@
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
+<%@ OutputCache Location="None" %>;
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" type="text/javascript"></script>
     <style type="text/css">
         .txtAlign { Text-Align: right }
@@ -155,7 +156,8 @@
                                     <li><a class="dropdown-item" href="RegRef_Massive.aspx">Masivo</a></li>
                                 </ul>
                             </li>
-<%--                            
+                            <li><hr class="dropdown-divider"/></li>
+                            <li><a class="dropdown-item" href="Expediente.aspx">Alta Expediente</a></li>
                             <li><hr class="dropdown-divider"/></li>
                             <li><a class="dropdown-item" href="#">Consultar</a></li>
                             <li><hr class="dropdown-divider"/></li>
@@ -170,7 +172,6 @@
                             <li><a class="dropdown-item" href="#">Aprobar</a></li>
                             <li><hr class="dropdown-divider"/></li>
                             <li><a class="dropdown-item" href="#">Actualizar</a></li>
---%>
                         </ul>
                     </li>
                     <%--    <li class="nav-item">
@@ -191,7 +192,6 @@
                             <li><a class="dropdown-item" href="Consulta_Document.aspx">Consultas</a></li>
                             <li><hr class="dropdown-divider"/></li>
                             <li><a class="dropdown-item" href="Catalog_TpoDocument.aspx">Alta tipo Documento</a></li>
-<%--
                             <li><hr class="dropdown-divider"/></li>
                             <li><a class="dropdown-item" href="#">Autorizar</a></li>
                             <li><hr class="dropdown-divider"/></li>
@@ -202,7 +202,7 @@
                             <li><a class="dropdown-item" href="#">Cancelar</a></li>
                             <li><hr class="dropdown-divider"/></li>
                             <li><a class="dropdown-item" href="#">Actualizar</a></li>
---%>
+
                         </ul>
                     </li>
 

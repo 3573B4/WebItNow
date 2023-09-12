@@ -2,7 +2,8 @@
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
-    
+<%@ OutputCache Location="None" %>
+
     <script language="javascript" type="text/javascript">
         
         var timer = setTimeout(function () {

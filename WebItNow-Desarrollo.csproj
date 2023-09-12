@@ -15,7 +15,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>WebItNow</RootNamespace>
     <AssemblyName>WebItNow</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
     <IISExpressSSLPort>44313</IISExpressSSLPort>
@@ -25,6 +25,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -49,6 +50,9 @@
     <Reference Include="AjaxControlToolkit">
       <HintPath>..\..\..\Documents\ASP.NET AJAX Control Toolkit\Bin\AjaxControlToolkit.dll</HintPath>
     </Reference>
+    <Reference Include="AspNet.ScriptManager.bootstrap, Version=5.2.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\AspNet.ScriptManager.bootstrap.5.2.3\lib\net45\AspNet.ScriptManager.bootstrap.dll</HintPath>
+    </Reference>
     <Reference Include="Azure.Core, Version=1.27.0.0, Culture=neutral, PublicKeyToken=92742159e12e44c8, processorArchitecture=MSIL">
       <HintPath>packages\Azure.Core.1.27.0\lib\net461\Azure.Core.dll</HintPath>
     </Reference>
@@ -66,6 +70,12 @@
     </Reference>
     <Reference Include="Azure.Storage.Queues, Version=12.1.1.0, Culture=neutral, PublicKeyToken=92742159e12e44c8, processorArchitecture=MSIL">
       <HintPath>packages\Azure.Storage.Queues.12.1.1\lib\netstandard2.0\Azure.Storage.Queues.dll</HintPath>
+    </Reference>
+    <Reference Include="BouncyCastle.Crypto, Version=1.9.0.0, Culture=neutral, PublicKeyToken=0e99375e54769942, processorArchitecture=MSIL">
+      <HintPath>packages\Portable.BouncyCastle.1.9.0\lib\net40\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
+    <Reference Include="BouncyCastle.Cryptography, Version=2.0.0.0, Culture=neutral, PublicKeyToken=072edcf4a5328938, processorArchitecture=MSIL">
+      <HintPath>packages\BouncyCastle.Cryptography.2.1.1\lib\net461\BouncyCastle.Cryptography.dll</HintPath>
     </Reference>
     <Reference Include="DocumentFormat.OpenXml, Version=2.11.3.0, Culture=neutral, PublicKeyToken=8fb06cb64d019a17, processorArchitecture=MSIL">
       <HintPath>packages\DocumentFormat.OpenXml.2.11.3\lib\net46\DocumentFormat.OpenXml.dll</HintPath>
@@ -97,6 +107,9 @@
     <Reference Include="Google.Apis.PlatformServices, Version=1.58.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
       <HintPath>packages\Google.Apis.1.58.0\lib\net45\Google.Apis.PlatformServices.dll</HintPath>
     </Reference>
+    <Reference Include="MailKit, Version=4.0.0.0, Culture=neutral, PublicKeyToken=4e064fe7c44a8f1b, processorArchitecture=MSIL">
+      <HintPath>packages\MailKit.4.0.0\lib\net48\MailKit.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Azure.KeyVault.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.Azure.KeyVault.Core.1.0.0\lib\net40\Microsoft.Azure.KeyVault.Core.dll</HintPath>
     </Reference>
@@ -105,6 +118,12 @@
     </Reference>
     <Reference Include="Microsoft.CodeAnalysis, Version=4.4.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.CodeAnalysis.Common.4.4.0\lib\netstandard2.0\Microsoft.CodeAnalysis.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Configuration.ConfigurationBuilders.Base, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Configuration.ConfigurationBuilders.Base.2.0.0\lib\Net471\Microsoft.Configuration.ConfigurationBuilders.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Configuration.ConfigurationBuilders.UserSecrets, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Configuration.ConfigurationBuilders.UserSecrets.2.0.0\lib\Net471\Microsoft.Configuration.ConfigurationBuilders.UserSecrets.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Exchange.WebServices, Version=15.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -155,6 +174,9 @@
     <Reference Include="Microsoft.WindowsAzure.Storage, Version=9.3.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>packages\WindowsAzure.Storage.9.3.2\lib\net45\Microsoft.WindowsAzure.Storage.dll</HintPath>
     </Reference>
+    <Reference Include="MimeKit, Version=4.0.0.0, Culture=neutral, PublicKeyToken=bede1c8a46c66814, processorArchitecture=MSIL">
+      <HintPath>packages\MimeKit.4.0.0\lib\net48\MimeKit.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>packages\Newtonsoft.Json.13.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -176,7 +198,6 @@
       <HintPath>packages\System.Configuration.ConfigurationManager.7.0.0\lib\net462\System.Configuration.ConfigurationManager.dll</HintPath>
     </Reference>
     <Reference Include="System.Data" />
-    <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data.OracleClient" />
     <Reference Include="System.Diagnostics.DiagnosticSource, Version=4.0.4.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
@@ -191,6 +212,13 @@
     </Reference>
     <Reference Include="System.IO, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>packages\System.IO.4.3.0\lib\net462\System.IO.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.IO.Compression.ZipFile, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>packages\System.IO.Compression.ZipFile.4.3.0\lib\net46\System.IO.Compression.ZipFile.dll</HintPath>
       <Private>True</Private>
       <Private>True</Private>
     </Reference>
@@ -217,6 +245,9 @@
       <Private>True</Private>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNet.WebApi.Client.5.2.7\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
     <Reference Include="System.Numerics" />
     <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
@@ -237,6 +268,7 @@
       <Private>True</Private>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Security.AccessControl, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>packages\System.Security.AccessControl.6.0.0\lib\net461\System.Security.AccessControl.dll</HintPath>
@@ -270,6 +302,7 @@
     <Reference Include="System.Security.Principal.Windows, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>packages\System.Security.Principal.Windows.5.0.0\lib\net461\System.Security.Principal.Windows.dll</HintPath>
     </Reference>
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.ServiceProcess" />
     <Reference Include="System.Text.Encoding.CodePages, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>packages\System.Text.Encoding.CodePages.6.0.0\lib\net461\System.Text.Encoding.CodePages.dll</HintPath>
@@ -289,8 +322,31 @@
       <HintPath>packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNet.WebPages.3.2.9\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNet.WebApi.Core.5.2.7\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNet.WebApi.WebHost.5.2.7\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.9.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNet.Mvc.5.2.9\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNet.Razor.3.2.9\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNet.WebPages.3.2.9\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNet.WebPages.3.2.9\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNet.WebPages.3.2.9\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
     <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
@@ -304,9 +360,6 @@
       <Private>True</Private>
       <HintPath>packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
     </Reference>
-    <Reference Include="AspNet.ScriptManager.bootstrap">
-      <HintPath>packages\AspNet.ScriptManager.bootstrap.3.4.1\lib\net45\AspNet.ScriptManager.bootstrap.dll</HintPath>
-    </Reference>
     <Reference Include="AspNet.ScriptManager.jQuery">
       <HintPath>packages\AspNet.ScriptManager.jQuery.3.4.1\lib\net45\AspNet.ScriptManager.jQuery.dll</HintPath>
     </Reference>
@@ -319,6 +372,7 @@
     <Reference Include="System.Web.Optimization, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
       <HintPath>packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
     </Reference>
+    <Reference Include="System.Xml.Linq" />
     <Reference Include="Uno.Diagnostics.Eventing, Version=255.255.255.255, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\Uno.Diagnostics.Eventing.2.0.1\lib\netstandard2.0\Uno.Diagnostics.Eventing.dll</HintPath>
     </Reference>
@@ -350,15 +404,34 @@
   <ItemGroup>
     <Content Include="About.aspx" />
     <Content Include="Access.aspx" />
+    <Content Include="agregarNivelArchivos.aspx" />
     <Content Include="Captcha.aspx" />
     <Content Include="Catalog_TpoDocument.aspx" />
     <Content Include="Consulta_Document.aspx" />
-    <Content Include="Content\bootstrap-theme.css" />
-    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap-grid.css" />
+    <Content Include="Content\bootstrap-grid.min.css" />
+    <Content Include="Content\bootstrap-grid.rtl.css" />
+    <Content Include="Content\bootstrap-grid.rtl.min.css" />
+    <Content Include="Content\bootstrap-reboot.css" />
+    <Content Include="Content\bootstrap-reboot.min.css" />
+    <Content Include="Content\bootstrap-reboot.rtl.css" />
+    <Content Include="Content\bootstrap-reboot.rtl.min.css" />
+    <Content Include="Content\bootstrap-utilities.css" />
+    <Content Include="Content\bootstrap-utilities.min.css" />
+    <Content Include="Content\bootstrap-utilities.rtl.css" />
+    <Content Include="Content\bootstrap-utilities.rtl.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\bootstrap.rtl.css" />
+    <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\icon_buscar.png" />
+    <Content Include="Images\logout_icon.png" />
+    <Content Include="Mnu_Dinamico.aspx" />
     <Content Include="Descargas.aspx" />
+    <Content Include="Document_Files.aspx" />
+    <Content Include="Document_Fotos.aspx" />
+    <Content Include="Document_Notas.aspx" />
     <Content Include="Images\aceptar.ico" />
     <Content Include="Images\aceptar.png" />
     <Content Include="Images\aceptar_new.png" />
@@ -374,51 +447,82 @@
     <Content Include="Images\descargar_new.png" />
     <Content Include="Images\edit.jpg" />
     <Content Include="Images\email-icon.png" />
+    <Content Include="Images\envia_doc.png" />
     <Content Include="Images\excel.png" />
     <Content Include="Images\imgItnow.jpeg" />
     <Content Include="Images\loader.gif" />
     <Content Include="Images\loading.gif" />
     <Content Include="Images\rechazar_new.png" />
     <Content Include="Images\Spinner-1s-200px.gif" />
-    <Content Include="Images\icono-Subir-Archivo-morado.png" />
+    <Content Include="Images\subir-archivo.png" />
+    <Content Include="Images\visor_doc.jpg" />
     <Content Include="Images\whatsapp-logo_icon.png" />
     <Content Include="Menu.aspx" />
+    <Content Include="Menu_Dinamico.aspx" />
     <Content Include="Page_Message.aspx" />
     <Content Include="Register_User.aspx" />
     <Content Include="RegRef_Individual.aspx" />
     <Content Include="Request_Document.aspx" />
     <Content Include="Request_Document_1.aspx" />
     <Content Include="Review_Document.aspx" />
+    <Content Include="Scripts\bootstrap.bundle.js" />
+    <Content Include="Scripts\bootstrap.bundle.min.js" />
+    <Content Include="Scripts\bootstrap.esm.js" />
+    <Content Include="Scripts\bootstrap.esm.min.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\footable.min.js" />
-    <None Include="Properties\PublishProfiles\CODICE1 - Web Deploy.pubxml" />
+    <Content Include="Scripts\jquery.mousewheel-3.0.6.min.js" />
+    <Content Include="Scripts\jquery.rondell.min.js" />
+    <Content Include="Styles\jquery.rondell.css" />
+    <Content Include="Styles\menu-style.css" />
+    <Content Include="Styles\skinC.css" />
+    <Content Include="WebForm1.aspx" />
+    <Content Include="WebForm2.aspx" />
+    <Content Include="WebService.asmx" />
+    <Content Include="Content\bootstrap.rtl.min.css.map" />
+    <Content Include="Content\bootstrap.rtl.css.map" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-utilities.rtl.min.css.map" />
+    <Content Include="Content\bootstrap-utilities.rtl.css.map" />
+    <Content Include="Content\bootstrap-utilities.min.css.map" />
+    <Content Include="Content\bootstrap-utilities.css.map" />
+    <Content Include="Content\bootstrap-reboot.rtl.min.css.map" />
+    <Content Include="Content\bootstrap-reboot.rtl.css.map" />
+    <Content Include="Content\bootstrap-reboot.min.css.map" />
+    <Content Include="Content\bootstrap-reboot.css.map" />
+    <Content Include="Content\bootstrap-grid.rtl.min.css.map" />
+    <Content Include="Content\bootstrap-grid.rtl.css.map" />
+    <Content Include="Content\bootstrap-grid.min.css.map" />
+    <Content Include="Content\bootstrap-grid.css.map" />
+    <Content Include="Main.Master" />
+    <Content Include="3secciones.Master" />
+    <None Include="Properties\PublishProfiles\WebItNow-Desarrollo - Web Deploy.pubxml" />
+    <Content Include="Scripts\bootstrap.min.js.map" />
+    <Content Include="Scripts\bootstrap.js.map" />
+    <Content Include="Scripts\bootstrap.esm.min.js.map" />
+    <Content Include="Scripts\bootstrap.esm.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.min.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.js.map" />
     <None Include="Scripts\jquery-1.4.1-vsdoc.js" />
     <Content Include="Scripts\jquery-1.4.1.js" />
     <Content Include="Scripts\jquery-1.4.1.min.js" />
     <Content Include="Scripts\loading-bar.js" />
     <Content Include="Scripts\loading-bar.min.js" />
+    <Content Include="Expediente.aspx" />
     <Content Include="Site.Master" />
     <Content Include="Styles\center_controls.css" />
     <Content Include="favicon.ico" />
-    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Forgot-Password.aspx" />
     <Content Include="Global.asax" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Content\bootstrap.min.css.map" />
-    <Content Include="Content\bootstrap.css.map" />
-    <Content Include="Content\bootstrap-theme.min.css.map" />
-    <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Images\Itnow.jpg" />
     <Content Include="Images\search_find.png" />
     <Content Include="Login.aspx" />
-    <Content Include="Main.Master" />
+    <Content Include="Main_bk.Master" />
     <Content Include="fonts\Tahoma-Bold.ttf" />
     <Content Include="fonts\Tahoma.ttf" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
@@ -462,6 +566,82 @@
     <Content Include="Site.Mobile.Master" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Code\ThumbGen.cs" />
+    <Compile Include="3secciones.Master.cs">
+      <DependentUpon>3secciones.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="3secciones.Master.designer.cs">
+      <DependentUpon>3secciones.Master</DependentUpon>
+    </Compile>
+    <Compile Include="agregarNivelArchivos.aspx.cs">
+      <DependentUpon>agregarNivelArchivos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="agregarNivelArchivos.aspx.designer.cs">
+      <DependentUpon>agregarNivelArchivos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="clsStrings.cs" />
+    <Compile Include="Main.Master.cs">
+      <DependentUpon>Main.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Main.Master.designer.cs">
+      <DependentUpon>Main.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Mnu_Dinamico.aspx.cs">
+      <DependentUpon>Mnu_Dinamico.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Mnu_Dinamico.aspx.designer.cs">
+      <DependentUpon>Mnu_Dinamico.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Document_Files.aspx.cs">
+      <DependentUpon>Document_Files.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Document_Files.aspx.designer.cs">
+      <DependentUpon>Document_Files.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Document_Fotos.aspx.cs">
+      <DependentUpon>Document_Fotos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Document_Fotos.aspx.designer.cs">
+      <DependentUpon>Document_Fotos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Document_Notas.aspx.cs">
+      <DependentUpon>Document_Notas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Document_Notas.aspx.designer.cs">
+      <DependentUpon>Document_Notas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Menu_Dinamico.aspx.cs">
+      <DependentUpon>Menu_Dinamico.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Menu_Dinamico.aspx.designer.cs">
+      <DependentUpon>Menu_Dinamico.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebForm1.aspx.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForm1.aspx.designer.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebForm2.aspx.cs">
+      <DependentUpon>WebForm2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForm2.aspx.designer.cs">
+      <DependentUpon>WebForm2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebService.asmx.cs">
+      <DependentUpon>WebService.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Content Include="ThumbGen.cs" />
     <Compile Include="Access.aspx.cs">
       <DependentUpon>Access.aspx</DependentUpon>
@@ -526,12 +706,12 @@
     <Compile Include="Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Main.Master.cs">
-      <DependentUpon>Main.Master</DependentUpon>
+    <Compile Include="Main_bk.Master.cs">
+      <DependentUpon>Main_bk.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Main.Master.designer.cs">
-      <DependentUpon>Main.Master</DependentUpon>
+    <Compile Include="Main_bk.Master.designer.cs">
+      <DependentUpon>Main_bk.Master</DependentUpon>
     </Compile>
     <Compile Include="Menu.aspx.cs">
       <DependentUpon>Menu.aspx</DependentUpon>
@@ -584,6 +764,13 @@
     <Compile Include="Review_Document.aspx.designer.cs">
       <DependentUpon>Review_Document.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Expediente.aspx.cs">
+      <DependentUpon>Expediente.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Expediente.aspx.designer.cs">
+      <DependentUpon>Expediente.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -629,7 +816,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Code\" />
     <Folder Include="App_Data\" />
     <Folder Include="Directorio\" />
     <Folder Include="itnowstorage\" />

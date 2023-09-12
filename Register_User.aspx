@@ -68,7 +68,8 @@
         <br />
         <div class="form-group">
             <div class="col-sm-12">
-                <%--<asp:CheckBox ID="chkPrivacidad" runat="server" Text="&nbsp;&nbsp;Acepto el Aviso de Privacidad" Font-Size="Small" />--%>
+                <asp:CheckBox ID="chkPrivacidad" runat="server" Text="&nbsp;&nbsp;Acepto&nbsp;&nbsp" Font-Size="Small" />
+                <a href="https://peacock.claims/aviso/" target="_blank">Aviso de Privacidad</a>
             </div>
         </div>
         <br />
@@ -85,7 +86,7 @@
         </div>
         <div class="from-group mt-2">
             <div class="d-grid col-6 mx-auto">
-                <asp:Button ID="BtnRegresar" runat="server" Text="Regresar" Font-Bold="True" OnClick="BtnRegresar_Click" CssClass="btn btn-link"/>
+                <asp:Button ID="BtnRegresar" runat="server" Text="Regresar" Font-Bold="True" OnClick="BtnRegresar_Click" CssClass="btn btn-link" Visible="false" />
             </div>
         </div>
         <div class="form-group">

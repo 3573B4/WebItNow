@@ -86,11 +86,12 @@ namespace WebItNow
                                         " ed.Url_Imagen, ed.Nom_Imagen, " +
                                         "  s.Descripcion AS Desc_Status, " +
                                         " ed.Fec_Envio, ed.Fec_Aceptado, ed.Fec_Rechazado, ed.IdDescarga " +
-                                " FROM ITM_04 ed, ITM_06 td, ITM_07 s, ITM_15 t " +
+                                " FROM ITM_04 ed, ITM_08 td, ITM_07 s, ITM_15 t " +
                                 "WHERE ed.IdStatus = s.IdStatus AND ed.IdTipoDocumento = td.IdTpoDocumento " +
                                 "  AND t.Referencia = ed.Referencia " +
-                                "  AND t.IdTpoDocumento = td.IdTpoDocumento AND t.IdProceso = td.IdProceso  " +
-                                "  AND t.IdSubProceso = td.IdSubProceso AND t.IdStatus = 1 ";
+                                "  AND t.IdTpoDocumento = td.IdTpoDocumento " +
+                            //  "  AND t.IdProceso = td.IdProceso AND t.IdSubProceso = td.IdSubProceso " +
+                                "  AND t.IdStatus = 1 ";
 
                 if (sValorStatus != "0")
                 {

@@ -2,6 +2,27 @@
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
+<%@ OutputCache Location="None" %>
+
+<script language="javascript" type="text/javascript"> 
+    function MantenSesion() {
+
+        var CONTROLADOR = "login.aspx";
+
+        var head = document.getElementsByTagName('head').item(0);
+
+        script = document.createElement('script');
+
+        script.src = CONTROLADOR;
+
+        script.setAttribute('type', 'text / javascript');
+
+        script.defer = true;
+
+        head.appendChild(script);
+    }
+</script>
+
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <br />    
@@ -10,7 +31,7 @@
     <ContentTemplate>
     <br />
     <div class="container col-md-4">
-        <h2 class="h2 mb-3 fw-normal mt-4"> Iniciar Sesión</h2>
+        <h2 class="h2 mb-3 fw-normal mt-4"> Iniciar Sesión (Test) </h2>
 
         <div class="form-group">
             <asp:Label ID="LblEmail" runat="server" Text="Correo electrónico" CssClass="control-label col-sm-2" Font-Size="Small"></asp:Label>
@@ -106,4 +127,8 @@
     <br />
     </ContentTemplate>
 </asp:UpdatePanel>
+
+<script language="javascript" type="text/javascript">
+    setInterval(‘MantenSesion() ’, <%= (int) (0.9 * (Session.Timeout * 30000)) %>);
+</script>
 </asp:Content>

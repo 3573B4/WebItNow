@@ -91,9 +91,9 @@ namespace WebItNow
                     if (Referencia_Existe == 0)
                     {
                         // Insertar tablas ITM_04, ITM_06
-                        //Insert_Row_ITM_04(sTpoDocumento);
+                        Insert_Row_ITM_04(sTpoDocumento);
 
-                        Insert_Row_ITM_06(sTpoDocumento, sDescripcion, sDescrpBrev, sIdProceso, sIdSubProceso);
+                        // Insert_Row_ITM_06(sTpoDocumento, sDescripcion, sDescrpBrev, sIdProceso, sIdSubProceso);
 
                         // Insertar tablas ITM_15
                         Insert_Row_ITM_15(valorcol0,sTpoDocumento,sIdProceso, sIdSubProceso);
@@ -104,6 +104,24 @@ namespace WebItNow
                     }
 
                 }
+
+                //string sAsunto = "IMPORTANTE: Se solicita documentación para la atención de su reporte " + TxtReferencia.Text;
+
+                //string sBody = "Estimado Cliente. \n Enviamos este mensaje para hacer de su conocimiento que es necesario nos remita a la brevedad, \n " +
+                //    "la documentación correspondiente al reporte: " + TxtReferencia.Text + " \n " +
+                //    "Para completar este proceso es necesario ingresar a nuestro sitio de carga segura de información. Dando clic a continuación: \n " +
+                //    "bit.ly/3n1Ck2q \n" +
+                //    "En caso de cualquier duda, puede ingresar a este vínculo, donde podrá buscar y encontrar lo que requiera: \n " +
+                //    "https://peacock.zendesk.com/hc/es-419" + " \n " + " \n ";
+                //sBody += "Alternativamente, puede contactarnos en cualquiera de los siguientes medios, donde con gusto lo atenderemos: \n " +
+                //    "* Asistente virtual en " + "www.peacock.claims \n " +
+                //    "* WhatsApp: + 52 55-9035-4806 \n " +
+                //    "* Correo electrónico: " + "contacto@peacock.claims \n " +
+                //    "* Vía Teléfono: + 5255-8525-7200 y +52 55-8932-4700 \n " + " \n " +
+                //    "Agradecemos de antemano su confianza y preferencia. Esperamos que su experiencia de servicio sea satisfactoria.";
+
+                //var email = new EnvioEmail();
+                //int Envio_Ok = email.EnvioMensaje(TxtReferencia.Text.Trim(), TxtEmail.Text.Trim(), sAsunto, sBody);
 
                 Session["Asunto"] = "Solicitud Documento";
                 Session["Referencia"] = TxtReferencia.Text;
@@ -296,7 +314,7 @@ namespace WebItNow
             if (Referencia_Existe == 0)
             {
                 // Consulta a la tabla Tipo de Documento
-                sqlQuery = "Select IdTpoDocumento, Descripcion, DescrpBrev, IdProceso, IdSubProceso, 'false' as IdStatus " +
+                sqlQuery = "Select IdTpoDocumento, Descripcion, DescripBrev, IdProceso, IdSubProceso, 'false' as IdStatus " +
                            "  From ITM_06 " +
                            " Where IdProceso = " + iIdProceso + "" +
                            "   And IdSubProceso = " + iIdSubProceso + "" +
@@ -304,13 +322,19 @@ namespace WebItNow
             }
             else
             {
-                sqlQuery = "Select tp.IdTpoDocumento, tp.Descripcion,  DescrpBrev, tp.IdProceso, tp.IdSubProceso, tr.IdStatus " +
-                            "  From ITM_06 tp, ITM_15 tr " +
-                            " Where tp.IdTpoDocumento = tr.IdTpoDocumento And tp.IdProceso = tr.IdProceso And tp.IdSubProceso = tr.IdSubProceso" +
-                            "   And tp.IdProceso = " + iIdProceso + "" +
-                            "   And tp.IdSubProceso = " + iIdSubProceso + "" +
-                            "   And tr.Referencia = '" + TxtReferencia.Text + "'" +
-                            "   And tp.IdStatus = '1'";
+                //sqlQuery = "Select tp.IdTpoDocumento, tp.Descripcion,  DescripBrev, tp.IdProceso, tp.IdSubProceso, tr.IdStatus " +
+                //            "  From ITM_06 tp, ITM_15 tr " +
+                //            " Where tp.IdTpoDocumento = tr.IdTpoDocumento And tp.IdProceso = tr.IdProceso And tp.IdSubProceso = tr.IdSubProceso" +
+                //            "   And tp.IdProceso = " + iIdProceso + "" +
+                //            "   And tp.IdSubProceso = " + iIdSubProceso + "" +
+                //            "   And tr.Referencia = '" + TxtReferencia.Text + "'" +
+                //            "   And tp.IdStatus = '1'";
+
+                sqlQuery = "Select tp.IdTpoDocumento, tp.Descripcion,  tp.DescripBrev, tr.IdProceso, tr.IdSubProceso, tr.IdStatus " +
+                           "  From ITM_08 tp, ITM_15 tr" +
+                           " Where tp.IdTpoDocumento = tr.IdTpoDocumento" +
+                           "   And tr.Referencia = '" + TxtReferencia.Text + "'";
+
             }
 
             SqlCommand cmd = new SqlCommand(sqlQuery, Conecta.ConectarBD);
@@ -587,7 +611,7 @@ namespace WebItNow
                 string sReferencia = TxtReferencia.Text;
 
                 // Insertar en la tabla de Transacciones ITM_06
-                string sqlQuery = "INSERT INTO ITM_06 (IdTpoDocumento, Descripcion, DescrpBrev, IdStatus, IdProceso, IdSubProceso)" +
+                string sqlQuery = "INSERT INTO ITM_06 (IdTpoDocumento, Descripcion, DescripBrev, IdStatus, IdProceso, IdSubProceso)" +
                               "VALUES ('" + valorcol1 + "', '" + valorcol2 + "', '" + valorcol3 + "', 1, " + valorcol4 + ", " + valorcol5 + ")";
 
                 sqlQuery += Environment.NewLine;
@@ -838,8 +862,8 @@ namespace WebItNow
                 string sDescrpBrev = Server.HtmlDecode(GrdTpoDocumentNew.Rows[index].Cells[3].Text);
                 int iProceso = Convert.ToInt32(Session["Proceso"]);
                 int iSubProceso = Convert.ToInt32(Session["SubProceso"]);
-                int iIdStatus = 1;
-
+            //  int iIdStatus = 1;
+                bool bIdStatus = true;
                 DataTable dt = (DataTable)Session["data"];
 
                 DataColumnCollection columns = dt.Columns;
@@ -861,7 +885,7 @@ namespace WebItNow
                     workRow[2] = sDescrpBrev;
                     workRow[3] = iProceso;
                     workRow[4] = iSubProceso;
-                    workRow[5] = iIdStatus;
+                    workRow[5] = bIdStatus;
 
                     dt.Rows.Add(workRow);
                     //dt.Rows.Add(new Object[] { "01", "Smith", 1, 1, 0 });

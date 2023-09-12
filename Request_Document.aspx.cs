@@ -42,7 +42,8 @@ namespace WebItNow
             System.Web.Security.FormsAuthentication.SignOut();
             Session.Abandon();
 
-            Response.Redirect("Menu.aspx");
+            // Response.Redirect("Menu.aspx");
+            Response.Redirect("Mnu_Dinamico.aspx", true);
         }
 
         protected void BtnClose_Click(object sender, EventArgs e)

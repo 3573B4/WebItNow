@@ -26,7 +26,7 @@ namespace WebItNow
              // lblUsuario.Text = sUsuario;
                 BtnRegresar.Visible = false;
 
-                if (sAsunto == "Documento Enviado")
+                if (sAsunto == "Documento Recibido")
                 {
                     BtnRegresar.Visible = false;
                     //LblMotivo.Text = "Motivo de Enviado";
@@ -40,7 +40,7 @@ namespace WebItNow
                     LblMotivo.Text = "Agregar comentario o instrucción especifica:";
                 }
 
-                if (sAsunto == "Documento Aceptado")
+                if (sAsunto == "Documentación Aceptada")
                 {
                     //LblMotivo.Text = "Motivo de Aceptado";
                     lblHeader.Text = "Documento aprobado exitosamente.";
@@ -72,52 +72,81 @@ namespace WebItNow
                 string sAsunto = Convert.ToString(Session["Asunto"]);
                 string sPredeterminado = string.Empty;
 
-                if (sAsunto == "Documento Aceptado")
+                if (sAsunto == "Documentación Aceptada")
                 {
-                    sPredeterminado = "Estimado cliente su archivo fue aprobado por nuestro personal en nuestra plataforma de carga segura. Gracias. \n ";
+                    sPredeterminado = "Estimado cliente. \n " +
+                        "Hacemos de su conocimiento que su documentación fue aprobada por nuestro personal en nuestra plataforma de carga segura. \n \n" +
+                        "Atentamente \n " +
+                        "El equipo de Peackok \n";
                 }
                 else if (sAsunto == "Documento Rechazado")
                 {
-                    sPredeterminado = "Estimado cliente. Lamentamos informarle que el archivo cargado en nuestro sistema no cumple con los parametros establecidos, \n " + "por favor reintente subir su archivo en nuestro sistema de carga segura. \n";
+                    sPredeterminado = "Estimado cliente. \n " +
+                        "Lamentamos informarle que el archivo cargado en nuestro sistema no cumple con los parámetros establecidos, \n" + "por favor intente nuevamente subir su archivo en nuestro sistema de carga segura. \n" +
+                        "Para completar este proceso es necesario ingresar a nuestro sitio de carga segura de información. Dando clic a continuación: \n " +
+                        "https://bit.ly/3n1Ck2q" + "\n " +
+                        "(Si no está habilitado este enlace, favor de copiarlo y pegarlo en su navegador) \n \n" +
+                        "Para poder ingresar es necesario proporcionar el siguiente número de reporte/referencia: " + sReferencia + " \n" +
+                        "Así como el correo electrónico que nos proporcionó para el seguimiento de su reporte. \n" +
+                        "En caso de cualquier duda, puede ingresar a este vínculo, donde podrá buscar y encontrar lo que requiera: \n" +
+                        "https://peacock.zendesk.com/hc/es-419" + "\n \n";
+                    sPredeterminado += "Alternativamente, puede contactarnos en cualquiera de los siguientes medios, donde con gusto lo atenderemos: \n \n" +
+                        "* Asistente virtual en " + "https://www.peacock.claims \n " +
+                        "* WhatsApp: + 52 55-9035-4806 \n " +
+                        "* Correo electrónico: " + "contacto@peacock.claims \n" +
+                        "* Vía Teléfono: + 5255-8525-7200 y +52 55-8932-4700 \n \n" +
+                        "Agradecemos de antemano su confianza y preferencia. Esperamos que su experiencia de servicio sea satisfactoria. \n";
                 }
-                else if (sAsunto == "Documento Enviado")
+                else if (sAsunto == "Documento Recibido")
                 {
-                    sPredeterminado = "Estimado cliente. Su archivo fue cargado exitosamente en nuestra plataforma de carga segura. \n " + "A la brevedad sera revisado y validado por alguno de nuestros operadores. Muchas gracias. \n";
+                    sPredeterminado = "Estimado cliente. \n " +
+                        "Le informamos que su archivo fue cargado exitosamente en nuestra plataforma de carga segura. \n " + "A la brevedad será revisado y validado por alguno de nuestros operadores.  \n Muchas gracias. \n";
                 }
                 else if (sAsunto == "Solicitud Documento" )
                 {
-                    string sListado = getListaDocumentos();
-
-                    sPredeterminado = "Le informamos que para la atención de su siniestro es necesario nos proporciones la siguiente información: \n \n " +
-                        sListado + " \n " +
-                        "Para realizar lo anterior es necesario acceder a nuestro sitio seguro: \n " +
-                        "https://codice1.azurewebsites.net/Access \n " +
-                        "Sus datos de acceso son su correo electrónico y la siguiente referencia " + sReferencia;
+                    //string sListado = getListaDocumentos();
+                    //sListado + " \n " +
+                    sPredeterminado = "Estimado Cliente. \n" +
+                        "Enviamos este mensaje para hacer de su conocimiento que es necesario nos remita a la brevedad, \n" +
+                        "la documentación correspondiente al reporte: " + sReferencia + " \n" +
+                        "Para completar este proceso es necesario ingresar a nuestro sitio de carga segura de información. Dando clic a continuación: \n" +
+                        "https://bit.ly/3n1Ck2q" + "\n " +
+                        "(Si no está habilitado este enlace, favor de copiarlo y pegarlo en su navegador) \n \n" +
+                        "En caso de cualquier duda, puede ingresar a este vínculo, donde podrá buscar y encontrar lo que requiera: \n " +
+                        "https://peacock.zendesk.com/hc/es-419" + "\n \n";
+                    sPredeterminado += "Alternativamente, puede contactarnos en cualquiera de los siguientes medios, donde con gusto lo atenderemos: \n \n" +
+                        "* Asistente virtual en " + "https://www.peacock.claims \n " +
+                        "* WhatsApp: + 52 55-9035-4806 \n " +
+                        "* Correo electrónico: " + "contacto@peacock.claims \n " +
+                        "* Vía Teléfono: + 5255-8525-7200 y +52 55-8932-4700 \n \n" +
+                        "Agradecemos de antemano su confianza y preferencia. Esperamos que su experiencia de servicio sea satisfactoria. \n";
                 }
 
                 var email = new EnvioEmail();
 
-                TxtAreaMensaje.Value = sPredeterminado + TxtAreaMensaje.Value;
-
                 string sEmail = email.CorreoElectronico(sReferencia);
-                int Envio_Ok = email.EnvioMensaje(sReferencia, sEmail, sAsunto, TxtAreaMensaje.Value);
+                string sBody = sPredeterminado + " \n Observaciones registradas : \n" + TxtAreaMensaje.Value;
 
-                //if (sAsunto == "Solicitud Documento")
-                //{
-                //    string sEmail = email.CorreoElectronico(sReferencia);
-                //    int Envio_Ok = email.EnvioMensaje(sReferencia, sEmail, sAsunto, TxtAreaMensaje.Value);
-                //}
-                //else
-                //{
-                //    string sEmail = Convert.ToString(Session["Email"]);
-                //    int Envio_Ok = email.EnvioMensaje(sReferencia, sEmail, sAsunto, TxtAreaMensaje.Value);
-                //}
+                //TxtAreaMensaje.Value = sPredeterminado + TxtAreaMensaje.Value;
+                //string sEmail = email.CorreoElectronico(sReferencia);
+                //int Envio_Ok = email.EnvioMensaje(sReferencia, sEmail, sAsunto, sBody);
 
-                if (sAsunto == "Documento Enviado")
+
+                if (sAsunto == "Solicitud Documento")
+                {
+                    string sCuerpo = "IMPORTANTE: Se solicita documentación para la atención de su reporte " + sReferencia;
+                    int Envio_Ok = email.EnvioMensaje(sReferencia, sEmail, sCuerpo, sBody);
+                }
+                else
+                {
+                    int Envio_Ok = email.EnvioMensaje(sReferencia, sEmail, sAsunto, sBody);
+                }
+
+                if (sAsunto == "Documento Recibido")
                 { 
                     Response.Redirect("Upload_Files.aspx");
                 } 
-                else if (sAsunto == "Documento Aceptado" || sAsunto == "Documento Rechazado")
+                else if (sAsunto == "Documentación Aceptada" || sAsunto == "Documento Rechazado")
                 {
                     Response.Redirect("Review_Document.aspx");
                 }
@@ -146,8 +175,8 @@ namespace WebItNow
             }
             else if (sAsunto == "Solicitud Documento")
             {
-                System.Web.Security.FormsAuthentication.SignOut();
-                Session.Abandon();
+                //System.Web.Security.FormsAuthentication.SignOut();
+                //Session.Abandon();
 
                 Response.Redirect("Request_Document.aspx");
             }

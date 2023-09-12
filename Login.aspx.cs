@@ -30,7 +30,7 @@ namespace WebItNow
                 this.Form.Attributes.Add("autocomplete", "off");
 
                 // Permisos Usuario
-                System.Web.HttpContext.Current.Session["UsPrivilegios"] = "2";
+                // System.Web.HttpContext.Current.Session["UsPrivilegios"] = "2";
 
                 //LblMessage.Text = (string)Session["DownloadsPath"];
                 //this.mpeMensaje.Show();
@@ -55,12 +55,10 @@ namespace WebItNow
             }
             else
             {
-
                 string result = Autenticar(TxtUsu.Text, TxtPass.Text);
 
                 if (result != null)
                 {
-
                     // IdUsuario
                     System.Web.HttpContext.Current.Session["IdUsuario"] = TxtUsu.Text;
                     // Permisos Usuario
@@ -71,13 +69,14 @@ namespace WebItNow
 
                     string UsPrivilegios = Convert.ToString(Session["UsPrivilegios"]);
 
-                    if (UsPrivilegios == "3")
+                    if (UsPrivilegios == "4")
                     {
-                      //  Response.Redirect("Upload_Files.aspx");
+                     // Response.Redirect("Upload_Files.aspx");
                     }
                     else
                     {
-                        Response.Redirect("menu.aspx");
+                     // Response.Redirect("menu.aspx");
+                        Response.Redirect("Mnu_Dinamico.aspx");
                     }
 
                     Lbl_Message.Visible = false;
@@ -120,7 +119,7 @@ namespace WebItNow
 
                 while (dr1.Read())
                 {
-                    return dr1["UsPrivilegios"].ToString().Trim();
+                    return dr1["IdPrivilegio"].ToString().Trim();
                 }
                     //if (dr1.Read())
                     //{

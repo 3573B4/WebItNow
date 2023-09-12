@@ -2,6 +2,7 @@
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
+<%@ OutputCache Location="None" %>
 
     <script language="javascript" type="text/javascript">
         
@@ -45,7 +46,6 @@
             </div>
         </div>
         <br />
-        <br />
 
         <div class="form-group">
                 <div style="overflow-x: auto; overflow-y:hidden">
@@ -71,7 +71,7 @@
                 </div>
         </div>
 
-        <div class="from-group">
+        <div class="from-group mb-5 pb-5"">
             <div class="d-grid col-2 mx-auto">
                 <asp:Button ID="BtnSalir" runat="server" Text="Salir" Font-Bold="True" OnClick="BtnSalir_Click" CssClass="btn btn-outline-primary mt-3"/>
             </div>

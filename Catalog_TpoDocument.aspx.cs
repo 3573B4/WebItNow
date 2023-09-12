@@ -11,7 +11,6 @@ namespace WebItNow
 {
     public partial class Catalog_TpoDocument : System.Web.UI.Page
     {
-
         protected void Page_PreInit(object sender, EventArgs e)
         {
             if (Request.Browser.IsMobileDevice)
@@ -124,6 +123,7 @@ namespace WebItNow
                 mpeMensaje.Show();
             }
         }
+
         protected void DropDownList1_SelectedIndexChanged(object sender, EventArgs e)
         {
             int iProceso = Convert.ToInt32(ddlProceso.SelectedValue);
@@ -164,7 +164,7 @@ namespace WebItNow
                                 //}
 
                                 string sqlString = "INSERT INTO ITM_06 " +
-                                    " (IdTpoDocumento, Descripcion, DescrpBrev, IdStatus, IdProceso, IdSubProceso) " + //para actualizar el status
+                                    " (IdTpoDocumento, Descripcion, DescripBrev, IdStatus, IdProceso, IdSubProceso) " + //para actualizar el status
                                     " VALUES ('" + ddlTpoDocumento.SelectedValue + "', " +
                                     " TRIM(' ' FROM '" + ddlTpoDocumento.SelectedItem + "')," +
                                     " TRIM(' ' FROM '" + TxtAreaMensaje.Value + "')," +
@@ -262,7 +262,7 @@ namespace WebItNow
 
                         string sqlString = "UPDATE ITM_06 " +
                                             " SET Descripcion = TRIM(' ' FROM '" + ddlTpoDocumento.SelectedItem + "'), " +
-                                                " DescrpBrev = TRIM(' ' FROM '" + TxtAreaMensaje.Value + "')," +
+                                                " DescripBrev = TRIM(' ' FROM '" + TxtAreaMensaje.Value + "')," +
                                                 " IdStatus = 1, " +
                                                 " IdProceso = " + ddlProceso.SelectedValue + ", " +
                                                 " IdSubProceso = " + ddlSubProceso.SelectedValue +
@@ -340,7 +340,7 @@ namespace WebItNow
             string iProceso = ddlProceso.SelectedValue;
             string iSubProceso = ddlSubProceso.SelectedValue;
 
-            string sqlQuery = "SELECT IdTpoDocumento, Descripcion, DescrpBrev, IdProceso, IdSubProceso " +
+            string sqlQuery = "SELECT IdTpoDocumento, Descripcion, DescripBrev, IdProceso, IdSubProceso " +
                               "  FROM ITM_06 " +
                               " WHERE IdStatus IN (1) " +
                               " AND IdProceso = " + iProceso +
@@ -388,7 +388,7 @@ namespace WebItNow
                 string iProceso = ddlProceso.SelectedValue;
                 string iSubProceso = ddlSubProceso.SelectedValue;
 
-                string sqlQuery = "SELECT IdTpoDocumento, Descripcion, DescrpBrev, IdProceso, IdSubProceso " +
+                string sqlQuery = "SELECT IdTpoDocumento, Descripcion, DescripBrev, IdProceso, IdSubProceso " +
                                   "  FROM ITM_06 " +
                                   " WHERE IdStatus IN (1) "; //le ponia el valor del ddl status doc
 

@@ -2,6 +2,7 @@
 using System.Configuration;
 using System.IO;
 
+using Microsoft.AspNet.Web;
 using System.Runtime.InteropServices;
 
 using System.Collections.Generic;
@@ -14,8 +15,18 @@ using System.Data;
 using System.Data.SqlClient;
 
 using Azure;
+using Azure.Storage.Blobs;
 using Azure.Storage.Files.Shares;
 using Azure.Storage.Files.Shares.Models;
+using System.IO.Compression;
+using Microsoft.WindowsAzure.Storage;
+using Microsoft.WindowsAzure.Storage.Blob;
+using System.Security.Principal;
+using System.Reflection;
+
+using Azure.Storage;
+using Azure.Storage.Files;
+using Microsoft.WindowsAzure.Storage.File;
 
 namespace WebItNow
 {
@@ -180,19 +191,19 @@ namespace WebItNow
                 Conecta.Abrir();
 
                 // Consulta a las tablas : Estado de Documento (Expediente) = ITM_04
-                // Tipo de Documento = ITM_06
+                // Tipo de Documento = ITM_08
                 // Status de Documento = ITM_07
 
                 string strQuery = "SELECT ed.Referencia, ed.Nom_Imagen, td.Descripcion, ed.IdTipoDocumento, " +
                                   "       s.Descripcion as Desc_Status, ed.Url_Imagen, ed.IdDescarga, tr.Aseguradora " +
-                                  "  FROM ITM_02 tr, ITM_04 ed, ITM_06 td, ITM_07 s, ITM_15 t " +
+                                  "  FROM ITM_02 tr, ITM_04 ed, ITM_08 td, ITM_07 s, ITM_15 t " +
                                   " WHERE tr.UsReferencia = ed.Referencia " +
                                   "   AND ed.IdStatus = s.IdStatus " + 
                                   "   AND ed.IdTipoDocumento = td.IdTpoDocumento " +
                                   "   AND t.Referencia = ed.Referencia " +
                                   "   AND t.IdTpoDocumento = ed.IdTipoDocumento " +
-                                  "   AND t.IdProceso = td.IdProceso " +
-                                  "   AND t.IdSubProceso = td.IdSubProceso " +
+                                  //"   AND t.IdProceso = td.IdProceso " +
+                                  //"   AND t.IdSubProceso = td.IdSubProceso " +
                                   "   AND t.IdStatus = 1 " +
                                   "   AND ed.IdStatus IN (2) ";
 
@@ -232,7 +243,8 @@ namespace WebItNow
             System.Web.Security.FormsAuthentication.SignOut();
             Session.Abandon();
 
-            Response.Redirect("Menu.aspx", true);
+            // Response.Redirect("Menu.aspx", true);
+            Response.Redirect("Mnu_Dinamico.aspx", true);
         }
 
         protected void ChkAceptado_OnCheckedChanged(object sender, EventArgs e)
@@ -306,7 +318,7 @@ namespace WebItNow
                 DeleteFromAzure(sFileName, sReferencia);
 
                 Session["Referencia"] = sReferencia;
-                Session["Asunto"] = "Documento Aceptado";
+                Session["Asunto"] = "Documentación Aceptada";
 
                 Response.Redirect("Page_Message.aspx");
 
@@ -410,18 +422,23 @@ namespace WebItNow
                 // Actualizar controles
                 GetEstadoDocumentos();
 
-                Session["Filename"] = Variables.wFileName;
-
-                string sFilename = Variables.wFileName;
+                string sFileName = Variables.wFileName;
                 string sSubdirectorio = Variables.wURL_Imagen;
 
-                System.Threading.Thread.Sleep(10000);
-                DownloadFromAzure(sFilename, sSubdirectorio);
+                HttpContext.Current.Session["sFileName"] = Variables.wFileName;
+                HttpContext.Current.Session["Subdirectorio"] = Variables.wURL_Imagen;
+
+                System.Threading.Thread.Sleep(1000);
+                //this.DownloadFromAzure(sFileName, sSubdirectorio);
+
+                this.DescargaFromAzure_(sFileName, sSubdirectorio);
+
+                //var result =  DownloadAsync.DownloadAzureAsync(sFileName, sSubdirectorio);
 
                 string mensaje = "window.open('Descargas.aspx');";
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "OpenWindow", mensaje, true);
 
-                //  imgDescarga.Enabled = false;
+                // imgDescarga.Enabled = false;
 
                 //// Actualizar en la tabla [ITM_04] (IdDescarga = 1)
                 //Update_ITM_04(sReferencia, sTipoDocumento, 1);
@@ -448,7 +465,6 @@ namespace WebItNow
             {
                 RefreshPage();
             }
-
         }
 
         protected void DeleteFromAzure(string sFilename, string sSubdirectorio)
@@ -459,7 +475,7 @@ namespace WebItNow
                 // Name of the share, directory, and file
                 string ConnectionString = ConfigurationManager.AppSettings.Get("StorageConnectionString");
                 string AccountName = ConfigurationManager.AppSettings.Get("StorageAccountName");
-                // string sDirName = "itnowstorage";
+             // string sDirName = "itnowstorage";
 
                 // Obtener una referencia de nuestra parte.
                 ShareClient share = new ShareClient(ConnectionString, AccountName);
@@ -479,143 +495,6 @@ namespace WebItNow
             catch (Exception ex)
             {
                 // Show(ex.Message);
-                LblMessage.Text = ex.Message;
-                this.mpeMensaje.Show();
-            }
-            finally
-            {
-
-            }
-        }
-
-        protected void DownloadFromAzure(string sFilename, string sSubdirectorio)
-        {
-
-            //  long tamaño = 0;
-            try
-            {
-                // Name of the share, directory, and file
-                string ConnectionString = ConfigurationManager.AppSettings.Get("StorageConnectionString");
-                string AccountName = ConfigurationManager.AppSettings.Get("StorageAccountName");
-                // string sDirName = "itnowstorage";
-                string directorioURL = Server.MapPath("~/itnowstorage/" + sFilename);
-
-                // Obtener una referencia de nuestra parte.
-                ShareClient share = new ShareClient(ConnectionString, AccountName);
-
-                // Obtener una referencia de nuestro directorio - directorio ubicado en el nivel raíz.
-                ShareDirectoryClient directory = share.GetDirectoryClient(AccountName);
-
-                // Obtener una referencia a un subdirectorio que no se encuentra en el nivel raíz
-                directory = directory.GetSubdirectoryClient(sSubdirectorio);
-
-                // Obtener una referencia a nuestro archivo.
-                ShareFileClient file = directory.GetFileClient(sFilename);
-
-                // Descargar el archivo.
-                ShareFileDownloadInfo download = file.Download();
-
-                // Int32 tamaño = file.Path.Length;
-
-                using (FileStream stream = File.OpenWrite(directorioURL))
-                {
-                    // tamaño = stream.Length;
-
-                    //                              32768  
-                    download.Content.CopyTo(stream, 327680);
-                    stream.Flush();
-                    stream.Close();
-                }
-
-                ////while (true)
-                ////{                   
-                ////    if (File.Exists(directorioURL))
-                ////        break;
-                ////}
-
-                //string extension = Path.GetExtension(file.Path);
-                //var strMimeType = "";
-
-                //if (extension != null)
-                //{
-                //    switch (extension.ToLower())
-                //    {
-                //        case ".htm":
-                //        case ".html":
-                //            strMimeType = "text/HTML";
-                //            break;
-                //        case ".txt":
-                //            strMimeType = "text/plain";
-                //            break;
-                //        case ".doc":
-
-                //        case ".docx":
-
-                //        case ".rtf":
-                //            strMimeType = "Application/msword";
-                //            break;
-                //        case ".pdf":
-                //            strMimeType = "application/pdf";
-                //            break;
-                //        case ".zip":
-                //            strMimeType = "application/zip";
-                //            break;
-                //        case ".xlsx":
-                //            strMimeType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
-                //            break;
-                //        case "xls":
-                //            strMimeType = "application/vnd.ms-excel";
-                //            break;
-
-                //    }
-
-                //}
-
-                //if (extension == ".xlsx")
-                //{
-                //    string direccion = directorioURL;
-                //    System.IO.FileStream fs = null;
-
-                //    fs = System.IO.File.Open(direccion, System.IO.FileMode.Open);
-                //    byte[] btFile = new byte[fs.Length];
-                //    fs.Read(btFile, 0, Convert.ToInt32(fs.Length));
-                //    fs.Close();
-
-                //    Response.AddHeader("Content-disposition", "attachment; filename=" + Path.GetFileName(directorioURL));
-                //    Response.ContentType = "application/octet-stream";
-                //    Response.BinaryWrite(btFile);
-                ////  Response.Flush();
-                //    Response.End();
-                ////  HttpContext.Current.ApplicationInstance.CompleteRequest();
-                //}
-                //else
-                //{
-
-                //    if (File.Exists(directorioURL))
-                //    {
-                //        Response.Clear();
-                //        Response.Buffer = true;
-                //        Response.ContentType = strMimeType;
-                //        Response.ContentEncoding = System.Text.Encoding.UTF8;
-                //        Response.AppendHeader("Content-Disposition", "attachment; filename=" + Path.GetFileName(directorioURL));
-                //    //  Response.TransmitFile(directorioURL, 0, tamaño);
-                //        Response.TransmitFile(directorioURL);
-                //        Response.Flush();
-                //        Response.End();
-
-                //    //  HttpContext.Current.ApplicationInstance.CompleteRequest();
-                //    }
-                //    else
-                //    {
-                //        Response.End();
-                //    }
-                //}
-
-                ////  System.Threading.Thread.Sleep(5000);
-                ////  File.Delete(directorioURL);
-            }
-            catch (Exception ex)
-            {
                 LblMessage.Text = ex.Message;
                 this.mpeMensaje.Show();
             }
@@ -808,17 +687,19 @@ namespace WebItNow
             try
             {
 
-                SqlCommand cmd1 = new SqlCommand("sp_UpDescarga", Conecta.ConectarBD);
-                cmd1.CommandType = CommandType.StoredProcedure;
+                using (SqlCommand cmd1 = new SqlCommand("sp_UpDescarga", Conecta.ConectarBD))
+                {
+                    cmd1.CommandType = CommandType.StoredProcedure;
 
-                cmd1.Parameters.AddWithValue("@referencia", pReferencia);
-                cmd1.Parameters.AddWithValue("@IdTipoDocumento", pIdTipoDocumento);
-                cmd1.Parameters.AddWithValue("@IdDescarga", pIdDescarga);
+                    cmd1.Parameters.AddWithValue("@referencia", pReferencia);
+                    cmd1.Parameters.AddWithValue("@IdTipoDocumento", pIdTipoDocumento);
+                    cmd1.Parameters.AddWithValue("@IdDescarga", pIdDescarga);
 
-                SqlDataReader dr1 = cmd1.ExecuteReader();
+                    SqlDataReader dr1 = cmd1.ExecuteReader();
 
-                cmd1.Dispose();
-                dr1.Dispose();
+                    cmd1.Dispose();
+                    dr1.Dispose();
+                }
 
                 Conecta.Cerrar();
 
@@ -843,25 +724,26 @@ namespace WebItNow
 
             try
             {
-
-                SqlCommand cmd1 = new SqlCommand("sp_Consecutivo_StatementType", Conecta.ConectarBD);
-                cmd1.CommandType = CommandType.StoredProcedure;
-
-                cmd1.Parameters.AddWithValue("@idconsecutivo", pConsecutivo);
-                cmd1.Parameters.AddWithValue("@dfecha", pFecha);
-                cmd1.Parameters.AddWithValue("@StatementType", pStatementType);
-
-                SqlDataReader dr1 = cmd1.ExecuteReader();
-
-                if (dr1.Read())
+                using (SqlCommand cmd1 = new SqlCommand("sp_Consecutivo_StatementType", Conecta.ConectarBD))
                 {
+                    cmd1.CommandType = CommandType.StoredProcedure;
 
-                    return dr1.GetInt32(0);
+                    cmd1.Parameters.AddWithValue("@idconsecutivo", pConsecutivo);
+                    cmd1.Parameters.AddWithValue("@dfecha", pFecha);
+                    cmd1.Parameters.AddWithValue("@StatementType", pStatementType);
 
+                    SqlDataReader dr1 = cmd1.ExecuteReader();
+
+                    if (dr1.Read())
+                    {
+
+                        return dr1.GetInt32(0);
+
+                    }
+
+                    cmd1.Dispose();
+                    dr1.Dispose();
                 }
-
-                cmd1.Dispose();
-                dr1.Dispose();
 
                 Conecta.Cerrar();
 
@@ -990,8 +872,8 @@ namespace WebItNow
         protected void BtnDescargas_Click(object sender, EventArgs e)
         {
 
-            string sReferencia = TxtRef.Text;
-            string sTipoDocumento = TxtTpoDocumento.Text;
+            //string sReferencia = TxtRef.Text;
+            //string sTipoDocumento = TxtTpoDocumento.Text;
             //string sFilename = TxtNomArchivo.Text;
             //string sSubdirectorio = TxtUrl_Imagen.Text;
 
@@ -1020,11 +902,226 @@ namespace WebItNow
 
         }
 
-        protected void BtnDownload_Click(object sender, EventArgs e)
+        protected void DownloadFromAzure(string sFilename, string sSubdirectorio)
         {
-            // Descargar el archivo.
-            Session["Filename"] = "Inventario antes del Robo Suc 47_compressed .pdf";
-            Response.Redirect("Descargas.aspx", true);
+
+            //  long tamaño = 0;
+            try
+            {
+                // Name of the share, directory, and file
+                string ConnectionString = ConfigurationManager.AppSettings.Get("StorageConnectionString");
+                string AccountName = ConfigurationManager.AppSettings.Get("StorageAccountName");
+
+             // string sDirName = "itnowstorage";
+                string directorioURL = Server.MapPath("~/itnowstorage/" + sFilename);
+
+                // Obtener una referencia de nuestra parte.
+                ShareClient share = new ShareClient(ConnectionString, AccountName);
+
+                // Obtener una referencia de nuestro directorio - directorio ubicado en el nivel raíz.
+                ShareDirectoryClient directory = share.GetDirectoryClient(AccountName);
+
+                // Obtener una referencia a un subdirectorio que no se encuentra en el nivel raíz
+                directory = directory.GetSubdirectoryClient(sSubdirectorio);
+
+                // Obtener una referencia a nuestro archivo.
+                ShareFileClient file = directory.GetFileClient(sFilename);
+
+                // Descargar el archivo.
+                ShareFileDownloadInfo download = file.Download();
+
+                // Int32 tamaño = file.Path.Length;
+
+                using (FileStream stream = File.OpenWrite(directorioURL))
+                {
+                    // tamaño = stream.Length;
+
+                    //                              32768  
+                    download.Content.CopyTo(stream, 327680);
+                    stream.Flush();
+                    stream.Close();
+                }
+
+                ////while (true)
+                ////{                   
+                ////    if (File.Exists(directorioURL))
+                ////        break;
+                ////}
+
+                //string extension = Path.GetExtension(file.Path);
+                //var strMimeType = "";
+
+                //if (extension != null)
+                //{
+                //    switch (extension.ToLower())
+                //    {
+                //        case ".htm":
+                //        case ".html":
+                //            strMimeType = "text/HTML";
+                //            break;
+                //        case ".txt":
+                //            strMimeType = "text/plain";
+                //            break;
+                //        case ".doc":
+
+                //        case ".docx":
+
+                //        case ".rtf":
+                //            strMimeType = "Application/msword";
+                //            break;
+                //        case ".pdf":
+                //            strMimeType = "application/pdf";
+                //            break;
+                //        case ".zip":
+                //            strMimeType = "application/zip";
+                //            break;
+                //        case ".xlsx":
+                //            strMimeType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+                //            break;
+                //        case "xls":
+                //            strMimeType = "application/vnd.ms-excel";
+                //            break;
+
+                //    }
+
+                //}
+
+                //if (extension == ".xlsx")
+                //{
+                //    string direccion = directorioURL;
+                //    System.IO.FileStream fs = null;
+
+                //    fs = System.IO.File.Open(direccion, System.IO.FileMode.Open);
+                //    byte[] btFile = new byte[fs.Length];
+                //    fs.Read(btFile, 0, Convert.ToInt32(fs.Length));
+                //    fs.Close();
+
+                //    Response.AddHeader("Content-disposition", "attachment; filename=" + Path.GetFileName(directorioURL));
+                //    Response.ContentType = "application/octet-stream";
+                //    Response.BinaryWrite(btFile);
+                ////  Response.Flush();
+                //    Response.End();
+                ////  HttpContext.Current.ApplicationInstance.CompleteRequest();
+                //}
+                //else
+                //{
+
+                //    if (File.Exists(directorioURL))
+                //    {
+                //        Response.Clear();
+                //        Response.Buffer = true;
+                //        Response.ContentType = strMimeType;
+                //        Response.ContentEncoding = System.Text.Encoding.UTF8;
+                //        Response.AppendHeader("Content-Disposition", "attachment; filename=" + Path.GetFileName(directorioURL));
+                //    //  Response.TransmitFile(directorioURL, 0, tamaño);
+                //        Response.TransmitFile(directorioURL);
+                //        Response.Flush();
+                //        Response.End();
+
+                //    //  HttpContext.Current.ApplicationInstance.CompleteRequest();
+                //    }
+                //    else
+                //    {
+                //        Response.End();
+                //    }
+                //}
+
+                ////  System.Threading.Thread.Sleep(5000);
+                ////  File.Delete(directorioURL);
+            }
+            catch (Exception ex)
+            {
+                LblMessage.Text = ex.Message;
+                this.mpeMensaje.Show();
+            }
+            finally
+            {
+
+            }
         }
+
+        protected void DownloadFromAzure_New(string sFilename, string sSubdirectorio)
+        {
+            try
+            {
+
+                string ConnectionString = ConfigurationManager.AppSettings.Get("StorageConnectionString");
+                string shareName = ConfigurationManager.AppSettings.Get("StorageAccountName");
+                string dirName = "/itnowstorage-desarrollo/" + sSubdirectorio ;
+
+                // Name of the share, directory, and file we'll download from
+                // string shareName = "sample-share";
+                // string dirName = "sample-dir";
+                // string fileName = "sample-file";
+
+                // Path to the save the downloaded file
+                // string localFilePath = @"<path_to_local_file>";
+
+                // Get a reference to the file
+                ShareClient share = new ShareClient(ConnectionString, shareName);
+                ShareDirectoryClient directory = share.GetDirectoryClient(dirName);
+                ShareFileClient file = directory.GetFileClient(sFilename);
+
+                // Download the file
+                ShareFileDownloadInfo download = file.Download();
+
+                var memoryStream = new MemoryStream();
+                download.Content.CopyTo(memoryStream);
+
+                memoryStream.Flush();
+                memoryStream.Close();
+
+                HttpContext.Current.Session["Array"] = memoryStream.ToArray();
+
+            }
+            catch (Exception ex)
+            {
+                LblMessage.Text = ex.Message;
+                this.mpeMensaje.Show();
+
+                return;
+            }
+        }
+
+        protected void DescargaFromAzure_(string sFileName, string sSubdirectorio)
+        {
+
+            try
+            {
+
+                string ConnectionString = ConfigurationManager.AppSettings.Get("StorageConnectionString");
+                string shareName = ConfigurationManager.AppSettings.Get("StorageAccountName");
+                string dirName = "/itnowstorage-desarrollo/" + sSubdirectorio;
+
+                // Get a reference to the file
+                ShareClient share = new ShareClient(ConnectionString, shareName);
+                ShareDirectoryClient directory = share.GetDirectoryClient(dirName);
+                ShareFileClient file = directory.GetFileClient(sFileName);
+
+                // Download the file
+                ShareFileDownloadInfo download = file.Download();
+
+                var memoryStream = new MemoryStream();
+                download.Content.CopyTo(memoryStream);
+
+                memoryStream.Flush();
+                memoryStream.Close();
+
+                HttpContext.Current.Session["Array"] = memoryStream.ToArray();
+
+            }
+            catch (Exception ex)
+            {
+                LblMessage.Text = ex.Message;
+                this.mpeMensaje.Show();
+
+                return;
+            }
+            finally
+            {
+
+            }
+        }
+
     }
 }

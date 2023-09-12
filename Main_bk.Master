@@ -1,0 +1,197 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Main_bk.Master.cs" Inherits="WebItNow.Main_bk" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+
+    <title></title>
+    <asp:ContentPlaceHolder ID="HeadContent" runat="server">
+    </asp:ContentPlaceHolder>
+
+    <meta http-equiv="Cache-Control" content="no-cache" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <meta name="description" content="@Html.Raw(ViewBag.description)" />
+
+    <script language="javascript" type="text/javascript">
+
+        if (history.forward(1)) {
+            location.replace(history.forward(1))
+        }
+
+        function mayus(e) {
+            e.value = e.value.toUpperCase();
+        }
+
+    </script>
+
+    <!-- Estilo para Agregar THEAD y TBODY a GridView. -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery-footable/0.1.0/css/footable.min.css" rel="stylesheet" type="text/css" />
+
+    <link href="~/Styles/center_controls.css" rel="stylesheet" type="text/css" />
+    <link href="~/Styles/default.css" rel="stylesheet" type="text/css" />
+    <link href="~/Styles/panel_message.css" rel="stylesheet" type="text/css" />
+    <link href="~/Styles/GridView.css" rel="stylesheet" type="text/css" />
+    <link href="~/Styles/fuentes.css" rel="stylesheet" type="text/css" />
+    <link href="~/Styles/pagination-ys.css" rel="stylesheet" type="text/css" />
+    <link href="~/Styles/menu-style.css" rel="stylesheet" type="text/css" />
+
+    <style type="text/css">
+        .style1
+        {
+            width: 180px;
+        }
+
+        .style2
+        {
+            width: 880px;
+        }
+
+        .style3
+        {
+            width: 180px;
+        }
+
+
+/*      
+        #headContent
+        { height: 10%; width: 100%; }
+
+*/
+
+        #topContent
+        { height: 10%; width: 100%; }
+
+/*        
+        #menuContent
+        { float: left; width: 15%;}
+
+*/
+
+/*        
+        #mainContent
+        { float: left; width: 85%;}
+
+*/
+
+        #mainContent
+        { height: 80%; width: 100%; overflow: auto;}
+
+        #footerContent
+        { clear: both; }
+
+        /*#footerContent*/
+        /*{ height: 10%; width: 100%; }*/
+
+        .headerCssClass{  
+            background-color:#c33803;  
+            color:white;
+            border: 1px solid black;  
+            padding: 4px;  
+        }  
+
+        .contentCssClass{  
+            background-color:#e59a7d;  
+            color:black;  
+            border: 1px dotted black;  
+            padding: 4px;  
+        }
+
+        .headerSelectedCss{  
+            background-color:#808080;  
+            color:white;  
+            border: 1px solid black;  
+            padding: 4px;  
+        }
+
+        #banners125 {
+        margin: 0; padding: 0;
+        width:100%;
+        overflow-x: hidden;
+        display:inline-block;  
+        }
+
+        .footer  {
+        position: fixed;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        background-color: mediumturquoise;
+        color: white;
+        margin-top: 8rem;
+        text-align: center;
+        bottom: 0;
+        }
+
+    </style>
+
+</head>
+
+<body style="overflow-x:hidden">
+    <form id="form1" runat="server" enctype="multipart/form-data">
+        <div id="contenedor">
+
+            <div id="topContent" >
+                <div class="row" style="background-color:mediumturquoise; width: 102%; height:80px;">
+                    <div class="col-6">
+                        <div class="row justify-content-start">
+                            <div class="col-4 my-1 ps-5">
+                                <asp:Image ID="ImgCodise" Width="60px" Height="70px" runat="server" ImageUrl="~/Images/banner_Codice_mediano.png" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="row justify-content-end">
+                            <div class="col-xl-4 col-lg-5 col-md-6 col-sm-6 justify-content-end my-2 pe-5">
+                                <asp:Image ID="ImgPeacock" Width="170px" Height="50px" runat="server" ImageUrl="~/Images/banner_Peacock.png" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="menuContent">
+                <asp:ContentPlaceHolder id="MenuContent" runat="server">
+                    <input type="checkbox" id="abrir-cerrar" name="abrir-cerrar" value="" data-toggle="modal" />
+                    <label id="lblMenu" for="abrir-cerrar" style="font-size:20px;" visible="false" runat="server" >&#9776; <span class="abrir">Menú</span><span class="cerrar">Cerrar</span></label>
+
+                    <div id="sidebar" class="sidebar" >
+                        <%--Aqui dentro van el Menu Dinamico--%>
+                        <asp:Menu ID="Menu_Dinamico" runat="server" Orientation="Vertical"
+                            MaximumDynamicDisplayLevels ="2" 
+                            DynamicHorizontalOffset="2" Font-Names="Tahoma" Font-Size="1.0em"
+                            ForeColor="#666666" StaticSubMenuIndent="10px">
+        
+                            <DynamicHoverStyle BackColor="#666666" ForeColor="White" Width="190px" />
+                            <DynamicMenuItemStyle HorizontalPadding="6px" VerticalPadding="4px" />
+                            <DynamicMenuStyle BackColor="#f6f6f6" />
+                            <DynamicSelectedStyle BackColor="#dddddd" />
+
+                            <StaticHoverStyle BackColor="#666666" ForeColor="White" Width="190px" />
+                            <StaticMenuItemStyle HorizontalPadding="6px" VerticalPadding="4px" />
+                            <StaticSelectedStyle BackColor="#dddddd" />
+                        </asp:Menu>
+                    </div>
+                </asp:ContentPlaceHolder>
+            </div>
+
+            <div id="mainContent" >
+                <asp:ContentPlaceHolder id="MainContent" runat="server">
+                     <%--Aqui dentro van los objetos de nuestro web forma--%>
+                 </asp:ContentPlaceHolder>
+            </div>
+
+            <div id="footerContent">
+                <asp:ContentPlaceHolder id="FooterContent" runat="server">
+                    <div class="text-center" style="background-color:mediumturquoise; width:100%; height:8%; color:white; position:fixed; display: grid; bottom:0;">
+                    <h7 class="h7 mt-3 fw-bold">© 2023 Todos los derechos reservados | Itnow Technologies de México S.A. de C.V.</h7>
+                    </div>
+                </asp:ContentPlaceHolder>                
+            </div>
+
+        </div>
+    </form>
+
+</body>
+</html>
+

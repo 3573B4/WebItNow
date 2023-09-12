@@ -83,7 +83,7 @@
         </div>
         <div class="from-group mt-2">
             <div class="d-grid col-6 mx-auto">
-                <asp:Button ID="BtnRegresar" runat="server" Text="Regresar" Font-Bold="True" OnClick="BtnRegresar_Click" CssClass="btn btn-link"/>
+                <asp:Button ID="BtnRegresar" runat="server" Text="Regresar" Font-Bold="True" OnClick="BtnRegresar_Click" CssClass="btn btn-link" Visible="false" />
             </div>
         </div>
         <div class="form-group">

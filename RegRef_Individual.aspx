@@ -24,8 +24,8 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
-    <br />
+<asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+<br />
 
 <div class="container col-md-4">
         <h2 class="h2 mb-3 fw-normal mt-4">Alta de Asunto</h2>
@@ -35,71 +35,80 @@
             <asp:Label ID="LblDesc" runat="server" Text="Estimado cliente, favor de proporcionar un nombre de usuario con una longitud de 6 a 15 caracteres. Un correo electrónico donde recibirás las notificaciones del sistema y tu contraseña de acceso." CssClass="control-label co-sm-2" Font-Size="Small" Font-Bold="False"></asp:Label>
         </div>
 --%>
-
+    <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
+        <ContentTemplate>
         <div class="form-group mt-4">
             <asp:Label ID="LblRef" runat="server" Text="Referencia" CssClass="control-label co-sm-2" Font-Size="Small" Font-Bold="False"></asp:Label>
-            <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server"   
+            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server"   
                 ControlToValidate="TxtRef" ErrorMessage="*" ForeColor="Red">
                 </asp:RequiredFieldValidator>
             <div class="col-sm-12">
-                <asp:TextBox ID="TxtRef" runat="server" CssClass="form-control" placeholder="Referencia"  OnTextChanged="TxtRef_TextChanged" AutoComplete="off" onkeyup="mayus(this);" AutoPostBack="true" MaxLength="12" ></asp:TextBox>
+                <asp:TextBox ID="TxtRef" runat="server" CssClass="form-control" placeholder="Referencia"  OnTextChanged="TxtRef_TextChanged" AutoComplete="off" onkeyup="mayus(this);" AutoPostBack="true" MaxLength="12" TabIndex="1"></asp:TextBox>
             </div>
         </div>
 
         <div class="form-group">
             <asp:Label ID="LblEmail" runat="server" Text="Correo electrónico" CssClass="control-label col-sm-2" Font-Size="Small"></asp:Label>
-            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server"   
+            <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server"   
                 ControlToValidate="TxtEmail" ErrorMessage="*" ForeColor="Red">
                 </asp:RequiredFieldValidator>
                 <asp:RegularExpressionValidator id="regEmail" ControlToValidate="TxtEmail" Text="" Runat="server" 
                                                 ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" /> 
             <div class="col-sm-12">
-                <asp:TextBox ID="TxtEmail" runat="server" CssClass="form-control" placeholder="Ingresa tu e-mail" MaxLength="50" AutoComplete="off" AutoPostBack="true" TextMode="Email"></asp:TextBox>
+                <asp:TextBox ID="TxtEmail" runat="server" CssClass="form-control" placeholder="Ingresa tu e-mail" MaxLength="50" AutoPostBack="true" AutoComplete="off" TextMode="Email" TabIndex="2"></asp:TextBox>
             </div>
         </div>        
+        </ContentTemplate>
+    </asp:UpdatePanel>
         <br />
        
         <div class="form-group">
             <asp:Label ID="LblAsegurado" runat="server" Text="Nombre de Cliente o Asegurado" CssClass="control-label col-sm-2" Font-Size="Small"></asp:Label>
-            <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server"   
+            <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server"   
                 ControlToValidate="TxtAsegurado" ErrorMessage="*" ForeColor="Red">
                 </asp:RequiredFieldValidator>
             <div class="col-sm-12">
-                <asp:TextBox ID="TxtAsegurado" runat="server" CssClass="form-control" placeholder="Ingresa el nombre del destinatario" AutoComplete="off" MaxLength="50"></asp:TextBox>
+                <asp:TextBox ID="TxtAsegurado" runat="server" CssClass="form-control" placeholder="Ingresa el nombre del destinatario" AutoComplete="off" MaxLength="50" TabIndex="3"></asp:TextBox>
             </div>
         </div>
 
         <div class="form-group">
             <asp:Label ID="LblTelefono" runat="server" Text="Telefono" CssClass="control-label col-sm-2" Font-Size="Small"></asp:Label>
-            <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server"   
+            <%--<asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server"   
                 ControlToValidate="TxtTelefono" ErrorMessage="*" ForeColor="Red">
-                </asp:RequiredFieldValidator>
+                </asp:RequiredFieldValidator>--%>
             <div class="col-sm-12">
-                <asp:TextBox ID="TxtTelefono" runat="server" CssClass="form-control" placeholder="Telefono" AutoComplete="off" MaxLength="10" ></asp:TextBox>
+                <asp:TextBox ID="TxtTelefono" runat="server" CssClass="form-control" placeholder="Telefono" AutoComplete="off" MaxLength="10" TabIndex="4"></asp:TextBox>
             </div>
         </div>
 
         <div class="form-floating mt-3">
             <asp:Label ID="LblProceso" runat="server" Text="Proceso"></asp:Label>
-            <asp:DropDownList ID="ddlProceso" runat="server" CssClass="btn btn-outline-secondary text-start mt-1"  AutoPostBack="true" OnSelectedIndexChanged="ddlProceso_SelectedIndexChanged" Width="100%" >
+            <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server"   
+                ControlToValidate="ddlProceso" ErrorMessage="*" ForeColor="Red">
+                </asp:RequiredFieldValidator>
+            <asp:DropDownList ID="ddlProceso" runat="server" CssClass="btn btn-outline-secondary text-start mt-1" AutoPostBack="true" OnSelectedIndexChanged="ddlProceso_SelectedIndexChanged" Width="100%" TabIndex="5">
             </asp:DropDownList>
         </div>
         <div class="form-floating my-3">
             <asp:Label ID="LblSubProceso" runat="server" Text="Sub Proceso"></asp:Label>
-            <asp:DropDownList ID="ddlSubProceso" runat="server" CssClass="btn btn-outline-secondary text-start mt-1" AutoPostBack="true" OnSelectedIndexChanged="ddlSubProceso_SelectedIndexChanged" Width="100%" >
+            <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server"   
+                ControlToValidate="ddlSubProceso" ErrorMessage="*" ForeColor="Red">
+                </asp:RequiredFieldValidator>
+            <asp:DropDownList ID="ddlSubProceso" runat="server" CssClass="btn btn-outline-secondary text-start mt-1" AutoPostBack="true" OnSelectedIndexChanged="ddlSubProceso_SelectedIndexChanged" Width="100%" TabIndex="6">
             </asp:DropDownList>
         </div>
 
-    <%--
         <div class="form-group">
-            <div class="col-sm-12">
-                <asp:CheckBox ID="chkPrivacidad" runat="server" Text="&nbsp;&nbsp;Acepto el Aviso de Privacidad" Font-Size="Small" />
+            <div class="col-sm-12 my-3">
+                <asp:CheckBox ID="chkPrivacidad" runat="server" Text="&nbsp;&nbsp;Acepto&nbsp;&nbsp" Font-Size="Small" />
+                <a href="https://peacock.claims/aviso/" target="_blank">Aviso de Privacidad</a>
             </div>
         </div>
-    --%>
+
         <div class="form-group">
             <div class="d-grid col-6 mx-auto">
-                <asp:Label ID="Lbl_Message" runat="server" ForeColor="Red" Visible="False"  Width="280px" ></asp:Label>
+                <asp:Label ID="Lbl_Message" runat="server" ForeColor="Red" Visible="False" Width="280px" ></asp:Label>
             </div>
         </div>        
         <div class="form-group mt-0">
@@ -111,7 +120,7 @@
 
         <div class="from-group mb-4 pb-5">
             <div class="d-grid col-6 mx-auto">
-                <asp:Button ID="BtnRegresar" runat="server" Text="Regresar" Font-Bold="True" OnClick="BtnRegresar_Click" CssClass="btn btn-link"/>
+                <asp:Button ID="BtnRegresar" runat="server" Text="Regresar" Font-Bold="True" OnClick="BtnRegresar_Click" CssClass="btn btn-link" Visible="false" />
             </div>
         </div>
         <div class="form-group">

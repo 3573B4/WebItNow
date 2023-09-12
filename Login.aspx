@@ -2,15 +2,46 @@
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
+<%@ OutputCache Location="None" %>
+
+<script language="javascript" type="text/javascript"> 
+    function MantenSesion() {
+
+        var CONTROLADOR = "login.aspx";
+
+        var head = document.getElementsByTagName('head').item(0);
+
+        script = document.createElement('script');
+
+        script.src = CONTROLADOR;
+
+        script.setAttribute('type', 'text / javascript');
+
+        script.defer = true;
+
+        head.appendChild(script);
+    }
+
+<%--
+    $(document).keypress(function (e) {
+        if (e.keyCode === 13) {
+            $("#<%= BtnAceptar.ClientID %>").click();
+        return false;
+    }
+    });
+    --%>
+
+</script>
 </asp:Content>
+
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <br />    
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
-    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+    <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
     <ContentTemplate>
     <br />
     <div class="container col-md-4">
-        <h2 class="h2 mb-3 fw-normal mt-4"> Iniciar Sesión</h2>
+        <h2 class="h2 mb-3 fw-normal mt-4"> Iniciar Sesión (Test) </h2>
         <div class="form-group">
             <asp:Label ID="LblUsu" runat="server" Text="Usuario" CssClass="control-label col-sm-2" Font-Size="Small"></asp:Label>
             <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server"   
@@ -54,7 +85,11 @@
         <div class="form-group mt-3">
             <div class="col-12">                
                 <div class="d-grid gap-2 d-flex justify-content-center">
-                    <asp:Button ID="BtnAceptar" runat="server" Text="Iniciar sesión"  Font-Bold="True"  CssClass="btn btn-primary me-md-2" OnClick="BtnAceptar_Click"/>
+                    <asp:UpdatePanel ID="UpdatePanel2" runat="server">
+                        <ContentTemplate>
+                            <asp:Button ID="BtnAceptar" runat="server" Text="Iniciar sesión" Font-Bold="True" CssClass="btn btn-primary me-md-2" OnClick="BtnAceptar_Click"/>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
             <%--    <asp:Button ID="BtnRegistrarse" runat="server" Font-Bold="True" Text="Registrarse" OnClick="BtnRegistrarse_Click" CssClass="btn btn-outline-primary"/>--%>
                 </div>
             </div>
@@ -104,5 +139,12 @@
     </asp:Panel>
     <br />
     </ContentTemplate>
+    <Triggers>
+        <asp:PostBackTrigger ControlID="BtnAceptar" /> 
+    </Triggers>
 </asp:UpdatePanel>
+
+    <script language="javascript" type="text/javascript">
+        setInterval('MantenSesion()', <%= (int) (0.9 * (Session.Timeout * 30000)) %>);
+    </script>
 </asp:Content>

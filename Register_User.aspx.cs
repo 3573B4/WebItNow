@@ -52,6 +52,8 @@ namespace WebItNow
                     {
                         LblMessage.Text = "Usuario fue insertado correctamente ";
                         this.mpeMensaje.Show();
+
+                        return;
                     }
 
                     Limpia(this.Controls);

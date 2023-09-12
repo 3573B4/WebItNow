@@ -1,4 +1,6 @@
-﻿    <%@ Page Title="" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="Request_Document.aspx.cs" Inherits="WebItNow.Request_Document" %>
+﻿   <%-- <%@ Page Title="" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="Request_Document.aspx.cs" Inherits="WebItNow.Request_Document" %>--%>
+<%@ Page Title="" Language="C#" MasterPageFile="~/3secciones.Master" AutoEventWireup="true" CodeBehind="Expediente.aspx.cs" Inherits="WebItNow.Expediente" %>
+
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
@@ -112,7 +114,7 @@
 
         <div class="from-group">
             <div class="d-grid col-6 mx-auto">
-                <asp:Button ID="BtnRegresar" runat="server" Text="Regresar" Font-Bold="True" OnClick="BtnRegresar_Click" CssClass="btn btn-link mb-5 pb-4"/>
+                <asp:Button ID="BtnRegresar" runat="server" Text="Regresar" Font-Bold="True" OnClick="BtnRegresar_Click" CssClass="btn btn-link mb-5 pb-4" Visible="false" />
             </div>
         </div>
 

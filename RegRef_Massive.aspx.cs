@@ -31,7 +31,8 @@ namespace WebItNow
 
         protected void BtnRegresar_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Menu.aspx");
+            // Response.Redirect("Menu.aspx");
+            Response.Redirect("Mnu_Dinamico.aspx", true);
         }
 
         protected void BtnCargaExcel_Click(object sender, EventArgs e)
@@ -159,14 +160,14 @@ namespace WebItNow
                 // Name of the share, directory, and file
                 string ConnectionString = ConfigurationManager.AppSettings.Get("StorageConnectionString");
                 string AccountName = ConfigurationManager.AppSettings.Get("StorageAccountName");
-                string sDirName = "itnowstorage";
+            //  string sDirName = "itnowstorage";
                 string directorioURL = Server.MapPath("~/itnowstorage/" + sFilename);
 
                 // Obtener una referencia de nuestra parte.
                 ShareClient share = new ShareClient(ConnectionString, AccountName);
 
                 // Obtener una referencia de nuestro directorio - directorio ubicado en el nivel raíz.
-                ShareDirectoryClient directory = share.GetDirectoryClient(sDirName);
+                ShareDirectoryClient directory = share.GetDirectoryClient(AccountName);
 
                 // Obtener una referencia a un subdirectorio que no se encuentra en el nivel raíz
                 directory = directory.GetSubdirectoryClient(sSubdirectorio);
@@ -264,7 +265,7 @@ namespace WebItNow
                 // Consulta a la tabla Tipo de Documento
                 string strQuery = "Select IdTpoDocumento, Descripcion From ITM_06 " +
                                   " Where IdProceso = " + pProceso + "" +
-                                  "   And IdSubProceso = " + pSubProceso + " And Status = " + pIdStatus + "";
+                                  "   And IdSubProceso = " + pSubProceso + " And IdStatus = " + pIdStatus + "";
 
                 SqlCommand cmd = new SqlCommand(strQuery, Conecta.ConectarBD);
 
@@ -477,7 +478,7 @@ namespace WebItNow
             int numeroColumnas = propiedades.NumberOfColumns;
             int numeroCeldas = propiedades.NumberOfCells;
 
-            if (numeroColumnas <= 13)
+            if (numeroColumnas <= 14)
             {
                 try
                 {
@@ -507,9 +508,9 @@ namespace WebItNow
                                 int iSubProceso = Convert.ToInt32(sl.GetCellValueAsString("M" + x));
 
                                 string sqlString = "INSERT INTO ITM_02 (UsReferencia, UsEmail, Aseguradora, UsAsegurado, Tipo_Asegurado, Nombre_Contacto, " +
-                                                                        "Apellidos_Contacto, UsTelefono, RFC_Contacto, Perfil_Contacto, Siniestro, Id_Proceso, Id_SubProceso ) " +
+                                                                        "Apellidos_Contacto, UsTelefono, RFC_Contacto, Perfil_Contacto, Siniestro, Id_Proceso, Id_SubProceso, UsPrivilegios ) " +
                                                 " VALUES (@referencia, @email, @aseguradora, @asegurado, @tpoasegurado, @nomcontacto, @apecontacto, " +
-                                                " @telefono, @rfc, @perfil, @siniestro, @proceso, @subproceso )";
+                                                " @telefono, @rfc, @perfil, @siniestro, @proceso, @subproceso, @privilegios )";
                                 try
                                 {
 
@@ -528,7 +529,7 @@ namespace WebItNow
                                     cmd.Parameters.AddWithValue("@siniestro", sl.GetCellValueAsString("K" + x));
                                     cmd.Parameters.AddWithValue("@proceso", sl.GetCellValueAsString("L" + x));
                                     cmd.Parameters.AddWithValue("@subproceso", sl.GetCellValueAsString("M" + x));
-
+                                    cmd.Parameters.AddWithValue("@privilegios", sl.GetCellValueAsString("N" + x));
 
                                     int result =  cmd.ExecuteNonQuery();
 

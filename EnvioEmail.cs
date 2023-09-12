@@ -73,20 +73,21 @@ namespace WebItNow
 
         public int EnvioMensaje(String pUsuarios, String pEmail, string pAsunto, string pBody)
         {
-            string wDe = "martin.baltierra@itnow.mx";
+            string wDe = "archivo@peacock.claims";
             string wPara = pEmail;
-            string wCC = "martin.baltierra@itnow.mx";
+            //  string wCC = "martin.baltierra@itnow.mx";
             string wAsunto = pAsunto;
-            string wMensaje = "Observaciones registradas :  \n" + pBody;
+            //string wMensaje = pBody + " \n Observaciones registradas : \n";
+            string wMensaje = pBody;
 
             System.Net.Mail.MailMessage correo = new System.Net.Mail.MailMessage();
             correo.From = new System.Net.Mail.MailAddress(wDe);
             correo.To.Add(wPara);
-            correo.CC.Add(wCC);
+            //  correo.CC.Add(wCC);
             correo.Subject = wAsunto;
             wMensaje += "\n\nFecha y hora GMT: " +
                 DateTime.Now.ToLocalTime().ToString("dd/MM/yyyy HH:mm:ss");
-            correo.Body = wMensaje ;
+            correo.Body = wMensaje;
             correo.IsBodyHtml = false;
             correo.Priority = System.Net.Mail.MailPriority.Normal;
             //
@@ -99,16 +100,16 @@ namespace WebItNow
             //smtp.Host = "outlook.office365.com";
             //smtp.Port = 25; //465; //25
 
-            smtp.Host = "smtp.ionos.mx";
+            smtp.Host = "smtp.office365.com";
             smtp.Port = 587; //465; //25
 
-            smtp.Credentials = new System.Net.NetworkCredential("sistemas@itnow.mx", "System1623#");
+            smtp.Credentials = new System.Net.NetworkCredential("archivo@peacock.claims", "ArcpT2022#");
             smtp.EnableSsl = true;
 
             try
             {
                 smtp.Send(correo);
-                //System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls;
+                // System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls;
 
                 return 0;
             }

@@ -13,7 +13,7 @@
 
             //alert("La sesión ha expirado.");
             //location.href = '/Login.aspx';
-        }, 600000);
+        }, 3600000);
 
         function acceso() {
             location.href = '/Login.aspx';
@@ -80,6 +80,7 @@
     <script src="Scripts/jquery-3.4.1.min.js" type="text/javascript"></script>
     <link href="~/Scripts/footable.min.js" rel="stylesheet" type="text/javascript" />
     <link href="~/Styles/footable.min.css" rel="stylesheet" type="text/css" />
+
 
     <style type="text/css">
         .modal
@@ -322,10 +323,11 @@
             </div>
         </div>
 --%>
+
         <br />
         <div class="from-group mb-4 pb-5">
             <div class="d-grid col-6 mx-auto">
-                <asp:Button ID="BtnRegresar" runat="server" Text="Regresar" Font-Bold="True" OnClick="BtnRegresar_Click" CssClass="btn btn-link"/>
+                <asp:Button ID="BtnRegresar" runat="server" Text="Regresar" Font-Bold="True" OnClick="BtnRegresar_Click" CssClass="btn btn-link" Visible="false" />
             </div>
         </div>
 
@@ -436,7 +438,7 @@
 
     </ContentTemplate>
     <Triggers>
-        <asp:PostBackTrigger ControlID="grdEstadoDocumento" />
+        <%--<asp:PostBackTrigger ControlID="GrdEstadoDocumento" />--%>
 <%--    <asp:PostBackTrigger ControlID="BtnDescargas" />    --%>
 <%--    <asp:PostBackTrigger ControlID="imgDescarga" />     --%>
     </Triggers>
