@@ -57,10 +57,11 @@ namespace WebItNow
             {
                 string result = Autenticar(TxtUsu.Text, TxtPass.Text);
 
-                if (result != null)
+                int result = Autenticar(TxtUsu.Text, TxtPass.Text);
+
+                if (result >= 1)
                 {
-                    // IdUsuario
-                    System.Web.HttpContext.Current.Session["IdUsuario"] = TxtUsu.Text;
+
                     // Permisos Usuario
                     System.Web.HttpContext.Current.Session["UsPrivilegios"] = result;
 
@@ -69,7 +70,7 @@ namespace WebItNow
 
                     string UsPrivilegios = Convert.ToString(Session["UsPrivilegios"]);
 
-                    if (UsPrivilegios == "4")
+                    if (mensaje == "3")
                     {
                      // Response.Redirect("Upload_Files.aspx");
                     }
@@ -119,16 +120,12 @@ namespace WebItNow
 
                 while (dr1.Read())
                 {
-                    return dr1["IdPrivilegio"].ToString().Trim();
-                }
-                    //if (dr1.Read())
-                    //{
 
-                    //    return dr1.GetInt32(0);
+                    return dr1.GetInt32(0);
 
                     //}
 
-                cmd1.Dispose();
+                    cmd1.Dispose();
                 dr1.Dispose();
 
                 Conecta.Cerrar();
@@ -145,39 +142,7 @@ namespace WebItNow
 
             }
 
-            return null;
-        }
-
-        protected void BtnClose_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        public static string GetHomePath()
-        {
-            // Not in .NET 2.0
-            // System.Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
-            if (System.Environment.OSVersion.Platform == System.PlatformID.Unix)
-                return System.Environment.GetEnvironmentVariable("HOME");
-
-            return System.Environment.ExpandEnvironmentVariables("%HOMEDRIVE%%HOMEPATH%");
-        }
-
-        public static string GetDownloadFolderPath()
-        {
-            if (System.Environment.OSVersion.Platform == System.PlatformID.Unix)
-            {
-                string pathDownload = System.IO.Path.Combine(GetHomePath(), "Downloads");
-                return pathDownload;
-            }
-
-            return System.Convert.ToString(
-                Microsoft.Win32.Registry.GetValue(
-                     @"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders"
-                    , "{374DE290-123F-4565-9164-39C4925E467B}"
-                    , String.Empty
-                )
-            );
+            return -1;
         }
 
     }

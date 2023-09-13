@@ -20,25 +20,19 @@
             location.replace(history.forward(1))
         }
 
-        function mayus(e) {
-            e.value = e.value.toUpperCase();
-        }
+    //function getNameURLWeb() {
+    //    var sPath = window.location.pathname;
+    //    var sPage = sPath.substring(sPath.lastIndexOf('/') + 1);
+    //    return sPage;
+    //}
+
+    //var xx_nombre_pagina = getNameURLWeb();
+    //    alert(xx_nombre_pagina);
 
     </script>
-
-    <!-- Estilo para Agregar THEAD y TBODY a GridView. -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery-footable/0.1.0/css/footable.min.css" rel="stylesheet" type="text/css" />
-
     <link href="~/Styles/center_controls.css" rel="stylesheet" type="text/css" />
     <link href="~/Styles/default.css" rel="stylesheet" type="text/css" />
     <link href="~/Styles/panel_message.css" rel="stylesheet" type="text/css" />
-    <link href="~/Styles/GridView.css" rel="stylesheet" type="text/css" />
-    <link href="~/Styles/fuentes.css" rel="stylesheet" type="text/css" />
-    <link href="Styles/pagination-ys.css" rel="stylesheet" type="text/css" />
-
-    <%--<link href="Styles/menu-style.css" rel="stylesheet" type="text/css" />--%>
-    <%--<link href="Content/bootstrap.min.css" rel="stylesheet" type="text/css" />--%>
-    <%--<link href="Content/bootstrap.min.css" rel="stylesheet" type="text/css" />--%>
 
     <style type="text/css">
         .style1 {
