@@ -1,0 +1,13 @@
+﻿@font-face {
+    font-family: Tahoma, sans-serif;
+    src: url(Tahoma.ttf);
+}
+
+h2 {
+    font-family: Tahoma, sans-serif;
+}
+
+body {
+    font-family: Tahoma, sans-serif;
+    font-size: 11px;
+}

@@ -1,0 +1,15 @@
+2025-05-20 15:02:27 - Entró al Page_Load
+2025-05-20 15:02:27 - Tipo de solicitud: POST
+2025-05-20 15:02:27 - Es un POST
+2025-05-20 15:02:27 - JSON recibido: {
+  "nom_completo": "Manuel Díaz Cabrera"
+}
+
+
+
+2025-05-20 15:02:43 - Entró al Page_Load
+2025-05-20 15:02:43 - Tipo de solicitud: POST
+2025-05-20 15:02:43 - Es un POST
+2025-05-20 15:02:43 - JSON recibido: {
+  "num_telefonico": "55-3331-6980"
+}

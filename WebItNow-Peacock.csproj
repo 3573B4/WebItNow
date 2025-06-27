@@ -1,0 +1,941 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{C0E8E036-896C-412B-992A-AC06D0EFF62B}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WebItNow_Peacock</RootNamespace>
+    <AssemblyName>WebItNow-Peacock</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort>44314</IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AjaxControlToolkit, Version=20.1.0.0, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e, processorArchitecture=MSIL">
+      <HintPath>packages\AjaxControlToolkit.20.1.0\lib\net40\AjaxControlToolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="BouncyCastle.Crypto, Version=1.8.9.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
+      <HintPath>packages\BouncyCastle.1.8.9\lib\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
+    <Reference Include="BouncyCastle.Cryptography, Version=2.0.0.0, Culture=neutral, PublicKeyToken=072edcf4a5328938, processorArchitecture=MSIL">
+      <HintPath>packages\BouncyCastle.Cryptography.2.3.0\lib\net461\BouncyCastle.Cryptography.dll</HintPath>
+    </Reference>
+    <Reference Include="DayPilot, Version=5.0.303.0, Culture=neutral, PublicKeyToken=ce5d34538e20ef65, processorArchitecture=MSIL">
+      <HintPath>packages\DayPilot.5.0.303\lib\DayPilot.dll</HintPath>
+    </Reference>
+    <Reference Include="DocumentFormat.OpenXml, Version=3.0.2.0, Culture=neutral, PublicKeyToken=8fb06cb64d019a17, processorArchitecture=MSIL">
+      <HintPath>packages\DocumentFormat.OpenXml.3.0.2\lib\net46\DocumentFormat.OpenXml.dll</HintPath>
+    </Reference>
+    <Reference Include="DocumentFormat.OpenXml.Framework, Version=3.0.2.0, Culture=neutral, PublicKeyToken=8fb06cb64d019a17, processorArchitecture=MSIL">
+      <HintPath>packages\DocumentFormat.OpenXml.Framework.3.0.2\lib\net46\DocumentFormat.OpenXml.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="Enums.NET, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7ea1c1650d506225, processorArchitecture=MSIL">
+      <HintPath>packages\Enums.NET.4.0.2\lib\net45\Enums.NET.dll</HintPath>
+    </Reference>
+    <Reference Include="EPPlus, Version=7.2.1.0, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
+      <HintPath>packages\EPPlus.7.2.1\lib\net462\EPPlus.dll</HintPath>
+    </Reference>
+    <Reference Include="EPPlus.Interfaces, Version=6.1.1.0, Culture=neutral, PublicKeyToken=a694d7f3b0907a61, processorArchitecture=MSIL">
+      <HintPath>packages\EPPlus.Interfaces.6.1.1\lib\net462\EPPlus.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="EPPlus.System.Drawing, Version=6.1.1.0, Culture=neutral, PublicKeyToken=2308d35469c9bac0, processorArchitecture=MSIL">
+      <HintPath>packages\EPPlus.System.Drawing.6.1.1\lib\net462\EPPlus.System.Drawing.dll</HintPath>
+    </Reference>
+    <Reference Include="ExtendedNumerics.BigDecimal, Version=0.0.0.0, Culture=neutral, PublicKeyToken=65f1315a45ad8949, processorArchitecture=MSIL">
+      <HintPath>packages\ExtendedNumerics.BigDecimal.2025.1000.0.118\lib\net472\ExtendedNumerics.BigDecimal.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Protobuf, Version=3.26.1.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
+      <HintPath>packages\Google.Protobuf.3.26.1\lib\net45\Google.Protobuf.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=1.3.3.11, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <HintPath>packages\SharpZipLib.1.3.3\lib\net45\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp, Version=5.5.13.3, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>packages\iTextSharp.5.5.13.3\lib\itextsharp.dll</HintPath>
+    </Reference>
+    <Reference Include="K4os.Compression.LZ4, Version=1.3.8.0, Culture=neutral, PublicKeyToken=2186fa9121ef231d, processorArchitecture=MSIL">
+      <HintPath>packages\K4os.Compression.LZ4.1.3.8\lib\net462\K4os.Compression.LZ4.dll</HintPath>
+    </Reference>
+    <Reference Include="K4os.Compression.LZ4.Streams, Version=1.3.8.0, Culture=neutral, PublicKeyToken=2186fa9121ef231d, processorArchitecture=MSIL">
+      <HintPath>packages\K4os.Compression.LZ4.Streams.1.3.8\lib\net462\K4os.Compression.LZ4.Streams.dll</HintPath>
+    </Reference>
+    <Reference Include="K4os.Hash.xxHash, Version=1.0.8.0, Culture=neutral, PublicKeyToken=32cd54395057cec3, processorArchitecture=MSIL">
+      <HintPath>packages\K4os.Hash.xxHash.1.0.8\lib\net462\K4os.Hash.xxHash.dll</HintPath>
+    </Reference>
+    <Reference Include="MathNet.Numerics, Version=5.0.0.0, Culture=neutral, PublicKeyToken=cd8b63ad3d691a37, processorArchitecture=MSIL">
+      <HintPath>packages\MathNet.Numerics.Signed.5.0.0\lib\net461\MathNet.Numerics.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.WebUtilities, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNetCore.WebUtilities.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.WebUtilities.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=4.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\lib\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.IO.RecyclableMemoryStream, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.IO.RecyclableMemoryStream.3.0.0\lib\netstandard2.0\Microsoft.IO.RecyclableMemoryStream.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Web.Infrastructure.2.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data, Version=9.0.0.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>packages\MySql.Data.9.0.0\lib\net462\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="SixLabors.Fonts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=d998eea7b14cab13, processorArchitecture=MSIL">
+      <HintPath>packages\SixLabors.Fonts.1.0.1\lib\netstandard2.0\SixLabors.Fonts.dll</HintPath>
+    </Reference>
+    <Reference Include="SixLabors.ImageSharp, Version=2.0.0.0, Culture=neutral, PublicKeyToken=d998eea7b14cab13, processorArchitecture=MSIL">
+      <HintPath>packages\SixLabors.ImageSharp.2.1.7\lib\net472\SixLabors.ImageSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="SpreadsheetLight, Version=3.5.0.0, Culture=neutral, PublicKeyToken=32fbb46dc1730c57, processorArchitecture=MSIL">
+      <HintPath>packages\SpreadsheetLight.3.5.0\lib\netstandard2.0\SpreadsheetLight.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.Annotations, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.ComponentModel.Annotations.5.0.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Configuration.ConfigurationManager, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Configuration.ConfigurationManager.8.0.0\lib\net462\System.Configuration.ConfigurationManager.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Drawing.Common, Version=4.0.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Drawing.Common.5.0.0\lib\net461\System.Drawing.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO.Compression, Version=4.1.2.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>packages\System.IO.Compression.4.3.0\lib\net46\System.IO.Compression.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.IO.Compression.ZipFile, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>packages\System.IO.Compression.ZipFile.4.3.0\lib\net46\System.IO.Compression.ZipFile.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Management" />
+    <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Security.AccessControl, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Security.AccessControl.6.0.0\lib\net461\System.Security.AccessControl.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Pkcs, Version=6.0.0.3, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Security.Cryptography.Pkcs.6.0.3\lib\net461\System.Security.Cryptography.Pkcs.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Xml, Version=6.0.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Security.Cryptography.Xml.6.0.1\lib\net461\System.Security.Cryptography.Xml.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Principal.Windows, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Security.Principal.Windows.5.0.0\lib\net461\System.Security.Principal.Windows.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Encoding.CodePages, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Text.Encoding.CodePages.8.0.0\lib\net462\System.Text.Encoding.CodePages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="Microsoft.ScriptManager.MSAjax">
+      <HintPath>packages\Microsoft.AspNet.ScriptManager.MSAjax.5.0.0\lib\net45\Microsoft.ScriptManager.MSAjax.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ScriptManager.WebForms">
+      <HintPath>packages\Microsoft.AspNet.ScriptManager.WebForms.5.0.0\lib\net45\Microsoft.ScriptManager.WebForms.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <HintPath>packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Web.Optimization.WebForms">
+      <Private>True</Private>
+      <HintPath>packages\Microsoft.AspNet.Web.Optimization.WebForms.1.1.3\lib\net45\Microsoft.AspNet.Web.Optimization.WebForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.FriendlyUrls">
+      <HintPath>packages\Microsoft.AspNet.FriendlyUrls.Core.1.0.2\lib\net45\Microsoft.AspNet.FriendlyUrls.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="ZstdSharp, Version=0.8.0.0, Culture=neutral, PublicKeyToken=8d151af33a4ad5cf, processorArchitecture=MSIL">
+      <HintPath>packages\ZstdSharp.Port.0.8.0\lib\net462\ZstdSharp.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="About.aspx" />
+    <Content Include="App_Data\BD_MySQL.xml" />
+    <Content Include="Captcha.aspx" />
+    <Content Include="Contact.aspx" />
+    <Content Include="Content\bootstrap-grid.css" />
+    <Content Include="Content\bootstrap-grid.min.css" />
+    <Content Include="Content\bootstrap-grid.rtl.css" />
+    <Content Include="Content\bootstrap-grid.rtl.min.css" />
+    <Content Include="Content\bootstrap-reboot.css" />
+    <Content Include="Content\bootstrap-reboot.min.css" />
+    <Content Include="Content\bootstrap-reboot.rtl.css" />
+    <Content Include="Content\bootstrap-reboot.rtl.min.css" />
+    <Content Include="Content\bootstrap-utilities.css" />
+    <Content Include="Content\bootstrap-utilities.min.css" />
+    <Content Include="Content\bootstrap-utilities.rtl.css" />
+    <Content Include="Content\bootstrap-utilities.rtl.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\bootstrap.rtl.css" />
+    <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="Content\Site.css" />
+    <Content Include="css\footable.core.min.css" />
+    <Content Include="Default.aspx" />
+    <Content Include="Descargas.aspx" />
+    <Content Include="fwCatalog_LineaNegocios.aspx" />
+    <Content Include="fwCatalog_Productos.aspx" />
+    <Content Include="fwCatalog_Sections.aspx" />
+    <Content Include="fwCatalog_SLA_Protocolos.aspx" />
+    <Content Include="fwCatalog_StSiniestro.aspx" />
+    <Content Include="fwConfiguracion_Aseguradora.aspx" />
+    <Content Include="fwConfiguracion_StSiniestro.aspx" />
+    <Content Include="fwGM_Alta_Proyecto.aspx" />
+    <Content Include="fwGM_Alta_Asunto.aspx" />
+    <Content Include="fwGM_Bitacora_Asunto.aspx" />
+    <Content Include="fwGM_Catalog_Categorias.aspx" />
+    <Content Include="fwGM_Catalog_Document.aspx" />
+    <Content Include="fwGM_Catalog_Hospitales.aspx" />
+    <Content Include="fwGM_Catalog_InstHospitalaria.aspx" />
+    <Content Include="fwGM_Catalog_Lineas.aspx" />
+    <Content Include="fwGM_Catalog_PaqueteMedico.aspx" />
+    <Content Include="fwGM_Catalog_Proveedores.aspx" />
+    <Content Include="fwGM_Catalog_Responsable.aspx" />
+    <Content Include="fwGM_Configuracion_Document.aspx" />
+    <Content Include="fwGM_Configuracion_Proyect.aspx" />
+    <Content Include="fwGM_Configuracion_StSiniestro.aspx" />
+    <Content Include="fwGM_Reporte_Alta_Asunto.aspx" />
+    <Content Include="fwModulo_Correspondencia.aspx" />
+    <Content Include="fwBitacora_Asunto.aspx" />
+    <Content Include="fwBitacora_Litigio.aspx" />
+    <Content Include="fwCatalog_Categorias.aspx" />
+    <Content Include="fwCatalog_Client.aspx" />
+    <Content Include="fwCatalog_Coberturas.aspx" />
+    <Content Include="fwCatalog_Contacts.aspx" />
+    <Content Include="fwCatalog_Document.aspx" />
+    <Content Include="fwAlta_Asunto.aspx" />
+    <Content Include="fwAlta_Proyecto.aspx" />
+    <Content Include="fwCatalog_Responsable.aspx" />
+    <Content Include="fwConfiguracion_Document.aspx" />
+    <Content Include="fwConfiguracion_Proyect.aspx" />
+    <Content Include="fwAgenda_Inspecciones.aspx" />
+    <Content Include="fwDocument_Notebook.aspx" />
+    <Content Include="fwDocument_Notebook_1.aspx" />
+    <Content Include="favicon.ico" />
+    <Content Include="fwAlta_Inspecciones.aspx" />
+    <Content Include="fwEditor_SQL.aspx" />
+    <Content Include="fwPV_Alta_Asunto.aspx" />
+    <Content Include="fwPV_Bitacora_Asunto.aspx" />
+    <Content Include="fwPV_Mnu_Dinamico.aspx" />
+    <Content Include="fwPV_Reporte_Alta_Asunto.aspx" />
+    <Content Include="fwReporte_Inspecciones.aspx" />
+    <Content Include="fwGM_Mnu_Dinamico.aspx" />
+    <Content Include="Images\alta_procesos.png" />
+    <Content Include="Images\checklist.png" />
+    <Content Include="Images\correspondencia.png" />
+    <Content Include="Images\editar.png" />
+    <Content Include="Images\editar_new.png" />
+    <Content Include="Images\fondo_inicio.jpeg" />
+    <Content Include="Images\home.png" />
+    <Content Include="Images\alta_referencia.png" />
+    <Content Include="Images\consultas.png" />
+    <Content Include="Images\alta_proyecto.png" />
+    <Content Include="Images\alta_inspeccion.png" />
+    <Content Include="Images\operaciones.png" />
+    <Content Include="Images\klipartz.png" />
+    <Content Include="Images\logout_icon_b.png" />
+    <Content Include="Images\martillo.png" />
+    <Content Include="Images\minus.png" />
+    <Content Include="Images\plus.png" />
+    <Content Include="Images\proveedor.png" />
+    <Content Include="js\footable.min.js" />
+    <Content Include="js\jquery.min.js" />
+    <Content Include="Login.aspx" />
+    <Content Include="fwReporte_Alta_Asunto.aspx" />
+    <Content Include="Global.asax" />
+    <Content Include="Images\aceptar.ico" />
+    <Content Include="Images\aceptar.jpg" />
+    <Content Include="Images\aceptar.png" />
+    <Content Include="Images\aceptar_new.png" />
+    <Content Include="Images\add-new-page_icon.png" />
+    <Content Include="Images\agregar.png" />
+    <Content Include="Images\agregar_new.png" />
+    <Content Include="Images\ajax-loader.gif" />
+    <Content Include="Images\banner_Codice_mediano.png" />
+    <Content Include="Images\banner_codise.png" />
+    <Content Include="Images\banner_Peacock.png" />
+    <Content Include="Images\cancelar.ico" />
+    <Content Include="Images\cancelar.jpg" />
+    <Content Include="Images\cancelar.png" />
+    <Content Include="Images\delete-page-icon.png" />
+    <Content Include="Images\descargar.ico" />
+    <Content Include="Images\descargar.png" />
+    <Content Include="Images\descargar_new.png" />
+    <Content Include="Images\edit.jpg" />
+    <Content Include="Images\eliminar_new.png" />
+    <Content Include="Images\email-icon.png" />
+    <Content Include="Images\envia_doc.png" />
+    <Content Include="Images\excel.png" />
+    <Content Include="Images\FGR.jpg" />
+    <Content Include="Images\imgItnow.jpeg" />
+    <Content Include="Images\Itnow.jpg" />
+    <Content Include="Images\loader.gif" />
+    <Content Include="Images\loading.gif" />
+    <Content Include="Images\logout_icon_w.png" />
+    <Content Include="Images\logo_Itnow.jpg" />
+    <Content Include="Images\rechazar_new.png" />
+    <Content Include="Images\search_find.png" />
+    <Content Include="Images\Spinner-1s-200px.gif" />
+    <Content Include="Images\subir-archivo.png" />
+    <Content Include="Images\user.png" />
+    <Content Include="Images\visor_doc.jpg" />
+    <Content Include="Images\whatsapp-logo_icon.png" />
+    <Content Include="ManychatReceptor.aspx" />
+    <Content Include="Mnu_Dinamico.aspx" />
+    <Content Include="Scripts\bootstrap.bundle.js" />
+    <Content Include="Scripts\bootstrap.bundle.min.js" />
+    <Content Include="Scripts\bootstrap.esm.js" />
+    <Content Include="Scripts\bootstrap.esm.min.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\footable.min.js" />
+    <Content Include="Main.Master" />
+    <Content Include="Content\bootstrap.rtl.min.css.map" />
+    <Content Include="Content\bootstrap.rtl.css.map" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-utilities.rtl.min.css.map" />
+    <Content Include="Content\bootstrap-utilities.rtl.css.map" />
+    <Content Include="Content\bootstrap-utilities.min.css.map" />
+    <Content Include="Content\bootstrap-utilities.css.map" />
+    <Content Include="Content\bootstrap-reboot.rtl.min.css.map" />
+    <Content Include="Content\bootstrap-reboot.rtl.css.map" />
+    <Content Include="Content\bootstrap-reboot.min.css.map" />
+    <Content Include="Content\bootstrap-reboot.css.map" />
+    <Content Include="Content\bootstrap-grid.rtl.min.css.map" />
+    <Content Include="Content\bootstrap-grid.rtl.css.map" />
+    <Content Include="Content\bootstrap-grid.min.css.map" />
+    <Content Include="Content\bootstrap-grid.css.map" />
+    <Content Include="itnowstorage\CARTA_SOLICITUD.docx" />
+    <Content Include="itnowstorage\IP_CALZA_SIDER.docx" />
+    <Content Include="Web.config" />
+    <Content Include="itnowstorage\ZSA_CONVENIO_AJUSTE.docx" />
+    <Content Include="itnowstorage\AZT_A_CONVENIO_AJUSTE.docx" />
+    <Content Include="itnowstorage\AZT_P_CONVENIO_AJUSTE.docx" />
+    <Content Include="itnowstorage\AZT_T_CONVENIO_AJUSTE.docx" />
+    <Content Include="itnowstorage\BER_T_CONVENIO_AJUSTE.docx" />
+    <Content Include="itnowstorage\DECLARACION_RECOLECCION.docx" />
+    <Content Include="itnowstorage\VF_BENEF_PRE_PASE_MEDICO.docx" />
+    <Content Include="itnowstorage\VF_CARTA_AUTORIZACION.docx" />
+    <Content Include="itnowstorage\VF_DICTAMEN_MEDICO.docx" />
+    <Content Include="itnowstorage\VF_INFORME_PRELIMINAR.docx" />
+    <Content Include="itnowstorage\VF_PASE_MEDICO_STC_METRO.docx" />
+    <Content Include="itnowstorage\VF_PRIMERA_RESPUESTA.docx" />
+    <Content Include="itnowstorage\VF_RESP_PRE_PASE_MEDICO.docx" />
+    <Content Include="itnowstorage\VF_PASE_MEDICO_BENEF_QR.docx" />
+    <Content Include="itnowstorage\VF_PASE_MEDICO_RESP_QR.docx" />
+    <None Include="Properties\PublishProfiles\IISProfile1.pubxml" />
+    <Content Include="Scripts\bootstrap.min.js.map" />
+    <Content Include="Scripts\bootstrap.js.map" />
+    <Content Include="Scripts\bootstrap.esm.min.js.map" />
+    <Content Include="Scripts\bootstrap.esm.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.min.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.js.map" />
+    <None Include="Scripts\jquery-1.4.1-vsdoc.js" />
+    <Content Include="Scripts\jquery-1.4.1.js" />
+    <Content Include="Scripts\jquery-1.4.1.min.js" />
+    <None Include="Scripts\jquery-3.7.1.intellisense.js" />
+    <Content Include="Scripts\jquery-3.7.1.js" />
+    <Content Include="Scripts\jquery-3.7.1.min.js" />
+    <Content Include="Scripts\jquery-3.7.1.slim.js" />
+    <Content Include="Scripts\jquery-3.7.1.slim.min.js" />
+    <Content Include="Scripts\jquery.mousewheel-3.0.6.min.js" />
+    <Content Include="Scripts\jquery.rondell.min.js" />
+    <Content Include="Scripts\loading-bar.js" />
+    <Content Include="Scripts\loading-bar.min.js" />
+    <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\WebForms\DetailsView.js" />
+    <Content Include="Scripts\WebForms\Focus.js" />
+    <Content Include="Scripts\WebForms\GridView.js" />
+    <Content Include="Scripts\WebForms\Menu.js" />
+    <Content Include="Scripts\WebForms\MenuStandards.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjax.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxApplicationServices.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxComponentModel.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxCore.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxGlobalization.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxHistory.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxNetwork.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxSerialization.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxTimer.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxWebForms.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxWebServices.js" />
+    <Content Include="Scripts\WebForms\SmartNav.js" />
+    <Content Include="Scripts\WebForms\TreeView.js" />
+    <Content Include="Scripts\WebForms\WebForms.js" />
+    <Content Include="Scripts\WebForms\WebParts.js" />
+    <Content Include="Scripts\WebForms\WebUIValidation.js" />
+    <Content Include="Site.Master" />
+    <Content Include="Styles\center_controls.css" />
+    <Content Include="Styles\default.css" />
+    <Content Include="Styles\foogallery.admin.min.css" />
+    <Content Include="Styles\footable.min.css" />
+    <Content Include="Styles\fuentes.css" />
+    <Content Include="Styles\GridView.css" />
+    <Content Include="Styles\jquery.rondell.css" />
+    <Content Include="Styles\loading-bar.css" />
+    <Content Include="Styles\loading-bar.min.css" />
+    <Content Include="Styles\menu-style.css" />
+    <Content Include="Styles\paginacion.css" />
+    <Content Include="Styles\pagination-ys.css" />
+    <Content Include="Styles\panel_message.css" />
+    <Content Include="Styles\skinC.css" />
+    <Content Include="ViewSwitcher.ascx" />
+    <Content Include="Bundle.config" />
+    <Content Include="Site.Mobile.Master" />
+    <Content Include="Scripts\jquery-3.7.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.7.1.min.map" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="About.aspx.cs">
+      <DependentUpon>About.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="About.aspx.designer.cs">
+      <DependentUpon>About.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Captcha.aspx.cs">
+      <DependentUpon>Captcha.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Captcha.aspx.designer.cs">
+      <DependentUpon>Captcha.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ConexionBD_MySQL.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Contact.aspx.cs">
+      <DependentUpon>Contact.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Contact.aspx.designer.cs">
+      <DependentUpon>Contact.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Descargas.aspx.cs">
+      <DependentUpon>Descargas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Descargas.aspx.designer.cs">
+      <DependentUpon>Descargas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EnvioEmail.cs" />
+    <Compile Include="ErrorManager.cs" />
+    <Compile Include="fwCatalog_LineaNegocios.aspx.cs">
+      <DependentUpon>fwCatalog_LineaNegocios.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="fwCatalog_LineaNegocios.aspx.designer.cs">
+      <DependentUpon>fwCatalog_LineaNegocios.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="fwCatalog_Productos.aspx.cs">
+      <DependentUpon>fwCatalog_Productos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="fwCatalog_Productos.aspx.designer.cs">
+      <DependentUpon>fwCatalog_Productos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="fwCatalog_Sections.aspx.cs">
+      <DependentUpon>fwCatalog_Sections.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="fwCatalog_Sections.aspx.designer.cs">
+      <DependentUpon>fwCatalog_Sections.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="fwCatalog_SLA_Protocolos.aspx.cs">
+      <DependentUpon>fwCatalog_SLA_Protocolos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="fwCatalog_SLA_Protocolos.aspx.designer.cs">
+      <DependentUpon>fwCatalog_SLA_Protocolos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="fwCatalog_StSiniestro.aspx.cs">
+      <DependentUpon>fwCatalog_StSiniestro.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="fwCatalog_StSiniestro.aspx.designer.cs">
+      <DependentUpon>fwCatalog_StSiniestro.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="fwConfiguracion_Aseguradora.aspx.cs">
+      <DependentUpon>fwConfiguracion_Aseguradora.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="fwConfiguracion_Aseguradora.aspx.designer.cs">
+      <DependentUpon>fwConfiguracion_Aseguradora.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="fwConfiguracion_StSiniestro.aspx.cs">
+      <DependentUpon>fwConfiguracion_StSiniestro.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="fwConfiguracion_StSiniestro.aspx.designer.cs">
+      <DependentUpon>fwConfiguracion_StSiniestro.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="fwGM_Alta_Proyecto.aspx.cs">
+      <DependentUpon>fwGM_Alta_Proyecto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="fwGM_Alta_Proyecto.aspx.designer.cs">
+      <DependentUpon>fwGM_Alta_Proyecto.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="fwGM_Alta_Asunto.aspx.cs">
+      <DependentUpon>fwGM_Alta_Asunto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="fwGM_Alta_Asunto.aspx.designer.cs">
+      <DependentUpon>fwGM_Alta_Asunto.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="fwGM_Bitacora_Asunto.aspx.cs">
+      <DependentUpon>fwGM_Bitacora_Asunto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="fwGM_Bitacora_Asunto.aspx.designer.cs">
+      <DependentUpon>fwGM_Bitacora_Asunto.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="fwGM_Catalog_Categorias.aspx.cs">
+      <DependentUpon>fwGM_Catalog_Categorias.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="fwGM_Catalog_Categorias.aspx.designer.cs">
+      <DependentUpon>fwGM_Catalog_Categorias.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="fwGM_Catalog_Document.aspx.cs">
+      <DependentUpon>fwGM_Catalog_Document.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="fwGM_Catalog_Document.aspx.designer.cs">
+      <DependentUpon>fwGM_Catalog_Document.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="fwGM_Catalog_Hospitales.aspx.cs">
+      <DependentUpon>fwGM_Catalog_Hospitales.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="fwGM_Catalog_Hospitales.aspx.designer.cs">
+      <DependentUpon>fwGM_Catalog_Hospitales.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="fwGM_Catalog_InstHospitalaria.aspx.cs">
+      <DependentUpon>fwGM_Catalog_InstHospitalaria.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="fwGM_Catalog_InstHospitalaria.aspx.designer.cs">
+      <DependentUpon>fwGM_Catalog_InstHospitalaria.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="fwGM_Catalog_Lineas.aspx.cs">
+      <DependentUpon>fwGM_Catalog_Lineas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="fwGM_Catalog_Lineas.aspx.designer.cs">
+      <DependentUpon>fwGM_Catalog_Lineas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="fwGM_Catalog_PaqueteMedico.aspx.cs">
+      <DependentUpon>fwGM_Catalog_PaqueteMedico.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="fwGM_Catalog_PaqueteMedico.aspx.designer.cs">
+      <DependentUpon>fwGM_Catalog_PaqueteMedico.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="fwGM_Catalog_Proveedores.aspx.cs">
+      <DependentUpon>fwGM_Catalog_Proveedores.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="fwGM_Catalog_Proveedores.aspx.designer.cs">
+      <DependentUpon>fwGM_Catalog_Proveedores.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="fwGM_Catalog_Responsable.aspx.cs">
+      <DependentUpon>fwGM_Catalog_Responsable.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="fwGM_Catalog_Responsable.aspx.designer.cs">
+      <DependentUpon>fwGM_Catalog_Responsable.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="fwGM_Configuracion_Document.aspx.cs">
+      <DependentUpon>fwGM_Configuracion_Document.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="fwGM_Configuracion_Document.aspx.designer.cs">
+      <DependentUpon>fwGM_Configuracion_Document.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="fwGM_Configuracion_Proyect.aspx.cs">
+      <DependentUpon>fwGM_Configuracion_Proyect.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="fwGM_Configuracion_Proyect.aspx.designer.cs">
+      <DependentUpon>fwGM_Configuracion_Proyect.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="fwGM_Configuracion_StSiniestro.aspx.cs">
+      <DependentUpon>fwGM_Configuracion_StSiniestro.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="fwGM_Configuracion_StSiniestro.aspx.designer.cs">
+      <DependentUpon>fwGM_Configuracion_StSiniestro.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="fwGM_Reporte_Alta_Asunto.aspx.cs">
+      <DependentUpon>fwGM_Reporte_Alta_Asunto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="fwGM_Reporte_Alta_Asunto.aspx.designer.cs">
+      <DependentUpon>fwGM_Reporte_Alta_Asunto.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="fwModulo_Correspondencia.aspx.cs">
+      <DependentUpon>fwModulo_Correspondencia.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="fwModulo_Correspondencia.aspx.designer.cs">
+      <DependentUpon>fwModulo_Correspondencia.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="fwBitacora_Asunto.aspx.cs">
+      <DependentUpon>fwBitacora_Asunto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="fwBitacora_Asunto.aspx.designer.cs">
+      <DependentUpon>fwBitacora_Asunto.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="fwBitacora_Litigio.aspx.cs">
+      <DependentUpon>fwBitacora_Litigio.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="fwBitacora_Litigio.aspx.designer.cs">
+      <DependentUpon>fwBitacora_Litigio.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="fwCatalog_Categorias.aspx.cs">
+      <DependentUpon>fwCatalog_Categorias.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="fwCatalog_Categorias.aspx.designer.cs">
+      <DependentUpon>fwCatalog_Categorias.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="fwCatalog_Client.aspx.cs">
+      <DependentUpon>fwCatalog_Client.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="fwCatalog_Client.aspx.designer.cs">
+      <DependentUpon>fwCatalog_Client.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="fwCatalog_Coberturas.aspx.cs">
+      <DependentUpon>fwCatalog_Coberturas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="fwCatalog_Coberturas.aspx.designer.cs">
+      <DependentUpon>fwCatalog_Coberturas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="fwCatalog_Contacts.aspx.cs">
+      <DependentUpon>fwCatalog_Contacts.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="fwCatalog_Contacts.aspx.designer.cs">
+      <DependentUpon>fwCatalog_Contacts.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="fwCatalog_Document.aspx.cs">
+      <DependentUpon>fwCatalog_Document.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="fwCatalog_Document.aspx.designer.cs">
+      <DependentUpon>fwCatalog_Document.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="fwAlta_Asunto.aspx.cs">
+      <DependentUpon>fwAlta_Asunto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="fwAlta_Asunto.aspx.designer.cs">
+      <DependentUpon>fwAlta_Asunto.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="fwAlta_Proyecto.aspx.cs">
+      <DependentUpon>fwAlta_Proyecto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="fwAlta_Proyecto.aspx.designer.cs">
+      <DependentUpon>fwAlta_Proyecto.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="fwCatalog_Responsable.aspx.cs">
+      <DependentUpon>fwCatalog_Responsable.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="fwCatalog_Responsable.aspx.designer.cs">
+      <DependentUpon>fwCatalog_Responsable.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="fwConfiguracion_Document.aspx.cs">
+      <DependentUpon>fwConfiguracion_Document.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="fwConfiguracion_Document.aspx.designer.cs">
+      <DependentUpon>fwConfiguracion_Document.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="fwConfiguracion_Proyect.aspx.cs">
+      <DependentUpon>fwConfiguracion_Proyect.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="fwConfiguracion_Proyect.aspx.designer.cs">
+      <DependentUpon>fwConfiguracion_Proyect.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="fwAgenda_Inspecciones.aspx.cs">
+      <DependentUpon>fwAgenda_Inspecciones.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="fwAgenda_Inspecciones.aspx.designer.cs">
+      <DependentUpon>fwAgenda_Inspecciones.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="fwDocument_Notebook.aspx.cs">
+      <DependentUpon>fwDocument_Notebook.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="fwDocument_Notebook.aspx.designer.cs">
+      <DependentUpon>fwDocument_Notebook.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="fwDocument_Notebook_1.aspx.cs">
+      <DependentUpon>fwDocument_Notebook_1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="fwDocument_Notebook_1.aspx.designer.cs">
+      <DependentUpon>fwDocument_Notebook_1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="fwAlta_Inspecciones.aspx.cs">
+      <DependentUpon>fwAlta_Inspecciones.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="fwAlta_Inspecciones.aspx.designer.cs">
+      <DependentUpon>fwAlta_Inspecciones.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="fwEditor_SQL.aspx.cs">
+      <DependentUpon>fwEditor_SQL.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="fwEditor_SQL.aspx.designer.cs">
+      <DependentUpon>fwEditor_SQL.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="fwPV_Alta_Asunto.aspx.cs">
+      <DependentUpon>fwPV_Alta_Asunto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="fwPV_Alta_Asunto.aspx.designer.cs">
+      <DependentUpon>fwPV_Alta_Asunto.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="fwPV_Bitacora_Asunto.aspx.cs">
+      <DependentUpon>fwPV_Bitacora_Asunto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="fwPV_Bitacora_Asunto.aspx.designer.cs">
+      <DependentUpon>fwPV_Bitacora_Asunto.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="fwPV_Mnu_Dinamico.aspx.cs">
+      <DependentUpon>fwPV_Mnu_Dinamico.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="fwPV_Mnu_Dinamico.aspx.designer.cs">
+      <DependentUpon>fwPV_Mnu_Dinamico.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="fwPV_Reporte_Alta_Asunto.aspx.cs">
+      <DependentUpon>fwPV_Reporte_Alta_Asunto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="fwPV_Reporte_Alta_Asunto.aspx.designer.cs">
+      <DependentUpon>fwPV_Reporte_Alta_Asunto.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="fwReporte_Inspecciones.aspx.cs">
+      <DependentUpon>fwReporte_Inspecciones.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="fwReporte_Inspecciones.aspx.designer.cs">
+      <DependentUpon>fwReporte_Inspecciones.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="fwGM_Mnu_Dinamico.aspx.cs">
+      <DependentUpon>fwGM_Mnu_Dinamico.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="fwGM_Mnu_Dinamico.aspx.designer.cs">
+      <DependentUpon>fwGM_Mnu_Dinamico.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="fwReporte_Alta_Asunto.aspx.cs">
+      <DependentUpon>fwReporte_Alta_Asunto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="fwReporte_Alta_Asunto.aspx.designer.cs">
+      <DependentUpon>fwReporte_Alta_Asunto.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Main.Master.cs">
+      <DependentUpon>Main.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Main.Master.designer.cs">
+      <DependentUpon>Main.Master</DependentUpon>
+    </Compile>
+    <Compile Include="ManychatReceptor.aspx.cs">
+      <DependentUpon>ManychatReceptor.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManychatReceptor.aspx.designer.cs">
+      <DependentUpon>ManychatReceptor.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Mnu_Dinamico.aspx.cs">
+      <DependentUpon>Mnu_Dinamico.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Mnu_Dinamico.aspx.designer.cs">
+      <DependentUpon>Mnu_Dinamico.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Site.Master.cs">
+      <DependentUpon>Site.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Site.Master.designer.cs">
+      <DependentUpon>Site.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Site.Mobile.Master.cs">
+      <DependentUpon>Site.Mobile.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Site.Mobile.Master.designer.cs">
+      <DependentUpon>Site.Mobile.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Variables.cs" />
+    <Compile Include="ViewSwitcher.ascx.cs">
+      <DependentUpon>ViewSwitcher.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ViewSwitcher.ascx.designer.cs">
+      <DependentUpon>ViewSwitcher.ascx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>50516</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:82/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>http://192.168.100.55:83/</CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Import Project="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets" Condition="Exists('packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>Este proyecto hace referencia a los paquetes NuGet que faltan en este equipo. Use la restauración de paquetes NuGet para descargarlos. Para obtener más información, consulte http://go.microsoft.com/fwlink/?LinkID=322105. El archivo que falta es {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
