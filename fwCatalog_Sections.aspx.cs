@@ -198,7 +198,7 @@ namespace WebItNow_Peacock
 
                 dbConn.Close();
 
-                LblMessage.Text = "Se elimino sección, correctamente, revisar";
+                LblMessage.Text = "Se elimino sección, correctamente";
                 mpeMensaje.Show();
 
                 GetSecciones();
