@@ -34,8 +34,8 @@ namespace WebItNow_Peacock
                         return;
                     }
 
-                    // GetSecciones();
                     Inicializar_GrdSeccion();
+                    GetSecciones();
 
                 }
                 catch (Exception ex)
@@ -55,10 +55,10 @@ namespace WebItNow_Peacock
                 ConexionBD_MySQL dbConn = new ConexionBD_MySQL(Variables.wUserName, Variables.wPassword);
                 dbConn.Open();
 
-                // Consulta a las tablas : Estado de Documento (Expediente) = ITM_67
-                string strQuery = "SELECT IdSeguros, IdOrden, Descripcion " +
-                                        " FROM ITM_67 " +
-                                        " WHERE IdStatus = 1 ORDER BY IdOrden";
+                // Consulta a las tablas : Estado de Documento (Expediente) = ITM_44
+                string strQuery = "SELECT IdSeccion, Descripcion " +
+                                        " FROM ITM_44 " +
+                                        " WHERE IdStatus = 1";
 
                 DataTable dt = dbConn.ExecuteQuery(strQuery);
 
@@ -150,17 +150,17 @@ namespace WebItNow_Peacock
 
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                e.Row.Cells[1].Width = Unit.Pixel(100);     // IdSeguros
-                e.Row.Cells[3].Width = Unit.Pixel(1100);    // Descripcion
-                e.Row.Cells[4].Width = Unit.Pixel(50);      // Eliminar
+                e.Row.Cells[1].Width = Unit.Pixel(1100);    // Descripcion
+                e.Row.Cells[2].Width = Unit.Pixel(50);      // Editar
+                e.Row.Cells[3].Width = Unit.Pixel(50);      // Eliminar
             }
             if (e.Row.RowType == DataControlRowType.Header)
             {
-                e.Row.Cells[2].Visible = false;    // IdOrden
+                e.Row.Cells[0].Visible = false;    // IdSeccion
             }
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                e.Row.Cells[2].Visible = false;    // IdOrden
+                e.Row.Cells[0].Visible = false;    // IdSeccion
             }
         }
 
@@ -179,20 +179,20 @@ namespace WebItNow_Peacock
             mpeMensaje_1.Show();
         }
 
-        protected void Eliminar_ITM_67()
+        protected void Eliminar_ITM_44()
         {
             try
             {
                 int index = Variables.wRenglon;
 
-                int iIdOrden = Convert.ToInt32(GrdSeccion.Rows[index].Cells[2].Text); ;
+                int iIdSeccion = Convert.ToInt32(GrdSeccion.Rows[index].Cells[0].Text); ;
 
                 ConexionBD_MySQL dbConn = new ConexionBD_MySQL(Variables.wUserName, Variables.wPassword);
                 dbConn.Open();
 
-                // Eliminar registro(s) tablas (ITM_67)
-                string strQuery = "DELETE FROM ITM_67 " +
-                                  " WHERE IdOrden = " + iIdOrden + "";
+                // Eliminar registro(s) tablas (ITM_44)
+                string strQuery = "DELETE FROM ITM_44 " +
+                                  " WHERE IdSeccion = " + iIdSeccion + "";
 
                 int affectedRows = dbConn.ExecuteNonQuery(strQuery);
 
@@ -212,23 +212,21 @@ namespace WebItNow_Peacock
             }
         }
 
-        protected void Actualizar_ITM_67()
+        protected void Actualizar_ITM_44()
         {
             try
             {
                 int index = Variables.wRenglon;
 
-                int iIdOrden = Convert.ToInt32(GrdSeccion.Rows[index].Cells[2].Text); ;
-                string IdSeguros = "ZSA";
+                int iIdSeccion = Convert.ToInt32(GrdSeccion.Rows[index].Cells[0].Text); ;
 
                 ConexionBD_MySQL dbConn = new ConexionBD_MySQL(Variables.wUserName, Variables.wPassword);
                 dbConn.Open();
 
-                // Actualizar registro(s) tablas (ITM_67)
-                string strQuery = "UPDATE ITM_67 " +
-                                  "   SET IdSeguros = '" + IdSeguros + "', " +
-                                  "       Descripcion = '" + TxtNomSeccion.Text.Trim() + "' " +
-                                  " WHERE IdOrden = " + iIdOrden + " ";
+                // Actualizar registro(s) tablas (ITM_44)
+                string strQuery = "UPDATE ITM_44 " +
+                                  "   SET Descripcion = '" + TxtNomSeccion.Text.Trim() + "' " +
+                                  " WHERE IdSeccion = " + iIdSeccion + " ";
 
                 int affectedRows = dbConn.ExecuteNonQuery(strQuery);
 
@@ -260,15 +258,14 @@ namespace WebItNow_Peacock
                     return;
                 }
 
-                int iIdOrden = GetIdConsecutivoMax();
-                string IdSeguros = "ZSA";
+                int iIdSeccion = GetIdConsecutivoMax();
 
                 ConexionBD_MySQL dbConn = new ConexionBD_MySQL(Variables.wUserName, Variables.wPassword);
                 dbConn.Open();
 
-                // Insertar registro tabla (ITM_67)
-                string strQuery = "INSERT INTO ITM_67 (IdSeguros, IdOrden, Descripcion, IdStatus) " +
-                                  "VALUES ('" + IdSeguros + "', " + iIdOrden + ", '" + TxtNomSeccion.Text.Trim() + "', 1)" + "\n \n";
+                // Insertar registro tabla (ITM_44)
+                string strQuery = "INSERT INTO ITM_44 (IdSeccion, Descripcion, IdStatus) " +
+                                  "VALUES ('" + iIdSeccion + "', '" + TxtNomSeccion.Text.Trim() + "', 1)" + "\n \n";
 
                 int affectedRows = dbConn.ExecuteNonQuery(strQuery);
 
@@ -298,15 +295,15 @@ namespace WebItNow_Peacock
             ConexionBD_MySQL dbConn = new ConexionBD_MySQL(Variables.wUserName, Variables.wPassword);
             dbConn.Open();
 
-            string strQuery = "SELECT COALESCE(MAX(IdOrden), 0) + 1 IdOrden " +
-                                " FROM ITM_67 ";
+            string strQuery = "SELECT COALESCE(MAX(IdSeccion), 0) + 1 IdSeccion " +
+                                " FROM ITM_44 ";
 
             DataTable dt = dbConn.ExecuteQuery(strQuery);
 
 
             foreach (DataRow row in dt.Rows)
             {
-                IdConsecutivoMax = Convert.ToInt32(row["IdOrden"].ToString().Trim());
+                IdConsecutivoMax = Convert.ToInt32(row["IdSeccion"].ToString().Trim());
             }
 
             dbConn.Close();
@@ -322,7 +319,7 @@ namespace WebItNow_Peacock
 
         protected void BtnAceptar_Click(object sender, EventArgs e)
         {
-            Eliminar_ITM_67();
+            Eliminar_ITM_44();
 
             TxtNomSeccion.Text = string.Empty;
         }
@@ -368,7 +365,7 @@ namespace WebItNow_Peacock
                 return;
             }
 
-            Actualizar_ITM_67();
+            Actualizar_ITM_44();
 
             // inicializar controles.
             TxtNomSeccion.Text = string.Empty;
@@ -389,7 +386,7 @@ namespace WebItNow_Peacock
 
             Variables.wRenglon = row.RowIndex;
 
-            TxtNomSeccion.Text = Server.HtmlDecode(Convert.ToString(GrdSeccion.Rows[index].Cells[3].Text));
+            TxtNomSeccion.Text = Server.HtmlDecode(Convert.ToString(GrdSeccion.Rows[index].Cells[1].Text));
 
             TxtNomSeccion.ReadOnly = true;
 

@@ -36,12 +36,10 @@ namespace WebItNow_Peacock
                     }
 
                     GetCiaSeguros();
+                    GetSecciones();
 
                     ddlProducto.Items.Clear();
                     ddlProducto.Items.Insert(0, new ListItem("-- Seleccionar --", "0"));
-
-                    ddlSecciones.Items.Clear();
-                    ddlSecciones.Items.Insert(0, new ListItem("-- Seleccionar --", "0"));
 
                     Inicializar_GrdCoberturas();
 
@@ -134,6 +132,38 @@ namespace WebItNow_Peacock
                 mpeMensaje.Show();
             }
         }
+
+        public void GetSecciones()
+        {
+            try
+            {
+                ConexionBD_MySQL dbConn = new ConexionBD_MySQL(Variables.wUserName, Variables.wPassword);
+                dbConn.Open();
+
+                // Consulta a las tablas : Estado de Documento (Expediente) = ITM_44
+                string strQuery = "SELECT IdSeccion, Descripcion " +
+                                        " FROM ITM_44 " +
+                                        " WHERE IdStatus = 1";
+
+                DataTable dt = dbConn.ExecuteQuery(strQuery);
+
+                ddlSecciones.DataSource = dt;
+
+                ddlSecciones.DataValueField = "IdSeccion";
+                ddlSecciones.DataTextField = "Descripcion";
+
+                ddlSecciones.DataBind();
+                ddlSecciones.Items.Insert(0, new ListItem("-- Seleccionar --", "0"));
+
+                dbConn.Close();
+            }
+            catch (System.Exception ex)
+            {
+                LblMessage.Text = ex.Message;
+                mpeMensaje.Show();
+            }
+        }
+
         private void Inicializar_GrdCoberturas()
         {
             // Crea un DataTable vacío con la estructura necesaria
