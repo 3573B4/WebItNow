@@ -56,10 +56,6 @@ C:\inetpub\wwwroot\WebItNow - Peacock\bin\Microsoft.ScriptManager.MSAjax.dll
 C:\inetpub\wwwroot\WebItNow - Peacock\bin\Microsoft.ScriptManager.WebForms.dll
 C:\inetpub\wwwroot\WebItNow - Peacock\bin\Microsoft.Web.Infrastructure.dll
 C:\inetpub\wwwroot\WebItNow - Peacock\bin\Newtonsoft.Json.dll
-C:\inetpub\wwwroot\WebItNow - Peacock\bin\NPOI.Core.dll
-C:\inetpub\wwwroot\WebItNow - Peacock\bin\NPOI.OOXML.dll
-C:\inetpub\wwwroot\WebItNow - Peacock\bin\NPOI.OpenXml4Net.dll
-C:\inetpub\wwwroot\WebItNow - Peacock\bin\NPOI.OpenXmlFormats.dll
 C:\inetpub\wwwroot\WebItNow - Peacock\bin\SixLabors.Fonts.dll
 C:\inetpub\wwwroot\WebItNow - Peacock\bin\SixLabors.ImageSharp.dll
 C:\inetpub\wwwroot\WebItNow - Peacock\bin\SpreadsheetLight.dll
@@ -91,14 +87,6 @@ C:\inetpub\wwwroot\WebItNow - Peacock\bin\MathNet.Numerics.xml
 C:\inetpub\wwwroot\WebItNow - Peacock\bin\Microsoft.AspNetCore.WebUtilities.xml
 C:\inetpub\wwwroot\WebItNow - Peacock\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
 C:\inetpub\wwwroot\WebItNow - Peacock\bin\Microsoft.IO.RecyclableMemoryStream.xml
-C:\inetpub\wwwroot\WebItNow - Peacock\bin\NPOI.Core.pdb
-C:\inetpub\wwwroot\WebItNow - Peacock\bin\NPOI.Core.xml
-C:\inetpub\wwwroot\WebItNow - Peacock\bin\NPOI.OOXML.pdb
-C:\inetpub\wwwroot\WebItNow - Peacock\bin\NPOI.OOXML.xml
-C:\inetpub\wwwroot\WebItNow - Peacock\bin\NPOI.OpenXml4Net.pdb
-C:\inetpub\wwwroot\WebItNow - Peacock\bin\NPOI.OpenXml4Net.xml
-C:\inetpub\wwwroot\WebItNow - Peacock\bin\NPOI.OpenXmlFormats.pdb
-C:\inetpub\wwwroot\WebItNow - Peacock\bin\NPOI.OpenXmlFormats.xml
 C:\inetpub\wwwroot\WebItNow - Peacock\bin\SixLabors.Fonts.xml
 C:\inetpub\wwwroot\WebItNow - Peacock\bin\SixLabors.ImageSharp.xml
 C:\inetpub\wwwroot\WebItNow - Peacock\bin\SpreadsheetLight.xml

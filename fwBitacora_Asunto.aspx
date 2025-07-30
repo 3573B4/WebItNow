@@ -1345,7 +1345,7 @@
                                     <button type="button" class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false" id="BtnFecFinVigencia">
                                         <span class="visually-hidden">Toggle Dropdown</span>
                                     </button>
-                                    <ajaxToolkit:CalendarExtender ID="dateFecFinVigencia" runat="server" TargetControlID="TxtFechaFinVigencia" PopupButtonID="BtnFecFinVigencia" Format="dd/MM/yyyy" />
+                                    <ajaxToolkit:CalendarExtender ID="dateFechaFinVigencia" runat="server" TargetControlID="TxtFechaFinVigencia" PopupButtonID="BtnFecFinVigencia" Format="dd/MM/yyyy" />
                                 </div>
                             </div>
 
@@ -2054,6 +2054,15 @@
                         <div class="row mb-3">
                             <div class="col-lg-4 col-md-4">
                                 <div class ="mb-2">
+                                    <asp:Label ID="LblSecciones" runat="server" Text="Sección" ></asp:Label>
+                                </div>
+                                <div class=" input-group input-group-sm">
+                                    <asp:DropDownList ID="ddlSecciones" runat="server" CssClass="btn btn-outline-secondary text-start" AutoPostBack="true" OnSelectedIndexChanged="ddlSecciones_SelectedIndexChanged" Width="100%">
+                                    </asp:DropDownList>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4">
+                                <div class ="mb-2">
                                     <asp:Label ID="LblCoberturas" runat="server" Text="Cobertura" ></asp:Label>
                                 </div>
                                 <div class=" input-group input-group-sm">
@@ -2069,6 +2078,8 @@
                                     &nbsp;
                                 </div>
                             </div>
+                        </div>
+                        <div class="row mb-3">
                             <div class="col-lg-4 col-md-4">
                                 <div class="mb-2">
                                     <asp:Label ID="LblSumaAsegurada" runat="server" Text="Suma Asegurada" CssClass="form-label"></asp:Label>
@@ -2084,7 +2095,7 @@
                             </div>
                         </div>
 
-                        <div class="row mt-3">
+                        <div class="row mt-3" style="display:none;">
                             <div class="col-lg-9 col-md-9">
                                 <div class="mb-2">
                                     <asp:Label ID="LblNomCobertura" runat="server" Text="Nombre Cobertura" CssClass="form-label"></asp:Label>
@@ -2094,7 +2105,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row mt-3">
+                        <div class="row mt-3" style="display:none;">
                             <div class="col-lg-9 col-md-9">
                                 <div class="mb-2">
                                     <asp:Label ID="LblRiesgo" runat="server" Text="Riesgo" CssClass="form-label"></asp:Label>
@@ -2219,10 +2230,11 @@
                                                     <asp:ImageButton ID="ImgEliminar" runat="server" OnClick="ImgEliminar_Click" Height="24px" Width="24px" ImageUrl="~/Images/rechazar_new.png"  Enabled="true" />
                                                 </ItemTemplate>
                                             </asp:TemplateField>
+                                            <asp:BoundField DataField="IdSeccion" />
                                             <asp:BoundField DataField="IdCobertura" />
-                                            <asp:BoundField DataField="DescCobertura" />
-                                            <asp:BoundField DataField="Cob_Nombre" HeaderText="Nombre Cobertura" />
-                                            <asp:BoundField DataField="Cob_Riesgo"  HeaderText="Riesgo" />
+                                            <asp:BoundField DataField="DescCobertura" HeaderText="Nombre Cobertura" />
+                                            <asp:BoundField DataField="Cob_Nombre" />
+                                            <asp:BoundField DataField="Cob_Riesgo" />
                                             <asp:BoundField DataField="Cob_Suma" HeaderText="Suma Asegurada" />
                                             <asp:BoundField DataField="Cob_Sublimite"  HeaderText="Sublimite" />
                                             <asp:BoundField DataField="Cob_Deducible" HeaderText="Deducible" />

@@ -260,6 +260,7 @@
     <Content Include="fwGM_Alta_Proyecto.aspx" />
     <Content Include="fwGM_Alta_Asunto.aspx" />
     <Content Include="fwGM_Bitacora_Asunto.aspx" />
+    <Content Include="fwGM_Catalog_Adjusters.aspx" />
     <Content Include="fwGM_Catalog_Categorias.aspx" />
     <Content Include="fwGM_Catalog_Document.aspx" />
     <Content Include="fwGM_Catalog_Hospitales.aspx" />
@@ -581,6 +582,13 @@
     </Compile>
     <Compile Include="fwGM_Bitacora_Asunto.aspx.designer.cs">
       <DependentUpon>fwGM_Bitacora_Asunto.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="fwGM_Catalog_Adjusters.aspx.cs">
+      <DependentUpon>fwGM_Catalog_Adjusters.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="fwGM_Catalog_Adjusters.aspx.designer.cs">
+      <DependentUpon>fwGM_Catalog_Adjusters.aspx</DependentUpon>
     </Compile>
     <Compile Include="fwGM_Catalog_Categorias.aspx.cs">
       <DependentUpon>fwGM_Catalog_Categorias.aspx</DependentUpon>

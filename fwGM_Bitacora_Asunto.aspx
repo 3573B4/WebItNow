@@ -182,6 +182,41 @@
                             <asp:TextBox ID="TxtNumPoliza" runat="server" CssClass="form-control form-control-sm" MaxLength="25"></asp:TextBox>
                         </div>
                     </div>
+                        <div class="col-lg-4 col-md-4">
+                            <div class="mb-2">
+                                <asp:Label ID="LblFechaIniVigencia" runat="server" Text="Fecha Inicio Vigencia" CssClass="form-label"></asp:Label>
+                            </div>
+                            <div class="input-group input-group-sm">
+                                <asp:TextBox ID="TxtFechaIniVigencia" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
+                                <button type="button" class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false" id="BtnFechaIniVigencia">
+                                    <span class="visually-hidden">Toggle Dropdown</span>
+                                </button>
+                                <ajaxToolkit:CalendarExtender ID="dateFechaIniVigencia" runat="server" TargetControlID="TxtFechaIniVigencia" PopupButtonID="BtnFechaIniVigencia" Format="dd/MM/yyyy" />
+                            </div>
+                        </div>  
+                        <div class="col-lg-4 col-md-4">
+                            <div class="mb-2">
+                                <asp:Label ID="LblFechaFinVigencia" runat="server" Text="Fecha Final Vigencia" CssClass="form-label"></asp:Label>
+                            </div>
+                            <div class="input-group input-group-sm">
+                                <asp:TextBox ID="TxtFechaFinVigencia" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
+                                <button type="button" class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false" id="BtnFechaFinVigencia">
+                                    <span class="visually-hidden">Toggle Dropdown</span>
+                                </button>
+                                <ajaxToolkit:CalendarExtender ID="dateFechaFinVigencia" runat="server" TargetControlID="TxtFechaFinVigencia" PopupButtonID="BtnFechaFinVigencia" Format="dd/MM/yyyy" />
+                            </div>
+                        </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-lg-4 col-md-4 ">
+                        <div class ="mb-2">
+                            <asp:Label ID="LblEstatusCaso" runat="server" Text="Estatus del Caso" CssClass="control-label" Font-Size="Small"></asp:Label>
+                        </div>
+                        <div class="input-group input-group-sm">
+                            <asp:DropDownList ID="ddlEstatusCaso" runat="server" CssClass="btn btn-outline-secondary text-start" AutoPostBack="true" OnSelectedIndexChanged="ddlEstatusCaso_SelectedIndexChanged" Width="100%" >
+                            </asp:DropDownList>
+                        </div>
+                    </div>
                     <div class="col-lg-8 col-md-8">
                         <div class="mb-2">
                             <asp:Label ID="LblNomAjustador" runat="server" Text="Nombre Ajustador" CssClass="form-label"></asp:Label>
@@ -215,13 +250,14 @@
                     <div class="row mt-3">
                         <div class="col-lg-4 col-md-4">
                             <div class="mb-2">
-                                <asp:Label ID="LblHoraRecepcion" runat="server" Text="Hora Recepcion" CssClass="form-label"></asp:Label>
+                                <asp:Label ID="LblFechaOcurrencia" runat="server" Text="Fecha Ocurrencia" CssClass="form-label"></asp:Label>
                             </div>
                             <div class="input-group input-group-sm">
-                                <asp:TextBox ID="TxtHoraRecepcion" runat="server" CssClass="form-control form-control-sm" 
-                                        onkeydown="if(event.key === 'Enter'){event.preventDefault(); return false;}"
-                                        oninput="this.value = this.value.replace(/[^0-9:]/g, '');"  
-                                        MaxLength ="5"></asp:TextBox>
+                                <asp:TextBox ID="TxtFechaOcurrencia" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
+                                <button type="button" class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false" id="BtnFechaOcurrencia">
+                                    <span class="visually-hidden">Toggle Dropdown</span>
+                                </button>
+                                <ajaxToolkit:CalendarExtender ID="dateOcurrencia" runat="server" TargetControlID="TxtFechaOcurrencia" PopupButtonID="BtnFechaOcurrencia" Format="dd/MM/yyyy" />
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-4">
@@ -237,14 +273,13 @@
                         </div>
                         <div class="col-lg-4 col-md-4">
                             <div class="mb-2">
-                                <asp:Label ID="LblFechaOcurrencia" runat="server" Text="Fecha Ocurrencia" CssClass="form-label"></asp:Label>
+                                <asp:Label ID="LblHoraRecepcion" runat="server" Text="Hora Recepcion" CssClass="form-label"></asp:Label>
                             </div>
                             <div class="input-group input-group-sm">
-                                <asp:TextBox ID="TxtFechaOcurrencia" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
-                                <button type="button" class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false" id="BtnFechaOcurrencia">
-                                    <span class="visually-hidden">Toggle Dropdown</span>
-                                </button>
-                                <ajaxToolkit:CalendarExtender ID="dateOcurrencia" runat="server" TargetControlID="TxtFechaOcurrencia" PopupButtonID="BtnFechaOcurrencia" Format="dd/MM/yyyy" />
+                                <asp:TextBox ID="TxtHoraRecepcion" runat="server" CssClass="form-control form-control-sm" 
+                                        onkeydown="if(event.key === 'Enter'){event.preventDefault(); return false;}"
+                                        oninput="this.value = this.value.replace(/[^0-9:]/g, '');"  
+                                        MaxLength ="5"></asp:TextBox>
                             </div>
                         </div>
                     </div>
@@ -260,6 +295,7 @@
                         </div>
                     </div>
 
+<%--                    
                     <div class="row mt-3">
                         <div class="col-lg-8 col-md-8">
                             <div class ="mb-2">
@@ -323,6 +359,7 @@
                             </div>
                         </div>
                     </div>
+--%>
 
                 </asp:Panel>
                     <!-- Botón Guardar y Actualizar para el panel 2 -->
@@ -337,6 +374,65 @@
                             </ContentTemplate>
                         </asp:UpdatePanel>
                     </div>
+                </div>
+
+                <div class="row mb-4 mt-3" style="background-color:#96E7D9; align-items: baseline;">
+                    <div class="col-10" style="padding-left: 14px;">
+                        <asp:Label ID="LblEtiquetaPnl6" runat="server" Text="LINEA / ESTACIÓN DE OCURRENCIA" CssClass="control-label" Font-Size="small"></asp:Label>
+                    </div>
+                    <div class="col-2" style="display:flex; justify-content: end;">
+                        <div>
+                            <asp:Button ID="btnShowPanel6" runat="server" Text="&#9660;" OnClick="btnShowPanel6_Click" Height="24px" Width="24px" CssClass="btn btn-primary btn-sm justify-content-center align-items-center p-0 m-0" />
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <asp:Panel ID="pnl6" runat="server" Visible="true">
+                        <div class="row mb-3">
+                            <div class="col-lg-4 col-md-4 ">
+                                <div class ="mb-2">
+                                    <asp:Label ID="LblLineaOcurrencia" runat="server" Text="Línea de Ocurrencia" CssClass="control-label" Font-Size="Small"></asp:Label>
+                                </div>
+                                <div class="input-group input-group-sm">
+                                    <asp:DropDownList ID="ddlLineaOcurrencia" runat="server" CssClass="btn btn-outline-secondary text-start" AutoPostBack="true" OnSelectedIndexChanged="ddlLineaOcurrencia_SelectedIndexChanged" Width="100%">
+                                    </asp:DropDownList>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 ">
+                                <div class ="mb-2">
+                                    <asp:Label ID="LblEstacionOcurrencia" runat="server" Text="Estación de Ocurrencia" CssClass="control-label" Font-Size="Small"></asp:Label>
+                                </div>
+                                <div class="input-group input-group-sm">
+                                    <asp:DropDownList ID="ddlEstacionOcurrencia" runat="server" CssClass="btn btn-outline-secondary text-start" AutoPostBack="true" OnSelectedIndexChanged="ddlEstacionOcurrencia_SelectedIndexChanged" Width="100%" >
+                                    </asp:DropDownList>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mt-3">
+                            <div class="col-lg-12 col-md-12">
+                                <div class ="mb-2">
+                                    <asp:Label ID="LblRef_Ubicacion" runat="server" Text="Referencias de la Ubicación"></asp:Label>
+                                </div>
+                                <div class="input-group input-group-sm">
+                                    <asp:TextBox ID="TxtRef_Ubicacion" runat="server" CssClass="form-control form-control-sm mb-1" placeholder="" AutoComplete="off" MaxLength="1250" Columns="12" Rows="2" TextMode="MultiLine"></asp:TextBox>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Botón Guardar y Actualizar para el panel 6 -->
+                        <div class="d-grid gap-4 d-flex justify-content-center mt-3 mb-3">
+                            <asp:UpdatePanel ID="UpdatePanel7" runat="server" UpdateMode="Conditional">
+                                <ContentTemplate>
+                                    <asp:Button ID="BtnAnularPnl6" runat="server" Text="Cancelar" Font-Bold="True" OnClick="BtnAnularPnl6_Click" CssClass="btn btn-primary" Visible="false" TabIndex="0"/>
+                                    <asp:Button ID="btnEditarPnl6" runat="server" Text="Editar Datos" Font-Bold="True" OnClick="btnEditarPnl6_Click" CssClass="btn btn-primary" TabIndex="1"/>
+                                    <asp:Button ID="btnActualizarPnl6" runat="server" Text="Aplicar Cambios" Font-Bold="True" OnClick="btnActualizarPnl6_Click" CssClass="btn btn-secondary" visible="false" TabIndex="2"/>
+                                </ContentTemplate>
+                            </asp:UpdatePanel>
+                        </div>
+
+                    </asp:Panel>
                 </div>
 
                 <div class="row mb-4 mt-3" style="background-color:#96E7D9; align-items: baseline;">
@@ -666,6 +762,7 @@
 
                 </div>
 
+<%--
                 <div class="row mb-4 mt-3" style="background-color:#96E7D9; align-items: baseline;">
                     <div class="col-10" style="padding-left: 14px;">
                         <asp:Label ID="LblEtiquetaPnl5" runat="server" Text="CONFIGURACIÓN DE LA RECLAMACIÓN" CssClass="control-label" Font-Size="small"></asp:Label>
@@ -676,9 +773,10 @@
                         </div>
                     </div>
                 </div>
+--%>
 
                 <div>
-                <asp:Panel ID="pnl1" runat="server" Visible="true">
+                <asp:Panel ID="pnl1" runat="server" Visible="false">
                     <div class="row mb-3">
                         <div class="col-lg-4 col-md-4 ">
                             <div class ="mb-2">
@@ -833,7 +931,7 @@
                 </div>
                 <div class="row mb-4 mt-3" style="background-color:#96E7D9; align-items: baseline;">
                     <div class="col-10" style="padding-left: 14px;">
-                        <asp:Label ID="LblEtiquetaPnl0" runat="server" Text="DOCUMENTACIÓN" CssClass="control-label" Font-Size="small"></asp:Label>
+                        <asp:Label ID="LblEtiquetaPnl0" runat="server" Text="GENERADOR DE DOCUMENTOS" CssClass="control-label" Font-Size="small"></asp:Label>
                     </div>
                     <div class="col-2" style="display:flex; justify-content: end;">
                         <div>
@@ -887,61 +985,13 @@
                                     <asp:Button ID="BtnThree" runat="server" Text="C. Autorización" OnClick="BtnThree_Click" CssClass="btn btn-primary" TabIndex="3" />
                                     <asp:Button ID="BtnFour" runat="server" Text="D. Médico" OnClick="BtnFour_Click" CssClass="btn btn-primary" TabIndex="4"/>
                                     <asp:Button ID="BtnFive"  runat="server" Text="I. Preliminar" OnClick="BtnFive_Click" CssClass="btn btn-primary" TabIndex="5"/>
-                                    <asp:Button ID="BtnSix" runat="server" Text="P.P.Médico B." OnClick="BtnSix_Click" CssClass="btn btn-primary" TabIndex="6" />
-                                    <asp:Button ID="BtnSeven" runat="server" Text="P.P.Médico R." OnClick="BtnSeven_Click" CssClass="btn btn-primary" TabIndex="7" />
-                                    <asp:Button ID="BtnEight" runat="server" Text="P. Médico QRB." OnClick="BtnEight_Click" CssClass="btn btn-primary" TabIndex="7" />
-                                    <asp:Button ID="BtnNine" runat="server" Text="P. Médico QRR." OnClick="BtnNine_Click" CssClass="btn btn-primary" TabIndex="7" />
+                                    <asp:Button ID="BtnSix" runat="server" Text="P.Médico Benef" OnClick="BtnSix_Click" CssClass="btn btn-primary" TabIndex="6" />
+                                    <asp:Button ID="BtnSeven" runat="server" Text="P.Médico Ajust." OnClick="BtnSeven_Click" CssClass="btn btn-primary" TabIndex="7" />
+                                    <%--<asp:Button ID="BtnEight" runat="server" Text="P. Médico QRB." OnClick="BtnEight_Click" CssClass="btn btn-primary" TabIndex="7" />--%>
+                                    <%--<asp:Button ID="BtnNine" runat="server" Text="P. Médico QRR." OnClick="BtnNine_Click" CssClass="btn btn-primary" TabIndex="7" />--%>
                                 </ContentTemplate>
                             </asp:UpdatePanel>
                         </div>
-                    </asp:Panel>
-                </div>
-
-                <div class="row mb-4 mt-3" style="background-color:#96E7D9; align-items: baseline;">
-                    <div class="col-10" style="padding-left: 14px;">
-                        <asp:Label ID="LblEtiquetaPnl6" runat="server" Text="LINEA / ESTACIÓN DE OCURRENCIA" CssClass="control-label" Font-Size="small"></asp:Label>
-                    </div>
-                    <div class="col-2" style="display:flex; justify-content: end;">
-                        <div>
-                            <asp:Button ID="btnShowPanel6" runat="server" Text="&#9660;" OnClick="btnShowPanel6_Click" Height="24px" Width="24px" CssClass="btn btn-primary btn-sm justify-content-center align-items-center p-0 m-0" />
-                        </div>
-                    </div>
-                </div>
-
-                <div>
-                    <asp:Panel ID="pnl6" runat="server" Visible="false">
-                        <div class="row mb-3">
-                            <div class="col-lg-4 col-md-4 ">
-                                <div class ="mb-2">
-                                    <asp:Label ID="LblLineaOcurrencia" runat="server" Text="Línea de Ocurrencia" CssClass="control-label" Font-Size="Small"></asp:Label>
-                                </div>
-                                <div class="input-group input-group-sm">
-                                    <asp:DropDownList ID="ddlLineaOcurrencia" runat="server" CssClass="btn btn-outline-secondary text-start" AutoPostBack="true" OnSelectedIndexChanged="ddlLineaOcurrencia_SelectedIndexChanged" Width="100%">
-                                    </asp:DropDownList>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-4 ">
-                                <div class ="mb-2">
-                                    <asp:Label ID="LblEstacionOcurrencia" runat="server" Text="Estación de Ocurrencia" CssClass="control-label" Font-Size="Small"></asp:Label>
-                                </div>
-                                <div class="input-group input-group-sm">
-                                    <asp:DropDownList ID="ddlEstacionOcurrencia" runat="server" CssClass="btn btn-outline-secondary text-start" AutoPostBack="true" OnSelectedIndexChanged="ddlEstacionOcurrencia_SelectedIndexChanged" Width="100%" >
-                                    </asp:DropDownList>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Botón Guardar y Actualizar para el panel 6 -->
-                        <div class="d-grid gap-4 d-flex justify-content-center mt-3 mb-3">
-                            <asp:UpdatePanel ID="UpdatePanel7" runat="server" UpdateMode="Conditional">
-                                <ContentTemplate>
-                                    <asp:Button ID="BtnAnularPnl6" runat="server" Text="Cancelar" Font-Bold="True" OnClick="BtnAnularPnl6_Click" CssClass="btn btn-primary" Visible="false" TabIndex="0"/>
-                                    <asp:Button ID="btnEditarPnl6" runat="server" Text="Editar Datos" Font-Bold="True" OnClick="btnEditarPnl6_Click" CssClass="btn btn-primary" TabIndex="1"/>
-                                    <asp:Button ID="btnActualizarPnl6" runat="server" Text="Aplicar Cambios" Font-Bold="True" OnClick="btnActualizarPnl6_Click" CssClass="btn btn-secondary" visible="false" TabIndex="2"/>
-                                </ContentTemplate>
-                            </asp:UpdatePanel>
-                        </div>
-
                     </asp:Panel>
                 </div>
 
@@ -1104,6 +1154,58 @@
                                     </div>
                                     <div class="col-lg-3 col-md-3">
                                         <div class="mb-2">
+                                            <asp:Label ID="LblHoraArribo" runat="server" Text="Hora de Arribo" CssClass="form-label"></asp:Label>
+                                        </div>
+                                        <div class="input-group input-group-sm">
+                                            <asp:TextBox ID="TxtHoraArribo" runat="server" CssClass="form-control form-control-sm" 
+                                                    onkeydown="if(event.key === 'Enter'){event.preventDefault(); return false;}"
+                                                    oninput="this.value = this.value.replace(/[^0-9:]/g, '');"  
+                                                    MaxLength ="5"></asp:TextBox>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="mb-2">
+                                            <asp:Label ID="LblHoraSalida" runat="server" Text="Hora de Salida" CssClass="form-label"></asp:Label>
+                                        </div>
+                                        <div class="input-group input-group-sm">
+                                            <asp:TextBox ID="TxtHoraSalida" runat="server" CssClass="form-control form-control-sm" 
+                                                    onkeydown="if(event.key === 'Enter'){event.preventDefault(); return false;}"
+                                                    oninput="this.value = this.value.replace(/[^0-9:]/g, '');"  
+                                                    MaxLength ="5"></asp:TextBox>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="mb-2">
+                                            <asp:Label ID="LblHoraLlegada" runat="server" Text="Hora de Llegada" CssClass="form-label"></asp:Label>
+                                        </div>
+                                        <div class="input-group input-group-sm">
+                                            <asp:TextBox ID="TxtHoraLlegada" runat="server" CssClass="form-control form-control-sm" 
+                                                    onkeydown="if(event.key === 'Enter'){event.preventDefault(); return false;}"
+                                                    oninput="this.value = this.value.replace(/[^0-9:]/g, '');"  
+                                                    MaxLength ="5"></asp:TextBox>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="mb-2">
+                                            <asp:Label ID="LblProvMontoAutorizado" runat="server" Text="Monto Autorizado" CssClass="form-label"></asp:Label>
+                                        </div>
+                                        <div class="input-group input-group-sm">
+<%--
+                                            <asp:TextBox ID="TxtProvMontoAutorizado" runat="server" CssClass="form-control form-control-sm"
+                                              onkeydown="if(event.key === 'Enter'){event.preventDefault(); return false;}"
+                                              oninput="this.value = this.value.replace(/[^0-9.]/g, '');" MaxLength ="11"></asp:TextBox>
+                                            <asp:RegularExpressionValidator ID="revProvMontoAutorizado" runat="server" ControlToValidate="TxtProvMontoAutorizado" 
+                                                ValidationExpression="^\d+(\.\d{0,2})?$" Display="None" EnableClientScript="true"/>
+--%>
+                                            <asp:TextBox ID="TxtProvMontoAutorizado" runat="server" CssClass="form-control form-control-sm"
+                                                onkeydown="if(event.key === 'Enter'){event.preventDefault(); return false;}"
+                                                oninput="this.value = this.value.replace(/[^0-9.]/g, '');" MaxLength="11"></asp:TextBox>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="mb-2">
                                             <asp:Label ID="LblNumUnidad" runat="server" Text="No. Unidad" CssClass="form-label"></asp:Label>
                                         </div>
                                         <div class="input-group input-group-sm">
@@ -1148,16 +1250,19 @@
                                                 <asp:BoundField DataField="Nom_Empresa" HeaderText="Nombre Empresa" >
                                                 <ItemStyle HorizontalAlign="Left" />
                                                 </asp:BoundField>
-                                                <asp:BoundField DataField="Email_Empresa" HeaderText="Correo Electronico" >
-                                                <ItemStyle HorizontalAlign="Left" />
-                                                </asp:BoundField>
                                                 <asp:BoundField DataField="Hora_Solicitud" HeaderText="Hora Solicitud" >
                                                 <ItemStyle HorizontalAlign="Left" />
                                                 </asp:BoundField>
-                                                <asp:BoundField DataField="Num_Unidad" HeaderText="No. Unidad" >
+                                                <asp:BoundField DataField="Hora_Arribo" HeaderText="Hora Arribo" >
                                                 <ItemStyle HorizontalAlign="Left" />
                                                 </asp:BoundField>
-                                                <asp:BoundField DataField="Responsable" HeaderText="Responsable" >
+                                                <asp:BoundField DataField="Hora_Salida" HeaderText="Hora Salida" >
+                                                <ItemStyle HorizontalAlign="Left" />
+                                                </asp:BoundField>
+                                                <asp:BoundField DataField="Hora_Llegada" HeaderText="Hora Llegada" >
+                                                <ItemStyle HorizontalAlign="Left" />
+                                                </asp:BoundField>
+                                                <asp:BoundField DataField="Monto_Autorizado" HeaderText="Monto Autorizado" >
                                                 <ItemStyle HorizontalAlign="Left" />
                                                 </asp:BoundField>
                                                 <asp:BoundField DataField="Calle" >
@@ -1178,6 +1283,12 @@
                                                 </asp:BoundField>
                                                 <asp:BoundField DataField="Tel_Contacto_2" >
                                                 </asp:BoundField>
+                                                <asp:BoundField DataField="Email_Empresa" >
+                                                </asp:BoundField>
+                                                <asp:BoundField DataField="Num_Unidad" >
+                                                </asp:BoundField>
+                                                <asp:BoundField DataField="Responsable">
+                                                </asp:BoundField>
                                                 <asp:TemplateField>
                                                     <ItemTemplate>
                                                         <asp:ImageButton ID="ImgProveedor_Add" runat="server" OnClick="ImgProveedor_Add_Click" Height="24px" Width="24px" ImageUrl="~/Images/aceptar_new.png" Enabled="true" />
@@ -1194,6 +1305,188 @@
                                 </div>
                             </asp:Panel>
                         </div>
+
+                    </asp:Panel>
+                </div>
+
+                <%--PAQUETES MEDICOS--%>
+		        <div class="row mb-4 mt-3" style="background-color:#96E7D9; align-items: baseline;">
+                    <div class="col-10" style="padding-left: 14px;">
+                        <asp:Label ID="LblEtiquetaPnl16" runat="server" Text="PAQUETES MEDICOS" CssClass="control-label" Font-Size="small"></asp:Label>
+                    </div>
+                    <div class="col-2" style="display:flex; justify-content: end;">
+                        <div>
+                            <asp:Button ID="btnShowPanel16" runat="server" Text="&#9660;" OnClick="btnShowPanel16_Click" Height="24px" Width="24px" CssClass="btn btn-primary btn-sm justify-content-center align-items-center p-0 m-0" />
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <asp:Panel ID="pnl16" runat="server" Visible="false">
+                            <div class="row mb-3">
+                                <div class="col-lg-4 col-md-4">
+                                    <div class ="mb-2">
+                                        <asp:Label ID="LblInstituciones" runat="server" Text="Institución Hospitalaria" ></asp:Label>
+                                    </div>
+                                    <div class=" input-group input-group-sm">
+                                        <asp:DropDownList ID="ddlInstituciones" runat="server" CssClass="btn btn-outline-secondary text-start" AutoPostBack="true" OnSelectedIndexChanged="ddlInstituciones_SelectedIndexChanged" Width="100%">
+                                        </asp:DropDownList>
+                                    </div>
+                                </div>
+                                <div class="col-lg-5 col-md-5">
+                                    <div class="mb-2">
+                                        <asp:Label ID="LblNomPaquete" runat="server" Text="Nombre del Paquete" CssClass="form-label"></asp:Label>
+                                    </div>
+                                    <div class="input-group input-group-sm">
+                                        <%--<asp:TextBox ID="TxtNomPaquete" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>--%>
+                                        <asp:DropDownList ID="ddlPaquetes_MD" runat="server" CssClass="btn btn-outline-secondary text-start" AutoPostBack="true" OnSelectedIndexChanged="ddlPaquetes_MD_SelectedIndexChanged" Width="100%">
+                                        </asp:DropDownList>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-lg-3 col-md-3">
+                                    <div class="mb-2">
+                                        <asp:Label ID="LblIdPaquete" runat="server" Text="ID del Paquete" CssClass="form-label"></asp:Label>
+                                    </div>
+                                    <div class="input-group input-group-sm">
+                                        <asp:TextBox ID="TxtIdPaquete" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3">
+                                    <div class ="mb-2">
+                                        <asp:Label ID="LblMontoMinimo" runat="server" Text="Monto Minimo" ></asp:Label>
+                                    </div>
+                                    <div class="input-group input-group-sm">
+                                        <asp:TextBox ID="TxtMontoMinimo" runat="server" CssClass="form-control form-control-sm"
+                                          onkeydown="if(event.key === 'Enter'){event.preventDefault(); return false;}"
+                                          oninput="this.value = this.value.replace(/[^0-9.]/g, '');" MaxLength ="11"></asp:TextBox>
+                                        <asp:RegularExpressionValidator ID="revMontoMinimo" runat="server" ControlToValidate="TxtMontoMinimo" 
+                                            ValidationExpression="^\d+(\.\d{0,2})?$" Display="None" EnableClientScript="true"/>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3">
+                                    <div class ="mb-2">
+                                        <asp:Label ID="LblMontoMaximo" runat="server" Text="Monto Maximo" ></asp:Label>
+                                    </div>
+                                    <div class="input-group input-group-sm">
+                                        <asp:TextBox ID="TxtMontoMaximo" runat="server" CssClass="form-control form-control-sm"
+                                          onkeydown="if(event.key === 'Enter'){event.preventDefault(); return false;}"
+                                          oninput="this.value = this.value.replace(/[^0-9.]/g, '');" MaxLength ="11"></asp:TextBox>
+                                        <asp:RegularExpressionValidator ID="revMontoMaximo" runat="server" ControlToValidate="TxtMontoMaximo" 
+                                            ValidationExpression="^\d+(\.\d{0,2})?$" Display="None" EnableClientScript="true"/>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3">
+                                    <div class ="mb-2">
+                                        <asp:Label ID="LblMontoUtilizado" runat="server" Text="Monto Utilizado" ></asp:Label>
+                                    </div>
+                                    <div class="input-group input-group-sm">
+                                        <asp:TextBox ID="TxtMontoUtilizado" runat="server" CssClass="form-control form-control-sm"
+                                          onkeydown="if(event.key === 'Enter'){event.preventDefault(); return false;}"
+                                          oninput="this.value = this.value.replace(/[^0-9.]/g, '');" MaxLength ="11"></asp:TextBox>
+                                        <asp:RegularExpressionValidator ID="revMontoUtilizado" runat="server" ControlToValidate="TxtMontoUtilizado" 
+                                            ValidationExpression="^\d+(\.\d{0,2})?$" Display="None" EnableClientScript="true"/>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-lg-3 col-md-3">
+                                    <div class ="mb-2">
+                                        <asp:Label ID="LblMontoRestante" runat="server" Text="Monto Restante" ></asp:Label>
+                                    </div>
+                                    <div class="input-group input-group-sm">
+                                        <asp:TextBox ID="TxtMontoRestante" runat="server" CssClass="form-control form-control-sm"
+                                          onkeydown="if(event.key === 'Enter'){event.preventDefault(); return false;}"
+                                          oninput="this.value = this.value.replace(/[^0-9.]/g, '');" MaxLength ="11"></asp:TextBox>
+                                        <asp:RegularExpressionValidator ID="revMontoRestante" runat="server" ControlToValidate="TxtMontoRestante" 
+                                            ValidationExpression="^\d+(\.\d{0,2})?$" Display="None" EnableClientScript="true"/>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3">
+                                    <div class ="mb-2">
+                                        <asp:Label ID="LblMontoSuperado" runat="server" Text="Monto Superado" ></asp:Label>
+                                    </div>
+                                    <div class="input-group input-group-sm">
+                                        <asp:TextBox ID="TxtMontoSuperado" runat="server" CssClass="form-control form-control-sm"
+                                          onkeydown="if(event.key === 'Enter'){event.preventDefault(); return false;}"
+                                          oninput="this.value = this.value.replace(/[^0-9.]/g, '');" MaxLength ="11"></asp:TextBox>
+                                        <asp:RegularExpressionValidator ID="revMontoSuperado" runat="server" ControlToValidate="TxtMontoSuperado" 
+                                            ValidationExpression="^\d+(\.\d{0,2})?$" Display="None" EnableClientScript="true"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-lg-12 col-md-12">
+                                    <div class ="mb-2">
+                                        <asp:Label ID="LblObservaciones_PM" runat="server" Text="Observaciones / Aplicación"></asp:Label>
+                                    </div>
+                                    <div class="input-group input-group-sm">
+                                        <asp:TextBox ID="TxtObservaciones_PM" runat="server" CssClass="form-control form-control-sm mb-1" placeholder="" AutoComplete="off" MaxLength="2500" Columns="12" Rows="5" TextMode="MultiLine"></asp:TextBox>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Botón Guardar y Actualizar para el panel 16 -->
+                            <div class="d-grid gap-4 d-flex justify-content-center mt-3 mb-3">
+                                <asp:UpdatePanel ID="UpdatePanel13" runat="server" UpdateMode="Conditional">
+                                    <ContentTemplate>
+                                        <asp:Button ID="BtnAnularPnl16" runat="server" Text="Cancelar" Font-Bold="True" OnClick="BtnAnularPnl16_Click" CssClass="btn btn-primary" Visible="false" TabIndex="0"/>
+                                        <asp:Button ID="btnEditarPnl16" runat="server" Text="Editar Datos" Font-Bold="True" OnClick="btnEditarPnl16_Click" CssClass="btn btn-primary" Enabled="false" TabIndex="1"/>
+                                        <asp:Button ID="btnActualizarPnl16" runat="server" Text="Aplicar Cambios" Font-Bold="True" OnClick="btnActualizarPnl16_Click" CssClass="btn btn-secondary" visible="false" TabIndex="2"/>
+                                        <asp:Button ID="BtnAgregarPnl16" runat="server" Text="Agregar" OnClick="BtnAgregarPnl16_Click" CausesValidation="true" CssClass="btn btn-primary px-4" TabIndex="3"/>
+
+                                    </ContentTemplate>
+                                </asp:UpdatePanel>
+                            </div>
+                            <div class="row mt-5">
+                                <%-- Consulta de Paquete Medico --%>
+                                <div style="overflow-x: auto; overflow-y:hidden">
+                                    <asp:GridView ID="GrdPaqueteMedico"  runat="server" AutoGenerateColumns="false" GridLines="None" Width="100%" 
+                                            AllowPaging="True" CssClass="table table-responsive table-light table-striped table-hover align-middle" PagerStyle-CssClass="pagination-ys" AlternatingRowStyle-CssClass="alt" 
+                                            OnPageIndexChanging="GrdPaqueteMedico_PageIndexChanging" OnRowCommand="GrdPaqueteMedico_RowCommand" OnPreRender="GrdPaqueteMedico_PreRender"
+                                            OnSelectedIndexChanged="GrdPaqueteMedico_SelectedIndexChanged" OnRowDataBound="GrdPaqueteMedico_RowDataBound" 
+                                            DataKeyNames="Id_Institucion" PageSize="5" Font-Size="Smaller" HeaderStyle-HorizontalAlign="Left" >
+                                            <AlternatingRowStyle CssClass="alt autoWidth" />
+                                            <Columns>
+                                                <asp:BoundField DataField="Id_Consecutivo" >
+                                                </asp:BoundField>
+                                                <asp:BoundField DataField="Id_Institucion" >
+                                                </asp:BoundField>
+                                                <asp:BoundField DataField="Id_Paquete_Medico" >
+                                                </asp:BoundField>
+                                                <asp:BoundField DataField="Descripcion" HeaderText="Institución Hospitalaria">
+                                                </asp:BoundField>
+                                                <asp:BoundField DataField="ID_Paquete" HeaderText="ID del Paquete" >
+                                                </asp:BoundField>
+                                                <asp:BoundField DataField="Monto_Minimo" HeaderText="Monto Minimo" >
+                                                </asp:BoundField>
+                                                <asp:BoundField DataField="Monto_Maximo" HeaderText="Monto Maximo" >
+                                                </asp:BoundField>
+                                                <asp:BoundField DataField="Monto_Utilizado" HeaderText="Monto Utilizado" >
+                                                </asp:BoundField>
+                                                <asp:BoundField DataField="Monto_Restante" HeaderText="Monto Restante" >
+                                                </asp:BoundField>
+                                                <asp:BoundField DataField="Monto_Superado" HeaderText="Monto Superado" >
+                                                </asp:BoundField>
+                                                <asp:BoundField DataField="Observaciones" >
+                                                </asp:BoundField>
+                                                <asp:TemplateField>
+                                                    <ItemTemplate>
+                                                        <asp:ImageButton ID="ImgPaquete_Add" runat="server" OnClick="ImgPaquete_Add_Click" Height="24px" Width="24px" ImageUrl="~/Images/aceptar_new.png" Enabled="true" />
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField>
+                                                    <ItemTemplate>
+                                                        <asp:ImageButton ID="ImgPaquete_Del" runat="server" OnClick="ImgPaquete_Del_Click" Height="24px" Width="24px" ImageUrl="~/Images/rechazar_new.png" Enabled="true" />
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                            </Columns>
+                                            <PagerStyle HorizontalAlign="Center" CssClass="pagination-ys" />
+                                    </asp:GridView>
+                                </div>
+                            </div>
 
                     </asp:Panel>
                 </div>
@@ -1570,7 +1863,33 @@
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <div class="col-lg-4 col-md-4">
+                            <div class="col-lg-6 col-md-6">
+                                <div class="mb-2">
+                                    <asp:Label ID="LblCorreoElectronico" runat="server" Text="Correo Electronico" CssClass="form-label"></asp:Label>
+                                </div>
+                                <div class="input-group input-group-sm">
+                                    <asp:TextBox ID="TxtCorreoElectronico" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 ">
+                                <div class="mb-2">
+                                    <asp:Label ID="LblTelAtencionContacto1" runat="server" Text="Telefono Contacto 1" CssClass="form-label"></asp:Label>
+                                </div>
+                                <div class="input-group input-group-sm">
+                                    <asp:TextBox ID="TxtTelAtencionContacto1" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 ">
+                                <div class="mb-2">
+                                    <asp:Label ID="LblTelAtencionContacto2" runat="server" Text="Telefono Contacto 2" CssClass="form-label"></asp:Label>
+                                </div>
+                                <div class="input-group input-group-sm">
+                                    <asp:TextBox ID="TxtTelAtencionContacto2" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-lg-3 col-md-3">
                                 <div class="mb-2">
                                     <asp:Label ID="LblFechaIngreso" runat="server" Text="Fecha Ingreso" CssClass="form-label"></asp:Label>
                                 </div>
@@ -1582,6 +1901,90 @@
                                     <ajaxToolkit:CalendarExtender ID="dateIngreso" runat="server" TargetControlID="TxtFechaIngreso" PopupButtonID="BtnFechaIngreso" Format="dd/MM/yyyy" />
                                 </div>
                             </div>
+                            <div class="col-lg-3 col-md-3">
+                                <div class="mb-2">
+                                    <asp:Label ID="LblHoraIngreso" runat="server" Text="Hora Ingreso" CssClass="form-label"></asp:Label>
+                                </div>
+                                <div class="input-group input-group-sm">
+                                    <asp:TextBox ID="TxtHoraIngreso" runat="server" CssClass="form-control form-control-sm" 
+                                            onkeydown="if(event.key === 'Enter'){event.preventDefault(); return false;}"
+                                            oninput="this.value = this.value.replace(/[^0-9:]/g, '');"  
+                                            MaxLength ="5"></asp:TextBox>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3">
+                                <div class="mb-2">
+                                    <asp:Label ID="LblFechaRecepcionNM" runat="server" Text="Fecha Recepción Notas Medicas" CssClass="form-label"></asp:Label>
+                                </div>
+                                <div class="input-group input-group-sm">
+                                    <asp:TextBox ID="TxtFechaRecepcionNM" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
+                                    <button type="button" class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false" id="BtnFechaRecepcionNM">
+                                        <span class="visually-hidden">Toggle Dropdown</span>
+                                    </button>
+                                    <ajaxToolkit:CalendarExtender ID="dateRecepcion" runat="server" TargetControlID="TxtFechaRecepcionNM" PopupButtonID="BtnFechaRecepcionNM" Format="dd/MM/yyyy" />
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3">
+                                <div class="mb-2">
+                                    <asp:Label ID="LblHoraRecepcionNM" runat="server" Text="Hora Recepción Notas Medicas" CssClass="form-label"></asp:Label>
+                                </div>
+                                <div class="input-group input-group-sm">
+                                    <asp:TextBox ID="TxtHoraRecepcionNM" runat="server" CssClass="form-control form-control-sm" 
+                                            onkeydown="if(event.key === 'Enter'){event.preventDefault(); return false;}"
+                                            oninput="this.value = this.value.replace(/[^0-9:]/g, '');"  
+                                            MaxLength ="5"></asp:TextBox>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-lg-3 col-md-3">
+                                <div class="mb-2">
+                                    <asp:Label ID="LblFechaAlta" runat="server" Text="Fecha Alta Hospitalaria" CssClass="form-label"></asp:Label>
+                                </div>
+                                <div class="input-group input-group-sm">
+                                    <asp:TextBox ID="TxtFechaAlta" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
+                                    <button type="button" class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false" id="BtnFechaAlta">
+                                        <span class="visually-hidden">Toggle Dropdown</span>
+                                    </button>
+                                    <ajaxToolkit:CalendarExtender ID="dateAlta" runat="server" TargetControlID="TxtFechaAlta" PopupButtonID="BtnFechaAlta" Format="dd/MM/yyyy" />
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3">
+                                <div class="mb-2">
+                                    <asp:Label ID="LblHoraAlta" runat="server" Text="Hora Alta Hospitalaria" CssClass="form-label"></asp:Label>
+                                </div>
+                                <div class="input-group input-group-sm">
+                                    <asp:TextBox ID="TxtHoraAlta" runat="server" CssClass="form-control form-control-sm" 
+                                            onkeydown="if(event.key === 'Enter'){event.preventDefault(); return false;}"
+                                            oninput="this.value = this.value.replace(/[^0-9:]/g, '');"  
+                                            MaxLength ="5"></asp:TextBox>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3">
+                                <div class="mb-2">
+                                    <asp:Label ID="LblFechaEnvio" runat="server" Text="Fecha Envio Expediente" CssClass="form-label"></asp:Label>
+                                </div>
+                                <div class="input-group input-group-sm">
+                                    <asp:TextBox ID="TxtFechaEnvio" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
+                                    <button type="button" class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false" id="BtnFechaEnvio">
+                                        <span class="visually-hidden">Toggle Dropdown</span>
+                                    </button>
+                                    <ajaxToolkit:CalendarExtender ID="dateEnvio" runat="server" TargetControlID="TxtFechaEnvio" PopupButtonID="BtnFechaEnvio" Format="dd/MM/yyyy" />
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3">
+                                <div class="mb-2">
+                                    <asp:Label ID="LblHoraEnvio" runat="server" Text="Hora Envio Expediente" CssClass="form-label"></asp:Label>
+                                </div>
+                                <div class="input-group input-group-sm">
+                                    <asp:TextBox ID="TxtHoraEnvio" runat="server" CssClass="form-control form-control-sm" 
+                                            onkeydown="if(event.key === 'Enter'){event.preventDefault(); return false;}"
+                                            oninput="this.value = this.value.replace(/[^0-9:]/g, '');"  
+                                            MaxLength ="5"></asp:TextBox>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
                             <div class="col-lg-4 col-md-4">
                                 <div class="mb-2">
                                     <asp:Label ID="LblFechaVigencia" runat="server" Text="Vigencia de la carta hasta" CssClass="form-label"></asp:Label>
@@ -1599,14 +2002,82 @@
                                     <asp:Label ID="LblMontoAutorizado" runat="server" Text="Monto Autorizado" CssClass="control-label" Font-Size="Small"></asp:Label>
                                 </div>
                                 <div class="input-group input-group-sm">
+<%--                                    
                                     <asp:TextBox ID="TxtMontoAutorizado" runat="server" CssClass="form-control form-control-sm"
                                       onkeydown="if(event.key === 'Enter'){event.preventDefault(); return false;}"
                                       oninput="this.value = this.value.replace(/[^0-9.]/g, '');" MaxLength ="11"></asp:TextBox>
                                     <asp:RegularExpressionValidator ID="revMontoAutorizado" runat="server" ControlToValidate="TxtMontoAutorizado" 
                                         ValidationExpression="^\d+(\.\d{0,2})?$" Display="None" EnableClientScript="true"/>
+--%>
+                                    <asp:TextBox ID="TxtMontoAutorizado" runat="server" CssClass="form-control form-control-sm"
+                                        onkeydown="if(event.key === 'Enter'){event.preventDefault(); return false;}"
+                                        oninput="this.value = this.value.replace(/[^0-9.]/g, '');" MaxLength="11"></asp:TextBox>
                                 </div>
                             </div>
                         </div>
+                    <div class="row mt-3">
+                        <div class="col-lg-8 col-md-8">
+                            <div class ="mb-2">
+                                <asp:Label ID="LblCalleAtencion" runat="server" Text="Calle" ></asp:Label>
+                            </div>
+                            <div class="input-group input-group-sm">
+                                <asp:TextBox ID="TxtCalleAtencion" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-2">
+                            <div class ="mb-2">
+                                <asp:Label ID="LblNumExtAtencion" runat="server" Text="Num. Exterior" ></asp:Label>
+                            </div>
+                            <div class="input-group input-group-sm">
+                                <asp:TextBox ID="TxtNumExtAtencion" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-2">
+                            <div class ="mb-2">
+                                <asp:Label ID="LblNumIntAtencion" runat="server" Text="Num. Interior" ></asp:Label>
+                            </div>
+                            <div class="input-group input-group-sm">
+                                <asp:TextBox ID="TxtNumIntAtencion" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-3">
+                        <div class="col-lg-4 col-md-4 ">
+                            <div class ="mb-2">
+                                <asp:Label ID="LblEstadoAtencion" runat="server" Text="Estado" CssClass="control-label" Font-Size="Small"></asp:Label>
+                            </div>
+                            <div class="input-group input-group-sm">
+                                <asp:DropDownList ID="ddlEstadoAtencion" runat="server" CssClass="btn btn-outline-secondary text-start" AutoPostBack="true" OnSelectedIndexChanged="ddlEstadoAtencion_SelectedIndexChanged" Width="100%">
+                                </asp:DropDownList>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 ">
+                            <div class ="mb-2">
+                                <asp:Label ID="LblMunicipiosAtencion" runat="server" Text="Delegación / Municipio" CssClass="control-label" Font-Size="Small"></asp:Label>
+                            </div>
+                            <div class="input-group input-group-sm">
+                                <asp:DropDownList ID="ddlMunicipiosAtencion" runat="server" CssClass="btn btn-outline-secondary text-start" AutoPostBack="true" OnSelectedIndexChanged="ddlMunicipiosAtencion_SelectedIndexChanged" Width="100%" >
+                                </asp:DropDownList>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-3 ">
+                            <div class ="mb-2">
+                                <asp:Label ID="LblColoniaAtencion" runat="server" Text="Colonia" CssClass="control-label" Font-Size="Small"></asp:Label>
+                            </div>
+                            <div class="input-group input-group-sm">
+                                <asp:TextBox ID="TxtColoniaAtencion" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
+                            </div>
+                        </div>
+                        <div class="col-lg-1 col-md-1 ">
+                            <div class ="mb-2">
+                                <asp:Label ID="LblCPostalAtencion" runat="server" Text="C.Postal" CssClass="control-label" Font-Size="Small"></asp:Label>
+                            </div>
+                            <div class="input-group input-group-sm">
+                                <asp:TextBox ID="TxtCPostalAtencion" runat="server" CssClass="form-control form-control-sm" MaxLength="5"></asp:TextBox>
+                            </div>
+                        </div>
+                    </div>
                         <div class="row mt-3">
                             <div class="col-lg-12 col-md-12">
                                 <div class ="mb-2">
@@ -1627,6 +2098,16 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="row mt-3">
+                            <div class="col-lg-12 col-md-12">
+                                <div class ="mb-2">
+                                    <asp:Label ID="LblPlanTratamiento" runat="server" Text="Plan de Tratamiento"></asp:Label>
+                                </div>
+                                <div class="input-group input-group-sm">
+                                    <asp:TextBox ID="TxtPlanTratamiento" runat="server" CssClass="form-control form-control-sm mb-1" placeholder="" AutoComplete="off" MaxLength="2500" Columns="12" Rows="5" TextMode="MultiLine"></asp:TextBox>
+                                </div>
+                            </div>
+                        </div>
                         <!-- Botón Guardar y Actualizar para el panel 13 -->
                         <div class="d-grid gap-4 d-flex justify-content-center mt-3 mb-3">
                             <asp:UpdatePanel ID="UpdatePanel9" runat="server" UpdateMode="Conditional">
@@ -1642,7 +2123,7 @@
 
                 <div class="row mb-4 mt-3" style="background-color:#96E7D9; align-items: baseline;">
                     <div class="col-10" style="padding-left: 14px;">
-                        <asp:Label ID="LblEtiquetaPnl15" runat="server" Text="SERVICIO AUTORIZADO" CssClass="control-label" Font-Size="small"></asp:Label>
+                        <asp:Label ID="LblEtiquetaPnl15" runat="server" Text="OTROS SERVICIOS" CssClass="control-label" Font-Size="small"></asp:Label>
                     </div>
                     <div class="col-2" style="display:flex; justify-content: end;">
                         <div>
@@ -1660,6 +2141,29 @@
                                 <div class="input-group input-group-sm">
                                     <asp:DropDownList ID="ddlServicios" runat="server" CssClass="btn btn-outline-secondary text-start" AutoPostBack="true" OnSelectedIndexChanged="ddlServicios_SelectedIndexChanged" Width="100%">
                                     </asp:DropDownList>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3">
+                                <div class="mb-2">
+                                    <asp:Label ID="LblFechaServicio" runat="server" Text="Fecha Servicio" CssClass="form-label"></asp:Label>
+                                </div>
+                                <div class="input-group input-group-sm">
+                                    <asp:TextBox ID="TxtFechaServicio" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
+                                    <button type="button" class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false" id="BtnFechaServicio">
+                                        <span class="visually-hidden">Toggle Dropdown</span>
+                                    </button>
+                                    <ajaxToolkit:CalendarExtender ID="dateFechaServicio" runat="server" TargetControlID="TxtFechaServicio" PopupButtonID="BtnFechaServicio" Format="dd/MM/yyyy" />
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3">
+                                <div class="mb-2">
+                                    <asp:Label ID="LblHoraServicio" runat="server" Text="Hora Servicio" CssClass="form-label"></asp:Label>
+                                </div>
+                                <div class="input-group input-group-sm">
+                                    <asp:TextBox ID="TxtHoraServicio" runat="server" CssClass="form-control form-control-sm" 
+                                            onkeydown="if(event.key === 'Enter'){event.preventDefault(); return false;}"
+                                            oninput="this.value = this.value.replace(/[^0-9:]/g, '');"  
+                                            MaxLength ="5"></asp:TextBox>
                                 </div>
                             </div>
                         </div>
@@ -1702,6 +2206,10 @@
                                             </asp:BoundField>
                                             <asp:BoundField DataField="Descripcion" HeaderText="Servicio" >
                                             </asp:BoundField>
+                                            <asp:BoundField DataField="FechaServicio" HeaderText="Fecha Servicio" >
+                                            </asp:BoundField>
+                                            <asp:BoundField DataField="Hora_Servicio" HeaderText="Hora Servicio" >
+                                            </asp:BoundField>
                                             <asp:BoundField DataField="Desc_Servicio" HeaderText="Descripción" >
                                             </asp:BoundField>
                                             <asp:TemplateField>
@@ -1721,188 +2229,7 @@
                         </div>
                     </asp:Panel>
 
-
-                    <%--PAQUETES MEDICOS--%>
-                    <div class="row mb-4 mt-3" style="background-color:#96E7D9; align-items: baseline;">
-                        <div class="col-10" style="padding-left: 14px;">
-                            <asp:Label ID="LblEtiquetaPnl16" runat="server" Text="PAQUETES MEDICOS" CssClass="control-label" Font-Size="small"></asp:Label>
-                        </div>
-                        <div class="col-2" style="display:flex; justify-content: end;">
-                            <div>
-                                <asp:Button ID="btnShowPanel16" runat="server" Text="&#9660;" OnClick="btnShowPanel16_Click" Height="24px" Width="24px" CssClass="btn btn-primary btn-sm justify-content-center align-items-center p-0 m-0" />
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
-
-                <asp:Panel ID="pnl16" runat="server" Visible="false">
-                        <div class="row mb-3">
-                            <div class="col-lg-4 col-md-4">
-                                <div class ="mb-2">
-                                    <asp:Label ID="LblInstituciones" runat="server" Text="Institución Hospitalaria" ></asp:Label>
-                                </div>
-                                <div class=" input-group input-group-sm">
-                                    <asp:DropDownList ID="ddlInstituciones" runat="server" CssClass="btn btn-outline-secondary text-start" AutoPostBack="true" OnSelectedIndexChanged="ddlInstituciones_SelectedIndexChanged" Width="100%">
-                                    </asp:DropDownList>
-                                </div>
-                            </div>
-                            <div class="col-lg-5 col-md-5">
-                                <div class="mb-2">
-                                    <asp:Label ID="LblNomPaquete" runat="server" Text="Nombre del Paquete" CssClass="form-label"></asp:Label>
-                                </div>
-                                <div class="input-group input-group-sm">
-                                    <%--<asp:TextBox ID="TxtNomPaquete" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>--%>
-                                    <asp:DropDownList ID="ddlPaquetes_MD" runat="server" CssClass="btn btn-outline-secondary text-start" AutoPostBack="true" OnSelectedIndexChanged="ddlPaquetes_MD_SelectedIndexChanged" Width="100%">
-                                    </asp:DropDownList>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col-lg-3 col-md-3">
-                                <div class="mb-2">
-                                    <asp:Label ID="LblIdPaquete" runat="server" Text="ID del Paquete" CssClass="form-label"></asp:Label>
-                                </div>
-                                <div class="input-group input-group-sm">
-                                    <asp:TextBox ID="TxtIdPaquete" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-md-3">
-                                <div class ="mb-2">
-                                    <asp:Label ID="LblMontoMinimo" runat="server" Text="Monto Minimo" ></asp:Label>
-                                </div>
-                                <div class="input-group input-group-sm">
-                                    <asp:TextBox ID="TxtMontoMinimo" runat="server" CssClass="form-control form-control-sm"
-                                      onkeydown="if(event.key === 'Enter'){event.preventDefault(); return false;}"
-                                      oninput="this.value = this.value.replace(/[^0-9.]/g, '');" MaxLength ="11"></asp:TextBox>
-                                    <asp:RegularExpressionValidator ID="revMontoMinimo" runat="server" ControlToValidate="TxtMontoMinimo" 
-                                        ValidationExpression="^\d+(\.\d{0,2})?$" Display="None" EnableClientScript="true"/>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-md-3">
-                                <div class ="mb-2">
-                                    <asp:Label ID="LblMontoMaximo" runat="server" Text="Monto Maximo" ></asp:Label>
-                                </div>
-                                <div class="input-group input-group-sm">
-                                    <asp:TextBox ID="TxtMontoMaximo" runat="server" CssClass="form-control form-control-sm"
-                                      onkeydown="if(event.key === 'Enter'){event.preventDefault(); return false;}"
-                                      oninput="this.value = this.value.replace(/[^0-9.]/g, '');" MaxLength ="11"></asp:TextBox>
-                                    <asp:RegularExpressionValidator ID="revMontoMaximo" runat="server" ControlToValidate="TxtMontoMaximo" 
-                                        ValidationExpression="^\d+(\.\d{0,2})?$" Display="None" EnableClientScript="true"/>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-md-3">
-                                <div class ="mb-2">
-                                    <asp:Label ID="LblMontoUtilizado" runat="server" Text="Monto Utilizado" ></asp:Label>
-                                </div>
-                                <div class="input-group input-group-sm">
-                                    <asp:TextBox ID="TxtMontoUtilizado" runat="server" CssClass="form-control form-control-sm"
-                                      onkeydown="if(event.key === 'Enter'){event.preventDefault(); return false;}"
-                                      oninput="this.value = this.value.replace(/[^0-9.]/g, '');" MaxLength ="11"></asp:TextBox>
-                                    <asp:RegularExpressionValidator ID="revMontoUtilizado" runat="server" ControlToValidate="TxtMontoUtilizado" 
-                                        ValidationExpression="^\d+(\.\d{0,2})?$" Display="None" EnableClientScript="true"/>
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col-lg-3 col-md-3">
-                                <div class ="mb-2">
-                                    <asp:Label ID="LblMontoRestante" runat="server" Text="Monto Restante" ></asp:Label>
-                                </div>
-                                <div class="input-group input-group-sm">
-                                    <asp:TextBox ID="TxtMontoRestante" runat="server" CssClass="form-control form-control-sm"
-                                      onkeydown="if(event.key === 'Enter'){event.preventDefault(); return false;}"
-                                      oninput="this.value = this.value.replace(/[^0-9.]/g, '');" MaxLength ="11"></asp:TextBox>
-                                    <asp:RegularExpressionValidator ID="revMontoRestante" runat="server" ControlToValidate="TxtMontoRestante" 
-                                        ValidationExpression="^\d+(\.\d{0,2})?$" Display="None" EnableClientScript="true"/>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-md-3">
-                                <div class ="mb-2">
-                                    <asp:Label ID="LblMontoSuperado" runat="server" Text="Monto Superado" ></asp:Label>
-                                </div>
-                                <div class="input-group input-group-sm">
-                                    <asp:TextBox ID="TxtMontoSuperado" runat="server" CssClass="form-control form-control-sm"
-                                      onkeydown="if(event.key === 'Enter'){event.preventDefault(); return false;}"
-                                      oninput="this.value = this.value.replace(/[^0-9.]/g, '');" MaxLength ="11"></asp:TextBox>
-                                    <asp:RegularExpressionValidator ID="revMontoSuperado" runat="server" ControlToValidate="TxtMontoSuperado" 
-                                        ValidationExpression="^\d+(\.\d{0,2})?$" Display="None" EnableClientScript="true"/>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col-lg-12 col-md-12">
-                                <div class ="mb-2">
-                                    <asp:Label ID="LblObservaciones_PM" runat="server" Text="Observaciones / Aplicación"></asp:Label>
-                                </div>
-                                <div class="input-group input-group-sm">
-                                    <asp:TextBox ID="TxtObservaciones_PM" runat="server" CssClass="form-control form-control-sm mb-1" placeholder="" AutoComplete="off" MaxLength="2500" Columns="12" Rows="5" TextMode="MultiLine"></asp:TextBox>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Botón Guardar y Actualizar para el panel 16 -->
-                        <div class="d-grid gap-4 d-flex justify-content-center mt-3 mb-3">
-                            <asp:UpdatePanel ID="UpdatePanel13" runat="server" UpdateMode="Conditional">
-                                <ContentTemplate>
-                                    <asp:Button ID="BtnAnularPnl16" runat="server" Text="Cancelar" Font-Bold="True" OnClick="BtnAnularPnl16_Click" CssClass="btn btn-primary" Visible="false" TabIndex="0"/>
-                                    <asp:Button ID="btnEditarPnl16" runat="server" Text="Editar Datos" Font-Bold="True" OnClick="btnEditarPnl16_Click" CssClass="btn btn-primary" Enabled="false" TabIndex="1"/>
-                                    <asp:Button ID="btnActualizarPnl16" runat="server" Text="Aplicar Cambios" Font-Bold="True" OnClick="btnActualizarPnl16_Click" CssClass="btn btn-secondary" visible="false" TabIndex="2"/>
-                                    <asp:Button ID="BtnAgregarPnl16" runat="server" Text="Agregar" OnClick="BtnAgregarPnl16_Click" CausesValidation="true" CssClass="btn btn-primary px-4" TabIndex="3"/>
-
-                                </ContentTemplate>
-                            </asp:UpdatePanel>
-                        </div>
-                        <div class="row mt-5">
-                            <%-- Consulta de Paquete Medico --%>
-                            <div style="overflow-x: auto; overflow-y:hidden">
-                                <asp:GridView ID="GrdPaqueteMedico"  runat="server" AutoGenerateColumns="false" GridLines="None" Width="100%" 
-                                        AllowPaging="True" CssClass="table table-responsive table-light table-striped table-hover align-middle" PagerStyle-CssClass="pagination-ys" AlternatingRowStyle-CssClass="alt" 
-                                        OnPageIndexChanging="GrdPaqueteMedico_PageIndexChanging" OnRowCommand="GrdPaqueteMedico_RowCommand" OnPreRender="GrdPaqueteMedico_PreRender"
-                                        OnSelectedIndexChanged="GrdPaqueteMedico_SelectedIndexChanged" OnRowDataBound="GrdPaqueteMedico_RowDataBound" 
-                                        DataKeyNames="Id_Institucion" PageSize="5" Font-Size="Smaller" HeaderStyle-HorizontalAlign="Left" >
-                                        <AlternatingRowStyle CssClass="alt autoWidth" />
-                                        <Columns>
-                                            <asp:BoundField DataField="Id_Consecutivo" >
-                                            </asp:BoundField>
-                                            <asp:BoundField DataField="Id_Institucion" >
-                                            </asp:BoundField>
-                                            <asp:BoundField DataField="Id_Paquete_Medico" >
-                                            </asp:BoundField>
-                                            <asp:BoundField DataField="Descripcion" HeaderText="Institución Hospitalaria">
-                                            </asp:BoundField>
-                                            <asp:BoundField DataField="ID_Paquete" HeaderText="ID del Paquete" >
-                                            </asp:BoundField>
-                                            <asp:BoundField DataField="Monto_Minimo" HeaderText="Monto Minimo" >
-                                            </asp:BoundField>
-                                            <asp:BoundField DataField="Monto_Maximo" HeaderText="Monto Maximo" >
-                                            </asp:BoundField>
-                                            <asp:BoundField DataField="Monto_Utilizado" HeaderText="Monto Utilizado" >
-                                            </asp:BoundField>
-                                            <asp:BoundField DataField="Monto_Restante" HeaderText="Monto Restante" >
-                                            </asp:BoundField>
-                                            <asp:BoundField DataField="Monto_Superado" HeaderText="Monto Restante" >
-                                            </asp:BoundField>
-                                            <asp:BoundField DataField="Observaciones" >
-                                            </asp:BoundField>
-                                            <asp:TemplateField>
-                                                <ItemTemplate>
-                                                    <asp:ImageButton ID="ImgPaquete_Add" runat="server" OnClick="ImgPaquete_Add_Click" Height="24px" Width="24px" ImageUrl="~/Images/aceptar_new.png" Enabled="true" />
-                                                </ItemTemplate>
-                                            </asp:TemplateField>
-                                            <asp:TemplateField>
-                                                <ItemTemplate>
-                                                    <asp:ImageButton ID="ImgPaquete_Del" runat="server" OnClick="ImgPaquete_Del_Click" Height="24px" Width="24px" ImageUrl="~/Images/rechazar_new.png" Enabled="true" />
-                                                </ItemTemplate>
-                                            </asp:TemplateField>
-                                        </Columns>
-                                        <PagerStyle HorizontalAlign="Center" CssClass="pagination-ys" />
-                                </asp:GridView>
-                            </div>
-                        </div>
-
-                </asp:Panel>
 
             </div>
 
@@ -2371,8 +2698,8 @@
             <asp:PostBackTrigger ControlID="BtnFive" />
             <asp:PostBackTrigger ControlID="BtnSix" />
             <asp:PostBackTrigger ControlID="BtnSeven" />
-            <asp:PostBackTrigger ControlID="BtnEight" />
-            <asp:PostBackTrigger ControlID="BtnNine" />
+            <%--<asp:PostBackTrigger ControlID="BtnEight" />--%>
+            <%--<asp:PostBackTrigger ControlID="BtnNine" />--%>
 
             <asp:PostBackTrigger ControlID="BtnProveedor" />
             <asp:PostBackTrigger ControlID="BtnICD" />

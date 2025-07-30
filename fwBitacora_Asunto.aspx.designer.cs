@@ -1959,13 +1959,13 @@ namespace WebItNow_Peacock
         protected global::System.Web.UI.WebControls.TextBox TxtFechaFinVigencia;
 
         /// <summary>
-        /// Control dateFecFinVigencia.
+        /// Control dateFechaFinVigencia.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::AjaxControlToolkit.CalendarExtender dateFecFinVigencia;
+        protected global::AjaxControlToolkit.CalendarExtender dateFechaFinVigencia;
 
         /// <summary>
         /// Control LblNumCertificado.
@@ -3271,6 +3271,24 @@ namespace WebItNow_Peacock
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel pnl17;
+
+        /// <summary>
+        /// Control LblSecciones.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LblSecciones;
+
+        /// <summary>
+        /// Control ddlSecciones.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlSecciones;
 
         /// <summary>
         /// Control LblCoberturas.

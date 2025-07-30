@@ -64,11 +64,13 @@ namespace WebItNow_Peacock
                     ////BtnCrear_Cuaderno.Enabled = false;
                 }
 
+                GetEstatusCaso();
                 GetTipoEvento();
                 GetServicios();
 
-                GetEstados();
+                // GetEstados();
                 GetEstados_Proveedor();
+                GetEstados_Atencion();
 
                 GetEstadosLesionado();
                 GetEstadosResponsable();
@@ -98,11 +100,11 @@ namespace WebItNow_Peacock
                 string flechaHaciaArriba = "\u25B2";
 
                 btnShowPanel0.Text = flechaHaciaAbajo;      // Flecha hacia abajo
-                btnShowPanel1.Text = flechaHaciaArriba;     // Flecha hacia arriba
+             // btnShowPanel1.Text = flechaHaciaArriba;     // Flecha hacia arriba
                 btnShowPanel3.Text = flechaHaciaArriba;     // Flecha hacia arriba  (INFORMACIÓN GENERAL DEL LESIONADO)
                 btnShowPanel4.Text = flechaHaciaArriba;     // Flecha hacia arriba  (INFORMACIÓN GENERAL DEL RESPONSABLE)
 
-                btnShowPanel6.Text = flechaHaciaAbajo;      // Flecha hacia abajo   (LINEA / ESTACIÓN DE OCURRENCIA)
+                btnShowPanel6.Text = flechaHaciaArriba;     // Flecha hacia abajo   (LINEA / ESTACIÓN DE OCURRENCIA)
                 btnShowPanel7.Text = flechaHaciaAbajo;      // Flecha hacia abajo
                 btnShowPanel8.Text = flechaHaciaAbajo;      // Flecha hacia abajo   (INFORMACIÓN MEDICA)
 
@@ -287,13 +289,13 @@ namespace WebItNow_Peacock
 
                 DataTable dt = dbConn.ExecuteQuery(strQuery);
 
-                ddlEstado.DataSource = dt;
+                //ddlEstado.DataSource = dt;
 
-                ddlEstado.DataValueField = "c_estado";
-                ddlEstado.DataTextField = "d_estado";
+                //ddlEstado.DataValueField = "c_estado";
+                //ddlEstado.DataTextField = "d_estado";
 
-                ddlEstado.DataBind();
-                ddlEstado.Items.Insert(0, new ListItem("-- Seleccionar --", "0"));
+                //ddlEstado.DataBind();
+                //ddlEstado.Items.Insert(0, new ListItem("-- Seleccionar --", "0"));
 
                 dbConn.Close();
             }
@@ -410,6 +412,42 @@ namespace WebItNow_Peacock
             }
         }
 
+        protected void GetEstados_Atencion()
+        {
+            try
+            {
+                ConexionBD_MySQL dbConn = new ConexionBD_MySQL(Variables.wUserName, Variables.wPassword);
+                dbConn.Open();
+
+                string strQuery = "SELECT DISTINCT " +
+                                  "  CASE WHEN c_estado = 05 THEN 'Coahuila' " +
+                                  "       WHEN c_estado = 16 THEN 'Michoacán' " +
+                                  "       WHEN c_estado = 30 THEN 'Veracruz' " +
+                                  "       ELSE d_estado " +
+                                  "   END AS d_estado, c_estado " +
+                                  " FROM ITM_75 " +
+                                  "ORDER BY d_estado ";
+
+                DataTable dt = dbConn.ExecuteQuery(strQuery);
+
+                ddlEstadoAtencion.DataSource = dt;
+
+                ddlEstadoAtencion.DataValueField = "c_estado";
+                ddlEstadoAtencion.DataTextField = "d_estado";
+
+                ddlEstadoAtencion.DataBind();
+                ddlEstadoAtencion.Items.Insert(0, new ListItem("-- Seleccionar --", "0"));
+
+
+                dbConn.Close();
+            }
+            catch (System.Exception ex)
+            {
+                LblMessage.Text = ex.Message;
+                mpeMensaje.Show();
+            }
+        }
+
         protected void GetMunicipios(string pEstado)
         {
             try
@@ -424,13 +462,13 @@ namespace WebItNow_Peacock
 
                 DataTable dt = dbConn.ExecuteQuery(strQuery);
 
-                ddlMunicipios.DataSource = dt;
+                //ddlMunicipios.DataSource = dt;
 
-                ddlMunicipios.DataValueField = "c_mnpio";
-                ddlMunicipios.DataTextField = "D_mnpio";
+                //ddlMunicipios.DataValueField = "c_mnpio";
+                //ddlMunicipios.DataTextField = "D_mnpio";
 
-                ddlMunicipios.DataBind();
-                ddlMunicipios.Items.Insert(0, new ListItem("-- Seleccionar --", "0"));
+                //ddlMunicipios.DataBind();
+                //ddlMunicipios.Items.Insert(0, new ListItem("-- Seleccionar --", "0"));
 
                 dbConn.Close();
             }
@@ -524,6 +562,37 @@ namespace WebItNow_Peacock
 
                 ddlMunicipiosResponsable.DataBind();
                 ddlMunicipiosResponsable.Items.Insert(0, new ListItem("-- Seleccionar --", "0"));
+
+                dbConn.Close();
+            }
+            catch (System.Exception ex)
+            {
+                LblMessage.Text = ex.Message;
+                mpeMensaje.Show();
+            }
+        }
+
+        protected void GetMunicipios_Atencion(string pEstado)
+        {
+            try
+            {
+                ConexionBD_MySQL dbConn = new ConexionBD_MySQL(Variables.wUserName, Variables.wPassword);
+                dbConn.Open();
+
+                string strQuery = "SELECT DISTINCT D_mnpio, c_mnpio " +
+                                  " FROM ITM_75 " +
+                                  "WHERE c_estado = '" + pEstado + "'" +
+                                  "ORDER BY D_mnpio";
+
+                DataTable dt = dbConn.ExecuteQuery(strQuery);
+
+                ddlMunicipiosAtencion.DataSource = dt;
+
+                ddlMunicipiosAtencion.DataValueField = "c_mnpio";
+                ddlMunicipiosAtencion.DataTextField = "D_mnpio";
+
+                ddlMunicipiosAtencion.DataBind();
+                ddlMunicipiosAtencion.Items.Insert(0, new ListItem("-- Seleccionar --", "0"));
 
                 dbConn.Close();
             }
@@ -782,6 +851,26 @@ namespace WebItNow_Peacock
                 mpeMensaje.Show();
             }
         }
+
+        protected void GetEstatusCaso()
+        {
+            try
+            {
+
+                ddlEstatusCaso.Items.Clear();
+                ddlEstatusCaso.Items.Add(new ListItem("-- Seleccionar--", "0"));
+                ddlEstatusCaso.Items.Add(new ListItem("Hospitalizado", "1"));
+                ddlEstatusCaso.Items.Add(new ListItem("En Seguimiento", "2"));
+                ddlEstatusCaso.Items.Add(new ListItem("Alta / Cerrado", "3"));
+
+            }
+            catch (System.Exception ex)
+            {
+                LblMessage.Text = ex.Message;
+                mpeMensaje.Show();
+            }
+        }
+
         protected void GetInstituciones()
         {
             try
@@ -1115,20 +1204,23 @@ namespace WebItNow_Peacock
             // habilitar controles Pnl2
             TxtNumSiniestro.Enabled = true;
             TxtNumPoliza.Enabled = true;
+            ddlEstatusCaso.Enabled = true;
             TxtNomAjustador.Enabled = true;
             TxtEmailAjustador.Enabled = true;
             TxtTelAjustador.Enabled = true;
+            TxtFechaIniVigencia.Enabled = true;
+            TxtFechaFinVigencia.Enabled = true;
             TxtFechaOcurrencia.Enabled = true;
             TxtHoraOcurrencia.Enabled = true;
             TxtHoraRecepcion.Enabled = true;
             TxtDetalleReporte.Enabled = true;
-            TxtCalle.Enabled = true;
-            TxtNumExterior.Enabled = true;
-            TxtNumInterior.Enabled = true;
-            ddlEstado.Enabled = true;
-            ddlMunicipios.Enabled = true;
-            TxtColonia.Enabled = true;
-            TxtCodigoPostal.Enabled = true;
+            //TxtCalle.Enabled = true;
+            //TxtNumExterior.Enabled = true;
+            //TxtNumInterior.Enabled = true;
+            //ddlEstado.Enabled = true;
+            //ddlMunicipios.Enabled = true;
+            //TxtColonia.Enabled = true;
+            //TxtCodigoPostal.Enabled = true;
 
             TxtNomLesionado.Enabled = true;
             TxtFecNacimiento.Enabled = true;
@@ -1200,7 +1292,8 @@ namespace WebItNow_Peacock
                 string strQuery = "UPDATE ITM_73 " +
                                   "   SET NumSiniestro = '" + TxtNumSiniestro.Text.Trim() + "', " +
                                   "       NumPoliza =  '" + TxtNumPoliza.Text.Trim() + "', " +
-                                  "       NomAjustador = '" + TxtNomAjustador.Text.Trim() + "' " +
+                                  "       NomAjustador = '" + TxtNomAjustador.Text.Trim() + "', " +
+                                  "       IdEstatusCaso = " + ddlEstatusCaso.SelectedValue + " " +
                                   " WHERE Referencia = '" + Variables.wRef + "' " +
                                   "   AND SubReferencia = " + Variables.wSubRef + " ";
 
@@ -1230,30 +1323,34 @@ namespace WebItNow_Peacock
                 int SubReferencia = Variables.wSubRef;
                 string Email_Ajustador = TxtEmailAjustador.Text;
                 string Tel_Ajustador = TxtTelAjustador.Text;
+                string Fec_IniVigencia = TxtFechaIniVigencia.Text;
+                string Fec_FinVigencia = TxtFechaFinVigencia.Text;
                 string Fec_Ocurrencia = TxtFechaOcurrencia.Text;
                 string Hora_Ocurrencia = TxtHoraOcurrencia.Text;
                 string Hora_Recepcion = TxtHoraRecepcion.Text;
                 string Detalle_Reporte = TxtDetalleReporte.Text;
-                string Calle = TxtCalle.Text;
-                string Num_Exterior = TxtNumExterior.Text;
-                string Num_Interior = TxtNumInterior.Text;
-                string Estado = ddlEstado.SelectedValue;
-                string Delegacion = ddlMunicipios.SelectedValue;
-                string Colonia = TxtColonia.Text;
-                string Codigo_Postal = TxtCodigoPostal.Text;
+                string Calle = string.Empty;            //TxtCalle.Text;
+                string Num_Exterior = string.Empty;     // TxtNumExterior.Text;
+                string Num_Interior = string.Empty;     //TxtNumInterior.Text;
+                string Estado = string.Empty;           //ddlEstado.SelectedValue;
+                string Delegacion = string.Empty;       //ddlMunicipios.SelectedValue;
+                string Colonia = string.Empty;          //TxtColonia.Text;
+                string Codigo_Postal = string.Empty;    //TxtCodigoPostal.Text;
 
                 string Id_Usuario = Variables.wUserLogon;
                 int IdStatus = 1;
 
-                string strQuery = @" INSERT INTO ITM_73_1 (Referencia, SubReferencia, Email_Ajustador, Tel_Ajustador, Fec_Ocurrencia, Hora_Recepcion, Hora_Ocurrencia, " +
+                string strQuery = @" INSERT INTO ITM_73_1 (Referencia, SubReferencia, Email_Ajustador, Tel_Ajustador, Fec_IniVigencia, Fec_FinVigencia, Fec_Ocurrencia, Hora_Recepcion, Hora_Ocurrencia, " +
                                     "                       Detalle_Reporte, Calle, Num_Exterior, Num_Interior, Estado, Delegacion, Colonia, Codigo_Postal, " +
                                     "                       Id_Usuario, IdStatus)" +
-                                    " VALUES (@Referencia, @SubReferencia, @Email_Ajustador, @Tel_Ajustador, @Fec_Ocurrencia, @Hora_Recepcion, @Hora_Ocurrencia, " +
+                                    " VALUES (@Referencia, @SubReferencia, @Email_Ajustador, @Tel_Ajustador, @Fec_IniVigencia, @Fec_FinVigencia, @Fec_Ocurrencia, @Hora_Recepcion, @Hora_Ocurrencia, " +
                                     "        @Detalle_Reporte, @Calle, @Num_Exterior, @Num_Interior, @Estado, @Delegacion, @Colonia, @Codigo_Postal, " +
                                     "        @Id_Usuario, @IdStatus)" +
                                     " ON DUPLICATE KEY UPDATE " +
                                     "    Email_Ajustador = VALUES(Email_Ajustador), " +
                                     "    Tel_Ajustador = VALUES(Tel_Ajustador), " +
+                                    "    Fec_IniVigencia = VALUES(Fec_IniVigencia), " +
+                                    "    Fec_FinVigencia = VALUES(Fec_FinVigencia), " +
                                     "    Fec_Ocurrencia = VALUES(Fec_Ocurrencia), " +
                                     "    Hora_Recepcion = VALUES(Hora_Recepcion), " +
                                     "    Hora_Ocurrencia = VALUES(Hora_Ocurrencia), " +
@@ -1275,6 +1372,8 @@ namespace WebItNow_Peacock
                     cmd.Parameters.AddWithValue("@SubReferencia", SubReferencia);
                     cmd.Parameters.AddWithValue("@Email_Ajustador", Email_Ajustador);
                     cmd.Parameters.AddWithValue("@Tel_Ajustador", Tel_Ajustador);
+                    cmd.Parameters.AddWithValue("@Fec_IniVigencia", Fec_IniVigencia);
+                    cmd.Parameters.AddWithValue("@Fec_FinVigencia", Fec_FinVigencia);
                     cmd.Parameters.AddWithValue("@Fec_Ocurrencia", Fec_Ocurrencia);
                     cmd.Parameters.AddWithValue("@Hora_Recepcion", Hora_Recepcion);
                     cmd.Parameters.AddWithValue("@Hora_Ocurrencia", Hora_Ocurrencia);
@@ -1410,6 +1509,7 @@ namespace WebItNow_Peacock
 
                 string Nom_Responsable = TxtNomResponsable.Text;
                 string Parentesco = TxtParentesco.Text;
+                string Edad = TxtEdadResponsable.Text;
                 string Tel_Responsable = TxtTelResponsable.Text;
                 string RFC_Responsable = TxtRFC_Responsable.Text;
                 string Email_Responsable = TxtEmailResponsable.Text;
@@ -1425,15 +1525,16 @@ namespace WebItNow_Peacock
                 string Id_Usuario = Variables.wUserLogon;
                 int IdStatus = 1;
 
-                string strQuery = @" INSERT INTO ITM_73_3 (Referencia, SubReferencia, Nom_Responsable, Parentesco, Tel_Responsable, RFC_Responsable, Email_Responsable, " +
+                string strQuery = @" INSERT INTO ITM_73_3 (Referencia, SubReferencia, Nom_Responsable, Parentesco, Edad, Tel_Responsable, RFC_Responsable, Email_Responsable, " +
                                     "                       Calle, Num_Exterior, Num_Interior, Estado, Delegacion, Colonia, Codigo_Postal, " +
                                     "                       Id_Usuario, IdStatus)" +
-                                    " VALUES (@Referencia, @SubReferencia, @Nom_Responsable, @Parentesco, @Tel_Responsable, @RFC_Responsable, @Email_Responsable, " +
+                                    " VALUES (@Referencia, @SubReferencia, @Nom_Responsable, @Parentesco, @Edad, @Tel_Responsable, @RFC_Responsable, @Email_Responsable, " +
                                     "        @Calle, @Num_Exterior, @Num_Interior, @Estado, @Delegacion, @Colonia, @Codigo_Postal, " +
                                     "        @Id_Usuario, @IdStatus)" +
                                     " ON DUPLICATE KEY UPDATE " +
                                     "    Nom_Responsable = VALUES(Nom_Responsable), " +
                                     "    Parentesco = VALUES(Parentesco), " +
+                                    "    Edad = VALUES(Edad), " +
                                     "    Tel_Responsable = VALUES(Tel_Responsable), " +
                                     "    RFC_Responsable = VALUES(RFC_Responsable), " +
                                     "    Email_Responsable = VALUES(Email_Responsable), " +
@@ -1454,6 +1555,7 @@ namespace WebItNow_Peacock
                     cmd.Parameters.AddWithValue("@SubReferencia", SubReferencia);
                     cmd.Parameters.AddWithValue("@Nom_Responsable", Nom_Responsable);
                     cmd.Parameters.AddWithValue("@Parentesco", Parentesco);
+                    cmd.Parameters.AddWithValue("@Edad", Edad);
                     cmd.Parameters.AddWithValue("@Tel_Responsable", Tel_Responsable);
                     cmd.Parameters.AddWithValue("@RFC_Responsable", RFC_Responsable);
                     cmd.Parameters.AddWithValue("@Email_Responsable", Email_Responsable);
@@ -1498,7 +1600,21 @@ namespace WebItNow_Peacock
                 int IdZona = string.IsNullOrWhiteSpace(ddlZonas.SelectedValue) ? 0 : int.Parse(ddlZonas.SelectedValue);
                 int IdHospital = string.IsNullOrWhiteSpace(ddlHospitales.SelectedValue) ? 0 : int.Parse(ddlHospitales.SelectedValue);
                 int TpoAtencion = string.IsNullOrWhiteSpace(ddlTpoAtencion.SelectedValue) ? 0 : int.Parse(ddlTpoAtencion.SelectedValue);
+
+                string Email_Atencion = TxtCorreoElectronico.Text.Trim();
+                string Tel_Contacto_1 = TxtTelAtencionContacto1.Text.Trim();
+                string Tel_Contacto_2 = TxtTelAtencionContacto2.Text.Trim();
+
                 string FechaIngreso = TxtFechaIngreso.Text.Trim();
+                string Hora_Ingreso = TxtHoraIngreso.Text.Trim();
+                string FechaRecepcion = TxtFechaRecepcionNM.Text.Trim();
+                string Hora_Recepcion = TxtHoraRecepcionNM.Text.Trim();
+
+                string FechaAlta = TxtFechaAlta.Text.Trim();
+                string Hora_Alta = TxtHoraAlta.Text.Trim();
+                string FechaEnvio = TxtFechaEnvio.Text.Trim();
+                string Hora_Envio = TxtHoraEnvio.Text.Trim();
+
                 string FechaVigencia = TxtFechaVigencia.Text.Trim();
 
                 decimal MontoAutorizado = 0;
@@ -1508,17 +1624,33 @@ namespace WebItNow_Peacock
                     decimal.TryParse(TxtMontoAutorizado.Text.Trim(), out MontoAutorizado);
                 }
 
+                string Calle = TxtCalleAtencion.Text;
+                string Num_Exterior = TxtNumExtAtencion.Text;
+                string Num_Interior = TxtNumIntAtencion.Text;
+                string Estado = ddlEstadoAtencion.SelectedValue;
+                string Delegacion = ddlMunicipiosAtencion.SelectedValue;
+                string Colonia = TxtColoniaAtencion.Text;
+                string Codigo_Postal = TxtCPostalAtencion.Text;
+
                 string Diagnostico = TxtDiagnostico.Text.Trim();
                 string Observaciones = TxtObservaciones_DA.Text.Trim();
+                string Ubicacion = TxtRef_Ubicacion.Text.Trim();
+                string PlanTratamiento = TxtPlanTratamiento.Text.Trim();
 
                 string Id_Usuario = Variables.wUserLogon;
                 int IdStatus = 1;
 
                 string strQuery = @" INSERT INTO ITM_73_4 (Referencia, SubReferencia, IdLinea, IdEstacion, IdZona, IdHospital, " +
-                                   "     TpoAtencion, FechaIngreso, FechaVigencia, MontoAutorizado, Diagnostico, Observaciones, " +
+                                   "     TpoAtencion, Email_Atencion, Tel_Contacto_1, Tel_Contacto_2, FechaIngreso, Hora_Ingreso," +
+                                   "     FechaRecepcion, Hora_Recepcion, FechaAlta, Hora_Alta, FechaEnvio, Hora_Envio, " +
+                                   "     Calle, Num_Exterior, Num_Interior, Estado, Delegacion, Colonia, Codigo_Postal, " +
+                                   "     FechaVigencia, MontoAutorizado, Diagnostico, Observaciones, Ubicacion, PlanTratamiento, " +
                                    "     Id_Usuario, IdStatus)" +
                                    " VALUES (@Referencia, @SubReferencia, @IdLinea, @IdEstacion, @IdZona, @IdHospital, " +
-                                   "         @TpoAtencion, @FechaIngreso, @FechaVigencia, @MontoAutorizado, @Diagnostico, @Observaciones, " +
+                                   "         @TpoAtencion, @Email_Atencion, @Tel_Contacto_1, @Tel_Contacto_2, @FechaIngreso, @Hora_Ingreso, " +
+                                   "         @FechaRecepcion, @Hora_Recepcion, @FechaAlta, @Hora_Alta, @FechaEnvio, @Hora_Envio, " +
+                                   "         @Calle, @Num_Exterior, @Num_Interior, @Estado, @Delegacion, @Colonia, @Codigo_Postal, " +
+                                   "         @FechaVigencia, @MontoAutorizado, @Diagnostico, @Observaciones, @Ubicacion, @PlanTratamiento, " +
                                    "         @Id_Usuario, @IdStatus)" +
                                    " ON DUPLICATE KEY UPDATE " +
                                    "    IdLinea = VALUES(IdLinea), " +
@@ -1526,11 +1658,30 @@ namespace WebItNow_Peacock
                                    "    IdZona = VALUES(IdZona), " +
                                    "    IdHospital = VALUES(IdHospital), " +
                                    "    TpoAtencion = VALUES(TpoAtencion), " +
+                                   "    Email_Atencion = VALUES(Email_Atencion), " +
+                                   "    Tel_Contacto_1 = VALUES(Tel_Contacto_1), " +
+                                   "    Tel_Contacto_2 = VALUES(Tel_Contacto_2), " +
                                    "    FechaIngreso = VALUES(FechaIngreso), " +
+                                   "    Hora_Ingreso = VALUES(Hora_Ingreso), " +
+                                   "    FechaRecepcion = VALUES(FechaRecepcion), " +
+                                   "    Hora_Recepcion = VALUES(Hora_Recepcion), " +
+                                   "    FechaAlta = VALUES(FechaAlta), " +
+                                   "    Hora_Alta = VALUES(Hora_Alta), " +
+                                   "    FechaEnvio = VALUES(FechaEnvio), " +
+                                   "    Hora_Envio = VALUES(Hora_Envio), " +
+                                   "    Calle = VALUES(Calle), " +
+                                   "    Num_Exterior = VALUES(Num_Exterior), " +
+                                   "    Num_Interior = VALUES(Num_Interior), " +
+                                   "    Estado = VALUES(Estado), " +
+                                   "    Delegacion = VALUES(Delegacion), " +
+                                   "    Colonia = VALUES(Colonia), " +
+                                   "    Codigo_Postal = VALUES(Codigo_Postal), " +
                                    "    FechaVigencia = VALUES(FechaVigencia), " +
                                    "    MontoAutorizado = VALUES(MontoAutorizado), " +
                                    "    Diagnostico = VALUES(Diagnostico), " +
                                    "    Observaciones = VALUES(Observaciones), " +
+                                   "    Ubicacion = VALUES(Ubicacion), " +
+                                   "    PlanTratamiento = VALUES(PlanTratamiento), " +
                                    "    Id_Usuario = VALUES(Id_Usuario), " +
                                    "    IdStatus = VALUES(IdStatus); ";
 
@@ -1544,11 +1695,30 @@ namespace WebItNow_Peacock
                     cmd.Parameters.AddWithValue("@IdZona", IdZona);
                     cmd.Parameters.AddWithValue("@IdHospital", IdHospital);
                     cmd.Parameters.AddWithValue("@TpoAtencion", TpoAtencion);
+                    cmd.Parameters.AddWithValue("@Email_Atencion", Email_Atencion);
+                    cmd.Parameters.AddWithValue("@Tel_Contacto_1", Tel_Contacto_1);
+                    cmd.Parameters.AddWithValue("@Tel_Contacto_2", Tel_Contacto_2);
                     cmd.Parameters.AddWithValue("@FechaIngreso", FechaIngreso);
+                    cmd.Parameters.AddWithValue("@Hora_Ingreso", Hora_Ingreso);
+                    cmd.Parameters.AddWithValue("@FechaRecepcion", FechaRecepcion);
+                    cmd.Parameters.AddWithValue("@Hora_Recepcion", Hora_Recepcion);
+                    cmd.Parameters.AddWithValue("@FechaAlta", FechaAlta);
+                    cmd.Parameters.AddWithValue("@Hora_Alta", Hora_Alta);
+                    cmd.Parameters.AddWithValue("@FechaEnvio", FechaEnvio);
+                    cmd.Parameters.AddWithValue("@Hora_Envio", Hora_Envio);
+                    cmd.Parameters.AddWithValue("@Calle", Calle);
+                    cmd.Parameters.AddWithValue("@Num_Exterior", Num_Exterior);
+                    cmd.Parameters.AddWithValue("@Num_Interior", Num_Interior);
+                    cmd.Parameters.AddWithValue("@Estado", Estado);
+                    cmd.Parameters.AddWithValue("@Delegacion", Delegacion);
+                    cmd.Parameters.AddWithValue("@Colonia", Colonia);
+                    cmd.Parameters.AddWithValue("@Codigo_Postal", Codigo_Postal);
                     cmd.Parameters.AddWithValue("@FechaVigencia", FechaVigencia);
                     cmd.Parameters.AddWithValue("@MontoAutorizado", MontoAutorizado);
                     cmd.Parameters.AddWithValue("@Diagnostico", Diagnostico);
                     cmd.Parameters.AddWithValue("@Observaciones", Observaciones);
+                    cmd.Parameters.AddWithValue("@Ubicacion", Ubicacion);
+                    cmd.Parameters.AddWithValue("@PlanTratamiento", PlanTratamiento);
                     cmd.Parameters.AddWithValue("@Id_Usuario", Id_Usuario);
                     cmd.Parameters.AddWithValue("@IdStatus", IdStatus);
                 });
@@ -1862,18 +2032,22 @@ namespace WebItNow_Peacock
 
                 string strQuery = "SELECT t0.IdAsunto, t0.SubReferencia, CASE WHEN t0.SubReferencia >= 1 THEN CONCAT(t0.Referencia, '-', t0.SubReferencia) ELSE t0.Referencia END as Referencia_Sub, " +
                            "       t0.NumSiniestro, t0.NumPoliza, t0.NomAjustador, " +
-                           "       A.Email_Ajustador, A.Tel_Ajustador, A.Fec_Ocurrencia, A.Hora_Recepcion, A.Hora_Ocurrencia, " +
+                           "       A.Email_Ajustador, A.Tel_Ajustador, A.Fec_IniVigencia, A.Fec_FinVigencia, A.Fec_Ocurrencia, A.Hora_Recepcion, A.Hora_Ocurrencia, " +
                            "       A.Detalle_Reporte, A.Calle, A.Num_Exterior, A.Num_Interior, A.Estado, A.Delegacion, A.Colonia, A.Codigo_Postal, " +
                            "       CASE WHEN t0.IdSeguros = 'OTR' THEN t0.NomCliente ELSE t2.Descripcion END as Seguro_Cia, " +
                            "       t0.IdRegimen, t0.IdEstStatus, t0.IdConclusion, " +
                            "       B.Nom_Lesionado, B.Fec_Nacimiento, B.Sexo, B.Email_Lesionado, B.Tel_Celular, B.Edad, B.RFC_Lesionado, B.Tpo_Evento, B.Desc_Lesiones, " +
                            "       B.Calle, B.Num_Exterior, B.Num_Interior, B.Estado, B.Delegacion, B.Colonia, B.Codigo_Postal, " +
-                           "       C.Nom_Responsable, C.Parentesco, C.Tel_Responsable, C.RFC_Responsable, C.Email_Responsable, " +
+                           "       C.Nom_Responsable, C.Parentesco, C.Edad, C.Tel_Responsable, C.RFC_Responsable, C.Email_Responsable, " +
                            "       C.Calle, C.Num_Exterior, C.Num_Interior, C.Estado, C.Delegacion, C.Colonia, C.Codigo_Postal, " +
-                           "       D.IdLinea, D.IdEstacion, D.IdZona, D.IdHospital, D.TpoAtencion, D.FechaIngreso, D.FechaVigencia, D.MontoAutorizado, " +
-                           "       D.Diagnostico, D.Observaciones, " +
+                           "       D.IdLinea, D.IdEstacion, D.IdZona, D.IdHospital, D.TpoAtencion, D.Email_Atencion, D.Tel_Contacto_1, D.Tel_Contacto_2, " +
+                           "       D.FechaIngreso, D.Hora_Ingreso, D.FechaRecepcion, D.Hora_Recepcion, D.FechaAlta, D.Hora_Alta, D.FechaEnvio, D.Hora_Envio, " +
+                           "       D.Calle, D.Num_Exterior, D.Num_Interior, D.Estado, D.Delegacion, D.Colonia, D.Codigo_Postal, " +
+                           "       D.FechaVigencia, D.MontoAutorizado, " +
+                           "       D.Diagnostico, D.Observaciones, D.Ubicacion, D.PlanTratamiento, " +
                            "       F.Alergias, F.Enfermedades, F.Medicamentos, F.Alcohol, F.Sustancias, F.Observaciones," +
-                           "       F.Diagnostico, F.Comentarios " +
+                           "       F.Diagnostico, F.Comentarios, " +
+                           "       t0.IdEstatusCaso " +
                            "  FROM ITM_73 t0 " +
                            "  LEFT JOIN ITM_73_1 A ON t0.Referencia = A.Referencia AND t0.SubReferencia = A.SubReferencia " +
                            "  LEFT JOIN ITM_73_2 B ON t0.Referencia = B.Referencia AND t0.SubReferencia = B.SubReferencia " +
@@ -1896,78 +2070,84 @@ namespace WebItNow_Peacock
                     // Informacion General
                     TxtSubReferencia.Text = Convert.ToString(row[2]);
                     TxtNumSiniestro.Text = Convert.ToString(row[3]);
-                    TxtNumPoliza.Text = Convert.ToString(row[4]);
+                    // TxtNumPoliza.Text = Convert.ToString(row[4]);
+                    TxtNumPoliza.Text = (row.IsNull(4) || string.IsNullOrWhiteSpace(row[4]?.ToString())) ? "INST0004" : row[4].ToString();
                     TxtNomAjustador.Text = Convert.ToString(row[5]);
 
                     TxtEmailAjustador.Text = Convert.ToString(row[6]);
                     TxtTelAjustador.Text = Convert.ToString(row[7]);
 
-                    TxtFechaOcurrencia.Text = Convert.ToString(row[8]);
+                    // TxtFechaIniVigencia.Text = Convert.ToString(row[8]);
+                    TxtFechaIniVigencia.Text = (row.IsNull(8) || string.IsNullOrWhiteSpace(row[8]?.ToString())) ? "01/01/" + DateTime.Now.Year.ToString() : row[8].ToString();
+                    // TxtFechaFinVigencia.Text = Convert.ToString(row[9]);
+                    TxtFechaFinVigencia.Text = (row.IsNull(8) || string.IsNullOrWhiteSpace(row[9]?.ToString())) ? "31/12/" + DateTime.Now.Year.ToString() : row[9].ToString();
+                    TxtFechaOcurrencia.Text = Convert.ToString(row[10]);
 
-                    TxtHoraRecepcion.Text = string.IsNullOrEmpty(Convert.ToString(row[9])) ? "00:00" : Convert.ToString(row[9]);
-                    TxtHoraOcurrencia.Text = string.IsNullOrEmpty(Convert.ToString(row[10])) ? "00:00" : Convert.ToString(row[10]);
-                    TxtDetalleReporte.Text = Convert.ToString(row[11]);
-                    TxtCalle.Text = Convert.ToString(row[12]);
-                    TxtNumExterior.Text = Convert.ToString(row[13]);
-                    TxtNumInterior.Text = Convert.ToString(row[14]);
-                    ddlEstado.SelectedValue = Convert.ToString(row[15]);
+                    TxtHoraRecepcion.Text = string.IsNullOrEmpty(Convert.ToString(row[11])) ? "00:00" : Convert.ToString(row[11]);
+                    TxtHoraOcurrencia.Text = string.IsNullOrEmpty(Convert.ToString(row[12])) ? "00:00" : Convert.ToString(row[12]);
+                    TxtDetalleReporte.Text = Convert.ToString(row[13]);
+                    //TxtCalle.Text = Convert.ToString(row[14]);
+                    //TxtNumExterior.Text = Convert.ToString(row[15]);
+                    //TxtNumInterior.Text = Convert.ToString(row[16]);
+                    //ddlEstado.SelectedValue = Convert.ToString(row[17]);
 
-                    // Disparar el evento SelectedIndexChanged manualmente
-                    ddlEstado_SelectedIndexChanged(ddlEstado, EventArgs.Empty);
+                    //// Disparar el evento SelectedIndexChanged manualmente
+                    //ddlEstado_SelectedIndexChanged(ddlEstado, EventArgs.Empty);
 
-                    ddlMunicipios.SelectedValue = Convert.ToString(row[16]);
-                    TxtColonia.Text = Convert.ToString(row[17]);
-                    TxtCodigoPostal.Text = Convert.ToString(row[18]);
-                    TxtSeguro_Cia.Text = Convert.ToString(row[19]);
-                    ddlTpoAsegurado.SelectedValue = Convert.ToString(row[20]);
-                    ddlEstSiniestro.SelectedValue = Convert.ToString(row[21]);
+                    //ddlMunicipios.SelectedValue = Convert.ToString(row[18]);
+                    //TxtColonia.Text = Convert.ToString(row[19]);
+                    //TxtCodigoPostal.Text = Convert.ToString(row[20]);
+                    TxtSeguro_Cia.Text = Convert.ToString(row[21]);
+                    ddlTpoAsegurado.SelectedValue = Convert.ToString(row[22]);
+                    ddlEstSiniestro.SelectedValue = Convert.ToString(row[23]);
 
                     // Disparar el evento SelectedIndexChanged manualmente
                     ddlEstSiniestro_SelectedIndexChanged(ddlEstSiniestro, EventArgs.Empty);
-                    ddlConclusion.SelectedValue = Convert.ToString(row[22]);
+                    ddlConclusion.SelectedValue = Convert.ToString(row[24]);
 
-                    TxtNomLesionado.Text = Convert.ToString(row[23]);
-                    TxtFecNacimiento.Text = Convert.ToString(row[24]);
-                    TxtSexo.Text = Convert.ToString(row[25]);
-                    TxtEmailLesionado.Text = Convert.ToString(row[26]);
-                    TxtTelLesionado.Text = Convert.ToString(row[27]);
-                    TxtEdadLesionado.Text = Convert.ToString(row[28]);
-                    TxtRFC_Lesionado.Text = Convert.ToString(row[29]);
-                    ddlTipoEvento.SelectedValue = Convert.ToString(row[30]);
-                    TxtDescLesiones.Text = Convert.ToString(row[31]);
+                    TxtNomLesionado.Text = Convert.ToString(row[25]);
+                    TxtFecNacimiento.Text = Convert.ToString(row[26]);
+                    TxtSexo.Text = Convert.ToString(row[27]);
+                    TxtEmailLesionado.Text = Convert.ToString(row[28]);
+                    TxtTelLesionado.Text = Convert.ToString(row[29]);
+                    TxtEdadLesionado.Text = Convert.ToString(row[30]);
+                    TxtRFC_Lesionado.Text = Convert.ToString(row[31]);
+                    ddlTipoEvento.SelectedValue = Convert.ToString(row[32]);
+                    TxtDescLesiones.Text = Convert.ToString(row[33]);
 
-                    TxtCalleLesionado.Text = Convert.ToString(row[32]);
-                    TxtNumExtLesionado.Text = Convert.ToString(row[33]);
-                    TxtNumIntLesionado.Text = Convert.ToString(row[34]);
-                    ddlEstadoLesionado.SelectedValue = Convert.ToString(row[35]);
+                    TxtCalleLesionado.Text = Convert.ToString(row[34]);
+                    TxtNumExtLesionado.Text = Convert.ToString(row[35]);
+                    TxtNumIntLesionado.Text = Convert.ToString(row[36]);
+                    ddlEstadoLesionado.SelectedValue = Convert.ToString(row[37]);
 
                     // Disparar el evento SelectedIndexChanged manualmente
                     ddlEstadoLesionado_SelectedIndexChanged(ddlEstadoLesionado, EventArgs.Empty);
 
-                    ddlMunicipiosLesionado.SelectedValue = Convert.ToString(row[36]);
-                    TxtColoniaLesionado.Text = Convert.ToString(row[37]);
-                    TxtCPostalLesionado.Text = Convert.ToString(row[38]);
+                    ddlMunicipiosLesionado.SelectedValue = Convert.ToString(row[38]);
+                    TxtColoniaLesionado.Text = Convert.ToString(row[39]);
+                    TxtCPostalLesionado.Text = Convert.ToString(row[40]);
 
-                    TxtNomResponsable.Text = Convert.ToString(row[39]);
-                    TxtParentesco.Text = Convert.ToString(row[40]);
-                    TxtTelResponsable.Text = Convert.ToString(row[41]);
-                    TxtRFC_Responsable.Text = Convert.ToString(row[42]);
-                    TxtEmailResponsable.Text = Convert.ToString(row[43]);
+                    TxtNomResponsable.Text = Convert.ToString(row[41]);
+                    TxtParentesco.Text = Convert.ToString(row[42]);
+                    TxtEdadResponsable.Text = Convert.ToString(row[43]);
+                    TxtTelResponsable.Text = Convert.ToString(row[44]);
+                    TxtRFC_Responsable.Text = Convert.ToString(row[45]);
+                    TxtEmailResponsable.Text = Convert.ToString(row[46]);
 
-                    TxtCalleResponsable.Text = Convert.ToString(row[44]);
-                    TxtNumExtResponsable.Text = Convert.ToString(row[45]);
-                    TxtNumIntResponsable.Text = Convert.ToString(row[46]);
-                    ddlEstadoResponsable.SelectedValue = Convert.ToString(row[47]);
+                    TxtCalleResponsable.Text = Convert.ToString(row[47]);
+                    TxtNumExtResponsable.Text = Convert.ToString(row[48]);
+                    TxtNumIntResponsable.Text = Convert.ToString(row[49]);
+                    ddlEstadoResponsable.SelectedValue = Convert.ToString(row[50]);
 
                     // Disparar el evento SelectedIndexChanged manualmente
                     ddlEstadoResponsable_SelectedIndexChanged(ddlEstadoResponsable, EventArgs.Empty);
 
-                    ddlMunicipiosResponsable.SelectedValue = Convert.ToString(row[48]);
-                    TxtColoniaResponsable.Text = Convert.ToString(row[49]);
-                    TxtCPostalResponsable.Text = Convert.ToString(row[50]);
+                    ddlMunicipiosResponsable.SelectedValue = Convert.ToString(row[51]);
+                    TxtColoniaResponsable.Text = Convert.ToString(row[52]);
+                    TxtCPostalResponsable.Text = Convert.ToString(row[53]);
 
-                    // ddlLineaOcurrencia.SelectedValue = Convert.ToString(row[51]);
-                    string valorLinea = row[51] != DBNull.Value ? Convert.ToInt32(row[51]).ToString() : "0";
+                    // ddlLineaOcurrencia.SelectedValue = Convert.ToString(row[54]);
+                    string valorLinea = row[54] != DBNull.Value ? Convert.ToInt32(row[54]).ToString() : "0";
                     if (ddlLineaOcurrencia.Items.FindByValue(valorLinea) != null)
                     {
                         ddlLineaOcurrencia.SelectedValue = valorLinea;
@@ -1982,10 +2162,10 @@ namespace WebItNow_Peacock
                         ddlLineaOcurrencia.SelectedIndex = -1;  // Ninguno seleccionado
                     }
 
-                    ddlEstacionOcurrencia.SelectedValue = Convert.ToString(row[52]);
+                    ddlEstacionOcurrencia.SelectedValue = Convert.ToString(row[55]);
 
-                    // ddlZonas.SelectedValue = Convert.ToString(row[53]);
-                    string valorZonas = row[53] != DBNull.Value ? Convert.ToInt32(row[53]).ToString() : "0";
+                    // ddlZonas.SelectedValue = Convert.ToString(row[56]);
+                    string valorZonas = row[56] != DBNull.Value ? Convert.ToInt32(row[56]).ToString() : "0";
                     if (ddlZonas.Items.FindByValue(valorZonas) != null)
                     {
                         ddlZonas.SelectedValue = valorZonas;
@@ -2000,22 +2180,55 @@ namespace WebItNow_Peacock
                         ddlZonas.SelectedIndex = -1;    // Ninguno seleccionado
                     }
 
-                    ddlHospitales.SelectedValue = Convert.ToString(row[54]);
-                    ddlTpoAtencion.SelectedValue = Convert.ToString(row[55]);
-                    TxtFechaIngreso.Text = Convert.ToString(row[56]);
-                    TxtFechaVigencia.Text = Convert.ToString(row[57]);
-                    TxtMontoAutorizado.Text = Convert.ToString(row[58]);
-                    TxtDiagnostico.Text = Convert.ToString(row[59]);
-                    TxtObservaciones_DA.Text = Convert.ToString(row[60]);
+                    ddlHospitales.SelectedValue = Convert.ToString(row[57]);
+                    ddlTpoAtencion.SelectedValue = Convert.ToString(row[58]);
 
-                    TxtAlergias.Text = Convert.ToString(row[61]);
-                    TxtEnfermedades.Text = Convert.ToString(row[62]);
-                    TxtMedicamentos.Text = Convert.ToString(row[63]);
-                    TxtAlcohol.Text = Convert.ToString(row[64]);
-                    TxtSustancias.Text = Convert.ToString(row[65]);
-                    TxtObservaciones_PA.Text = Convert.ToString(row[66]);
-                    TxtDiagnosticoPreliminar.Text = Convert.ToString(row[67]);
-                    TxtComentariosMedicos.Text = Convert.ToString(row[68]);
+                    TxtCorreoElectronico.Text = Convert.ToString(row[59]);
+                    TxtTelAtencionContacto1.Text = Convert.ToString(row[60]);
+                    TxtTelAtencionContacto2.Text = Convert.ToString(row[61]);
+
+                    TxtFechaIngreso.Text = Convert.ToString(row[62]);
+                    TxtHoraIngreso.Text = string.IsNullOrEmpty(Convert.ToString(row[63])) ? "00:00" : Convert.ToString(row[63]);
+                    TxtFechaRecepcionNM.Text = Convert.ToString(row[64]);
+                    TxtHoraRecepcionNM.Text = string.IsNullOrEmpty(Convert.ToString(row[65])) ? "00:00" : Convert.ToString(row[65]);
+
+                    TxtFechaAlta.Text = Convert.ToString(row[66]);
+                    TxtHoraAlta.Text = string.IsNullOrEmpty(Convert.ToString(row[67])) ? "00:00" : Convert.ToString(row[67]);
+                    TxtFechaEnvio.Text = Convert.ToString(row[68]);
+                    TxtHoraEnvio.Text = string.IsNullOrEmpty(Convert.ToString(row[69])) ? "00:00" : Convert.ToString(row[69]);
+
+                    TxtCalleAtencion.Text = Convert.ToString(row[70]);
+                    TxtNumExtAtencion.Text = Convert.ToString(row[71]);
+                    TxtNumIntAtencion.Text = Convert.ToString(row[72]);
+
+                    ddlEstadoAtencion.SelectedValue = Convert.ToString(row[73]);
+
+                    // Disparar el evento SelectedIndexChanged manualmente
+                    ddlEstadoAtencion_SelectedIndexChanged(ddlEstadoAtencion, EventArgs.Empty);
+
+                    ddlMunicipiosAtencion.SelectedValue = Convert.ToString(row[74]);
+
+                    TxtColoniaAtencion.Text = Convert.ToString(row[75]);
+                    TxtCPostalAtencion.Text = Convert.ToString(row[76]);
+
+                    TxtFechaVigencia.Text = Convert.ToString(row[77]);
+                    TxtMontoAutorizado.Text = Convert.ToString(row[78]);
+                    TxtMontoAutorizado.Text = string.IsNullOrEmpty(Convert.ToString(row[78])) ? "0.00" : Convert.ToString(row[78]);
+                    TxtDiagnostico.Text = Convert.ToString(row[79]);
+                    TxtObservaciones_DA.Text = Convert.ToString(row[80]);
+                    TxtRef_Ubicacion.Text = Convert.ToString(row[81]);
+                    TxtPlanTratamiento.Text = Convert.ToString(row[82]);
+
+                    TxtAlergias.Text = Convert.ToString(row[83]);
+                    TxtEnfermedades.Text = Convert.ToString(row[84]);
+                    TxtMedicamentos.Text = Convert.ToString(row[85]);
+                    TxtAlcohol.Text = Convert.ToString(row[86]);
+                    TxtSustancias.Text = Convert.ToString(row[87]);
+                    TxtObservaciones_PA.Text = Convert.ToString(row[88]);
+                    TxtDiagnosticoPreliminar.Text = Convert.ToString(row[89]);
+                    TxtComentariosMedicos.Text = Convert.ToString(row[90]);
+
+                    ddlEstatusCaso.SelectedValue = Convert.ToString(row[91]);
 
                     return 0;
                 }
@@ -2043,18 +2256,18 @@ namespace WebItNow_Peacock
         {
             pnl1.Visible = !pnl1.Visible;   // Cambia la visibilidad del Panel 1 al contrario de su estado actual
 
-            if (pnl1.Visible)
-            {
-                string flechaHaciaArriba = "\u25B2";
-                btnShowPanel1.Text = flechaHaciaArriba; // Flecha hacia arriba
-                pnl1.Visible = true;
-            }
-            else
-            {
-                string flechaHaciaAbajo = "\u25BC";
-                btnShowPanel1.Text = flechaHaciaAbajo; // Flecha hacia abajo
-                pnl1.Visible = false;
-            }
+            //if (pnl1.Visible)
+            //{
+            //    string flechaHaciaArriba = "\u25B2";
+            //    btnShowPanel1.Text = flechaHaciaArriba; // Flecha hacia arriba
+            //    pnl1.Visible = true;
+            //}
+            //else
+            //{
+            //    string flechaHaciaAbajo = "\u25BC";
+            //    btnShowPanel1.Text = flechaHaciaAbajo; // Flecha hacia abajo
+            //    pnl1.Visible = false;
+            //}
         }
 
         protected void btnShowPanel2_Click(object sender, EventArgs e)
@@ -3049,7 +3262,7 @@ namespace WebItNow_Peacock
                             ddlEstadoProveedor.SelectedValue = Server.HtmlDecode(Convert.ToString(row.Cells[7].Text));
 
                             // Disparar el evento SelectedIndexChanged manualmente
-                            ddlEstadoProveedor_SelectedIndexChanged(ddlEstado, EventArgs.Empty);
+                            ddlEstadoProveedor_SelectedIndexChanged(ddlEstadoProveedor, EventArgs.Empty);
 
                             ddlMunicipioProveedor.SelectedValue = Server.HtmlDecode(Convert.ToString(row.Cells[8].Text));
                             TxtColoniaProveedor.Text = Server.HtmlDecode(Convert.ToString(row.Cells[9].Text));
@@ -3099,8 +3312,8 @@ namespace WebItNow_Peacock
 
         protected void ddlEstado_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string sEstado = ddlEstado.SelectedValue;
-            GetMunicipios(sEstado);
+            //string sEstado = ddlEstado.SelectedValue;
+            //GetMunicipios(sEstado);
         }
 
         protected void ddlMunicipios_SelectedIndexChanged(object sender, EventArgs e)
@@ -3127,6 +3340,17 @@ namespace WebItNow_Peacock
         }
 
         protected void ddlMunicipiosResponsable_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void ddlEstadoAtencion_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string sEstado = ddlEstadoAtencion.SelectedValue;
+            GetMunicipios_Atencion(sEstado);
+        }
+
+        protected void ddlMunicipiosAtencion_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
@@ -3269,6 +3493,7 @@ namespace WebItNow_Peacock
             // habilitar controles Pnl4
             TxtNomResponsable.Enabled = true;
             TxtParentesco.Enabled = true;
+            TxtEdadResponsable.Enabled = true;
             TxtTelResponsable.Enabled = true;
             TxtRFC_Responsable.Enabled = true;
             TxtEmailResponsable.Enabled = true;
@@ -3341,6 +3566,7 @@ namespace WebItNow_Peacock
             // habilitar controles Pnl6
             ddlLineaOcurrencia.Enabled = true;
             ddlEstacionOcurrencia.Enabled = true;
+            TxtRef_Ubicacion.Enabled = true;
 
             btnEditarPnl6.Visible = false;
             btnActualizarPnl6.Visible = true;
@@ -3362,7 +3588,40 @@ namespace WebItNow_Peacock
                 return;
             }
 
-            string sDescripcion = TxtDescServicio.Text;
+            string valorTexto = TxtProvMontoAutorizado.Text.Trim();
+
+            if (string.IsNullOrEmpty(valorTexto))
+            {
+                // Opcional: si quieres validar que no esté vacío
+                LblMessage.Text = "Ingrese un monto autorizado válido";
+                mpeMensaje.Show();
+
+                return; // O muestra mensaje si quieres
+            }
+
+            if (!decimal.TryParse(valorTexto, out decimal monto))
+            {
+                // Opcional: si quieres validar que sea número válido
+                return; // O muestra mensaje si quieres
+            }
+
+            // Contar decimales en el texto original
+            int decimales = 0;
+            int indicePunto = valorTexto.IndexOf('.');
+
+            if (indicePunto >= 0)
+            {
+                decimales = valorTexto.Length - indicePunto - 1;
+            }
+
+            if (decimales > 2)
+            {
+                LblMessage.Text = "monto autorizado, solo se permiten hasta 2 decimales";
+                mpeMensaje.Show();
+                return;
+            }
+
+            // string sDescripcion = TxtDescServicio.Text;
 
             int Envio_Ok = Add_tbProveedor();
 
@@ -3385,6 +3644,11 @@ namespace WebItNow_Peacock
                 TxtTelContacto1.Text = string.Empty;
                 TxtTelContacto2.Text = string.Empty;
                 TxtHoraSolicitud.Text = "00:00";
+                TxtHoraArribo.Text = "00:00";
+                TxtHoraSalida.Text = "00:00";
+                TxtHoraLlegada.Text = "00:00";
+
+                TxtProvMontoAutorizado.Text = string.Empty;
                 TxtNumUnidad.Text = string.Empty;
                 TxtResponsable.Text = string.Empty;
 
@@ -3422,6 +3686,11 @@ namespace WebItNow_Peacock
             TxtTelContacto1.Text = string.Empty;
             TxtTelContacto2.Text = string.Empty;
             TxtHoraSolicitud.Text = "00:00";
+            TxtHoraArribo.Text = "00:00";
+            TxtHoraSalida.Text = "00:00";
+            TxtHoraLlegada.Text = "00:00";
+
+            TxtProvMontoAutorizado.Text = string.Empty;
             TxtNumUnidad.Text = string.Empty;
             TxtResponsable.Text = string.Empty;
 
@@ -3443,6 +3712,11 @@ namespace WebItNow_Peacock
             TxtTelContacto1.ReadOnly = false;
             TxtTelContacto2.ReadOnly = false;
             TxtHoraSolicitud.ReadOnly = false;
+            TxtHoraArribo.ReadOnly = false;
+            TxtHoraSalida.ReadOnly = false;
+            TxtHoraLlegada.ReadOnly = false;
+
+            TxtProvMontoAutorizado.ReadOnly = false;
             TxtNumUnidad.ReadOnly = false;
             TxtResponsable.ReadOnly = false;
 
@@ -3458,6 +3732,11 @@ namespace WebItNow_Peacock
         {
             // habilitar controles Pnl7
             TxtHoraSolicitud.ReadOnly = false;
+            TxtHoraArribo.ReadOnly = false;
+            TxtHoraSalida.ReadOnly = false;
+            TxtHoraLlegada.ReadOnly = false;
+
+            TxtProvMontoAutorizado.ReadOnly = false;
             TxtNumUnidad.ReadOnly = false;
             TxtResponsable.ReadOnly = false;
 
@@ -3468,6 +3747,53 @@ namespace WebItNow_Peacock
 
         protected void btnActualizarPnl7_Click(object sender, EventArgs e)
         {
+
+            if (TxtNomEmpresa.Text == "" || TxtNomEmpresa.Text == null)
+            {
+                LblMessage.Text = "Seleccione el nombre de la empresa";
+                mpeMensaje.Show();
+                return;
+            }
+            else if (TxtEmailEmpresa.Text == "" || TxtEmailEmpresa.Text == null)
+            {
+                LblMessage.Text = "Seleccione el correo electrónico";
+                mpeMensaje.Show();
+                return;
+            }
+
+            string valorTexto = TxtProvMontoAutorizado.Text.Trim();
+
+            if (string.IsNullOrEmpty(valorTexto))
+            {
+                // Opcional: si quieres validar que no esté vacío
+                LblMessage.Text = "Ingrese un monto autorizado válido";
+                mpeMensaje.Show();
+
+                return; // O muestra mensaje si quieres
+            }
+
+            if (!decimal.TryParse(valorTexto, out decimal monto))
+            {
+                // Opcional: si quieres validar que sea número válido
+                return; // O muestra mensaje si quieres
+            }
+
+            // Contar decimales en el texto original
+            int decimales = 0;
+            int indicePunto = valorTexto.IndexOf('.');
+
+            if (indicePunto >= 0)
+            {
+                decimales = valorTexto.Length - indicePunto - 1;
+            }
+
+            if (decimales > 2)
+            {
+                LblMessage.Text = "monto autorizado, solo se permiten hasta 2 decimales";
+                mpeMensaje.Show();
+                return;
+            }
+
             Actualizar_ITM_35();
 
             // habilitar_controles();
@@ -3495,6 +3821,11 @@ namespace WebItNow_Peacock
             TxtTelContacto1.Text = string.Empty;
             TxtTelContacto2.Text = string.Empty;
             TxtHoraSolicitud.Text = "00:00";
+            TxtHoraArribo.Text = "00:00";
+            TxtHoraSalida.Text = "00:00";
+            TxtHoraLlegada.Text = "00:00";
+
+            TxtProvMontoAutorizado.Text = string.Empty;
             TxtNumUnidad.Text = string.Empty;
             TxtResponsable.Text = string.Empty;
 
@@ -3517,6 +3848,11 @@ namespace WebItNow_Peacock
             TxtTelContacto2.ReadOnly = false;
 
             TxtHoraSolicitud.ReadOnly = false;
+            TxtHoraArribo.ReadOnly = false;
+            TxtHoraSalida.ReadOnly = false;
+            TxtHoraLlegada.ReadOnly = false;
+
+            TxtProvMontoAutorizado.ReadOnly = false;
             TxtNumUnidad.ReadOnly = false;
             TxtResponsable.ReadOnly = false;
 
@@ -3545,9 +3881,15 @@ namespace WebItNow_Peacock
                 // Actualizar registro(s) tablas (ITM_35)
                 string strQuery = "UPDATE ITM_35 " +
                                   "   SET Hora_Solicitud = '" + TxtHoraSolicitud.Text.Trim() + "', " +
+                                  "       Hora_Arribo = '" + TxtHoraArribo.Text.Trim() + "', " +
+                                  "       Hora_Salida = '" + TxtHoraSalida.Text.Trim() + "', " +
+                                  "       Hora_Llegada = '" + TxtHoraLlegada.Text.Trim() + "', " +
+                                  "       Monto_Autorizado = " + TxtProvMontoAutorizado.Text.Trim() + ", " +
                                   "       Num_Unidad = '" + TxtNumUnidad.Text.Trim() + "', " +
                                   "       Responsable = '" + TxtResponsable.Text.Trim() + "' " +
-                                  " WHERE Id_Proveedor = " + Id_Proveedor + " ";
+                                  " WHERE Id_Proveedor = " + Id_Proveedor + " " +
+                                  "   AND Referencia = '" + Variables.wRef + "' " +
+                                  "   AND SubReferencia = " + Variables.wSubRef + " ";
 
                 int affectedRows = dbConn.ExecuteNonQuery(strQuery);
 
@@ -3687,26 +4029,30 @@ namespace WebItNow_Peacock
 
             ddlTpoServicio.SelectedValue = Server.HtmlDecode(Convert.ToString(GrdProveedores.Rows[index].Cells[1].Text));
             TxtNomEmpresa.Text = Server.HtmlDecode(Convert.ToString(GrdProveedores.Rows[index].Cells[2].Text));
-            TxtEmailEmpresa.Text = Server.HtmlDecode(Convert.ToString(GrdProveedores.Rows[index].Cells[3].Text));
+            TxtHoraSolicitud.Text = Server.HtmlDecode(Convert.ToString(GrdProveedores.Rows[index].Cells[3].Text));
+            TxtHoraArribo.Text = Server.HtmlDecode(Convert.ToString(GrdProveedores.Rows[index].Cells[4].Text));
+            TxtHoraSalida.Text = Server.HtmlDecode(Convert.ToString(GrdProveedores.Rows[index].Cells[5].Text));
+            TxtHoraLlegada.Text = Server.HtmlDecode(Convert.ToString(GrdProveedores.Rows[index].Cells[6].Text));
+            TxtProvMontoAutorizado.Text = Server.HtmlDecode(Convert.ToString(GrdProveedores.Rows[index].Cells[7].Text));
 
-            TxtHoraSolicitud.Text = Server.HtmlDecode(Convert.ToString(GrdProveedores.Rows[index].Cells[4].Text));
-            TxtNumUnidad.Text = Server.HtmlDecode(Convert.ToString(GrdProveedores.Rows[index].Cells[5].Text));
-            TxtResponsable.Text = Server.HtmlDecode(Convert.ToString(GrdProveedores.Rows[index].Cells[6].Text));
-
-            TxtCalleProveedor.Text = Server.HtmlDecode(Convert.ToString(GrdProveedores.Rows[index].Cells[7].Text));
-            TxtNumExtProveedor.Text = Server.HtmlDecode(Convert.ToString(GrdProveedores.Rows[index].Cells[8].Text));
-            TxtNumIntProveedor.Text = Server.HtmlDecode(Convert.ToString(GrdProveedores.Rows[index].Cells[9].Text));
-            ddlEstadoProveedor.SelectedValue = Server.HtmlDecode(Convert.ToString(GrdProveedores.Rows[index].Cells[10].Text));
+            TxtCalleProveedor.Text = Server.HtmlDecode(Convert.ToString(GrdProveedores.Rows[index].Cells[8].Text));
+            TxtNumExtProveedor.Text = Server.HtmlDecode(Convert.ToString(GrdProveedores.Rows[index].Cells[9].Text));
+            TxtNumIntProveedor.Text = Server.HtmlDecode(Convert.ToString(GrdProveedores.Rows[index].Cells[10].Text));
+            ddlEstadoProveedor.SelectedValue = Server.HtmlDecode(Convert.ToString(GrdProveedores.Rows[index].Cells[11].Text));
 
             // Disparar el evento SelectedIndexChanged manualmente
-            ddlEstadoProveedor_SelectedIndexChanged(ddlEstado, EventArgs.Empty);
+            ddlEstadoProveedor_SelectedIndexChanged(ddlEstadoProveedor, EventArgs.Empty);
 
-            ddlMunicipioProveedor.SelectedValue = Server.HtmlDecode(Convert.ToString(GrdProveedores.Rows[index].Cells[11].Text));
-            TxtColoniaProveedor.Text = Server.HtmlDecode(Convert.ToString(GrdProveedores.Rows[index].Cells[12].Text));
-            TxtCPostalProveedor.Text = Server.HtmlDecode(Convert.ToString(GrdProveedores.Rows[index].Cells[13].Text));
+            ddlMunicipioProveedor.SelectedValue = Server.HtmlDecode(Convert.ToString(GrdProveedores.Rows[index].Cells[12].Text));
+            TxtColoniaProveedor.Text = Server.HtmlDecode(Convert.ToString(GrdProveedores.Rows[index].Cells[13].Text));
+            TxtCPostalProveedor.Text = Server.HtmlDecode(Convert.ToString(GrdProveedores.Rows[index].Cells[14].Text));
 
-            TxtTelContacto1.Text = Server.HtmlDecode(Convert.ToString(GrdProveedores.Rows[index].Cells[14].Text));
-            TxtTelContacto2.Text = Server.HtmlDecode(Convert.ToString(GrdProveedores.Rows[index].Cells[15].Text));
+            TxtTelContacto1.Text = Server.HtmlDecode(Convert.ToString(GrdProveedores.Rows[index].Cells[15].Text));
+            TxtTelContacto2.Text = Server.HtmlDecode(Convert.ToString(GrdProveedores.Rows[index].Cells[16].Text));
+
+            TxtEmailEmpresa.Text = Server.HtmlDecode(Convert.ToString(GrdProveedores.Rows[index].Cells[17].Text));
+            TxtNumUnidad.Text = Server.HtmlDecode(Convert.ToString(GrdProveedores.Rows[index].Cells[18].Text));
+            TxtResponsable.Text = Server.HtmlDecode(Convert.ToString(GrdProveedores.Rows[index].Cells[19].Text));
 
             TxtNomEmpresa.ReadOnly = true;
             TxtCalleProveedor.ReadOnly = true;
@@ -3723,6 +4069,11 @@ namespace WebItNow_Peacock
             TxtTelContacto1.ReadOnly = true;
             TxtTelContacto2.ReadOnly = true;
             TxtHoraSolicitud.ReadOnly = true;
+            TxtHoraArribo.ReadOnly = true;
+            TxtHoraSalida.ReadOnly = true;
+            TxtHoraLlegada.ReadOnly = true;
+
+            TxtProvMontoAutorizado.ReadOnly = true;
             TxtNumUnidad.ReadOnly = true;
             TxtResponsable.ReadOnly = true;
 
@@ -3811,6 +4162,39 @@ namespace WebItNow_Peacock
 
         protected void btnActualizarPnl13_Click(object sender, EventArgs e)
         {
+            string valorTexto = TxtMontoAutorizado.Text.Trim();
+
+            if (string.IsNullOrEmpty(valorTexto))
+            {
+                // Opcional: si quieres validar que no esté vacío
+                LblMessage.Text = "Ingrese un monto autorizado válido";
+                mpeMensaje.Show();
+
+                return; // O muestra mensaje si quieres
+            }
+
+            if (!decimal.TryParse(valorTexto, out decimal monto))
+            {
+                // Opcional: si quieres validar que sea número válido
+                return; // O muestra mensaje si quieres
+            }
+
+            // Contar decimales en el texto original
+            int decimales = 0;
+            int indicePunto = valorTexto.IndexOf('.');
+
+            if (indicePunto >= 0)
+            {
+                decimales = valorTexto.Length - indicePunto - 1;
+            }
+
+            if (decimales > 2)
+            {
+                LblMessage.Text = "monto autorizado, solo se permiten hasta 2 decimales";
+                mpeMensaje.Show();
+                return;
+            }
+
             Insertar_ITM_73_4();
 
             inhabilitar(this.Controls);
@@ -3834,11 +4218,35 @@ namespace WebItNow_Peacock
             ddlZonas.Enabled = true;
             ddlHospitales.Enabled = true;
             ddlTpoAtencion.Enabled = true;
+            
+            TxtCorreoElectronico.Enabled = true;
+            TxtTelAtencionContacto1.Enabled = true;
+            TxtTelAtencionContacto2.Enabled = true;
+
             TxtFechaIngreso.Enabled = true;
+            TxtHoraIngreso.Enabled = true;
+            TxtFechaRecepcionNM.Enabled = true;
+            TxtHoraRecepcionNM.Enabled = true;
+
+            TxtFechaAlta.Enabled = true;
+            TxtHoraAlta.Enabled = true;
+            TxtFechaEnvio.Enabled = true;
+            TxtHoraEnvio.Enabled = true;
+
             TxtFechaVigencia.Enabled = true;
             TxtMontoAutorizado.Enabled = true;
+
+            TxtCalleAtencion.Enabled = true;
+            TxtNumExtAtencion.Enabled = true;
+            TxtNumIntAtencion.Enabled = true;
+            ddlEstadoAtencion.Enabled = true;
+            ddlMunicipiosAtencion.Enabled = true;
+            TxtColoniaAtencion.Enabled = true;
+            TxtCPostalAtencion.Enabled = true;
+
             TxtDiagnostico.Enabled = true;
             TxtObservaciones_DA.Enabled = true;
+            TxtPlanTratamiento.Enabled = true;
 
             btnEditarPnl13.Visible = false;
             btnActualizarPnl13.Visible = true;
@@ -4011,6 +4419,18 @@ namespace WebItNow_Peacock
                 mpeMensaje.Show();
                 return;
             }
+            else if (TxtFechaServicio.Text == "" || TxtFechaServicio.Text == null)
+            {
+                LblMessage.Text = "Capturar Fecha Servicio";
+                mpeMensaje.Show();
+                return;
+            }
+            else if (TxtHoraServicio.Text == "" || TxtHoraServicio.Text == null)
+            {
+                LblMessage.Text = "Capturar Hora Servicio";
+                mpeMensaje.Show();
+                return;
+            }
             else if (TxtDescServicio.Text == "" || TxtDescServicio.Text == null)
             {
                 LblMessage.Text = "Capturar Descripción Servicio";
@@ -4018,9 +4438,11 @@ namespace WebItNow_Peacock
                 return;
             }
 
+            string sFechaServicio = TxtFechaServicio.Text;
+            string sHoraServicio = TxtHoraServicio.Text;
             string sDescripcion = TxtDescServicio.Text;
 
-            int Envio_Ok = Add_tbServicio(Convert.ToInt32(ddlServicios.SelectedValue), sDescripcion);
+            int Envio_Ok = Add_tbServicio(Convert.ToInt32(ddlServicios.SelectedValue), sFechaServicio, sHoraServicio, sDescripcion);
 
             if (Envio_Ok == 0)
             {
@@ -4028,6 +4450,8 @@ namespace WebItNow_Peacock
                 // inicializar controles
                 ddlServicios.SelectedValue = "0";
                 TxtDescServicio.Text = string.Empty;
+                TxtFechaServicio.Text = string.Empty;
+                TxtHoraServicio.Text = "00:00";
 
                 GetDatos_Servicios();
             }
@@ -4043,9 +4467,13 @@ namespace WebItNow_Peacock
 
             // Inicializar Controles
             ddlServicios.SelectedValue = "0";
+            TxtFechaServicio.Text = string.Empty;
+            TxtHoraServicio.Text = "00:00";
             TxtDescServicio.Text = string.Empty;
 
             ddlServicios.Enabled = true;
+            TxtFechaServicio.ReadOnly = false;
+            TxtHoraServicio.ReadOnly = false;
             TxtDescServicio.ReadOnly = false;
 
             btnEditarPnl14.Visible = true;
@@ -4059,6 +4487,8 @@ namespace WebItNow_Peacock
         protected void btnEditarPnl14_Click(object sender, EventArgs e)
         {
             // habilitar controles Pnl14
+            TxtFechaServicio.ReadOnly = false;
+            TxtHoraServicio.ReadOnly = false;
             TxtDescServicio.ReadOnly = false;
 
             btnEditarPnl14.Visible = false;
@@ -4068,6 +4498,25 @@ namespace WebItNow_Peacock
 
         protected void btnActualizarPnl14_Click(object sender, EventArgs e)
         {
+            if (TxtFechaServicio.Text.Trim() == "" || TxtFechaServicio.Text == null)
+            {
+                LblMessage.Text = "Capturar Fecha Servicio";
+                mpeMensaje.Show();
+                return;
+            }
+            if (TxtHoraServicio.Text == "" || TxtHoraServicio.Text == null)
+            {
+                LblMessage.Text = "Capturar Hora Servicio";
+                mpeMensaje.Show();
+                return;
+            }
+            else if (TxtDescServicio.Text == "" || TxtDescServicio.Text == null)
+            {
+                LblMessage.Text = "Capturar Descripción Servicio";
+                mpeMensaje.Show();
+                return;
+            }
+
             Actualizar_ITM_07();
 
             // habilitar_controles();
@@ -4077,7 +4526,11 @@ namespace WebItNow_Peacock
             // ddlConclusion.Enabled = true;
 
             // inicializar controles.
+            ddlServicios.Enabled = true;
+
             ddlServicios.SelectedValue = "0";
+            TxtFechaServicio.Text = string.Empty;
+            TxtHoraServicio.Text = "00:00";
             TxtDescServicio.Text = string.Empty;
 
             btnEditarPnl14.Enabled = false;
@@ -4100,9 +4553,13 @@ namespace WebItNow_Peacock
             Variables.wRenglon = row.RowIndex;
 
             ddlServicios.SelectedValue = Server.HtmlDecode(Convert.ToString(GrdServicios.Rows[index].Cells[1].Text));
-            TxtDescServicio.Text = Server.HtmlDecode(Convert.ToString(GrdServicios.Rows[index].Cells[3].Text));
+            TxtFechaServicio.Text = Server.HtmlDecode(Convert.ToString(GrdServicios.Rows[index].Cells[3].Text));
+            TxtHoraServicio.Text = Server.HtmlDecode(Convert.ToString(GrdServicios.Rows[index].Cells[4].Text));
+            TxtDescServicio.Text = Server.HtmlDecode(Convert.ToString(GrdServicios.Rows[index].Cells[5].Text));
 
             ddlServicios.Enabled = false;
+            TxtFechaServicio.ReadOnly = true;
+            TxtHoraServicio.ReadOnly = true;
             TxtDescServicio.ReadOnly = true;
 
             BtnAnularPnl14.Visible = true;
@@ -4145,8 +4602,12 @@ namespace WebItNow_Peacock
 
                 // Actualizar registro(s) tablas (ITM_07)
                 string strQuery = "UPDATE ITM_07 " +
-                                  "   SET Desc_Servicio = '" + TxtDescServicio.Text.Trim() + "' " +
-                                  " WHERE IdConsecutivo = " + IdConsecutivo + " ";
+                                  "   SET FechaServicio = '" + TxtFechaServicio.Text.Trim() + "'," +
+                                  "   Hora_Servicio = '" + TxtHoraServicio.Text.Trim() + "', " +
+                                  "   Desc_Servicio = '" + TxtDescServicio.Text.Trim() + "' " +
+                                  " WHERE Referencia = '" + Variables.wRef + "' " +
+                                  "   AND SubReferencia = " + Variables.wSubRef + " " +
+                                  "   AND IdConsecutivo = " + IdConsecutivo + " ";
 
                 int affectedRows = dbConn.ExecuteNonQuery(strQuery);
 
@@ -4182,7 +4643,9 @@ namespace WebItNow_Peacock
 
                 // Eliminar registro(s) tablas (ITM_07)
                 string strQuery = "DELETE FROM ITM_07 " +
-                                  " WHERE IdConsecutivo = " + IdConsecutivo + " ";
+                                  " WHERE Referencia = '" + Variables.wRef + "' " +
+                                  "   AND SubReferencia = " + Variables.wSubRef + " " +
+                                  "   AND IdConsecutivo = " + IdConsecutivo + " ";
 
                                   //"   AND Referencia = '" + sReferencia + "' " +
                                   //"   AND SubReferencia = " + iSubReferencia + " ";
@@ -4221,14 +4684,15 @@ namespace WebItNow_Peacock
 
                 string strQuery = $"INSERT INTO ITM_35 (Id_Proveedor, Tpo_Servicio, Referencia, SubReferencia, " +
                                   $" Nom_Empresa, Email_Empresa, Calle, Num_Exterior, Num_Interior, Estado, Delegacion, " +
-                                  $" Colonia, Codigo_Postal, Tel_Contacto_1, Tel_Contacto_2, Hora_Solicitud, Num_Unidad, " +
+                                  $" Colonia, Codigo_Postal, Tel_Contacto_1, Tel_Contacto_2, Hora_Solicitud, " +
+                                  $" Hora_Arribo, Hora_Salida, Hora_Llegada, Monto_Autorizado, Num_Unidad, " +
                                   $" Responsable, Id_Usuario, IdStatus) " +
                                   $"VALUES (" + Id_Proveedor + ", " + iTpo_Servicio + ", '" + Referencia + "', '" + SubReferencia + "', " +
                                   "'" + TxtNomEmpresa.Text.Trim() + "', '" + TxtEmailEmpresa.Text.Trim() + "', '" + TxtCalleProveedor.Text.Trim() + "', '" + TxtNumExtProveedor.Text.Trim() + "', " +
                                   "'" + TxtNumIntProveedor.Text.Trim() + "', '" + ddlEstadoProveedor.SelectedValue + "', '" + ddlMunicipioProveedor.SelectedValue + "', '" + TxtColoniaProveedor.Text.Trim() + "', " +
                                   "'" + TxtCPostalProveedor.Text.Trim() + "', '" + TxtTelContacto1.Text.Trim() + "', '" + TxtTelContacto2.Text.Trim() + "', " +
-                                  "'" + TxtHoraSolicitud.Text.Trim() + "', '" + TxtNumUnidad.Text.Trim() + "'," +
-                                  "'" + TxtResponsable.Text.Trim() + "', '" + Id_Usuario + "', 1)" + "\n \n";
+                                  "'" + TxtHoraSolicitud.Text.Trim() + "', '" + TxtHoraArribo.Text.Trim() + "', '" + TxtHoraSalida.Text.Trim() + "', '" + TxtHoraLlegada.Text.Trim() + "', " +
+                                  "" + TxtProvMontoAutorizado.Text.Trim() + ", '" + TxtNumUnidad.Text.Trim() + "', '" + TxtResponsable.Text.Trim() + "', '" + Id_Usuario + "', 1)" + "\n \n";
 
                 int affectedRows = dbConn.ExecuteNonQuery(strQuery);
 
@@ -4423,7 +4887,7 @@ namespace WebItNow_Peacock
 
         }
 
-        public int Add_tbServicio(int iIdServicio, string pDescripcion)
+        public int Add_tbServicio(int iIdServicio, string pFechaServicio, string pHoraServicio, string pDescripcion)
         {
             try
             {
@@ -4432,8 +4896,9 @@ namespace WebItNow_Peacock
                 ConexionBD_MySQL dbConn = new ConexionBD_MySQL(Variables.wUserName, Variables.wPassword);
                 dbConn.Open();
 
-                string strQuery = $"INSERT INTO ITM_07 (IdConsecutivo, IdServicio, Desc_Servicio, IdStatus) " +
-                                  $"VALUES (" + iConsecutivo + ", " + iIdServicio + ", '" + pDescripcion + "', 1)" + "\n \n";
+                string strQuery = $"INSERT INTO ITM_07 (IdConsecutivo, Referencia, SubReferencia, IdServicio, FechaServicio, Hora_Servicio, Desc_Servicio, IdStatus) " +
+                                  $"VALUES (" + iConsecutivo + ", '" + Variables.wRef + "', " + Variables.wSubRef + ", " + iIdServicio + ", " +
+                                  "'" + pFechaServicio + "', '" + pHoraServicio + "', '" + pDescripcion + "', 1)" + "\n \n";
 
                 int affectedRows = dbConn.ExecuteNonQuery(strQuery);
 
@@ -4565,7 +5030,7 @@ namespace WebItNow_Peacock
                 ConexionBD_MySQL dbConn = new ConexionBD_MySQL(Variables.wUserName, Variables.wPassword);
                 dbConn.Open();
 
-                // Consulta a las tablas : Estado de Documento (Expediente) = ITM_07
+                // Consulta a las tablas : Estado de Documento (Expediente) = ITM_36
                 string strQuery = "SELECT Id_Estudio, Referencia, SubReferencia, Desc_Estudio " +
                                   "  FROM ITM_36 " +
                                   " WHERE Referencia = '" + Variables.wRef + "' " +
@@ -4604,9 +5069,11 @@ namespace WebItNow_Peacock
                 dbConn.Open();
 
                 // Consulta a las tablas : Estado de Documento (Expediente) = ITM_07
-                string strQuery = "SELECT IdConsecutivo, t1.IdServicio, t0.Descripcion, Desc_Servicio " +
+                string strQuery = "SELECT IdConsecutivo, t1.IdServicio, t1.FechaServicio, t1.Hora_Servicio, t0.Descripcion, Desc_Servicio " +
                                   "  FROM ITM_06 t0, ITM_07 t1 " +
-                                  " WHERE t0.IdServicio = t1.IdServicio " +
+                                  " WHERE Referencia = '" + Variables.wRef + "' " +
+                                  "   AND SubReferencia = " + Variables.wSubRef + " " +
+                                  "   AND t0.IdServicio = t1.IdServicio " +
                                   "   AND t1.IdStatus = 1 ";
 
                 DataTable dt = dbConn.ExecuteQuery(strQuery);
@@ -4643,9 +5110,11 @@ namespace WebItNow_Peacock
                 // Consulta a las tablas : Datos de Proveedor = ITM_35
                 string strQuery = "SELECT Id_Proveedor, Tpo_Servicio, Referencia, SubReferencia, Nom_Empresa," +
                                   "       Email_Empresa, Calle, Num_Exterior, Num_Interior, Estado, Delegacion, Colonia, Codigo_Postal, " +
-                                  "       Tel_Contacto_1, Tel_Contacto_2, Hora_Solicitud, Num_Unidad, Responsable " +
+                                  "       Tel_Contacto_1, Tel_Contacto_2, Hora_Solicitud, Hora_Arribo, Hora_Salida, Hora_Llegada, Monto_Autorizado, Num_Unidad, Responsable " +
                                   "  FROM ITM_35 " +
-                                  " WHERE IdStatus = 1 ";
+                                  " WHERE Referencia = '" + Variables.wRef + "' " +
+                                  "   AND SubReferencia = " + Variables.wSubRef + " " +
+                                  "   AND IdStatus = 1 ";
 
                 DataTable dt = dbConn.ExecuteQuery(strQuery);
 
@@ -4682,7 +5151,9 @@ namespace WebItNow_Peacock
                 string strQuery = "SELECT t1.Id_Consecutivo, t1.Id_Institucion, t1.Id_Paquete_Medico, t0.Descripcion, t1.Referencia, t1.SubReferencia, t1.ID_Paquete," +
                                   "       t1.Monto_Minimo, t1.Monto_Maximo, t1.Monto_Utilizado, t1.Monto_Restante, t1.Monto_Superado, t1.Observaciones " +
                                   "  FROM ITM_13 t0, ITM_38 t1 " +
-                                  " WHERE t1.Id_Institucion = t0.Id_Institucion " +
+                                  " WHERE t1.Referencia = '" + Variables.wRef + "' " +
+                                  "   AND t1.SubReferencia = " + Variables.wSubRef + " " +
+                                  "   AND t1.Id_Institucion = t0.Id_Institucion " +
                                   "   AND t1.IdStatus = 1 ";
 
                 DataTable dt = dbConn.ExecuteQuery(strQuery);
@@ -4716,6 +5187,8 @@ namespace WebItNow_Peacock
                 {
                     Dictionary<string, TextBox> fechas = new Dictionary<string, TextBox>
                     {
+                        { "Fecha Inicio Vigencia", TxtFechaIniVigencia },
+                        { "Fecha Final Vigencia", TxtFechaFinVigencia },
                         { "Fecha de Ocurrencia", TxtFechaOcurrencia },
                         { "Fecha de Nacimiento", TxtFecNacimiento }
                     };
@@ -4757,6 +5230,8 @@ namespace WebItNow_Peacock
                 {
                     Dictionary<string, TextBox> fechas = new Dictionary<string, TextBox>
                     {
+                        { "Fecha Inicio Vigencia", TxtFechaIniVigencia },
+                        { "Fecha Final Vigencia", TxtFechaFinVigencia },
                         { "Fecha de Ocurrencia", TxtFechaOcurrencia },
                         { "Fecha de Nacimiento", TxtFecNacimiento }
                     };
@@ -4799,6 +5274,8 @@ namespace WebItNow_Peacock
                 {
                     Dictionary<string, TextBox> fechas = new Dictionary<string, TextBox>
                     {
+                        { "Fecha Inicio Vigencia", TxtFechaIniVigencia },
+                        { "Fecha Final Vigencia", TxtFechaFinVigencia },
                         { "Fecha de Ocurrencia", TxtFechaOcurrencia },
                         { "Fecha de Nacimiento", TxtFecNacimiento }
                     };
@@ -4841,6 +5318,8 @@ namespace WebItNow_Peacock
                 {
                     Dictionary<string, TextBox> fechas = new Dictionary<string, TextBox>
                     {
+                        { "Fecha Inicio Vigencia", TxtFechaIniVigencia },
+                        { "Fecha Final Vigencia", TxtFechaFinVigencia },
                         { "Fecha de Ocurrencia", TxtFechaOcurrencia },
                         { "Fecha de Nacimiento", TxtFecNacimiento }
                     };
@@ -4883,6 +5362,8 @@ namespace WebItNow_Peacock
                 {
                     Dictionary<string, TextBox> fechas = new Dictionary<string, TextBox>
                     {
+                        { "Fecha Inicio Vigencia", TxtFechaIniVigencia },
+                        { "Fecha Final Vigencia", TxtFechaFinVigencia },
                         { "Fecha de Ocurrencia", TxtFechaOcurrencia },
                         { "Fecha de Nacimiento", TxtFecNacimiento }
                     };
@@ -4925,6 +5406,8 @@ namespace WebItNow_Peacock
                 {
                     Dictionary<string, TextBox> fechas = new Dictionary<string, TextBox>
                     {
+                        { "Fecha Inicio Vigencia", TxtFechaIniVigencia },
+                        { "Fecha Final Vigencia", TxtFechaFinVigencia },
                         { "Fecha de Ocurrencia", TxtFechaOcurrencia },
                         { "Fecha de Nacimiento", TxtFecNacimiento }
                     };
@@ -4967,6 +5450,8 @@ namespace WebItNow_Peacock
                 {
                     Dictionary<string, TextBox> fechas = new Dictionary<string, TextBox>
                     {
+                        { "Fecha Inicio Vigencia", TxtFechaIniVigencia },
+                        { "Fecha Final Vigencia", TxtFechaFinVigencia },
                         { "Fecha de Ocurrencia", TxtFechaOcurrencia },
                         { "Fecha de Nacimiento", TxtFecNacimiento }
                     };
@@ -5009,6 +5494,8 @@ namespace WebItNow_Peacock
                 {
                     Dictionary<string, TextBox> fechas = new Dictionary<string, TextBox>
                     {
+                        { "Fecha Inicio Vigencia", TxtFechaIniVigencia },
+                        { "Fecha Final Vigencia", TxtFechaFinVigencia },
                         { "Fecha de Ocurrencia", TxtFechaOcurrencia },
                         { "Fecha de Nacimiento", TxtFecNacimiento }
                     };
@@ -5051,6 +5538,8 @@ namespace WebItNow_Peacock
                 {
                     Dictionary<string, TextBox> fechas = new Dictionary<string, TextBox>
                     {
+                        { "Fecha Inicio Vigencia", TxtFechaIniVigencia },
+                        { "Fecha Final Vigencia", TxtFechaFinVigencia },
                         { "Fecha de Ocurrencia", TxtFechaOcurrencia },
                         { "Fecha de Nacimiento", TxtFecNacimiento }
                     };
@@ -5113,11 +5602,13 @@ namespace WebItNow_Peacock
                 string abrev_Colonia = "Colonia";
                 string abrev_CodigoP = "C.P.";
 
-                string Dom_Asegurado = TxtCalle.Text.Trim() + " " + TxtNumExterior.Text.Trim() + " " + TxtNumInterior.Text.Trim() + ", " + abrev_Colonia + " " + TxtColonia.Text.Trim()
-                                      + ", " + ddlMunicipios.SelectedItem + ", " + ddlEstado.SelectedItem + ", " + abrev_CodigoP + " " + TxtCodigoPostal.Text.Trim();
+                //string Dom_Asegurado = TxtCalle.Text.Trim() + " " + TxtNumExterior.Text.Trim() + " " + TxtNumInterior.Text.Trim() + ", " + abrev_Colonia + " " + TxtColonia.Text.Trim()
+                //                      + ", " + ddlMunicipios.SelectedItem + ", " + ddlEstado.SelectedItem + ", " + abrev_CodigoP + " " + TxtCodigoPostal.Text.Trim();
 
-                string Dom_Ocurrencia = TxtCalle.Text.Trim() + " " + TxtNumExterior.Text.Trim() + " " + TxtNumInterior.Text.Trim() + ", " + abrev_Colonia + " " + TxtColonia.Text.Trim()
-                                      + ", " + ddlMunicipios.SelectedItem + ", " + ddlEstado.SelectedItem + ", " + abrev_CodigoP + " " + TxtCodigoPostal.Text.Trim();
+                //string Dom_Ocurrencia = TxtCalle.Text.Trim() + " " + TxtNumExterior.Text.Trim() + " " + TxtNumInterior.Text.Trim() + ", " + abrev_Colonia + " " + TxtColonia.Text.Trim()
+                //                      + ", " + ddlMunicipios.SelectedItem + ", " + ddlEstado.SelectedItem + ", " + abrev_CodigoP + " " + TxtCodigoPostal.Text.Trim();
+
+                string Dom_Ocurrencia = string.Empty;
 
                 string Dom_Lesionado = TxtCalleLesionado.Text.Trim() + " " + TxtNumExtLesionado.Text.Trim() + " " + TxtNumIntLesionado.Text.Trim() + ", " + abrev_Colonia + " " + TxtColoniaLesionado.Text.Trim()
                                       + ", " + ddlMunicipiosLesionado.SelectedItem + ", " + ddlEstadoLesionado.SelectedItem + ", " + abrev_CodigoP + " " + TxtCPostalLesionado.Text.Trim();
@@ -5166,7 +5657,7 @@ namespace WebItNow_Peacock
 
                 // Obtener Proveedores
                 // Iterar sobre las filas del GridView
-                string Nom_Empresa_1 = string.Empty, Direccion_1 = string.Empty, Observaciones_1 = string.Empty;
+                string Nom_Empresa_1 = string.Empty, Direccion_1 = string.Empty, Observaciones_1 = string.Empty, Monto_Proveedor_1 = string.Empty, Monto_Proveedor_Letras_1 = string.Empty;
                 string Hora_Solicitud_1 = string.Empty, Num_Unidad_1 = string.Empty, Responsable_Proveedor_1 = string.Empty;
 
                 string Nom_Empresa_2 = string.Empty, Direccion_2 = string.Empty, Observaciones_2 = string.Empty;
@@ -5179,14 +5670,28 @@ namespace WebItNow_Peacock
 
                     // Recuperar valores de las celdas
                     string Nom_Empresa = Server.HtmlDecode(Convert.ToString(row.Cells[2].Text));
+                    string Hora_Solicitud = Server.HtmlDecode(Convert.ToString(row.Cells[3].Text));
+                    string Monto_Proveedor = Server.HtmlDecode(Convert.ToString(row.Cells[7].Text));
 
-                    string Direccion = Server.HtmlDecode(Convert.ToString(row.Cells[7].Text)) + " " + Server.HtmlDecode(Convert.ToString(row.Cells[8].Text)) + 
-                        " " + Server.HtmlDecode(Convert.ToString(row.Cells[9].Text)) + "," + abrev_Colonia + " " + Server.HtmlDecode(Convert.ToString(row.Cells[12].Text))
-                        + ", " + Server.HtmlDecode(Convert.ToString(row.Cells[11].Text)) + ", " + Server.HtmlDecode(Convert.ToString(row.Cells[10].Text)) + ", " + abrev_CodigoP + " " + Server.HtmlDecode(Convert.ToString(row.Cells[13].Text));          // Direccion
+                    // Quitar símbolo de moneda y comas, si vienen
+                    Monto_Proveedor = Monto_Proveedor.Replace("$", "").Replace(",", "").Trim();
 
-                    string Hora_Solicitud = Server.HtmlDecode(Convert.ToString(row.Cells[4].Text));
-                    string Num_Unidad = Server.HtmlDecode(Convert.ToString(row.Cells[5].Text));
-                    string Responsable_Proveedor = Server.HtmlDecode(Convert.ToString(row.Cells[6].Text));
+                    // Convertir a decimal
+                    decimal importe;
+                    string Monto_Proveedor_Letras = string.Empty;
+
+                    if (decimal.TryParse(Monto_Proveedor, out importe))
+                    {
+                        Monto_Proveedor_Letras = NumeroALetrasConFraccionMN(importe);
+                    }
+
+                    string Direccion = Server.HtmlDecode(Convert.ToString(row.Cells[8].Text)) + " " + Server.HtmlDecode(Convert.ToString(row.Cells[9].Text)) + 
+                        " " + Server.HtmlDecode(Convert.ToString(row.Cells[10].Text)) + "," + abrev_Colonia + " " + Server.HtmlDecode(Convert.ToString(row.Cells[13].Text))
+                        + ", " + Server.HtmlDecode(Convert.ToString(row.Cells[12].Text)) + ", " + Server.HtmlDecode(Convert.ToString(row.Cells[11].Text)) + ", " + abrev_CodigoP + " " + Server.HtmlDecode(Convert.ToString(row.Cells[14].Text));          // Direccion
+
+                    string Num_Unidad = Server.HtmlDecode(Convert.ToString(row.Cells[18].Text));
+                    string Responsable_Proveedor = Server.HtmlDecode(Convert.ToString(row.Cells[19].Text));
+
 
                     string Observaciones = string.Empty;
 
@@ -5196,6 +5701,8 @@ namespace WebItNow_Peacock
                         case 0:
                             Nom_Empresa_1 = Nom_Empresa;
                             Direccion_1 = Direccion;
+                            Monto_Proveedor_1 = Monto_Proveedor;
+                            Monto_Proveedor_Letras_1 = Monto_Proveedor_Letras;
 
                             Responsable_Proveedor_1 = Responsable_Proveedor;
                             Hora_Solicitud_1 = Hora_Solicitud;
@@ -5375,6 +5882,9 @@ namespace WebItNow_Peacock
                     ReplaceText(body, "Fec_Mes", fecOcurrencia.Month.ToString("00"));
                     ReplaceText(body, "Fec_Año", fecOcurrencia.Year.ToString());
 
+                    ReplaceText(body, "Fec_IniVigencia", TxtFechaIniVigencia.Text);    // en dd/MM/yyyy
+                    ReplaceText(body, "Fec_FinVigencia", TxtFechaFinVigencia.Text);    // en dd/MM/yyyy
+
                     ReplaceText(body, "Fec_Ocurrencia", FechaOcurrencia);               // en letras
                     ReplaceText(body, "Fecha_Ocurrencia", TxtFechaOcurrencia.Text);     // en dd/MM/yyyy
                     ReplaceText(body, "Hora_Ocurrencia", TxtHoraOcurrencia.Text);
@@ -5451,17 +5961,31 @@ namespace WebItNow_Peacock
 
                     ReplaceText(body, "Nom_Responsable", TxtNomResponsable.Text);
                     ReplaceText(body, "Parentesco_Responsable", TxtParentesco.Text);
-                    ReplaceText(body, "Edad_Responsable", string.Empty);
+                 // ReplaceText(body, "Edad_Responsable", TxtEdadResponsable.Text);
+                    ReplaceText(body, "Edad_Parentesco", TxtEdadResponsable.Text);
                     ReplaceText(body, "Tel_Responsable", TxtTelResponsable.Text);
                     ReplaceText(body, "Email_Responsable", TxtEmailResponsable.Text);
                     ReplaceText(body, "RFC_Responsable", TxtRFC_Responsable.Text);
                     ReplaceText(body, "Domicilio_Responsable", Dom_Responsable);
 
                     ReplaceText(body, "Monto_Autorizado", TxtMontoAutorizado.Text);
+
+                    // Quitar símbolo de moneda y comas, si vienen
+                    string Monto_Autorizado = TxtMontoAutorizado.Text.Replace("$", "").Replace(",", "").Trim();
+
+                    // Convertir a decimal
+                    decimal importe;
+                    string Monto_Autorizado_Letras = string.Empty;
+
+                    if (decimal.TryParse(Monto_Autorizado, out importe))
+                    {
+                        Monto_Autorizado_Letras = NumeroALetrasConFraccionMN(importe);
+                    }
+
+                    ReplaceText(body, "Monto_Letras_Autorizado", Monto_Autorizado_Letras);
+
                     ReplaceText(body, "Ate_Diagnostico", TxtDiagnostico.Text);
-
                     ReplaceText(body, "Desc_Lesiones", TxtDescLesiones.Text);
-
                     ReplaceText(body, "Tratamiento_Paquete", string.Empty);
 
                     // SOLICITUD DE SERVICIO (Tratamiento/Paquete)
@@ -5486,6 +6010,8 @@ namespace WebItNow_Peacock
                     ReplaceText(body, "Responsable_Proveedor", Responsable_Proveedor_1);
                     ReplaceText(body, "Hora_Solicitud", Hora_Solicitud_1);
                     ReplaceText(body, "Num_Unidad", Num_Unidad_1);
+                    ReplaceText(body, "Monto_Proveedor", Monto_Proveedor_1);
+                    ReplaceText(body, "Monto_Letras_Proveedor", Monto_Proveedor_Letras_1);
 
                     ReplaceText(body, "Nom_Empresa_2", string.IsNullOrWhiteSpace(Nom_Empresa_2) ? "\u00A0" : Nom_Empresa_2);
                     ReplaceText(body, "Direccion_2", Direccion_2);
@@ -5531,6 +6057,73 @@ namespace WebItNow_Peacock
             }
         }
 
+        public static string NumeroALetrasConFraccionMN(decimal numero)
+        {
+            string letras = ConvertirNumero((int)Math.Floor(numero)).Trim();
+            int centavos = (int)Math.Round((numero - Math.Floor(numero)) * 100);
+
+            return $"{letras} PESOS {centavos:D2}/100 M.N.";
+        }
+
+        private static string ConvertirNumero(int numero)
+        {
+            string[] unidades = { "", "UNO", "DOS", "TRES", "CUATRO", "CINCO", "SEIS", "SIETE", "OCHO", "NUEVE" };
+            string[] decenas = { "", "DIEZ", "VEINTE", "TREINTA", "CUARENTA", "CINCUENTA", "SESENTA", "SETENTA", "OCHENTA", "NOVENTA" };
+            string[] centenas = { "", "CIENTO", "DOSCIENTOS", "TRESCIENTOS", "CUATROCIENTOS", "QUINIENTOS", "SEISCIENTOS", "SETECIENTOS", "OCHOCIENTOS", "NOVECIENTOS" };
+
+            if (numero == 0)
+                return "CERO";
+
+            if (numero < 10)
+                return unidades[numero];
+
+            if (numero < 20)
+            {
+                switch (numero)
+                {
+                    case 10: return "DIEZ";
+                    case 11: return "ONCE";
+                    case 12: return "DOCE";
+                    case 13: return "TRECE";
+                    case 14: return "CATORCE";
+                    case 15: return "QUINCE";
+                    default: return "DIECI" + unidades[numero - 10];
+                }
+            }
+
+            if (numero < 30)
+            {
+                if (numero == 20) return "VEINTE";
+                return "VEINTI" + unidades[numero - 20];
+            }
+
+            if (numero < 100)
+            {
+                int decena = numero / 10;
+                int unidad = numero % 10;
+                return decenas[decena] + (unidad > 0 ? " Y " + unidades[unidad] : "");
+            }
+
+            if (numero < 1000)
+            {
+                int centena = numero / 100;
+                int resto = numero % 100;
+                if (numero == 100) return "CIEN";
+                return centenas[centena] + (resto > 0 ? " " + ConvertirNumero(resto) : "");
+            }
+
+            if (numero < 1000000)
+            {
+                int miles = numero / 1000;
+                int resto = numero % 1000;
+                string milesTexto = miles == 1 ? "MIL" : ConvertirNumero(miles) + " MIL";
+                return milesTexto + (resto > 0 ? " " + ConvertirNumero(resto) : "");
+            }
+
+            return "";
+        }
+
+
         protected void ddlServicios_SelectedIndexChanged(object sender, EventArgs e)
         {
 
@@ -5563,11 +6156,18 @@ namespace WebItNow_Peacock
             ddlTpoServicio.Enabled = true;
             BtnProveedor.Enabled = true;
             TxtHoraSolicitud.Enabled = true;
+            TxtHoraArribo.Enabled = true;
+            TxtHoraSalida.Enabled = true;
+            TxtHoraLlegada.Enabled = true;
+
+            TxtProvMontoAutorizado.Enabled = true;
             TxtNumUnidad.Enabled = true;
             TxtResponsable.Enabled = true;
 
             //Servicio Autorizado
             ddlServicios.Enabled = true;
+            TxtFechaServicio.Enabled = true;
+            TxtHoraServicio.Enabled = true;
             TxtDescServicio.Enabled = true;
 
             // Paquetes Médicos
@@ -5586,8 +6186,12 @@ namespace WebItNow_Peacock
             ddlServicios.SelectedValue = "0";
 
             ddlServicios.Enabled = true;
+            TxtFechaServicio.Enabled = true;
+            TxtHoraServicio.Enabled = true;
             TxtDescServicio.Enabled = true;
 
+            TxtFechaServicio.Text = string.Empty;
+            TxtHoraServicio.Text = "00:00";
             TxtDescServicio.Text = string.Empty;
 
             btnEditarPnl14.Enabled = false;
@@ -5599,6 +6203,18 @@ namespace WebItNow_Peacock
 
             TxtHoraSolicitud.Enabled = true;
             TxtHoraSolicitud.Text = "00:00";
+
+            TxtHoraArribo.Enabled = true;
+            TxtHoraArribo.Text = "00:00";
+
+            TxtHoraSalida.Enabled = true;
+            TxtHoraSalida.Text = "00:00";
+
+            TxtHoraLlegada.Enabled = true;
+            TxtHoraLlegada.Text = "00:00";
+
+            TxtProvMontoAutorizado.Enabled = true;
+            TxtProvMontoAutorizado.Text = "0.00";
             TxtNumUnidad.Enabled = true;
             TxtResponsable.Enabled = true;
 
@@ -5671,9 +6287,11 @@ namespace WebItNow_Peacock
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
                 e.Row.Cells[2].Width = Unit.Pixel(300);     // Servicio
-                e.Row.Cells[3].Width = Unit.Pixel(1100);    // Descripción
-                e.Row.Cells[4].Width = Unit.Pixel(50);      // Editar
-                e.Row.Cells[5].Width = Unit.Pixel(50);      // Eliminar
+                e.Row.Cells[3].Width = Unit.Pixel(150);     // FechaServicio
+                e.Row.Cells[4].Width = Unit.Pixel(150);     // Hora_Servicio
+                e.Row.Cells[5].Width = Unit.Pixel(800);     // Descripción
+                e.Row.Cells[6].Width = Unit.Pixel(50);      // Editar
+                e.Row.Cells[7].Width = Unit.Pixel(50);      // Eliminar
             }
 
             if (e.Row.RowType == DataControlRowType.Header)
@@ -6280,42 +6898,50 @@ namespace WebItNow_Peacock
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
                 e.Row.Cells[2].Width = Unit.Pixel(350);     // Nom_Empresa
-                e.Row.Cells[3].Width = Unit.Pixel(350);     // Email_Empresa
-                e.Row.Cells[4].Width = Unit.Pixel(150);     // Hora_Solicitud
-                e.Row.Cells[5].Width = Unit.Pixel(300);     // Num_Unidad
-                e.Row.Cells[6].Width = Unit.Pixel(350);     // Responsable
+                e.Row.Cells[3].Width = Unit.Pixel(150);     // Hora_Solicitud
+                e.Row.Cells[4].Width = Unit.Pixel(150);     // Hora_Arribo
+                e.Row.Cells[5].Width = Unit.Pixel(150);     // Hora_Salida
+                e.Row.Cells[6].Width = Unit.Pixel(150);     // Hora_Llegada
+                e.Row.Cells[7].Width = Unit.Pixel(150);     // Monto_Autorizado
 
-                e.Row.Cells[16].Width = Unit.Pixel(50);     // Editar
-                e.Row.Cells[17].Width = Unit.Pixel(50);     // Eliminar
+                e.Row.Cells[20].Width = Unit.Pixel(50);     // Editar
+                e.Row.Cells[21].Width = Unit.Pixel(50);     // Eliminar
             }
 
             if (e.Row.RowType == DataControlRowType.Header)
             {
                 e.Row.Cells[0].Visible = false;     // Id_Proveedor
                 e.Row.Cells[1].Visible = false;     // Tpo_Servicio
-                e.Row.Cells[7].Visible = false;     // Calle
-                e.Row.Cells[8].Visible = false;     // Num_Exterior
-                e.Row.Cells[9].Visible = false;     // Num_Interior
-                e.Row.Cells[10].Visible = false;    // Estado
-                e.Row.Cells[11].Visible = false;    // Delegacion
-                e.Row.Cells[12].Visible = false;    // Colonia
-                e.Row.Cells[13].Visible = false;    // Codigo_Postal
-                e.Row.Cells[14].Visible = false;    // Tel_Contacto_1
-                e.Row.Cells[15].Visible = false;    // Tel_Contacto_2
+                e.Row.Cells[8].Visible = false;     // Calle
+                e.Row.Cells[9].Visible = false;     // Num_Exterior
+                e.Row.Cells[10].Visible = false;    // Num_Interior
+                e.Row.Cells[11].Visible = false;    // Estado
+                e.Row.Cells[12].Visible = false;    // Delegacion
+                e.Row.Cells[13].Visible = false;    // Colonia
+                e.Row.Cells[14].Visible = false;    // Codigo_Postal
+                e.Row.Cells[15].Visible = false;    // Tel_Contacto_1
+                e.Row.Cells[16].Visible = false;    // Tel_Contacto_2
+                e.Row.Cells[17].Visible = false;    // Email_Empresa
+                e.Row.Cells[18].Visible = false;    // Num_Unidad
+                e.Row.Cells[19].Visible = false;    // Responsable
             }
+
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
                 e.Row.Cells[0].Visible = false;     // Id_Proveedor
                 e.Row.Cells[1].Visible = false;     // Tpo_Servicio
-                e.Row.Cells[7].Visible = false;     // Calle
-                e.Row.Cells[8].Visible = false;     // Num_Exterior
-                e.Row.Cells[9].Visible = false;     // Num_Interior
-                e.Row.Cells[10].Visible = false;    // Estado
-                e.Row.Cells[11].Visible = false;    // Delegacion
-                e.Row.Cells[12].Visible = false;    // Colonia
-                e.Row.Cells[13].Visible = false;    // Codigo_Postal
-                e.Row.Cells[14].Visible = false;    // Tel_Contacto_1
-                e.Row.Cells[15].Visible = false;    // Tel_Contacto_2
+                e.Row.Cells[8].Visible = false;     // Calle
+                e.Row.Cells[9].Visible = false;     // Num_Exterior
+                e.Row.Cells[10].Visible = false;    // Num_Interior
+                e.Row.Cells[11].Visible = false;    // Estado
+                e.Row.Cells[12].Visible = false;    // Delegacion
+                e.Row.Cells[13].Visible = false;    // Colonia
+                e.Row.Cells[14].Visible = false;    // Codigo_Postal
+                e.Row.Cells[15].Visible = false;    // Tel_Contacto_1
+                e.Row.Cells[16].Visible = false;    // Tel_Contacto_2
+                e.Row.Cells[17].Visible = false;    // Email_Empresa
+                e.Row.Cells[18].Visible = false;    // Num_Unidad
+                e.Row.Cells[19].Visible = false;    // Responsable
             }
         }
 
@@ -6648,6 +7274,11 @@ namespace WebItNow_Peacock
                 LblMessage.Text = ex.Message;
                 this.mpeMensaje.Show();
             }
+        }
+
+        protected void ddlEstatusCaso_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

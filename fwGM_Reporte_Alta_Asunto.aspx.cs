@@ -382,7 +382,8 @@ namespace WebItNow_Peacock.GastosMedicos
                                "   CASE WHEN t0.IdProyecto = 0 THEN 'NINGUNO' ELSE t5.Descripcion END AS NomProyecto, " +
                                "   CASE WHEN t0.IdSeguros = 'OTR' THEN t0.NomCliente ELSE t2.Descripcion END AS Seguro_Cia, " +
                                "   t3.Descripcion AS Resp_Tecnico, t4.Descripcion AS Resp_Administrativo, t0.IdProyecto, " +
-                               "   t0.IdSeguros, t0.IdTpoEvento, t0.IdTpoProyecto " +
+                               "   t0.IdSeguros, t0.IdTpoEvento, t0.IdTpoProyecto, " +
+                               "   CASE WHEN t0.IdEstatusCaso = 1 THEN 'Hospitalizado' WHEN t0.IdEstatusCaso = 2 THEN 'En Seguimiento' WHEN t0.IdEstatusCaso = 3 THEN 'Alta / Cerrado' END AS Estatus_Caso " +
                                "  FROM ITM_73 t0 " +
                                "  JOIN ITM_11 t1 ON t0.IdTpoEvento = t1.IdTpoEvento " +
                                "  JOIN ITM_67 t2 ON t0.IdSeguros = t2.IdSeguros " +
@@ -424,7 +425,8 @@ namespace WebItNow_Peacock.GastosMedicos
                                "   CASE WHEN t0.IdProyecto = 0 THEN 'NINGUNO' ELSE t5.Descripcion END AS NomProyecto, " +
                                "   CASE WHEN t0.IdSeguros = 'OTR' THEN t0.NomCliente ELSE t2.Descripcion END AS Seguro_Cia, " +
                                "   t3.Descripcion AS Resp_Tecnico, t4.Descripcion AS Resp_Administrativo, t0.IdProyecto, " +
-                               "   t0.IdSeguros, t0.IdTpoEvento, t0.IdTpoProyecto " +
+                               "   t0.IdSeguros, t0.IdTpoEvento, t0.IdTpoProyecto, " +
+                               "   CASE WHEN t0.IdEstatusCaso = 1 THEN 'Hospitalizado' WHEN t0.IdEstatusCaso = 2 THEN 'En Seguimiento' WHEN t0.IdEstatusCaso = 3 THEN 'Alta / Cerrado' END AS Estatus_Caso " +
                                "  FROM ITM_73 t0 " +
                                "  JOIN ITM_11 t1 ON t0.IdTpoEvento = t1.IdTpoEvento " +
                                "  JOIN ITM_67 t2 ON t0.IdSeguros = t2.IdSeguros " +
@@ -692,7 +694,8 @@ namespace WebItNow_Peacock.GastosMedicos
                                "       t1.Descripcion as Tpo_Asunto, " +
                                "       CASE WHEN t0.IdProyecto = 0 THEN 'NINGUNO' ELSE t5.Descripcion END as IdProyecto, " +
                                "       CASE WHEN t0.IdSeguros = 'OTR' THEN t0.NomCliente ELSE t2.Descripcion END as Seguro_Cia, " +
-                               "       t3.Descripcion as Resp_Tecnico, t4.Descripcion as Resp_Administrativo " +
+                               "       t3.Descripcion as Resp_Tecnico, t4.Descripcion as Resp_Administrativo, " +
+                               "       CASE WHEN t0.IdEstatusCaso = 1 THEN 'Hospitalizado' WHEN t0.IdEstatusCaso = 2 THEN 'En Seguimiento' WHEN t0.IdEstatusCaso = 3 THEN 'Alta / Cerrado' END AS Estatus_Caso " +
                                "  FROM ITM_73 t0 " +
                                "  JOIN ITM_11 t1 ON t0.IdTpoEvento = t1.IdTpoEvento " +
                                "  JOIN ITM_67 t2 ON t0.IdSeguros = t2.IdSeguros " +
@@ -721,7 +724,8 @@ namespace WebItNow_Peacock.GastosMedicos
                                 "       t1.Descripcion as Tpo_Asunto, " +
                                 "       CASE WHEN t0.IdProyecto = 0 THEN 'NINGUNO' ELSE t5.Descripcion END as IdProyecto, " +
                                 "       CASE WHEN t0.IdSeguros = 'OTR' THEN t0.NomCliente ELSE t2.Descripcion END as Seguro_Cia, " +
-                                "       t3.Descripcion as Resp_Tecnico, t4.Descripcion as Resp_Administrativo " +
+                                "       t3.Descripcion as Resp_Tecnico, t4.Descripcion as Resp_Administrativo, " +
+                                "       CASE WHEN t0.IdEstatusCaso = 1 THEN 'Hospitalizado' WHEN t0.IdEstatusCaso = 2 THEN 'En Seguimiento' WHEN t0.IdEstatusCaso = 3 THEN 'Alta / Cerrado' END AS Estatus_Caso " +
                                 "  FROM ITM_73 t0 " +
                                 "  JOIN ITM_11 t1 ON t0.IdTpoEvento = t1.IdTpoEvento " +
                                 "  JOIN ITM_67 t2 ON t0.IdSeguros = t2.IdSeguros " +
@@ -888,11 +892,11 @@ namespace WebItNow_Peacock.GastosMedicos
                 string sUsuario = Variables.wUserLogon; //LblUsuario.Text;
 
                 // Insertar registro tabla (ITM_70)
-                string strQuery = "INSERT INTO ITM_70(Referencia, SubReferencia, NumSiniestro, NumPoliza, NumReporte, Referencia_Anterior, IdSeguros, IdTpoAsunto, IdProyecto, IdRegimen, " +
+                string strQuery = "INSERT INTO ITM_73 (Referencia, SubReferencia, NumSiniestro, NumPoliza, NumReporte, Referencia_Anterior, IdSeguros, IdTpoAsunto, IdProyecto, IdRegimen, " +
                                   "                   Fecha_Asignacion, NomCliente, NomActor, NomDemandado, NomAsegurado, IdRespTecnico, IdRespAdministrativo, IdConclusion, IdTpoProyecto, IdTpoJuicio, Id_Usuario, IdStatus) " +
                                   "SELECT Referencia, SubReferencia + 1, NumSiniestro, NumPoliza, NumReporte, Referencia_Anterior, IdSeguros, IdTpoAsunto, IdProyecto, IdRegimen, " +
                                   "    Fecha_Asignacion, NomCliente, NomActor, NomDemandado, NomAsegurado, IdRespTecnico, IdRespAdministrativo, IdConclusion, 0, " + ddlProcedimiento.SelectedValue + ", '" + sUsuario + "', 1" +
-                                  "  FROM ITM_70" +
+                                  "  FROM ITM_73" +
                                   " WHERE Referencia = '" + sReferencia + "'" +
                                   " ORDER BY SubReferencia DESC LIMIT 1 ";
 

@@ -207,7 +207,7 @@
                             <asp:BoundField DataField="Resp_Tecnico" HeaderText="Responsable Medico" >
                             <%--<ItemStyle Width="600px" />--%>
                             </asp:BoundField>
-                            <asp:BoundField DataField="Resp_Administrativo" HeaderText="Responsable Administrativo" >
+                            <asp:BoundField DataField="Estatus_Caso" HeaderText="Estatus del Caso" >
                             <%--<ItemStyle Width="600px" />--%>
                             </asp:BoundField>
                             <asp:BoundField DataField="IdStatus" HeaderText="Estatus" >

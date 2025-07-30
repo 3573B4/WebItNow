@@ -122,7 +122,7 @@
                         <asp:Label ID="LblSecciones" runat="server" Text="Sección" ></asp:Label>
                     </div>
                     <div class=" input-group input-group-sm">
-                        <asp:DropDownList ID="ddlSecciones" runat="server" CssClass="btn btn-outline-secondary text-start" AutoPostBack="true" OnSelectedIndexChanged="ddlProducto_SelectedIndexChanged" Width="100%">
+                        <asp:DropDownList ID="ddlSecciones" runat="server" CssClass="btn btn-outline-secondary text-start" AutoPostBack="true" OnSelectedIndexChanged="ddlSecciones_SelectedIndexChanged" Width="100%">
                         </asp:DropDownList>
                     </div>
                 </div>
@@ -161,11 +161,13 @@
                             DataKeyNames="IdCobertura" PageSize="10" Font-Size="Smaller" >
                             <AlternatingRowStyle CssClass="alt autoWidth" />
                             <Columns>
-                                <asp:BoundField DataField="IdCobertura"  HeaderText="Clave" >
+                                <asp:BoundField DataField="IdCobertura" >
                                 </asp:BoundField>
                                 <asp:BoundField DataField="IdSeguros" >
                                 </asp:BoundField>
                                 <asp:BoundField DataField="IdProducto" >
+                                </asp:BoundField>
+                                <asp:BoundField DataField="IdSeccion" >
                                 </asp:BoundField>
                                 <asp:BoundField DataField="Descripcion" HeaderText="Categoría" >
                                 </asp:BoundField>

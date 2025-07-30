@@ -82,7 +82,8 @@ namespace WebItNow_Peacock
                 GetConclusion();
                 GetRegimen();
 
-                GetCoberturas();
+                GetSecciones();
+                //GetCoberturas();
 
                 string flechaHaciaAbajo = "\u25BC";
                 string flechaHaciaArriba = "\u25B2";
@@ -123,9 +124,10 @@ namespace WebItNow_Peacock
                 
                 ddlTpoAsegurado.Enabled = true;
                 ddlConclusion.Enabled = true;
-                ddlCoberturas.Enabled = true;
                 ddlEstSiniestro.Enabled = true;
 
+                ddlSecciones.Enabled = true;
+                ddlCoberturas.Enabled = true;
                 // TxtDomSiniestro.Enabled = true;
 
                 GetSeccion_2();     // RIESGOS
@@ -161,7 +163,9 @@ namespace WebItNow_Peacock
             else
             {
                 // habilitar controles (COBERTURAS)
+                ddlSecciones.Enabled = true;
                 ddlCoberturas.Enabled = true;
+
                 TxtNomCobertura.Enabled = true;
                 TxtRiesgo.Enabled = true;
                 TxtSumaAsegurada.Enabled = true;
@@ -376,6 +380,37 @@ namespace WebItNow_Peacock
             }
         }
 
+        public void GetSecciones()
+        {
+            try
+            {
+                ConexionBD_MySQL dbConn = new ConexionBD_MySQL(Variables.wUserName, Variables.wPassword);
+                dbConn.Open();
+
+                // Consulta a las tablas : Estado de Documento (Expediente) = ITM_44
+                string strQuery = "SELECT IdSeccion, Descripcion " +
+                                        " FROM ITM_44 " +
+                                        " WHERE IdStatus = 1";
+
+                DataTable dt = dbConn.ExecuteQuery(strQuery);
+
+                ddlSecciones.DataSource = dt;
+
+                ddlSecciones.DataValueField = "IdSeccion";
+                ddlSecciones.DataTextField = "Descripcion";
+
+                ddlSecciones.DataBind();
+                ddlSecciones.Items.Insert(0, new ListItem("-- Seleccionar --", "0"));
+
+                dbConn.Close();
+            }
+            catch (System.Exception ex)
+            {
+                LblMessage.Text = ex.Message;
+                mpeMensaje.Show();
+            }
+        }
+
         protected void GetCoberturas()
         {
             try
@@ -388,6 +423,7 @@ namespace WebItNow_Peacock
                                   "  FROM ITM_94 " +
                                   " WHERE IdSeguros = '" + Variables.wPrefijo_Aseguradora + "' " +
                                   "   AND IdProducto = " + ddlProductos.SelectedValue + " " +
+                                  "   AND IdSeccion = " + ddlSecciones.SelectedValue + " " +
                                   "   AND IdStatus = 1 ";
 
                 DataTable dt = dbConn.ExecuteQuery(strQuery);
@@ -431,12 +467,6 @@ namespace WebItNow_Peacock
                                         "   AND IdStatus = 1 ";
 
                 DataTable dt = dbConn.ExecuteQuery(strQuery);
-
-                //SqlCommand cmd = new SqlCommand(sqlQuery, Conecta.ConectarBD);
-
-                //SqlDataAdapter da = new SqlDataAdapter(cmd);
-                //DataTable dt = new DataTable();
-                //da.Fill(dt);
 
                 ddlProductos.DataSource = dt;
 
@@ -545,7 +575,7 @@ namespace WebItNow_Peacock
                 ConexionBD_MySQL dbConn = new ConexionBD_MySQL(Variables.wUserName, Variables.wPassword);
                 dbConn.Open();
 
-                string strQuery = "SELECT t0.IdCobertura, t1.Descripcion AS DescCobertura, t0.Cob_Nombre, t0.Cob_Riesgo, t0.Cob_Suma, " +
+                string strQuery = "SELECT t0.IdSeccion, t0.IdCobertura, t1.Descripcion AS DescCobertura, t0.Cob_Nombre, t0.Cob_Riesgo, t0.Cob_Suma, " +
                                   "       t0.Cob_Sublimite, t0.Cob_Deducible, t0.Cob_Coaseguro " +
                                   "  FROM ITM_70_3_4 t0 " +
                                   "  JOIN ITM_94 t1 ON t0.IdCobertura = t1.IdCobertura " +
@@ -2391,7 +2421,9 @@ namespace WebItNow_Peacock
                 pnl17.Visible = true;
 
                 // habilitar controles
+                ddlSecciones.Enabled = true;
                 ddlCoberturas.Enabled = true;
+
                 TxtNomCobertura.Enabled = true;
                 TxtRiesgo.Enabled = true;
                 TxtSumaAsegurada.Enabled = true;
@@ -4802,6 +4834,9 @@ namespace WebItNow_Peacock
             BtnAnularPnl17.Visible = false;
 
             // inicializar controles.
+            ddlSecciones.SelectedValue = "0";
+            ddlSecciones.Enabled = true;
+
             ddlCoberturas.SelectedValue = "0";
             ddlCoberturas.Enabled = true;
 
@@ -4879,6 +4914,9 @@ namespace WebItNow_Peacock
             GetAltaCoberturas();
 
             // inicializar controles.
+            ddlSecciones.SelectedValue = "0";
+            ddlSecciones.Enabled = true;
+
             ddlCoberturas.SelectedValue = "0";
             ddlCoberturas.Enabled = true;
 
@@ -4913,18 +4951,24 @@ namespace WebItNow_Peacock
 
         protected void BtnAgregarPnl17_Click(object sender, EventArgs e)
         {
-            if (ddlCoberturas.SelectedValue == "0")
+            if (ddlSecciones.SelectedValue == "0")
             {
-                LblMessage.Text = "Seleccionar Coberturas Por";
+                LblMessage.Text = "Seleccionar Sección";
                 mpeMensaje.Show();
                 return;
             }
-            else if (TxtNomCobertura.Text == "" || TxtNomCobertura.Text == null)
+            else if (ddlCoberturas.SelectedValue == "0")
             {
-                LblMessage.Text = "Capturar Nombre Cobertura";
+                LblMessage.Text = "Seleccionar Coberturas";
                 mpeMensaje.Show();
                 return;
             }
+            //else if (TxtNomCobertura.Text == "" || TxtNomCobertura.Text == null)
+            //{
+            //    LblMessage.Text = "Capturar Nombre Cobertura";
+            //    mpeMensaje.Show();
+            //    return;
+            //}
 
             //string sDescripcion = TxtNomCategoria.Text;
             //string sTabla = Variables.wTabla;
@@ -4939,7 +4983,12 @@ namespace WebItNow_Peacock
             BtnAnularPnl17.Visible = false;
 
             // inicializar controles
+            ddlSecciones.SelectedValue = "0";
+            ddlSecciones.Enabled = true;
+
             ddlCoberturas.SelectedValue = "0";
+            ddlCoberturas.Enabled = true;
+
             TxtNomCobertura.Text = string.Empty;
             TxtSumaAsegurada.Text = string.Empty;
             TxtRiesgo.Text = string.Empty;
@@ -5673,14 +5722,15 @@ namespace WebItNow_Peacock
 
                 // Inserta / Actualiza Datos Personales
                 int IdCobertura = int.Parse(ddlCoberturas.SelectedValue);
+                int IdSeccion = int.Parse(ddlSecciones.SelectedValue);
                 string Referencia = Variables.wRef;
                 int SubReferencia = Variables.wSubRef;
 
                 string Id_Usuario = Variables.wUserLogon;
                 int IdStatus = 1;
 
-                string strQuery = @"INSERT INTO ITM_70_3_4 (IdCobertura, Referencia, SubReferencia, Cob_Habilitado, Cob_Nombre, Cob_Riesgo, Cob_Suma, Cob_Sublimite, Cob_Deducible, Cob_Coaseguro, Id_Usuario, IdStatus) " +
-                                   "VALUES (@IdCobertura, @Referencia, @SubReferencia, @Cob_Habilitado, @Cob_Nombre, @Cob_Riesgo, @Cob_Suma, @Cob_Sublimite, @Cob_Deducible, @Cob_Coaseguro, @Id_Usuario, @IdStatus) " +
+                string strQuery = @"INSERT INTO ITM_70_3_4 (Referencia, SubReferencia, IdSeccion, IdCobertura, Cob_Habilitado, Cob_Nombre, Cob_Riesgo, Cob_Suma, Cob_Sublimite, Cob_Deducible, Cob_Coaseguro, Id_Usuario, IdStatus) " +
+                                   "VALUES (@Referencia, @SubReferencia, @IdSeccion, @IdCobertura, @Cob_Habilitado, @Cob_Nombre, @Cob_Riesgo, @Cob_Suma, @Cob_Sublimite, @Cob_Deducible, @Cob_Coaseguro, @Id_Usuario, @IdStatus) " +
                                    " ON DUPLICATE KEY UPDATE " +
                                    " Cob_Habilitado = VALUES(Cob_Habilitado), " +
                                    " Cob_Nombre = VALUES(Cob_Nombre), " +
@@ -5695,9 +5745,10 @@ namespace WebItNow_Peacock
                 int result = dbConn.ExecuteNonQueryWithParameters(strQuery, cmd =>
                 {
                     // Agregar los parámetros y sus valores
-                    cmd.Parameters.AddWithValue("@IdCobertura", IdCobertura);
                     cmd.Parameters.AddWithValue("@Referencia", Referencia);
                     cmd.Parameters.AddWithValue("@SubReferencia", SubReferencia);
+                    cmd.Parameters.AddWithValue("@IdSeccion", IdSeccion);
+                    cmd.Parameters.AddWithValue("@IdCobertura", IdCobertura);
 
                     cmd.Parameters.AddWithValue("@Cob_Habilitado", Cob_Habilitado);
                     cmd.Parameters.AddWithValue("@Cob_Nombre", Cob_Nombre);
@@ -5861,11 +5912,17 @@ namespace WebItNow_Peacock
 
             if (e.Row.RowType == DataControlRowType.Header)
             {
-                e.Row.Cells[2].Visible = false;         // IdCobertura
+                e.Row.Cells[2].Visible = false;         // IdSeccion
+                e.Row.Cells[3].Visible = false;         // IdCobertura
+                e.Row.Cells[5].Visible = false;         // Cob_Nombre
+                e.Row.Cells[6].Visible = false;         // Cob_Riesgo
             }
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                e.Row.Cells[2].Visible = false;         // IdCobertura
+                e.Row.Cells[2].Visible = false;         // IdSeccion
+                e.Row.Cells[3].Visible = false;         // IdCobertura
+                e.Row.Cells[5].Visible = false;         // Cob_Nombre
+                e.Row.Cells[6].Visible = false;         // Cob_Riesgo
             }
         }
 
@@ -5876,16 +5933,22 @@ namespace WebItNow_Peacock
 
             Variables.wRenglon = row.RowIndex;
 
-            ddlCoberturas.SelectedValue = Server.HtmlDecode(Convert.ToString(GrdCoberturas.Rows[index].Cells[2].Text));
-            TxtNomCobertura.Text = Server.HtmlDecode(Convert.ToString(GrdCoberturas.Rows[index].Cells[4].Text));
-            TxtRiesgo.Text = Server.HtmlDecode(Convert.ToString(GrdCoberturas.Rows[index].Cells[5].Text));
-            TxtSumaAsegurada.Text = Server.HtmlDecode(Convert.ToString(GrdCoberturas.Rows[index].Cells[6].Text));
-            TxtSublimite.Text = Server.HtmlDecode(Convert.ToString(GrdCoberturas.Rows[index].Cells[7].Text));
-            TxtDeducible.Text = Server.HtmlDecode(Convert.ToString(GrdCoberturas.Rows[index].Cells[8].Text));
-            TxtCoaseguro.Text = Server.HtmlDecode(Convert.ToString(GrdCoberturas.Rows[index].Cells[9].Text));
+            ddlSecciones.SelectedValue = Server.HtmlDecode(Convert.ToString(GrdCoberturas.Rows[index].Cells[2].Text));
+            
+            // Disparar el evento SelectedIndexChanged manualmente
+            ddlSecciones_SelectedIndexChanged(ddlSecciones, EventArgs.Empty);
 
+            ddlCoberturas.SelectedValue = Server.HtmlDecode(Convert.ToString(GrdCoberturas.Rows[index].Cells[3].Text));
+            TxtNomCobertura.Text = Server.HtmlDecode(Convert.ToString(GrdCoberturas.Rows[index].Cells[5].Text));
+            TxtRiesgo.Text = Server.HtmlDecode(Convert.ToString(GrdCoberturas.Rows[index].Cells[6].Text));
+            TxtSumaAsegurada.Text = Server.HtmlDecode(Convert.ToString(GrdCoberturas.Rows[index].Cells[7].Text));
+            TxtSublimite.Text = Server.HtmlDecode(Convert.ToString(GrdCoberturas.Rows[index].Cells[8].Text));
+            TxtDeducible.Text = Server.HtmlDecode(Convert.ToString(GrdCoberturas.Rows[index].Cells[9].Text));
+            TxtCoaseguro.Text = Server.HtmlDecode(Convert.ToString(GrdCoberturas.Rows[index].Cells[10].Text));
 
+            ddlSecciones.Enabled = false;
             ddlCoberturas.Enabled = false;
+
             TxtSumaAsegurada.ReadOnly = true;
             TxtNomCobertura.ReadOnly = true;
             TxtRiesgo.ReadOnly = true;
@@ -5915,7 +5978,7 @@ namespace WebItNow_Peacock
 
         }
 
-        protected void Eliminar_tbCoberturas(int iIdCobertura)
+        protected void Eliminar_tbCoberturas(int iIdSeccion, int iIdCobertura)
         {
             try
             {
@@ -5927,9 +5990,10 @@ namespace WebItNow_Peacock
 
                 // Eliminar registro tabla
                 string strQuery = "DELETE FROM ITM_70_3_4 " +
-                                  " WHERE IdCobertura = " + iIdCobertura + " " +
-                                  "   AND Referencia = '" + Variables.wRef + "' " +
-                                  "   AND SubReferencia = '" + Variables.wSubRef + "' ";
+                                  " WHERE Referencia = '" + Variables.wRef + "' " +
+                                  "   AND SubReferencia = '" + Variables.wSubRef + "' " +
+                                  "   AND IdSeccion = " + iIdSeccion + " " +
+                                  "   AND IdCobertura = " + iIdCobertura + " ";
 
                 int affectedRows = dbConn.ExecuteNonQuery(strQuery);
 
@@ -5951,9 +6015,10 @@ namespace WebItNow_Peacock
 
             int index = Variables.wRenglon;
 
-            int iIdCobertura = int.Parse(Server.HtmlDecode(GrdCoberturas.Rows[index].Cells[2].Text));
+            int iIdSeccion = int.Parse(Server.HtmlDecode(GrdCoberturas.Rows[index].Cells[2].Text));
+            int iIdCobertura = int.Parse(Server.HtmlDecode(GrdCoberturas.Rows[index].Cells[3].Text));
 
-            Eliminar_tbCoberturas(iIdCobertura);
+            Eliminar_tbCoberturas(iIdSeccion, iIdCobertura);
 
             GetAltaCoberturas();
 
@@ -6071,6 +6136,11 @@ namespace WebItNow_Peacock
         }
 
         protected void ddlProductos_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            GetCoberturas();
+        }
+
+        protected void ddlSecciones_SelectedIndexChanged(object sender, EventArgs e)
         {
             GetCoberturas();
         }
