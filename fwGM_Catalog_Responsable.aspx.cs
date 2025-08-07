@@ -508,7 +508,7 @@ namespace WebItNow_Peacock
 
                     break;
                 case "2":
-                    // Tecnicos
+                    // Medicos
                     Variables.wIdColumna = "IdRespMedico";
                     Variables.wTabla = "ITM_12";
 

@@ -321,7 +321,7 @@ namespace WebItNow_Peacock.GastosMedicos
                     string sNomCliente = TxtNomCliente.Text;
                     string sNomActor = string.Empty;
                     string sNomDemandado = string.Empty;
-                    string sNomAjustador = string.Empty;
+                    // string sNomAjustador = string.Empty;
                     string sEstOcurrencia = string.Empty;
                     string sDescMote = string.Empty;
 
@@ -369,14 +369,15 @@ namespace WebItNow_Peacock.GastosMedicos
                     }
 
                     int iIdTpoAsunto = Convert.ToInt32(ddlTipoEvento.SelectedValue);
+                    int iIdAjustador = 0;
                     int iIdRespMedico = Convert.ToInt32(ddlRespMedico.SelectedValue);
                     int iIdRespAdministrativo = Convert.ToInt32(ddlRespAdministrativo.SelectedValue);
 
                     // Insertar registro tabla (ITM_73)
-                    string strQuery = "INSERT INTO ITM_73 (Referencia, SubReferencia, NumSiniestro,  NumPoliza, NumReporte, IdSeguros, IdTpoEvento, IdProyecto, IdRegimen, NomCliente, NomActor, NomDemandado, NomAjustador, IdRespMedico, IdRespAdministrativo, " +
+                    string strQuery = "INSERT INTO ITM_73 (Referencia, SubReferencia, NumSiniestro,  NumPoliza, NumReporte, IdSeguros, IdTpoEvento, IdProyecto, IdRegimen, NomCliente, NomActor, NomDemandado, IdAjustador, IdRespMedico, IdRespAdministrativo, " +
                         "Fecha_Asignacion, Hora_Asignacion, IdConclusion, IdTpoProyecto, Id_Usuario, IdStatus ) " +
                         "VALUES('" + sReferencia + "', '" + sSubRefencia + "', '" + sNumSiniestro + "', '" + sNumPoliza + "', '" + sNumReporte + "', '" + sIdSeguros + "', " + iIdTpoAsunto + ", " + iIdProyecto + ", 1, '" + sNomCliente + "'," +
-                        "'" + sNomActor + "', '" + sNomDemandado + "', '" + sNomAjustador + "', " + iIdRespMedico + ", " + iIdRespAdministrativo + "," +
+                        "'" + sNomActor + "', '" + sNomDemandado + "', " + iIdAjustador + ", " + iIdRespMedico + ", " + iIdRespAdministrativo + "," +
                         "'" + fechaFormateada + "', '" + sHoraAsignacion + "', 1, 0, '" + sUsuario + "', 1); ";
 
                     strQuery += Environment.NewLine;

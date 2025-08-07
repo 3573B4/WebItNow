@@ -35,6 +35,7 @@ namespace WebItNow_Peacock
                     }
 
                     Inicializar_GrdResponsable();
+                    GetAjustadores();
 
                 }
                 catch (Exception ex)
@@ -47,7 +48,7 @@ namespace WebItNow_Peacock
         }
 
 
-        public void GetResponsables(string IdColumna, string Tabla)
+        public void GetAjustadores()
         {
             try
             {
@@ -55,27 +56,26 @@ namespace WebItNow_Peacock
                 ConexionBD_MySQL dbConn = new ConexionBD_MySQL(Variables.wUserName, Variables.wPassword);
                 dbConn.Open();
 
-                // Consulta a las tablas : Estado de Documento (Expediente) = ITM_68, ITM_69, ITM_79
-                string strQuery = $"SELECT { IdColumna } as IdDocumento, Descripcion " +
-                                  $"  FROM { Tabla } " +
-                                  $" WHERE IdStatus = 1 " +
-                                  $" ORDER BY { IdColumna }";
+                // Consulta a las tablas : Estado de Documento (Expediente) = ITM_45
+                string strQuery = "SELECT IdAjustador, NomAjustador, Email_Ajustador, Tel_Ajustador " +
+                                  "  FROM ITM_45 " +
+                                  " WHERE IdStatus = 1 ";
 
                 DataTable dt = dbConn.ExecuteQuery(strQuery);
 
                 if (dt.Rows.Count == 0)
                 {
-                    GrdResponsables.ShowHeaderWhenEmpty = true;
-                    GrdResponsables.EmptyDataText = "No hay resultados.";
+                    GrdAjustadores.ShowHeaderWhenEmpty = true;
+                    GrdAjustadores.EmptyDataText = "No hay resultados.";
                 }
 
-                GrdResponsables.DataSource = dt;
-                GrdResponsables.DataBind();
+                GrdAjustadores.DataSource = dt;
+                GrdAjustadores.DataBind();
 
                 dbConn.Close();
 
                 //* * Agrega THEAD y TBODY a GridView.
-                GrdResponsables.HeaderRow.TableSection = TableRowSection.TableHeader;
+                GrdAjustadores.HeaderRow.TableSection = TableRowSection.TableHeader;
             }
             catch (Exception ex)
             {
@@ -93,13 +93,13 @@ namespace WebItNow_Peacock
             if (dt.Rows.Count == 0)
             {
                 // Mostrar el mensaje de "No hay resultados"
-                GrdResponsables.ShowHeaderWhenEmpty = true;
-                GrdResponsables.EmptyDataText = "No hay resultados.";
+                GrdAjustadores.ShowHeaderWhenEmpty = true;
+                GrdAjustadores.EmptyDataText = "No hay resultados.";
             }
 
             // Enlaza el DataTable (vacío o lleno) al GridView
-            GrdResponsables.DataSource = dt;
-            GrdResponsables.DataBind();
+            GrdAjustadores.DataSource = dt;
+            GrdAjustadores.DataBind();
         }
 
         private DataTable CrearDataTableVacio()
@@ -107,30 +107,32 @@ namespace WebItNow_Peacock
             DataTable dt = new DataTable();
 
             // Define las columnas del DataTable
-            dt.Columns.Add("IdDocumento", typeof(string));
-            dt.Columns.Add("Descripcion", typeof(string));
+            dt.Columns.Add("IdAjustador", typeof(string));
+            dt.Columns.Add("NomAjustador", typeof(string));
+            dt.Columns.Add("Email_Ajustador", typeof(string));
+            dt.Columns.Add("Tel_Ajustador", typeof(string));
             // Agrega más columnas según sea necesario
 
             return dt;
         }
 
-        public int Add_tbDocumentos(string IdColumna, string Tabla, string pDescripcion)
+        public int Add_tbDocumentos()
         {
             try
             {
-                int iConsecutivo = GetIdConsecutivoMax(IdColumna, Tabla);
+                int iConsecutivo = GetIdConsecutivoMax();
 
                 ConexionBD_MySQL dbConn = new ConexionBD_MySQL(Variables.wUserName, Variables.wPassword);
                 dbConn.Open();
 
-                string strQuery = $"INSERT INTO { Tabla } ({ IdColumna }, Descripcion, DescripBrev, IdStatus) " +
-                                  $"VALUES (" + iConsecutivo + ", '" + pDescripcion + "', Null, 1)" + "\n \n";
+                string strQuery = "INSERT INTO ITM_45 (IdAjustador, NomAjustador, Email_Ajustador, Tel_Ajustador, IdStatus) " +
+                                  "VALUES (" + iConsecutivo + ", '" + TxtNomAjustador.Text.Trim() + "', '" + TxtEmail.Text.Trim() + "', '" + TxtTelCelular.Text.Trim() + "', 1)" + "\n \n";
 
                 int affectedRows = dbConn.ExecuteNonQuery(strQuery);
 
                 dbConn.Close();
 
-                LblMessage.Text = "Se agrego responsable, correctamente";
+                LblMessage.Text = "Se agrego ajustador, correctamente";
                 mpeMensaje.Show();
 
                 return 0;
@@ -148,7 +150,7 @@ namespace WebItNow_Peacock
             return -1;
         }
 
-        public int GetIdConsecutivoMax(string IdColumna, string Tabla)
+        public int GetIdConsecutivoMax()
         {
 
             int IdConsecutivoMax = 0;
@@ -156,14 +158,14 @@ namespace WebItNow_Peacock
             ConexionBD_MySQL dbConn = new ConexionBD_MySQL(Variables.wUserName, Variables.wPassword);
             dbConn.Open();
 
-            string strQuery = $"SELECT COALESCE(MAX( { IdColumna } ), 0) + 1 IdDocumento " +
-                              $"  FROM { Tabla } ";
+            string strQuery = $"SELECT COALESCE(MAX( IdAjustador ), 0) + 1 IdAjustador " +
+                              $"  FROM ITM_45 ";
 
             DataTable dt = dbConn.ExecuteQuery(strQuery);
 
             foreach (DataRow row in dt.Rows)
             {
-                IdConsecutivoMax = Convert.ToInt32(row["IdDocumento"].ToString().Trim());
+                IdConsecutivoMax = Convert.ToInt32(row["IdAjustador"].ToString().Trim());
             }
 
             dbConn.Close();
@@ -172,7 +174,7 @@ namespace WebItNow_Peacock
 
         }
 
-        protected void Eliminar_tbDocumentos(string IdColumna, string Tabla, int iIdDocumento, int iIdTpoAsunto)
+        protected void Eliminar_tbDocumentos(int iIdAjustador)
         {
             try
             {
@@ -183,14 +185,14 @@ namespace WebItNow_Peacock
                 string sUsuario = Variables.wUserName; //LblUsuario.Text;
 
                 // Eliminar registro tabla
-                string strQuery = $"DELETE FROM { Tabla } " +
-                                  $" WHERE { IdColumna } = " + iIdDocumento + " ";
+                string strQuery = "DELETE FROM ITM_45 " +
+                                  " WHERE IdAjustador = " + iIdAjustador + " ";
 
                 int affectedRows = dbConn.ExecuteNonQuery(strQuery);
 
                 dbConn.Close();
 
-                LblMessage.Text = "Se elimino responsable, correctamente";
+                LblMessage.Text = "Se elimino ajustador, correctamente";
                 mpeMensaje.Show();
 
             }
@@ -198,7 +200,7 @@ namespace WebItNow_Peacock
             {
                 if (ex.HResult == -2146232060)
                 {
-                    LblMessage.Text = "Responsable, se encuentra relacionado a un Asunto";
+                    LblMessage.Text = "Ajustador, se encuentra relacionado a un Asunto";
                 }
                 else
                 {
@@ -209,7 +211,7 @@ namespace WebItNow_Peacock
             }
         }
 
-        protected void Actualizar_tbDocumentos(string IdColumna, string Tabla, int iIdDocumento, int iIdTpoAsunto)
+        protected void Actualizar_tbDocumentos(int iIdAjustador)
         {
             try
             {
@@ -220,16 +222,17 @@ namespace WebItNow_Peacock
                 string sUsuario = Variables.wUserName; //LblUsuario.Text;
 
                 // Eliminar registro tabla
-                string strQuery = $"UPDATE { Tabla } " +
-                                  $"   SET Descripcion = '" + TxtNomAjustador.Text.Trim() + "' " +
-                                  $" WHERE { IdColumna } = " + iIdDocumento + " ";
-                //$"   AND IdTpoAsunto = " + iIdTpoAsunto + "";
+                string strQuery = "UPDATE ITM_45 " +
+                                  "   SET NomAjustador = '" + TxtNomAjustador.Text.Trim() + "'," +
+                                  "       Email_Ajustador = '" + TxtEmail.Text.Trim() + "'," +
+                                  "       Tel_Ajustador = '" + TxtTelCelular.Text.Trim() + "' " +
+                                  " WHERE IdAjustador = " + iIdAjustador + " ";
 
                 int affectedRows = dbConn.ExecuteNonQuery(strQuery);
 
                 dbConn.Close();
 
-                LblMessage.Text = "Se actualizo responsable, correctamente";
+                LblMessage.Text = "Se actualizo ajustador, correctamente";
                 mpeMensaje.Show();
 
             }
@@ -237,7 +240,7 @@ namespace WebItNow_Peacock
             {
                 if (ex.HResult == -2146232060)
                 {
-                    LblMessage.Text = "Responsable, se encuentra relacionado a un Asunto";
+                    LblMessage.Text = "Ajustador, se encuentra relacionado a un Asunto";
                 }
                 else
                 {
@@ -248,12 +251,22 @@ namespace WebItNow_Peacock
             }
         }
 
-        protected void GrdResponsables_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        protected void GrdAjustadores_PreRender(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void GrdAjustadores_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+
+        }
+
+        protected void GrdAjustadores_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
             try
             {
-                GrdResponsables.PageIndex = e.NewPageIndex;
-                GetResponsables(Variables.wIdColumna, Variables.wTabla);
+                GrdAjustadores.PageIndex = e.NewPageIndex;
+                GetAjustadores();
             }
             catch (Exception ex)
             {
@@ -262,41 +275,31 @@ namespace WebItNow_Peacock
             }
         }
 
-        protected void GrdResponsables_RowCommand(object sender, GridViewCommandEventArgs e)
+        protected void GrdAjustadores_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
 
-        protected void GrdResponsables_PreRender(object sender, EventArgs e)
-        {
-
-        }
-
-        protected void GrdResponsables_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        protected void GrdResponsables_RowDataBound(object sender, GridViewRowEventArgs e)
+        protected void GrdAjustadores_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
-                e.Row.Attributes.Add("OnClick", "" + Page.ClientScript.GetPostBackClientHyperlink(this.GrdResponsables, "Select$" + e.Row.RowIndex.ToString()) + ";");
+                e.Row.Attributes.Add("OnClick", "" + Page.ClientScript.GetPostBackClientHyperlink(this.GrdAjustadores, "Select$" + e.Row.RowIndex.ToString()) + ";");
 
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                e.Row.Cells[1].Width = Unit.Pixel(1100);    // Descripcion
-                e.Row.Cells[2].Width = Unit.Pixel(25);      // ImgEditar
-                e.Row.Cells[3].Width = Unit.Pixel(25);      // ImgEliminar
+                e.Row.Cells[1].Width = Unit.Pixel(450);     // NomAjustador
+                e.Row.Cells[2].Width = Unit.Pixel(350);     // Email_Ajustador
+                e.Row.Cells[3].Width = Unit.Pixel(300);     // Tel_Ajustador
+                e.Row.Cells[4].Width = Unit.Pixel(25);      // ImgEditar
+                e.Row.Cells[5].Width = Unit.Pixel(25);      // ImgEliminar
             }
             if (e.Row.RowType == DataControlRowType.Header)
             {
-                e.Row.Cells[0].Visible = false;         // IdDocumento
-                                                        // e.Row.Cells[2].Visible = false;         // IdTpoAsunto
+                e.Row.Cells[0].Visible = false;             // IdAjustador
             }
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                e.Row.Cells[0].Visible = false;         // IdDocumento
-                                                        // e.Row.Cells[2].Visible = false;         // IdTpoAsunto
+                e.Row.Cells[0].Visible = false;             // IdAjustador
             }
         }
 
@@ -310,18 +313,17 @@ namespace WebItNow_Peacock
                 return;
             }
 
-            string sDescripcion = TxtNomAjustador.Text;
-            string sTabla = Variables.wTabla;
-
-            int Envio_Ok = Add_tbDocumentos(Variables.wIdColumna, sTabla, sDescripcion);
+            int Envio_Ok = Add_tbDocumentos();
 
             if (Envio_Ok == 0)
             {
 
                 // inicializar controles
                 TxtNomAjustador.Text = string.Empty;
+                TxtEmail.Text = string.Empty;
+                TxtTelCelular.Text = string.Empty;
 
-                GetResponsables(Variables.wIdColumna, sTabla);
+                GetAjustadores();
             }
 
         }
@@ -338,7 +340,7 @@ namespace WebItNow_Peacock
             BtnCancelar.Visible = true;
             BtnCerrar.Visible = false;
 
-            LblMessage_1.Text = "¿Desea eliminar el responsable ?";
+            LblMessage_1.Text = "¿Desea eliminar el ajustador ?";
             mpeMensaje_1.Show();
 
         }
@@ -353,13 +355,11 @@ namespace WebItNow_Peacock
 
             int index = Variables.wRenglon;
 
-            int iIdDocumento = Convert.ToInt32(GrdResponsables.Rows[index].Cells[0].Text);
-            //int iIdTpoAsunto = Convert.ToInt32(GrdResponsables.Rows[index].Cells[2].Text);
-            int iIdTpoAsunto = 0;
+            int iIdAjustador = Convert.ToInt32(GrdAjustadores.Rows[index].Cells[0].Text);
 
-            Eliminar_tbDocumentos(Variables.wIdColumna, Variables.wTabla, iIdDocumento, iIdTpoAsunto);
+            Eliminar_tbDocumentos(iIdAjustador);
 
-            GetResponsables(Variables.wIdColumna, Variables.wTabla);
+            GetAjustadores();
         }
 
         protected void BtnCancelar_Click(object sender, EventArgs e)
@@ -379,10 +379,13 @@ namespace WebItNow_Peacock
 
             Variables.wRenglon = row.RowIndex;
 
-            TxtNomAjustador.Text = Server.HtmlDecode(Convert.ToString(GrdResponsables.Rows[index].Cells[1].Text));
+            TxtNomAjustador.Text = Server.HtmlDecode(Convert.ToString(GrdAjustadores.Rows[index].Cells[1].Text));
+            TxtEmail.Text = Server.HtmlDecode(Convert.ToString(GrdAjustadores.Rows[index].Cells[2].Text));
+            TxtTelCelular.Text = Server.HtmlDecode(Convert.ToString(GrdAjustadores.Rows[index].Cells[3].Text));
 
             TxtNomAjustador.ReadOnly = true;
-            TxtNomAjustador.ReadOnly = true;
+            TxtEmail.ReadOnly = true;
+            TxtTelCelular.ReadOnly = true;
 
             BtnAnular.Visible = true;
             BtnEditar.Enabled = true;
@@ -395,6 +398,12 @@ namespace WebItNow_Peacock
             TxtNomAjustador.Text = string.Empty;
             TxtNomAjustador.ReadOnly = false;
 
+            TxtEmail.Text = string.Empty;
+            TxtEmail.ReadOnly = false;
+
+            TxtTelCelular.Text = string.Empty;
+            TxtTelCelular.ReadOnly = false;
+
             BtnEditar.Visible = true;
             BtnGrabar.Visible = false;
             BtnAnular.Visible = false;
@@ -406,7 +415,8 @@ namespace WebItNow_Peacock
         protected void BtnEditar_Click(object sender, EventArgs e)
         {
             TxtNomAjustador.ReadOnly = false;
-            TxtNomAjustador.ReadOnly = false;
+            TxtEmail.ReadOnly = false;
+            TxtTelCelular.ReadOnly = false;
 
             BtnEditar.Visible = false;
             BtnGrabar.Visible = true;
@@ -423,16 +433,21 @@ namespace WebItNow_Peacock
 
             int index = Variables.wRenglon;
 
-            int iIdDocumento = Convert.ToInt32(GrdResponsables.Rows[index].Cells[0].Text);
-            int iIdTpoAsunto = 0;
+            int iIdAjustador = Convert.ToInt32(GrdAjustadores.Rows[index].Cells[0].Text);
 
-            Actualizar_tbDocumentos(Variables.wIdColumna, Variables.wTabla, iIdDocumento, iIdTpoAsunto);
+            Actualizar_tbDocumentos(iIdAjustador);
 
-            GetResponsables(Variables.wIdColumna, Variables.wTabla);
+            GetAjustadores();
 
             // inicializar controles.
             TxtNomAjustador.Text = string.Empty;
             TxtNomAjustador.ReadOnly = false;
+
+            TxtEmail.Text = string.Empty;
+            TxtEmail.ReadOnly = false;
+
+            TxtTelCelular.Text = string.Empty;
+            TxtTelCelular.ReadOnly = false;
 
             BtnEditar.Visible = true;
             BtnGrabar.Visible = false;

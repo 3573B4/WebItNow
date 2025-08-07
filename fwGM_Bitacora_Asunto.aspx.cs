@@ -65,6 +65,8 @@ namespace WebItNow_Peacock
                 }
 
                 GetEstatusCaso();
+                GetAjustadores();
+
                 GetTipoEvento();
                 GetServicios();
 
@@ -87,6 +89,7 @@ namespace WebItNow_Peacock
                 GetInstituciones();
                 GetTpoAtencion();
 
+
                 habilitar_control_proveedores();
                 habilitar_control_servicios();
                 habilitar_control_paquetes();
@@ -99,7 +102,7 @@ namespace WebItNow_Peacock
                 string flechaHaciaAbajo = "\u25BC";
                 string flechaHaciaArriba = "\u25B2";
 
-                btnShowPanel0.Text = flechaHaciaAbajo;      // Flecha hacia abajo
+                btnShowPanel0.Text = flechaHaciaAbajo;      // Flecha hacia abajo   (GENERADOR DE DOCUMENTOS)
              // btnShowPanel1.Text = flechaHaciaArriba;     // Flecha hacia arriba
                 btnShowPanel3.Text = flechaHaciaArriba;     // Flecha hacia arriba  (INFORMACIÓN GENERAL DEL LESIONADO)
                 btnShowPanel4.Text = flechaHaciaArriba;     // Flecha hacia arriba  (INFORMACIÓN GENERAL DEL RESPONSABLE)
@@ -196,6 +199,38 @@ namespace WebItNow_Peacock
                 mpeMensaje.Show();
             }
 
+        }
+
+        protected void GetAjustadores()
+        {
+            try
+            {
+
+                ConexionBD_MySQL dbConn = new ConexionBD_MySQL(Variables.wUserName, Variables.wPassword);
+                dbConn.Open();
+
+                string strQuery = "SELECT IdAjustador, NomAjustador " +
+                                        " FROM ITM_45 " +
+                                        " WHERE IdStatus = 1 ";
+
+                DataTable dt = dbConn.ExecuteQuery(strQuery);
+
+                ddlNomAjustador.DataSource = dt;
+
+                ddlNomAjustador.DataValueField = "IdAjustador";
+                ddlNomAjustador.DataTextField = "NomAjustador";
+
+                ddlNomAjustador.DataBind();
+                ddlNomAjustador.Items.Insert(0, new ListItem("-- Seleccionar --", "0"));
+
+                dbConn.Close();
+
+            }
+            catch (System.Exception ex)
+            {
+                LblMessage.Text = ex.Message;
+                mpeMensaje.Show();
+            }
         }
 
         protected void GetTipoServicio()
@@ -1205,9 +1240,9 @@ namespace WebItNow_Peacock
             TxtNumSiniestro.Enabled = true;
             TxtNumPoliza.Enabled = true;
             ddlEstatusCaso.Enabled = true;
-            TxtNomAjustador.Enabled = true;
-            TxtEmailAjustador.Enabled = true;
-            TxtTelAjustador.Enabled = true;
+            ddlNomAjustador.Enabled = true;
+            // TxtEmailAjustador.Enabled = true;
+            // TxtTelAjustador.Enabled = true;
             TxtFechaIniVigencia.Enabled = true;
             TxtFechaFinVigencia.Enabled = true;
             TxtFechaOcurrencia.Enabled = true;
@@ -1292,7 +1327,7 @@ namespace WebItNow_Peacock
                 string strQuery = "UPDATE ITM_73 " +
                                   "   SET NumSiniestro = '" + TxtNumSiniestro.Text.Trim() + "', " +
                                   "       NumPoliza =  '" + TxtNumPoliza.Text.Trim() + "', " +
-                                  "       NomAjustador = '" + TxtNomAjustador.Text.Trim() + "', " +
+                                  "       IdAjustador = '" + ddlNomAjustador.SelectedValue + "', " +
                                   "       IdEstatusCaso = " + ddlEstatusCaso.SelectedValue + " " +
                                   " WHERE Referencia = '" + Variables.wRef + "' " +
                                   "   AND SubReferencia = " + Variables.wSubRef + " ";
@@ -2031,7 +2066,7 @@ namespace WebItNow_Peacock
                 dbConn.Open();
 
                 string strQuery = "SELECT t0.IdAsunto, t0.SubReferencia, CASE WHEN t0.SubReferencia >= 1 THEN CONCAT(t0.Referencia, '-', t0.SubReferencia) ELSE t0.Referencia END as Referencia_Sub, " +
-                           "       t0.NumSiniestro, t0.NumPoliza, t0.NomAjustador, " +
+                           "       t0.NumSiniestro, t0.NumPoliza, t0.IdAjustador, " +
                            "       A.Email_Ajustador, A.Tel_Ajustador, A.Fec_IniVigencia, A.Fec_FinVigencia, A.Fec_Ocurrencia, A.Hora_Recepcion, A.Hora_Ocurrencia, " +
                            "       A.Detalle_Reporte, A.Calle, A.Num_Exterior, A.Num_Interior, A.Estado, A.Delegacion, A.Colonia, A.Codigo_Postal, " +
                            "       CASE WHEN t0.IdSeguros = 'OTR' THEN t0.NomCliente ELSE t2.Descripcion END as Seguro_Cia, " +
@@ -2072,7 +2107,7 @@ namespace WebItNow_Peacock
                     TxtNumSiniestro.Text = Convert.ToString(row[3]);
                     // TxtNumPoliza.Text = Convert.ToString(row[4]);
                     TxtNumPoliza.Text = (row.IsNull(4) || string.IsNullOrWhiteSpace(row[4]?.ToString())) ? "INST0004" : row[4].ToString();
-                    TxtNomAjustador.Text = Convert.ToString(row[5]);
+                    ddlNomAjustador.SelectedValue = Convert.ToString(row[5]);
 
                     TxtEmailAjustador.Text = Convert.ToString(row[6]);
                     TxtTelAjustador.Text = Convert.ToString(row[7]);
@@ -3289,19 +3324,19 @@ namespace WebItNow_Peacock
 
         protected void btnShowPanel0_Click(object sender, EventArgs e)
         {
-            pnl0.Visible = !pnl0.Visible;   // Cambia la visibilidad del Panel 0 al contrario de su estado actual
+            pnl5.Visible = !pnl5.Visible;   // Cambia la visibilidad del Panel 0 al contrario de su estado actual
 
-            if (pnl0.Visible)
+            if (pnl5.Visible)
             {
                 string flechaHaciaArriba = "\u25B2";
                 btnShowPanel0.Text = flechaHaciaArriba; // Flecha hacia arriba
-                pnl0.Visible = true;
+                pnl5.Visible = true;
             }
             else
             {
                 string flechaHaciaAbajo = "\u25BC";
                 btnShowPanel0.Text = flechaHaciaAbajo; // Flecha hacia abajo
-                pnl0.Visible = false;
+                pnl5.Visible = false;
             }
         }
 
@@ -5616,7 +5651,6 @@ namespace WebItNow_Peacock
                 string Dom_Responsable = TxtCalleResponsable.Text.Trim() + " " + TxtNumExtResponsable.Text.Trim() + " " + TxtNumIntResponsable.Text.Trim() + ", " + abrev_Colonia + " " + TxtColoniaResponsable.Text.Trim()
                                       + ", " + ddlMunicipiosResponsable.SelectedItem + ", " + ddlEstadoResponsable.SelectedItem + ", " + abrev_CodigoP + " " + TxtCPostalResponsable.Text.Trim();
 
-
                 // Obtener Paquete Medico
                 // Iterar sobre las filas del GridView
                 // Declaración de variables
@@ -5855,6 +5889,61 @@ namespace WebItNow_Peacock
                     }
                 }
 
+                // Obtener datos Proveedor
+                // Iterar sobre las filas del GridView
+                string Nom_Proveedor_1 = string.Empty, CalleProveedor_1 = string.Empty, NumExtProveedor_1 = string.Empty, NumIntProveedor_1 = string.Empty, ColoniaProveedor_1 = string.Empty, MunicipioProveedor_1 = string.Empty, EstadoProveedor_1 = string.Empty, CPostalProveedor_1 = string.Empty;
+                string Nom_Proveedor_2 = string.Empty, CalleProveedor_2 = string.Empty, NumExtProveedor_2 = string.Empty, NumIntProveedor_2 = string.Empty, ColoniaProveedor_2 = string.Empty, MunicipioProveedor_2 = string.Empty, EstadoProveedor_2 = string.Empty, CPostalProveedor_2 = string.Empty;
+                string Nom_Proveedor_3 = string.Empty, CalleProveedor_3 = string.Empty, NumExtProveedor_3 = string.Empty, NumIntProveedor_3 = string.Empty, ColoniaProveedor_3 = string.Empty, MunicipioProveedor_3 = string.Empty, EstadoProveedor_3 = string.Empty, CPostalProveedor_3 = string.Empty;
+                string Nom_Proveedor_4 = string.Empty, CalleProveedor_4 = string.Empty, NumExtProveedor_4 = string.Empty, NumIntProveedor_4 = string.Empty, ColoniaProveedor_4 = string.Empty, MunicipioProveedor_4 = string.Empty, EstadoProveedor_4 = string.Empty, CPostalProveedor_4 = string.Empty;
+
+                for (int i = 0; i < GrdProveedores.Rows.Count && i < 4; i++) // Máximo 4 filas
+                {
+                    GridViewRow row = GrdProveedores.Rows[i];
+
+                    // Recuperar valores de las celdas
+                    string Nom_Proveedor = Server.HtmlDecode(Convert.ToString(row.Cells[2].Text));
+                    string Calle_Proveedor = Server.HtmlDecode(Convert.ToString(row.Cells[8].Text));
+                    string NumExt_Proveedor = Server.HtmlDecode(Convert.ToString(row.Cells[9].Text));
+                    string NumInt_Proveedor = Server.HtmlDecode(Convert.ToString(row.Cells[10].Text));
+                    string Estado_Proveedor = Server.HtmlDecode(Convert.ToString(row.Cells[11].Text));
+                    string Municipio_Proveedor = Server.HtmlDecode(Convert.ToString(row.Cells[12].Text));
+
+                    // Cargar los municipios del estado correspondiente ANTES de buscar
+                    GetMunicipiosProveedor(Estado_Proveedor);
+
+                    string Colonia_Proveedor = Server.HtmlDecode(Convert.ToString(row.Cells[13].Text));
+                    string CPostal_Proveedor = Server.HtmlDecode(Convert.ToString(row.Cells[14].Text));
+
+                    // Asignar valores a las variables según el renglón
+                    switch (i)
+                    {
+                        case 0:
+                            Nom_Proveedor_1 = Nom_Proveedor;
+                            CalleProveedor_1 = Calle_Proveedor;
+                            NumExtProveedor_1 = NumExt_Proveedor;
+                            NumIntProveedor_1 = NumInt_Proveedor;
+                            ColoniaProveedor_1 = Colonia_Proveedor;
+                            EstadoProveedor_1 = ddlEstadoProveedor.Items.FindByValue(Estado_Proveedor)?.Text ?? "";
+                            MunicipioProveedor_1 = ddlMunicipioProveedor.Items.FindByValue(Municipio_Proveedor)?.Text ?? ""; 
+                            CPostalProveedor_1 = CPostal_Proveedor;
+                            break;
+                        case 1:
+                            Nom_Proveedor_2 = Nom_Proveedor;
+                            CalleProveedor_2 = Calle_Proveedor;
+                            break;
+                        case 2:
+                            Nom_Proveedor_3 = Nom_Proveedor;
+                            CalleProveedor_3 = Calle_Proveedor;
+                            break;
+                        case 3:
+                            Nom_Proveedor_4 = Nom_Proveedor;
+                            CalleProveedor_4 = Calle_Proveedor;
+                            break;
+                    }
+                }
+
+                string Dom_Proveedor = CalleProveedor_1 + " " + NumExtProveedor_1 + " " + NumIntProveedor_1 + ", " + abrev_Colonia + " " + ColoniaProveedor_1
+                                      + ", " + MunicipioProveedor_1 + ", " + EstadoProveedor_1 + ", " + abrev_CodigoP + " " + CPostalProveedor_1;
 
                 // Copiar la plantilla a un nuevo documento
                 System.IO.File.Copy(plantillaPath, documentoGeneradoPath, true);
@@ -5969,6 +6058,9 @@ namespace WebItNow_Peacock
                     ReplaceText(body, "Domicilio_Responsable", Dom_Responsable);
 
                     ReplaceText(body, "Monto_Autorizado", TxtMontoAutorizado.Text);
+
+                    ReplaceText(body, "Nom_Proveedor", Nom_Proveedor_1);
+                    ReplaceText(body, "Dom_Proveedor", Dom_Proveedor);
 
                     // Quitar símbolo de moneda y comas, si vienen
                     string Monto_Autorizado = TxtMontoAutorizado.Text.Replace("$", "").Replace(",", "").Trim();
@@ -6154,7 +6246,9 @@ namespace WebItNow_Peacock
 
             // Datos de Proveedor
             ddlTpoServicio.Enabled = true;
+            TxtFiltroProveedor.Enabled = true;
             BtnProveedor.Enabled = true;
+
             TxtHoraSolicitud.Enabled = true;
             TxtHoraArribo.Enabled = true;
             TxtHoraSalida.Enabled = true;
@@ -6378,7 +6472,7 @@ namespace WebItNow_Peacock
 
         }
 
-        private void CargarDatos_Proveedor(string filtro = "")
+        private void CargarDatos_Proveedor(string filtro_1 = "", string filtro_2 = "")
         {
 
             ConexionBD_MySQL dbConn = new ConexionBD_MySQL(Variables.wUserName, Variables.wPassword);
@@ -6389,11 +6483,12 @@ namespace WebItNow_Peacock
                               "       Tel_Contacto_1, Tel_Contacto_2 " +
                               "  FROM ITM_34 WHERE IdStatus = 1";
 
-            if (!string.IsNullOrEmpty(filtro))
+            if (!string.IsNullOrEmpty(filtro_1))
             {
                 // Escapar comillas simples para evitar errores y reducir riesgo de SQL injection
-                filtro = filtro.Replace("'", "''");
-                strQuery += $" AND (Tpo_Servicio LIKE '%{filtro}%') ";
+                filtro_1 = filtro_1.Replace("'", "''");
+                strQuery += $" AND (Tpo_Servicio LIKE '%{filtro_1}%') " +
+                            $" AND ( Nom_Empresa LIKE '%{filtro_2}%') ";
             }
 
             DataTable dt = dbConn.ExecuteQuery(strQuery);
@@ -6963,7 +7058,14 @@ namespace WebItNow_Peacock
 
         protected void BtnProveedor_Click(object sender, EventArgs e)
         {
-            CargarDatos_Proveedor(ddlTpoServicio.SelectedValue);
+            if (ddlTpoServicio.SelectedValue == "0")
+            {
+                LblMessage.Text = "Seleccionar Tipo de Servicio";
+                mpeMensaje.Show();
+                return;
+            }
+
+            CargarDatos_Proveedor(ddlTpoServicio.SelectedValue, TxtFiltroProveedor.Text.Trim());
             mpeNewProveedor.Show();
         }
 
@@ -7280,5 +7382,59 @@ namespace WebItNow_Peacock
         {
 
         }
+
+        protected void ddlNomAjustador_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // inicializar controles
+            TxtEmailAjustador.Text = string.Empty;
+            TxtTelAjustador.Text = string.Empty;
+
+            string idAjustador = ddlNomAjustador.SelectedValue;
+
+            if (!string.IsNullOrEmpty(idAjustador))
+            {
+                ObtenerDatosAjustador(idAjustador);
+            }
+
+        }
+
+
+        private void ObtenerDatosAjustador(string idAjustador)
+        {
+            ConexionBD_MySQL dbConn = new ConexionBD_MySQL(Variables.wUserName, Variables.wPassword);
+            dbConn.Open();
+
+            string strQuery = "SELECT Email_Ajustador, Tel_Ajustador " +
+                              "FROM ITM_45 " +
+                              "WHERE IdAjustador = @IdAjustador AND IdStatus = 1";
+
+            using (MySqlCommand cmd = new MySqlCommand(strQuery, dbConn.Connection))
+            {
+                cmd.Parameters.AddWithValue("@IdAjustador", idAjustador);
+
+                try
+                {
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            TxtEmailAjustador.Text = reader["Email_Ajustador"].ToString();
+                            TxtTelAjustador.Text = reader["Tel_Ajustador"].ToString();
+                        }
+                        else
+                        {
+                            TxtEmailAjustador.Text = "";
+                            TxtTelAjustador.Text = "";
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    LblMessage.Text = ex.Message;
+                    mpeMensaje.Show();
+                }
+            }
+        }
+
     }
 }

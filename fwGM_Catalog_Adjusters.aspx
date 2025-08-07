@@ -89,6 +89,25 @@
                 </div>
             </div>
 
+            <div class="row mb-3">
+                <div class="col-lg-4 col-md-4 ">
+                    <div class="mb-2">
+                        <asp:Label ID="LblEmail" runat="server" Text="Correo Electronico" ></asp:Label>
+                    </div>
+                    <div class="input-group input-group-sm">
+                        <asp:TextBox ID="TxtEmail" runat="server" CssClass="form-control form-control-sm" placeholder="Correo Electronico" AutoComplete="off" MaxLength="50"></asp:TextBox>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 ">
+                    <div class="mb-2">
+                        <asp:Label ID="LblTelCelular" runat="server" Text="Telefono Celular" ></asp:Label>
+                    </div>
+                    <div class="input-group input-group-sm">
+                        <asp:TextBox ID="TxtTelCelular" runat="server" CssClass="form-control form-control-sm" placeholder="Telefono Celular" AutoComplete="off" MaxLength="50"></asp:TextBox>
+                    </div>
+                </div>
+            </div>
+
             <div class="d-grid gap-4 d-flex justify-content-center mt-2 mb-3">
                 <asp:UpdatePanel ID="UpdatePanel2" runat="server">
                     <ContentTemplate>
@@ -102,23 +121,26 @@
 
             <div class="container col-12 mt-4">
                 <div class="row mb-3 mt-4" style="background-color:#96E7D9;">
-                    <h6 class="h6 fw-normal my-1" style="font-size:small">Consulta de Responsables</h6>
+                    <h6 class="h6 fw-normal my-1" style="font-size:small">Consulta de Ajustadores</h6>
                 </div>
 
                 <%-- Catalogo de clientes --%>
                 <div style="overflow-x: auto; overflow-y:hidden">
-                    <asp:GridView ID="GrdResponsables"  runat="server" AutoGenerateColumns="false" GridLines="None" Width="100%" 
+                    <asp:GridView ID="GrdAjustadores"  runat="server" AutoGenerateColumns="false" GridLines="None" Width="100%" 
                             AllowPaging="True" CssClass="table table-responsive table-light table-striped table-hover align-middle" PagerStyle-CssClass="pagination-ys" AlternatingRowStyle-CssClass="alt" 
-                            OnPageIndexChanging="GrdResponsables_PageIndexChanging" OnRowCommand="GrdResponsables_RowCommand" OnPreRender="GrdResponsables_PreRender"
-                            OnSelectedIndexChanged="GrdResponsables_SelectedIndexChanged" OnRowDataBound="GrdResponsables_RowDataBound" 
-                            DataKeyNames="IdDocumento" PageSize="10" Font-Size="Smaller" >
+                            OnPageIndexChanging="GrdAjustadores_PageIndexChanging" OnRowCommand="GrdAjustadores_RowCommand" OnPreRender="GrdAjustadores_PreRender"
+                            OnSelectedIndexChanged="GrdAjustadores_SelectedIndexChanged" OnRowDataBound="GrdAjustadores_RowDataBound" 
+                            DataKeyNames="IdAjustador" PageSize="10" Font-Size="Smaller" >
                             <AlternatingRowStyle CssClass="alt autoWidth" />
                             <Columns>
-                                <asp:BoundField DataField="IdDocumento"  HeaderText="Clave" >
+                                <asp:BoundField DataField="IdAjustador" >
                                 </asp:BoundField>
-                                <asp:BoundField DataField="Descripcion" HeaderText="Categoría" >
+                                <asp:BoundField DataField="NomAjustador" HeaderText="Nombre de Ajustador" >
                                 </asp:BoundField>
-                                <%--<asp:BoundField DataField="IdTpoAsunto"> </asp:BoundField>--%>
+                                <asp:BoundField DataField="Email_Ajustador" HeaderText="Correo Electronico" >
+                                </asp:BoundField>
+                                <asp:BoundField DataField="Tel_Ajustador" HeaderText="Telefono Celular" >
+                                </asp:BoundField>
                                 <asp:TemplateField>
                                     <ItemTemplate>
                                         <asp:ImageButton ID="ImgEditar" runat="server" OnClick="ImgEditar_Click" Height="24px" Width="24px" ImageUrl="~/Images/editar_new.png"  Enabled="true" />

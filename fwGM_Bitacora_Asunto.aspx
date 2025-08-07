@@ -217,12 +217,20 @@
                             </asp:DropDownList>
                         </div>
                     </div>
-                    <div class="col-lg-8 col-md-8">
+                    <div class="col-lg-4 col-md-4">
+<%--
                         <div class="mb-2">
                             <asp:Label ID="LblNomAjustador" runat="server" Text="Nombre Ajustador" CssClass="form-label"></asp:Label>
                         </div>
                         <div class="input-group input-group-sm">
                             <asp:TextBox ID="TxtNomAjustador" runat="server" CssClass="form-control form-control-sm" AutoComplete="off" onkeyup="mayus(this);" MaxLength="80"></asp:TextBox>
+                        </div>
+--%>
+                        <div class="mb-2">
+                            <asp:Label ID="LblNomAjustador" runat="server" Text="Nombre del Ajustador" CssClass="form-label"></asp:Label>
+                        </div>
+                        <div class="input-group input-group-sm">
+                            <asp:DropDownList ID="ddlNomAjustador" runat="server" CssClass="btn btn-outline-secondary text-start" AutoPostBack="true" OnSelectedIndexChanged="ddlNomAjustador_SelectedIndexChanged" Width="100%"></asp:DropDownList>
                         </div>
                     </div>
                 </div>
@@ -929,69 +937,334 @@
                     </div>
                 </asp:Panel>
                 </div>
+
                 <div class="row mb-4 mt-3" style="background-color:#96E7D9; align-items: baseline;">
                     <div class="col-10" style="padding-left: 14px;">
-                        <asp:Label ID="LblEtiquetaPnl0" runat="server" Text="GENERADOR DE DOCUMENTOS" CssClass="control-label" Font-Size="small"></asp:Label>
+                        <asp:Label ID="LblEtiquetaPnl8" runat="server" Text="INFORMACIÓN MEDICA" CssClass="control-label" Font-Size="small"></asp:Label>
                     </div>
                     <div class="col-2" style="display:flex; justify-content: end;">
                         <div>
-                            <asp:Button ID="btnShowPanel0" runat="server" Text="&#9660;" OnClick="btnShowPanel0_Click" Height="24px" Width="24px" CssClass="btn btn-primary btn-sm justify-content-center align-items-center p-0 m-0" />
+                            <asp:Button ID="btnShowPanel8" runat="server" Text="&#9660;" OnClick="btnShowPanel8_Click" Height="24px" Width="24px" CssClass="btn btn-primary btn-sm justify-content-center align-items-center p-0 m-0" />
                         </div>
                     </div>
                 </div>
                 <div>
-                <asp:Panel ID="pnl0" runat="server" Visible="false">
-                    <div class="row mb-2">
-                        <%--<div style="overflow-x: auto; overflow-y:hidden">--%>
-                        <div style="overflow-y: auto; max-height: 330px; ">
-
-                            <asp:GridView ID="GrdDocumentos"  runat="server" AutoGenerateColumns="False" GridLines="None" Width="99%"
-                                    CssClass="table table-responsive table-light table-striped table-hover align-middle" AlternatingRowStyle-CssClass="alt" 
-                                    OnRowCommand="GrdDocumentos_RowCommand" OnSelectedIndexChanged="GrdDocumentos_SelectedIndexChanged" OnRowDataBound ="GrdDocumentos_RowDataBound"
-                                    DataKeyNames="IdDoc_Categoria" Font-Size="Smaller" >
-                                    <AlternatingRowStyle CssClass="alt" />
-                                    <Columns>
-                                        <asp:BoundField DataField="TpoArchivo" HeaderText="Tipo de Archivo" >
-                                        <ItemStyle Width="125px" /> 
-                                        </asp:BoundField>
-                                        <asp:BoundField DataField="Descripcion" HeaderText="Descripción del documento" >
-                                        <ItemStyle Width="825px" />
-                                        </asp:BoundField>
-                                        <asp:BoundField DataField="Fec_Entrega" DataFormatString="{0:d}" HeaderText="Fecha de entrega" >
-                                        <ItemStyle Width="125px" />
-                                        </asp:BoundField>
-                                        <asp:BoundField DataField="DocInterno" >
-                                        </asp:BoundField>    
-                                        <asp:TemplateField HeaderText="Entregado" ItemStyle-HorizontalAlign="Center" HeaderStyle-CssClass="text-center">
-                                            <ItemStyle Width="125px" />
-                                            <ItemTemplate>
-                                                <asp:CheckBox ID="ChBoxRow" runat="server" Checked='<%# Convert.ToBoolean(Eval("IdDescarga")) %>' />
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-                                    </Columns>
-                            </asp:GridView>
-
+                    <asp:Panel ID="pnl8" runat="server" Visible="false">
+                        <div class="row mt-3">
+                            <div class="col-lg-12 col-md-12">
+                                <div class ="mb-2">
+                                    <asp:Label ID="LblAlergias" runat="server" Text="Alergias"></asp:Label>
+                                </div>
+                                <div class="input-group input-group-sm">
+                                    <asp:TextBox ID="TxtAlergias" runat="server" CssClass="form-control form-control-sm mb-1" placeholder="" AutoComplete="off" MaxLength="1250" Columns="12" Rows="2" TextMode="MultiLine"></asp:TextBox>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </asp:Panel>
 
-                <div>
-                    <asp:Panel ID="pnl5" runat="server" Visible="true">
-                        <div class="d-grid gap-2 gap-md-3 d-md-flex justify-content-md-center mt-2 mb-3">
-                            <asp:UpdatePanel ID="UpdatePanel11" runat="server" UpdateMode="Conditional">
+                        <div class="row mt-3">
+                            <div class="col-lg-12 col-md-12">
+                                <div class ="mb-2">
+                                    <asp:Label ID="LblEnfermedades" runat="server" Text="Enfermedades preexistentes / Cronicas"></asp:Label>
+                                </div>
+                                <div class="input-group input-group-sm">
+                                    <asp:TextBox ID="TxtEnfermedades" runat="server" CssClass="form-control form-control-sm mb-1" placeholder="" AutoComplete="off" MaxLength="1250" Columns="12" Rows="2" TextMode="MultiLine"></asp:TextBox>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mt-3">
+                            <div class="col-lg-12 col-md-12">
+                                <div class ="mb-2">
+                                    <asp:Label ID="LblMedicamentos" runat="server" Text="Tratamientos"></asp:Label>
+                                </div>
+                                <div class="input-group input-group-sm">
+                                    <asp:TextBox ID="TxtMedicamentos" runat="server" CssClass="form-control form-control-sm mb-1" placeholder="" AutoComplete="off" MaxLength="1250" Columns="12" Rows="2" TextMode="MultiLine"></asp:TextBox>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mt-3">
+                            <div class="col-lg-12 col-md-12">
+                                <div class ="mb-2">
+                                    <asp:Label ID="LblAlcohol" runat="server" Text="Intoxicación por Alcohol"></asp:Label>
+                                </div>
+                                <div class="input-group input-group-sm">
+                                    <asp:TextBox ID="TxtAlcohol" runat="server" CssClass="form-control form-control-sm mb-1" placeholder="" AutoComplete="off" MaxLength="1250" Columns="12" Rows="2" TextMode="MultiLine"></asp:TextBox>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mt-3">
+                            <div class="col-lg-12 col-md-12">
+                                <div class ="mb-2">
+                                    <asp:Label ID="LblSustancias" runat="server" Text="Intoxicación por Sustancias"></asp:Label>
+                                </div>
+                                <div class="input-group input-group-sm">
+                                    <asp:TextBox ID="TxtSustancias" runat="server" CssClass="form-control form-control-sm mb-1" placeholder="" AutoComplete="off" MaxLength="1250" Columns="12" Rows="2" TextMode="MultiLine"></asp:TextBox>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mt-3">
+                            <div class="col-lg-12 col-md-12">
+                                <div class ="mb-2">
+                                    <asp:Label ID="LblObservaciones" runat="server" Text="Observaciones de primera atención"></asp:Label>
+                                </div>
+                                <div class="input-group input-group-sm">
+                                    <asp:TextBox ID="TxtObservaciones_PA" runat="server" CssClass="form-control form-control-sm mb-1" placeholder="" AutoComplete="off" MaxLength="2500" Columns="12" Rows="5" TextMode="MultiLine"></asp:TextBox>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mt-3">
+                            <div class="col-lg-12 col-md-12">
+                                <div class ="mb-2">
+                                    <asp:Label ID="LblDiagnosticoPreliminar" runat="server" Text="Diagnostico Preliminar"></asp:Label>
+                                </div>
+                                <div class="input-group input-group-sm">
+                                    <asp:TextBox ID="TxtDiagnosticoPreliminar" runat="server" CssClass="form-control form-control-sm mb-1" placeholder="" AutoComplete="off" MaxLength="2500" Columns="12" Rows="5" TextMode="MultiLine"></asp:TextBox>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-lg-12 col-md-12">
+                                <div class ="mb-2">
+                                    <asp:Label ID="LblComentariosMedicos" runat="server" Text="Comentarios Médicos"></asp:Label>
+                                </div>
+                                <div class="input-group input-group-sm">
+                                    <asp:TextBox ID="TxtComentariosMedicos" runat="server" CssClass="form-control form-control-sm mb-1" placeholder="" AutoComplete="off" MaxLength="2500" Columns="12" Rows="5" TextMode="MultiLine"></asp:TextBox>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-grid gap-4 d-flex justify-content-center mt-3 mb-3">
+                            <asp:UpdatePanel ID="UpdatePanel27" runat="server" UpdateMode="Conditional">
                                 <ContentTemplate>
-                                    <asp:Button ID="BtnOne" runat="server" Text="P. Medico STC." OnClick="BtnOne_Click" CssClass="btn btn-primary" TabIndex="1"/>
-                                    <asp:Button ID="BtnTwo"  runat="server" Text="1ra Respuesta" OnClick="BtnTwo_Click" CssClass="btn btn-primary" TabIndex="2"/>
-                                    <asp:Button ID="BtnThree" runat="server" Text="C. Autorización" OnClick="BtnThree_Click" CssClass="btn btn-primary" TabIndex="3" />
-                                    <asp:Button ID="BtnFour" runat="server" Text="D. Médico" OnClick="BtnFour_Click" CssClass="btn btn-primary" TabIndex="4"/>
-                                    <asp:Button ID="BtnFive"  runat="server" Text="I. Preliminar" OnClick="BtnFive_Click" CssClass="btn btn-primary" TabIndex="5"/>
-                                    <asp:Button ID="BtnSix" runat="server" Text="P.Médico Benef" OnClick="BtnSix_Click" CssClass="btn btn-primary" TabIndex="6" />
-                                    <asp:Button ID="BtnSeven" runat="server" Text="P.Médico Ajust." OnClick="BtnSeven_Click" CssClass="btn btn-primary" TabIndex="7" />
-                                    <%--<asp:Button ID="BtnEight" runat="server" Text="P. Médico QRB." OnClick="BtnEight_Click" CssClass="btn btn-primary" TabIndex="7" />--%>
-                                    <%--<asp:Button ID="BtnNine" runat="server" Text="P. Médico QRR." OnClick="BtnNine_Click" CssClass="btn btn-primary" TabIndex="7" />--%>
+                                    <asp:Button ID="BtnAnularPnl8" runat="server" Text="Cancelar" Font-Bold="True" OnClick="BtnAnularPnl8_Click" CssClass="btn btn-primary" Visible="false" TabIndex="0"/>
+                                    <asp:Button ID="btnEditarPnl8" runat="server" Text="Editar Datos" Font-Bold="True" OnClick="btnEditarPnl8_Click" CssClass="btn btn-primary" TabIndex="1"/>
+                                    <asp:Button ID="btnActualizarPnl8" runat="server" Text="Aplicar Cambios" Font-Bold="True" OnClick="btnActualizarPnl8_Click" CssClass="btn btn-secondary" visible="false" TabIndex="2"/>
                                 </ContentTemplate>
                             </asp:UpdatePanel>
                         </div>
+                        <div class="row mb-3 mt-4" style="background-color:#C6D541; align-items: baseline;">
+                            <div class="col-10" style="padding-left: 14px;">
+                                <asp:Label ID="LblICD" runat="server" Text="Diagnostico Final" CssClass="control-label" Font-Size="small"></asp:Label>
+                            </div>
+                            <div class="col-2" style="display:flex; justify-content: end;">
+                                <div>
+                                    <asp:Button ID="btnShowPanel10" runat="server" Text="&#9660;" OnClick="btnShowPanel10_Click" Height="24px" Width="24px" CssClass="btn btn-primary btn-sm justify-content-center align-items-center p-0 m-0" />
+                                </div>
+                            </div>
+                        </div>
+                        <asp:Panel ID="pnl10" runat="server" Visible="false">
+                        <div class="row mb-3">
+                            <div class="col-lg-4 col-md-4 ">
+                                <div class ="mb-2">
+                                    <asp:Label ID="LblBuscarICD" runat="server" Text="ICD" CssClass="control-label" Font-Size="Small"></asp:Label>
+                                </div>
+                                        <div class="input-group input-group-sm">
+                                            <asp:TextBox ID="TxtBuscarICD" runat="server" CssClass="form-control form-control-sm" onkeyup="mayus(this);"></asp:TextBox>
+                                        </div>
+                            </div>
+                            <div class="col-lg-2 col-md-2 ">
+                                <div class ="mb-2">
+                                    <asp:Label runat="server" CssClass="form-label">&nbsp;</asp:Label>
+                                </div>
+                                <div class="input-group input-group-sm">
+                                    <asp:Button ID="BtnICD" runat="server" Text="Buscar ICD" OnClick="BtnICD_Click" CssClass="btn btn-primary match-input-height" Enabled="false" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <%--  Diagnostico Final --%>
+                        <div style="overflow-x: auto; overflow-y:hidden">
+                            <asp:GridView ID="GrdDiagnosticoFinal"  runat="server" AutoGenerateColumns="false" GridLines="None" Width="100%" 
+                                    AllowPaging="True" CssClass="table table-responsive table-light table-striped table-hover align-middle" PagerStyle-CssClass="pagination-ys" AlternatingRowStyle-CssClass="alt" 
+                                    OnPageIndexChanging="GrdDiagnosticoFinal_PageIndexChanging" OnRowCommand="GrdDiagnosticoFinal_RowCommand" OnPreRender="GrdDiagnosticoFinal_PreRender"
+                                    OnSelectedIndexChanged="GrdDiagnosticoFinal_SelectedIndexChanged" OnRowDataBound="GrdDiagnosticoFinal_RowDataBound" 
+                                    DataKeyNames="Id_ICD" PageSize="5" Font-Size="Smaller" HeaderStyle-HorizontalAlign="Left" >
+                                    <AlternatingRowStyle CssClass="alt autoWidth" />
+                                    <Columns>
+                                        <asp:BoundField DataField="Id_ICD" >
+                                        </asp:BoundField>
+                                        <asp:BoundField DataField="Cve_ICD" HeaderText="Clave ICD" >
+                                        </asp:BoundField>
+                                        <asp:BoundField DataField="Desc_ICD" HeaderText="Descripción" >
+                                        </asp:BoundField>
+                                        <asp:BoundField DataField="Referencia" >
+                                        </asp:BoundField>
+                                        <asp:BoundField DataField="SubReferencia" >
+                                        </asp:BoundField>
+                                        <asp:TemplateField>
+                                            <ItemTemplate>
+                                                <asp:ImageButton ID="ImgEliminar_ICD" runat="server" OnClick="ImgEliminar_ICD_Click" Height="24px" Width="24px" ImageUrl="~/Images/rechazar_new.png"  Enabled="true" />
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                    </Columns>
+                                    <PagerStyle HorizontalAlign="Center" CssClass="pagination-ys" />
+                            </asp:GridView>
+                        </div>
+                        
+<%--
+                        <div class="row mt-3">
+                            <div class="col-lg-12 col-md-12">
+                                <div class ="mb-2">
+                                    <asp:Label ID="LblDiagnosticoFinal" runat="server" Text="Diagnostico Final"></asp:Label>
+                                </div>
+                                <div class="input-group input-group-sm">
+                                    <asp:TextBox ID="TxtDiagnosticoFinal" runat="server" CssClass="form-control form-control-sm mb-1" placeholder="" AutoComplete="off" MaxLength="1250" Columns="12" Rows="2" TextMode="MultiLine"></asp:TextBox>
+                                </div>
+                            </div>
+                        </div>
+--%>
+                        </asp:Panel>
+                        <div class="row mb-3 mt-4" style="background-color:#C6D541; align-items: baseline;">
+                            <div class="col-10" style="padding-left: 14px;">
+                                <asp:Label ID="LblCPT" runat="server" Text="Tratamientos Realizados" CssClass="control-label" Font-Size="small"></asp:Label>
+                            </div>
+                            <div class="col-2" style="display:flex; justify-content: end;">
+                                <div>
+                                    <asp:Button ID="btnShowPanel11" runat="server" Text="&#9660;" OnClick="btnShowPanel11_Click" Height="24px" Width="24px" CssClass="btn btn-primary btn-sm justify-content-center align-items-center p-0 m-0" />
+                                </div>
+                            </div>
+                        </div>
+                        <asp:Panel ID="pnl11" runat="server" Visible="false">
+                            <div class="row mb-3">
+                                <div class="col-lg-4 col-md-4 ">
+                                    <div class ="mb-2">
+                                        <asp:Label ID="LblBuscarCPT" runat="server" Text="CPT" CssClass="control-label" Font-Size="Small"></asp:Label>
+                                    </div>
+                                            <div class="input-group input-group-sm">
+                                                <asp:TextBox ID="TxtBuscarCPT" runat="server" CssClass="form-control form-control-sm" onkeyup="mayus(this);"></asp:TextBox>
+                                            </div>
+                                </div>
+                                <div class="col-lg-2 col-md-2 ">
+                                    <div class ="mb-2">
+                                        <asp:Label runat="server" CssClass="form-label">&nbsp;</asp:Label>
+                                    </div>
+                                    <div class="input-group input-group-sm">
+                                        <asp:Button ID="BtnCPT" runat="server" Text="Buscar CPT" OnClick="BtnCPT_Click" CssClass="btn btn-primary match-input-height" Enabled="false" />
+                                    </div>
+                                </div>
+                            </div>
+                            <%--  Tratamientos Realizados --%>
+                            <div style="overflow-x: auto; overflow-y:hidden">
+                                <asp:GridView ID="GrdTratamientos"  runat="server" AutoGenerateColumns="false" GridLines="None" Width="100%" 
+                                        AllowPaging="True" CssClass="table table-responsive table-light table-striped table-hover align-middle" PagerStyle-CssClass="pagination-ys" AlternatingRowStyle-CssClass="alt" 
+                                        OnPageIndexChanging="GrdTratamientos_PageIndexChanging" OnRowCommand="GrdTratamientos_RowCommand" OnPreRender="GrdTratamientos_PreRender"
+                                        OnSelectedIndexChanged="GrdTratamientos_SelectedIndexChanged" OnRowDataBound="GrdTratamientos_RowDataBound" 
+                                        DataKeyNames="Id_CPT" PageSize="5" Font-Size="Smaller" HeaderStyle-HorizontalAlign="Left" >
+                                        <AlternatingRowStyle CssClass="alt autoWidth" />
+                                        <Columns>
+                                            <asp:BoundField DataField="Id_CPT" >
+                                            </asp:BoundField>
+                                            <asp:BoundField DataField="Cve_CPT" HeaderText="Clave CPT" >
+                                            </asp:BoundField>
+                                            <asp:BoundField DataField="Desc_CPT" HeaderText="Descripción" >
+                                            </asp:BoundField>
+                                            <asp:BoundField DataField="Referencia" >
+                                            </asp:BoundField>
+                                            <asp:BoundField DataField="SubReferencia" >
+                                            </asp:BoundField>
+                                            <asp:TemplateField>
+                                                <ItemTemplate>
+                                                    <asp:ImageButton ID="ImgEliminar_CPT" runat="server" OnClick="ImgEliminar_CPT_Click" Height="24px" Width="24px" ImageUrl="~/Images/rechazar_new.png"  Enabled="true" />
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+                                        </Columns>
+                                        <PagerStyle HorizontalAlign="Center" CssClass="pagination-ys" />
+                                </asp:GridView>
+                            </div>
+<%--                        
+                        <div class="row mt-3">
+                            <div class="col-lg-12 col-md-12">
+                                <div class ="mb-2">
+                                    <asp:Label ID="LblTratamientosRealizados" runat="server" Text="Tratamientos Realizados"></asp:Label>
+                                </div>
+                                <div class="input-group input-group-sm">
+                                    <asp:TextBox ID="TxtTratamientosRealizados" runat="server" CssClass="form-control form-control-sm mb-1" placeholder="" AutoComplete="off" MaxLength="1250" Columns="12" Rows="2" TextMode="MultiLine"></asp:TextBox>
+                                </div>
+                            </div>
+                        </div>
+--%>
+                        </asp:Panel>
+                        <div class="row mb-3 mt-4" style="background-color:#C6D541; align-items: baseline;">
+                            <div class="col-10" style="padding-left: 14px;">
+                                <asp:Label ID="LblLine1" runat="server" Text="Estudios Realizados" CssClass="control-label" Font-Size="small"></asp:Label>
+                            </div>
+                            <div class="col-2" style="display:flex; justify-content: end;">
+                                <div>
+                                    <asp:Button ID="btnShowPanel12" runat="server" Text="&#9660;" OnClick="btnShowPanel12_Click" Height="24px" Width="24px" CssClass="btn btn-primary btn-sm justify-content-center align-items-center p-0 m-0" />
+                                </div>
+                            </div>
+                        </div>
+                        <asp:Panel ID="pnl12" runat="server" Visible="false">
+                            <div class="row mt-3">
+                                <div class="col-lg-12 col-md-12">
+                                    <div class ="mb-2">
+                                        <asp:Label ID="LblEstudiosRealizados" runat="server" Text="Estudios Realizados"></asp:Label>
+                                    </div>
+                                    <div class="input-group input-group-sm">
+                                        <asp:TextBox ID="TxtEstudiosRealizados" runat="server" CssClass="form-control form-control-sm mb-1" placeholder="" AutoComplete="off" MaxLength="1250" Columns="12" Rows="2" TextMode="MultiLine"></asp:TextBox>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Botón Guardar y Actualizar para el panel 9 -->
+                            <div class="d-grid gap-4 d-flex justify-content-center mt-3 mb-3">
+                                <asp:UpdatePanel ID="UpdatePanel16" runat="server" UpdateMode="Conditional">
+                                    <ContentTemplate>
+                                        <asp:Button ID="BtnAnularPnl9" runat="server" Text="Cancelar" Font-Bold="True" OnClick="BtnAnularPnl9_Click" CssClass="btn btn-primary" Visible="false" TabIndex="0"/>
+                                        <asp:Button ID="btnEditarPnl9" runat="server" Text="Editar Datos" Font-Bold="True" OnClick="btnEditarPnl9_Click" CssClass="btn btn-primary" Enabled="false" TabIndex="1"/>
+                                        <asp:Button ID="btnActualizarPnl9" runat="server" Text="Aplicar Cambios" Font-Bold="True" OnClick="btnActualizarPnl9_Click" CssClass="btn btn-primary" Visible="false" TabIndex="2"/>
+                                        <asp:Button ID="BtnAgregarPnl9" runat="server" Text="Agregar" OnClick="BtnAgregarPnl9_Click" CausesValidation="true" CssClass="btn btn-primary px-4" TabIndex="3"/>
+                                    </ContentTemplate>
+                                </asp:UpdatePanel>
+                            </div>
+                            <div class="row mt-5">
+                                <%-- Estudios Realizados --%>
+                                <div style="overflow-x: auto; overflow-y:hidden">
+                                    <asp:GridView ID="GrdEstudios"  runat="server" AutoGenerateColumns="false" GridLines="None" Width="100%" 
+                                            AllowPaging="True" CssClass="table table-responsive table-light table-striped table-hover align-middle" PagerStyle-CssClass="pagination-ys" AlternatingRowStyle-CssClass="alt" 
+                                            OnPageIndexChanging="GrdEstudios_PageIndexChanging" OnRowCommand="GrdEstudios_RowCommand" OnPreRender="GrdEstudios_PreRender"
+                                            OnSelectedIndexChanged="GrdEstudios_SelectedIndexChanged" OnRowDataBound="GrdEstudios_RowDataBound" 
+                                            DataKeyNames="Id_Estudio" PageSize="5" Font-Size="Smaller" HeaderStyle-HorizontalAlign="Left" >
+                                            <AlternatingRowStyle CssClass="alt autoWidth" />
+                                            <Columns>
+                                                <asp:BoundField DataField="Id_Estudio" >
+                                                </asp:BoundField>
+                                                <asp:BoundField DataField="Desc_Estudio" HeaderText="Estudios Realizados" >
+                                                <ItemStyle HorizontalAlign="Left" />
+                                                </asp:BoundField>
+                                                <asp:TemplateField>
+                                                    <ItemTemplate>
+                                                        <asp:ImageButton ID="ImgEstudios_Add" runat="server" OnClick="ImgEstudios_Add_Click" Height="24px" Width="24px" ImageUrl="~/Images/aceptar_new.png" Enabled="true" />
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField>
+                                                    <ItemTemplate>
+                                                        <asp:ImageButton ID="ImgEstudios_Del" runat="server" OnClick="ImgEstudios_Del_Click" Height="24px" Width="24px" ImageUrl="~/Images/rechazar_new.png" Enabled="true" />
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                            </Columns>
+                                            <PagerStyle HorizontalAlign="Center" CssClass="pagination-ys" />
+                                    </asp:GridView>
+                                </div>
+                            </div>
+                        </asp:Panel>
+<%--                        
+                        <div class="row mb-3 mt-4" style="background-color:#C6D541; align-items: baseline;">
+                            <div class="col-10" style="padding-left: 14px;">
+                                <asp:Label ID="LblLine2" runat="server" Text="Comentarios Médicos" CssClass="control-label" Font-Size="small"></asp:Label>
+                            </div>
+                            <div class="col-2" style="display:flex; justify-content: end;">
+                                <div>
+                                    <asp:Button ID="btnShowPanel13" runat="server" Text="&#9660;" OnClick="btnShowPanel13_Click" Height="24px" Width="24px" CssClass="btn btn-primary btn-sm justify-content-center align-items-center p-0 m-0" />
+                                </div>
+                            </div>
+                        </div>
+                        <asp:Panel ID="pnl13" runat="server" Visible="false">
+                        </asp:Panel>
+--%>
+
                     </asp:Panel>
                 </div>
 
@@ -1032,12 +1305,20 @@
                                             </asp:DropDownList>
                                         </div>
                                     </div>
-                                    <div class="col-lg-2 col-md-2">
-                                        <div class="mb-2">
+                                    <div class="col-lg-4 col-md-4 ">
+                                        <div class ="mb-2">
+                                            <asp:Label ID="Lbl1" runat="server" Text="Criterio de búsqueda del proveedor" CssClass="control-label" Font-Size="Small"></asp:Label>
+                                        </div>
+                                        <div class="input-group input-group-sm">
+                                            <asp:TextBox ID="TxtFiltroProveedor" runat="server" CssClass="form-control form-control-sm" ></asp:TextBox>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-2 col-md-2 ">
+                                        <div class ="mb-2">
                                             <asp:Label runat="server" CssClass="form-label">&nbsp;</asp:Label>
                                         </div>
                                         <div class="input-group input-group-sm">
-                                            <asp:Button ID="BtnProveedor" runat="server" Text="Buscar Proveedor" OnClick="BtnProveedor_Click" CssClass="btn btn-primary w-100" />
+                                            <asp:Button ID="BtnProveedor" runat="server" Text="Buscar Proveedor" OnClick="BtnProveedor_Click" CssClass="btn btn-primary match-input-height" Enabled="false" />
                                         </div>
                                     </div>
                                 </div>
@@ -1493,336 +1774,6 @@
 
                 <div class="row mb-4 mt-3" style="background-color:#96E7D9; align-items: baseline;">
                     <div class="col-10" style="padding-left: 14px;">
-                        <asp:Label ID="LblEtiquetaPnl8" runat="server" Text="INFORMACIÓN MEDICA" CssClass="control-label" Font-Size="small"></asp:Label>
-                    </div>
-                    <div class="col-2" style="display:flex; justify-content: end;">
-                        <div>
-                            <asp:Button ID="btnShowPanel8" runat="server" Text="&#9660;" OnClick="btnShowPanel8_Click" Height="24px" Width="24px" CssClass="btn btn-primary btn-sm justify-content-center align-items-center p-0 m-0" />
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <asp:Panel ID="pnl8" runat="server" Visible="false">
-                        <div class="row mt-3">
-                            <div class="col-lg-12 col-md-12">
-                                <div class ="mb-2">
-                                    <asp:Label ID="LblAlergias" runat="server" Text="Alergias"></asp:Label>
-                                </div>
-                                <div class="input-group input-group-sm">
-                                    <asp:TextBox ID="TxtAlergias" runat="server" CssClass="form-control form-control-sm mb-1" placeholder="" AutoComplete="off" MaxLength="1250" Columns="12" Rows="2" TextMode="MultiLine"></asp:TextBox>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row mt-3">
-                            <div class="col-lg-12 col-md-12">
-                                <div class ="mb-2">
-                                    <asp:Label ID="LblEnfermedades" runat="server" Text="Enfermedades preexistentes / Cronicas"></asp:Label>
-                                </div>
-                                <div class="input-group input-group-sm">
-                                    <asp:TextBox ID="TxtEnfermedades" runat="server" CssClass="form-control form-control-sm mb-1" placeholder="" AutoComplete="off" MaxLength="1250" Columns="12" Rows="2" TextMode="MultiLine"></asp:TextBox>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row mt-3">
-                            <div class="col-lg-12 col-md-12">
-                                <div class ="mb-2">
-                                    <asp:Label ID="LblMedicamentos" runat="server" Text="Tratamientos"></asp:Label>
-                                </div>
-                                <div class="input-group input-group-sm">
-                                    <asp:TextBox ID="TxtMedicamentos" runat="server" CssClass="form-control form-control-sm mb-1" placeholder="" AutoComplete="off" MaxLength="1250" Columns="12" Rows="2" TextMode="MultiLine"></asp:TextBox>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row mt-3">
-                            <div class="col-lg-12 col-md-12">
-                                <div class ="mb-2">
-                                    <asp:Label ID="LblAlcohol" runat="server" Text="Intoxicación por Alcohol"></asp:Label>
-                                </div>
-                                <div class="input-group input-group-sm">
-                                    <asp:TextBox ID="TxtAlcohol" runat="server" CssClass="form-control form-control-sm mb-1" placeholder="" AutoComplete="off" MaxLength="1250" Columns="12" Rows="2" TextMode="MultiLine"></asp:TextBox>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row mt-3">
-                            <div class="col-lg-12 col-md-12">
-                                <div class ="mb-2">
-                                    <asp:Label ID="LblSustancias" runat="server" Text="Intoxicación por Sustancias"></asp:Label>
-                                </div>
-                                <div class="input-group input-group-sm">
-                                    <asp:TextBox ID="TxtSustancias" runat="server" CssClass="form-control form-control-sm mb-1" placeholder="" AutoComplete="off" MaxLength="1250" Columns="12" Rows="2" TextMode="MultiLine"></asp:TextBox>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row mt-3">
-                            <div class="col-lg-12 col-md-12">
-                                <div class ="mb-2">
-                                    <asp:Label ID="LblObservaciones" runat="server" Text="Observaciones de primera atención"></asp:Label>
-                                </div>
-                                <div class="input-group input-group-sm">
-                                    <asp:TextBox ID="TxtObservaciones_PA" runat="server" CssClass="form-control form-control-sm mb-1" placeholder="" AutoComplete="off" MaxLength="2500" Columns="12" Rows="5" TextMode="MultiLine"></asp:TextBox>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row mt-3">
-                            <div class="col-lg-12 col-md-12">
-                                <div class ="mb-2">
-                                    <asp:Label ID="LblDiagnosticoPreliminar" runat="server" Text="Diagnostico Preliminar"></asp:Label>
-                                </div>
-                                <div class="input-group input-group-sm">
-                                    <asp:TextBox ID="TxtDiagnosticoPreliminar" runat="server" CssClass="form-control form-control-sm mb-1" placeholder="" AutoComplete="off" MaxLength="2500" Columns="12" Rows="5" TextMode="MultiLine"></asp:TextBox>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row mt-3">
-                            <div class="col-lg-12 col-md-12">
-                                <div class ="mb-2">
-                                    <asp:Label ID="LblComentariosMedicos" runat="server" Text="Comentarios Médicos"></asp:Label>
-                                </div>
-                                <div class="input-group input-group-sm">
-                                    <asp:TextBox ID="TxtComentariosMedicos" runat="server" CssClass="form-control form-control-sm mb-1" placeholder="" AutoComplete="off" MaxLength="2500" Columns="12" Rows="5" TextMode="MultiLine"></asp:TextBox>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="d-grid gap-4 d-flex justify-content-center mt-3 mb-3">
-                            <asp:UpdatePanel ID="UpdatePanel27" runat="server" UpdateMode="Conditional">
-                                <ContentTemplate>
-                                    <asp:Button ID="BtnAnularPnl8" runat="server" Text="Cancelar" Font-Bold="True" OnClick="BtnAnularPnl8_Click" CssClass="btn btn-primary" Visible="false" TabIndex="0"/>
-                                    <asp:Button ID="btnEditarPnl8" runat="server" Text="Editar Datos" Font-Bold="True" OnClick="btnEditarPnl8_Click" CssClass="btn btn-primary" TabIndex="1"/>
-                                    <asp:Button ID="btnActualizarPnl8" runat="server" Text="Aplicar Cambios" Font-Bold="True" OnClick="btnActualizarPnl8_Click" CssClass="btn btn-secondary" visible="false" TabIndex="2"/>
-                                </ContentTemplate>
-                            </asp:UpdatePanel>
-                        </div>
-                        <div class="row mb-3 mt-4" style="background-color:#C6D541; align-items: baseline;">
-                            <div class="col-10" style="padding-left: 14px;">
-                                <asp:Label ID="LblICD" runat="server" Text="Diagnostico Final" CssClass="control-label" Font-Size="small"></asp:Label>
-                            </div>
-                            <div class="col-2" style="display:flex; justify-content: end;">
-                                <div>
-                                    <asp:Button ID="btnShowPanel10" runat="server" Text="&#9660;" OnClick="btnShowPanel10_Click" Height="24px" Width="24px" CssClass="btn btn-primary btn-sm justify-content-center align-items-center p-0 m-0" />
-                                </div>
-                            </div>
-                        </div>
-                        <asp:Panel ID="pnl10" runat="server" Visible="false">
-                        <div class="row mb-3">
-                            <div class="col-lg-4 col-md-4 ">
-                                <div class ="mb-2">
-                                    <asp:Label ID="LblBuscarICD" runat="server" Text="ICD" CssClass="control-label" Font-Size="Small"></asp:Label>
-                                </div>
-                                        <div class="input-group input-group-sm">
-                                            <asp:TextBox ID="TxtBuscarICD" runat="server" CssClass="form-control form-control-sm" onkeyup="mayus(this);"></asp:TextBox>
-                                        </div>
-                            </div>
-                            <div class="col-lg-2 col-md-2 ">
-                                <div class ="mb-2">
-                                    <asp:Label runat="server" CssClass="form-label">&nbsp;</asp:Label>
-                                </div>
-                                <div class="input-group input-group-sm">
-                                    <asp:Button ID="BtnICD" runat="server" Text="Buscar ICD" OnClick="BtnICD_Click" CssClass="btn btn-primary match-input-height" Enabled="false" />
-                                </div>
-                            </div>
-                        </div>
-
-                        <%--  Diagnostico Final --%>
-                        <div style="overflow-x: auto; overflow-y:hidden">
-                            <asp:GridView ID="GrdDiagnosticoFinal"  runat="server" AutoGenerateColumns="false" GridLines="None" Width="100%" 
-                                    AllowPaging="True" CssClass="table table-responsive table-light table-striped table-hover align-middle" PagerStyle-CssClass="pagination-ys" AlternatingRowStyle-CssClass="alt" 
-                                    OnPageIndexChanging="GrdDiagnosticoFinal_PageIndexChanging" OnRowCommand="GrdDiagnosticoFinal_RowCommand" OnPreRender="GrdDiagnosticoFinal_PreRender"
-                                    OnSelectedIndexChanged="GrdDiagnosticoFinal_SelectedIndexChanged" OnRowDataBound="GrdDiagnosticoFinal_RowDataBound" 
-                                    DataKeyNames="Id_ICD" PageSize="5" Font-Size="Smaller" HeaderStyle-HorizontalAlign="Left" >
-                                    <AlternatingRowStyle CssClass="alt autoWidth" />
-                                    <Columns>
-                                        <asp:BoundField DataField="Id_ICD" >
-                                        </asp:BoundField>
-                                        <asp:BoundField DataField="Cve_ICD" HeaderText="Clave ICD" >
-                                        </asp:BoundField>
-                                        <asp:BoundField DataField="Desc_ICD" HeaderText="Descripción" >
-                                        </asp:BoundField>
-                                        <asp:BoundField DataField="Referencia" >
-                                        </asp:BoundField>
-                                        <asp:BoundField DataField="SubReferencia" >
-                                        </asp:BoundField>
-                                        <asp:TemplateField>
-                                            <ItemTemplate>
-                                                <asp:ImageButton ID="ImgEliminar_ICD" runat="server" OnClick="ImgEliminar_ICD_Click" Height="24px" Width="24px" ImageUrl="~/Images/rechazar_new.png"  Enabled="true" />
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-                                    </Columns>
-                                    <PagerStyle HorizontalAlign="Center" CssClass="pagination-ys" />
-                            </asp:GridView>
-                        </div>
-                        
-<%--
-                        <div class="row mt-3">
-                            <div class="col-lg-12 col-md-12">
-                                <div class ="mb-2">
-                                    <asp:Label ID="LblDiagnosticoFinal" runat="server" Text="Diagnostico Final"></asp:Label>
-                                </div>
-                                <div class="input-group input-group-sm">
-                                    <asp:TextBox ID="TxtDiagnosticoFinal" runat="server" CssClass="form-control form-control-sm mb-1" placeholder="" AutoComplete="off" MaxLength="1250" Columns="12" Rows="2" TextMode="MultiLine"></asp:TextBox>
-                                </div>
-                            </div>
-                        </div>
---%>
-                        </asp:Panel>
-                        <div class="row mb-3 mt-4" style="background-color:#C6D541; align-items: baseline;">
-                            <div class="col-10" style="padding-left: 14px;">
-                                <asp:Label ID="LblCPT" runat="server" Text="Tratamientos Realizados" CssClass="control-label" Font-Size="small"></asp:Label>
-                            </div>
-                            <div class="col-2" style="display:flex; justify-content: end;">
-                                <div>
-                                    <asp:Button ID="btnShowPanel11" runat="server" Text="&#9660;" OnClick="btnShowPanel11_Click" Height="24px" Width="24px" CssClass="btn btn-primary btn-sm justify-content-center align-items-center p-0 m-0" />
-                                </div>
-                            </div>
-                        </div>
-                        <asp:Panel ID="pnl11" runat="server" Visible="false">
-                            <div class="row mb-3">
-                                <div class="col-lg-4 col-md-4 ">
-                                    <div class ="mb-2">
-                                        <asp:Label ID="LblBuscarCPT" runat="server" Text="CPT" CssClass="control-label" Font-Size="Small"></asp:Label>
-                                    </div>
-                                            <div class="input-group input-group-sm">
-                                                <asp:TextBox ID="TxtBuscarCPT" runat="server" CssClass="form-control form-control-sm" onkeyup="mayus(this);"></asp:TextBox>
-                                            </div>
-                                </div>
-                                <div class="col-lg-2 col-md-2 ">
-                                    <div class ="mb-2">
-                                        <asp:Label runat="server" CssClass="form-label">&nbsp;</asp:Label>
-                                    </div>
-                                    <div class="input-group input-group-sm">
-                                        <asp:Button ID="BtnCPT" runat="server" Text="Buscar CPT" OnClick="BtnCPT_Click" CssClass="btn btn-primary match-input-height" Enabled="false" />
-                                    </div>
-                                </div>
-                            </div>
-                            <%--  Tratamientos Realizados --%>
-                            <div style="overflow-x: auto; overflow-y:hidden">
-                                <asp:GridView ID="GrdTratamientos"  runat="server" AutoGenerateColumns="false" GridLines="None" Width="100%" 
-                                        AllowPaging="True" CssClass="table table-responsive table-light table-striped table-hover align-middle" PagerStyle-CssClass="pagination-ys" AlternatingRowStyle-CssClass="alt" 
-                                        OnPageIndexChanging="GrdTratamientos_PageIndexChanging" OnRowCommand="GrdTratamientos_RowCommand" OnPreRender="GrdTratamientos_PreRender"
-                                        OnSelectedIndexChanged="GrdTratamientos_SelectedIndexChanged" OnRowDataBound="GrdTratamientos_RowDataBound" 
-                                        DataKeyNames="Id_CPT" PageSize="5" Font-Size="Smaller" HeaderStyle-HorizontalAlign="Left" >
-                                        <AlternatingRowStyle CssClass="alt autoWidth" />
-                                        <Columns>
-                                            <asp:BoundField DataField="Id_CPT" >
-                                            </asp:BoundField>
-                                            <asp:BoundField DataField="Cve_CPT" HeaderText="Clave CPT" >
-                                            </asp:BoundField>
-                                            <asp:BoundField DataField="Desc_CPT" HeaderText="Descripción" >
-                                            </asp:BoundField>
-                                            <asp:BoundField DataField="Referencia" >
-                                            </asp:BoundField>
-                                            <asp:BoundField DataField="SubReferencia" >
-                                            </asp:BoundField>
-                                            <asp:TemplateField>
-                                                <ItemTemplate>
-                                                    <asp:ImageButton ID="ImgEliminar_CPT" runat="server" OnClick="ImgEliminar_CPT_Click" Height="24px" Width="24px" ImageUrl="~/Images/rechazar_new.png"  Enabled="true" />
-                                                </ItemTemplate>
-                                            </asp:TemplateField>
-                                        </Columns>
-                                        <PagerStyle HorizontalAlign="Center" CssClass="pagination-ys" />
-                                </asp:GridView>
-                            </div>
-<%--                        
-                        <div class="row mt-3">
-                            <div class="col-lg-12 col-md-12">
-                                <div class ="mb-2">
-                                    <asp:Label ID="LblTratamientosRealizados" runat="server" Text="Tratamientos Realizados"></asp:Label>
-                                </div>
-                                <div class="input-group input-group-sm">
-                                    <asp:TextBox ID="TxtTratamientosRealizados" runat="server" CssClass="form-control form-control-sm mb-1" placeholder="" AutoComplete="off" MaxLength="1250" Columns="12" Rows="2" TextMode="MultiLine"></asp:TextBox>
-                                </div>
-                            </div>
-                        </div>
---%>
-                        </asp:Panel>
-                        <div class="row mb-3 mt-4" style="background-color:#C6D541; align-items: baseline;">
-                            <div class="col-10" style="padding-left: 14px;">
-                                <asp:Label ID="LblLine1" runat="server" Text="Estudios Realizados" CssClass="control-label" Font-Size="small"></asp:Label>
-                            </div>
-                            <div class="col-2" style="display:flex; justify-content: end;">
-                                <div>
-                                    <asp:Button ID="btnShowPanel12" runat="server" Text="&#9660;" OnClick="btnShowPanel12_Click" Height="24px" Width="24px" CssClass="btn btn-primary btn-sm justify-content-center align-items-center p-0 m-0" />
-                                </div>
-                            </div>
-                        </div>
-                        <asp:Panel ID="pnl12" runat="server" Visible="false">
-                            <div class="row mt-3">
-                                <div class="col-lg-12 col-md-12">
-                                    <div class ="mb-2">
-                                        <asp:Label ID="LblEstudiosRealizados" runat="server" Text="Estudios Realizados"></asp:Label>
-                                    </div>
-                                    <div class="input-group input-group-sm">
-                                        <asp:TextBox ID="TxtEstudiosRealizados" runat="server" CssClass="form-control form-control-sm mb-1" placeholder="" AutoComplete="off" MaxLength="1250" Columns="12" Rows="2" TextMode="MultiLine"></asp:TextBox>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Botón Guardar y Actualizar para el panel 9 -->
-                            <div class="d-grid gap-4 d-flex justify-content-center mt-3 mb-3">
-                                <asp:UpdatePanel ID="UpdatePanel16" runat="server" UpdateMode="Conditional">
-                                    <ContentTemplate>
-                                        <asp:Button ID="BtnAnularPnl9" runat="server" Text="Cancelar" Font-Bold="True" OnClick="BtnAnularPnl9_Click" CssClass="btn btn-primary" Visible="false" TabIndex="0"/>
-                                        <asp:Button ID="btnEditarPnl9" runat="server" Text="Editar Datos" Font-Bold="True" OnClick="btnEditarPnl9_Click" CssClass="btn btn-primary" Enabled="false" TabIndex="1"/>
-                                        <asp:Button ID="btnActualizarPnl9" runat="server" Text="Aplicar Cambios" Font-Bold="True" OnClick="btnActualizarPnl9_Click" CssClass="btn btn-primary" Visible="false" TabIndex="2"/>
-                                        <asp:Button ID="BtnAgregarPnl9" runat="server" Text="Agregar" OnClick="BtnAgregarPnl9_Click" CausesValidation="true" CssClass="btn btn-primary px-4" TabIndex="3"/>
-                                    </ContentTemplate>
-                                </asp:UpdatePanel>
-                            </div>
-                            <div class="row mt-5">
-                                <%-- Estudios Realizados --%>
-                                <div style="overflow-x: auto; overflow-y:hidden">
-                                    <asp:GridView ID="GrdEstudios"  runat="server" AutoGenerateColumns="false" GridLines="None" Width="100%" 
-                                            AllowPaging="True" CssClass="table table-responsive table-light table-striped table-hover align-middle" PagerStyle-CssClass="pagination-ys" AlternatingRowStyle-CssClass="alt" 
-                                            OnPageIndexChanging="GrdEstudios_PageIndexChanging" OnRowCommand="GrdEstudios_RowCommand" OnPreRender="GrdEstudios_PreRender"
-                                            OnSelectedIndexChanged="GrdEstudios_SelectedIndexChanged" OnRowDataBound="GrdEstudios_RowDataBound" 
-                                            DataKeyNames="Id_Estudio" PageSize="5" Font-Size="Smaller" HeaderStyle-HorizontalAlign="Left" >
-                                            <AlternatingRowStyle CssClass="alt autoWidth" />
-                                            <Columns>
-                                                <asp:BoundField DataField="Id_Estudio" >
-                                                </asp:BoundField>
-                                                <asp:BoundField DataField="Desc_Estudio" HeaderText="Estudios Realizados" >
-                                                <ItemStyle HorizontalAlign="Left" />
-                                                </asp:BoundField>
-                                                <asp:TemplateField>
-                                                    <ItemTemplate>
-                                                        <asp:ImageButton ID="ImgEstudios_Add" runat="server" OnClick="ImgEstudios_Add_Click" Height="24px" Width="24px" ImageUrl="~/Images/aceptar_new.png" Enabled="true" />
-                                                    </ItemTemplate>
-                                                </asp:TemplateField>
-                                                <asp:TemplateField>
-                                                    <ItemTemplate>
-                                                        <asp:ImageButton ID="ImgEstudios_Del" runat="server" OnClick="ImgEstudios_Del_Click" Height="24px" Width="24px" ImageUrl="~/Images/rechazar_new.png" Enabled="true" />
-                                                    </ItemTemplate>
-                                                </asp:TemplateField>
-                                            </Columns>
-                                            <PagerStyle HorizontalAlign="Center" CssClass="pagination-ys" />
-                                    </asp:GridView>
-                                </div>
-                            </div>
-                        </asp:Panel>
-<%--                        
-                        <div class="row mb-3 mt-4" style="background-color:#C6D541; align-items: baseline;">
-                            <div class="col-10" style="padding-left: 14px;">
-                                <asp:Label ID="LblLine2" runat="server" Text="Comentarios Médicos" CssClass="control-label" Font-Size="small"></asp:Label>
-                            </div>
-                            <div class="col-2" style="display:flex; justify-content: end;">
-                                <div>
-                                    <asp:Button ID="btnShowPanel13" runat="server" Text="&#9660;" OnClick="btnShowPanel13_Click" Height="24px" Width="24px" CssClass="btn btn-primary btn-sm justify-content-center align-items-center p-0 m-0" />
-                                </div>
-                            </div>
-                        </div>
-                        <asp:Panel ID="pnl13" runat="server" Visible="false">
-                        </asp:Panel>
---%>
-
-                    </asp:Panel>
-                </div>
-
-                <div class="row mb-4 mt-3" style="background-color:#96E7D9; align-items: baseline;">
-                    <div class="col-10" style="padding-left: 14px;">
                         <asp:Label ID="LblEtiquetaPnl14" runat="server" Text="DATOS DE ATENCIÓN" CssClass="control-label" Font-Size="small"></asp:Label>
                     </div>
                     <div class="col-2" style="display:flex; justify-content: end;">
@@ -2115,6 +2066,71 @@
                                     <asp:Button ID="BtnAnularPnl13" runat="server" Text="Cancelar" Font-Bold="True" OnClick="BtnAnularPnl13_Click" CssClass="btn btn-primary" Visible="false" TabIndex="0"/>
                                     <asp:Button ID="btnEditarPnl13" runat="server" Text="Editar Datos" Font-Bold="True" OnClick="btnEditarPnl13_Click" CssClass="btn btn-primary" TabIndex="1"/>
                                     <asp:Button ID="btnActualizarPnl13" runat="server" Text="Aplicar Cambios" Font-Bold="True" OnClick="btnActualizarPnl13_Click" CssClass="btn btn-secondary" visible="false" TabIndex="2"/>
+                                </ContentTemplate>
+                            </asp:UpdatePanel>
+                        </div>
+                    </asp:Panel>
+                </div>
+
+                <div class="row mb-4 mt-3" style="background-color:#96E7D9; align-items: baseline;">
+                    <div class="col-10" style="padding-left: 14px;">
+                        <asp:Label ID="LblEtiquetaPnl0" runat="server" Text="GENERADOR DE DOCUMENTOS" CssClass="control-label" Font-Size="small"></asp:Label>
+                    </div>
+                    <div class="col-2" style="display:flex; justify-content: end;">
+                        <div>
+                            <asp:Button ID="btnShowPanel0" runat="server" Text="&#9660;" OnClick="btnShowPanel0_Click" Height="24px" Width="24px" CssClass="btn btn-primary btn-sm justify-content-center align-items-center p-0 m-0" />
+                        </div>
+                    </div>
+                </div>
+                <div>
+                <asp:Panel ID="pnl0" runat="server" Visible="false">
+                    <div class="row mb-2">
+                        <%--<div style="overflow-x: auto; overflow-y:hidden">--%>
+                        <div style="overflow-y: auto; max-height: 330px; ">
+
+                            <asp:GridView ID="GrdDocumentos"  runat="server" AutoGenerateColumns="False" GridLines="None" Width="99%"
+                                    CssClass="table table-responsive table-light table-striped table-hover align-middle" AlternatingRowStyle-CssClass="alt" 
+                                    OnRowCommand="GrdDocumentos_RowCommand" OnSelectedIndexChanged="GrdDocumentos_SelectedIndexChanged" OnRowDataBound ="GrdDocumentos_RowDataBound"
+                                    DataKeyNames="IdDoc_Categoria" Font-Size="Smaller" >
+                                    <AlternatingRowStyle CssClass="alt" />
+                                    <Columns>
+                                        <asp:BoundField DataField="TpoArchivo" HeaderText="Tipo de Archivo" >
+                                        <ItemStyle Width="125px" /> 
+                                        </asp:BoundField>
+                                        <asp:BoundField DataField="Descripcion" HeaderText="Descripción del documento" >
+                                        <ItemStyle Width="825px" />
+                                        </asp:BoundField>
+                                        <asp:BoundField DataField="Fec_Entrega" DataFormatString="{0:d}" HeaderText="Fecha de entrega" >
+                                        <ItemStyle Width="125px" />
+                                        </asp:BoundField>
+                                        <asp:BoundField DataField="DocInterno" >
+                                        </asp:BoundField>    
+                                        <asp:TemplateField HeaderText="Entregado" ItemStyle-HorizontalAlign="Center" HeaderStyle-CssClass="text-center">
+                                            <ItemStyle Width="125px" />
+                                            <ItemTemplate>
+                                                <asp:CheckBox ID="ChBoxRow" runat="server" Checked='<%# Convert.ToBoolean(Eval("IdDescarga")) %>' />
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                    </Columns>
+                            </asp:GridView>
+
+                        </div>
+                    </div>
+                </asp:Panel>
+                <div>
+                    <asp:Panel ID="pnl5" runat="server" Visible="false">
+                        <div class="d-grid gap-2 gap-md-3 d-md-flex justify-content-md-center mt-2 mb-3">
+                            <asp:UpdatePanel ID="UpdatePanel11" runat="server" UpdateMode="Conditional">
+                                <ContentTemplate>
+                                    <asp:Button ID="BtnOne" runat="server" Text="P. Medico STC." OnClick="BtnOne_Click" CssClass="btn btn-primary" TabIndex="1"/>
+                                    <asp:Button ID="BtnTwo"  runat="server" Text="1ra Respuesta" OnClick="BtnTwo_Click" CssClass="btn btn-primary" TabIndex="2"/>
+                                    <asp:Button ID="BtnThree" runat="server" Text="C. Autorización" OnClick="BtnThree_Click" CssClass="btn btn-primary" TabIndex="3" />
+                                    <asp:Button ID="BtnFour" runat="server" Text="D. Médico" OnClick="BtnFour_Click" CssClass="btn btn-primary" TabIndex="4"/>
+                                    <asp:Button ID="BtnFive"  runat="server" Text="I. Preliminar" OnClick="BtnFive_Click" CssClass="btn btn-primary" TabIndex="5"/>
+                                    <asp:Button ID="BtnSix" runat="server" Text="P.Médico Benef" OnClick="BtnSix_Click" CssClass="btn btn-primary" TabIndex="6" />
+                                    <asp:Button ID="BtnSeven" runat="server" Text="P.Médico Ajust." OnClick="BtnSeven_Click" CssClass="btn btn-primary" TabIndex="7" />
+                                <%--<asp:Button ID="BtnEight" runat="server" Text="P. Médico QRB." OnClick="BtnEight_Click" CssClass="btn btn-primary" TabIndex="7" />--%>
+                                <%--<asp:Button ID="BtnNine" runat="server" Text="P. Médico QRR." OnClick="BtnNine_Click" CssClass="btn btn-primary" TabIndex="7" />--%>
                                 </ContentTemplate>
                             </asp:UpdatePanel>
                         </div>

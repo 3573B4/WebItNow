@@ -232,6 +232,38 @@ namespace WebItNow_Peacock.GastosMedicos
             }
         }
 
+        protected void GetAjustador()
+        {
+            try
+            {
+
+                ConexionBD_MySQL dbConn = new ConexionBD_MySQL(Variables.wUserName, Variables.wPassword);
+                dbConn.Open();
+
+                string strQuery = "SELECT IdAjustador, NomAjustador " +
+                                        " FROM ITM_45 " +
+                                        " WHERE IdStatus = 1 ";
+
+                DataTable dt = dbConn.ExecuteQuery(strQuery);
+
+                ddlFiltros.DataSource = dt;
+
+                ddlFiltros.DataValueField = "IdAjustador";
+                ddlFiltros.DataTextField = "NomAjustador";
+
+                ddlFiltros.DataBind();
+                ddlFiltros.Items.Insert(0, new ListItem("-- Seleccionar --", "0"));
+
+                dbConn.Close();
+
+            }
+            catch (System.Exception ex)
+            {
+                LblMessage.Text = ex.Message;
+                mpeMensaje.Show();
+            }
+        }
+
         protected void GetEstatus()
         {
             try
@@ -328,6 +360,25 @@ namespace WebItNow_Peacock.GastosMedicos
             }
         }
 
+        protected void GetEstatusCaso()
+        {
+            try
+            {
+
+                ddlFiltros.Items.Clear();
+                ddlFiltros.Items.Add(new ListItem("-- Seleccionar--", "0"));
+                ddlFiltros.Items.Add(new ListItem("Hospitalizado", "1"));
+                ddlFiltros.Items.Add(new ListItem("En Seguimiento", "2"));
+                ddlFiltros.Items.Add(new ListItem("Alta / Cerrado", "3"));
+
+            }
+            catch (System.Exception ex)
+            {
+                LblMessage.Text = ex.Message;
+                mpeMensaje.Show();
+            }
+        }
+
         protected void GetAltaAsunto(string sValor, string sIdColumna)
         {
             try
@@ -376,7 +427,7 @@ namespace WebItNow_Peacock.GastosMedicos
                                "   WHEN '10' THEN 'Oct' WHEN '11' THEN 'Nov' WHEN '12' THEN 'Dic' END, '-', " +
                                "   DATE_FORMAT(STR_TO_DATE(t0.Fecha_Asignacion, '%d/%m/%Y'), '%Y') " +
                                "   ) AS Fecha_Asignacion,  t0.Hora_Asignacion, " +
-                               "   t0.NomActor, t0.NomDemandado, t0.NomAjustador, " +
+                               "   t0.NomActor, t0.NomDemandado, t6.NomAjustador, " +
                                "   CASE WHEN t0.IdStatus = 1 THEN 'ABIERTO' ELSE 'CERRADO' END AS IdStatus, " +
                                "   t0.Referencia AS Referencia, t1.Descripcion AS Tpo_Evento, " +
                                "   CASE WHEN t0.IdProyecto = 0 THEN 'NINGUNO' ELSE t5.Descripcion END AS NomProyecto, " +
@@ -390,6 +441,7 @@ namespace WebItNow_Peacock.GastosMedicos
                                "  LEFT JOIN ITM_12 t3 ON t0.IdRespMedico = t3.IdRespMedico " +
                                "  LEFT JOIN ITM_14 t4 ON t0.IdRespAdministrativo = t4.IdRespAdministrativo " +
                                "  LEFT JOIN ITM_26 t5 ON t0.IdProyecto = t5.IdProyecto AND t0.IdSeguros = t5.IdCliente " +
+                               "  LEFT JOIN ITM_45 t6 ON t0.IdAjustador = t6.IdAjustador " +
                                " WHERE t0.IdStatus IN (1) AND t0.IdTpoProyecto = " + iTpoProyecto + " ";
 
                     if (sIdColumna == "IdRespTecnico" || sIdColumna == "IdRespAdministrativo")
@@ -419,7 +471,7 @@ namespace WebItNow_Peacock.GastosMedicos
                                "   WHEN '10' THEN 'Oct' WHEN '11' THEN 'Nov' WHEN '12' THEN 'Dic' END, '-', " +
                                "   DATE_FORMAT(STR_TO_DATE(t0.Fecha_Asignacion, '%d/%m/%Y'), '%Y') " +
                                "   ) AS Fecha_Asignacion, t0.Hora_Asignacion, " +
-                               "   t0.NomActor, t0.NomDemandado, t0.NomAjustador, " +
+                               "   t0.NomActor, t0.NomDemandado, t6.NomAjustador, " +
                                "   CASE WHEN t0.IdStatus = 1 THEN 'ABIERTO' ELSE 'CERRADO' END AS IdStatus, " +
                                "   t0.Referencia AS Referencia, t1.Descripcion AS Tpo_Evento, " +
                                "   CASE WHEN t0.IdProyecto = 0 THEN 'NINGUNO' ELSE t5.Descripcion END AS NomProyecto, " +
@@ -433,6 +485,7 @@ namespace WebItNow_Peacock.GastosMedicos
                                "  LEFT JOIN ITM_12 t3 ON t0.IdRespMedico = t3.IdRespMedico " +
                                "  LEFT JOIN ITM_14 t4 ON t0.IdRespAdministrativo = t4.IdRespAdministrativo " +
                                "  LEFT JOIN ITM_26 t5 ON t0.IdProyecto = t5.IdProyecto AND t0.IdSeguros = t5.IdCliente " +
+                               "  LEFT JOIN ITM_45 t6 ON t0.IdAjustador = t6.IdAjustador " +
                                " WHERE t0.IdStatus IN (1) AND t0.IdTpoProyecto = " + iTpoProyecto + " " +
                                " ORDER BY t0.IdAsunto DESC LIMIT 100 ";
 
@@ -690,18 +743,17 @@ namespace WebItNow_Peacock.GastosMedicos
 
                     // Consulta MySQL
                     strQuery = "SELECT CASE WHEN t0.SubReferencia >= 1 THEN CONCAT(t0.Referencia, '-', t0.SubReferencia) ELSE t0.Referencia END as Referencia, " +
-                               "       t0.NumSiniestro, t0.NumPoliza, t0.NumReporte, t0.Fecha_Asignacion, t0.Hora_Asignacion, t0.NomActor, t0.NomDemandado, t0.NomAjustador, " +
-                               "       t1.Descripcion as Tpo_Asunto, " +
-                               "       CASE WHEN t0.IdProyecto = 0 THEN 'NINGUNO' ELSE t5.Descripcion END as IdProyecto, " +
+                               "       t0.NumSiniestro, t0.NumPoliza,  " +
+                               "       CASE WHEN t0.IdProyecto = 0 THEN 'NINGUNO' ELSE t5.Descripcion END as Nombre_Proyecto, t0.Fecha_Asignacion, t0.Hora_Asignacion, " +
                                "       CASE WHEN t0.IdSeguros = 'OTR' THEN t0.NomCliente ELSE t2.Descripcion END as Seguro_Cia, " +
-                               "       t3.Descripcion as Resp_Tecnico, t4.Descripcion as Resp_Administrativo, " +
+                               "       t1.Descripcion as Tpo_Evento, t6.NomAjustador, t3.Descripcion as Responsable_Medico, " +
                                "       CASE WHEN t0.IdEstatusCaso = 1 THEN 'Hospitalizado' WHEN t0.IdEstatusCaso = 2 THEN 'En Seguimiento' WHEN t0.IdEstatusCaso = 3 THEN 'Alta / Cerrado' END AS Estatus_Caso " +
                                "  FROM ITM_73 t0 " +
                                "  JOIN ITM_11 t1 ON t0.IdTpoEvento = t1.IdTpoEvento " +
                                "  JOIN ITM_67 t2 ON t0.IdSeguros = t2.IdSeguros " +
                                "  LEFT JOIN ITM_12 t3 ON t0.IdRespMedico = t3.IdRespMedico" +
-                               "  LEFT JOIN ITM_14 t4 ON t0.IdRespAdministrativo = t4.IdRespAdministrativo " +
                                "  LEFT JOIN ITM_26 t5 ON t0.IdProyecto = t5.IdProyecto AND t0.IdSeguros = t5.IdCliente " +
+                               "  LEFT JOIN ITM_45 t6 ON t0.IdAjustador = t6.IdAjustador " +
                                " WHERE t0.IdStatus IN (1) AND t0.IdTpoProyecto = " + iTpoProyecto + " ";
 
                     if (sIdColumna == "IdRespTecnico" || sIdColumna == "IdRespAdministrativo")
@@ -720,18 +772,17 @@ namespace WebItNow_Peacock.GastosMedicos
                 else
                 {
                     strQuery = "SELECT CASE WHEN t0.SubReferencia >= 1 THEN CONCAT(t0.Referencia, '-', t0.SubReferencia) ELSE t0.Referencia END as Referencia, " +
-                                "       t0.NumSiniestro, t0.NumPoliza, t0.NumReporte, t0.Fecha_Asignacion, t0.Hora_Asignacion, t0.NomActor, t0.NomDemandado, t0.NomAjustador, " +
-                                "       t1.Descripcion as Tpo_Asunto, " +
-                                "       CASE WHEN t0.IdProyecto = 0 THEN 'NINGUNO' ELSE t5.Descripcion END as IdProyecto, " +
+                                "       t0.NumSiniestro, t0.NumPoliza, " +
+                                "       CASE WHEN t0.IdProyecto = 0 THEN 'NINGUNO' ELSE t5.Descripcion END as Nombre_Proyecto, t0.Fecha_Asignacion, t0.Hora_Asignacion, " +
                                 "       CASE WHEN t0.IdSeguros = 'OTR' THEN t0.NomCliente ELSE t2.Descripcion END as Seguro_Cia, " +
-                                "       t3.Descripcion as Resp_Tecnico, t4.Descripcion as Resp_Administrativo, " +
+                                "       t1.Descripcion as Tpo_Evento, t6.NomAjustador, t3.Descripcion as Responsable_Medico, " +
                                 "       CASE WHEN t0.IdEstatusCaso = 1 THEN 'Hospitalizado' WHEN t0.IdEstatusCaso = 2 THEN 'En Seguimiento' WHEN t0.IdEstatusCaso = 3 THEN 'Alta / Cerrado' END AS Estatus_Caso " +
                                 "  FROM ITM_73 t0 " +
                                 "  JOIN ITM_11 t1 ON t0.IdTpoEvento = t1.IdTpoEvento " +
                                 "  JOIN ITM_67 t2 ON t0.IdSeguros = t2.IdSeguros " +
                                 "  LEFT JOIN ITM_12 t3 ON t0.IdRespMedico = t3.IdRespMedico " +
-                                "  LEFT JOIN ITM_14 t4 ON t0.IdRespAdministrativo = t4.IdRespAdministrativo " +
                                 "  LEFT JOIN ITM_26 t5 ON t0.IdProyecto = t5.IdProyecto AND t0.IdSeguros = t5.IdCliente " +
+                                "  LEFT JOIN ITM_45 t6 ON t0.IdAjustador = t6.IdAjustador " +
                                 " WHERE t0.IdStatus IN (1) AND t0.IdTpoProyecto = " + iTpoProyecto + " " +
                                 " ORDER BY t0.IdAsunto DESC LIMIT 100 ";
                 }
@@ -838,6 +889,18 @@ namespace WebItNow_Peacock.GastosMedicos
 
                     break;
 
+                case "IdAjustador":
+
+                    GetAjustador();
+
+                    LblFiltros.Text = "Nombre del Ajustador";
+                    LblFiltros.Visible = true;
+                    ddlFiltros.Visible = true;
+
+                    TxtRef.Text = string.Empty;
+
+                    break;
+
                 case "IdRespMedico":
 
                     GetResponsableTec();
@@ -850,11 +913,11 @@ namespace WebItNow_Peacock.GastosMedicos
 
                     break;
 
-                case "IdRespAdministrativo":
+                case "IdEstatusCaso":
 
-                    GetResponsableAdmin();
+                    GetEstatusCaso();
 
-                    LblFiltros.Text = "Responsable Administrativo";
+                    LblFiltros.Text = "Estatus del Caso";
                     LblFiltros.Visible = true;
                     ddlFiltros.Visible = true;
 

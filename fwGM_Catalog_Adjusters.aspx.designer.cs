@@ -51,6 +51,42 @@ namespace WebItNow_Peacock
         protected global::System.Web.UI.WebControls.TextBox TxtNomAjustador;
 
         /// <summary>
+        /// Control LblEmail.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LblEmail;
+
+        /// <summary>
+        /// Control TxtEmail.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TxtEmail;
+
+        /// <summary>
+        /// Control LblTelCelular.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LblTelCelular;
+
+        /// <summary>
+        /// Control TxtTelCelular.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TxtTelCelular;
+
+        /// <summary>
         /// Control UpdatePanel2.
         /// </summary>
         /// <remarks>
@@ -96,13 +132,13 @@ namespace WebItNow_Peacock
         protected global::System.Web.UI.WebControls.Button BtnAgregar;
 
         /// <summary>
-        /// Control GrdResponsables.
+        /// Control GrdAjustadores.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GrdResponsables;
+        protected global::System.Web.UI.WebControls.GridView GrdAjustadores;
 
         /// <summary>
         /// Control pnlMensaje.
