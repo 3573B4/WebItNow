@@ -19,9 +19,12 @@ namespace WebItNow_Peacock
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!Page.IsPostBack)
+            if (!Page.IsPostBack || Session["Idioma"] != null)
             {
                 string UsPrivilegios = Convert.ToString(Session["UsPrivilegios"]);
+
+                // Labels
+                lblTitulo_Mnu_Dinamico.Text = GetGlobalResourceObject("GlobalResources", "lblTitulo_Mnu_Dinamico").ToString();
 
                 if (UsPrivilegios == "3")
                 {

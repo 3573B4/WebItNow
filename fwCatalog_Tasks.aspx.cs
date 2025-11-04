@@ -27,6 +27,9 @@ namespace WebItNow_Peacock
             if (!Page.IsPostBack)
             {
                 GetTareas();
+
+                // Labels
+                lblTitulo_Cat_Tareas.Text = GetGlobalResourceObject("GlobalResources", "lblTitulo_Cat_Tareas").ToString();
             }
         }
 
@@ -49,7 +52,9 @@ namespace WebItNow_Peacock
                 if (dt.Rows.Count == 0)
                 {
                     GrdTasks.ShowHeaderWhenEmpty = true;
-                    GrdTasks.EmptyDataText = "No hay resultados.";
+                    GrdTasks.EmptyDataText = GetGlobalResourceObject("GlobalResources", "msg_NoResults").ToString();
+
+                    //GrdTasks.EmptyDataText = "No hay resultados.";
                 }
 
                 GrdTasks.DataSource = dt;
@@ -102,7 +107,8 @@ namespace WebItNow_Peacock
 
                 dbConn.Close();
 
-                LblMessage.Text = "Se elimino tarea, correctamente";
+                //LblMessage.Text = "Se elimino tarea, correctamente";
+                LblMessage.Text = GetGlobalResourceObject("GlobalResources", "msg_Tarea_Eliminado").ToString();
                 mpeMensaje.Show();
 
                 GetTareas();
@@ -146,7 +152,8 @@ namespace WebItNow_Peacock
 
                 dbConn.Close();
 
-                LblMessage.Text = "Se actualizo tarea, correctamente";
+                //LblMessage.Text = "Se actualizo tarea, correctamente";
+                LblMessage.Text = GetGlobalResourceObject("GlobalResources", "msg_Tarea_Actualizado").ToString();
                 mpeMensaje.Show();
 
                 GetTareas();
@@ -247,7 +254,7 @@ namespace WebItNow_Peacock
             chkTaskInterno.Enabled = false;
 
             BtnAnular.Visible = true;
-            BtnEditar.Enabled = true;
+            btnEditar.Enabled = true;
             BtnAgregar.Enabled = false;
         }
 
@@ -262,7 +269,8 @@ namespace WebItNow_Peacock
             BtnCancelar.Visible = true;
             BtnCerrar.Visible = false;
 
-            LblMessage_1.Text = "¿Desea eliminar la tarea?";
+            // LblMessage_1.Text = "¿Desea eliminar la tarea?";
+            LblMessage_1.Text = GetGlobalResourceObject("GlobalResources", "msg_Confirmar_Delete_Tarea").ToString();
             mpeMensaje_1.Show();
         }
 
@@ -277,11 +285,11 @@ namespace WebItNow_Peacock
             TxtPlazo.ReadOnly = false;
             chkTaskInterno.Enabled = true;
 
-            BtnEditar.Visible = true;
+            btnEditar.Visible = true;
             BtnGrabar.Visible = false;
             BtnAnular.Visible = false;
 
-            BtnEditar.Enabled = false;
+            btnEditar.Enabled = false;
             BtnAgregar.Enabled = true;
         }
 
@@ -291,7 +299,7 @@ namespace WebItNow_Peacock
             TxtPlazo.ReadOnly = false;
             chkTaskInterno.Enabled = true;
 
-            BtnEditar.Visible = false;
+            btnEditar.Visible = false;
             BtnGrabar.Visible = true;
         }
 
@@ -299,14 +307,16 @@ namespace WebItNow_Peacock
         {
             if (TxtTarea.Text == "" || TxtTarea.Text == null)
             {
-                LblMessage.Text = "Capturar Descripción de la Tarea";
+                //LblMessage.Text = "Capturar Descripción de la Tarea";
+                LblMessage.Text = GetGlobalResourceObject("GlobalResources", "msg_Capturar_DescTarea").ToString();
                 mpeMensaje.Show();
                 return;
             }
 
             if (TxtPlazo.Text == "" || TxtPlazo.Text == null)
             {
-                LblMessage.Text = "Capturar Descripción del Plazo";
+                //LblMessage.Text = "Capturar Descripción del Plazo";
+                LblMessage.Text = GetGlobalResourceObject("GlobalResources", "msg_Capturar_DescPlazo").ToString();
                 mpeMensaje.Show();
                 return;
             }
@@ -322,11 +332,11 @@ namespace WebItNow_Peacock
             TxtPlazo.ReadOnly = false;
             chkTaskInterno.Enabled = true;
 
-            BtnEditar.Visible = true;
+            btnEditar.Visible = true;
             BtnGrabar.Visible = false;
             BtnAnular.Visible = false;
 
-            BtnEditar.Enabled = false;
+            btnEditar.Enabled = false;
             BtnAgregar.Enabled = true;
         }
 
@@ -337,13 +347,15 @@ namespace WebItNow_Peacock
 
                 if (TxtTarea.Text == "" || TxtTarea.Text == null)
                 {
-                    LblMessage.Text = "Capturar Descripción de la Tarea";
+                    // LblMessage.Text = "Capturar Descripción de la Tarea";
+                    LblMessage.Text = GetGlobalResourceObject("GlobalResources", "msg_Capturar_DescTarea").ToString();
                     mpeMensaje.Show();
                     return;
                 }
                 else if (TxtPlazo.Text == "" || TxtPlazo.Text == null)
                 {
-                    LblMessage.Text = "Capturar Descripción del Plazo";
+                    // LblMessage.Text = "Capturar Descripción del Plazo";
+                    LblMessage.Text = GetGlobalResourceObject("GlobalResources", "msg_Capturar_DescPlazo").ToString();
                     mpeMensaje.Show();
                     return;
                 }
@@ -371,7 +383,8 @@ namespace WebItNow_Peacock
 
                 GetTareas();
 
-                LblMessage.Text = "Se agrego tarea, correctamente";
+                //LblMessage.Text = "Se agrego tarea, correctamente";
+                LblMessage.Text = GetGlobalResourceObject("GlobalResources", "msg_Tarea_Agregado").ToString();
                 mpeMensaje.Show();
 
                 // Inicializar Controles

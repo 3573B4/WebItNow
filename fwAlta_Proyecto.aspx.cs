@@ -29,6 +29,9 @@ namespace WebItNow_Peacock
                         return;
                     }
 
+                    // Labels
+                    lblTitulo_Alta_Proyecto.Text = GetGlobalResourceObject("GlobalResources", "lblTitulo_Alta_Proyecto").ToString();
+
                     GetCiaSeguros();
                     GetTipoAsunto();
                     GetGerentes();
@@ -79,7 +82,8 @@ namespace WebItNow_Peacock
                 ddlCliente.DataTextField = "Descripcion";
 
                 ddlCliente.DataBind();
-                ddlCliente.Items.Insert(0, new ListItem("-- Seleccionar --", "0"));
+                //ddlCliente.Items.Insert(0, new ListItem("-- Seleccionar --", "0"));
+                ddlCliente.Items.Insert(0, new ListItem(GetGlobalResourceObject("GlobalResources", "ddl_Select").ToString(), "0"));
 
                 dbConn.Close();
 
@@ -112,7 +116,8 @@ namespace WebItNow_Peacock
                 ddlTpoAsunto.DataTextField = "Descripcion";
 
                 ddlTpoAsunto.DataBind();
-                ddlTpoAsunto.Items.Insert(0, new ListItem("-- Seleccionar --", "-1"));
+                //ddlTpoAsunto.Items.Insert(0, new ListItem("-- Seleccionar --", "-1"));
+                ddlTpoAsunto.Items.Insert(0, new ListItem(GetGlobalResourceObject("GlobalResources", "ddl_Select").ToString(), "-1"));
 
                 dbConn.Close();
             }
@@ -143,7 +148,8 @@ namespace WebItNow_Peacock
                 ddlGerentes.DataTextField = "Descripcion";
 
                 ddlGerentes.DataBind();
-                ddlGerentes.Items.Insert(0, new ListItem("-- Seleccionar --", "0"));
+                //ddlGerentes.Items.Insert(0, new ListItem("-- Seleccionar --", "0"));
+                ddlGerentes.Items.Insert(0, new ListItem(GetGlobalResourceObject("GlobalResources", "ddl_Select").ToString(), "0"));
 
                 dbConn.Close();
             }
@@ -189,7 +195,8 @@ namespace WebItNow_Peacock
                 if (dt.Rows.Count == 0)
                 {
                     GrdProyectos.ShowHeaderWhenEmpty = true;
-                    GrdProyectos.EmptyDataText = "No hay resultados.";
+                    GrdProyectos.EmptyDataText = GetGlobalResourceObject("GlobalResources", "msg_NoResults").ToString();
+                    //GrdProyectos.EmptyDataText = "No hay resultados.";
                 }
 
                 GrdProyectos.DataSource = dt;
@@ -225,7 +232,8 @@ namespace WebItNow_Peacock
                 ddlTpoAsegurado.DataTextField = "Descripcion";
 
                 ddlTpoAsegurado.DataBind();
-                ddlTpoAsegurado.Items.Insert(0, new ListItem("-- Seleccionar --", "0"));
+                //ddlTpoAsegurado.Items.Insert(0, new ListItem("-- Seleccionar --", "0"));
+                ddlTpoAsegurado.Items.Insert(0, new ListItem(GetGlobalResourceObject("GlobalResources", "ddl_Select").ToString(), "0"));
 
                 dbConn.Close();
             }
@@ -274,167 +282,6 @@ namespace WebItNow_Peacock
         protected void ddlTpoAsunto_SelectedIndexChanged(object sender, EventArgs e)
         {
 
-        }
-
-        protected void BtnAgregar_Click(object sender, EventArgs e)
-        {
-            //try
-            //{
-            //    if (ddlCliente.SelectedValue == "0")
-            //    {
-            //        LblMessage.Text = "Seleccionar Nombre del Cliente";
-            //        mpeMensaje.Show();
-            //        return;
-            //    } else if (ddlTpoAsunto.SelectedValue == "0")
-            //    {
-            //        LblMessage.Text = "Seleccionar Tipo de Asunto";
-            //        mpeMensaje.Show();
-            //        return;
-            //    } else if (TxtNomProyecto.Text == "" || TxtNomProyecto.Text == null)
-            //    {
-            //        LblMessage.Text = "Capturar Nombre del proyecto";
-            //        mpeMensaje.Show();
-            //        return;
-            //    } else if (ddlGerentes.SelectedValue == "0")
-            //    {
-            //        LblMessage.Text = "Seleccionar Gerente Responsable";
-            //        mpeMensaje.Show();
-            //        return;
-            //    }
-
-            //    int iProyecto = GetIdConsecutivoMax();
-
-            //    string sCliente = ddlCliente.SelectedValue;
-            //    int iTpoAsunto = Convert.ToInt32(ddlTpoAsunto.SelectedValue);
-            //    int iGerente = Convert.ToInt32(ddlGerentes.SelectedValue);
-
-            //    int iTpoGestion = 0;
-
-
-            //    DateTime fechaActual = DateTime.Today;
-            //    string fechaActualFormateada = fechaActual.ToString("yyyy-MM-dd");
-
-            //    if (rbGestionCasos1.Checked)
-            //    {
-            //        if (TxtNumPoliza.Text == "" || TxtNumPoliza.Text == null)
-            //        {
-            //            LblMessage.Text = "Capturar Número de Póliza";
-            //            mpeMensaje.Show();
-            //            return;
-            //        } else if (TxtNomAsegurado.Text == "" || TxtNomAsegurado.Text == null)
-            //        {
-            //            LblMessage.Text = "Capturar Nombre del Asegurado";
-            //            mpeMensaje.Show();
-            //            return;
-            //        } else if (ddlTpoAsegurado.SelectedValue == "0")
-            //        {
-            //            LblMessage.Text = "Seleccionar Tipo de Asegurado";
-            //            mpeMensaje.Show();
-            //            return;
-            //        } else if (TxtIniVigencia.Text == "" || TxtIniVigencia.Text == null)
-            //        {
-            //            LblMessage.Text = "Seleccionar Fecha Inicio Vigencia";
-            //            mpeMensaje.Show();
-            //            return;
-            //        } else if (TxtFinVigencia.Text == "" || TxtFinVigencia.Text == null)
-            //        {
-            //            LblMessage.Text = "Seleccionar Fecha Fin Vigencia";
-            //            mpeMensaje.Show();
-            //            return;
-            //        }
-
-            //        iTpoGestion = 1;
-            //        fechaActualFormateada = TxtIniVigencia.Text;
-
-            //    }
-
-            //    DateTime fecha = DateTime.ParseExact(fechaActualFormateada, "yyyy-MM-dd", null);
-            //    int iTpoAsegurado = Convert.ToInt32(ddlTpoAsegurado.SelectedValue);
-
-            //    string sUsuario = Variables.wUserLogon;
-            //    string sReferencia = string.Empty;
-
-
-            //    string sIdSeguros = ddlCliente.SelectedValue;
-            //    int iConsecutivo = obtenerConsecutivo("fwAlta_Asunto");
-
-            //    if (ddlTpoAsunto.SelectedValue == "1")
-            //    {
-            //        sReferencia = "T-" + iConsecutivo + "-" + sIdSeguros + fecha.ToString("yy");
-            //    }
-            //    else if (ddlTpoAsunto.SelectedValue == "2")
-            //    {
-            //        sReferencia = "SS-" + iConsecutivo + "-" + sIdSeguros + fecha.ToString("yy");
-            //    }
-            //    else if (ddlTpoAsunto.SelectedValue == "3")
-            //    {
-            //        sReferencia = "SC-" + iConsecutivo + "-" + sIdSeguros + fecha.ToString("yy");
-            //    }
-            //    else if (ddlTpoAsunto.SelectedValue == "4")
-            //    {
-            //        sReferencia = "L-" + iConsecutivo + "-" + sIdSeguros + fecha.ToString("yy");
-            //    }
-
-            //    ConexionBD Conecta = new ConexionBD();
-            //    Conecta.Abrir();
-
-            //    // Insertar registro tabla (ITM_78)
-            //    string strQuery = "INSERT INTO ITM_78 (IdProyecto, Referencia, SubReferencia, Descripcion, IdCliente, IdTpoAsunto, Descripcion_Proyecto, Gerente_Responsable, IdTpoGestion, NumPoliza, " +
-            //                      " NomAsegurado, TpoAsegurado, FecIni_Vigencia, FecFin_Vigencia, Id_Usuario, IdStatus) " +
-            //                      " VALUES (" + iProyecto + ", '" + sReferencia + "', 0, '" + TxtNomProyecto.Text.Trim() + "', '" + sCliente + "', " + iTpoAsunto + ", " +
-            //                      "'" + TxtDescProyecto.Text.Trim() + "', " + iGerente + ", " + iTpoGestion + ", '" + TxtNumPoliza.Text.Trim() + "', " +
-            //                      "'" + TxtNomAsegurado.Text.Trim() + "', " + iTpoAsegurado + ", '" + TxtIniVigencia.Text + "', '" + TxtFinVigencia.Text + "', '" + sUsuario + "', 1)" + "\n \n";
-
-            //    strQuery += Environment.NewLine;
-
-            //    iConsecutivo++;
-            //    strQuery += "UPDATE ITM_71 SET IdConsecutivo = " + iConsecutivo + " WHERE IdProceso = 'fwAlta_Asunto'";
-
-            //    strQuery += Environment.NewLine;
-
-            //    strQuery += "INSERT INTO ITM_70 (Referencia, SubReferencia, NumPoliza, IdSeguros, IdTpoAsunto, IdProyecto, Fecha_Asignacion, " +
-            //                " NomAsegurado, Id_Usuario, IdStatus) " +
-            //                "  VALUES ('" + sReferencia + "', 0, '" + TxtNumPoliza.Text.Trim() + "', '" + sCliente + "', " + iTpoAsunto + ", " +
-            //                " " + iProyecto + ", '" + fechaActualFormateada + "', '" + TxtNomAsegurado.Text.Trim() + "', '" + sUsuario + "', 1)";
-
-            //    SqlCommand cmd = new SqlCommand(strQuery, Conecta.ConectarBD);
-
-            //    int affectedRows = cmd.ExecuteNonQuery();
-
-            //    Conecta.Cerrar();
-            //    cmd.Dispose();
-
-            //    LblMessage.Text = "Se agrego nuevo proyecto, correctamente " + "<br />" + "Num. Referencia : " + sReferencia;
-            //    mpeMensaje.Show();
-
-            //    // Inicializar Controles
-            //    TxtNomProyecto.Text = string.Empty;
-            //    TxtDescProyecto.Text = string.Empty;
-
-            //    ddlCliente.ClearSelection();
-            //    ddlTpoAsunto.ClearSelection();
-            //    ddlGerentes.ClearSelection();
-
-            //    TxtNumPoliza.Text = string.Empty;
-            //    TxtNomAsegurado.Text = string.Empty;
-            //    ddlTpoAsegurado.ClearSelection();
-            //    TxtIniVigencia.Text = string.Empty;
-            //    TxtFinVigencia.Text = string.Empty;
-
-            //    rbGestionCasos1.Checked = false;
-            //    rbGestionCasos2.Checked = false;
-
-            //    PnlGestionCasos.Visible = false;
-
-            //    string sCliente = ddlCliente.SelectedValue;  
-            //    GetProyectos(sCliente);
-
-            //}
-            //catch (Exception ex)
-            //{
-            //    LblMessage.Text = ex.Message;
-            //    mpeMensaje.Show();
-            //}
         }
 
         public int obtenerConsecutivo(string IdProceso)
@@ -531,7 +378,8 @@ namespace WebItNow_Peacock
 
                 //int affectedRows = cmd.ExecuteNonQuery();
 
-                LblMessage.Text = "Se elimino proyecto, correctamente";
+                // LblMessage.Text = "Se elimino proyecto, correctamente";
+                LblMessage.Text = GetGlobalResourceObject("GlobalResources", "msg_Proyecto_Eliminado").ToString();
                 mpeMensaje.Show();
 
                 string sCliente = ddlCliente.SelectedValue;
@@ -665,25 +513,29 @@ namespace WebItNow_Peacock
 
             if (ddlCliente.SelectedValue == "0")
             {
-                LblMessage.Text = "Seleccionar Nombre del Cliente";
+                //LblMessage.Text = "Seleccionar Nombre del Cliente";
+                LblMessage.Text = GetGlobalResourceObject("GlobalResources", "msg_Seleccionar_CiaSeguros").ToString();
                 mpeMensaje.Show();
                 return;
             }
             else if (ddlTpoAsunto.SelectedValue == "-1")
             {
-                LblMessage.Text = "Seleccionar Tipo de Asunto";
+                //LblMessage.Text = "Seleccionar Tipo de Asunto";
+                LblMessage.Text = GetGlobalResourceObject("GlobalResources", "msg_Seleccionar_TpoAsunto").ToString();
                 mpeMensaje.Show();
                 return;
             }
             else if (TxtNomProyecto.Text == "" || TxtNomProyecto.Text == null)
             {
-                LblMessage.Text = "Capturar Nombre del proyecto";
+                //LblMessage.Text = "Capturar Nombre del proyecto";
+                LblMessage.Text = GetGlobalResourceObject("GlobalResources", "msg_Capturar_NomProyecto").ToString();
                 mpeMensaje.Show();
                 return;
             }
             else if (ddlGerentes.SelectedValue == "0")
             {
-                LblMessage.Text = "Seleccionar Gerente Responsable";
+                //LblMessage.Text = "Seleccionar Gerente Responsable";
+                LblMessage.Text = GetGlobalResourceObject("GlobalResources", "msg_Seleccionar_Gerente").ToString();
                 mpeMensaje.Show();
                 return;
             }
@@ -692,7 +544,8 @@ namespace WebItNow_Peacock
 
             if(OkExiste == 1)
             {
-                LblMessage.Text = "El Proyecto, ya se encuentra registrado";
+                //LblMessage.Text = "El Proyecto, ya se encuentra registrado";
+                LblMessage.Text = GetGlobalResourceObject("GlobalResources", "msg_Proyecto_Registrado").ToString();
                 mpeMensaje.Show();
                 return;
             }
@@ -731,31 +584,36 @@ namespace WebItNow_Peacock
             {
                 if (TxtNumPoliza.Text == "" || TxtNumPoliza.Text == null)
                 {
-                    LblMessage.Text = "Capturar Número de Póliza";
+                    //LblMessage.Text = "Capturar Número de Póliza";
+                    LblMessage.Text = GetGlobalResourceObject("GlobalResources", "msg_Capturar_NumPoliza").ToString();
                     mpeMensaje.Show();
                     return;
                 }
                 else if (TxtNomAsegurado.Text == "" || TxtNomAsegurado.Text == null)
                 {
-                    LblMessage.Text = "Capturar Nombre del Asegurado";
+                    //LblMessage.Text = "Capturar Nombre del Asegurado";
+                    LblMessage.Text = GetGlobalResourceObject("GlobalResources", "msg_Capturar_NomAsegurado").ToString();
                     mpeMensaje.Show();
                     return;
                 }
                 else if (ddlTpoAsegurado.SelectedValue == "0")
                 {
-                    LblMessage.Text = "Seleccionar Tipo de Asegurado";
+                    //LblMessage.Text = "Seleccionar Tipo de Asegurado";
+                    LblMessage.Text = GetGlobalResourceObject("GlobalResources", "msg_Seleccionar_TpoAsegurado").ToString();
                     mpeMensaje.Show();
                     return;
                 }
                 else if (TxtIniVigencia.Text == "" || TxtIniVigencia.Text == null)
                 {
-                    LblMessage.Text = "Seleccionar Fecha Inicio Vigencia";
+                    //LblMessage.Text = "Seleccionar Fecha Inicio Vigencia";
+                    LblMessage.Text = GetGlobalResourceObject("GlobalResources", "msg_Seleccionar_FecIniVigencia").ToString();
                     mpeMensaje.Show();
                     return;
                 }
                 else if (TxtFinVigencia.Text == "" || TxtFinVigencia.Text == null)
                 {
-                    LblMessage.Text = "Seleccionar Fecha Fin Vigencia";
+                    //LblMessage.Text = "Seleccionar Fecha Fin Vigencia";
+                    LblMessage.Text = GetGlobalResourceObject("GlobalResources", "msg_Seleccionar_FecFinVigencia").ToString();
                     mpeMensaje.Show();
                     return;
                 }

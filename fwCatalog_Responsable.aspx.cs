@@ -34,6 +34,9 @@ namespace WebItNow_Peacock
                         return;
                     }
 
+                    // Labels
+                    lblTitulo_Cat_Responsables.Text = GetGlobalResourceObject("GlobalResources", "lblTitulo_Cat_Responsables").ToString();
+
                     GetResponsables();
 
                     Inicializar_GrdResponsable();
@@ -71,11 +74,13 @@ namespace WebItNow_Peacock
 
                 if (dt.Rows.Count == 0)
                 {
-                    ddlResponsables.Items.Insert(0, new ListItem("-- No Hay Carpeta(s) --", "0"));
+                    //ddlResponsables.Items.Insert(0, new ListItem("-- No Hay Carpeta(s) --", "0"));
+                    ddlResponsables.Items.Insert(0, new ListItem(GetGlobalResourceObject("GlobalResources", "ddl_NoHayCarpeta").ToString(), "0"));
                 }
                 else
                 {
-                    ddlResponsables.Items.Insert(0, new ListItem("-- Seleccionar --", "0"));
+                    //ddlResponsables.Items.Insert(0, new ListItem("-- Seleccionar --", "0"));
+                    ddlResponsables.Items.Insert(0, new ListItem(GetGlobalResourceObject("GlobalResources", "ddl_Select").ToString(), "0"));
                 }
 
                 dbConn.Close();
@@ -107,7 +112,9 @@ namespace WebItNow_Peacock
                 if (dt.Rows.Count == 0)
                 {
                     GrdResponsables.ShowHeaderWhenEmpty = true;
-                    GrdResponsables.EmptyDataText = "No hay resultados.";
+                    GrdResponsables.EmptyDataText = GetGlobalResourceObject("GlobalResources", "msg_NoResults").ToString();
+
+                    //GrdResponsables.EmptyDataText = "No hay resultados.";
                 }
 
                 GrdResponsables.DataSource = dt;
@@ -135,7 +142,9 @@ namespace WebItNow_Peacock
             {
                 // Mostrar el mensaje de "No hay resultados"
                 GrdResponsables.ShowHeaderWhenEmpty = true;
-                GrdResponsables.EmptyDataText = "No hay resultados.";
+                GrdResponsables.EmptyDataText = GetGlobalResourceObject("GlobalResources", "msg_NoResults").ToString();
+
+                //GrdResponsables.EmptyDataText = "No hay resultados.";
             }
 
             // Enlaza el DataTable (vacío o lleno) al GridView
@@ -171,7 +180,8 @@ namespace WebItNow_Peacock
 
                 dbConn.Close();
 
-                LblMessage.Text = "Se agrego responsable, correctamente";
+                // LblMessage.Text = "Se agrego responsable, correctamente";
+                LblMessage.Text = GetGlobalResourceObject("GlobalResources", "msg_Resposable_Agregado").ToString();
                 mpeMensaje.Show();
 
                 return 0;
@@ -231,7 +241,8 @@ namespace WebItNow_Peacock
 
                 dbConn.Close();
 
-                LblMessage.Text = "Se elimino responsable, correctamente";
+                // LblMessage.Text = "Se elimino responsable, correctamente";
+                LblMessage.Text = GetGlobalResourceObject("GlobalResources", "msg_Responsable_Eliminado").ToString();
                 mpeMensaje.Show();
 
             }
@@ -239,7 +250,8 @@ namespace WebItNow_Peacock
             {
                 if (ex.HResult == -2146232060)
                 {
-                    LblMessage.Text = "Responsable, se encuentra relacionado a un Asunto";
+                    // LblMessage.Text = "Responsable, se encuentra relacionado a un Asunto";
+                    LblMessage.Text = GetGlobalResourceObject("GlobalResources", "msg_Responsable_Relacionado").ToString();
                 }
                 else
                 {
@@ -270,7 +282,8 @@ namespace WebItNow_Peacock
 
                 dbConn.Close();
 
-                LblMessage.Text = "Se actualizo responsable, correctamente";
+                // LblMessage.Text = "Se actualizo responsable, correctamente";
+                LblMessage.Text = GetGlobalResourceObject("GlobalResources", "msg_Responsable_Actualizado").ToString();
                 mpeMensaje.Show();
 
             }
@@ -278,7 +291,8 @@ namespace WebItNow_Peacock
             {
                 if (ex.HResult == -2146232060)
                 {
-                    LblMessage.Text = "Responsable, se encuentra relacionado a un Asunto";
+                    // LblMessage.Text = "Responsable, se encuentra relacionado a un Asunto";
+                    LblMessage.Text = GetGlobalResourceObject("GlobalResources", "msg_Responsable_Relacionado").ToString();
                 }
                 else
                 {
@@ -346,13 +360,15 @@ namespace WebItNow_Peacock
 
             if (ddlResponsables.SelectedValue == "0")
             {
-                LblMessage.Text = "Seleccionar tipo de Responsable";
+                // LblMessage.Text = "Seleccionar tipo de Responsable";
+                LblMessage.Text = GetGlobalResourceObject("GlobalResources", "msg_Seleccionar_Responsable").ToString();
                 mpeMensaje.Show();
                 return;
             }
             else if (TxtNomResponsable.Text == "" || TxtNomResponsable.Text == null)
             {
-                LblMessage.Text = "Capturar Nombre de Responsable";
+                // LblMessage.Text = "Capturar Nombre de Responsable";
+                LblMessage.Text = GetGlobalResourceObject("GlobalResources", "msg_Capturar_Responsable").ToString();
                 mpeMensaje.Show();
                 return;
             }
@@ -385,7 +401,8 @@ namespace WebItNow_Peacock
             BtnCancelar.Visible = true;
             BtnCerrar.Visible = false;
 
-            LblMessage_1.Text = "¿Desea eliminar el responsable ?";
+            //LblMessage_1.Text = "¿Desea eliminar el responsable ?";
+            LblMessage_1.Text = GetGlobalResourceObject("GlobalResources", "msg_Confirmar_Delete_Responsable").ToString();
             mpeMensaje_1.Show();
 
         }
@@ -467,7 +484,8 @@ namespace WebItNow_Peacock
         {
             if (TxtNomResponsable.Text == "" || TxtNomResponsable.Text == null)
             {
-                LblMessage.Text = "Capturar Nombre de Responsable";
+                // LblMessage.Text = "Capturar Nombre de Responsable";
+                LblMessage.Text = GetGlobalResourceObject("GlobalResources", "msg_Capturar_Responsable").ToString();
                 mpeMensaje.Show();
                 return;
             }

@@ -33,6 +33,18 @@ namespace WebItNow_Peacock
             // para la producción, use la herramienta de compilación disponible en https://modernizr.com para seleccionar solo las pruebas que necesite
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                             "~/Scripts/modernizr-*"));
+
+            // Bundle de CSS
+            bundles.Add(new StyleBundle("~/Content/css").Include(
+                "~/Content/site.css",
+                "~/Content/bootstrap.css" // agrega tus CSS aquí
+            ));
+
+            // Bundle de JS
+            bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
+                "~/Scripts/jquery-3.7.1.js",
+                "~/Scripts/bootstrap.js" // agrega tus JS aquí
+            ));
         }
     }
 }

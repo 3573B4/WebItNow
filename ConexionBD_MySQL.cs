@@ -20,6 +20,20 @@ namespace WebItNow_Peacock
             string usuario = Convert.ToString(Session["User"]);
             string contraseña = Convert.ToString(Session["Password"]);
 
+            // Ajusta la base de datos según el idioma
+            switch (Session["Idioma"].ToString())
+            {
+                case "es-MX":
+                    // No cambia: Español por defecto
+                    break;
+                case "pt-BR":
+                    database += "_pt";
+                    break;
+                case "en-US":
+                    database += "_en";
+                    break;
+            }
+
             connectionString = $"Server={server};Port={port};Database={database};User ID={usuario};Password={contraseña};";
             connection = new MySqlConnection(connectionString);
         }

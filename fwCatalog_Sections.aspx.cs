@@ -34,6 +34,9 @@ namespace WebItNow_Peacock
                         return;
                     }
 
+                    // Labels
+                    lblTitulo_Cat_Secciones.Text = GetGlobalResourceObject("GlobalResources", "lblTitulo_Cat_Secciones").ToString();
+
                     Inicializar_GrdSeccion();
                     GetSecciones();
 
@@ -56,7 +59,7 @@ namespace WebItNow_Peacock
                 dbConn.Open();
 
                 // Consulta a las tablas : Estado de Documento (Expediente) = ITM_44
-                string strQuery = "SELECT IdSeccion, Descripcion " +
+                string strQuery = "SELECT IdSeccion, Cve_Seccion, Descripcion " +
                                         " FROM ITM_44 " +
                                         " WHERE IdStatus = 1";
 
@@ -65,7 +68,9 @@ namespace WebItNow_Peacock
                 if (dt.Rows.Count == 0)
                 {
                     GrdSeccion.ShowHeaderWhenEmpty = true;
-                    GrdSeccion.EmptyDataText = "No hay resultados.";
+                    GrdSeccion.EmptyDataText = GetGlobalResourceObject("GlobalResources", "msg_NoResults").ToString();
+
+                    //GrdSeccion.EmptyDataText = "No hay resultados.";
                 }
 
                 GrdSeccion.DataSource = dt;
@@ -93,7 +98,9 @@ namespace WebItNow_Peacock
             {
                 // Mostrar el mensaje de "No hay resultados"
                 GrdSeccion.ShowHeaderWhenEmpty = true;
-                GrdSeccion.EmptyDataText = "No hay resultados.";
+                GrdSeccion.EmptyDataText = GetGlobalResourceObject("GlobalResources", "msg_NoResults").ToString();
+
+                //GrdSeccion.EmptyDataText = "No hay resultados.";
             }
 
             // Enlaza el DataTable (vacío o lleno) al GridView
@@ -107,6 +114,7 @@ namespace WebItNow_Peacock
 
             // Define las columnas del DataTable (ITM_)
             dt.Columns.Add("IdSeccion", typeof(string));
+            dt.Columns.Add("Cve_Seccion", typeof(string));
             dt.Columns.Add("Descripcion", typeof(string));
 
             // Agrega más columnas según sea necesario
@@ -150,9 +158,10 @@ namespace WebItNow_Peacock
 
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                e.Row.Cells[1].Width = Unit.Pixel(1100);    // Descripcion
-                e.Row.Cells[2].Width = Unit.Pixel(50);      // Editar
-                e.Row.Cells[3].Width = Unit.Pixel(50);      // Eliminar
+                e.Row.Cells[1].Width = Unit.Pixel(100);     // Cve_Seccion
+                e.Row.Cells[2].Width = Unit.Pixel(1100);    // Descripcion
+                e.Row.Cells[3].Width = Unit.Pixel(50);      // Editar
+                e.Row.Cells[4].Width = Unit.Pixel(50);      // Eliminar
             }
             if (e.Row.RowType == DataControlRowType.Header)
             {
@@ -175,7 +184,9 @@ namespace WebItNow_Peacock
             BtnCancelar.Visible = true;
             BtnCerrar.Visible = false;
 
-            LblMessage_1.Text = "¿Desea eliminar la sección?";
+            // LblMessage_1.Text = "¿Desea eliminar la sección?";
+            LblMessage_1.Text = GetGlobalResourceObject("GlobalResources", "msg_Confirmar_Delete_Seccion").ToString();
+
             mpeMensaje_1.Show();
         }
 
@@ -198,7 +209,9 @@ namespace WebItNow_Peacock
 
                 dbConn.Close();
 
-                LblMessage.Text = "Se elimino sección, correctamente";
+                // LblMessage.Text = "Se elimino sección, correctamente";
+                LblMessage.Text = GetGlobalResourceObject("GlobalResources", "msg_Seccion_Eliminada").ToString();
+
                 mpeMensaje.Show();
 
                 GetSecciones();
@@ -232,7 +245,9 @@ namespace WebItNow_Peacock
 
                 dbConn.Close();
 
-                LblMessage.Text = "Se actualizo sección, correctamente";
+                //LblMessage.Text = "Se actualizo sección, correctamente";
+                LblMessage.Text = GetGlobalResourceObject("GlobalResources", "msg_Seccion_Actualizada").ToString();
+
                 mpeMensaje.Show();
 
                 GetSecciones();
@@ -253,25 +268,29 @@ namespace WebItNow_Peacock
 
                 if (TxtNomSeccion.Text == "" || TxtNomSeccion.Text == null)
                 {
-                    LblMessage.Text = "Capturar Nombre de la Sección";
+                    // LblMessage.Text = "Capturar Nombre de la Sección";
+                    LblMessage.Text = GetGlobalResourceObject("GlobalResources", "msg_CapturarNomSeccion").ToString();
                     mpeMensaje.Show();
+
                     return;
                 }
 
-                int iIdSeccion = GetIdConsecutivoMax();
+                int iConsecutivo = GetIdConsecutivoMax();
 
                 ConexionBD_MySQL dbConn = new ConexionBD_MySQL(Variables.wUserName, Variables.wPassword);
                 dbConn.Open();
 
                 // Insertar registro tabla (ITM_44)
-                string strQuery = "INSERT INTO ITM_44 (IdSeccion, Descripcion, IdStatus) " +
-                                  "VALUES ('" + iIdSeccion + "', '" + TxtNomSeccion.Text.Trim() + "', 1)" + "\n \n";
+                string strQuery = "INSERT INTO ITM_44 (IdSeccion, Cve_Seccion, Descripcion, IdStatus) " +
+                                  "VALUES ('" + iConsecutivo + "', CONCAT('SCC-', LPAD(" + iConsecutivo + ", 4, '0')), '" + TxtNomSeccion.Text.Trim() + "', 1)" + "\n \n";
 
                 int affectedRows = dbConn.ExecuteNonQuery(strQuery);
 
                 dbConn.Close();
 
-                LblMessage.Text = "Se agrego sección, correctamente";
+                // LblMessage.Text = "Se agrego sección, correctamente";
+                LblMessage.Text = GetGlobalResourceObject("GlobalResources", "msg_Seccion_Agregada").ToString();
+
                 mpeMensaje.Show();
 
                 // Inicializar Controles
@@ -360,7 +379,9 @@ namespace WebItNow_Peacock
         {
             if (TxtNomSeccion.Text == "" || TxtNomSeccion.Text == null)
             {
-                LblMessage.Text = "Capturar Nombre de la Sección";
+                // LblMessage.Text = "Capturar Nombre de la Sección";
+                LblMessage.Text = GetGlobalResourceObject("GlobalResources", "msg_CapturarNomSeccion").ToString();
+
                 mpeMensaje.Show();
                 return;
             }
@@ -386,7 +407,7 @@ namespace WebItNow_Peacock
 
             Variables.wRenglon = row.RowIndex;
 
-            TxtNomSeccion.Text = Server.HtmlDecode(Convert.ToString(GrdSeccion.Rows[index].Cells[1].Text));
+            TxtNomSeccion.Text = Server.HtmlDecode(Convert.ToString(GrdSeccion.Rows[index].Cells[2].Text));
 
             TxtNomSeccion.ReadOnly = true;
 

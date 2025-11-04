@@ -33,7 +33,11 @@ namespace WebItNow_Peacock
                         return;
                     }
 
+                    // Labels
+                    lblTitulo_Cat_Linea_Neg.Text = GetGlobalResourceObject("GlobalResources", "lblTitulo_Cat_Linea_Neg").ToString();
+
                     GetCiaSeguros();
+                    Inicializar_GrdLineaNeg();
                     // GetContactos();
 
                 }
@@ -67,7 +71,8 @@ namespace WebItNow_Peacock
                 ddlCliente.DataTextField = "Descripcion";
 
                 ddlCliente.DataBind();
-                ddlCliente.Items.Insert(0, new ListItem("-- Seleccionar --", "0"));
+                //ddlCliente.Items.Insert(0, new ListItem("-- Seleccionar --", "0"));
+                ddlCliente.Items.Insert(0, new ListItem(GetGlobalResourceObject("GlobalResources", "ddl_Select").ToString(), "0"));
 
                 dbConn.Close();
             }
@@ -87,7 +92,7 @@ namespace WebItNow_Peacock
                 dbConn.Open();
 
                 // Consulta a las tablas : Linea de Negocios = ITM_58
-                string strQuery = "SELECT IdLinea, IdSeguros, NomLineaNegocio " +
+                string strQuery = "SELECT IdLinea, IdSeguros, Cve_LineaNeg, NomLineaNegocio " +
                                   "  FROM ITM_58 " +
                                   " WHERE IdSeguros = '" + ddlCliente.SelectedValue + "' " +
                                   "   AND IdStatus = 1 ORDER BY IdLinea";
@@ -97,7 +102,9 @@ namespace WebItNow_Peacock
                 if (dt.Rows.Count == 0)
                 {
                     GrdLineaNegocios.ShowHeaderWhenEmpty = true;
-                    GrdLineaNegocios.EmptyDataText = "No hay resultados.";
+                    GrdLineaNegocios.EmptyDataText = GetGlobalResourceObject("GlobalResources", "msg_NoResults").ToString();
+
+                    //GrdLineaNegocios.EmptyDataText = "No hay resultados.";
                 }
 
                 GrdLineaNegocios.DataSource = dt;
@@ -113,6 +120,41 @@ namespace WebItNow_Peacock
                 LblMessage.Text = ex.Message;
                 mpeMensaje.Show();
             }
+        }
+
+        private void Inicializar_GrdLineaNeg()
+        {
+            // Crea un DataTable vacío con la estructura necesaria
+            DataTable dt = CrearDataTableVacio();
+
+            // Verifica si el DataTable tiene filas
+            if (dt.Rows.Count == 0)
+            {
+                // Mostrar el mensaje de "No hay resultados"
+                GrdLineaNegocios.ShowHeaderWhenEmpty = true;
+                GrdLineaNegocios.EmptyDataText = GetGlobalResourceObject("GlobalResources", "msg_NoResults").ToString();
+
+                //GrdLineaNegocios.EmptyDataText = "No hay resultados.";
+            }
+
+            // Enlaza el DataTable (vacío o lleno) al GridView
+            GrdLineaNegocios.DataSource = dt;
+            GrdLineaNegocios.DataBind();
+        }
+
+        private DataTable CrearDataTableVacio()
+        {
+            DataTable dt = new DataTable();
+
+            // Define las columnas del DataTable
+            dt.Columns.Add("IdLinea", typeof(string));
+            dt.Columns.Add("IdSeguros", typeof(string));
+            dt.Columns.Add("Cve_LineaNeg", typeof(string));
+            dt.Columns.Add("NomLineaNegocio", typeof(string));
+
+            // Agrega más columnas según sea necesario
+
+            return dt;
         }
 
         protected void GrdLineaNegocios_PageIndexChanging(object sender, GridViewPageEventArgs e)
@@ -146,17 +188,20 @@ namespace WebItNow_Peacock
 
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                e.Row.Cells[1].Width = Unit.Pixel(100);     // IdSeguros
-                e.Row.Cells[2].Width = Unit.Pixel(1100);    // Nombre Linea de Negocio
-                e.Row.Cells[4].Width = Unit.Pixel(50);      // Eliminar
+                e.Row.Cells[2].Width = Unit.Pixel(150);     // Cve_LineaNeg
+                e.Row.Cells[3].Width = Unit.Pixel(1100);    // Nombre Linea de Negocio
+                e.Row.Cells[4].Width = Unit.Pixel(50);      // Editar
+                e.Row.Cells[5].Width = Unit.Pixel(50);      // Eliminar
             }
             if (e.Row.RowType == DataControlRowType.Header)
             {
-                e.Row.Cells[0].Visible = false;    // IdLinea
+                e.Row.Cells[0].Visible = false;     // IdLinea
+                e.Row.Cells[1].Visible = false;     // IdSeguros
             }
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
                 e.Row.Cells[0].Visible = false;    // IdLinea
+                e.Row.Cells[1].Visible = false;     // IdSeguros
             }
         }
 
@@ -222,13 +267,15 @@ namespace WebItNow_Peacock
 
             if (ddlCliente.SelectedValue == "0")
             {
-                LblMessage.Text = "Seleccionar Compañia de Seguros";
+                // LblMessage.Text = "Seleccionar Compañia de Seguros";
+                LblMessage.Text = GetGlobalResourceObject("GlobalResources", "msg_Seleccionar_CiaSeguros").ToString();
                 mpeMensaje.Show();
                 return;
             }
             if (TxtLineaNegocio.Text == "" || TxtLineaNegocio.Text == null)
             {
-                LblMessage.Text = "Capturar Nombre de Linea Negocios";
+                // LblMessage.Text = "Capturar Nombre de Linea Negocios";
+                LblMessage.Text = GetGlobalResourceObject("GlobalResources", "msg_Capturar_LineaNegocios").ToString();
                 mpeMensaje.Show();
                 return;
             }
@@ -272,7 +319,8 @@ namespace WebItNow_Peacock
 
                 dbConn.Close();
 
-                LblMessage.Text = "Se actualizo linea de negocios, correctamente";
+                //LblMessage.Text = "Se actualizo linea de negocios, correctamente";
+                LblMessage.Text = GetGlobalResourceObject("GlobalResources", "msg_LineaNegocios_Actualizado").ToString();
                 mpeMensaje.Show();
 
                 GetLineaNegocios();
@@ -307,7 +355,8 @@ namespace WebItNow_Peacock
 
                 dbConn.Close();
 
-                LblMessage.Text = "Se elimino linea de negocios, correctamente";
+                //LblMessage.Text = "Se elimino linea de negocios, correctamente";
+                LblMessage.Text = GetGlobalResourceObject("GlobalResources", "msg_LineaNegocios_Eliminado").ToString();
                 mpeMensaje.Show();
 
                 GetLineaNegocios();
@@ -327,31 +376,34 @@ namespace WebItNow_Peacock
             {
                 if (ddlCliente.SelectedValue == "0")
                 {
-                    LblMessage.Text = "Seleccionar Compañia de Seguros";
+                    // LblMessage.Text = "Seleccionar Compañia de Seguros";
+                    LblMessage.Text = GetGlobalResourceObject("GlobalResources", "msg_Seleccionar_CiaSeguros").ToString();
                     mpeMensaje.Show();
                     return;
                 }
                 if (TxtLineaNegocio.Text == "" || TxtLineaNegocio.Text == null)
                 {
-                    LblMessage.Text = "Capturar Nombre de Linea Negocios";
+                    // LblMessage.Text = "Capturar Nombre de Linea Negocios";
+                    LblMessage.Text = GetGlobalResourceObject("GlobalResources", "msg_Capturar_LineaNegocios").ToString();
                     mpeMensaje.Show();
                     return;
                 }
 
-                int iIdLinea = GetIdConsecutivoMax();
+                int iConsecutivo = GetIdConsecutivoMax();
 
                 ConexionBD_MySQL dbConn = new ConexionBD_MySQL(Variables.wUserName, Variables.wPassword);
                 dbConn.Open();
 
                 // Insertar registro tabla (ITM_58)
-                string strQuery = "INSERT INTO ITM_58 (IdLinea, IdSeguros, NomLineaNegocio, IdStatus) " +
-                                  "VALUES (" + iIdLinea + ", '" + ddlCliente.SelectedValue + "', '" + TxtLineaNegocio.Text.Trim() + "', 1)" + "\n \n";
+                string strQuery = "INSERT INTO ITM_58 (IdLinea, IdSeguros, Cve_LineaNeg, NomLineaNegocio, IdStatus) " +
+                                  "VALUES (" + iConsecutivo + ", '" + ddlCliente.SelectedValue + "', CONCAT('LNE-', LPAD(" + iConsecutivo + ", 4, '0')), '" + TxtLineaNegocio.Text.Trim() + "', 1)" + "\n \n";
 
                 int affectedRows = dbConn.ExecuteNonQuery(strQuery);
 
                 dbConn.Close();
 
-                LblMessage.Text = "Se agrego linea de negocio, correctamente";
+                // LblMessage.Text = "Se agrego linea de negocio, correctamente";
+                LblMessage.Text = GetGlobalResourceObject("GlobalResources", "msg_LineaNegocios_Agregado").ToString();
                 mpeMensaje.Show();
 
                 // Inicializar Controles
@@ -401,7 +453,7 @@ namespace WebItNow_Peacock
             Variables.wRenglon = row.RowIndex;
 
             ddlCliente.SelectedValue = Server.HtmlDecode(Convert.ToString(GrdLineaNegocios.Rows[index].Cells[1].Text));
-            TxtLineaNegocio.Text = Server.HtmlDecode(Convert.ToString(GrdLineaNegocios.Rows[index].Cells[2].Text));
+            TxtLineaNegocio.Text = Server.HtmlDecode(Convert.ToString(GrdLineaNegocios.Rows[index].Cells[3].Text));
 
             ddlCliente.Enabled = false;
             TxtLineaNegocio.ReadOnly = true;
@@ -422,7 +474,8 @@ namespace WebItNow_Peacock
             BtnCancelar.Visible = true;
             BtnCerrar.Visible = false;
 
-            LblMessage_1.Text = "¿Desea eliminar linea de negocios?";
+            // LblMessage_1.Text = "¿Desea eliminar linea de negocios?";
+            LblMessage_1.Text = GetGlobalResourceObject("GlobalResources", "msg_Confirmar_Delete_LineaNegocio").ToString();
             mpeMensaje_1.Show();
         }
 

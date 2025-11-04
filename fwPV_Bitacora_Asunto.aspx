@@ -15,25 +15,6 @@
             $("input").attr("autocomplete", "off");
         });
 
-        window.onload = function () {
-            // Inicia un temporizador para ejecutar después de 30 minutos (1800000 milisegundos)
-            var timer = setTimeout(function () {
-                // Actualiza el contenido del elemento para mostrar que la sesión ha expirado
-                document.getElementById('<%=LblExpira.ClientID %>').innerHTML = 'La sesión ha expirado.';
-        
-                // Encuentra el modal y lo muestra
-                var modalId = '<%=mpeExpira.ClientID%>';
-                var modal = $find(modalId);
-                modal.show();
-
-                // Inicia otro temporizador para recargar la página después de 30 minutos
-                setTimeout(function () {
-                    location.reload();
-                }, 1800000);
-
-            }, 1800000);
-        };
-
         function showError(message) {
             // Aquí puedes definir cómo quieres mostrar los mensajes de error
             var errorDiv = document.getElementById('errorDiv');
@@ -542,206 +523,169 @@
                 </div>
 
             </div>
-
-    <asp:Panel ID="pnlExpira" runat="server" CssClass="CajaDialogo" style="display: none; border: none; border-radius: 10px; width: 400px; background-color:#FFFFFF;">
-        <div class=" row justify-content-end" data-bs-theme="dark">
-            <div class="col-1">
-                <asp:Button runat="server" OnClientClick="acceso(); return false;" type="button" class="btn-close" aria-label="Close" />
-            </div>
-        </div>
-        <div>
-                <br />
-            <hr class="dropdown-divider" />
-        </div>
-        <div>
-                <br />
-            <hr class="dropdown-divider" />
-        </div>
-        <div>
-            <asp:Label ID="LblExpira" runat="server" Text="" />
-        </div>
-        <div>
-            <br />
-            <hr class="dropdown-divider" />
-        </div>
-        <div>
-            <br />
-                <asp:Button ID="BtnClose_Expira" OnClientClick="acceso(); return false;" runat="server" Text="Cerrar" CssClass="btn btn-outline-primary"/>
-        </div>
-    </asp:Panel>
-    <br />
-    <asp:Panel ID="pnlMensaje" runat="server" CssClass="CajaDialogo" style="display: none; border: none; border-radius: 10px; width: 400px; background-color:#FFFFFF;">
-        <div class=" row justify-content-end" data-bs-theme="dark">
-            <div class="col-1">
-                <asp:Button runat="server" type="button" class="btn-close" aria-label="Close" />
-            </div>
-        </div>
-        <div>
-            <br />
-            <hr class="dropdown-divider" />
-        </div>
-        
-        <div>
-            <br />
-            <asp:Label ID="LblMessage" runat="server" Text="" />
-        </div>
-        <div>
-            <br />
-            <hr class="dropdown-divider" />
-        </div>
-        
-        <div>
-            <br />
-            <asp:Button ID="BtnClose" runat="server" OnClick="BtnClose_Click" Text="Cerrar" CssClass="btn btn-outline-primary"/>
-        </div>
-    </asp:Panel>
-    <br />
-    <asp:Panel ID="pnlMensaje_1" runat="server" CssClass="CajaDialogo" style="display: none; border: none; border-radius: 10px; width: 400px; background-color:#FFFFFF;">
-        <div class=" row justify-content-end" data-bs-theme="dark">
-            <div class="col-1">
-                <asp:Button runat="server" type="button" class="btn-close" aria-label="Close" />
-            </div>
-        </div>
-        <div>
-            <br />
-            <hr class="dropdown-divider" />
-        </div>
-        
-        <div>
-            <br />
-            <asp:Label ID="LblMessage_1" runat="server" Text="" />
-        </div>
-        <div>
-            <br />
-            <hr class="dropdown-divider" />
-        </div>
-        
-        <div class="d-flex justify-content-center mb-3">
-            <br />
-            <asp:Button ID="BtnAceptar" runat="server" OnClick="BtnAceptar_Click" Text="Aceptar" CssClass="btn btn-outline-primary mx-1" />
-            <asp:Button ID="BtnCancelar" runat="server" OnClick="BtnCancelar_Click" Text="Cancelar" CssClass="btn btn-outline-secondary mx-1" />
-            <asp:Button ID="BtnCerrar" runat="server" OnClick="BtnCerrar_Click" Text="Cerrar" CssClass="btn btn-outline-primary"/>
-        </div>
-    </asp:Panel>
-    <br />
-    <asp:Panel ID="pnlMensaje_2" runat="server" CssClass="CajaDialogo" style="display: none; border: none; border-radius: 10px; width: 400px; background-color:#FFFFFF;">
-        <div class=" row justify-content-end" data-bs-theme="dark">
-            <div class="col-1">
-                <asp:Button runat="server" type="button" class="btn-close" aria-label="Close" />
-            </div>
-        </div>
-        <div>
-            <br />
-            <hr class="dropdown-divider" />
-        </div>
-        
-        <div>
-            <br />
-            <asp:Label ID="LblMessage_2" runat="server" Text="" />
-        </div>
-        <div>
-            <br />
-            <hr class="dropdown-divider" />
-        </div>
-        
-        <div class="d-flex justify-content-center mb-3">
-            <br />
-            <asp:Button ID="BtnAceptar_Del_Doc" runat="server" OnClick="BtnAceptar_Del_Doc_Click" Text="Aceptar" CssClass="btn btn-outline-primary mx-1" />
-            <asp:Button ID="BtnCancelar_Del_Doc" runat="server" OnClick="BtnCancelar_Del_Doc_Click" Text="Cancelar" CssClass="btn btn-outline-secondary mx-1" />
-        </div>
-    </asp:Panel>
-    <br />
-    <asp:Panel ID="pnlMensaje_3" runat="server" CssClass="CajaDialogo" style="display: none; border: none; border-radius: 10px; width: 400px; background-color:#FFFFFF;">
-        <div class=" row justify-content-end" data-bs-theme="dark">
-            <div class="col-1">
-                <asp:Button runat="server" type="button" class="btn-close" aria-label="Close" />
-            </div>
-        </div>
-        <div>
-            <br />
-            <hr class="dropdown-divider" />
-        </div>
-        
-        <div>
-            <br />
-            <asp:Label ID="LblMessage_3" runat="server" Text="" />
-        </div>
-        <div>
-            <br />
-            <hr class="dropdown-divider" />
-        </div>
-        
-        <div class="d-flex justify-content-center mb-3">
-            <br />
-            <asp:Button ID="BtnAceptar_CrearCuaderno" runat="server" OnClick="BtnAceptar_CrearCuaderno_Click" Text="Aceptar" CssClass="btn btn-outline-primary mx-1" />
-            <asp:Button ID="BtnCancelar_CrearCuaderno" runat="server" OnClick="BtnCancelar_CrearCuaderno_Click" Text="Cancelar" CssClass="btn btn-outline-secondary mx-1" />
-        </div>
-    </asp:Panel>
-    <br />
-    <table cellspacing="1" cellpadding="1" border="0">
-        <tr>
-            <td>
-                <div class="form-group">
-                    <div class="d-grid col-6 mx-auto">
-                        <ajaxToolkit:ModalPopupExtender ID="mpeMensaje" runat="server" PopupControlID="pnlMensaje"
-                            TargetControlID="lblOculto" BackgroundCssClass="FondoAplicacion" OnOkScript="mpeMensajeOnOk()" >
-                        </ajaxToolkit:ModalPopupExtender>
-                        <asp:Label ID="lblOculto" runat="server" Text="Label" Style="display: none;" />
-                    </div>
-                    <div>
-                        <div class="form-group">
-                            <div class="d-grid col-6 mx-auto">
-                                <ajaxToolkit:ModalPopupExtender ID="mpeMensaje_1" runat="server" PopupControlID="pnlMensaje_1"
-                                    TargetControlID="lblOculto_1" BackgroundCssClass="FondoAplicacion" OnOkScript="mpeMensajeOnOk()" >
-                                </ajaxToolkit:ModalPopupExtender>
-                                <asp:Label ID="lblOculto_1" runat="server" Text="Label" Style="display: none;" />
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="form-group">
-                            <div class="d-grid col-6 mx-auto">
-                                <ajaxToolkit:ModalPopupExtender ID="mpeMensaje_2" runat="server" PopupControlID="pnlMensaje_2"
-                                    TargetControlID="lblOculto_2" BackgroundCssClass="FondoAplicacion" OnOkScript="mpeMensajeOnOk()" >
-                                </ajaxToolkit:ModalPopupExtender>
-                                <asp:Label ID="lblOculto_2" runat="server" Text="Label" Style="display: none;" />
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="form-group">
-                            <div class="d-grid col-6 mx-auto">
-                                <ajaxToolkit:ModalPopupExtender ID="mpeMensaje_3" runat="server" PopupControlID="pnlMensaje_3"
-                                    TargetControlID="lblOculto_3" BackgroundCssClass="FondoAplicacion" OnOkScript="mpeMensajeOnOk()" >
-                                </ajaxToolkit:ModalPopupExtender>
-                                <asp:Label ID="lblOculto_3" runat="server" Text="Label" Style="display: none;" />
-                            </div>
-                        </div>
-                    </div>
+        <br />
+        <asp:Panel ID="pnlMensaje" runat="server" CssClass="CajaDialogo" style="display: none; border: none; border-radius: 10px; width: 400px; background-color:#FFFFFF;">
+            <div class=" row justify-content-end" data-bs-theme="dark">
+                <div class="col-1">
+                    <asp:Button runat="server" type="button" class="btn-close" aria-label="Close" />
                 </div>
-            </td>
-            <td>&nbsp;</td>
-            <td>
-                <div class="form-group">
-                    <div class="d-grid col-6 mx-auto">
-                        <ajaxToolkit:ModalPopupExtender ID="mpeExpira" runat="server" PopupControlID="pnlExpira"
-                            TargetControlID="lblHide" BackgroundCssClass="FondoAplicacion" OnOkScript="mpeExpiraOnOk()" >
-                        </ajaxToolkit:ModalPopupExtender>
-                        <asp:Label ID="lblHide" runat="server" Text="Label" Style="display: none;" />
-                    </div>
+            </div>
+            <div>
+                <br />
+                <hr class="dropdown-divider" />
+            </div>
+        
+            <div>
+                <br />
+                <asp:Label ID="LblMessage" runat="server" Text="" />
+            </div>
+            <div>
+                <br />
+                <hr class="dropdown-divider" />
+            </div>
+        
+            <div>
+                <br />
+                <asp:Button ID="BtnClose" runat="server" OnClick="BtnClose_Click" Text="Cerrar" CssClass="btn btn-outline-primary"/>
+            </div>
+        </asp:Panel>
+        <br />
+        <asp:Panel ID="pnlMensaje_1" runat="server" CssClass="CajaDialogo" style="display: none; border: none; border-radius: 10px; width: 400px; background-color:#FFFFFF;">
+            <div class=" row justify-content-end" data-bs-theme="dark">
+                <div class="col-1">
+                    <asp:Button runat="server" type="button" class="btn-close" aria-label="Close" />
                 </div>
-            </td>
-        </tr>
-        <tr>
-            <td>
+            </div>
+            <div>
+                <br />
+                <hr class="dropdown-divider" />
+            </div>
+        
+            <div>
+                <br />
+                <asp:Label ID="LblMessage_1" runat="server" Text="" />
+            </div>
+            <div>
+                <br />
+                <hr class="dropdown-divider" />
+            </div>
+        
+            <div class="d-flex justify-content-center mb-3">
+                <br />
+                <asp:Button ID="BtnAceptar" runat="server" OnClick="BtnAceptar_Click" Text="Aceptar" CssClass="btn btn-outline-primary mx-1" />
+                <asp:Button ID="BtnCancelar" runat="server" OnClick="BtnCancelar_Click" Text="Cancelar" CssClass="btn btn-outline-secondary mx-1" />
+                <asp:Button ID="BtnCerrar" runat="server" OnClick="BtnCerrar_Click" Text="Cerrar" CssClass="btn btn-outline-primary"/>
+            </div>
+        </asp:Panel>
+        <br />
+        <asp:Panel ID="pnlMensaje_2" runat="server" CssClass="CajaDialogo" style="display: none; border: none; border-radius: 10px; width: 400px; background-color:#FFFFFF;">
+            <div class=" row justify-content-end" data-bs-theme="dark">
+                <div class="col-1">
+                    <asp:Button runat="server" type="button" class="btn-close" aria-label="Close" />
+                </div>
+            </div>
+            <div>
+                <br />
+                <hr class="dropdown-divider" />
+            </div>
+        
+            <div>
+                <br />
+                <asp:Label ID="LblMessage_2" runat="server" Text="" />
+            </div>
+            <div>
+                <br />
+                <hr class="dropdown-divider" />
+            </div>
+        
+            <div class="d-flex justify-content-center mb-3">
+                <br />
+                <asp:Button ID="BtnAceptar_Del_Doc" runat="server" OnClick="BtnAceptar_Del_Doc_Click" Text="Aceptar" CssClass="btn btn-outline-primary mx-1" />
+                <asp:Button ID="BtnCancelar_Del_Doc" runat="server" OnClick="BtnCancelar_Del_Doc_Click" Text="Cancelar" CssClass="btn btn-outline-secondary mx-1" />
+            </div>
+        </asp:Panel>
+        <br />
+        <asp:Panel ID="pnlMensaje_3" runat="server" CssClass="CajaDialogo" style="display: none; border: none; border-radius: 10px; width: 400px; background-color:#FFFFFF;">
+            <div class=" row justify-content-end" data-bs-theme="dark">
+                <div class="col-1">
+                    <asp:Button runat="server" type="button" class="btn-close" aria-label="Close" />
+                </div>
+            </div>
+            <div>
+                <br />
+                <hr class="dropdown-divider" />
+            </div>
+        
+            <div>
+                <br />
+                <asp:Label ID="LblMessage_3" runat="server" Text="" />
+            </div>
+            <div>
+                <br />
+                <hr class="dropdown-divider" />
+            </div>
+        
+            <div class="d-flex justify-content-center mb-3">
+                <br />
+                <asp:Button ID="BtnAceptar_CrearCuaderno" runat="server" OnClick="BtnAceptar_CrearCuaderno_Click" Text="Aceptar" CssClass="btn btn-outline-primary mx-1" />
+                <asp:Button ID="BtnCancelar_CrearCuaderno" runat="server" OnClick="BtnCancelar_CrearCuaderno_Click" Text="Cancelar" CssClass="btn btn-outline-secondary mx-1" />
+            </div>
+        </asp:Panel>
+        <br />
+        <table cellspacing="1" cellpadding="1" border="0">
+            <tr>
+                <td>
+                    <div class="form-group">
+                        <div class="d-grid col-6 mx-auto">
+                            <ajaxToolkit:ModalPopupExtender ID="mpeMensaje" runat="server" PopupControlID="pnlMensaje"
+                                TargetControlID="lblOculto" BackgroundCssClass="FondoAplicacion" OnOkScript="mpeMensajeOnOk()" >
+                            </ajaxToolkit:ModalPopupExtender>
+                            <asp:Label ID="lblOculto" runat="server" Text="Label" Style="display: none;" />
+                        </div>
+                        <div>
+                            <div class="form-group">
+                                <div class="d-grid col-6 mx-auto">
+                                    <ajaxToolkit:ModalPopupExtender ID="mpeMensaje_1" runat="server" PopupControlID="pnlMensaje_1"
+                                        TargetControlID="lblOculto_1" BackgroundCssClass="FondoAplicacion" OnOkScript="mpeMensajeOnOk()" >
+                                    </ajaxToolkit:ModalPopupExtender>
+                                    <asp:Label ID="lblOculto_1" runat="server" Text="Label" Style="display: none;" />
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="form-group">
+                                <div class="d-grid col-6 mx-auto">
+                                    <ajaxToolkit:ModalPopupExtender ID="mpeMensaje_2" runat="server" PopupControlID="pnlMensaje_2"
+                                        TargetControlID="lblOculto_2" BackgroundCssClass="FondoAplicacion" OnOkScript="mpeMensajeOnOk()" >
+                                    </ajaxToolkit:ModalPopupExtender>
+                                    <asp:Label ID="lblOculto_2" runat="server" Text="Label" Style="display: none;" />
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="form-group">
+                                <div class="d-grid col-6 mx-auto">
+                                    <ajaxToolkit:ModalPopupExtender ID="mpeMensaje_3" runat="server" PopupControlID="pnlMensaje_3"
+                                        TargetControlID="lblOculto_3" BackgroundCssClass="FondoAplicacion" OnOkScript="mpeMensajeOnOk()" >
+                                    </ajaxToolkit:ModalPopupExtender>
+                                    <asp:Label ID="lblOculto_3" runat="server" Text="Label" Style="display: none;" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td>
 
-            </td>
-            <td class="style3">
-            </td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-        </tr>
-    </table>
+                </td>
+                <td class="style3">
+                </td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+        </table>
 
     </ContentTemplate>
     <Triggers>

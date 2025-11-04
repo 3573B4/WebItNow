@@ -75,8 +75,12 @@
             //
         }
 
-        document.onkeydown = function (evt) {
-            return (evt ? evt.which : event.keyCode) != 13;
+        //document.onkeydown = function (evt) {
+        //    return (evt ? evt.which : event.keyCode) != 13;
+        //}
+
+        function setIdioma(codigoIdioma) {
+            __doPostBack('ddlIdioma', codigoIdioma);
         }
 
     </script>
@@ -114,10 +118,15 @@
                 top: 5%; 	
             }
         }
+
     </style>
 
     <!-- Estilo para Agregar THEAD y TBODY a GridView. -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery-footable/0.1.0/css/footable.min.css" rel="stylesheet" type="text/css" />
+    <!-- CSS de Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- JS de Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
     <link href="~/Styles/center_controls.css" rel="stylesheet" type="text/css" />
     <link href="~/Styles/default.css" rel="stylesheet" type="text/css" />
@@ -129,31 +138,109 @@
 
 <body style="overflow: hidden;">
     <form id="form1" runat="server">
+<%-- 
+        <!-- Dropdown de idioma superior derecho -->
+       <div style="position:absolute; top:10px; right:10px; z-index:9999;">
+            <asp:DropDownList ID="ddlIdioma" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlIdioma_SelectedIndexChanged">
+                <asp:ListItem Text="Español" Value="es-MX"></asp:ListItem>
+                <asp:ListItem Text="Português" Value="pt-BR"></asp:ListItem>
+                <asp:ListItem Text="English" Value="en-US"></asp:ListItem>
+            </asp:DropDownList>
+        </div>
+--%>
+
+        <!-- Dropdown de idioma con ícono -->
+        <div class="dropdown" style="position:absolute; top:10px; right:10px; z-index:9999;">
+          <button class="btn btn-light border dropdown-toggle d-flex align-items-center shadow-sm" 
+                  type="button" id="ddlIdiomaBtn" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="bi bi-globe me-2"></i> <% = GetGlobalResourceObject("GlobalResources", "lblIdioma") %>
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="ddlIdiomaBtn">
+            <li>
+              <a class="dropdown-item d-flex align-items-center" href="javascript:void(0);" onclick="setIdioma('es-MX')">
+                <img src="/Images/es.png" width="20" class="me-2" /> Español
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item d-flex align-items-center" href="javascript:void(0);" onclick="setIdioma('pt-BR')">
+                <img src="/Images/pt.png" width="20" class="me-2" /> Português
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item d-flex align-items-center" href="javascript:void(0);" onclick="setIdioma('en-US')">
+                <img src="/Images/en.png" width="20" class="me-2" /> English
+              </a>
+            </li>
+          </ul>
+        </div>
+
+<%--
+        <div class="dropdown" style="position:absolute; top:10px; right:10px; z-index:9999;">
+          <button class="btn btn-outline-light dropdown-toggle" type="button" id="ddlIdiomaBtn" data-bs-toggle="dropdown" aria-expanded="false">
+            🌐 <% = GetGlobalResourceObject("GlobalResources", "lblIdioma") %>
+          </button>
+          <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end" aria-labelledby="ddlIdiomaBtn">
+            <li><a class="dropdown-item" href="javascript:void(0);" onclick="setIdioma('es-MX')">🇲🇽 Español</a></li>
+            <li><a class="dropdown-item" href="javascript:void(0);" onclick="setIdioma('pt-BR')">🇧🇷 Português</a></li>
+            <li><a class="dropdown-item" href="javascript:void(0);" onclick="setIdioma('en-US')">🇺🇸 English</a></li>
+          </ul>
+        </div>
+--%>
+
+<%--
+        <div style="position:absolute; top:10px; right:10px; z-index:9999;">
+          <div class="btn-group">
+            <button type="button" class="btn btn-outline-primary dropdown-toggle rounded-pill" 
+                    data-bs-toggle="dropdown" aria-expanded="false">
+              🌍  <% = GetGlobalResourceObject("GlobalResources", "lblIdioma") %>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end shadow-sm">
+              <li><a class="dropdown-item" href="javascript:void(0);" onclick="setIdioma('es-MX')">Español</a></li>
+              <li><a class="dropdown-item" href="javascript:void(0);" onclick="setIdioma('pt-BR')">Português</a></li>
+              <li><a class="dropdown-item" href="javascript:void(0);" onclick="setIdioma('en-US')">English</a></li>
+            </ul>
+          </div>
+        </div>
+--%>
+
         <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+
+        <!-- Banderas de idioma -->
+<%--
+        <div style="text-align:right; margin:10px;">
+            <asp:ImageButton ID="btnEspañol" runat="server" ImageUrl="~/Images/es.png"
+                ToolTip="Español" OnClick="btnEspañol_Click" CausesValidation="false" />
+            <asp:ImageButton ID="btnPortugues" runat="server" ImageUrl="~/Images/pt.png"
+                ToolTip="Português" OnClick="btnPortugues_Click" CausesValidation="false" />
+        </div>
+--%>
+
         <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
             <ContentTemplate>
             <div id="contenedor">
                 <div id="panelSuperior" class="container col-md-4">
-                    <h2 class="h2 mb-3 fw-normal mt-4"> Iniciar Sesión</h2>
-                    <div class="form-group">
-                        <asp:Label ID="LblUsu" runat="server" Text="Usuario" CssClass="control-label col-sm-2" Font-Size="Small"></asp:Label>
+                    <%--<h2 class="h2 mb-3 fw-normal mt-4"> Iniciar Sesión</h2>--%>
+                    <asp:Label ID="lblTitulo" runat="server" CssClass="h2 mb-3 fw-normal mt-4" style="display:block; text-align:center;" ></asp:Label>
+
+                    <div class="form-group mb-2">
+                        <asp:Label ID="lblUsuario" runat="server" Text="<%$ Resources:GlobalResources, lblUsuario %>" CssClass="control-label col-sm-2" Font-Size="Small"></asp:Label>
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server"   
                             ControlToValidate="TxtUsu" ErrorMessage="*" ForeColor="Red">
                             </asp:RequiredFieldValidator>
                         <div class="col-sm-12">
                             <asp:Panel ID="pnlUsu" runat="server" DefaultButton="BtnAceptar">
-                                <asp:TextBox ID="TxtUsu" runat="server" CssClass="form-control" placeholder="Usuario"  MaxLength="20" ></asp:TextBox>
+                                <asp:TextBox ID="TxtUsu" runat="server" CssClass="form-control" placeholder="<%$ Resources:GlobalResources, lblUsuario %>"  MaxLength="20" ></asp:TextBox>
                             </asp:Panel>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <asp:Label ID="LblPass" runat="server" Text="Contraseña" CssClass="control-label col-sm-2" Font-Size="Small"></asp:Label>
+                    <div class="form-group mb-2">
+                        <asp:Label ID="LblPass" runat="server" Text="<%$ Resources:GlobalResources, lblContraseña %>" CssClass="control-label col-sm-2" Font-Size="Small"></asp:Label>
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server"   
                             ControlToValidate="TxtPass" ErrorMessage="*" ForeColor="Red">
                             </asp:RequiredFieldValidator>
                         <div class="col-sm-12">
                             <asp:Panel ID="pnlPass" runat="server" DefaultButton="BtnAceptar">
-                                <asp:TextBox ID="TxtPass" runat="server" CssClass="form-control" placeholder="Contraseña" MaxLength="20" TextMode="Password"></asp:TextBox>
+                                <asp:TextBox ID="TxtPass" runat="server" CssClass="form-control" placeholder="<%$ Resources:GlobalResources, lblContraseña %>" MaxLength="20" TextMode="Password"></asp:TextBox>
                             </asp:Panel>
                         </div>
                     </div>
@@ -166,13 +253,13 @@
                             </div>
                     </div>
                     <div class="from-group">
-                        <asp:Label ID="lblVerificacion" runat="server" CssClass="control-label col-sm-2" Text="Código de verificación" Font-Size="Small"></asp:Label>
+                        <asp:Label ID="lblVerificacion" runat="server" CssClass="control-label col-sm-2" Text="<%$ Resources:GlobalResources, lblCodigoVerificacion %>" Font-Size="Small"></asp:Label>
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server"   
                             ControlToValidate="txtVerificationCode" ErrorMessage="*" ForeColor="Red">
                             </asp:RequiredFieldValidator>
                         <div class="col-sm-12">
                             <asp:Panel ID="pnlCaptcha" runat="server" DefaultButton="BtnAceptar">
-                                <asp:TextBox runat="server" ID="txtVerificationCode" placeholder="Código de verificación" onkeyup="mayus(this);" CssClass="form-control"></asp:TextBox>
+                                <asp:TextBox runat="server" ID="txtVerificationCode" placeholder="<%$ Resources:GlobalResources, lblCodigoVerificacion %>" onkeyup="mayus(this);" CssClass="form-control"></asp:TextBox>
                             </asp:Panel>
 
                         </div>
@@ -187,7 +274,7 @@
                             <div class="d-grid gap-2 d-flex justify-content-center">
                                 <asp:UpdatePanel ID="UpdatePanel2" runat="server">
                                     <ContentTemplate>
-                                        <asp:Button ID="BtnAceptar" runat="server" Text="Iniciar sesión" Font-Bold="True" CssClass="btn btn-success me-md-2" OnClick="BtnAceptar_Click"/>
+                                        <asp:Button ID="BtnAceptar" runat="server" Text="<%$ Resources:GlobalResources, btnIniciarSesion %>" Font-Bold="True" CssClass="btn btn-success me-md-2" OnClick="BtnAceptar_Click"/>
                                     </ContentTemplate>
                                 </asp:UpdatePanel>
                             </div>
@@ -234,6 +321,8 @@
             <br />
             </ContentTemplate>
             <Triggers>
+                <%--<asp:PostBackTrigger ControlID="btnEspañol" />--%>
+                <%--<asp:PostBackTrigger ControlID="btnPortugues" />--%>
                 <asp:PostBackTrigger ControlID="BtnAceptar" /> 
             </Triggers>
         </asp:UpdatePanel>

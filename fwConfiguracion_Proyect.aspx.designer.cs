@@ -33,6 +33,15 @@ namespace WebItNow_Peacock
         protected global::System.Web.UI.UpdatePanel UpdatePanel1;
 
         /// <summary>
+        /// Control lblTitulo_Categoria_Proyecto.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblTitulo_Categoria_Proyecto;
+
+        /// <summary>
         /// Control LblCliente.
         /// </summary>
         /// <remarks>
@@ -96,13 +105,13 @@ namespace WebItNow_Peacock
         protected global::System.Web.UI.WebControls.Button BtnAgregarDatos;
 
         /// <summary>
-        /// Control BtnEditar.
+        /// Control btnEditar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button BtnEditar;
+        protected global::System.Web.UI.WebControls.Button btnEditar;
 
         /// <summary>
         /// Control BtnGrabar.
@@ -150,13 +159,13 @@ namespace WebItNow_Peacock
         protected global::System.Web.UI.WebControls.Panel pnl1;
 
         /// <summary>
-        /// Control LblAsegurados.
+        /// Control LblEtiquetaPnl2.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LblAsegurados;
+        protected global::System.Web.UI.WebControls.Label LblEtiquetaPnl2;
 
         /// <summary>
         /// Control UpdatePanel4.
@@ -204,13 +213,13 @@ namespace WebItNow_Peacock
         protected global::System.Web.UI.WebControls.Button BtnPnl1Seleccionar_1;
 
         /// <summary>
-        /// Control LblAsuntos.
+        /// Control LblEtiquetaPnl3.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LblAsuntos;
+        protected global::System.Web.UI.WebControls.Label LblEtiquetaPnl3;
 
         /// <summary>
         /// Control UpdatePanel3.
@@ -258,13 +267,13 @@ namespace WebItNow_Peacock
         protected global::System.Web.UI.WebControls.Button BtnPnl1Seleccionar_2;
 
         /// <summary>
-        /// Control LblCuadernos.
+        /// Control LblEtiquetaPnl4.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LblCuadernos;
+        protected global::System.Web.UI.WebControls.Label LblEtiquetaPnl4;
 
         /// <summary>
         /// Control UpdatePanel5.
@@ -312,13 +321,13 @@ namespace WebItNow_Peacock
         protected global::System.Web.UI.WebControls.Button BtnPnl1Seleccionar_3;
 
         /// <summary>
-        /// Control LblBienes.
+        /// Control LblEtiquetaPnl5.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LblBienes;
+        protected global::System.Web.UI.WebControls.Label LblEtiquetaPnl5;
 
         /// <summary>
         /// Control UpdatePanel6.
@@ -366,13 +375,13 @@ namespace WebItNow_Peacock
         protected global::System.Web.UI.WebControls.Button BtnPnl1Seleccionar_4;
 
         /// <summary>
-        /// Control Label1.
+        /// Control LblEtiquetaPnl6.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label1;
+        protected global::System.Web.UI.WebControls.Label LblEtiquetaPnl6;
 
         /// <summary>
         /// Control UpdatePanel9.
@@ -447,33 +456,6 @@ namespace WebItNow_Peacock
         protected global::System.Web.UI.WebControls.Button BtnClose;
 
         /// <summary>
-        /// Control pnlExpira.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlExpira;
-
-        /// <summary>
-        /// Control LblExpira.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LblExpira;
-
-        /// <summary>
-        /// Control BtnClose_Expira.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button BtnClose_Expira;
-
-        /// <summary>
         /// Control PnlDocProceso.
         /// </summary>
         /// <remarks>
@@ -492,13 +474,13 @@ namespace WebItNow_Peacock
         protected global::System.Web.UI.UpdatePanel UpdatePanel7;
 
         /// <summary>
-        /// Control LblDocumentos.
+        /// Control LblDescCategoria.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LblDocumentos;
+        protected global::System.Web.UI.WebControls.Label LblDescCategoria;
 
         /// <summary>
         /// Control TxtDescripcion.
@@ -562,24 +544,6 @@ namespace WebItNow_Peacock
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblOculto;
-
-        /// <summary>
-        /// Control mpeExpira.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::AjaxControlToolkit.ModalPopupExtender mpeExpira;
-
-        /// <summary>
-        /// Control lblHide.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblHide;
 
         /// <summary>
         /// Control mpeNewProceso.

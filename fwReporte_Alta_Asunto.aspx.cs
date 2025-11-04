@@ -3,11 +3,18 @@ using System.IO;
 
 using System.Data;
 using System.Data.SqlClient;
+using MySql.Data.MySqlClient;
 
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
 using OfficeOpenXml;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Text;
+using System.Globalization;
+using System.Text.RegularExpressions;
 
 namespace WebItNow_Peacock
 {
@@ -40,6 +47,11 @@ namespace WebItNow_Peacock
                     {
                         Response.Redirect("Login.aspx", true);
                         return;
+                    }
+
+                    if(Variables.wPrivilegios == "2")
+                    { 
+                        BtnCargaDatosIA.Visible = true;
                     }
 
                     // GetCiaSeguros();
@@ -93,7 +105,8 @@ namespace WebItNow_Peacock
                 ddlProcedimiento.DataTextField = "Descripcion";
 
                 ddlProcedimiento.DataBind();
-                ddlProcedimiento.Items.Insert(0, new ListItem("-- Seleccionar --", "0"));
+                // ddlProcedimiento.Items.Insert(0, new ListItem("-- Seleccionar --", "0"));
+                ddlProcedimiento.Items.Insert(0, new ListItem(GetGlobalResourceObject("GlobalResources", "ddl_Select").ToString(), "0"));
 
                 dbConn.Close();
 
@@ -124,7 +137,8 @@ namespace WebItNow_Peacock
                 ddlColumnas.DataTextField = "Descripcion";
 
                 ddlColumnas.DataBind();
-                ddlColumnas.Items.Insert(0, new ListItem("-- Seleccionar Columna --", "0"));
+                // ddlColumnas.Items.Insert(0, new ListItem("-- Seleccionar Columna --", "0"));
+                ddlColumnas.Items.Insert(0, new ListItem(GetGlobalResourceObject("GlobalResources", "ddl_Select_Col").ToString(), "0"));
 
                 dbConn.Close();
             }
@@ -155,7 +169,8 @@ namespace WebItNow_Peacock
                 ddlFiltros.DataTextField = "Descripcion";
 
                 ddlFiltros.DataBind();
-                ddlFiltros.Items.Insert(0, new ListItem("-- Seleccionar --", "0"));
+                // ddlFiltros.Items.Insert(0, new ListItem("-- Seleccionar --", "0"));
+                ddlFiltros.Items.Insert(0, new ListItem(GetGlobalResourceObject("GlobalResources", "ddl_Select").ToString(), "0"));
 
                 dbConn.Close();
             }
@@ -186,7 +201,8 @@ namespace WebItNow_Peacock
                 ddlFiltros.DataTextField = "Descripcion";
 
                 ddlFiltros.DataBind();
-                ddlFiltros.Items.Insert(0, new ListItem("-- Seleccionar --", "0"));
+                // ddlFiltros.Items.Insert(0, new ListItem("-- Seleccionar --", "0"));
+                ddlFiltros.Items.Insert(0, new ListItem(GetGlobalResourceObject("GlobalResources", "ddl_Select").ToString(), "0"));
 
                 dbConn.Close();
 
@@ -219,7 +235,8 @@ namespace WebItNow_Peacock
                 ddlFiltros.DataTextField = "Descripcion";
 
                 ddlFiltros.DataBind();
-                ddlFiltros.Items.Insert(0, new ListItem("-- Seleccionar --", "0"));
+                // ddlFiltros.Items.Insert(0, new ListItem("-- Seleccionar --", "0"));
+                ddlFiltros.Items.Insert(0, new ListItem(GetGlobalResourceObject("GlobalResources", "ddl_Select").ToString(), "0"));
 
                 dbConn.Close();
 
@@ -251,7 +268,8 @@ namespace WebItNow_Peacock
                 ddlFiltros.DataTextField = "Descripcion";
 
                 ddlFiltros.DataBind();
-                ddlFiltros.Items.Insert(0, new ListItem("-- Seleccionar --", "0"));
+                // ddlFiltros.Items.Insert(0, new ListItem("-- Seleccionar --", "0"));
+                ddlFiltros.Items.Insert(0, new ListItem(GetGlobalResourceObject("GlobalResources", "ddl_Select").ToString(), "0"));
 
                 dbConn.Close();
 
@@ -283,7 +301,8 @@ namespace WebItNow_Peacock
                 ddlFiltros.DataTextField = "Descripcion";
 
                 ddlFiltros.DataBind();
-                ddlFiltros.Items.Insert(0, new ListItem("-- Seleccionar --", "0"));
+                // ddlFiltros.Items.Insert(0, new ListItem("-- Seleccionar --", "0"));
+                ddlFiltros.Items.Insert(0, new ListItem(GetGlobalResourceObject("GlobalResources", "ddl_Select").ToString(), "0"));
 
                 dbConn.Close();
             }
@@ -315,7 +334,8 @@ namespace WebItNow_Peacock
                 ddlFiltros.DataTextField = "Descripcion";
 
                 ddlFiltros.DataBind();
-                ddlFiltros.Items.Insert(0, new ListItem("-- Seleccionar --", "-1"));
+                // ddlFiltros.Items.Insert(0, new ListItem("-- Seleccionar --", "-1"));
+                ddlFiltros.Items.Insert(0, new ListItem(GetGlobalResourceObject("GlobalResources", "ddl_Select").ToString(), "-1"));
 
                 dbConn.Close();
 
@@ -487,7 +507,8 @@ namespace WebItNow_Peacock
                 if (dt.Rows.Count == 0)
                 {
                     GrdAlta_Asunto.ShowHeaderWhenEmpty = true;
-                    GrdAlta_Asunto.EmptyDataText = "No hay resultados.";
+                    // GrdAlta_Asunto.EmptyDataText = "No hay resultados.";
+                    GrdAlta_Asunto.EmptyDataText = GetGlobalResourceObject("GlobalResources", "msg_NoResults").ToString();
                 }
 
                 GrdAlta_Asunto.DataSource = dt;
@@ -1152,5 +1173,599 @@ namespace WebItNow_Peacock
         {
 
         }
+
+        protected void BtnCargaDatosIA_Click(object sender, EventArgs e)
+        {
+            mpeNewEnvio.Show();
+        }
+
+        protected void BtnEnviar_Click(object sender, EventArgs e)
+        {
+            string idUsuarioFijo = Variables.wUserLogon;    // valor fijo para Id_Usuario
+            int idStatusFijo = 1;                           // valor fijo para IdStatus
+
+            LblMessageIA.Text = string.Empty;
+
+            HttpPostedFile postedFile = Request.Files["ctl00$MainContent$oFile"];
+
+            if (postedFile != null && postedFile.ContentLength > 0)
+            {
+                string extension = System.IO.Path.GetExtension(oFile.PostedFile.FileName).ToLower();
+                if (extension != ".xlsx")
+                {
+                    LblMessage.Text = "Solo se permiten archivos .xlsx";
+                    mpeMensaje.Show();
+
+                    return;
+                }
+
+                string strFileName = Path.GetFileName(postedFile.FileName);
+                string rutaExcel = Server.MapPath("~/ArchivoTemporal/" + strFileName);
+               
+                // Guardar archivo temporal
+                postedFile.SaveAs(rutaExcel);
+
+                // Definir estructura esperada
+                var estructuraEsperada = new Dictionary<string, List<string>>()
+                {
+                    { "INF_POLIZA",  new List<string> { "referencia", "sub_referencia", "producto", "num_poliza", "num_endoso", "fecha_emision", "fecha_inicio_vig", "hora_inicio_vig", "fecha_fin_vig", "hora_fin_vig",     
+                                                        "num_certificado", "moneda", "plan", "plazo", "canal", "num_renovacion", "giro", "forma_pago", "prima_anual", "prima_neta", "gastos_exp", "recargo_fracc", "por_iva", "monto_iva",
+                                                        "prima_total", "prima_forma_pago", "pagos_subs" } },
+                    { "CONTRATANTE", new List<string> { "referencia", "sub_referencia", "nombre_contrata", "rfc", "tipo_contrata", "email", "tel_part", "tel_cel", "calle", "num_ext", "num_int",
+                                                        "colonia", "edo", "municipio_alcaldia", "cp", "otros" } },
+                    { "ASEGURADO",   new List<string> { "referencia", "sub_referencia", "nombre_asegurado", "rfc_asegurado", "tipo_asegurado", "calle", "num_ext", "num_int", "colonia", "edo",
+                                                        "municipio_alcaldia", "cp", "otros" } },
+                    { "REG_POLIZA",  new List<string> { "referencia", "sub_referencia", "reg_ppaq", "fecha_ppaq", "reg_resp", "fecha_resp", "reg_cgen", "fecha_cgen", "reg_badi", "fecha_badi",
+                                                        "reg_condusef", "fecha_condusef" } },
+                    { "UBICACION",   new List<string> { "referencia", "sub_referencia", "detalle_asegurado", "tipo_techo", "tipo_muros", "num_pisos", "piso_inmueble" } }
+                };
+
+
+                // Validar estructura de TODAS las hojas
+                string mensajeError;
+                bool esValido = ValidarEstructuraExcel(rutaExcel, estructuraEsperada, out mensajeError);
+
+                if (!esValido)
+                {
+                    // LblMessage.Text = "Error en estructura:<br/>" + mensajeError;
+                    LblMessageIA.Text = "<pre style='text-align:left; font-size:inherit; font-family:inherit; white-space:pre-wrap;'>"
+                                      + "Error en estructura:\r\n\r\n" + mensajeError + "</pre>";
+
+                    mpeMensaje_2.Show();
+
+                    // Eliminar archivo inválido
+                    if (File.Exists(rutaExcel))
+                    {
+                        File.Delete(rutaExcel);
+                    }
+
+                    return; // Detener flujo
+                }
+
+                // Procesar archivo porque es válido
+                string rutaLog = Server.MapPath("~/ArchivoTemporal/ErroresCargaExcel.csv");
+
+                try
+                {
+                    CargarExcel_AI_BaseDatos(rutaExcel, "ITM_70_3", idUsuarioFijo, idStatusFijo, rutaLog, 500);
+
+                    // Mensaje de confirmación
+                    LblMessage.Text = "Archivo cargado y procesado correctamente.";
+                    mpeMensaje.Show();
+                }
+                catch (Exception ex)
+                {
+                    LblMessage.Text = "Ocurrió un error al procesar el archivo: " + ex.Message;
+                    mpeMensaje.Show();
+                }
+                finally
+                {
+                    // Limpiar archivo temporal después de procesar
+                    if (File.Exists(rutaExcel))
+                    {
+                        File.Delete(rutaExcel);
+                    }
+                }
+            }
+            else
+            {
+                LblMessage.Text = "Por favor, selecciona un archivo antes de continuar.";
+                mpeMensaje.Show();
+            }
+        }
+
+
+        protected void BtnCloseIA_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void BtnCerrarIA_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        public void CargarExcel_AI_BaseDatos(string rutaExcel, string nombreTablaDefault, string idUsuarioFijo, int idStatusFijo, 
+                                                              string rutaLogErrores, int batchSize = 1000)
+        {
+            FileInfo archivo = new FileInfo(rutaExcel);
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+
+            using (ExcelPackage package = new ExcelPackage(archivo))
+            {
+                foreach (var hoja in package.Workbook.Worksheets)
+                {
+                    try
+                    {
+                        // obtener tabla y mapa para la hoja
+                        string nombreTabla = ObtenerNombreTabla(hoja.Name);
+                        if (string.IsNullOrEmpty(nombreTabla))
+                        {
+                            string logLinea = $"{DateTime.Now:yyyy-MM-dd HH:mm:ss},{hoja.Name},0,Hoja no mapeada a ninguna tabla";
+                            File.AppendAllLines(rutaLogErrores, new List<string> { logLinea });
+                            continue;
+                        }
+
+                        var mapaColumnas = ObtenerMapaColumnas(hoja.Name);
+                        if (mapaColumnas == null || mapaColumnas.Count == 0)
+                        {
+                            string logLinea = $"{DateTime.Now:yyyy-MM-dd HH:mm:ss},{hoja.Name},0,Hoja sin mapa de columnas configurado";
+                            File.AppendAllLines(rutaLogErrores, new List<string> { logLinea });
+                            continue;
+                        }
+
+                        DataTable dt = LeerExcelADataTable(rutaExcel, hoja.Name);
+                        dt.TableName = hoja.Name;
+
+                        InsertarDatosHoja(dt, nombreTabla, mapaColumnas, idUsuarioFijo, idStatusFijo, rutaLogErrores, batchSize);
+
+                        Console.WriteLine($"Hoja '{hoja.Name}' procesada correctamente en la tabla '{nombreTabla}'.");
+                    }
+                    catch (Exception exHoja)
+                    {
+                        string logLinea = $"{DateTime.Now:yyyy-MM-dd HH:mm:ss},{hoja.Name},0,{exHoja.Message}";
+                        File.AppendAllLines(rutaLogErrores, new List<string> { logLinea });
+                    }
+                }
+            }
+
+        }
+
+        public DataTable LeerExcelADataTable(string rutaExcel, string nombreHoja)
+        {
+            var dt = new DataTable();
+
+            FileInfo archivo = new FileInfo(rutaExcel);
+            using (ExcelPackage package = new ExcelPackage(archivo))
+            {
+                ExcelWorksheet worksheet = package.Workbook.Worksheets[nombreHoja];
+                if (worksheet == null)
+                    throw new Exception($"La hoja '{nombreHoja}' no existe en el archivo Excel.");
+
+                // Leer encabezados
+                for (int col = 1; col <= worksheet.Dimension.End.Column; col++)
+                {
+                    dt.Columns.Add(worksheet.Cells[1, col].Text.Trim());
+                }
+
+                // Leer filas
+                for (int row = 2; row <= worksheet.Dimension.End.Row; row++)
+                {
+                    DataRow dr = dt.NewRow();
+                    for (int col = 1; col <= worksheet.Dimension.End.Column; col++)
+                    {
+                        dr[col - 1] = worksheet.Cells[row, col].Text.Trim();
+                    }
+                    dt.Rows.Add(dr);
+                }
+            }
+
+            return dt;
+        }
+
+
+        public void InsertarDatosHoja(DataTable dt, string nombreTabla, Dictionary<string, (string ColumnaBD, string Tipo, int Longitud)> mapaColumnas,
+                                                                                  string idUsuarioFijo, int idStatusFijo, string rutaLogErrores, int batchSize = 1000)
+        {
+            ConexionBD_MySQL dbConn = new ConexionBD_MySQL(Variables.wUserName, Variables.wPassword);
+            MySqlCommand cmd = new MySqlCommand();
+
+            try
+            {
+                dbConn.Open();
+                cmd.Connection = dbConn.Connection;
+                int totalFilas = dt.Rows.Count;
+
+                if (!File.Exists(rutaLogErrores))
+                    File.WriteAllText(rutaLogErrores, "FechaHora, Hoja, Fila,MensajeError" + Environment.NewLine);
+
+                // preparar mapa insensible a mayúsculas: claveMapa -> nombreColumnaEnDT (o null si no existe)
+                var excelToDtCol = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+                foreach (var key in mapaColumnas.Keys)
+                {
+                    var found = dt.Columns.Cast<DataColumn>()
+                                  .FirstOrDefault(c => string.Equals(c.ColumnName.Trim(), key.Trim(), StringComparison.OrdinalIgnoreCase));
+                    excelToDtCol[key] = found != null ? found.ColumnName : null;
+                }
+
+                for (int start = 0; start < totalFilas; start += batchSize)
+                {
+                    int end = Math.Min(start + batchSize, totalFilas);
+                    var batchRows = dt.AsEnumerable().Skip(start).Take(end - start);
+
+                    // columnas BD en orden (según mapa)
+                    var columnasTabla = mapaColumnas.Values.Select(v => v.ColumnaBD).ToList();
+                    columnasTabla.Add("Id_Usuario");
+                    columnasTabla.Add("IdStatus");
+
+                    List<string> listaValores = new List<string>();
+                    cmd.Parameters.Clear();
+                    int paramIndex = 0;
+
+                    foreach (DataRow row in batchRows)
+                    {
+                        try
+                        {
+                            List<string> valoresFila = new List<string>();
+
+                            foreach (var mapeo in mapaColumnas)
+                            {
+                                string excelKey = mapeo.Key;
+                                var meta = mapeo.Value;
+                                string dtColName = excelToDtCol.ContainsKey(excelKey) ? excelToDtCol[excelKey] : null;
+                                string raw = dtColName != null ? (row[dtColName]?.ToString() ?? "") : "";
+
+                                // Procesar según tipo
+                                if (meta.Tipo.StartsWith("varchar", StringComparison.OrdinalIgnoreCase) ||
+                                    meta.Tipo.Equals("string", StringComparison.OrdinalIgnoreCase))
+                                {
+                                    string valor = raw;
+                                    if (meta.Longitud > 0 && valor.Length > meta.Longitud)
+                                    {
+                                        // truncar y registrar
+                                        string logTrunc = $"{DateTime.Now:yyyy-MM-dd HH:mm:ss},{dt.TableName},{dt.Rows.IndexOf(row) + 2},Valor truncado en columna {excelKey} a {meta.Longitud} caracteres";
+                                        File.AppendAllLines(rutaLogErrores, new List<string> { logTrunc });
+                                        valor = valor.Substring(0, meta.Longitud);
+                                    }
+                                    cmd.Parameters.AddWithValue($"@p{paramIndex}", valor);
+                                    valoresFila.Add($"@p{paramIndex}");
+                                    paramIndex++;
+                                }
+                                else if (meta.Tipo.Equals("int", StringComparison.OrdinalIgnoreCase))
+                                {
+                                    if (string.IsNullOrWhiteSpace(raw))
+                                    {
+                                        cmd.Parameters.AddWithValue($"@p{paramIndex}", DBNull.Value);
+                                        valoresFila.Add($"@p{paramIndex}");
+                                        paramIndex++;
+                                    }
+                                    else if (int.TryParse(raw, out int numero))
+                                    {
+                                        cmd.Parameters.AddWithValue($"@p{paramIndex}", numero);
+                                        valoresFila.Add($"@p{paramIndex}");
+                                        paramIndex++;
+                                    }
+                                    else
+                                    {
+                                        // no es numérico: registrar y poner NULL
+                                        string logLinea = $"{DateTime.Now:yyyy-MM-dd HH:mm:ss},{dt.TableName},{dt.Rows.IndexOf(row) + 2},Valor no numérico en {excelKey}: '{raw}'";
+                                        File.AppendAllLines(rutaLogErrores, new List<string> { logLinea });
+                                        cmd.Parameters.AddWithValue($"@p{paramIndex}", DBNull.Value);
+                                        valoresFila.Add($"@p{paramIndex}");
+                                        paramIndex++;
+                                    }
+                                }
+                                else if (meta.Tipo.StartsWith("date", StringComparison.OrdinalIgnoreCase))
+                                {
+                                    if (string.IsNullOrWhiteSpace(raw))
+                                    {
+                                        cmd.Parameters.AddWithValue($"@p{paramIndex}", DBNull.Value);
+                                        valoresFila.Add($"@p{paramIndex}");
+                                        paramIndex++;
+                                    }
+                                    else if (DateTime.TryParse(raw, out DateTime fecha))
+                                    {
+                                        cmd.Parameters.AddWithValue($"@p{paramIndex}", fecha.ToString("yyyy-MM-dd"));
+                                        valoresFila.Add($"@p{paramIndex}");
+                                        paramIndex++;
+                                    }
+                                    else
+                                    {
+                                        string logLinea = $"{DateTime.Now:yyyy-MM-dd HH:mm:ss},{dt.TableName},{dt.Rows.IndexOf(row) + 2},Fecha inválida en {excelKey}: '{raw}'";
+                                        File.AppendAllLines(rutaLogErrores, new List<string> { logLinea });
+                                        cmd.Parameters.AddWithValue($"@p{paramIndex}", DBNull.Value);
+                                        valoresFila.Add($"@p{paramIndex}");
+                                        paramIndex++;
+                                    }
+                                }
+                                else
+                                {
+                                    // fallback: tratar como string
+                                    string valor = raw;
+                                    if (meta.Longitud > 0 && valor.Length > meta.Longitud)
+                                        valor = valor.Substring(0, meta.Longitud);
+
+                                    cmd.Parameters.AddWithValue($"@p{paramIndex}", valor);
+                                    valoresFila.Add($"@p{paramIndex}");
+                                    paramIndex++;
+                                }
+                            } // end foreach mapeo
+
+                            // agregar Id_Usuario e IdStatus
+                            cmd.Parameters.AddWithValue($"@p{paramIndex}", idUsuarioFijo);
+                            valoresFila.Add($"@p{paramIndex}");
+                            paramIndex++;
+
+                            cmd.Parameters.AddWithValue($"@p{paramIndex}", idStatusFijo);
+                            valoresFila.Add($"@p{paramIndex}");
+                            paramIndex++;
+
+                            listaValores.Add("(" + string.Join(",", valoresFila) + ")");
+                        }
+                        catch (Exception exFila)
+                        {
+                            string logLinea = $"{DateTime.Now:yyyy-MM-dd HH:mm:ss},{dt.TableName},{dt.Rows.IndexOf(row) + 2},{exFila.Message}";
+                            File.AppendAllLines(rutaLogErrores, new List<string> { logLinea });
+                            // continúa con la siguiente fila
+                        }
+                    } // end foreach row
+
+                    if (listaValores.Count > 0)
+                    {
+                        var colsBackticked = columnasTabla.Select(c => $"`{c}`");
+
+                        string sql = $"INSERT IGNORE INTO `{nombreTabla}` ({string.Join(",", colsBackticked)}) VALUES {string.Join(",", listaValores)}";
+
+                        cmd.CommandText = sql;
+                        cmd.ExecuteNonQuery();
+                    }
+
+                } // end batches
+            }
+            catch (Exception ex)
+            {
+                string logLinea = $"{DateTime.Now:yyyy-MM-dd HH:mm:ss},{dt.TableName},0,{ex.Message}";
+                File.AppendAllLines(rutaLogErrores, new List<string> { logLinea });
+                throw new Exception("Error al insertar los datos en MySQL (batch): " + ex.Message, ex);
+            }
+            finally
+            {
+                dbConn.Close();
+                cmd.Dispose();
+            }
+        }
+
+        private string ObtenerNombreTabla(string nombreHoja)
+        {
+            // Relaciona nombre de hoja con la tabla MySQL
+            switch (nombreHoja)
+            {
+                case "INF_POLIZA": return "ITM_70_3";
+                case "CONTRATANTE": return "ITM_70_3_1";
+                case "ASEGURADO": return "ITM_70_3_2";
+                case "UBICACION": return "ITM_70_3_3";
+                case "REG_POLIZA": return "ITM_70_3_5";
+
+                default: return null;
+            }
+        }
+
+
+        private Dictionary<string, (string ColumnaBD, string Tipo, int Longitud)> ObtenerMapaColumnas(string nombreHoja)
+        {
+            switch (nombreHoja)
+            {
+                case "INF_POLIZA":
+                    return new Dictionary<string, (string ColumnaBD, string Tipo, int Longitud)>()
+            {
+                { "referencia", ("Referencia", "varchar", 15) },
+                { "sub_referencia", ("SubReferencia", "int", 0) },
+                { "producto", ("TpoProducto", "varchar", 25) },
+                { "fecha_emision", ("Fec_Emision", "varchar", 10) },
+                { "fecha_inicio_vig", ("Fec_IniVigencia", "varchar", 10) },
+                { "fecha_fin_vig", ("Fec_FinVigencia", "varchar", 10) },
+                { "num_certificado", ("Num_Certificado", "varchar", 25) },
+                { "moneda", ("TpoMoneda", "varchar", 25) },
+                { "plan", ("TpoPlan", "varchar", 25) },
+                { "plazo", ("Plazo", "varchar", 25) },
+                { "canal", ("CanalVentas", "varchar", 50) },
+                { "num_renovacion", ("Num_Renovacion", "varchar", 25) },
+                { "giro", ("Giro", "varchar", 50) },
+                { "forma_pago", ("FormaPago", "varchar", 20) },
+                { "prima_anual", ("PrimaTotalAnual", "varchar", 20) },
+                { "prima_neta", ("PrimaNeta", "varchar", 20) },
+                { "gastos_exp", ("GastosExpedicion", "varchar", 20) },
+                { "recargo_fracc", ("RecargoPago", "varchar", 20) },
+                { "por_iva", ("PrimaTotal", "varchar", 20) },
+                { "prima_forma_pago", ("PrimaFormaPago", "varchar", 20) },
+                { "pagos_subs", ("PagoSubsecuente", "varchar", 20) }
+
+                // agrega todos los campos que correspondan
+            };
+
+                case "CONTRATANTE":
+                    return new Dictionary<string, (string ColumnaBD, string Tipo, int Longitud)>()
+            {
+                { "referencia", ("Referencia", "varchar", 15) },
+                { "sub_referencia", ("SubReferencia", "int", 0) },
+                { "nombre_contrata", ("Nom_Contratante", "varchar", 80) },
+                { "rfc", ("RFC_Contratante", "varchar", 15) },
+                { "tipo_contrata", ("Tipo_Contratante", "varchar", 50) },
+                { "email", ("Email_Contratante", "varchar", 100) },
+                { "tel_part", ("Tel1_Contratante", "varchar", 15) },
+                { "tel_cel", ("Tel2_Contratante", "varchar", 15) },
+                { "calle", ("Calle_Contratante", "varchar", 50) },
+                { "num_ext", ("Num_Exterior", "varchar", 25) },
+                { "num_int", ("Num_Interior", "varchar", 25) },
+                { "colonia", ("Colonia_Contratante", "varchar", 50) },
+                { "edo", ("Estado_Contratante", "varchar", 5) },
+                { "municipio_alcaldia", ("Municipio_Contratante", "varchar", 5) },
+                { "cp", ("CPostal_Contratante", "varchar", 5) },
+                { "otros", ("Otros_Contratante", "varchar", 25) }
+            };
+
+                case "ASEGURADO":
+                    return new Dictionary<string, (string ColumnaBD, string Tipo, int Longitud)>()
+            {
+                { "referencia", ("Referencia", "varchar", 15) },
+                { "sub_referencia", ("SubReferencia", "int", 0) },
+                { "nombre_asegurado", ("Nom_Asegurado_1", "varchar", 80) },
+                { "rfc_asegurado", ("RFC_Asegurado_1", "varchar", 15) },
+                { "tipo_asegurado", ("Tipo_Asegurado_1", "varchar", 50) },
+                { "calle", ("Calle_Asegurado_1", "varchar", 50) },
+                { "num_ext", ("Num_Exterior_Asegurado_1", "varchar", 25) },
+                { "num_int", ("Num_Interior_Asegurado_1", "varchar", 25) },
+                { "colonia", ("Colonia_Asegurado_1", "varchar", 50) },
+                { "edo", ("Estado_Asegurado_1", "varchar", 5) },
+                { "municipio_alcaldia", ("Municipio_Asegurado_1", "varchar", 5) },
+                { "cp", ("CPostal_Asegurado_1", "varchar", 5) },
+                { "otros", ("Otros_Asegurado_1", "varchar", 25) }
+            };
+
+                case "REG_POLIZA":
+                    return new Dictionary<string, (string ColumnaBD, string Tipo, int Longitud)>()
+            {
+                { "referencia", ("Referencia", "varchar", 15) },
+                { "sub_referencia", ("SubReferencia", "int", 0) },
+                { "reg_ppaq", ("RegistroPPAQ", "varchar", 30) },
+                { "fecha_ppaq", ("FecRegistroPPAQ", "varchar", 10) },
+                { "reg_resp", ("RegistroRESP", "varchar", 30) },
+                { "fecha_resp", ("FecRegistroRESP", "varchar", 10) },
+                { "reg_cgen", ("RegistroCGEN", "varchar", 30) },
+                { "fecha_cgen", ("FecRegistroCGEN", "varchar", 10) },
+                { "reg_badi", ("RegistroBADI", "varchar", 30) },
+                { "fecha_badi", ("FecRegistroBADI", "varchar", 10) },
+                { "reg_condusef", ("RegistroCONDUSEF", "varchar", 30) },
+                { "fecha_condusef", ("FecRegistroCONDUSEF", "varchar", 10) }
+            };
+                case "UBICACION":
+                    return new Dictionary<string, (string ColumnaBD, string Tipo, int Longitud)>()
+            {
+                { "referencia", ("Referencia", "varchar", 15) },
+                { "sub_referencia", ("SubReferencia", "int", 0) },
+                { "detalle_asegurado", ("Detalles_BienAsegurado", "varchar", 2500) },
+                { "tipo_techo", ("TpoTecho_BienAsegurado", "varchar", 50) },
+                { "tipo_muros", ("TpoMuro_BienAsegurado", "varchar", 50) },
+                { "num_pisos", ("Pisos_BienAsegurado", "varchar", 50) },
+                { "piso_inmueble", ("PisosDel_BienAsegurado", "varchar", 50) }
+            };
+
+                default:
+                    return null;    // hoja no configurada
+            }
+        }
+
+        private string NormalizeHeader(string header)
+        {
+            if (string.IsNullOrWhiteSpace(header))
+                return "";
+
+            // Normaliza a minúsculas
+            string norm = header.Trim().ToLowerInvariant();
+
+            // Quita acentos
+            norm = norm.Normalize(NormalizationForm.FormD);
+            norm = new string(norm.Where(c => CharUnicodeInfo.GetUnicodeCategory(c) != UnicodeCategory.NonSpacingMark).ToArray());
+
+            // Reemplaza espacios, guiones, etc. por guion bajo
+            norm = Regex.Replace(norm, @"[\s\-]+", "_");
+
+            return norm;
+        }
+
+        private bool ValidarEstructuraExcel(string rutaExcel, Dictionary<string, List<string>> estructuraEsperada, out string mensajeError)
+        {
+            mensajeError = "";
+            var errores = new List<string>();
+
+            FileInfo fileInfo = new FileInfo(rutaExcel);
+
+            // Obligatorio para EPPlus (licencia)
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+
+            using (ExcelPackage package = new ExcelPackage(fileInfo))
+            {
+                // Recorrer cada hoja que se espera validar
+                foreach (var hojaConfig in estructuraEsperada)
+                {
+                    string nombreHoja = hojaConfig.Key;
+                    List<string> columnasEsperadas = hojaConfig.Value ?? new List<string>();
+
+                    // Buscar la hoja
+                    var worksheet = package.Workbook.Worksheets[nombreHoja];
+                    if (worksheet == null)
+                    {
+                        errores.Add($"❌ La hoja '{nombreHoja}' no existe en el archivo.");
+                        continue;
+                    }
+
+                    // Si la hoja no tiene celdas usadas
+                    if (worksheet.Dimension == null || worksheet.Dimension.End.Column == 0)
+                    {
+                        errores.Add($"❌ La hoja '{nombreHoja}' no contiene datos (cabecera vacía).");
+                        continue;
+                    }
+
+                    int colCount = worksheet.Dimension.End.Column;
+                    var columnasEncontradasNorm = new List<string>();
+                    var columnasEncontradasOriginal = new List<string>();
+                    var duplicados = new List<string>();
+                    var seen = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+
+                    for (int col = 1; col <= colCount; col++)
+                    {
+                        var valorCelda = (worksheet.Cells[1, col].Text ?? "").Trim();
+                        if (string.IsNullOrWhiteSpace(valorCelda))
+                            continue;
+
+                        string norm = NormalizeHeader(valorCelda);
+
+                        columnasEncontradasOriginal.Add(valorCelda);
+                        columnasEncontradasNorm.Add(norm);
+
+                        if (!seen.Add(norm))
+                            duplicados.Add(valorCelda);
+                    }
+
+                    if (duplicados.Any())
+                    {
+                        errores.Add($"❗ Hoja '{nombreHoja}' tiene encabezados duplicados: {string.Join(", ", duplicados.Distinct())}");
+                    }
+
+                    // Normalizar las columnas esperadas
+                    var expectedNorm = columnasEsperadas.Select(c => NormalizeHeader(c)).ToList();
+
+                    // Buscar faltantes
+                    var faltantes = expectedNorm
+                        .Where(c => !columnasEncontradasNorm.Contains(c, StringComparer.OrdinalIgnoreCase))
+                        .ToList();
+
+                    // Buscar sobrantes
+                    var sobrantes = columnasEncontradasNorm
+                        .Where(c => !expectedNorm.Contains(c, StringComparer.OrdinalIgnoreCase))
+                        .ToList();
+
+                    if (faltantes.Any() || sobrantes.Any())
+                    {
+                        if (faltantes.Any())
+                            errores.Add($"❌ Hoja '{nombreHoja}' faltan columnas: {string.Join(", ", faltantes)}");
+
+                        if (sobrantes.Any())
+                            errores.Add($"❌ Hoja '{nombreHoja}' tiene columnas no esperadas: {string.Join(", ", sobrantes)}");
+                    }
+                    else
+                    {
+                        errores.Add($"✅ Hoja '{nombreHoja}' validada correctamente. (Columnas: {string.Join(", ", columnasEncontradasOriginal)})");
+                    }
+                }
+            }
+
+            // errores críticos (los que empiezan con ❌)
+            var erroresCriticos = errores.Where(e => e.StartsWith("❌")).ToList();
+            mensajeError = string.Join("\r\n", errores);
+
+            return !erroresCriticos.Any();
+        }
+
     }
 }

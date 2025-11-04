@@ -50,6 +50,10 @@ namespace WebItNow_Peacock
                         return;
                     }
 
+                    // Labels
+                    lblTitulo_Alta_Cuaderno.Text = GetGlobalResourceObject("GlobalResources", "lblTitulo_Alta_Cuaderno").ToString();
+                    lblTitulo_Agregar_Archivos.Text = GetGlobalResourceObject("GlobalResources", "lblTitulo_Agregar_Archivos").ToString();
+
                     // Habilitar Controles
                     TxtRef.Enabled = true;
                     ImgBusReference.Enabled = true;
@@ -173,7 +177,7 @@ namespace WebItNow_Peacock
                                   "   AND t1.IdCliente = t2.IdAseguradora AND t1.IdProyecto = t2.IdProyecto AND t1.IdTpoAsunto = t2.IdTpoAsunto " +
                                   "   AND t1.IdSeccion = t2.IdSeccion AND t1.IdCategoria = t2.IdCategoria " +
                                   "   AND t1.IdDocumento = t2.IdDocumento AND t1.IdProyecto = t2.IdProyecto " +
-                                  " UNION ALL " +
+                                  " UNION " +
                                   "SELECT t0.UsReferencia, t0.SubReferencia, t1.TpoArchivo, t1.Descripcion, " +
                                   "  t2.IdConclusion, t2.IdTpoDocumento, t2.IdDocumento, t2.IdUsuario, t2.Id_Directorio, t2.Url_Archivo, t2.Nom_Archivo, " +
                                   "  t2.Fec_Entrega, t2.IdDescarga, t2.IdStatus, t2.IdSeccion AS IdSeccion, t2.IdCategoria AS IdCategoria " +

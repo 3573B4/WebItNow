@@ -19,7 +19,7 @@
             // Inicia un temporizador para ejecutar después de 30 minutos (1800000 milisegundos)
             var timer = setTimeout(function () {
                 // Actualiza el contenido del elemento para mostrar que la sesión ha expirado
-                document.getElementById('<%=LblExpira.ClientID %>').innerHTML = 'La sesión ha expirado.';
+                document.getElementById('<%=LblExpira.ClientID %>').innerHTML = document.getElementById('<%=litSesionExpirada.ClientID %>').innerHTML;
         
                 // Encuentra el modal y lo muestra
                 var modalId = '<%=mpeExpira.ClientID%>';
@@ -682,6 +682,7 @@
     <asp:Panel ID="pnlExpira" runat="server" CssClass="CajaDialogo" style="display: none; border: none; border-radius: 10px; width: 400px; background-color:#FFFFFF;">
         <div class=" row justify-content-end" data-bs-theme="dark">
             <div class="col-1">
+                <asp:Literal ID="litSesionExpirada" runat="server" Visible="false" Text="<%$ Resources:GlobalResources, msgSesionExpirada %>" />
                 <asp:Button runat="server" OnClientClick="acceso(); return false;" type="button" class="btn-close" aria-label="Close" />
             </div>
         </div>

@@ -36,6 +36,9 @@ namespace WebItNow_Peacock
                         return;
                     }
 
+                    // Labels
+                    lblTitulo_Cat_Productos.Text = GetGlobalResourceObject("GlobalResources", "lblTitulo_Cat_Productos").ToString();
+
                     GetCiaSeguros();
 
                     Inicializar_GrdProductos();
@@ -77,7 +80,8 @@ namespace WebItNow_Peacock
                 ddlCliente.DataTextField = "Descripcion";
 
                 ddlCliente.DataBind();
-                ddlCliente.Items.Insert(0, new ListItem("-- Seleccionar --", "0"));
+                // ddlCliente.Items.Insert(0, new ListItem("-- Seleccionar --", "0"));
+                ddlCliente.Items.Insert(0, new ListItem(GetGlobalResourceObject("GlobalResources", "ddl_Select").ToString(), "0"));
 
                 //Conecta.Cerrar();
                 //cmd.Dispose();
@@ -100,7 +104,9 @@ namespace WebItNow_Peacock
             {
                 // Mostrar el mensaje de "No hay resultados"
                 GrdProductos.ShowHeaderWhenEmpty = true;
-                GrdProductos.EmptyDataText = "No hay resultados.";
+                GrdProductos.EmptyDataText = GetGlobalResourceObject("GlobalResources", "msg_NoResults").ToString();
+
+                //GrdProductos.EmptyDataText = "No hay resultados.";
             }
 
             // Enlaza el DataTable (vacío o lleno) al GridView
@@ -114,6 +120,7 @@ namespace WebItNow_Peacock
 
             // Define las columnas del DataTable
             dt.Columns.Add("IdProducto", typeof(string));
+            dt.Columns.Add("Cve_Producto", typeof(string));
             dt.Columns.Add("Descripcion", typeof(string));
             dt.Columns.Add("Num_Condusef", typeof(string));
             // Agrega más columnas según sea necesario
@@ -130,7 +137,7 @@ namespace WebItNow_Peacock
                 dbConn.Open();
 
                 // Consulta a la tabla : Coberturas  = ITM_39
-                string strQuery = "SELECT IdProducto, Descripcion, Num_Condusef " +
+                string strQuery = "SELECT IdProducto, Cve_Producto, Descripcion, Num_Condusef " +
                                   "  FROM ITM_39 " +
                                   " WHERE IdStatus = 1 " +
                                   "   AND IdSeguros = '" + sIdSeguro + "' " +
@@ -141,7 +148,9 @@ namespace WebItNow_Peacock
                 if (dt.Rows.Count == 0)
                 {
                     GrdProductos.ShowHeaderWhenEmpty = true;
-                    GrdProductos.EmptyDataText = "No hay resultados.";
+                    GrdProductos.EmptyDataText = GetGlobalResourceObject("GlobalResources", "msg_NoResults").ToString();
+
+                    //GrdProductos.EmptyDataText = "No hay resultados.";
                 }
 
                 GrdProductos.DataSource = dt;
@@ -196,7 +205,9 @@ namespace WebItNow_Peacock
             BtnCancelar.Visible = true;
             BtnCerrar.Visible = false;
 
-            LblMessage_1.Text = "¿Desea eliminar el producto ?";
+            // LblMessage_1.Text = "¿Desea eliminar el producto ?";
+            LblMessage_1.Text = GetGlobalResourceObject("GlobalResources", "msg_Confirmar_Delete_Producto").ToString();
+
             mpeMensaje_1.Show();
         }
 
@@ -207,8 +218,8 @@ namespace WebItNow_Peacock
 
             Variables.wRenglon = row.RowIndex;
 
-            TxtNomProducto.Text = Server.HtmlDecode(Convert.ToString(GrdProductos.Rows[index].Cells[1].Text));
-            TxtNumCondusef.Text = Server.HtmlDecode(Convert.ToString(GrdProductos.Rows[index].Cells[2].Text));
+            TxtNomProducto.Text = Server.HtmlDecode(Convert.ToString(GrdProductos.Rows[index].Cells[2].Text));
+            TxtNumCondusef.Text = Server.HtmlDecode(Convert.ToString(GrdProductos.Rows[index].Cells[3].Text));
 
             TxtNomProducto.ReadOnly = true;
             TxtNumCondusef.ReadOnly = true;
@@ -232,10 +243,11 @@ namespace WebItNow_Peacock
 
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                e.Row.Cells[1].Width = Unit.Pixel(550);     // Descripcion
-                e.Row.Cells[2].Width = Unit.Pixel(550);     // Num_Condusef
-                e.Row.Cells[3].Width = Unit.Pixel(25);      // ImgEditar
-                e.Row.Cells[4].Width = Unit.Pixel(25);      // ImgEliminar
+                e.Row.Cells[1].Width = Unit.Pixel(100);     // Cve_Producto
+                e.Row.Cells[2].Width = Unit.Pixel(550);     // Descripcion
+                e.Row.Cells[3].Width = Unit.Pixel(550);     // Num_Condusef
+                e.Row.Cells[4].Width = Unit.Pixel(25);      // ImgEditar
+                e.Row.Cells[5].Width = Unit.Pixel(25);      // ImgEliminar
             }
             if (e.Row.RowType == DataControlRowType.Header)
             {
@@ -280,14 +292,15 @@ namespace WebItNow_Peacock
                 ConexionBD_MySQL dbConn = new ConexionBD_MySQL(Variables.wUserName, Variables.wPassword);
                 dbConn.Open();
 
-                string strQuery = "INSERT INTO ITM_39 (IdProducto, IdSeguros, Descripcion, Num_Condusef, IdStatus) " +
-                                  "VALUES (" + iConsecutivo + ", '" + sIdSeguros + "', '" + pDescripcion + "', '" + pNumCondusef + "', 1)" + "\n \n";
+                string strQuery = "INSERT INTO ITM_39 (IdProducto, IdSeguros, Cve_Producto, Descripcion, Num_Condusef, IdStatus) " +
+                                  "VALUES (" + iConsecutivo + ", '" + sIdSeguros + "', CONCAT('PRD-', LPAD(" + iConsecutivo + ", 4, '0')), '" + pDescripcion + "', '" + pNumCondusef + "', 1)" + "\n \n";
 
                 int affectedRows = dbConn.ExecuteNonQuery(strQuery);
 
                 dbConn.Close();
 
-                LblMessage.Text = "Se agrego producto, correctamente";
+                // LblMessage.Text = "Se agrego producto, correctamente";
+                LblMessage.Text = GetGlobalResourceObject("GlobalResources", "msg_Producto_Agregado").ToString();
                 mpeMensaje.Show();
 
                 return 0;
@@ -348,7 +361,8 @@ namespace WebItNow_Peacock
 
                 dbConn.Close();
 
-                LblMessage.Text = "Se elimino producto, correctamente";
+                //LblMessage.Text = "Se elimino producto, correctamente";
+                LblMessage.Text = GetGlobalResourceObject("GlobalResources", "msg_Producto_Eliminado").ToString();
                 mpeMensaje.Show();
 
             }
@@ -356,7 +370,8 @@ namespace WebItNow_Peacock
             {
                 if (ex.HResult == -2146232060)
                 {
-                    LblMessage.Text = "Producto, se encuentra relacionado a un Asunto";
+                    //LblMessage.Text = "Producto, se encuentra relacionado a un Asunto";
+                    LblMessage.Text = GetGlobalResourceObject("GlobalResources", "msg_Producto_Relacionado").ToString();
                 }
                 else
                 {
@@ -398,7 +413,8 @@ namespace WebItNow_Peacock
         {
             if (TxtNomProducto.Text == "" || TxtNomProducto.Text == null)
             {
-                LblMessage.Text = "Capturar Descripción de Producto";
+                //LblMessage.Text = "Capturar Descripción de Producto";
+                LblMessage.Text = GetGlobalResourceObject("GlobalResources", "msg_Capturar_DescProducto").ToString();
                 mpeMensaje.Show();
                 return;
             }
@@ -450,7 +466,8 @@ namespace WebItNow_Peacock
 
                 dbConn.Close();
 
-                LblMessage.Text = "Se actualizo producto, correctamente";
+                //LblMessage.Text = "Se actualizo producto, correctamente";
+                LblMessage.Text = GetGlobalResourceObject("GlobalResources", "msg_Producto_Actualizado").ToString();
                 mpeMensaje.Show();
 
             }
@@ -458,7 +475,8 @@ namespace WebItNow_Peacock
             {
                 if (ex.HResult == -2146232060)
                 {
-                    LblMessage.Text = "Cobertura, se encuentra relacionada a un Asunto";
+                    //LblMessage.Text = "Cobertura, se encuentra relacionada a un Asunto";
+                    LblMessage.Text = GetGlobalResourceObject("GlobalResources", "msg_Cobertura_Relacionada").ToString();
                 }
                 else
                 {
@@ -473,13 +491,15 @@ namespace WebItNow_Peacock
         {
             if (ddlCliente.SelectedValue == "0")
             {
-                LblMessage.Text = "Seleccionar Compañia de Seguros";
+                // LblMessage.Text = "Seleccionar Compañia de Seguros";
+                LblMessage.Text = GetGlobalResourceObject("GlobalResources", "msg_Seleccionar_CiaSeguros").ToString();
                 mpeMensaje.Show();
                 return;
             }
             else if (TxtNomProducto.Text == "" || TxtNomProducto.Text == null)
             {
-                LblMessage.Text = "Capturar Descripción de Producto";
+                // LblMessage.Text = "Capturar Descripción de Producto";
+                LblMessage.Text = GetGlobalResourceObject("GlobalResources", "msg_Capturar_DescProducto").ToString();
                 mpeMensaje.Show();
                 return;
             }

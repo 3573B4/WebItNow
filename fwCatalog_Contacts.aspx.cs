@@ -34,6 +34,9 @@ namespace WebItNow_Peacock
                         return;
                     }
 
+                    // Labels
+                    lblTitulo_Cat_Contactos.Text = GetGlobalResourceObject("GlobalResources", "lblTitulo_Cat_Contactos").ToString();
+
                     GetCiaSeguros();
                     GetSeccion_1();
 
@@ -68,7 +71,8 @@ namespace WebItNow_Peacock
                 ddlCliente.DataTextField = "Descripcion";
 
                 ddlCliente.DataBind();
-                ddlCliente.Items.Insert(0, new ListItem("-- Seleccionar --", "0"));
+                //ddlCliente.Items.Insert(0, new ListItem("-- Seleccionar --", "0"));
+                ddlCliente.Items.Insert(0, new ListItem(GetGlobalResourceObject("GlobalResources", "ddl_Select").ToString(), "0"));
 
                 dbConn.Close();
             }
@@ -98,7 +102,9 @@ namespace WebItNow_Peacock
                 if (dt.Rows.Count == 0)
                 {
                     GrdContactos.ShowHeaderWhenEmpty = true;
-                    GrdContactos.EmptyDataText = "No hay resultados.";
+                    GrdContactos.EmptyDataText = GetGlobalResourceObject("GlobalResources", "msg_NoResults").ToString();
+
+                    //GrdContactos.EmptyDataText = "No hay resultados.";
                 }
 
                 GrdContactos.DataSource = dt;
@@ -314,19 +320,22 @@ namespace WebItNow_Peacock
         {
             if (ddlCliente.SelectedValue == "0")
             {
-                LblMessage.Text = "Seleccionar Compañia de Seguros";
+                // LblMessage.Text = "Seleccionar Compañia de Seguros";
+                LblMessage.Text = GetGlobalResourceObject("GlobalResources", "msg_Seleccionar_CiaSeguros").ToString();
                 mpeMensaje.Show();
                 return;
             }
             if (TxtNomContacto.Text == "" || TxtNomContacto.Text == null)
             {
-                LblMessage.Text = "Capturar Nombre del Contacto";
+                // LblMessage.Text = "Capturar Nombre del Contacto";
+                LblMessage.Text = GetGlobalResourceObject("GlobalResources", "msg_Capturar_NomContacto").ToString();
                 mpeMensaje.Show();
                 return;
             }
             else if (TxtCorreoContacto.Text == "" || TxtCorreoContacto.Text == null)
             {
-                LblMessage.Text = "Capturar Correo del Contacto";
+                // LblMessage.Text = "Capturar Correo del Contacto";
+                LblMessage.Text = GetGlobalResourceObject("GlobalResources", "msg_Capturar_CorreoContacto").ToString();
                 mpeMensaje.Show();
                 return;
             }
@@ -399,7 +408,8 @@ namespace WebItNow_Peacock
 
                 dbConn.Close();
 
-                LblMessage.Text = "Se actualizo contacto, correctamente";
+                // LblMessage.Text = "Se actualizo contacto, correctamente";
+                LblMessage.Text = GetGlobalResourceObject("GlobalResources", "msg_Contacto_Actualizado").ToString();
                 mpeMensaje.Show();
 
                 GetContactos();
@@ -434,7 +444,8 @@ namespace WebItNow_Peacock
 
                 dbConn.Close();
 
-                LblMessage.Text = "Se elimino cliente, correctamente";
+                // LblMessage.Text = "Se elimino contacto, correctamente";
+                LblMessage.Text = GetGlobalResourceObject("GlobalResources", "msg_Contacto_Eliminado").ToString();
                 mpeMensaje.Show();
 
                 GetContactos();
@@ -454,19 +465,22 @@ namespace WebItNow_Peacock
             {
                 if (ddlCliente.SelectedValue == "0")
                 {
-                    LblMessage.Text = "Seleccionar Compañia de Seguros";
+                    // LblMessage.Text = "Seleccionar Compañia de Seguros";
+                    LblMessage.Text = GetGlobalResourceObject("GlobalResources", "msg_Seleccionar_CiaSeguros").ToString();
                     mpeMensaje.Show();
                     return;
                 }
                 if (TxtNomContacto.Text == "" || TxtNomContacto.Text == null)
                 {
-                    LblMessage.Text = "Capturar Nombre del Contacto";
+                    // LblMessage.Text = "Capturar Nombre del Contacto";
+                    LblMessage.Text = GetGlobalResourceObject("GlobalResources", "msg_Capturar_NomContacto").ToString();
                     mpeMensaje.Show();
                     return;
                 }
                 else if (TxtCorreoContacto.Text == "" || TxtCorreoContacto.Text == null)
                 {
-                    LblMessage.Text = "Capturar Correo del Contacto";
+                    // LblMessage.Text = "Capturar Correo del Contacto";
+                    LblMessage.Text = GetGlobalResourceObject("GlobalResources", "msg_Capturar_CorreoContacto").ToString();
                     mpeMensaje.Show();
                     return;
                 }
@@ -489,7 +503,8 @@ namespace WebItNow_Peacock
 
                 GetSeccion_1();
 
-                LblMessage.Text = "Se agrego contacto, correctamente";
+                // LblMessage.Text = "Se agrego contacto, correctamente";
+                LblMessage.Text = GetGlobalResourceObject("GlobalResources", "msg_Contacto_Agregado").ToString();
                 mpeMensaje.Show();
 
                 // Inicializar Controles
@@ -606,7 +621,8 @@ namespace WebItNow_Peacock
             BtnCancelar.Visible = true;
             BtnCerrar.Visible = false;
 
-            LblMessage_1.Text = "¿Desea eliminar el contacto?";
+            // LblMessage_1.Text = "¿Desea eliminar el contacto?";
+            LblMessage_1.Text = GetGlobalResourceObject("GlobalResources", "msg_Confirmar_Delete_Contacto").ToString();
             mpeMensaje_1.Show();
         }
 
@@ -699,7 +715,9 @@ namespace WebItNow_Peacock
                 if (dt.Rows.Count == 0)
                 {
                     grdSeccion_1.ShowHeaderWhenEmpty = true;
-                    grdSeccion_1.EmptyDataText = "No hay resultados.";
+                    grdSeccion_1.EmptyDataText = GetGlobalResourceObject("GlobalResources", "msg_NoResults").ToString();
+
+                    //grdSeccion_1.EmptyDataText = "No hay resultados.";
                 }
 
                 grdSeccion_1.DataSource = dt;
@@ -748,7 +766,9 @@ namespace WebItNow_Peacock
                 if (dt.Rows.Count == 0)
                 {
                     grdSeccion_1.ShowHeaderWhenEmpty = true;
-                    grdSeccion_1.EmptyDataText = "No hay resultados.";
+                    grdSeccion_1.EmptyDataText = GetGlobalResourceObject("GlobalResources", "msg_NoResults").ToString();
+
+                    //grdSeccion_1.EmptyDataText = "No hay resultados.";
                 }
 
                 grdSeccion_1.DataSource = dt;

@@ -34,7 +34,7 @@ namespace WebItNow_Peacock
 
                     GetCiaSeguros();
                     GetProyecto();
-                    GetCarpetas();
+                 // GetCarpetas();
                     GetDocumentos(string.Empty, 0, 0);
 
                     // Inicializar controles
@@ -130,21 +130,21 @@ namespace WebItNow_Peacock
 
                 DataTable dt = dbConn.ExecuteQuery(strQuery);
 
-                ddlCarpetas.DataSource = dt;
+                //ddlCarpetas.DataSource = dt;
 
-                ddlCarpetas.DataValueField = "Id_Carpeta";
-                ddlCarpetas.DataTextField = "Nom_Carpeta";
+                //ddlCarpetas.DataValueField = "Id_Carpeta";
+                //ddlCarpetas.DataTextField = "Nom_Carpeta";
 
-                ddlCarpetas.DataBind();
+                //ddlCarpetas.DataBind();
 
-                if (dt.Rows.Count == 0)
-                {
-                    ddlCarpetas.Items.Insert(0, new ListItem("-- No Hay Carpeta(s) --", "0"));
-                }
-                else
-                {
-                    ddlCarpetas.Items.Insert(0, new ListItem("-- Seleccionar --", "0"));
-                }
+                //if (dt.Rows.Count == 0)
+                //{
+                //    ddlCarpetas.Items.Insert(0, new ListItem("-- No Hay Carpeta(s) --", "0"));
+                //}
+                //else
+                //{
+                //    ddlCarpetas.Items.Insert(0, new ListItem("-- Seleccionar --", "0"));
+                //}
 
                 dbConn.Close();
             }
@@ -281,7 +281,7 @@ namespace WebItNow_Peacock
 
         protected void BtnEtapas_Click(object sender, EventArgs e)
         {
-            ddlCarpetas.SelectedIndex = 0;
+            // ddlCarpetas.SelectedIndex = 0;
 
             GetBusqProceso(0);
             mpeNewProceso.Show();
@@ -297,15 +297,26 @@ namespace WebItNow_Peacock
                 Variables.wPrefijo_Aseguradora = ddlCliente.SelectedValue;
                 Variables.wIdProyecto = Convert.ToInt32(ddlProyecto.SelectedValue);
 
-                string strQuery = "SELECT C.IdDocumento, C.Descripcion " +
-                                  "  FROM ITM_86 AS A, ITM_87 AS B, ITM_83 AS C " +
-                                  " WHERE A.IdSeccion = B.IdCategoria " +
-                                  "   AND A.IdDocumento = C.IdDocumento " +
-                                  "   AND IdProyecto = " + Variables.wIdProyecto + " AND IdCliente = '" + Variables.wPrefijo_Aseguradora + "' " +
-                                  "   AND IdSeccion = " + IdSeccion +" " +
-                                  "   AND bSeleccion = 1 AND A.IdStatus = 1 " +
-                                  " ORDER BY C.IdDocumento ";
+                //string strQuery = "SELECT C.IdDocumento, C.Descripcion " +
+                //                  "  FROM ITM_86 AS A, ITM_87 AS B, ITM_83 AS C " +
+                //                  " WHERE A.IdSeccion = B.IdCategoria " +
+                //                  "   AND A.IdDocumento = C.IdDocumento " +
+                //                  "   AND IdProyecto = " + Variables.wIdProyecto + " AND IdCliente = '" + Variables.wPrefijo_Aseguradora + "' " +
+                //                  "   AND IdSeccion = " + IdSeccion +" " +
+                //                  "   AND bSeleccion = 1 AND A.IdStatus = 1 " +
+                //                  " ORDER BY C.IdDocumento ";
 
+                string strQuery = " SELECT r.IdEtapa_fk as IdDocumento, e.Descripcion " +
+                                  "  FROM ITM_97 r " +
+                                  " INNER JOIN ITM_67 a ON r.IdAseguradora_fk = a.IdOrden " +
+                                  " INNER JOIN ITM_83 e ON r.IdEtapa_fk = e.IdDocumento " +
+                                  " WHERE a.IdSeguros = '" + Variables.wPrefijo_Aseguradora + "' " +
+                                  "   AND r.IdServicio_fk    = " + Variables.wIdProyecto +
+                                  "   AND r.IdCategoria_fk = " + Variables.wIdTpoAsunto +
+                                  "   AND r.bSeleccion    = 1 " +
+                                  "   AND r.IdStatus      = 1 " +
+                                  "   AND e.IdStatus      = 1 " +
+                                  " ORDER BY r.IdOrden ASC; ";
 
                 DataTable dt = dbConn.ExecuteQuery(strQuery);
 
@@ -562,7 +573,7 @@ namespace WebItNow_Peacock
 
             ddlProyecto.ClearSelection();
             ddlEstSiniestro.Items.Clear();
-            ddlCarpetas.SelectedIndex = 0;
+            // ddlCarpetas.SelectedIndex = 0;
 
             ddlEstSiniestro.Items.Insert(0, new ListItem("-- Seleccionar --", "0"));
 
@@ -576,7 +587,7 @@ namespace WebItNow_Peacock
             // Inicializar controles
             GetDocumentos(string.Empty, 0, 0);
 
-            TxtTpoAsunto.Text = string.Empty;
+            // TxtTpoAsunto.Text = string.Empty;
 
             ddlEstSiniestro.Items.Insert(0, new ListItem("-- Seleccionar --", "0"));
 
@@ -588,14 +599,16 @@ namespace WebItNow_Peacock
 
         protected void ddlCarpetas_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (ddlCarpetas.SelectedValue == "0")
-            {
-                GetBusqProceso(0);
-            }
-            else
-            {
-                GetBusqProceso(3);
-            }
+            GetBusqProceso(0);
+
+            //if (ddlCarpetas.SelectedValue == "0")
+            //{
+            //    GetBusqProceso(0);
+            //}
+            //else
+            //{
+            //    GetBusqProceso(3);
+            //}
         }
 
     }

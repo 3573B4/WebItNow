@@ -17,25 +17,6 @@
             $("input").attr("autocomplete", "off");
         });
 
-        window.onload = function () {
-            // Inicia un temporizador para ejecutar después de 30 minutos (1800000 milisegundos)
-            var timer = setTimeout(function () {
-                // Actualiza el contenido del elemento para mostrar que la sesión ha expirado
-                document.getElementById('<%=LblExpira.ClientID %>').innerHTML = 'La sesión ha expirado.';
-        
-                // Encuentra el modal y lo muestra
-                var modalId = '<%=mpeExpira.ClientID%>';
-                var modal = $find(modalId);
-                modal.show();
-
-                // Inicia otro temporizador para recargar la página después de 30 minutos
-                setTimeout(function () {
-                    location.reload();
-                }, 1800000);
-
-            }, 1800000);
-        };
-
         function acceso() {
             location.href = '/Login.aspx';
         }
@@ -77,7 +58,8 @@
                 </div>
                 <div class="col-lg-8 col-md-8">
                     <div class="input-group input-group-sm">
-                        <h2 class="h2 mb-3 fw-normal mt-4 align-content-center">Alta de Proyecto</h2>
+                        <%--<h2 class="h2 mb-3 fw-normal mt-4 align-content-center">Alta de Proyecto</h2>--%>
+                        <asp:Label ID="lblTitulo_Alta_Proyecto" runat="server" CssClass="h2 mb-3 fw-normal mt-4 align-content-center" style="display:block; text-align:center;" ></asp:Label>
                     </div>
                 </div>
             </div>
@@ -86,7 +68,7 @@
             <div class="row mb-3">
                 <div class="col-lg-4 col-md-4 ">
                     <div class ="mb-2">
-                        <asp:Label ID="LblCliente" runat="server" Text="Cliente"></asp:Label>
+                        <asp:Label ID="LblCliente" runat="server" Text="<%$ Resources:GlobalResources, lblCiaSeguros %>"></asp:Label>
                     </div>
                     <div class="input-group input-group-sm">
                         <asp:DropDownList ID="ddlCliente" runat="server" CssClass="form-select" AutoPostBack="true" OnSelectedIndexChanged="ddlCliente_SelectedIndexChanged">
@@ -95,7 +77,7 @@
                 </div>
                 <div class="col-lg-4 col-md-4">
                     <div class ="mb-2">
-                        <asp:Label ID="LblTpoAsunto" runat="server" Text="Tipo de Asunto" ></asp:Label>
+                        <asp:Label ID="LblTpoAsunto" runat="server" Text="<%$ Resources:GlobalResources, lblTipoAsunto %>" ></asp:Label>
                     </div>
                     <div class=" input-group input-group-sm">
                         <asp:DropDownList ID="ddlTpoAsunto" runat="server" CssClass="btn btn-outline-secondary text-start" AutoPostBack="true" OnSelectedIndexChanged="ddlTpoAsunto_SelectedIndexChanged" Width="100%">
@@ -107,15 +89,15 @@
             <div class="row mb-3">
                 <div class="col-lg-4 col-md-4 ">
                     <div class="mb-2">
-                        <asp:Label ID="LblProyecto" runat="server" Text="Nombre del Proyecto" ></asp:Label>
+                        <asp:Label ID="LblProyecto" runat="server" Text="<%$ Resources:GlobalResources, lblNomProyecto %>" ></asp:Label>
                     </div>
                     <div class="input-group input-group-sm">
-                        <asp:TextBox ID="TxtNomProyecto" runat="server" CssClass="form-control form-control-sm" onkeyup="mayus(this);" placeholder="Nombre del Proyecto" Text="NINGUNO" AutoComplete="off" MaxLength="25"></asp:TextBox>
+                        <asp:TextBox ID="TxtNomProyecto" runat="server" CssClass="form-control form-control-sm" onkeyup="mayus(this);" placeholder="<%$ Resources:GlobalResources, lblNomProyecto %>" Text="NINGUNO" AutoComplete="off" MaxLength="25"></asp:TextBox>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-4 ">
                     <div class="mb-2">
-                        <asp:Label ID="LblGerente" runat="server" Text="Gerente Responsable" ></asp:Label>
+                        <asp:Label ID="LblGerente" runat="server" Text="<%$ Resources:GlobalResources, lblGerente %>" ></asp:Label>
                     </div>
                     <div class="input-group input-group-sm">
                         <asp:DropDownList ID="ddlGerentes" runat="server" CssClass="btn btn-outline-secondary text-start" AutoPostBack="true" OnSelectedIndexChanged="ddlGerentes_SelectedIndexChanged" Width="100%">
@@ -133,7 +115,7 @@
             <div class="row mb-3">
                 <div class="col-lg-8 col-md-8 ">
                     <div class ="mb-2">
-                        <asp:Label ID="LblDescProyecto" runat="server" Text="Descripción del Proyecto"></asp:Label>
+                        <asp:Label ID="LblDescProyecto" runat="server" Text="<%$ Resources:GlobalResources, lblDescProyecto %>"></asp:Label>
                     </div>
                     <div class="input-group input-group-sm">
                         <asp:TextBox ID="TxtDescProyecto" runat="server" CssClass="form-control form-control-sm" AutoComplete="off" MaxLength="2500" Columns="12" Rows="5" TextMode="MultiLine" ></asp:TextBox>
@@ -160,23 +142,23 @@
                             <div class="row mb-3">
                                 <div class="col-lg-4 col-md-4 ">
                                     <div class="mb-2">
-                                        <asp:Label ID="LblNumPoliza" runat="server" Text="Número de Póliza"></asp:Label>
+                                        <asp:Label ID="LblNumPoliza" runat="server" Text="<%$ Resources:GlobalResources, lblNumPoliza %>"></asp:Label>
                                     </div>
                                     <div class="input-group input-group-sm">
-                                        <asp:TextBox ID="TxtNumPoliza" runat="server" CssClass="form-control form-control-sm" onkeyup="mayus(this);" placeholder="Número de Póliza" AutoComplete="off" MaxLength="18"></asp:TextBox>
+                                        <asp:TextBox ID="TxtNumPoliza" runat="server" CssClass="form-control form-control-sm" onkeyup="mayus(this);" placeholder="<%$ Resources:GlobalResources, lblNumPoliza %>" AutoComplete="off" MaxLength="18"></asp:TextBox>
                                     </div>
                                 </div>
                                 <div class="col-lg-4 col-md-4 ">
                                     <div class="mb-2">
-                                        <asp:Label ID="LblNomAsegurado" runat="server" Text="Nombre del Asegurado"></asp:Label>
+                                        <asp:Label ID="LblNomAsegurado" runat="server" Text="<%$ Resources:GlobalResources, lblNomAsegurado %>"></asp:Label>
                                     </div>
                                     <div class="input-group input-group-sm">
-                                        <asp:TextBox ID="TxtNomAsegurado" runat="server" CssClass="form-control form-control-sm" onkeyup="mayus(this);" placeholder="Nombre del Asegurado" AutoComplete="off" MaxLength="80"></asp:TextBox>
+                                        <asp:TextBox ID="TxtNomAsegurado" runat="server" CssClass="form-control form-control-sm" onkeyup="mayus(this);" placeholder="<%$ Resources:GlobalResources, lblNomAsegurado %>" AutoComplete="off" MaxLength="80"></asp:TextBox>
                                     </div>
                                 </div>
                                 <div class="col-lg-4 col-md-4 ">
                                     <div class="mb-2">
-                                        <asp:Label ID="LblTpoAsegurado" runat="server" Text="Tipo de Asegurado"></asp:Label>
+                                        <asp:Label ID="LblTpoAsegurado" runat="server" Text="<%$ Resources:GlobalResources, lblTpoAsegurado %>"></asp:Label>
                                     </div>
                                     <div class="input-group input-group-sm">
                                         <asp:DropDownList ID="ddlTpoAsegurado" runat="server" CssClass="btn btn-outline-secondary text-start" AutoPostBack="true" OnSelectedIndexChanged="ddlTpoAsegurado_SelectedIndexChanged" visible="true" Width="100%">
@@ -187,7 +169,7 @@
                             <div class="row mb-3">
                                 <div class="col-lg-4 col-md-4 ">
                                     <div class="mb-2">
-                                        <asp:Label ID="LblIniVigencia" runat="server" Text="Inicio de Vigencia"></asp:Label>
+                                        <asp:Label ID="LblIniVigencia" runat="server" Text="<%$ Resources:GlobalResources, lblIniVigencia %>"></asp:Label>
                                     </div>
                                     <div class="input-group input-group-sm">
                                         <asp:TextBox ID="TxtIniVigencia" runat="server" TextMode="Date" placeholder="Select date" style="font-size:16px;" class="form-control form-control-sm" TabIndex="1" />
@@ -195,7 +177,7 @@
                                 </div>
                                 <div class="col-lg-4 col-md-4 ">
                                     <div class="mb-2">
-                                        <asp:Label ID="LblFinVigencia" runat="server" Text="Fin de Vigencia"></asp:Label>
+                                        <asp:Label ID="LblFinVigencia" runat="server" Text="<%$ Resources:GlobalResources, lblFinVigencia %>"></asp:Label>
                                     </div>
                                     <div class="input-group input-group-sm">
                                         <asp:TextBox ID="TxtFinVigencia" runat="server" TextMode="Date" placeholder="Select date" style="font-size:16px;" class="form-control form-control-sm" TabIndex="1" />
@@ -212,15 +194,17 @@
             <div class="d-grid gap-4 d-flex justify-content-center mt-2 mb-3">
                 <asp:UpdatePanel ID="UpdatePanel2" runat="server">
                     <ContentTemplate>
-                        <%--<asp:Button ID="BtnAgregar" runat="server" Text="Agregar" OnClick="BtnAgregar_Click" CausesValidation="true" CssClass="btn btn-primary px-4" TabIndex="11"/>--%>
-                        <asp:Button ID="BtnSiguiente" runat="server" Text="Siguiente" OnClick="BtnSiguiente_Click" CausesValidation="true" CssClass="btn btn-primary px-4" TabIndex="11"/>
+                        <asp:Button ID="BtnSiguiente" runat="server" Text="<%$ Resources:GlobalResources, btnSiguiente %>" OnClick="BtnSiguiente_Click" CausesValidation="true" CssClass="btn btn-primary px-4" TabIndex="11"/>
                     </ContentTemplate>
                 </asp:UpdatePanel>
             </div>
 
             <div class="container col-12 mt-4">
                 <div class="row mb-3 mt-4" style="background-color:#96E7D9;">
-                    <h6 class="h6 fw-normal my-1" style="font-size:small">Consulta de Proyectos</h6>
+                    <%--<h6 class="h6 fw-normal my-1" style="font-size:small">Consulta de Proyectos</h6>--%>
+                    <h6 class="h6 fw-normal my-1" style="font-size:small">
+                        <asp:Literal runat="server" Text="<%$ Resources:GlobalResources, hdrConsultaProyectos %>" />
+                    </h6>
                 </div>
 
                 <%-- Catalogo de proyectos --%>
@@ -232,7 +216,7 @@
                             DataKeyNames="IdProyecto" PageSize="10" Font-Size="Smaller" >
                             <AlternatingRowStyle CssClass="alt autoWidth" />
                             <Columns>
-                                <asp:TemplateField HeaderText="Nombre del proyecto">
+                                <asp:TemplateField HeaderText="<%$ Resources:GlobalResources, col_NomProyecto %>">
                                     <ItemTemplate>
                                         <asp:LinkButton ID="lnkProyecto" runat="server" UseSubmitBehavior="true" style="display: block; text-align: left; text-decoration: none;" CommandName="SelectProyecto" CommandArgument='<%# Eval("Descripcion") + "|" + Eval("IdProyecto") + "|" + Eval("NomCliente") + "|" + Eval("DescAsunto")  + "|" + Eval("IdCliente") + "|" + Eval("IdTpoAsunto") %>'><%# Eval("Descripcion") %></asp:LinkButton>
                                     </ItemTemplate>
@@ -241,9 +225,9 @@
                                 <asp:BoundField DataField="Descripcion" HeaderText="Descripción del proyecto" >
                                 </asp:BoundField>
 --%>
-                                <asp:BoundField DataField="NomCliente" HeaderText="Cliente" >
+                                <asp:BoundField DataField="NomCliente" HeaderText="<%$ Resources:GlobalResources, col_Seguro_Cia %>" >
                                 </asp:BoundField>
-                                <asp:BoundField DataField="DescAsunto" HeaderText="Tipo de Asunto" >
+                                <asp:BoundField DataField="DescAsunto" HeaderText="<%$ Resources:GlobalResources, col_Tpo_Asunto %>" >
                                 </asp:BoundField>
                                 <asp:BoundField DataField="NumPoliza" >
                                 </asp:BoundField>
@@ -287,7 +271,7 @@
         
                 <div>
                     <br />
-                    <asp:Button ID="BtnClose" runat="server" OnClick="BtnClose_Click" Text="Cerrar" CssClass="btn btn-outline-primary"/>
+                    <asp:Button ID="BtnClose" runat="server" OnClick="BtnClose_Click" Text="<%$ Resources:GlobalResources, btnCerrar %>" CssClass="btn btn-outline-primary"/>
                 </div>
             </asp:Panel>
             <br />
@@ -313,36 +297,9 @@
         
                 <div class="d-flex justify-content-center mb-3">
                     <br />
-                    <asp:Button ID="BtnAceptar" runat="server" OnClick="BtnAceptar_Click" Text="Aceptar" CssClass="btn btn-outline-primary mx-1" />
-                    <asp:Button ID="BtnCancelar" runat="server" OnClick="BtnCancelar_Click" Text="Cancelar" CssClass="btn btn-outline-secondary mx-1" />
-                    <asp:Button ID="BtnCerrar" runat="server" OnClick="BtnCerrar_Click" Text="Cerrar" CssClass="btn btn-outline-primary"/>
-                </div>
-            </asp:Panel>
-            <br />
-            <asp:Panel ID="pnlExpira" runat="server" CssClass="CajaDialogo" style="display: none; border: none; border-radius: 10px; width: 400px; background-color:#FFFFFF;">
-                <div class=" row justify-content-end" data-bs-theme="dark">
-                    <div class="col-1">
-                        <asp:Button runat="server" OnClientClick="acceso(); return false;" type="button" class="btn-close" aria-label="Close" />
-                    </div>
-                </div>
-                <div>
-                        <br />
-                    <hr class="dropdown-divider" />
-                </div>
-                <div>
-                        <br />
-                    <hr class="dropdown-divider" />
-                </div>
-                <div>
-                    <asp:Label ID="LblExpira" runat="server" Text="" />
-                </div>
-                <div>
-                    <br />
-                    <hr class="dropdown-divider" />
-                </div>
-                <div>
-                    <br />
-                        <asp:Button ID="BtnClose_Expira" OnClientClick="acceso(); return false;" runat="server" Text="Cerrar" CssClass="btn btn-outline-primary"/>
+                    <asp:Button ID="BtnAceptar" runat="server" OnClick="BtnAceptar_Click" Text="<%$ Resources:GlobalResources, btnAceptar %>" CssClass="btn btn-outline-primary mx-1" />
+                    <asp:Button ID="BtnCancelar" runat="server" OnClick="BtnCancelar_Click" Text="<%$ Resources:GlobalResources, btnCancelar %>" CssClass="btn btn-outline-secondary mx-1" />
+                    <asp:Button ID="BtnCerrar" runat="server" OnClick="BtnCerrar_Click" Text="<%$ Resources:GlobalResources, btnCerrar %>" CssClass="btn btn-outline-primary"/>
                 </div>
             </asp:Panel>
             <br />
@@ -367,16 +324,6 @@
                         </div>
                     </td>
                     <td>&nbsp;</td>
-                    <td>
-                        <div class="form-group">
-                            <div class="d-grid col-6 mx-auto">
-                                <ajaxToolkit:ModalPopupExtender ID="mpeExpira" runat="server" PopupControlID="pnlExpira"
-                                    TargetControlID="lblHide" BackgroundCssClass="FondoAplicacion" OnOkScript="mpeExpiraOnOk()" >
-                                </ajaxToolkit:ModalPopupExtender>
-                                <asp:Label ID="lblHide" runat="server" Text="Label" Style="display: none;" />
-                            </div>
-                        </div>
-                    </td>
                 </tr>
                 <tr>
                     <td>&nbsp;</td>

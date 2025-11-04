@@ -22,6 +22,7 @@ namespace WebItNow_Peacock
         {
             // Código que se ejecuta al iniciar la aplicación
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+            // Registrar bundles
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
 
@@ -40,6 +41,24 @@ namespace WebItNow_Peacock
             // Session["Url_OneDrive_Eliminados"] = Url_OneDrive_Eliminados;
         }
 
+        protected void Application_AcquireRequestState(object sender, EventArgs e)
+        {
+            if (HttpContext.Current.Session != null && HttpContext.Current.Session["Idioma"] != null)
+            {
+                System.Threading.Thread.CurrentThread.CurrentUICulture =
+                    new System.Globalization.CultureInfo(HttpContext.Current.Session["Idioma"].ToString());
+                System.Threading.Thread.CurrentThread.CurrentCulture =
+                    new System.Globalization.CultureInfo(HttpContext.Current.Session["Idioma"].ToString());
+            }
+            else
+            {
+                // Idioma por defecto: español
+                System.Threading.Thread.CurrentThread.CurrentUICulture =
+                    new System.Globalization.CultureInfo("es-MX");
+                System.Threading.Thread.CurrentThread.CurrentCulture =
+                    new System.Globalization.CultureInfo("es-MX");
+            }
+        }
 
     }
 }

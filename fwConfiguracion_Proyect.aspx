@@ -15,25 +15,6 @@
             $("input").attr("autocomplete", "off");
         });
 
-        window.onload = function () {
-            // Inicia un temporizador para ejecutar después de 30 minutos (1800000 milisegundos)
-            var timer = setTimeout(function () {
-                // Actualiza el contenido del elemento para mostrar que la sesión ha expirado
-                document.getElementById('<%=LblExpira.ClientID %>').innerHTML = 'La sesión ha expirado.';
-        
-                // Encuentra el modal y lo muestra
-                var modalId = '<%=mpeExpira.ClientID%>';
-                var modal = $find(modalId);
-                modal.show();
-
-                // Inicia otro temporizador para recargar la página después de 30 minutos
-                setTimeout(function () {
-                    location.reload();
-                }, 1800000);
-
-            }, 1800000);
-        };
-
         function acceso() {
             location.href = '/Login.aspx';
         }
@@ -69,6 +50,24 @@
             }
         }
 
+        function CerrarPanel() {
+            // 1️⃣ Ocultar el panel al instante
+            var pnl = document.getElementById('<%= PnlDocProceso.ClientID %>');
+            if (pnl) pnl.style.display = 'none';
+
+            // 2️⃣ Llamar al WebMethod para limpiar la variable
+            if (typeof PageMethods !== "undefined") {
+                PageMethods.LimpiarVariable(onSuccess, onError);
+            }
+
+            function onSuccess() {
+                console.log('Variable limpiada correctamente.');
+            }
+            function onError(err) {
+                console.error('Error al limpiar variable: ', err);
+            }
+        }
+
     </script>
     
     <style type="text/css">
@@ -94,7 +93,8 @@
                     </div>
                     <div class="col-lg-8 col-md-8">
                         <div class="input-group input-group-sm">
-                            <h2 class="h2 mb-3 fw-normal mt-4 align-content-center">Configuración de Categorías al Proyecto</h2>
+                            <%--<h2 class="h2 mb-3 fw-normal mt-4 align-content-center">Configuración de Categorías al Proyecto</h2>--%>
+                            <asp:Label ID="lblTitulo_Categoria_Proyecto" runat="server" CssClass="h2 mb-3 fw-normal mt-4 align-content-center" style="display:block; text-align:center;" ></asp:Label>
                         </div>
                     </div>
                 </div>
@@ -108,108 +108,56 @@
                 <div class="row mb-3">
                     <div class="col-lg-4 col-md-4">
                         <div class ="mb-2">
-                            <asp:Label ID="LblCliente" runat="server" Text="Nombre del Cliente" ></asp:Label>
+                            <asp:Label ID="LblCliente" runat="server" Text="<%$ Resources:GlobalResources, LblCiaSeguros %>" ></asp:Label>
                         </div>
                         <div class=" input-group input-group-sm">
                             <%--<asp:DropDownList ID="ddlCliente" runat="server" CssClass="btn btn-outline-secondary text-start" AutoPostBack="true" OnSelectedIndexChanged="ddlCliente_SelectedIndexChanged" Width="100%">--%>
                             <%--</asp:DropDownList>--%>
-                            <asp:TextBox ID="TxtCliente" runat="server" CssClass="form-control form-control-sm" placeholder="Nombre del Cliente" AutoComplete="off" MaxLength="30" ReadOnly="true" ></asp:TextBox>
+                            <asp:TextBox ID="TxtCliente" runat="server" CssClass="form-control form-control-sm" placeholder="<%$ Resources:GlobalResources, LblCiaSeguros %>" AutoComplete="off" MaxLength="30" ReadOnly="true" ></asp:TextBox>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-4 ">
                         <div class ="mb-2">
-                            <asp:Label ID="LblProyecto" runat="server" Text="Proyecto" CssClass="control-label" Font-Size="Small"></asp:Label>
+                            <asp:Label ID="LblProyecto" runat="server" Text="<%$ Resources:GlobalResources, lblNomProyecto %>" CssClass="control-label" Font-Size="Small"></asp:Label>
                         </div>
                         <div class="input-group input-group-sm">
                             <%--<asp:DropDownList ID="ddlProyecto" runat="server" CssClass="btn btn-outline-secondary text-start" AutoPostBack="true" OnSelectedIndexChanged="ddlProyecto_SelectedIndexChanged" Width="100%">--%>
                             <%--</asp:DropDownList>--%>
-                            <asp:TextBox ID="TxtNomProyecto" runat="server" CssClass="form-control form-control-sm" placeholder="Nombre del Proyecto" AutoComplete="off" MaxLength="30" ReadOnly="true" ></asp:TextBox>
+                            <asp:TextBox ID="TxtNomProyecto" runat="server" CssClass="form-control form-control-sm" placeholder="<%$ Resources:GlobalResources, lblNomProyecto %>" AutoComplete="off" MaxLength="30" ReadOnly="true" ></asp:TextBox>
                         </div>
                     </div>
 
                     <div class="col-lg-4 col-md-4">
                         <div class ="mb-2">
-                            <asp:Label ID="LblTpoAsunto" runat="server" Text="Tipo de Asunto" ></asp:Label>
+                            <asp:Label ID="LblTpoAsunto" runat="server" Text="<%$ Resources:GlobalResources, lblTipoAsunto %>" ></asp:Label>
                         </div>
                         <div class=" input-group input-group-sm">
-                            <asp:TextBox ID="TxtTpoAsunto" runat="server" CssClass="form-control form-control-sm" placeholder="Tipo de Asunto" AutoComplete="off" MaxLength="30" ReadOnly="true" ></asp:TextBox>
+                            <asp:TextBox ID="TxtTpoAsunto" runat="server" CssClass="form-control form-control-sm" placeholder="<%$ Resources:GlobalResources, lblTipoAsunto %>" AutoComplete="off" MaxLength="30" ReadOnly="true" ></asp:TextBox>
                         </div>
                     </div>
                 </div>
 
-<%--  
-                <div class="row mb-3">
-                    <div class="col-lg-4 col-md-4">
-                        <div class ="mb-2">
-                            <asp:Label ID="LblTpoEstatus" runat="server" Text="Tipo de Estatus" ></asp:Label>
-                        </div>
-                        <div class=" input-group input-group-sm">
-                            <asp:DropDownList ID="ddlTpoEstatus" runat="server" CssClass="btn btn-outline-secondary text-start" AutoPostBack="true" OnSelectedIndexChanged="ddlTpoStatus_SelectedIndexChanged" Width="100%">
-                            </asp:DropDownList>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-4">
-                    </div>
-                    <div class="col-lg-4 col-md-4">
-                    </div>
-                </div>
---%>
+
                 <div class="row mb-3 mt-4 " style="background-color:#96E7D9;">
                     <h5 class="h1 fw-normal my-1" style="font-size:small">&nbsp;</h5>
                 </div>
 
-<%--                
-                <div class="row mb-3">
-                    <div class="col-lg-4 col-md-4">
-                        <div class ="mb-2">
-                            <asp:Label ID="LblCarpetas" runat="server" Text="Carpeta en la cual desea trabajar" ></asp:Label>
-                        </div>
-                        <div class=" input-group input-group-sm">
-                            <asp:DropDownList ID="ddlCarpetas" runat="server" CssClass="btn btn-outline-secondary text-start" AutoPostBack="true" OnSelectedIndexChanged="ddlCarpetas_SelectedIndexChanged" Width="100%">
-                            </asp:DropDownList>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-4">
-                    </div>
-                    <div class="col-lg-4 col-md-4">
-                    </div>
-                </div>
---%>
 
                 <div class="d-grid gap-4 d-flex justify-content-center mt-2 mb-3">
-                    <asp:Button ID="BtnAgregarDatos" runat="server" Text="Agregar" OnClick="BtnAgregarDatos_Click" CssClass="btn btn-primary" Visible="true" TabIndex="0" />
-                    <asp:Button ID="BtnEditar" runat="server" Text="Editar Datos" OnClick="BtnEditar_Click" CssClass="btn btn-primary" Visible="false" TabIndex="1" />
-                    <asp:Button ID="BtnGrabar" runat="server" Text="Aplicar Cambios" Font-Bold="True" OnClick="BtnGrabar_Click" CssClass="btn btn-primary" Visible="false" TabIndex="2" />
-                    <asp:Button ID="BtnRegresar" runat="server" Text="Regresar" OnClick="BtnRegresar_Click" CssClass="btn btn-primary" />
+                    <asp:Button ID="BtnAgregarDatos" runat="server" Text="<%$ Resources:GlobalResources, btnAgregar %>" OnClick="BtnAgregarDatos_Click" CssClass="btn btn-primary" Visible="true" TabIndex="0" />
+                    <asp:Button ID="btnEditar" runat="server" Text="<%$ Resources:GlobalResources, btnEditar %>" OnClick="BtnEditar_Click" CssClass="btn btn-primary" Visible="false" TabIndex="1" />
+                    <asp:Button ID="BtnGrabar" runat="server" Text="<%$ Resources:GlobalResources, btnGrabar %>" Font-Bold="True" OnClick="BtnGrabar_Click" CssClass="btn btn-primary" Visible="false" TabIndex="2" />
+                    <asp:Button ID="BtnRegresar" runat="server" Text="<%$ Resources:GlobalResources, btnRegresar %>" OnClick="BtnRegresar_Click" CssClass="btn btn-primary" />
 
                     <%--<asp:Button ID="btnEliminarDatos" runat="server" Text="Eliminar" OnClick="btnEliminarDatos_Click" CssClass="btn btn-primary" Enabled="false" />--%>
                     <%--<asp:Button ID="btnEditarDatos" runat="server" Text="Editar Datos" OnClick="btnEditarDatos_Click" CssClass="btn btn-primary" Enabled="false" />--%>
                 </div>
                 <br />
-<%--
-                <div class="row mb-3">
-                    <div class="col-lg-4 col-md-4">
-                        <div class ="mb-2">
-                            <asp:Label ID="lblArchivo" runat="server" Text="ruta archivo" ></asp:Label>
-                        </div>
-                        <div class=" input-group input-group-sm">
-                            <asp:TextBox ID="txtFilePath" runat="server" CssClass="form-control form-control-sm" placeholder="ruta archivo" AutoComplete="off" MaxLength="200"  ></asp:TextBox>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-4">
-                        <div class ="mb-2">
-                            &nbsp;
-                        </div>
-                        <div class=" input-group input-group-sm">
-                            <asp:Button ID="btnReadExcel" runat="server" Text="Leer Excel" OnClick="btnReadExcel_Click" CssClass="btn btn-primary" />
-                        </div>
-                    </div>
-                </div>
---%>
+
                 <%--controles pnl1--%>
                 <div class="row" style="background-color:mediumturquoise; align-items: baseline;">
                     <div class="col-10" style="padding-left: 14px;">
-                        <asp:Label ID="LblEtiquetaPnl1" runat="server" Text="DOCUMENTOS REQUERIDOS POR " CssClass="control-label" Font-Size="small"></asp:Label>
+                        <asp:Label ID="LblEtiquetaPnl1" runat="server" Text="<%$ Resources:GlobalResources, hdrTituloDocumentos %>" CssClass="control-label" Font-Size="small"></asp:Label>
                     </div>
                     <div class="col-2" style="display:flex; justify-content: end;">
                         <div>
@@ -232,7 +180,7 @@
 
                         <div class="row mb-3 mt-4" style="background-color:#96E7D9; align-items: baseline;">
                             <div class="col-10" style="padding-left: 14px;">
-                                <asp:Label ID="LblAsegurados" runat="server" Text="ASEGURADOS A LOS QUE APLICA(N) ESTE/OS DOCUMENTO(S)" CssClass="control-label" Font-Size="small"></asp:Label>
+                                <asp:Label ID="LblEtiquetaPnl2" runat="server" Text="<%$ Resources:GlobalResources, hdrTituloAsegurados %>" CssClass="control-label" Font-Size="small"></asp:Label>
                             </div>
                             <div class="col-2" style="display:flex; justify-content: end;">
                                 <asp:UpdatePanel ID="UpdatePanel4" runat="server" UpdateMode="Conditional">
@@ -293,7 +241,7 @@
                             </div>
                             <div class="col-lg-4 col-md-4">
                                 <div class=" input-group input-group-sm">
-                                    <asp:Button ID="BtnPnl1Seleccionar_1" runat="server" Text="SELECCIONAR TODOS" OnClick="BtnPnl1Seleccionar_1_Click" CssClass="btn btn-primary" />
+                                    <asp:Button ID="BtnPnl1Seleccionar_1" runat="server" Text="<%$ Resources:GlobalResources, btnSeleccionar %>" OnClick="BtnPnl1Seleccionar_1_Click" CssClass="btn btn-primary" />
                                 </div>
                             </div>
                         </div>
@@ -306,7 +254,7 @@
 
                         <div class="row mb-3 mt-4" style="background-color:#96E7D9; align-items: baseline;">
                             <div class="col-10" style="padding-left: 14px;">
-                                <asp:Label ID="LblAsuntos" runat="server" Text="RIESGOS A LOS QUE APLICA(N) ESTE/OS DOCUMENTO(S)" CssClass="control-label" Font-Size="small"></asp:Label>
+                                <asp:Label ID="LblEtiquetaPnl3" runat="server" Text="<%$ Resources:GlobalResources, hdrTituloRiesgos %>" CssClass="control-label" Font-Size="small"></asp:Label>
                             </div>
                             <div class="col-2" style="display:flex; justify-content: end;">
                                 <asp:UpdatePanel ID="UpdatePanel3" runat="server" UpdateMode="Conditional">
@@ -367,7 +315,7 @@
                             </div>
                             <div class="col-lg-4 col-md-4">
                                 <div class=" input-group input-group-sm">
-                                    <asp:Button ID="BtnPnl1Seleccionar_2" runat="server" Text="SELECCIONAR TODOS" OnClick="BtnPnl1Seleccionar_2_Click" CssClass="btn btn-primary" />
+                                    <asp:Button ID="BtnPnl1Seleccionar_2" runat="server" Text="<%$ Resources:GlobalResources, btnSeleccionar %>" OnClick="BtnPnl1Seleccionar_2_Click" CssClass="btn btn-primary" />
                                 </div>
                             </div>
                         </div>
@@ -380,7 +328,7 @@
 
                         <div class="row mb-3 mt-4" style="background-color:#96E7D9; align-items: baseline;">
                             <div class="col-10" style="padding-left: 14px;">
-                                <asp:Label ID="LblCuadernos" runat="server" Text="ESTATUS A LOS QUE APLICA(N) ESTE/OS DOCUMENTO(S)" CssClass="control-label" Font-Size="small"></asp:Label>
+                                <asp:Label ID="LblEtiquetaPnl4" runat="server" Text="<%$ Resources:GlobalResources, hdrTituloEstatus %>" CssClass="control-label" Font-Size="small"></asp:Label>
                             </div>
                             <div class="col-2" style="display:flex; justify-content: end;">
                                 <asp:UpdatePanel ID="UpdatePanel5" runat="server" UpdateMode="Conditional">
@@ -441,7 +389,7 @@
                             </div>
                             <div class="col-lg-4 col-md-4">
                                 <div class=" input-group input-group-sm">
-                                    <asp:Button ID="BtnPnl1Seleccionar_3" runat="server" Text="SELECCIONAR TODOS" OnClick="BtnPnl1Seleccionar_3_Click" CssClass="btn btn-primary" />
+                                    <asp:Button ID="BtnPnl1Seleccionar_3" runat="server" Text="<%$ Resources:GlobalResources, btnSeleccionar %>" OnClick="BtnPnl1Seleccionar_3_Click" CssClass="btn btn-primary" />
                                 </div>
                             </div>
                         </div>
@@ -454,7 +402,7 @@
 
                         <div class="row mb-3 mt-4" style="background-color:#96E7D9; align-items: baseline;">
                             <div class="col-10" style="padding-left: 14px;">
-                                <asp:Label ID="LblBienes" runat="server" Text="BIENES A LOS QUE APLICA(N) ESTE/OS DOCUMENTO(S)" CssClass="control-label" Font-Size="small"></asp:Label>
+                                <asp:Label ID="LblEtiquetaPnl5" runat="server" Text="<%$ Resources:GlobalResources, hdrTituloBienes %>" CssClass="control-label" Font-Size="small"></asp:Label>
                             </div>
                             <div class="col-2" style="display:flex; justify-content: end;">
                                 <asp:UpdatePanel ID="UpdatePanel6" runat="server" UpdateMode="Conditional">
@@ -515,14 +463,14 @@
                             </div>
                             <div class="col-lg-4 col-md-4">
                                 <div class=" input-group input-group-sm">
-                                    <asp:Button ID="BtnPnl1Seleccionar_4" runat="server" Text="SELECCIONAR TODOS" OnClick="BtnPnl1Seleccionar_4_Click" CssClass="btn btn-primary" />
+                                    <asp:Button ID="BtnPnl1Seleccionar_4" runat="server" Text="<%$ Resources:GlobalResources, btnSeleccionar %>" OnClick="BtnPnl1Seleccionar_4_Click" CssClass="btn btn-primary" />
                                 </div>
                             </div>
                         </div>
 
                         <div class="row mb-3 mt-4" style="background-color:#96E7D9; align-items: baseline;">
                             <div class="col-10" style="padding-left: 14px;">
-                                <asp:Label ID="Label1" runat="server" Text="OTROS DETALLES A LOS QUE APLICA(N) ESTE/OS DOCUMENTO(S)" CssClass="control-label" Font-Size="small"></asp:Label>
+                                <asp:Label ID="LblEtiquetaPnl6" runat="server" Text="<%$ Resources:GlobalResources, hdrTituloOtrosDetalles %>" CssClass="control-label" Font-Size="small"></asp:Label>
                             </div>
                             <div class="col-2" style="display:flex; justify-content: end;">
                                 <asp:UpdatePanel ID="UpdatePanel9" runat="server" UpdateMode="Conditional">
@@ -583,7 +531,7 @@
                             </div>
                             <div class="col-lg-4 col-md-4">
                                 <div class=" input-group input-group-sm">
-                                    <asp:Button ID="BtnPnl1Seleccionar_5" runat="server" Text="SELECCIONAR TODOS" OnClick="BtnPnl1Seleccionar_5_Click" CssClass="btn btn-primary" />
+                                    <asp:Button ID="BtnPnl1Seleccionar_5" runat="server" Text="<%$ Resources:GlobalResources, btnSeleccionar %>" OnClick="BtnPnl1Seleccionar_5_Click" CssClass="btn btn-primary" />
                                 </div>
                             </div>
                         </div>
@@ -616,34 +564,7 @@
         
                 <div>
                     <br />
-                    <asp:Button ID="BtnClose" runat="server" OnClick="BtnClose_Click" Text="Cerrar" CssClass="btn btn-outline-primary"/>
-                </div>
-            </asp:Panel>
-            <br />
-            <asp:Panel ID="pnlExpira" runat="server" CssClass="CajaDialogo" style="display: none; border: none; border-radius: 10px; width: 400px; background-color:#FFFFFF;">
-                <div class=" row justify-content-end" data-bs-theme="dark">
-                    <div class="col-1">
-                        <asp:Button runat="server" OnClientClick="acceso(); return false;" type="button" class="btn-close" aria-label="Close" />
-                    </div>
-                </div>
-                <div>
-                        <br />
-                    <hr class="dropdown-divider" />
-                </div>
-                <div>
-                        <br />
-                    <hr class="dropdown-divider" />
-                </div>
-                <div>
-                    <asp:Label ID="LblExpira" runat="server" Text="" />
-                </div>
-                <div>
-                    <br />
-                    <hr class="dropdown-divider" />
-                </div>
-                <div>
-                    <br />
-                        <asp:Button ID="BtnClose_Expira" OnClientClick="acceso(); return false;" runat="server" Text="Cerrar" CssClass="btn btn-outline-primary"/>
+                    <asp:Button ID="BtnClose" runat="server" OnClick="BtnClose_Click" Text="<%$ Resources:GlobalResources, btnCerrar %>" CssClass="btn btn-outline-primary"/>
                 </div>
             </asp:Panel>
             <br />
@@ -663,38 +584,14 @@
                             <div>
                                 <br />
                                 <div class="d-flex flex-row mx-4 m-0 p-0">
-                                    <asp:Label ID="LblDocumentos" runat="server" Text="Descripción de Categoría" CssClass="form-label my-0 p-0" />
+                                    <asp:Label ID="LblDescCategoria" runat="server" Text="<%$ Resources:GlobalResources, lblDescCategoria %>" CssClass="form-label my-0 p-0" />
                                 </div>
                                 <div class="col-sm-6 mx-3">
                                     <asp:Panel runat="server" DefaultButton="BtnBuscar">
-                                        <asp:TextBox ID="TxtDescripcion" runat="server" placeholder="Descripción de Categoría" CssClass="form-control form-control-sm" onkeyup="mayus(this);"></asp:TextBox>
+                                        <asp:TextBox ID="TxtDescripcion" runat="server" placeholder="<%$ Resources:GlobalResources, lblDescCategoria %>" CssClass="form-control form-control-sm" onkeyup="mayus(this);"></asp:TextBox>
                                         <asp:Button ID="BtnBuscar" runat="server" OnClick="BtnBuscar_Click" Style="display: none" />
                                     </asp:Panel>
                                 </div>
-<%--                                
-                                <div class="mb-2">
-                                    <div style="overflow-x: hidden; overflow-y: auto; max-height: 275px;">
-                                        <asp:GridView ID="grdPnlBusqProceso" runat="server" AutoGenerateColumns="false" GridLines="None" Width="100%"
-                                            AllowPaging="True" CssClass="table table-responsive table-light table-striped table-hover align-middle" PagerStyle-CssClass="pagination-ys" 
-                                            AlternatingRowStyle-CssClass="alt" OnPageIndexChanging="grdPnlBusqProceso_PageIndexChanging"
-                                            PageSize="10" Font-Size="Smaller" HeaderStyle-HorizontalAlign="Left" >
-                                            <AlternatingRowStyle CssClass="alt autoWidth" />
-                                            <Columns>
-                                                <asp:BoundField DataField="IdDocumento" />
-                                                <asp:BoundField DataField="Descripcion" HeaderText="Categoría" >
-                                                    <ItemStyle HorizontalAlign="Left" />
-                                                </asp:BoundField>
-                                                <asp:TemplateField>
-                                                    <ItemTemplate>
-                                                        <asp:ImageButton ID="ImgDocumento_Del" runat="server" OnClick="ImgDocumento_Del_Click" Height="24px" Width="24px" ImageUrl="~/Images/rechazar_new.png"  Enabled="true" />
-                                                    </ItemTemplate>
-                                                </asp:TemplateField>
-                                            </Columns>
-                                            <PagerStyle HorizontalAlign="Center" CssClass="pagination-ys" />
-                                        </asp:GridView>
-                                    </div>
-                                </div>
---%>
                                 <div class="mb-2">
                                     <div style="overflow-x: hidden; overflow-y: auto; max-height: 275px;">
                                         <asp:GridView ID="grdPnlBusqProceso" runat="server" AutoGenerateColumns="false" GridLines="None" Width="100%"
@@ -710,12 +607,12 @@
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
                                                 <asp:BoundField DataField="IdDocumento" HeaderText="" />
-                                                <asp:BoundField DataField="Descripcion" HeaderText="Descripción de Categoría" >
+                                                <asp:BoundField DataField="Descripcion" HeaderText="<%$ Resources:GlobalResources, col_DescCategoria %>" >
                                                 <ItemStyle HorizontalAlign="Left" />
                                                 </asp:BoundField>
                                                 <asp:TemplateField>
                                                     <ItemTemplate>
-                                                        <asp:LinkButton ID="lnkQuitar" runat="server" CommandName="Quitar" CommandArgument='<%# Container.DataItemIndex %>' Text="eliminar" />
+                                                        <asp:LinkButton ID="lnkQuitar" runat="server" CommandName="Quitar" CommandArgument='<%# Container.DataItemIndex %>' Text="<%$ Resources:GlobalResources, lblEliminar %>" />
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
                                             </Columns>
@@ -728,8 +625,8 @@
                                 <hr class="dropdown-divider" />
                             </div>
                             <div class="d-grid gap-4 d-flex justify-content-center mb-2">
-                                <asp:Button ID="btnAgregar_Proceso" runat="server" Text="Agregar" OnClick="btnAgregar_Proceso_Click" CssClass="btn btn-outline-primary btn-sm" />
-                                <asp:Button ID="btnClose_Proceso" runat="server" OnClick="btnClose_Proceso_Click" Text="Cerrar" CssClass="btn btn-outline-secondary btn-sm" />
+                                <asp:Button ID="btnAgregar_Proceso" runat="server" Text="<%$ Resources:GlobalResources, btnAgregar %>" OnClick="btnAgregar_Proceso_Click" CssClass="btn btn-outline-primary btn-sm" />
+                                <asp:Button ID="btnClose_Proceso" runat="server" OnClick="btnClose_Proceso_Click" Text="<%$ Resources:GlobalResources, btnCerrar %>" CssClass="btn btn-outline-secondary btn-sm" />
                             </div>
                             <br />
                         </div>
@@ -755,13 +652,6 @@
                     <td>&nbsp;</td>
                 </tr>
                 <tr>
-                    <td>
-                        <ajaxToolkit:ModalPopupExtender ID="mpeExpira" runat="server" PopupControlID="pnlExpira"
-                            TargetControlID="lblHide" BackgroundCssClass="FondoAplicacion" OnOkScript="mpeExpiraOnOk()" >
-                        </ajaxToolkit:ModalPopupExtender>
-                    </td>
-                    <td class="style3"><asp:Label ID="lblHide" runat="server" Text="Label" Style="display: none;" />
-                    </td>
                     <td>
                         <ajaxToolkit:ModalPopupExtender ID="mpeNewProceso" runat="server" PopupControlID="PnlDocProceso"
                             TargetControlID="LblOculto1" BackgroundCssClass="FondoAplicacion" OnOkScript="mpeNewProceso()" >

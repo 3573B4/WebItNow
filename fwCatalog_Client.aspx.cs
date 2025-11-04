@@ -34,6 +34,9 @@ namespace WebItNow_Peacock
                         return;
                     }
 
+                    // Labels
+                    lblTitulo_Cat_Clientes.Text = GetGlobalResourceObject("GlobalResources", "lblTitulo_Cat_Clientes").ToString();
+
                     GetClientes();
 
                 }
@@ -64,7 +67,9 @@ namespace WebItNow_Peacock
                 if (dt.Rows.Count == 0)
                 {
                     GrdCliente.ShowHeaderWhenEmpty = true;
-                    GrdCliente.EmptyDataText = "No hay resultados.";
+                    GrdCliente.EmptyDataText = GetGlobalResourceObject("GlobalResources", "msg_NoResults").ToString();
+
+                    //GrdCliente.EmptyDataText = "No hay resultados.";
                 }
 
                 GrdCliente.DataSource = dt;
@@ -143,7 +148,8 @@ namespace WebItNow_Peacock
             BtnCancelar.Visible = true;
             BtnCerrar.Visible = false;
 
-            LblMessage_1.Text = "¿Desea eliminar el cliente?";
+            // LblMessage_1.Text = "¿Desea eliminar el cliente?";
+            LblMessage_1.Text = GetGlobalResourceObject("GlobalResources", "msg_Confirmar_Delete_Cliente").ToString();
             mpeMensaje_1.Show();
         }
 
@@ -166,7 +172,8 @@ namespace WebItNow_Peacock
 
                 dbConn.Close();
 
-                LblMessage.Text = "Se elimino cliente, correctamente";
+                // LblMessage.Text = "Se elimino cliente, correctamente";
+                LblMessage.Text = GetGlobalResourceObject("GlobalResources", "msg_Cliente_Eliminado").ToString();
                 mpeMensaje.Show();
 
                 GetClientes();
@@ -201,7 +208,8 @@ namespace WebItNow_Peacock
 
                 dbConn.Close();
 
-                LblMessage.Text = "Se actualizo cliente, correctamente";
+                // LblMessage.Text = "Se actualizo cliente, correctamente";
+                LblMessage.Text = GetGlobalResourceObject("GlobalResources", "msg_Cliente_Actualizado").ToString();
                 mpeMensaje.Show();
 
                 GetClientes();
@@ -221,13 +229,15 @@ namespace WebItNow_Peacock
             {
                 if (TxtCveCliente.Text == "" || TxtCveCliente.Text == null)
                 {
-                    LblMessage.Text = "Capturar Clave del Cliente";
+                    // LblMessage.Text = "Capturar Clave del Cliente";
+                    LblMessage.Text = GetGlobalResourceObject("GlobalResources", "msg_Capturar_ClaveCliente").ToString();
                     mpeMensaje.Show();
                     return;
                 }
                 else if (TxtNomCliente.Text == "" || TxtNomCliente.Text == null)
                 {
-                    LblMessage.Text = "Capturar Nombre del Cliente";
+                    // LblMessage.Text = "Capturar Nombre del Cliente";
+                    LblMessage.Text = GetGlobalResourceObject("GlobalResources", "msg_Capturar_NombreCliente").ToString();
                     mpeMensaje.Show();
                     return;
                 }
@@ -245,7 +255,8 @@ namespace WebItNow_Peacock
 
                 dbConn.Close();
 
-                LblMessage.Text = "Se agrego cliente, correctamente";
+                // LblMessage.Text = "Se agrego cliente, correctamente";
+                LblMessage.Text = GetGlobalResourceObject("GlobalResources", "msg_Cliente_Agregado").ToString();
                 mpeMensaje.Show();
 
                 // Inicializar Controles
@@ -340,13 +351,15 @@ namespace WebItNow_Peacock
         {
             if (TxtCveCliente.Text == "" || TxtCveCliente.Text == null)
             {
-                LblMessage.Text = "Capturar Clave del Cliente";
+                // LblMessage.Text = "Capturar Clave del Cliente";
+                LblMessage.Text = GetGlobalResourceObject("GlobalResources", "msg_Capturar_ClaveCliente").ToString();
                 mpeMensaje.Show();
                 return;
             }
             else if (TxtNomCliente.Text == "" || TxtNomCliente.Text == null)
             {
-                LblMessage.Text = "Capturar Nombre del Cliente";
+                // LblMessage.Text = "Capturar Nombre del Cliente";
+                LblMessage.Text = GetGlobalResourceObject("GlobalResources", "msg_Capturar_NombreCliente").ToString();
                 mpeMensaje.Show();
                 return;
             }

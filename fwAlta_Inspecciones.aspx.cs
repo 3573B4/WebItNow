@@ -26,6 +26,9 @@ namespace WebItNow_Peacock
             {
                 try
                 {
+                    // Labels
+                    lblTitulo_Alta_Inspecciones.Text = GetGlobalResourceObject("GlobalResources", "lblTitulo_Alta_Inspecciones").ToString();
+
                     TxtRef_Siniestro.Text = string.Empty;
                     TxtNomAsegurado.Text = string.Empty;
 

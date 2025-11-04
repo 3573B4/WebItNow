@@ -36,6 +36,11 @@ namespace WebItNow_Peacock
                         return;
                     }
 
+                    // Labels
+                    lblTitulo_Cat_Estatus.Text = GetGlobalResourceObject("GlobalResources", "lblTitulo_Cat_Estatus").ToString();
+
+                    Inicializar_GrdStSiniestro();
+
                     GetStSiniestro();
 
                 }
@@ -48,6 +53,40 @@ namespace WebItNow_Peacock
             }
         }
 
+        private void Inicializar_GrdStSiniestro()
+        {
+            // Crea un DataTable vacío con la estructura necesaria
+            DataTable dt = CrearDataTableVacio();
+
+            // Verifica si el DataTable tiene filas
+            if (dt.Rows.Count == 0)
+            {
+                // Mostrar el mensaje de "No hay resultados"
+                GrdStSiniestro.ShowHeaderWhenEmpty = true;
+                GrdStSiniestro.EmptyDataText = GetGlobalResourceObject("GlobalResources", "msg_NoResults").ToString();
+                
+                // GrdStSiniestro.EmptyDataText = "No hay resultados.";
+            }
+
+            // Enlaza el DataTable (vacío o lleno) al GridView
+            GrdStSiniestro.DataSource = dt;
+            GrdStSiniestro.DataBind();
+        }
+
+        private DataTable CrearDataTableVacio()
+        {
+            DataTable dt = new DataTable();
+
+            // Define las columnas del DataTable
+            dt.Columns.Add("IdEstStatus", typeof(string));
+            dt.Columns.Add("Cve_EstStatus", typeof(string));
+            dt.Columns.Add("Descripcion", typeof(string));
+
+            // Agrega más columnas según sea necesario
+
+            return dt;
+        }
+
         public void GetStSiniestro()
         {
             try
@@ -57,7 +96,7 @@ namespace WebItNow_Peacock
                 dbConn.Open();
 
                 // Consulta a las tablas : Estado de Documento (Expediente) = ITM_52
-                string strQuery = "SELECT IdEstStatus, Descripcion " +
+                string strQuery = "SELECT IdEstStatus, Cve_EstStatus, Descripcion " +
                                         " FROM ITM_52 " +
                                         " WHERE IdStatus = 1";
 
@@ -66,7 +105,8 @@ namespace WebItNow_Peacock
                 if (dt.Rows.Count == 0)
                 {
                     GrdStSiniestro.ShowHeaderWhenEmpty = true;
-                    GrdStSiniestro.EmptyDataText = "No hay resultados.";
+                    GrdStSiniestro.EmptyDataText = GetGlobalResourceObject("GlobalResources", "msg_NoResults").ToString();
+                    // GrdStSiniestro.EmptyDataText = "No hay resultados.";
                 }
 
                 GrdStSiniestro.DataSource = dt;
@@ -120,9 +160,10 @@ namespace WebItNow_Peacock
 
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                e.Row.Cells[0].Width = Unit.Pixel(100);     // IdEstStatus
-                e.Row.Cells[1].Width = Unit.Pixel(1200);    // Descripcion
-                e.Row.Cells[3].Width = Unit.Pixel(50);      // Eliminar
+                e.Row.Cells[1].Width = Unit.Pixel(100);     // Cve_EstStatus
+                e.Row.Cells[2].Width = Unit.Pixel(1200);    // Descripcion
+                e.Row.Cells[3].Width = Unit.Pixel(50);      // Editar
+                e.Row.Cells[4].Width = Unit.Pixel(50);      // Eliminar
             }
             if (e.Row.RowType == DataControlRowType.Header)
             {
@@ -145,7 +186,8 @@ namespace WebItNow_Peacock
             BtnCancelar.Visible = true;
             BtnCerrar.Visible = false;
 
-            LblMessage_1.Text = "¿Desea eliminar el estatus?";
+            // LblMessage_1.Text = "¿Desea eliminar el estatus?";
+            LblMessage_1.Text = GetGlobalResourceObject("GlobalResources", "msg_Confirmar_Delete_Estatus").ToString();
             mpeMensaje_1.Show();
         }
 
@@ -168,7 +210,8 @@ namespace WebItNow_Peacock
 
                 dbConn.Close();
 
-                LblMessage.Text = "Se elimino estatus, correctamente";
+                //LblMessage.Text = "Se elimino estatus, correctamente";
+                LblMessage.Text = GetGlobalResourceObject("GlobalResources", "msg_Estatus_Eliminado").ToString();
                 mpeMensaje.Show();
 
                 GetStSiniestro();
@@ -202,7 +245,8 @@ namespace WebItNow_Peacock
 
                 dbConn.Close();
 
-                LblMessage.Text = "Se actualizo estatus, correctamente";
+                //LblMessage.Text = "Se actualizo estatus, correctamente";
+                LblMessage.Text = GetGlobalResourceObject("GlobalResources", "msg_Estatus_Actualizado").ToString();
                 mpeMensaje.Show();
 
                 GetStSiniestro();
@@ -222,25 +266,27 @@ namespace WebItNow_Peacock
             {
                 if (TxtNomEstatus.Text == "" || TxtNomEstatus.Text == null)
                 {
-                    LblMessage.Text = "Capturar Nombre del Estatus";
+                    // LblMessage.Text = "Capturar Nombre del Estatus";
+                    LblMessage.Text = GetGlobalResourceObject("GlobalResources", "msg_Capturar_NomEstatus").ToString();
                     mpeMensaje.Show();
                     return;
                 }
 
-                int IdEstStatus = GetIdConsecutivoMax();
+                int iConsecutivo = GetIdConsecutivoMax();
 
                 ConexionBD_MySQL dbConn = new ConexionBD_MySQL(Variables.wUserName, Variables.wPassword);
                 dbConn.Open();
 
                 // Insertar registro tabla (ITM_52)
-                string strQuery = "INSERT INTO ITM_52 (IdEstStatus, Descripcion, IdStatus) " +
-                                  "VALUES (" + IdEstStatus + ", '" + TxtNomEstatus.Text.Trim() + "', 1)" + "\n \n";
+                string strQuery = "INSERT INTO ITM_52 (IdEstStatus, Cve_EstStatus, Descripcion, IdStatus) " +
+                                  "VALUES (" + iConsecutivo + ", CONCAT('ESS-', LPAD(" + iConsecutivo + ", 4, '0')), '" + TxtNomEstatus.Text.Trim() + "', 1)" + "\n \n";
 
                 int affectedRows = dbConn.ExecuteNonQuery(strQuery);
 
                 dbConn.Close();
 
-                LblMessage.Text = "Se agrego estatus, correctamente";
+                // LblMessage.Text = "Se agrego estatus, correctamente";
+                LblMessage.Text = GetGlobalResourceObject("GlobalResources", "msg_Estatus_Agregado").ToString();
                 mpeMensaje.Show();
 
                 // Inicializar Controles
@@ -329,7 +375,8 @@ namespace WebItNow_Peacock
         {
             if (TxtNomEstatus.Text == "" || TxtNomEstatus.Text == null)
             {
-                LblMessage.Text = "Capturar Nombre del Estatus";
+                // LblMessage.Text = "Capturar Nombre del Estatus";
+                LblMessage.Text = GetGlobalResourceObject("GlobalResources", "msg_Capturar_NomEstatus").ToString();
                 mpeMensaje.Show();
                 return;
             }
@@ -355,7 +402,7 @@ namespace WebItNow_Peacock
 
             Variables.wRenglon = row.RowIndex;
 
-            TxtNomEstatus.Text = Server.HtmlDecode(Convert.ToString(GrdStSiniestro.Rows[index].Cells[1].Text));
+            TxtNomEstatus.Text = Server.HtmlDecode(Convert.ToString(GrdStSiniestro.Rows[index].Cells[2].Text));
 
             TxtNomEstatus.ReadOnly = true;
 

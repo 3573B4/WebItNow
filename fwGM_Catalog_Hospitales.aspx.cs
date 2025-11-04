@@ -161,11 +161,11 @@ namespace WebItNow_Peacock
             TxtTarea.Text = string.Empty;
             TxtTarea.ReadOnly = false;
 
-            BtnEditar.Visible = true;
+            btnEditar.Visible = true;
             BtnGrabar.Visible = false;
             BtnAnular.Visible = false;
 
-            BtnEditar.Enabled = false;
+            btnEditar.Enabled = false;
             BtnAgregar.Enabled = true;
         }
 
@@ -176,7 +176,7 @@ namespace WebItNow_Peacock
 
             TxtTarea.ReadOnly = false;
 
-            BtnEditar.Visible = false;
+            btnEditar.Visible = false;
             BtnGrabar.Visible = true;
         }
 
@@ -211,11 +211,11 @@ namespace WebItNow_Peacock
             TxtTarea.Text = string.Empty;
             TxtTarea.ReadOnly = false;
 
-            BtnEditar.Visible = true;
+            btnEditar.Visible = true;
             BtnGrabar.Visible = false;
             BtnAnular.Visible = false;
 
-            BtnEditar.Enabled = false;
+            btnEditar.Enabled = false;
             BtnAgregar.Enabled = true;
         }
 
@@ -443,7 +443,7 @@ namespace WebItNow_Peacock
             TxtTarea.ReadOnly = true;
 
             BtnAnular.Visible = true;
-            BtnEditar.Enabled = true;
+            btnEditar.Enabled = true;
             BtnAgregar.Enabled = false;
         }
 

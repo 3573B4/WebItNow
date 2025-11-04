@@ -15,25 +15,6 @@
             $("input").attr("autocomplete", "off");
         });
 
-        window.onload = function () {
-            // Inicia un temporizador para ejecutar después de 30 minutos (1800000 milisegundos)
-            var timer = setTimeout(function () {
-                // Actualiza el contenido del elemento para mostrar que la sesión ha expirado
-                document.getElementById('<%=LblExpira.ClientID %>').innerHTML = 'La sesión ha expirado.';
-        
-                // Encuentra el modal y lo muestra
-                var modalId = '<%=mpeExpira.ClientID%>';
-                var modal = $find(modalId);
-                modal.show();
-
-                // Inicia otro temporizador para recargar la página después de 30 minutos
-                setTimeout(function () {
-                    location.reload();
-                }, 1800000);
-
-            }, 1800000);
-        };
-
         function acceso() {
             location.href = '/Login.aspx';
         }
@@ -77,6 +58,9 @@
         .radio-button-horizontal:last-child {
             margin-right: 0;
         }
+        .radio-button-horizontal label {
+            margin-left: 6px; /* separa el texto del botón */
+        }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
@@ -90,14 +74,14 @@
             <div class="row mb-0 py-5">
                 <div class="col-lg-3 col-md-3">
                     <div class ="mb-2">
-                        <asp:Label ID="LblRef" runat="server" Text="Buscar General de Referencias" CssClass="control-label col-sm-2" Font-Size="Small"></asp:Label>
+                        <asp:Label ID="LblRef" runat="server" Text="<%$ Resources:GlobalResources, lblRef %>" CssClass="control-label col-sm-2" Font-Size="Small"></asp:Label>
                     </div>
  
                     <asp:Panel runat="server" DefaultButton="ImgBusReference">
                         <div class="row">
                             
                             <div class="col-11">
-                                <asp:TextBox ID="TxtRef" runat="server" CssClass="form-control form-control-sm" onkeyup="mayus(this);" placeholder="Buscar General de Referencias" AutoComplete="off" MaxLength="15" ></asp:TextBox>
+                                <asp:TextBox ID="TxtRef" runat="server" CssClass="form-control form-control-sm" onkeyup="mayus(this);" placeholder="<%$ Resources:GlobalResources, lblRef %>" AutoComplete="off" MaxLength="15" ></asp:TextBox>
                             </div>
 
                            <div class="col-1 justify-content-start ps-0 ms-0">
@@ -110,7 +94,7 @@
 
                 <div class="col-lg-3 col-md-3 ">
                     <div class ="mb-2">
-                        <asp:Label ID="LblColumnas" runat="server" Text="Columna a buscar"></asp:Label>
+                        <asp:Label ID="LblColumnas" runat="server" Text="<%$ Resources:GlobalResources, lblColumnas %>"></asp:Label>
                     </div>
                     <div class="input-group input-group-sm">
                         <asp:DropDownList ID="ddlColumnas" runat="server" CssClass="btn btn-outline-secondary text-start" OnSelectedIndexChanged="ddlColumnas_SelectedIndexChanged" AutoPostBack="true" Width="100%" TabIndex="1">
@@ -120,7 +104,7 @@
 
                 <div class="col-lg-3 col-md-3 ">
                     <div class ="mb-2">
-                        <asp:Label ID="LblFiltros" runat="server" Text="Filtros" Visible="false" ></asp:Label>
+                        <asp:Label ID="LblFiltros" runat="server" Text="<%$ Resources:GlobalResources, lblFiltros %>" Visible="false" ></asp:Label>
                     </div>
                     <div class="input-group input-group-sm">
                         <asp:DropDownList ID="ddlFiltros" runat="server" CssClass="btn btn-outline-secondary text-start" OnSelectedIndexChanged="ddlFiltros_SelectedIndexChanged" AutoPostBack="true" Width="100%" Visible="false" TabIndex ="2">
@@ -131,7 +115,8 @@
             </div>
 
             <div class="group-container-horizontal">
-                <asp:RadioButton ID="rbAsuntos" runat="server" CssClass="radio-button-horizontal" Text="&nbsp; Asuntos" OnCheckedChanged="rbAsuntos_CheckedChanged" AutoPostBack="true" GroupName="GrupoCasos" Checked="True" />
+                <%--<asp:RadioButton ID="rbAsuntos" runat="server" CssClass="radio-button-horizontal" Text="&nbsp; Asuntos" OnCheckedChanged="rbAsuntos_CheckedChanged" AutoPostBack="true" GroupName="GrupoCasos" Checked="True" />--%>
+                    <asp:RadioButton ID="rbAsuntos" runat="server" CssClass="radio-button-horizontal" Text="<%$ Resources:GlobalResources, lblAsuntos %>" OnCheckedChanged="rbAsuntos_CheckedChanged" AutoPostBack="true" GroupName="GrupoCasos" Checked="True" />
                 <%--<asp:RadioButton ID="rbProyectos" runat="server" CssClass="radio-button-horizontal" Text="&nbsp; Proyectos" OnCheckedChanged="rbProyectos_CheckedChanged" AutoPostBack="true" GroupName="GrupoCasos" />--%>
             </div>
 
@@ -139,7 +124,10 @@
 
         <div class="container col-12 mt-4">
             <div class="row mb-3 mt-4" style="background-color:#96E7D9;">
-                <h6 class="h6 fw-normal my-1" style="font-size:small">Consulta General de Referencias</h6>
+                <%--<h6 class="h6 fw-normal my-1" style="font-size:small">Consulta General de Referencias</h6>--%>
+                <h6 class="h6 fw-normal my-1" style="font-size:small">
+                    <asp:Label ID="LblConsultaRef" runat="server" Text="<%$ Resources:GlobalResources, LblConsultaRef %>"></asp:Label>
+                </h6>
             </div>
 
             <%-- Altas de Asunto --%>
@@ -158,7 +146,7 @@
                                     <asp:ImageButton ID="ImgCheckList" runat="server" OnClick="ImgCheckList_Click" Height="24px" Width="24px" ImageUrl="~/Images/checklist.png" Enabled="false" />
                                 </ItemTemplate>
                             </asp:TemplateField>
-                            <asp:TemplateField HeaderText="Referencia Siniestro">
+                            <asp:TemplateField HeaderText="<%$ Resources:GlobalResources, col_Referencia %>">
                                 <ItemTemplate>
                                     <asp:LinkButton ID="lnkReferencia" runat="server" UseSubmitBehavior="true" style="display: block; text-align: left; text-decoration: none;" CommandName="SelectReferencia" 
                                     CommandArgument='<%# Eval("Referencia_Sub") + "|" + Eval("Referencia") + "|" + Eval("SubReferencia")  + "|" + 
@@ -166,34 +154,34 @@
                                     </asp:LinkButton>
                                 </ItemTemplate>
                             </asp:TemplateField>
-                            <asp:BoundField DataField="NumSiniestro" HeaderText="Número Siniestro" >
+                            <asp:BoundField DataField="NumSiniestro" HeaderText="<%$ Resources:GlobalResources, col_NumSiniestro %>" >
                             <%--<ItemStyle Width="300px" />--%>
                             </asp:BoundField>
-                            <asp:BoundField DataField="NumPoliza" HeaderText="Número Póliza" >
+                            <asp:BoundField DataField="NumPoliza" HeaderText="<%$ Resources:GlobalResources, col_NumPoliza %>" >
                             <%--<ItemStyle Width="300px" />--%>
                             </asp:BoundField>
-                            <asp:BoundField DataField="NumReporte" HeaderText="Número Reporte" >
+                            <asp:BoundField DataField="NumReporte" HeaderText="<%$ Resources:GlobalResources, col_NumReporte %>" >
                             <%--<ItemStyle Width="300px" />--%>
                             </asp:BoundField>
-                            <asp:BoundField DataField="Fecha_Asignacion" DataFormatString="{0:d}" HeaderText="Fecha de Asignación" >
+                            <asp:BoundField DataField="Fecha_Asignacion" DataFormatString="{0:d}" HeaderText="<%$ Resources:GlobalResources, col_Fecha_Asignacion %>" >
                             <%--<ItemStyle Width="300px" />--%>
                             </asp:BoundField>
-                            <asp:BoundField DataField="Seguro_Cia" HeaderText="Compañia de Seguros" >
+                            <asp:BoundField DataField="Seguro_Cia" HeaderText="<%$ Resources:GlobalResources, col_Seguro_Cia %>" >
                             <%--<ItemStyle Width="3000px" />--%>
                             </asp:BoundField>
-                            <asp:BoundField DataField="NomAsegurado" HeaderText="Nombre del Asegurado" >
+                            <asp:BoundField DataField="NomAsegurado" HeaderText="<%$ Resources:GlobalResources, col_NomAsegurado %>" >
                             <%--<ItemStyle Width="600px" />--%>
                             </asp:BoundField>
-                            <asp:BoundField DataField="NomCliente" HeaderText="Nombre del Cliente" >
+                            <asp:BoundField DataField="NomCliente" HeaderText="<%$ Resources:GlobalResources, col_NomCliente %>" >
                             <%--<ItemStyle Width="600px" />--%>
                             </asp:BoundField>
-                            <asp:BoundField DataField="Resp_Tecnico" HeaderText="Responsable Tecnico" >
+                            <asp:BoundField DataField="Resp_Tecnico" HeaderText="<%$ Resources:GlobalResources, col_Resp_Tecnico %>" >
                             <%--<ItemStyle Width="600px" />--%>
                             </asp:BoundField>
-                            <asp:BoundField DataField="Resp_Administrativo" HeaderText="Responsable Administrativo" >
+                            <asp:BoundField DataField="Resp_Administrativo" HeaderText="<%$ Resources:GlobalResources, col_Resp_Administrativo %>" >
                             <%--<ItemStyle Width="600px" />--%>
                             </asp:BoundField>
-                            <asp:BoundField DataField="IdStatus" HeaderText="Estatus" >
+                            <asp:BoundField DataField="IdStatus" HeaderText="<%$ Resources:GlobalResources, col_IdStatus %>" >
                             </asp:BoundField>
                             <asp:BoundField DataField="Referencia" >
                             </asp:BoundField>
@@ -223,9 +211,9 @@
             <div class="d-grid gap-2 gap-md-3 d-md-flex justify-content-md-center mt-2 mb-3">
                 <asp:UpdatePanel ID="UpdatePanel4" runat="server">
                     <ContentTemplate>
-                        <asp:Button ID="BtnAltaAsunto" runat="server" Text="Alta Asunto" OnClick="BtnAltaAsunto_Click" CausesValidation="true" CssClass="btn btn-primary px-4" TabIndex="3"/>
-                        <asp:Button ID="BtnExportarExcel" runat="server" Text="Exportar Excel" OnClick="BtnExportarExcel_Click" CssClass="btn btn-primary" TabIndex="4"/>
-                        <asp:Button ID="BtnRegresar" runat="server" Text="Regresar" OnClick="BtnRegresar_Click" CausesValidation="false" CssClass="btn btn-primary px-4" />
+                        <asp:Button ID="BtnAltaAsunto" runat="server" Text="<%$ Resources:GlobalResources, btnAltaAsunto %>" OnClick="BtnAltaAsunto_Click" CausesValidation="true" CssClass="btn btn-primary px-4" TabIndex="3"/>
+                        <asp:Button ID="BtnExportarExcel" runat="server" Text="<%$ Resources:GlobalResources, btnExportarExcel %>" OnClick="BtnExportarExcel_Click" CssClass="btn btn-primary" TabIndex="4"/>
+                        <asp:Button ID="BtnRegresar" runat="server" Text="<%$ Resources:GlobalResources, btnRegresar %>" OnClick="BtnRegresar_Click" CausesValidation="false" CssClass="btn btn-primary px-4" />
                     </ContentTemplate>
                 </asp:UpdatePanel>
             </div>
@@ -300,33 +288,6 @@
         </div>
     </asp:Panel>
     <br />
-    <asp:Panel ID="pnlExpira" runat="server" CssClass="CajaDialogo" style="display: none; border: none; border-radius: 10px; width: 400px; background-color:#FFFFFF;">
-        <div class=" row justify-content-end" data-bs-theme="dark">
-            <div class="col-1">
-                <asp:Button runat="server" OnClientClick="acceso(); return false;" type="button" class="btn-close" aria-label="Close" />
-            </div>
-        </div>
-        <div>
-                <br />
-            <hr class="dropdown-divider" />
-        </div>
-        <div>
-                <br />
-            <hr class="dropdown-divider" />
-        </div>
-        <div>
-            <asp:Label ID="LblExpira" runat="server" Text="" />
-        </div>
-        <div>
-            <br />
-            <hr class="dropdown-divider" />
-        </div>
-        <div>
-            <br />
-                <asp:Button ID="BtnClose_Expira" OnClientClick="acceso(); return false;" runat="server" Text="Cerrar" CssClass="btn btn-outline-primary"/>
-        </div>
-    </asp:Panel>
-    <br />
     <table cellspacing="1" cellpadding="1" border="0">
         <tr>
             <td>
@@ -352,13 +313,6 @@
             </td>
         </tr>
         <tr>
-            <td>
-                <ajaxToolkit:ModalPopupExtender ID="mpeExpira" runat="server" PopupControlID="pnlExpira"
-                    TargetControlID="lblHide" BackgroundCssClass="FondoAplicacion" OnOkScript="mpeExpiraOnOk()" >
-                </ajaxToolkit:ModalPopupExtender>
-            </td>
-            <td class="style3"><asp:Label ID="lblHide" runat="server" Text="Label" Style="display: none;" />
-            </td>
             <td>&nbsp;</td>
             <td>&nbsp;</td>
         </tr>

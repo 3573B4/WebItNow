@@ -916,7 +916,7 @@ namespace WebItNow_Peacock
             habilitar(this.Controls);
 
             // TxtNumReporte.Enabled = false;
-            // BtnEditar.Visible = false;
+            // btnEditar.Visible = false;
             // BtnGrabar.Visible = true;
         }
 

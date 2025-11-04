@@ -47,7 +47,7 @@ namespace WebItNow_Peacock
                     // GetProtocolo();
 
                     BtnAgregarDatos.Visible = false;
-                    BtnEditar.Visible = true;
+                    btnEditar.Visible = true;
 
                 }
                 catch (Exception ex)

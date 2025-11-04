@@ -4414,12 +4414,12 @@ namespace WebItNow_Peacock
                 mpeMensaje.Show();
                 return;
             }
-            else if (TxtIdPaquete.Text == "" || TxtIdPaquete.Text == null)
-            {
-                LblMessage.Text = "Capturar ID del Paquete";
-                mpeMensaje.Show();
-                return;
-            }
+            //else if (TxtIdPaquete.Text == "" || TxtIdPaquete.Text == null)
+            //{
+            //    LblMessage.Text = "Capturar ID del Paquete";
+            //    mpeMensaje.Show();
+            //    return;
+            //}
 
             int sPaquete = Convert.ToInt32(ddlPaquetes_MD.SelectedValue);
 

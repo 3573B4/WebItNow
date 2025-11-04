@@ -53,7 +53,7 @@ namespace WebItNow_Peacock
                     if (int.TryParse(IdProyecto, out proyectoId) && proyectoId >= 0)
                     {
                         BtnAgregarDatos.Visible = false;
-                        BtnEditar.Visible = true;
+                        btnEditar.Visible = true;
 
                         TxtCliente.Text = (string)Session["Cliente"];
                         TxtNomProyecto.Text = (string)Session["Proyecto"];
@@ -1917,7 +1917,7 @@ namespace WebItNow_Peacock
 
         protected void BtnEditar_Click(object sender, EventArgs e)
         {
-            BtnEditar.Visible = false;
+            btnEditar.Visible = false;
             BtnGrabar.Visible = true;
 
             // Desactivar los CheckBoxes
@@ -1942,7 +1942,7 @@ namespace WebItNow_Peacock
 
         protected void BtnGrabar_Click(object sender, EventArgs e)
         {
-            BtnEditar.Visible = true;
+            btnEditar.Visible = true;
             BtnGrabar.Visible = false;
 
             // Actualizar en la tabla ITM_25 los valores de CheckBox seleccionados. 

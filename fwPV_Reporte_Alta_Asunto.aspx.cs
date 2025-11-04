@@ -73,6 +73,138 @@ namespace WebItNow_Peacock
             BtnExportarExcel.Enabled = false;
         }
 
+        protected void GetEstatus()
+        {
+            try
+            {
+
+                ConexionBD_MySQL dbConn = new ConexionBD_MySQL(Variables.wUserName, Variables.wPassword);
+                dbConn.Open();
+
+                string strQuery = "SELECT IdDocumento, Descripcion " +
+                                        " FROM ITM_83 " +
+                                        " WHERE IdStatus = 1 ";
+
+                DataTable dt = dbConn.ExecuteQuery(strQuery);
+
+                ddlFiltros.DataSource = dt;
+
+                ddlFiltros.DataValueField = "IdDocumento";
+                ddlFiltros.DataTextField = "Descripcion";
+
+                ddlFiltros.DataBind();
+                // ddlFiltros.Items.Insert(0, new ListItem("-- Seleccionar --", "0"));
+                ddlFiltros.Items.Insert(0, new ListItem(GetGlobalResourceObject("GlobalResources", "ddl_Select").ToString(), "0"));
+
+                dbConn.Close();
+
+            }
+            catch (System.Exception ex)
+            {
+                LblMessage.Text = ex.Message;
+                mpeMensaje.Show();
+            }
+        }
+
+        protected void GetTpoAsunto()
+        {
+            try
+            {
+
+                ConexionBD_MySQL dbConn = new ConexionBD_MySQL(Variables.wUserName, Variables.wPassword);
+                dbConn.Open();
+
+                string strQuery = "SELECT IdTpoAsunto, Descripcion " +
+                                        " FROM ITM_66 " +
+                                        " WHERE IdStatus = 1 ";
+
+                DataTable dt = dbConn.ExecuteQuery(strQuery);
+
+                ddlFiltros.DataSource = dt;
+
+                ddlFiltros.DataValueField = "IdTpoAsunto";
+                ddlFiltros.DataTextField = "Descripcion";
+
+                ddlFiltros.DataBind();
+                // ddlFiltros.Items.Insert(0, new ListItem("-- Seleccionar --", "0"));
+                ddlFiltros.Items.Insert(0, new ListItem(GetGlobalResourceObject("GlobalResources", "ddl_Select").ToString(), "0"));
+
+                dbConn.Close();
+
+            }
+            catch (System.Exception ex)
+            {
+                LblMessage.Text = ex.Message;
+                mpeMensaje.Show();
+            }
+        }
+
+        public void GetProyectos()
+        {
+            try
+            {
+
+                ConexionBD_MySQL dbConn = new ConexionBD_MySQL(Variables.wUserName, Variables.wPassword);
+                dbConn.Open();
+
+                string strQuery = "SELECT DISTINCT(IdProyecto), Descripcion " +
+                                        " FROM ITM_78 " +
+                                        " WHERE IdStatus = 1 ";
+
+
+                DataTable dt = dbConn.ExecuteQuery(strQuery);
+
+                ddlFiltros.DataSource = dt;
+
+                ddlFiltros.DataValueField = "IdProyecto";
+                ddlFiltros.DataTextField = "Descripcion";
+
+                ddlFiltros.DataBind();
+                // ddlFiltros.Items.Insert(0, new ListItem("-- Seleccionar --", "-1"));
+                ddlFiltros.Items.Insert(0, new ListItem(GetGlobalResourceObject("GlobalResources", "ddl_Select").ToString(), "-1"));
+
+                dbConn.Close();
+
+            }
+            catch (Exception ex)
+            {
+                LblMessage.Text = ex.Message;
+                mpeMensaje.Show();
+            }
+        }
+
+        protected void GetCiaSeguros()
+        {
+            try
+            {
+
+                ConexionBD_MySQL dbConn = new ConexionBD_MySQL(Variables.wUserName, Variables.wPassword);
+                dbConn.Open();
+
+                string strQuery = "SELECT IdSeguros, Descripcion " +
+                                        " FROM ITM_67 " +
+                                        " WHERE IdStatus = 1 ORDER BY IdOrden";
+
+                DataTable dt = dbConn.ExecuteQuery(strQuery);
+
+                ddlFiltros.DataSource = dt;
+
+                ddlFiltros.DataValueField = "IdSeguros";
+                ddlFiltros.DataTextField = "Descripcion";
+
+                ddlFiltros.DataBind();
+                // ddlFiltros.Items.Insert(0, new ListItem("-- Seleccionar --", "0"));
+                ddlFiltros.Items.Insert(0, new ListItem(GetGlobalResourceObject("GlobalResources", "ddl_Select").ToString(), "0"));
+
+                dbConn.Close();
+            }
+            catch (System.Exception ex)
+            {
+                LblMessage.Text = ex.Message;
+                mpeMensaje.Show();
+            }
+        }
+
         protected void GetProcedimiento()
         {
             try
@@ -93,7 +225,8 @@ namespace WebItNow_Peacock
                 ddlProcedimiento.DataTextField = "Descripcion";
 
                 ddlProcedimiento.DataBind();
-                ddlProcedimiento.Items.Insert(0, new ListItem("-- Seleccionar --", "0"));
+                //ddlProcedimiento.Items.Insert(0, new ListItem("-- Seleccionar --", "0"));
+                ddlProcedimiento.Items.Insert(0, new ListItem(GetGlobalResourceObject("GlobalResources", "ddl_Select").ToString(), "0"));
 
                 dbConn.Close();
 
@@ -125,7 +258,8 @@ namespace WebItNow_Peacock
                 ddlColumnas.DataTextField = "Descripcion";
 
                 ddlColumnas.DataBind();
-                ddlColumnas.Items.Insert(0, new ListItem("-- Seleccionar Columna --", "0"));
+                //ddlColumnas.Items.Insert(0, new ListItem("-- Seleccionar Columna --", "0"));
+                ddlColumnas.Items.Insert(0, new ListItem(GetGlobalResourceObject("GlobalResources", "ddl_Select_Col").ToString(), "0"));
 
                 dbConn.Close();
             }
@@ -156,7 +290,8 @@ namespace WebItNow_Peacock
                 ddlFiltros.DataTextField = "Descripcion";
 
                 ddlFiltros.DataBind();
-                ddlFiltros.Items.Insert(0, new ListItem("-- Seleccionar --", "0"));
+                //ddlFiltros.Items.Insert(0, new ListItem("-- Seleccionar --", "0"));
+                ddlFiltros.Items.Insert(0, new ListItem(GetGlobalResourceObject("GlobalResources", "ddl_Select").ToString(), "0"));
 
                 dbConn.Close();
             }
@@ -187,7 +322,8 @@ namespace WebItNow_Peacock
                 ddlFiltros.DataTextField = "Descripcion";
 
                 ddlFiltros.DataBind();
-                ddlFiltros.Items.Insert(0, new ListItem("-- Seleccionar --", "0"));
+                //ddlFiltros.Items.Insert(0, new ListItem("-- Seleccionar --", "0"));
+                ddlFiltros.Items.Insert(0, new ListItem(GetGlobalResourceObject("GlobalResources", "ddl_Select").ToString(), "0"));
 
                 dbConn.Close();
 
@@ -303,7 +439,8 @@ namespace WebItNow_Peacock
                 if (dt.Rows.Count == 0)
                 {
                     GrdAlta_Asunto.ShowHeaderWhenEmpty = true;
-                    GrdAlta_Asunto.EmptyDataText = "No hay resultados.";
+                    //GrdAlta_Asunto.EmptyDataText = "No hay resultados.";
+                    GrdAlta_Asunto.EmptyDataText = GetGlobalResourceObject("GlobalResources", "msg_NoResults").ToString();
                 }
 
                 GrdAlta_Asunto.DataSource = dt;
@@ -374,12 +511,109 @@ namespace WebItNow_Peacock
 
         protected void ddlFiltros_SelectedIndexChanged(object sender, EventArgs e)
         {
+            string IdColumna = ddlColumnas.SelectedValue;
 
+            GetAltaAsunto(string.Empty, IdColumna);
         }
 
         protected void ddlColumnas_SelectedIndexChanged(object sender, EventArgs e)
         {
+            string IdColumna = ddlColumnas.SelectedValue;
 
+            // Inicializar DropDownList de busqueda
+            ddlFiltros.ClearSelection();
+
+            switch (IdColumna)
+            {
+                case "IdSeguros":
+
+                    GetCiaSeguros();
+
+                    LblFiltros.Text = "Compañia de Seguros";
+                    LblFiltros.Visible = true;
+                    ddlFiltros.Visible = true;
+
+                    TxtRef.Text = string.Empty;
+
+                    break;
+
+                case "IdProyecto":
+
+                    GetProyectos();
+
+                    LblFiltros.Text = "Nombre de Proyecto";
+                    LblFiltros.Visible = true;
+                    ddlFiltros.Visible = true;
+
+                    TxtRef.Text = string.Empty;
+
+                    break;
+
+                case "IdTpoAsunto":
+
+                    GetTpoAsunto();
+
+                    LblFiltros.Text = "Tipo de Asunto";
+                    LblFiltros.Visible = true;
+                    ddlFiltros.Visible = true;
+
+                    TxtRef.Text = string.Empty;
+
+                    break;
+
+                case "IdRespTecnico":
+
+                    GetResponsableTec();
+
+                    LblFiltros.Text = "Responsable Técnico";
+                    LblFiltros.Visible = true;
+                    ddlFiltros.Visible = true;
+
+                    TxtRef.Text = string.Empty;
+
+                    break;
+
+                case "IdRespAdministrativo":
+
+                    GetResponsableAdmin();
+
+                    LblFiltros.Text = "Responsable Administrativo";
+                    LblFiltros.Visible = true;
+                    ddlFiltros.Visible = true;
+
+                    TxtRef.Text = string.Empty;
+
+                    break;
+
+                case "IdStatus":
+
+                    GetEstatus();
+
+                    LblFiltros.Text = "Estatus";
+                    LblFiltros.Visible = true;
+                    ddlFiltros.Visible = true;
+
+                    TxtRef.Text = string.Empty;
+
+                    break;
+
+                default:
+
+                    LblFiltros.Text = "Filtros";
+                    LblFiltros.Visible = false;
+                    ddlFiltros.Visible = false;
+
+                    if (IdColumna != "0")
+                    {
+                        GetAltaAsunto(string.Empty, IdColumna);
+                    }
+                    else
+                    {
+                        GetAltaAsunto("*", "*");
+                    }
+
+                    break;
+            }
         }
 
         protected void ImgBusReference_Click(object sender, ImageClickEventArgs e)

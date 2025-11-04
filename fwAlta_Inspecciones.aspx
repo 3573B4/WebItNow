@@ -15,25 +15,6 @@
             $("input").attr("autocomplete", "off");
         });
 
-        window.onload = function () {
-            // Inicia un temporizador para ejecutar después de 30 minutos (1800000 milisegundos)
-            var timer = setTimeout(function () {
-                // Actualiza el contenido del elemento para mostrar que la sesión ha expirado
-                document.getElementById('<%=LblExpira.ClientID %>').innerHTML = 'La sesión ha expirado.';
-        
-                // Encuentra el modal y lo muestra
-                var modalId = '<%=mpeExpira.ClientID%>';
-                var modal = $find(modalId);
-                modal.show();
-
-                // Inicia otro temporizador para recargar la página después de 30 minutos
-                setTimeout(function () {
-                    location.reload();
-                }, 1800000);
-
-            }, 1800000);
-        };
-
         function acceso() {
             location.href = '/Login.aspx';
         }
@@ -76,7 +57,8 @@
         <div class="container col-md-4 py-5">
             <div class="form-floating mt-3">
                 <div class="row mb-3 mt-4" style="background-color:#96E7D9;">
-                    <h6 class="h6 fw-normal my-1" style="font-size:small">ALTA DE INSPECCIONES</h6>
+                    <%--<h6 class="h6 fw-normal my-1" style="font-size:small">ALTA DE INSPECCIONES</h6>--%>
+                    <asp:Label ID="lblTitulo_Alta_Inspecciones" runat="server" CssClass="h6 fw-normal my-1" style="display:block; text-align:center;" ></asp:Label>
                 </div>
 
                 <div class="form-group mt-4">
@@ -459,33 +441,6 @@
             </asp:UpdatePanel>
         </asp:Panel>
     <br />
-    <asp:Panel ID="pnlExpira" runat="server" CssClass="CajaDialogo" style="display: none; border: none; border-radius: 10px; width: 400px; background-color:#FFFFFF;">
-        <div class=" row justify-content-end" data-bs-theme="dark">
-            <div class="col-1">
-                <asp:Button runat="server" OnClientClick="acceso(); return false;" type="button" class="btn-close" aria-label="Close" />
-            </div>
-        </div>
-        <div>
-                <br />
-            <hr class="dropdown-divider" />
-        </div>
-        <div>
-                <br />
-            <hr class="dropdown-divider" />
-        </div>
-        <div>
-            <asp:Label ID="LblExpira" runat="server" Text="" />
-        </div>
-        <div>
-            <br />
-            <hr class="dropdown-divider" />
-        </div>
-        <div>
-            <br />
-                <asp:Button ID="BtnClose_Expira" OnClientClick="acceso(); return false;" runat="server" Text="Cerrar" CssClass="btn btn-outline-primary"/>
-        </div>
-    </asp:Panel>
-    <br />
     <table cellspacing="1" cellpadding="1" border="0">
         <tr>
             <td>
@@ -510,13 +465,6 @@
             </td>
         </tr>
         <tr>
-            <td>
-                <ajaxToolkit:ModalPopupExtender ID="mpeExpira" runat="server" PopupControlID="pnlExpira"
-                    TargetControlID="lblHide" BackgroundCssClass="FondoAplicacion" OnOkScript="mpeExpiraOnOk()" >
-                </ajaxToolkit:ModalPopupExtender>
-            </td>
-            <td class="style3"><asp:Label ID="lblHide" runat="server" Text="Label" Style="display: none;" />
-            </td>
             <td>
                 <ajaxToolkit:ModalPopupExtender ID="mpeNewProceso" runat="server" PopupControlID="PnlCodigoPostal"
                     TargetControlID="LblOculto1" BackgroundCssClass="FondoAplicacion" OnOkScript="mpeNewProceso()" >

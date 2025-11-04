@@ -17,25 +17,6 @@
             $("input").attr("autocomplete", "off");
         });
 
-        window.onload = function () {
-            // Inicia un temporizador para ejecutar después de 30 minutos (1800000 milisegundos)
-            var timer = setTimeout(function () {
-                // Actualiza el contenido del elemento para mostrar que la sesión ha expirado
-                document.getElementById('<%=LblExpira.ClientID %>').innerHTML = 'La sesión ha expirado.';
-        
-                // Encuentra el modal y lo muestra
-                var modalId = '<%=mpeExpira.ClientID%>';
-                var modal = $find(modalId);
-                modal.show();
-
-                // Inicia otro temporizador para recargar la página después de 30 minutos
-                setTimeout(function () {
-                    location.reload();
-                }, 1800000);
-
-            }, 1800000);
-        };
-
         function acceso() {
             location.href = '/Login.aspx';
         }
@@ -70,7 +51,8 @@
                 </div>
                 <div class="col-lg-8 col-md-8">
                     <div class="input-group input-group-sm">
-                        <h2 class="h2 mb-3 fw-normal mt-4 align-content-center">Catálogo Estatus del Siniestro</h2>
+                        <%--<h2 class="h2 mb-3 fw-normal mt-4 align-content-center">Catálogo Estatus del Siniestro</h2>--%>
+                        <asp:Label ID="lblTitulo_Cat_Estatus" runat="server" CssClass="h2 mb-3 fw-normal mt-4 align-content-center" style="display:block; text-align:center;" ></asp:Label>
                     </div>
                 </div>
             </div>
@@ -91,10 +73,10 @@
             <div class="d-grid gap-4 d-flex justify-content-center mt-2 mb-3">
                 <asp:UpdatePanel ID="UpdatePanel2" runat="server">
                     <ContentTemplate>
-                        <asp:Button ID="BtnAnular" runat="server" Text="Cancelar" Font-Bold="True" OnClick="BtnAnular_Click" CssClass="btn btn-primary" Visible="false" TabIndex="0"/>
-                        <asp:Button ID="BtnEditar" runat="server" Text="Editar Datos" Font-Bold="True" OnClick="BtnEditar_Click" CssClass="btn btn-primary" Enabled="false" TabIndex="1"/>
-                        <asp:Button ID="BtnGrabar" runat="server" Text="Aplicar Cambios" Font-Bold="True" OnClick="BtnGrabar_Click" CssClass="btn btn-primary" Visible="false" TabIndex="2"/>
-                        <asp:Button ID="BtnAgregar" runat="server" Text="Agregar" OnClick="BtnAgregar_Click" CausesValidation="true" CssClass="btn btn-primary px-4" TabIndex="3"/>
+                        <asp:Button ID="BtnAnular" runat="server" Text="<%$ Resources:GlobalResources, btnAnular %>" Font-Bold="True" OnClick="BtnAnular_Click" CssClass="btn btn-primary" Visible="false" TabIndex="0"/>
+                        <asp:Button ID="BtnEditar" runat="server" Text="<%$ Resources:GlobalResources, btnEditar %>" Font-Bold="True" OnClick="BtnEditar_Click" CssClass="btn btn-primary" Enabled="false" TabIndex="1"/>
+                        <asp:Button ID="BtnGrabar" runat="server" Text="<%$ Resources:GlobalResources, btnGrabar %>" Font-Bold="True" OnClick="BtnGrabar_Click" CssClass="btn btn-primary" Visible="false" TabIndex="2"/>
+                        <asp:Button ID="BtnAgregar" runat="server" Text="<%$ Resources:GlobalResources, btnAgregar %>" OnClick="BtnAgregar_Click" CausesValidation="true" CssClass="btn btn-primary px-4" TabIndex="3"/>
                     </ContentTemplate>
                 </asp:UpdatePanel>
             </div>
@@ -114,6 +96,8 @@
                             <AlternatingRowStyle CssClass="alt autoWidth" />
                             <Columns>
                                 <asp:BoundField DataField="IdEstStatus" HeaderText="Id" >
+                                </asp:BoundField>
+                                <asp:BoundField DataField="Cve_EstStatus" HeaderText="Cve. Estatus" >
                                 </asp:BoundField>
                                 <asp:BoundField DataField="Descripcion" HeaderText="Descripción del estatus" >
                                 </asp:BoundField>
@@ -156,7 +140,7 @@
         
             <div>
                 <br />
-                <asp:Button ID="BtnClose" runat="server" OnClick="BtnClose_Click" Text="Cerrar" CssClass="btn btn-outline-primary"/>
+                <asp:Button ID="BtnClose" runat="server" OnClick="BtnClose_Click" Text="<%$ Resources:GlobalResources, btnCerrar %>" CssClass="btn btn-outline-primary"/>
             </div>
         </asp:Panel>
         <br />
@@ -182,36 +166,9 @@
         
             <div class="d-flex justify-content-center mb-3">
                 <br />
-                <asp:Button ID="BtnAceptar" runat="server" OnClick="BtnAceptar_Click" Text="Aceptar" CssClass="btn btn-outline-primary mx-1" />
-                <asp:Button ID="BtnCancelar" runat="server" OnClick="BtnCancelar_Click" Text="Cancelar" CssClass="btn btn-outline-secondary mx-1" />
-                <asp:Button ID="BtnCerrar" runat="server" OnClick="BtnCerrar_Click" Text="Cerrar" CssClass="btn btn-outline-primary"/>
-            </div>
-        </asp:Panel>
-        <br />
-        <asp:Panel ID="pnlExpira" runat="server" CssClass="CajaDialogo" style="display: none; border: none; border-radius: 10px; width: 400px; background-color:#FFFFFF;">
-            <div class=" row justify-content-end" data-bs-theme="dark">
-                <div class="col-1">
-                    <asp:Button runat="server" OnClientClick="acceso(); return false;" type="button" class="btn-close" aria-label="Close" />
-                </div>
-            </div>
-            <div>
-                    <br />
-                <hr class="dropdown-divider" />
-            </div>
-            <div>
-                    <br />
-                <hr class="dropdown-divider" />
-            </div>
-            <div>
-                <asp:Label ID="LblExpira" runat="server" Text="" />
-            </div>
-            <div>
-                <br />
-                <hr class="dropdown-divider" />
-            </div>
-            <div>
-                <br />
-                    <asp:Button ID="BtnClose_Expira" OnClientClick="acceso(); return false;" runat="server" Text="Cerrar" CssClass="btn btn-outline-primary"/>
+                <asp:Button ID="BtnAceptar" runat="server" OnClick="BtnAceptar_Click" Text="<%$ Resources:GlobalResources, btnAceptar %>" CssClass="btn btn-outline-primary mx-1" />
+                <asp:Button ID="BtnCancelar" runat="server" OnClick="BtnCancelar_Click" Text="<%$ Resources:GlobalResources, btnCancelar %>" CssClass="btn btn-outline-secondary mx-1" />
+                <asp:Button ID="BtnCerrar" runat="server" OnClick="BtnCerrar_Click" Text="<%$ Resources:GlobalResources, btnCerrar %>" CssClass="btn btn-outline-primary"/>
             </div>
         </asp:Panel>
         <br />
@@ -236,16 +193,6 @@
                     </div>
                 </td>
                 <td>&nbsp;</td>
-                <td>
-                    <div class="form-group">
-                        <div class="d-grid col-6 mx-auto">
-                            <ajaxToolkit:ModalPopupExtender ID="mpeExpira" runat="server" PopupControlID="pnlExpira"
-                                TargetControlID="lblHide" BackgroundCssClass="FondoAplicacion" OnOkScript="mpeExpiraOnOk()" >
-                            </ajaxToolkit:ModalPopupExtender>
-                            <asp:Label ID="lblHide" runat="server" Text="Label" Style="display: none;" />
-                        </div>
-                    </div>
-                </td>
             </tr>
             <tr>
                 <td>&nbsp;</td>

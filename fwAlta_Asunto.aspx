@@ -15,25 +15,6 @@
             $("input").attr("autocomplete", "off");
         });
 
-        window.onload = function () {
-            // Inicia un temporizador para ejecutar después de 30 minutos (1800000 milisegundos)
-            var timer = setTimeout(function () {
-                // Actualiza el contenido del elemento para mostrar que la sesión ha expirado
-                document.getElementById('<%=LblExpira.ClientID %>').innerHTML = 'La sesión ha expirado.';
-        
-                // Encuentra el modal y lo muestra
-                var modalId = '<%=mpeExpira.ClientID%>';
-                var modal = $find(modalId);
-                modal.show();
-
-                // Inicia otro temporizador para recargar la página después de 30 minutos
-                setTimeout(function () {
-                    location.reload();
-                }, 1800000);
-
-            }, 1800000);
-        };
-
         function acceso() {
             location.href = '/Login.aspx';
         }
@@ -147,11 +128,12 @@
         <div class="container col-md-4 " >
             <div class="form-floating mt-3 py-5">
                 <div class="row mb-3 mt-4" style="background-color:#96E7D9;">
-                    <h5 class="h6 fw-normal my-1" style="font-size:small">ALTA DE NUEVA REFERENCIA</h5>
+                    <%--<h5 class="h6 fw-normal my-1" style="font-size:small">ALTA DE NUEVA REFERENCIA</h5>--%>
+                    <asp:Label ID="lblTitulo_Alta_Asunto" runat="server" CssClass="h6 fw-normal my-1" style="display:block; text-align:center;" ></asp:Label>
                 </div>
 
                 <div class="form-floating mt-3">
-                    <asp:Label ID="LblCiaSeguros" runat="server" Text="Compañia de Seguros"></asp:Label>
+                    <asp:Label ID="LblCiaSeguros" runat="server" Text="<%$ Resources:GlobalResources, LblCiaSeguros %>"></asp:Label>
                         <asp:CustomValidator ID="cvCiaSeguros" runat="server" ControlToValidate="ddlCiaSeguros" 
                         OnServerValidate ="cvCiaSeguros_ServerValidate" ErrorMessage="*" ForeColor="Red" Display="Dynamic" >
                         </asp:CustomValidator>
@@ -160,7 +142,7 @@
                 </div>
 
                 <div class="form-floating mt-3">
-                    <asp:Label ID="LblProyecto" runat="server" Text="Proyecto" CssClass="control-label" Font-Size="Small"></asp:Label>
+                    <asp:Label ID="LblProyecto" runat="server" Text="<%$ Resources:GlobalResources, LblProyecto %>" CssClass="control-label" Font-Size="Small"></asp:Label>
                         <asp:CustomValidator ID="cvProyecto" runat="server" ControlToValidate="ddlProyecto" 
                         OnServerValidate ="cvProyecto_ServerValidate" ErrorMessage="*" ForeColor="Red" Display="Dynamic" >
                         </asp:CustomValidator>
@@ -170,18 +152,18 @@
 
                 <div class="form-group mt-4">
                 <div id="divCliente" runat="server" visible="false">
-                    <asp:Label ID="LblNomCliente" runat="server" Text="Nombre del Cliente" CssClass="control-label co-sm-2" Font-Size="Small" Font-Bold="False" ></asp:Label>
+                    <asp:Label ID="LblNomCliente" runat="server" Text="<%$ Resources:GlobalResources, LblNomCliente %>" CssClass="control-label co-sm-2" Font-Size="Small" Font-Bold="False" ></asp:Label>
                         <asp:RequiredFieldValidator ID="rfvCliente" runat="server"
                         ControlToValidate="TxtNomCliente" ErrorMessage="*" ForeColor="Red">
                         </asp:RequiredFieldValidator>
                     <div class="col-sm-12">
-                        <asp:TextBox ID="TxtNomCliente" runat="server" CssClass="form-control" placeholder="Nombre del Cliente" AutoComplete="off" onkeyup="mayus(this);" MaxLength="50" TabIndex="3"></asp:TextBox>
+                        <asp:TextBox ID="TxtNomCliente" runat="server" CssClass="form-control" placeholder="<%$ Resources:GlobalResources, LblNomCliente %>" AutoComplete="off" onkeyup="mayus(this);" MaxLength="50" TabIndex="3"></asp:TextBox>
                     </div>
                 </div>
                 </div>  
 
                 <div class="form-floating mt-3">
-                    <asp:Label ID="LblTipoAsunto" runat="server" Text="Tipo de Asunto" ></asp:Label>
+                    <asp:Label ID="LblTipoAsunto" runat="server" Text="<%$ Resources:GlobalResources, LblTipoAsunto %>" ></asp:Label>
                         <asp:CustomValidator ID="cvTipoAsunto" runat="server" ControlToValidate="ddlTipoAsunto" 
                         OnServerValidate ="cvTipoAsunto_ServerValidate" ErrorMessage="*" ForeColor="Red" Display="Dynamic" >
                         </asp:CustomValidator>
@@ -190,7 +172,7 @@
                 </div>
 
                 <div class="form-group mt-4">
-                    <asp:Label ID="LblFechaAsignacion" runat="server" Text="Fecha de Asignación" CssClass="control-label" Font-Size="Small"></asp:Label>
+                    <asp:Label ID="LblFechaAsignacion" runat="server" Text="<%$ Resources:GlobalResources, LblFechaAsignacion %>" CssClass="control-label" Font-Size="Small"></asp:Label>
                         <asp:RequiredFieldValidator ID="rfvFechaInput" runat="server"
                         ControlToValidate="TxtFechaInput" ErrorMessage="*" ForeColor="Red">
                         </asp:RequiredFieldValidator>
@@ -201,103 +183,103 @@
 
                 <div class="form-group mt-4">
                     <div id="divCampo1" runat="server" visible="false">
-                        <asp:Label ID="LblEstOcurrencia" runat="server" Text="Estado de Ocurrencia" CssClass="control-label co-sm-2" Font-Size="Small" Font-Bold="False"></asp:Label>
+                        <asp:Label ID="LblEstOcurrencia" runat="server" Text="<%$ Resources:GlobalResources, LblEstOcurrencia %>" CssClass="control-label co-sm-2" Font-Size="Small" Font-Bold="False"></asp:Label>
                             <asp:RequiredFieldValidator ID="rfvEstOcurrencia" runat="server"
                             ControlToValidate="TxtEstOcurrencia" ErrorMessage="*" ForeColor="Red" Enabled="false">
                             </asp:RequiredFieldValidator>
                         <div class="col-sm-12">
-                            <asp:TextBox ID="TxtEstOcurrencia" runat="server" CssClass="form-control" placeholder="Estado de Ocurrencia" AutoComplete="off" onkeyup="mayus(this);" MaxLength="80" TabIndex="6"></asp:TextBox>
+                            <asp:TextBox ID="TxtEstOcurrencia" runat="server" CssClass="form-control" placeholder="<%$ Resources:GlobalResources, LblEstOcurrencia %>" AutoComplete="off" onkeyup="mayus(this);" MaxLength="80" TabIndex="6"></asp:TextBox>
                         </div>
                     </div>
                 </div>
 
                 <div class="form-group mt-4">
                     <div id="divCampo2" runat="server" visible="false">
-                        <asp:Label ID="LblDescMote" runat="server" Text=" Descripción Mote" CssClass="control-label co-sm-2" Font-Size="Small" Font-Bold="False"></asp:Label>
+                        <asp:Label ID="LblDescMote" runat="server" Text="<%$ Resources:GlobalResources, LblDescMote %>" CssClass="control-label co-sm-2" Font-Size="Small" Font-Bold="False"></asp:Label>
                             <asp:RequiredFieldValidator ID="rfvDescMote" runat="server"
                             ControlToValidate="TxtDescMote" ErrorMessage="*" ForeColor="Red" Enabled="false">
                             </asp:RequiredFieldValidator>
                         <div class="col-sm-12">
-                            <asp:TextBox ID="TxtDescMote" runat="server" CssClass="form-control" placeholder="Descripción Mote" AutoComplete="off" onkeyup="mayus(this);" MaxLength="80" TabIndex="7"></asp:TextBox>
+                            <asp:TextBox ID="TxtDescMote" runat="server" CssClass="form-control" placeholder="<%$ Resources:GlobalResources, LblDescMote %>" AutoComplete="off" onkeyup="mayus(this);" MaxLength="80" TabIndex="7"></asp:TextBox>
                         </div>
                     </div>
                 </div>
 
                 <div class="form-group mt-4">
                     <div id="divNomActor" runat="server" visible="true">
-                        <asp:Label ID="LblNomActor" runat="server" Text="Nombre del Actor" CssClass="control-label co-sm-2" Font-Size="Small" Font-Bold="False"></asp:Label>
+                        <asp:Label ID="LblNomActor" runat="server" Text="<%$ Resources:GlobalResources, LblNomActor %>" CssClass="control-label co-sm-2" Font-Size="Small" Font-Bold="False"></asp:Label>
                             <asp:RequiredFieldValidator ID="rfvNomActor" runat="server"
                             ControlToValidate="TxtNomActor" ErrorMessage="*" ForeColor="Red">
                             </asp:RequiredFieldValidator>
                         <div class="col-sm-12">
-                            <asp:TextBox ID="TxtNomActor" runat="server" CssClass="form-control" placeholder="Nombre del Actor" AutoComplete="off" onkeyup="mayus(this);" MaxLength="80" TabIndex="8"></asp:TextBox>
+                            <asp:TextBox ID="TxtNomActor" runat="server" CssClass="form-control" placeholder="<%$ Resources:GlobalResources, LblNomActor %>" AutoComplete="off" onkeyup="mayus(this);" MaxLength="80" TabIndex="8"></asp:TextBox>
                         </div>
                     </div>
                 </div>
 
                 <div class="form-group mt-4">
                     <div id="divDemandado" runat="server" visible="true">
-                        <asp:Label ID="LblDemandado" runat="server" Text="Nombre del Demandado" CssClass="control-label co-sm-2" Font-Size="Small" Font-Bold="False"></asp:Label>
+                        <asp:Label ID="LblDemandado" runat="server" Text="<%$ Resources:GlobalResources, LblDemandado %>" CssClass="control-label co-sm-2" Font-Size="Small" Font-Bold="False"></asp:Label>
                             <asp:RequiredFieldValidator ID="rfvDemandado" runat="server"
                             ControlToValidate="TxtDemandado" ErrorMessage="*" ForeColor="Red">
                             </asp:RequiredFieldValidator>
                         <div class="col-sm-12">
-                            <asp:TextBox ID="TxtDemandado" runat="server" CssClass="form-control" placeholder="Nombre del Demandado" AutoComplete="off" onkeyup="mayus(this);" MaxLength="80" TabIndex="9"></asp:TextBox>
+                            <asp:TextBox ID="TxtDemandado" runat="server" CssClass="form-control" placeholder="<%$ Resources:GlobalResources, LblDemandado %>" AutoComplete="off" onkeyup="mayus(this);" MaxLength="80" TabIndex="9"></asp:TextBox>
                         </div>
                     </div>
                 </div>
 
                 <div class="form-group mt-4">
                     <div id="divNumSiniestro" runat="server" visible="true">
-                        <asp:Label ID="LblNumSiniestro" runat="server" Text="Número de Siniestro (Notificación)" CssClass="control-label co-sm-2" Font-Size="Small" Font-Bold="False"></asp:Label>
+                        <asp:Label ID="LblNumSiniestro" runat="server" Text="<%$ Resources:GlobalResources, LblNumSiniestro %>" CssClass="control-label co-sm-2" Font-Size="Small" Font-Bold="False"></asp:Label>
                             <asp:RequiredFieldValidator ID="rfvNumSiniestro" runat="server"
                             ControlToValidate="TxtNumSiniestro" ErrorMessage="*" ForeColor="Red">
                             </asp:RequiredFieldValidator>
                         <div class="col-sm-12">
-                            <asp:TextBox ID="TxtNumSiniestro" runat="server" CssClass="form-control" placeholder="Número de Siniestro" AutoComplete="off" onkeyup="mayus(this);" MaxLength="25" TabIndex="10"></asp:TextBox>
+                            <asp:TextBox ID="TxtNumSiniestro" runat="server" CssClass="form-control" placeholder="<%$ Resources:GlobalResources, LblNumSiniestro %>" AutoComplete="off" onkeyup="mayus(this);" MaxLength="25" TabIndex="10"></asp:TextBox>
                         </div>
                     </div>
                 </div>
 
                 <div class="form-group mt-4">
                     <div id="divNumPoliza" runat="server" visible="true">
-                        <asp:Label ID="LblNumPoliza" runat="server" Text="Número de Póliza" CssClass="control-label co-sm-2" Font-Size="Small" Font-Bold="False"></asp:Label>
+                        <asp:Label ID="LblNumPoliza" runat="server" Text="<%$ Resources:GlobalResources, LblNumPoliza %>" CssClass="control-label co-sm-2" Font-Size="Small" Font-Bold="False"></asp:Label>
                             <asp:RequiredFieldValidator ID="rfvNumPoliza" runat="server"
                             ControlToValidate="TxtNumPoliza" ErrorMessage="*" ForeColor="Red">
                             </asp:RequiredFieldValidator>
                         <div class="col-sm-12">
-                            <asp:TextBox ID="TxtNumPoliza" runat="server" CssClass="form-control" placeholder="Número de Póliza" AutoComplete="off" onkeyup="mayus(this);" MaxLength="25" TabIndex="11"></asp:TextBox>
+                            <asp:TextBox ID="TxtNumPoliza" runat="server" CssClass="form-control" placeholder="<%$ Resources:GlobalResources, LblNumPoliza %>" AutoComplete="off" onkeyup="mayus(this);" MaxLength="25" TabIndex="11"></asp:TextBox>
                         </div>
                     </div>
                 </div>
 
                 <div class="form-group mt-4">
                     <div id="divNumReporte" runat="server" visible="false">
-                        <asp:Label ID="LblNumReporte" runat="server" Text="Número de Reporte" CssClass="control-label co-sm-2" Font-Size="Small" Font-Bold="False"></asp:Label>
+                        <asp:Label ID="LblNumReporte" runat="server" Text="<%$ Resources:GlobalResources, LblNumReporte %>" CssClass="control-label co-sm-2" Font-Size="Small" Font-Bold="False"></asp:Label>
                             <asp:RequiredFieldValidator ID="rfvNumReporte" runat="server"
                             ControlToValidate="TxtNumReporte" ErrorMessage="*" ForeColor="Red" Enabled="true">
                             </asp:RequiredFieldValidator>
                         <div class="col-sm-12">
-                            <asp:TextBox ID="TxtNumReporte" runat="server" CssClass="form-control" placeholder="Número de Reporte" AutoComplete="off" onkeyup="mayus(this);" MaxLength="25" TabIndex="12"></asp:TextBox>
+                            <asp:TextBox ID="TxtNumReporte" runat="server" CssClass="form-control" placeholder="<%$ Resources:GlobalResources, LblNumReporte %>" AutoComplete="off" onkeyup="mayus(this);" MaxLength="25" TabIndex="12"></asp:TextBox>
                         </div>
                     </div>
                 </div>
 
                 <div class="form-group mt-4">
                     <div id="divNomAsegurado" runat="server" visible="true">
-                        <asp:Label ID="LblNomAsegurado" runat="server" Text="Nombre del Asegurado" CssClass="control-label co-sm-2" Font-Size="Small" Font-Bold="False"></asp:Label>
+                        <asp:Label ID="LblNomAsegurado" runat="server" Text="<%$ Resources:GlobalResources, LblNomAsegurado %>" CssClass="control-label co-sm-2" Font-Size="Small" Font-Bold="False"></asp:Label>
                             <asp:RequiredFieldValidator ID="rfvNomAsegurado" runat="server"
                             ControlToValidate="TxtNomAsegurado" ErrorMessage="*" ForeColor="Red" Enabled="true">
                             </asp:RequiredFieldValidator>
                         <div class="col-sm-12">
-                            <asp:TextBox ID="TxtNomAsegurado" runat="server" CssClass="form-control" placeholder="Nombre del Asegurado" AutoComplete="off" onkeyup="mayus(this);" MaxLength="80" TabIndex="13"></asp:TextBox>
+                            <asp:TextBox ID="TxtNomAsegurado" runat="server" CssClass="form-control" placeholder="<%$ Resources:GlobalResources, LblNomAsegurado %>" AutoComplete="off" onkeyup="mayus(this);" MaxLength="80" TabIndex="13"></asp:TextBox>
                         </div>
                     </div>
                 </div>
 
                 <div class="form-floating mt-3">
                     <div id="divTecResponsable" runat="server" visible="true">
-                        <asp:Label ID="LblRespTecnico" runat="server" Text="Responsable Técnico" ></asp:Label>
+                        <asp:Label ID="LblRespTecnico" runat="server" Text="<%$ Resources:GlobalResources, LblRespTecnico %>" ></asp:Label>
                             <asp:CustomValidator ID="cvTecResponsable" runat="server" ControlToValidate="ddlRespTecnico" 
                             OnServerValidate ="cvTecResponsable_ServerValidate" ErrorMessage="*" ForeColor="Red" Display="Dynamic" >
                             </asp:CustomValidator>
@@ -307,7 +289,7 @@
                 </div>
 
                 <div class="form-floating mt-3">
-                    <asp:Label ID="LblRespAdministrativo" runat="server" Text="Responsable Administrativo" ></asp:Label>
+                    <asp:Label ID="LblRespAdministrativo" runat="server" Text="<%$ Resources:GlobalResources, LblRespAdministrativo %>" ></asp:Label>
                         <asp:CustomValidator ID="cvAdminResponsable" runat="server" ControlToValidate="ddlRespAdministrativo" 
                         OnServerValidate ="cvAdminResponsable_ServerValidate" ErrorMessage="*" ForeColor="Red" Display="Dynamic" >
                         </asp:CustomValidator>
@@ -318,7 +300,7 @@
                 <div class="d-grid gap-4 d-flex justify-content-center mt-2 mb-3">
                     <asp:UpdatePanel ID="UpdatePanel4" runat="server">
                         <ContentTemplate>
-                            <asp:Button ID="BtnEnviar" runat="server" Text="Generar" OnClick="BtnEnviar_Click" CausesValidation="true" CssClass="btn btn-primary px-4" TabIndex="16"/>
+                            <asp:Button ID="BtnEnviar" runat="server" Text="<%$ Resources:GlobalResources, btnEnviar %>" OnClick="BtnEnviar_Click" CausesValidation="true" CssClass="btn btn-primary px-4" TabIndex="16"/>
                         </ContentTemplate>
                     </asp:UpdatePanel>
                     <%--<asp:Button ID="BtnRegresar" runat="server" Text="Regresar" OnClick="BtnRegresar_Click" CssClass="btn btn-primary" TabIndex="11"/>--%>
@@ -387,33 +369,6 @@
         </div>
     </asp:Panel>
     <br />
-    <asp:Panel ID="pnlExpira" runat="server" CssClass="CajaDialogo" style="display: none; border: none; border-radius: 10px; width: 400px; background-color:#FFFFFF;">
-        <div class=" row justify-content-end" data-bs-theme="dark">
-            <div class="col-1">
-                <asp:Button runat="server" OnClientClick="acceso(); return false;" type="button" class="btn-close" aria-label="Close" />
-            </div>
-        </div>
-        <div>
-                <br />
-            <hr class="dropdown-divider" />
-        </div>
-        <div>
-                <br />
-            <hr class="dropdown-divider" />
-        </div>
-        <div>
-            <asp:Label ID="LblExpira" runat="server" Text="" />
-        </div>
-        <div>
-            <br />
-            <hr class="dropdown-divider" />
-        </div>
-        <div>
-            <br />
-                <asp:Button ID="BtnClose_Expira" OnClientClick="acceso(); return false;" runat="server" Text="Cerrar" CssClass="btn btn-outline-primary"/>
-        </div>
-    </asp:Panel>
-    <br />
     <table cellspacing="1" cellpadding="1" border="0">
         <tr>
             <td>
@@ -438,13 +393,6 @@
             </td>
         </tr>
         <tr>
-            <td>
-                <ajaxToolkit:ModalPopupExtender ID="mpeExpira" runat="server" PopupControlID="pnlExpira"
-                    TargetControlID="lblHide" BackgroundCssClass="FondoAplicacion" OnOkScript="mpeExpiraOnOk()" >
-                </ajaxToolkit:ModalPopupExtender>
-            </td>
-            <td class="style3"><asp:Label ID="lblHide" runat="server" Text="Label" Style="display: none;" />
-            </td>
             <td>&nbsp;</td>
         </tr>
     </table>

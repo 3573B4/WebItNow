@@ -14,12 +14,34 @@
             <div class="col-lg-8 col-md-8">
                 <div class="input-group input-group-sm">
                     <%-- Selecciona un tipo de Operación --%>
-                    <h2 class="h2 mb-3 fw-normal mt-4 align-content-center">PROVEEDORES</h2>
+                    <%--<h2 class="h2 mb-3 fw-normal mt-4 align-content-center">PROVEEDORES</h2>--%>
+                    <h2 class="h2 mb-3 fw-normal mt-4 align-content-center">
+                        <asp:Literal runat="server" Text="<%$ Resources:GlobalResources, lblProveedores %>" />
+                    </h2>
                 </div>
             </div>
         </div>
         <br />
         <div class="d-flex flex-row">
+            <div class="mx-3 text-center" style="width: 10rem;">
+                <a href="fwPV_Alta_Asunto.aspx">
+                    <img src="/Images/alta_referencia.png" class="img-fluid" alt="Alta de Asunto" />
+                </a>
+                <div class="mt-2 fw-bold">
+                    <asp:Label ID="lblAltaReferencia" runat="server" Text="<%$ Resources:GlobalResources, lblAltaReferencia %>"></asp:Label>
+                </div>
+            </div>
+
+            <div class="mx-3 text-center" style="width: 10rem;">
+                <a href="fwPV_Reporte_Alta_Asunto.aspx">
+                    <img src="/Images/consultas.png" class="img-fluid" alt="Consultas" />
+                </a>
+                <div class="mt-2 fw-bold">
+                    <asp:Label ID="lblConsultas" runat="server" Text="<%$ Resources:GlobalResources, lblConsultas %>"></asp:Label>
+                </div>
+            </div>
+
+<%--            
             <div class="mx-2" style="width: 10rem; height: 10rem;">
                 <a href="fwPV_Alta_Asunto.aspx">
                     <img src="<%= ResolveUrl("~/Images/alta_referencia.png") %>" class="img-fluid" alt="..." />
@@ -31,6 +53,7 @@
                     <img src="<%= ResolveUrl("~/Images/consultas.png") %>" class="img-fluid" alt="..." />
                 </a>
             </div>
+--%>
 
             <div class="mx-2" style="width: 10rem; height: 10rem;">
                 <a> </a>

@@ -541,7 +541,7 @@ namespace WebItNow_Peacock
             ddlSecciones.Enabled = false;
 
             BtnAnular.Visible = true;
-            BtnEditar.Enabled = true;
+            btnEditar.Enabled = true;
             BtnAgregar.Enabled = false;
         }
 
@@ -553,11 +553,11 @@ namespace WebItNow_Peacock
             TxtNomCategoria.Text = string.Empty;
             TxtNomCategoria.ReadOnly = false;
 
-            BtnEditar.Visible = true;
+            btnEditar.Visible = true;
             BtnGrabar.Visible = false;
             BtnAnular.Visible = false;
 
-            BtnEditar.Enabled = false;
+            btnEditar.Enabled = false;
             BtnAgregar.Enabled = true;
         }
 
@@ -565,7 +565,7 @@ namespace WebItNow_Peacock
         {
             TxtNomCategoria.ReadOnly = false;
 
-            BtnEditar.Visible = false;
+            btnEditar.Visible = false;
             BtnGrabar.Visible = true;
         }
 
@@ -593,11 +593,11 @@ namespace WebItNow_Peacock
             TxtNomCategoria.Text = string.Empty;
             TxtNomCategoria.ReadOnly = false;
 
-            BtnEditar.Visible = true;
+            btnEditar.Visible = true;
             BtnGrabar.Visible = false;
             BtnAnular.Visible = false;
 
-            BtnEditar.Enabled = false;
+            btnEditar.Enabled = false;
             BtnAgregar.Enabled = true;
         }
     }

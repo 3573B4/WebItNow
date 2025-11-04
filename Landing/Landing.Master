@@ -1,0 +1,136 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Landing.master.cs" Inherits="WebItNow_Peacock.Landing.Landing" %>
+
+<!DOCTYPE html>
+<html>
+<head runat="server">
+    <meta charset="utf-8" />
+    <title>Portal de Siniestros</title>
+    <link href="Content/landing.css" rel="stylesheet" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <meta http-equiv="Cache-Control" content="no-cache" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <meta name="description" content="@Html.Raw(ViewBag.description)" />
+
+    <script language="javascript" type="text/javascript">
+
+        setInterval(mantenerSesionActiva, 5 * 60 * 1000);  // 5 minutos en milisegundos
+
+        function mantenerSesionActiva() {
+            // Realizar una solicitud al servidor para mantener la sesión activa
+            var xhr = new XMLHttpRequest();
+
+            // Especificar el método y la URL del servidor (usar Login.aspx)
+            /*xhr.open("GET", "Login.aspx?accion=MantenSesion", true);*/
+            xhr.open("GET", "Login.aspx", true);
+
+            // Manejar la respuesta del servidor
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    // La solicitud fue exitosa
+                    console.log("Sesión actualizada correctamente.");
+                }
+            };
+
+            // Enviar la solicitud
+            xhr.send();
+        }
+
+        function EnterEvent(e, ctrl) {
+            var keycode = (e.keyCode ? e.keyCode : e.which);
+            if (keycode == 13 && ctrl.value.length > 2) {
+                /*return false;*/
+                $('[id$=BtnAceptar]').click();
+            }
+            else {
+                //return true;
+                return false;
+            }
+        }
+
+        if (history.forward(1)) {
+            location.replace(history.forward(1))
+        }
+
+        function mayus(e) {
+            e.value = e.value.toUpperCase();
+        }
+
+        $(document).ready(function () {
+            $("input").attr("autocomplete", "off");
+        });
+
+
+        function mpeMensajeOnOk() {
+            //
+        }
+
+        function mpeNewEnvio() {
+            //
+        }
+
+        function mpeAddArchivo() {
+            //
+        }
+
+        document.onkeydown = function (evt) {
+            return (evt ? evt.which : event.keyCode) != 13;
+        }
+
+    </script>
+
+    <style type="text/css">
+        body, html {
+            height: 100%;
+            margin: 0;
+        }
+
+        #contenedor {
+            position: relative;
+            width: 100%;
+            height: 100vh;;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-size: cover;
+            background-image: url('/Images/fondo_inicio.jpeg');
+        }
+
+        #panelSuperior {
+            position: absolute;
+            top: 25%;           	
+            width: 90%;         	
+            max-width: 500px;   	
+            border-radius:4%;
+            background-color: white;
+            padding: 20px;
+        }
+
+        @media (max-width: 768px) {
+            #panelSuperior {
+                width: 90%;
+                top: 5%; 	
+            }
+        }
+    </style>
+
+    <!-- Estilo para Agregar THEAD y TBODY a GridView. -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery-footable/0.1.0/css/footable.min.css" rel="stylesheet" type="text/css" />
+
+    <link href="~/Styles/center_controls.css" rel="stylesheet" type="text/css" />
+    <link href="~/Styles/default.css" rel="stylesheet" type="text/css" />
+    <link href="~/Styles/panel_message.css" rel="stylesheet" type="text/css" />
+    <link href="~/Styles/GridView.css" rel="stylesheet" type="text/css" />
+    <link href="~/Styles/fuentes.css" rel="stylesheet" type="text/css" />
+    <link href="Styles/pagination-ys.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <form id="form1" runat="server" enctype="multipart/form-data">
+        <div class="landing-wrapper">
+            <asp:ContentPlaceHolder ID="MainContent" runat="server" />
+        </div>
+    </form>
+</body>
+</html>

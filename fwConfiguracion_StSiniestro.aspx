@@ -15,25 +15,6 @@
             $("input").attr("autocomplete", "off");
         });
 
-        window.onload = function () {
-            // Inicia un temporizador para ejecutar después de 30 minutos (1800000 milisegundos)
-            var timer = setTimeout(function () {
-                // Actualiza el contenido del elemento para mostrar que la sesión ha expirado
-                document.getElementById('<%=LblExpira.ClientID %>').innerHTML = 'La sesión ha expirado.';
-        
-                // Encuentra el modal y lo muestra
-                var modalId = '<%=mpeExpira.ClientID%>';
-                var modal = $find(modalId);
-                modal.show();
-
-                // Inicia otro temporizador para recargar la página después de 30 minutos
-                setTimeout(function () {
-                    location.reload();
-                }, 1800000);
-
-            }, 1800000);
-        };
-
         function acceso() {
             location.href = '/Login.aspx';
         }
@@ -234,33 +215,6 @@
                 </div>
             </asp:Panel>
             <br />
-            <asp:Panel ID="pnlExpira" runat="server" CssClass="CajaDialogo" style="display: none; border: none; border-radius: 10px; width: 400px; background-color:#FFFFFF;">
-                <div class=" row justify-content-end" data-bs-theme="dark">
-                    <div class="col-1">
-                        <asp:Button runat="server" OnClientClick="acceso(); return false;" type="button" class="btn-close" aria-label="Close" />
-                    </div>
-                </div>
-                <div>
-                        <br />
-                    <hr class="dropdown-divider" />
-                </div>
-                <div>
-                        <br />
-                    <hr class="dropdown-divider" />
-                </div>
-                <div>
-                    <asp:Label ID="LblExpira" runat="server" Text="" />
-                </div>
-                <div>
-                    <br />
-                    <hr class="dropdown-divider" />
-                </div>
-                <div>
-                    <br />
-                        <asp:Button ID="BtnClose_Expira" OnClientClick="acceso(); return false;" runat="server" Text="Cerrar" CssClass="btn btn-outline-primary"/>
-                </div>
-            </asp:Panel>
-            <br />
             <asp:Panel ID="PnlDocProceso" runat="server" CssClass="CajaDialogo" style="display: none; border: none; border-radius: 10px; max-width: 100%; width: 800px; background-color:#FFFFFF;">
                 <div class="row justify-content-end" data-bs-theme="dark">
                     <div class="col-1">
@@ -279,10 +233,12 @@
                                 <div class="d-flex flex-row mx-4 m-0 p-0">
                                     <asp:Label ID="LblEtapas" runat="server" Text="Etapas" CssClass="form-label my-0 p-0" />
                                 </div>
+<%--                                
                                 <div class="col-sm-6 mx-3">
                                     <asp:DropDownList ID="ddlCarpetas" runat="server" CssClass="form-select form-control-sm" OnSelectedIndexChanged="ddlCarpetas_SelectedIndexChanged" AutoPostBack ="true" >
                                     </asp:DropDownList>
                                 </div>
+--%>
                                 <div class="mb-2">
                                     <div style="overflow-x: hidden; overflow-y: auto; max-height: 275px;">
                                     <asp:UpdatePanel ID="UpdatePanel3" runat="server">  

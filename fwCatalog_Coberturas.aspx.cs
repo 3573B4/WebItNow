@@ -35,8 +35,11 @@ namespace WebItNow_Peacock
                         return;
                     }
 
+                    // Labels
+                    lblTitulo_Cat_Coberturas.Text = GetGlobalResourceObject("GlobalResources", "lblTitulo_Cat_Coberturas").ToString();
+
                     GetCiaSeguros();
-                    GetSecciones();
+                    // GetSecciones();
 
                     ddlProducto.Items.Clear();
                     ddlProducto.Items.Insert(0, new ListItem("-- Seleccionar --", "0"));
@@ -80,7 +83,8 @@ namespace WebItNow_Peacock
                 ddlCliente.DataTextField = "Descripcion";
 
                 ddlCliente.DataBind();
-                ddlCliente.Items.Insert(0, new ListItem("-- Seleccionar --", "0"));
+                //ddlCliente.Items.Insert(0, new ListItem("-- Seleccionar --", "0"));
+                ddlCliente.Items.Insert(0, new ListItem(GetGlobalResourceObject("GlobalResources", "ddl_Select").ToString(), "0"));
 
                 //Conecta.Cerrar();
                 //cmd.Dispose();
@@ -120,7 +124,8 @@ namespace WebItNow_Peacock
                 ddlProducto.DataTextField = "Descripcion";
 
                 ddlProducto.DataBind();
-                ddlProducto.Items.Insert(0, new ListItem("-- Seleccionar --", "0"));
+                //ddlProducto.Items.Insert(0, new ListItem("-- Seleccionar --", "0"));
+                ddlProducto.Items.Insert(0, new ListItem(GetGlobalResourceObject("GlobalResources", "ddl_Select").ToString(), "0"));
 
                 //Conecta.Cerrar();
                 //cmd.Dispose();
@@ -153,7 +158,8 @@ namespace WebItNow_Peacock
                 ddlSecciones.DataTextField = "Descripcion";
 
                 ddlSecciones.DataBind();
-                ddlSecciones.Items.Insert(0, new ListItem("-- Seleccionar --", "0"));
+                //ddlSecciones.Items.Insert(0, new ListItem("-- Seleccionar --", "0"));
+                ddlSecciones.Items.Insert(0, new ListItem(GetGlobalResourceObject("GlobalResources", "ddl_Select").ToString(), "0"));
 
                 dbConn.Close();
             }
@@ -174,7 +180,9 @@ namespace WebItNow_Peacock
             {
                 // Mostrar el mensaje de "No hay resultados"
                 GrdCoberturas.ShowHeaderWhenEmpty = true;
-                GrdCoberturas.EmptyDataText = "No hay resultados.";
+                GrdCoberturas.EmptyDataText = GetGlobalResourceObject("GlobalResources", "msg_NoResults").ToString();
+
+                //GrdCoberturas.EmptyDataText = "No hay resultados.";
             }
 
             // Enlaza el DataTable (vacío o lleno) al GridView
@@ -191,6 +199,7 @@ namespace WebItNow_Peacock
             dt.Columns.Add("IdSeguros", typeof(string));
             dt.Columns.Add("IdProducto", typeof(string));
             dt.Columns.Add("IdSeccion", typeof(string));
+            dt.Columns.Add("Cve_Cobertura", typeof(string));
             dt.Columns.Add("Descripcion", typeof(string));
             // Agrega más columnas según sea necesario
 
@@ -206,7 +215,7 @@ namespace WebItNow_Peacock
                 dbConn.Open();
 
                 // Consulta a la tabla : Coberturas  = ITM_94
-                string strQuery = "SELECT IdCobertura, IdSeguros, IdProducto, IdSeccion, Descripcion " +
+                string strQuery = "SELECT IdCobertura, IdSeguros, IdProducto, IdSeccion, Cve_Cobertura, Descripcion " +
                                   "  FROM ITM_94 " +
                                   " WHERE IdStatus = 1 " +
                                   "   AND IdSeguros = '" + sIdSeguro + "' " +
@@ -219,7 +228,9 @@ namespace WebItNow_Peacock
                 if (dt.Rows.Count == 0)
                 {
                     GrdCoberturas.ShowHeaderWhenEmpty = true;
-                    GrdCoberturas.EmptyDataText = "No hay resultados.";
+                    GrdCoberturas.EmptyDataText = GetGlobalResourceObject("GlobalResources", "msg_NoResults").ToString();
+
+                    //GrdCoberturas.EmptyDataText = "No hay resultados.";
                 }
 
                 GrdCoberturas.DataSource = dt;
@@ -242,7 +253,8 @@ namespace WebItNow_Peacock
             try
             {
                 GrdCoberturas.PageIndex = e.NewPageIndex;
-                GetCoberturas(ddlCliente.SelectedValue, Convert.ToInt16(ddlProducto.SelectedValue), Convert.ToInt16(ddlSecciones.SelectedValue));
+                int iIdSeccion = 0;
+                GetCoberturas(ddlCliente.SelectedValue, Convert.ToInt16(ddlProducto.SelectedValue), iIdSeccion);
             }
             catch (Exception ex)
             {
@@ -273,9 +285,10 @@ namespace WebItNow_Peacock
 
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                e.Row.Cells[4].Width = Unit.Pixel(1100);    // Descripcion
-                e.Row.Cells[5].Width = Unit.Pixel(25);      // ImgEditar
-                e.Row.Cells[6].Width = Unit.Pixel(25);      // ImgEliminar
+                e.Row.Cells[4].Width = Unit.Pixel(100);     // Cve_Cobertura
+                e.Row.Cells[5].Width = Unit.Pixel(1100);    // Descripcion
+                e.Row.Cells[6].Width = Unit.Pixel(25);      // ImgEditar
+                e.Row.Cells[7].Width = Unit.Pixel(25);      // ImgEliminar
             }
             if (e.Row.RowType == DataControlRowType.Header)
             {
@@ -304,7 +317,7 @@ namespace WebItNow_Peacock
 
             Eliminar_tbDocumentos(ddlCliente.SelectedValue, iIdCobertura, iIdProducto, iIdSeccion);
 
-            GetCoberturas(ddlCliente.SelectedValue, Convert.ToInt16(ddlProducto.SelectedValue), Convert.ToInt16(ddlSecciones.SelectedValue));
+            GetCoberturas(ddlCliente.SelectedValue, Convert.ToInt16(ddlProducto.SelectedValue), iIdSeccion);
         }
 
         protected void BtnCancelar_Click(object sender, EventArgs e)
@@ -325,7 +338,7 @@ namespace WebItNow_Peacock
         protected void ddlCliente_SelectedIndexChanged(object sender, EventArgs e)
         {
 
-            ddlSecciones.SelectedValue = "0";
+            // ddlSecciones.SelectedValue = "0";
             Inicializar_GrdCoberturas();
 
             GetProductos();
@@ -336,7 +349,7 @@ namespace WebItNow_Peacock
             // inicializar controles.
             ddlCliente.Enabled = true;
             ddlProducto.Enabled = true;
-            ddlSecciones.Enabled = true;
+            // ddlSecciones.Enabled = true;
 
             TxtNomCobertura.Text = string.Empty;
             TxtNomCobertura.ReadOnly = false;
@@ -361,7 +374,8 @@ namespace WebItNow_Peacock
         {
             if (TxtNomCobertura.Text == "" || TxtNomCobertura.Text == null)
             {
-                LblMessage.Text = "Capturar Descripción de Cobertura";
+                // LblMessage.Text = "Capturar Descripción de Cobertura";  
+                LblMessage.Text = GetGlobalResourceObject("GlobalResources", "msg_Capturar_DescCobertura").ToString();
                 mpeMensaje.Show();
                 return;
             }
@@ -376,12 +390,12 @@ namespace WebItNow_Peacock
 
             Actualizar_tbDocumentos(iIdCobertura, sIdSeguros, iIdProducto, iIdSeccion);
 
-            GetCoberturas(ddlCliente.SelectedValue, Convert.ToInt16(ddlProducto.SelectedValue), Convert.ToInt16(ddlSecciones.SelectedValue));
+            GetCoberturas(ddlCliente.SelectedValue, Convert.ToInt16(ddlProducto.SelectedValue), iIdSeccion);
 
             // inicializar controles.
             ddlCliente.Enabled = true;
             ddlProducto.Enabled = true;
-            ddlSecciones.Enabled = true;
+            // ddlSecciones.Enabled = true;
 
             TxtNomCobertura.Text = string.Empty;
             TxtNomCobertura.ReadOnly = false;
@@ -416,7 +430,8 @@ namespace WebItNow_Peacock
 
                 dbConn.Close();
 
-                LblMessage.Text = "Se actualizo cobertura, correctamente";
+                // LblMessage.Text = "Se actualizo cobertura, correctamente";
+                LblMessage.Text = GetGlobalResourceObject("GlobalResources", "msg_Cobertura_Actualizada").ToString();
                 mpeMensaje.Show();
 
             }
@@ -424,7 +439,8 @@ namespace WebItNow_Peacock
             {
                 if (ex.HResult == -2146232060)
                 {
-                    LblMessage.Text = "Cobertura, se encuentra relacionada a un Asunto";
+                    // LblMessage.Text = "Cobertura, se encuentra relacionada a un Asunto";
+                    LblMessage.Text = GetGlobalResourceObject("GlobalResources", "msg_Cobertura_Relacionada").ToString();
                 }
                 else
                 {
@@ -440,26 +456,30 @@ namespace WebItNow_Peacock
 
             if (ddlCliente.SelectedValue == "0")
             {
-                LblMessage.Text = "Seleccionar Coberturas Por";
+                // LblMessage.Text = "Seleccionar Coberturas Por";
+                LblMessage.Text = GetGlobalResourceObject("GlobalResources", "msg_Seleccionar_CiaSeguros").ToString();
                 mpeMensaje.Show();
                 return;
             }
             else if (ddlProducto.SelectedValue == "0")
             {
-                LblMessage.Text = "Seleccionar un producto";
+                // LblMessage.Text = "Seleccionar un producto";
+                LblMessage.Text = GetGlobalResourceObject("GlobalResources", "msg_Seleccionar_Producto").ToString();
                 mpeMensaje.Show();
                 return;
             }
             else if (TxtNomCobertura.Text == "" || TxtNomCobertura.Text == null)
             {
-                LblMessage.Text = "Capturar Descripción de Cobertura";
+                // LblMessage.Text = "Capturar Descripción de Cobertura";
+                LblMessage.Text = GetGlobalResourceObject("GlobalResources", "msg_Capturar_DescCobertura").ToString();
                 mpeMensaje.Show();
                 return;
             }
 
             string sDescripcion = TxtNomCobertura.Text;
+            int iIdSeccion = 0;
 
-            int Envio_Ok = Add_tbDocumentos(ddlCliente.SelectedValue, Convert.ToInt16(ddlProducto.SelectedValue), Convert.ToInt16(ddlSecciones.SelectedValue), sDescripcion);
+            int Envio_Ok = Add_tbDocumentos(ddlCliente.SelectedValue, Convert.ToInt16(ddlProducto.SelectedValue), iIdSeccion, sDescripcion);
 
             if (Envio_Ok == 0)
             {
@@ -467,7 +487,7 @@ namespace WebItNow_Peacock
                 // inicializar controles
                 TxtNomCobertura.Text = string.Empty;
 
-                GetCoberturas(ddlCliente.SelectedValue, Convert.ToInt16(ddlProducto.SelectedValue), Convert.ToInt16(ddlSecciones.SelectedValue));
+                GetCoberturas(ddlCliente.SelectedValue, Convert.ToInt16(ddlProducto.SelectedValue), iIdSeccion);
             }
         }
 
@@ -480,14 +500,15 @@ namespace WebItNow_Peacock
                 ConexionBD_MySQL dbConn = new ConexionBD_MySQL(Variables.wUserName, Variables.wPassword);
                 dbConn.Open();
 
-                string strQuery = "INSERT INTO ITM_94 (IdCobertura, IdSeguros, IdProducto, IdSeccion, Descripcion, DescripBrev, IdStatus) " +
-                                  "VALUES (" + iConsecutivo + ", '" + sIdSeguros + "', " + iIdProducto + ", " + iIdSeccion + ", '" + pDescripcion + "', Null, 1)" + "\n \n";
+                string strQuery = "INSERT INTO ITM_94 (IdCobertura, IdSeguros, IdProducto, IdSeccion, Cve_Cobertura, Descripcion, DescripBrev, IdStatus) " +
+                                  "VALUES (" + iConsecutivo + ", '" + sIdSeguros + "', " + iIdProducto + ", " + iIdSeccion + ", CONCAT('CBR-', LPAD(" + iConsecutivo + ", 4, '0')), '" + pDescripcion + "', Null, 1)" + "\n \n";
 
                 int affectedRows = dbConn.ExecuteNonQuery(strQuery);
 
                 dbConn.Close();
 
-                LblMessage.Text = "Se agrego cobertura, correctamente";
+                // LblMessage.Text = "Se agrego cobertura, correctamente";
+                LblMessage.Text = GetGlobalResourceObject("GlobalResources", "msg_Cobertura_Agregado").ToString();
                 mpeMensaje.Show();
 
                 return 0;
@@ -550,7 +571,8 @@ namespace WebItNow_Peacock
 
                 dbConn.Close();
 
-                LblMessage.Text = "Se elimino cobertura, correctamente";
+                // LblMessage.Text = "Se elimino cobertura, correctamente";
+                LblMessage.Text = GetGlobalResourceObject("GlobalResources", "msg_Cobertura_Eliminada").ToString();
                 mpeMensaje.Show();
 
             }
@@ -558,7 +580,8 @@ namespace WebItNow_Peacock
             {
                 if (ex.HResult == -2146232060)
                 {
-                    LblMessage.Text = "Cobertura, se encuentra relacionada a un Asunto";
+                    // LblMessage.Text = "Cobertura, se encuentra relacionada a un Asunto";
+                    LblMessage.Text = GetGlobalResourceObject("GlobalResources", "msg_Cobertura_Relacionada").ToString();
                 }
                 else
                 {
@@ -576,13 +599,13 @@ namespace WebItNow_Peacock
 
             Variables.wRenglon = row.RowIndex;
 
-            TxtNomCobertura.Text = Server.HtmlDecode(Convert.ToString(GrdCoberturas.Rows[index].Cells[4].Text));
+            TxtNomCobertura.Text = Server.HtmlDecode(Convert.ToString(GrdCoberturas.Rows[index].Cells[5].Text));
 
             TxtNomCobertura.ReadOnly = true;
 
             ddlCliente.Enabled = false;
             ddlProducto.Enabled = false;
-            ddlSecciones.Enabled = false;
+            // ddlSecciones.Enabled = false;
 
             BtnAnular.Visible = true;
             BtnEditar.Enabled = true;
@@ -600,19 +623,22 @@ namespace WebItNow_Peacock
             BtnCancelar.Visible = true;
             BtnCerrar.Visible = false;
 
-            LblMessage_1.Text = "¿Desea eliminar la cobertura ?";
+            // LblMessage_1.Text = "¿Desea eliminar la cobertura ?";
+            LblMessage_1.Text = GetGlobalResourceObject("GlobalResources", "msg_Confirmar_Delete_Cobertura").ToString();
             mpeMensaje_1.Show();
         }
 
         protected void ddlProducto_SelectedIndexChanged(object sender, EventArgs e)
         {
             Inicializar_GrdCoberturas();
-            ddlSecciones.SelectedValue = "0";
+            // ddlSecciones.SelectedValue = "0";
+            int iIdSeccion = 0;
+            GetCoberturas(ddlCliente.SelectedValue, Convert.ToInt16(ddlProducto.SelectedValue), iIdSeccion);
         }
 
         protected void ddlSecciones_SelectedIndexChanged(object sender, EventArgs e)
         {
-            GetCoberturas(ddlCliente.SelectedValue, Convert.ToInt16(ddlProducto.SelectedValue), Convert.ToInt16(ddlSecciones.SelectedValue));
+            // GetCoberturas(ddlCliente.SelectedValue, Convert.ToInt16(ddlProducto.SelectedValue), Convert.ToInt16(ddlSecciones.SelectedValue));
         }
     }
 }

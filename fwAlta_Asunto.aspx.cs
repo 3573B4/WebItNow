@@ -39,6 +39,9 @@ namespace WebItNow_Peacock
                         return;
                     }
 
+                    // Labels
+                    lblTitulo_Alta_Asunto.Text = GetGlobalResourceObject("GlobalResources", "lblTitulo_Alta_Asunto").ToString();
+
                     BtnEnviar.Enabled = true;
 
                     Variables.wContinuar = true;
@@ -481,8 +484,11 @@ namespace WebItNow_Peacock
 
                     // string referencia = Variables.wRef_Proyecto;
                     string añoActual = DateTime.Now.Year.ToString().Substring(2);   // Año Actual
-                    if (sRef_Actual != null)
+
+                 // if (sRef_Actual != null)
+                    if (!string.IsNullOrEmpty(sRef_Actual) && sRef_Actual.Length > 2)
                     {
+                        // Si tiene más de 2 caracteres, quitamos los últimos 2 y concatenamos el año
                         sReferencia = sRef_Actual.Substring(0, sRef_Actual.Length - 2) + añoActual;
 
                     } else

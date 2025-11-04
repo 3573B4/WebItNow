@@ -37,6 +37,9 @@ namespace WebItNow_Peacock
                         return;
                     }
 
+                    // Labels
+                    lblTitulo_Cat_Categorias.Text = GetGlobalResourceObject("GlobalResources", "lblTitulo_Cat_Categorias").ToString();
+
                     GetCategorias();
 
                     Inicializar_GrdCategorias();
@@ -104,11 +107,13 @@ namespace WebItNow_Peacock
 
                 if (dt.Rows.Count == 0)
                 {
-                    ddlSecciones.Items.Insert(0, new ListItem("-- No Hay Carpeta(s) --", "0"));
+                    //ddlSecciones.Items.Insert(0, new ListItem("-- No Hay Carpeta(s) --", "0"));
+                    ddlSecciones.Items.Insert(0, new ListItem(GetGlobalResourceObject("GlobalResources", "ddl_NoHayCarpeta").ToString(), "0"));
                 }
                 else
                 {
-                    ddlSecciones.Items.Insert(0, new ListItem("-- Seleccionar --", "0"));
+                    //ddlSecciones.Items.Insert(0, new ListItem("-- Seleccionar --", "0"));
+                    ddlSecciones.Items.Insert(0, new ListItem(GetGlobalResourceObject("GlobalResources", "ddl_Select").ToString(), "0"));
                 }
 
                 dbConn.Close();
@@ -130,9 +135,8 @@ namespace WebItNow_Peacock
                 dbConn.Open();
 
                 // Consulta a las tablas : Estado de Documento (Expediente) = ITM_81, ITM_82, ITM_83, ITM_84, ITM_85
-                string strQuery = $"SELECT IdDocumento, Descripcion " +
+                string strQuery = $"SELECT IdDocumento, Cve_Documento, Descripcion " +
                                   $"  FROM { Tabla } " +
-                                  //$" WHERE IdTpoAsunto = " + ddlTpoAsunto.SelectedValue + "" +
                                   $" WHERE IdStatus = 1 " +
                                   $" ORDER BY IdDocumento";
 
@@ -141,7 +145,9 @@ namespace WebItNow_Peacock
                 if (dt.Rows.Count == 0)
                 {
                     GrdCategorias.ShowHeaderWhenEmpty = true;
-                    GrdCategorias.EmptyDataText = "No hay resultados.";
+                    GrdCategorias.EmptyDataText = GetGlobalResourceObject("GlobalResources", "msg_NoResults").ToString();
+
+                    //GrdCategorias.EmptyDataText = "No hay resultados.";
                 }
 
                 GrdCategorias.DataSource = dt;
@@ -169,7 +175,9 @@ namespace WebItNow_Peacock
             {
                 // Mostrar el mensaje de "No hay resultados"
                 GrdCategorias.ShowHeaderWhenEmpty = true;
-                GrdCategorias.EmptyDataText = "No hay resultados.";
+                GrdCategorias.EmptyDataText = GetGlobalResourceObject("GlobalResources", "msg_NoResults").ToString();
+
+                //GrdCategorias.EmptyDataText = "No hay resultados.";
             }
 
             // Enlaza el DataTable (vacío o lleno) al GridView
@@ -183,13 +191,14 @@ namespace WebItNow_Peacock
 
             // Define las columnas del DataTable
             dt.Columns.Add("IdDocumento", typeof(string));
+            dt.Columns.Add("Cve_Documento", typeof(string));
             dt.Columns.Add("Descripcion", typeof(string));
             // Agrega más columnas según sea necesario
 
             return dt;
         }
 
-        public int Add_tbDocumentos(string Tabla, string pDescripcion)
+        public int Add_tbDocumentos(string Tabla, string Prefijo, string pDescripcion)
         {
             try
             {
@@ -198,14 +207,15 @@ namespace WebItNow_Peacock
                 ConexionBD_MySQL dbConn = new ConexionBD_MySQL(Variables.wUserName, Variables.wPassword);
                 dbConn.Open();
 
-                string strQuery = $"INSERT INTO { Tabla } (IdDocumento, Descripcion, DescripBrev, IdTpoAsunto, IdStatus) " +
-                                  $"VALUES (" + iConsecutivo + ", '" + pDescripcion + "', Null, 0, 1)" + "\n \n";
+                string strQuery = $"INSERT INTO { Tabla } (IdDocumento, Cve_Documento, Descripcion, DescripBrev, IdTpoAsunto, IdStatus) " +
+                                  $"VALUES (" + iConsecutivo + ", CONCAT('" + Prefijo + "', LPAD(" + iConsecutivo + ", 4, '0')), '" + pDescripcion + "', Null, 0, 1)" + "\n \n";
 
                 int affectedRows = dbConn.ExecuteNonQuery(strQuery);
 
                 dbConn.Close();
 
-                LblMessage.Text = "Se agrego categoría, correctamente";
+                //LblMessage.Text = "Se agrego categoría, correctamente";
+                LblMessage.Text = GetGlobalResourceObject("GlobalResources", "msg_CategoriaAgregada").ToString();
                 mpeMensaje.Show();
 
                 return 0;
@@ -247,7 +257,7 @@ namespace WebItNow_Peacock
 
         }
 
-        protected void Eliminar_tbDocumentos(string Tabla, int iIdDocumento, int iIdTpoAsunto)
+        protected void Eliminar_tbDocumentos(string Tabla, int iIdDocumento)
         {
             try
             {
@@ -260,13 +270,13 @@ namespace WebItNow_Peacock
                 // Eliminar registro tabla
                 string strQuery = $"DELETE FROM { Tabla } " +
                                   $" WHERE IdDocumento = " + iIdDocumento + " ";
-                                  //$"   AND IdTpoAsunto = " + iIdTpoAsunto + "";
 
                 int affectedRows = dbConn.ExecuteNonQuery(strQuery);
 
                 dbConn.Close();
 
-                LblMessage.Text = "Se elimino categoría, correctamente";
+                //LblMessage.Text = "Se elimino categoría, correctamente";
+                LblMessage.Text = GetGlobalResourceObject("GlobalResources", "msg_CategoriaEliminada").ToString();
                 mpeMensaje.Show();
 
             }
@@ -274,8 +284,11 @@ namespace WebItNow_Peacock
             {
                 if (ex.HResult == -2146232060)
                 {
-                    LblMessage.Text = "Categoria, se encuentra relacionada a un Asunto";
-                } else
+                    //LblMessage.Text = "Categoria, se encuentra relacionada a un Asunto";
+                    LblMessage.Text = GetGlobalResourceObject("GlobalResources", "msg_CategoriaRelacionadaAsunto").ToString();
+
+                }
+                else
                 {
                     LblMessage.Text = Convert.ToString(ex.Message);
                 }
@@ -304,7 +317,8 @@ namespace WebItNow_Peacock
 
                 dbConn.Close();
 
-                LblMessage.Text = "Se actualizo categoría, correctamente";
+                //LblMessage.Text = "Se actualizo categoría, correctamente";
+                LblMessage.Text = GetGlobalResourceObject("GlobalResources", "msg_CategoriaActualizada").ToString();
                 mpeMensaje.Show();
 
             }
@@ -312,7 +326,8 @@ namespace WebItNow_Peacock
             {
                 if (ex.HResult == -2146232060)
                 {
-                    LblMessage.Text = "Categoria, se encuentra relacionada a un Asunto";
+                    //LblMessage.Text = "Categoria, se encuentra relacionada a un Asunto";
+                    LblMessage.Text = GetGlobalResourceObject("GlobalResources", "msg_CategoriaRelacionadaAsunto").ToString();
                 }
                 else
                 {
@@ -359,19 +374,18 @@ namespace WebItNow_Peacock
 
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                e.Row.Cells[1].Width = Unit.Pixel(1100);    // Descripcion
-                e.Row.Cells[2].Width = Unit.Pixel(25);      // ImgEditar
-                e.Row.Cells[3].Width = Unit.Pixel(25);      // ImgEliminar
+                e.Row.Cells[1].Width = Unit.Pixel(100);     // Cve_Documento
+                e.Row.Cells[2].Width = Unit.Pixel(1100);    // Descripcion
+                e.Row.Cells[3].Width = Unit.Pixel(25);      // ImgEditar
+                e.Row.Cells[4].Width = Unit.Pixel(25);      // ImgEliminar
             }
             if (e.Row.RowType == DataControlRowType.Header)
             {
                 e.Row.Cells[0].Visible = false;         // IdDocumento
-             // e.Row.Cells[2].Visible = false;         // IdTpoAsunto
             }
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
                 e.Row.Cells[0].Visible = false;         // IdDocumento
-             // e.Row.Cells[2].Visible = false;         // IdTpoAsunto
             }
         }
 
@@ -380,20 +394,23 @@ namespace WebItNow_Peacock
 
             if (ddlSecciones.SelectedValue == "0")
             {
-                LblMessage.Text = "Seleccionar Categorías Por";
+                //LblMessage.Text = "Seleccionar Categorías Por";
+                LblMessage.Text = GetGlobalResourceObject("GlobalResources", "msg_SeleccionarCategoriasPor").ToString();
                 mpeMensaje.Show();
                 return;
             } else if (TxtNomCategoria.Text == "" || TxtNomCategoria.Text == null)
             {
-                LblMessage.Text = "Capturar Descripción de Categoría";
+                //LblMessage.Text = "Capturar Descripción de Categoría";
+                LblMessage.Text = GetGlobalResourceObject("GlobalResources", "msg_CapturarDescCategoria").ToString();
                 mpeMensaje.Show();
                 return;
             }
 
             string sDescripcion = TxtNomCategoria.Text;
             string sTabla = Variables.wTabla;
+            string sPrefijo = Variables.wPrefijo;
 
-            int Envio_Ok = Add_tbDocumentos(sTabla, sDescripcion);
+            int Envio_Ok = Add_tbDocumentos(sTabla, sPrefijo, sDescripcion);
 
             if (Envio_Ok == 0)
             {
@@ -418,7 +435,8 @@ namespace WebItNow_Peacock
             BtnCancelar.Visible = true;
             BtnCerrar.Visible = false;
 
-            LblMessage_1.Text = "¿Desea eliminar la categoria ?";
+            //LblMessage_1.Text = "¿Desea eliminar la categoria ?";
+            LblMessage_1.Text = GetGlobalResourceObject("GlobalResources", "msg_Confirmar_Delete_Categoria").ToString();
             mpeMensaje_1.Show();
 
         }
@@ -434,10 +452,8 @@ namespace WebItNow_Peacock
             int index = Variables.wRenglon;
 
             int iIdDocumento = Convert.ToInt32(GrdCategorias.Rows[index].Cells[0].Text);
-            //int iIdTpoAsunto = Convert.ToInt32(GrdCategorias.Rows[index].Cells[2].Text);
-            int iIdTpoAsunto = 0;
 
-            Eliminar_tbDocumentos(Variables.wTabla, iIdDocumento, iIdTpoAsunto);
+            Eliminar_tbDocumentos(Variables.wTabla, iIdDocumento);
 
             GetCategorias(Variables.wTabla);
         }
@@ -452,39 +468,6 @@ namespace WebItNow_Peacock
 
         }
 
-        protected void ddlTpoAsunto_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            //switch (ddlSecciones.SelectedValue)
-            //{
-            //    case "1":
-            //        GetCategorias("ITM_81");
-            //        Variables.wTabla = "ITM_81";
-
-            //        break;
-            //    case "2":
-            //        GetCategorias("ITM_82");
-            //        Variables.wTabla = "ITM_82";
-
-            //        break;
-            //    case "3":
-            //        GetCategorias("ITM_83");
-            //        Variables.wTabla = "ITM_83";
-
-            //        break;
-            //    case "4":
-            //        GetCategorias("ITM_84");
-            //        Variables.wTabla = "ITM_84";
-
-            //        break;
-            //    case "5":
-            //        GetCategorias("ITM_85");
-            //        Variables.wTabla = "ITM_85";
-
-            //        break;
-            //    default:
-            //        break;
-            //}
-        }
 
         protected void ddlSecciones_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -494,31 +477,37 @@ namespace WebItNow_Peacock
                 case "1":
                     GetCategorias("ITM_81");
                     Variables.wTabla = "ITM_81";
+                    Variables.wPrefijo = "ASD-";
 
                     break;
                 case "2":
                     GetCategorias("ITM_82");
                     Variables.wTabla = "ITM_82";
+                    Variables.wPrefijo = "RSG-";
 
                     break;
                 case "3":
                     GetCategorias("ITM_83");
                     Variables.wTabla = "ITM_83";
+                    Variables.wPrefijo = "EST-";
 
                     break;
                 case "4":
                     GetCategorias("ITM_84");
                     Variables.wTabla = "ITM_84";
+                    Variables.wPrefijo = "BNS-";
 
                     break;
                 case "5":
                     GetCategorias("ITM_85");
                     Variables.wTabla = "ITM_85";
+                    Variables.wPrefijo = "OTR-";
 
                     break;
                 case "6":
                     GetCategorias("ITM_92");
                     Variables.wTabla = "ITM_92";
+                    Variables.wPrefijo = "ASE-";
 
                     break;
                 default:
@@ -535,7 +524,7 @@ namespace WebItNow_Peacock
 
             Variables.wRenglon = row.RowIndex;
 
-            TxtNomCategoria.Text = Server.HtmlDecode(Convert.ToString(GrdCategorias.Rows[index].Cells[1].Text));
+            TxtNomCategoria.Text = Server.HtmlDecode(Convert.ToString(GrdCategorias.Rows[index].Cells[2].Text));
 
             TxtNomCategoria.ReadOnly = true;
 
@@ -574,7 +563,9 @@ namespace WebItNow_Peacock
         {
             if (TxtNomCategoria.Text == "" || TxtNomCategoria.Text == null)
             {
-                LblMessage.Text = "Capturar Descripción de Categoría";
+                //LblMessage.Text = "Capturar Descripción de Categoría";
+
+                LblMessage.Text = GetGlobalResourceObject("GlobalResources", "msg_CapturarDescCategoria").ToString();
                 mpeMensaje.Show();
                 return;
             }

@@ -15,25 +15,6 @@
             $("input").attr("autocomplete", "off");
         });
 
-        window.onload = function () {
-            // Inicia un temporizador para ejecutar después de 30 minutos (1800000 milisegundos)
-            var timer = setTimeout(function () {
-                // Actualiza el contenido del elemento para mostrar que la sesión ha expirado
-                document.getElementById('<%=LblExpira.ClientID %>').innerHTML = 'La sesión ha expirado.';
-        
-                // Encuentra el modal y lo muestra
-                var modalId = '<%=mpeExpira.ClientID%>';
-                var modal = $find(modalId);
-                modal.show();
-
-                // Inicia otro temporizador para recargar la página después de 30 minutos
-                setTimeout(function () {
-                    location.reload();
-                }, 1800000);
-
-            }, 1800000);
-        };
-
         function acceso() {
             location.href = '/Login.aspx';
         }
@@ -300,33 +281,6 @@
         </div>
     </asp:Panel>
     <br />
-    <asp:Panel ID="pnlExpira" runat="server" CssClass="CajaDialogo" style="display: none; border: none; border-radius: 10px; width: 400px; background-color:#FFFFFF;">
-        <div class=" row justify-content-end" data-bs-theme="dark">
-            <div class="col-1">
-                <asp:Button runat="server" OnClientClick="acceso(); return false;" type="button" class="btn-close" aria-label="Close" />
-            </div>
-        </div>
-        <div>
-                <br />
-            <hr class="dropdown-divider" />
-        </div>
-        <div>
-                <br />
-            <hr class="dropdown-divider" />
-        </div>
-        <div>
-            <asp:Label ID="LblExpira" runat="server" Text="" />
-        </div>
-        <div>
-            <br />
-            <hr class="dropdown-divider" />
-        </div>
-        <div>
-            <br />
-                <asp:Button ID="BtnClose_Expira" OnClientClick="acceso(); return false;" runat="server" Text="Cerrar" CssClass="btn btn-outline-primary"/>
-        </div>
-    </asp:Panel>
-    <br />
     <table cellspacing="1" cellpadding="1" border="0">
         <tr>
             <td>
@@ -351,13 +305,6 @@
             </td>
         </tr>
         <tr>
-            <td>
-                <ajaxToolkit:ModalPopupExtender ID="mpeExpira" runat="server" PopupControlID="pnlExpira"
-                    TargetControlID="lblHide" BackgroundCssClass="FondoAplicacion" OnOkScript="mpeExpiraOnOk()" >
-                </ajaxToolkit:ModalPopupExtender>
-            </td>
-            <td class="style3"><asp:Label ID="lblHide" runat="server" Text="Label" Style="display: none;" />
-            </td>
             <td>&nbsp;</td>
         </tr>
     </table>

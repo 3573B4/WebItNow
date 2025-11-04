@@ -1,0 +1,966 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="btnAceptar" xml:space="preserve">
+    <value>Aceitar</value>
+  </data>
+  <data name="btnAgregar" xml:space="preserve">
+    <value>Adicionar</value>
+  </data>
+  <data name="btnAltaAsunto" xml:space="preserve">
+    <value>Novo Assunto</value>
+  </data>
+  <data name="btnAnular" xml:space="preserve">
+    <value>Cancelar</value>
+  </data>
+  <data name="btnCancelar" xml:space="preserve">
+    <value>Cancelar</value>
+  </data>
+  <data name="btnCargaDatosIA" xml:space="preserve">
+    <value>Carregamento de Dados IA</value>
+  </data>
+  <data name="btnCerrar" xml:space="preserve">
+    <value>Fechar</value>
+  </data>
+  <data name="btnEditar" xml:space="preserve">
+    <value>Editar Dados</value>
+  </data>
+  <data name="btnEnviar" xml:space="preserve">
+    <value>Gerar</value>
+  </data>
+  <data name="btnExportarExcel" xml:space="preserve">
+    <value>Exportar para Excel</value>
+  </data>
+  <data name="btnGrabar" xml:space="preserve">
+    <value>Aplicar Alterações</value>
+  </data>
+  <data name="btnGuardarOrden" xml:space="preserve">
+    <value>Salvar pedido</value>
+  </data>
+  <data name="btnIniciarSesion" xml:space="preserve">
+    <value>Entrar</value>
+  </data>
+  <data name="btnOrdenarTask" xml:space="preserve">
+    <value>Ordenar Lista</value>
+  </data>
+  <data name="btnProyecto" xml:space="preserve">
+    <value>Cadastro de Projetos</value>
+  </data>
+  <data name="btnRegresar" xml:space="preserve">
+    <value>Voltar</value>
+  </data>
+  <data name="btnSeleccionar" xml:space="preserve">
+    <value>SELECIONAR TODOS</value>
+  </data>
+  <data name="btnSiguiente" xml:space="preserve">
+    <value>Próximo</value>
+  </data>
+  <data name="col_Categoria" xml:space="preserve">
+    <value>Categoria</value>
+  </data>
+  <data name="col_Clave" xml:space="preserve">
+    <value>Chave</value>
+  </data>
+  <data name="col_CorreoContacto" xml:space="preserve">
+    <value>E-mail do Contato</value>
+  </data>
+  <data name="col_CveCategoria" xml:space="preserve">
+    <value>Cód. Categoria</value>
+  </data>
+  <data name="col_Cve_Cobertura" xml:space="preserve">
+    <value>Chave da Cobertura</value>
+  </data>
+  <data name="col_Cve_LineaNeg" xml:space="preserve">
+    <value>Cód. da Linha de Negócio</value>
+  </data>
+  <data name="col_Cve_Producto" xml:space="preserve">
+    <value>Cód. do Produto</value>
+  </data>
+  <data name="col_Cve_Seccion" xml:space="preserve">
+    <value>Cód. Seção</value>
+  </data>
+  <data name="col_DescCategoria" xml:space="preserve">
+    <value>Descrição da categoria</value>
+  </data>
+  <data name="col_DescDocumento" xml:space="preserve">
+    <value>Descrição do Documento</value>
+  </data>
+  <data name="col_DescripcionCliente" xml:space="preserve">
+    <value>Descrição do Cliente</value>
+  </data>
+  <data name="col_DescTarea" xml:space="preserve">
+    <value>Descrição da Tarefa a Realizar</value>
+  </data>
+  <data name="col_Desc_Cobertura" xml:space="preserve">
+    <value>Descrição da Cobertura</value>
+  </data>
+  <data name="col_Desc_Etapa" xml:space="preserve">
+    <value>Descrição da Etapa</value>
+  </data>
+  <data name="col_Desc_Producto" xml:space="preserve">
+    <value>Descrição do produto</value>
+  </data>
+  <data name="col_Desc_Seccion" xml:space="preserve">
+    <value>Descrição</value>
+  </data>
+  <data name="col_Fecha_Asignacion" xml:space="preserve">
+    <value>Data de Atribuição</value>
+  </data>
+  <data name="col_IdOrden" xml:space="preserve">
+    <value>Ordem</value>
+  </data>
+  <data name="col_IdSeguros" xml:space="preserve">
+    <value>Chave</value>
+  </data>
+  <data name="col_IdStatus" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="col_MedidaTiempo" xml:space="preserve">
+    <value>Unidade de tempo</value>
+  </data>
+  <data name="col_NomActor" xml:space="preserve">
+    <value>Nome do Autor</value>
+  </data>
+  <data name="col_NomAsegurado" xml:space="preserve">
+    <value>Nome do Segurado</value>
+  </data>
+  <data name="col_NomCliente" xml:space="preserve">
+    <value>Nome do Cliente</value>
+  </data>
+  <data name="col_NomContacto" xml:space="preserve">
+    <value>Nome do Contato</value>
+  </data>
+  <data name="col_NomDemandado" xml:space="preserve">
+    <value>Nome do Réu</value>
+  </data>
+  <data name="col_NomLineaNegocio" xml:space="preserve">
+    <value>Descrição da Linha de Negócio</value>
+  </data>
+  <data name="col_NomProyecto" xml:space="preserve">
+    <value>Nome do Projeto</value>
+  </data>
+  <data name="col_NomTarea" xml:space="preserve">
+    <value>Nome da Tarefa</value>
+  </data>
+  <data name="col_NumPoliza" xml:space="preserve">
+    <value>Número da Apólice</value>
+  </data>
+  <data name="col_NumReporte" xml:space="preserve">
+    <value>Número do Relatório</value>
+  </data>
+  <data name="col_NumSiniestro" xml:space="preserve">
+    <value>Número do Sinistro</value>
+  </data>
+  <data name="col_Num_Condusef" xml:space="preserve">
+    <value>Registro CONDUSEF</value>
+  </data>
+  <data name="col_Plazo" xml:space="preserve">
+    <value>Prazo</value>
+  </data>
+  <data name="col_Referencia" xml:space="preserve">
+    <value>Referência do Sinistro</value>
+  </data>
+  <data name="col_Referencia_Anterior" xml:space="preserve">
+    <value>Referência Anterior</value>
+  </data>
+  <data name="col_Resp_Administrativo" xml:space="preserve">
+    <value>Responsável Administrativo</value>
+  </data>
+  <data name="col_Resp_Tecnico" xml:space="preserve">
+    <value>Responsável Técnico</value>
+  </data>
+  <data name="col_Seguro_Cia" xml:space="preserve">
+    <value>Companhia de Seguros</value>
+  </data>
+  <data name="col_Telefono" xml:space="preserve">
+    <value>Telefone</value>
+  </data>
+  <data name="col_TelExtencion" xml:space="preserve">
+    <value>Número de Ramal</value>
+  </data>
+  <data name="col_TelMovil" xml:space="preserve">
+    <value>Telefone Celular</value>
+  </data>
+  <data name="col_TpoDocumento" xml:space="preserve">
+    <value>Tipo de Documento</value>
+  </data>
+  <data name="col_TpoInterno" xml:space="preserve">
+    <value>Tipo de Tarefa</value>
+  </data>
+  <data name="col_Tpo_Asunto" xml:space="preserve">
+    <value>Tipo de Assunto</value>
+  </data>
+  <data name="col_UnidadTiempo" xml:space="preserve">
+    <value>Unidade de Tempo</value>
+  </data>
+  <data name="ddl_NoHayCarpeta" xml:space="preserve">
+    <value>-- Nenhuma pasta encontrada --</value>
+  </data>
+  <data name="ddl_Select" xml:space="preserve">
+    <value>-- Selecionar --</value>
+  </data>
+  <data name="ddl_Select_Col" xml:space="preserve">
+    <value>-- Selecionar Coluna --</value>
+  </data>
+  <data name="hdrConsultaClientes" xml:space="preserve">
+    <value>Consulta de Clientes</value>
+  </data>
+  <data name="hdrConsultaCoberturas" xml:space="preserve">
+    <value>Consulta de Coberturas</value>
+  </data>
+  <data name="hdrConsultaContactos" xml:space="preserve">
+    <value>Consulta de Contatos</value>
+  </data>
+  <data name="hdrConsultaDocumentos" xml:space="preserve">
+    <value>Consulta de Documentos</value>
+  </data>
+  <data name="hdrConsultaProductos" xml:space="preserve">
+    <value>Consulta de Produto</value>
+  </data>
+  <data name="hdrConsultaProyectos" xml:space="preserve">
+    <value>Consulta de Projetos</value>
+  </data>
+  <data name="hdrConsultaResponsable" xml:space="preserve">
+    <value>Consulta de Responsáveis</value>
+  </data>
+  <data name="hdrConsultaTareas" xml:space="preserve">
+    <value>Consulta de Tarefas</value>
+  </data>
+  <data name="hdrLineaNegocios" xml:space="preserve">
+    <value>Consulta de Linhas de Negócio</value>
+  </data>
+  <data name="hdrTituloAsegurados" xml:space="preserve">
+    <value>SEGURADOS AOS QUAIS ESTE(S) DOCUMENTO(S) SE APLICA(M)</value>
+  </data>
+  <data name="hdrTituloBienes" xml:space="preserve">
+    <value>BENS AOS QUAIS ESTE(S) DOCUMENTO(S) SE APLICA(M)</value>
+  </data>
+  <data name="hdrTituloDocumentos" xml:space="preserve">
+    <value>DOCUMENTOS EXIGIDOS POR</value>
+  </data>
+  <data name="hdrTituloEstatus" xml:space="preserve">
+    <value>STATUS AOS QUAIS ESTE(S) DOCUMENTO(S) SE APLICA(M)</value>
+  </data>
+  <data name="hdrTituloOtrosDetalles" xml:space="preserve">
+    <value>OUTROS DETALHES AOS QUAIS ESTE(S) DOCUMENTO(S) SE APLICA(M)</value>
+  </data>
+  <data name="hdrTituloRiesgos" xml:space="preserve">
+    <value>RISCOS AOS QUAIS ESTE(S) DOCUMENTO(S) SE APLICA(M)</value>
+  </data>
+  <data name="lblAddNewProtocolo" xml:space="preserve">
+    <value>Adicionar Novo Protocolo (SLA)</value>
+  </data>
+  <data name="lblAltaInspeccion" xml:space="preserve">
+    <value>CADASTRO DE INSPEÇÃO</value>
+  </data>
+  <data name="lblAltaProyecto" xml:space="preserve">
+    <value>CADASTRO DE PROJETO</value>
+  </data>
+  <data name="lblAltaReferencia" xml:space="preserve">
+    <value>ABERTURA DE REFERÊNCIA</value>
+  </data>
+  <data name="lblAsuntos" xml:space="preserve">
+    <value>Assuntos</value>
+  </data>
+  <data name="lblCarpetas" xml:space="preserve">
+    <value>Tipo de Pasta</value>
+  </data>
+  <data name="lblCategoriasPor" xml:space="preserve">
+    <value>Categorias por</value>
+  </data>
+  <data name="lblCiaSeguros" xml:space="preserve">
+    <value>Companhia de Seguros</value>
+  </data>
+  <data name="lblClaveCliente" xml:space="preserve">
+    <value>Chave do Cliente</value>
+  </data>
+  <data name="lblCobertura" xml:space="preserve">
+    <value>Descrição da Cobertura</value>
+  </data>
+  <data name="lblCodigoVerificacion" xml:space="preserve">
+    <value>Código de verificação</value>
+  </data>
+  <data name="lblColumnas" xml:space="preserve">
+    <value>Coluna para pesquisar</value>
+  </data>
+  <data name="lblConsultaCategoria" xml:space="preserve">
+    <value>Consulta de categorias</value>
+  </data>
+  <data name="lblConsultaProtocolo" xml:space="preserve">
+    <value>Consulta de Protocolos (SLA)</value>
+  </data>
+  <data name="lblConsultaRef" xml:space="preserve">
+    <value>Consulta Geral de Referências</value>
+  </data>
+  <data name="lblConsultas" xml:space="preserve">
+    <value>CONSULTAS</value>
+  </data>
+  <data name="LblConsultaTareas" xml:space="preserve">
+    <value>Consulta de Tarefas</value>
+  </data>
+  <data name="lblContraseña" xml:space="preserve">
+    <value>Senha</value>
+  </data>
+  <data name="lblCorreoContacto" xml:space="preserve">
+    <value>E-mail do Contato</value>
+  </data>
+  <data name="lblCorrespondencia" xml:space="preserve">
+    <value>CORRESPONDÊNCIA</value>
+  </data>
+  <data name="lblDemandado" xml:space="preserve">
+    <value>Nome do Réu</value>
+  </data>
+  <data name="lblDescCategoria" xml:space="preserve">
+    <value>Descrição da categoria</value>
+  </data>
+  <data name="lblDescMote" xml:space="preserve">
+    <value>Descrição do Motivo</value>
+  </data>
+  <data name="lblDescProducto" xml:space="preserve">
+    <value>Descrição do produto</value>
+  </data>
+  <data name="lblDescProyecto" xml:space="preserve">
+    <value>Descrição do Projeto</value>
+  </data>
+  <data name="lblDescripBrev" xml:space="preserve">
+    <value>Descrição do Documento (Curta)</value>
+  </data>
+  <data name="lblDescripLarga" xml:space="preserve">
+    <value>Descrição do Documento (Longa)</value>
+  </data>
+  <data name="lblDescTarea" xml:space="preserve">
+    <value>Descrição da Tarefa a Realizar</value>
+  </data>
+  <data name="lblDocInterno" xml:space="preserve">
+    <value>Documento Interno</value>
+  </data>
+  <data name="lblEliminar" xml:space="preserve">
+    <value>Excluir</value>
+  </data>
+  <data name="lblEstOcurrencia" xml:space="preserve">
+    <value>Estado da Ocorrência</value>
+  </data>
+  <data name="lblFechaAsignacion" xml:space="preserve">
+    <value>Data de Atribuição</value>
+  </data>
+  <data name="lblFiltros" xml:space="preserve">
+    <value>Filtros</value>
+  </data>
+  <data name="lblFinVigencia" xml:space="preserve">
+    <value>Fim da Vigência</value>
+  </data>
+  <data name="lblGerente" xml:space="preserve">
+    <value>Gerente Responsável</value>
+  </data>
+  <data name="lblIdioma" xml:space="preserve">
+    <value>Língua</value>
+  </data>
+  <data name="lblIniVigencia" xml:space="preserve">
+    <value>Início da Vigência</value>
+  </data>
+  <data name="lblLineaNegocio" xml:space="preserve">
+    <value>Nome da Linha de Negócio</value>
+  </data>
+  <data name="lblLineaNegocios" xml:space="preserve">
+    <value>LINHA DE NEGÓCIOS</value>
+  </data>
+  <data name="lblMedidaTiempo" xml:space="preserve">
+    <value>Unidade de tempo</value>
+  </data>
+  <data name="lblMenu" xml:space="preserve">
+    <value>Menu</value>
+  </data>
+  <data name="lblMenuBienvenido" xml:space="preserve">
+    <value>Bem-vindo:</value>
+  </data>
+  <data name="lblNomActor" xml:space="preserve">
+    <value>Nome do Autor</value>
+  </data>
+  <data name="lblNomAsegurado" xml:space="preserve">
+    <value>Nome do Segurado</value>
+  </data>
+  <data name="lblNombreCliente" xml:space="preserve">
+    <value>Nome do Cliente</value>
+  </data>
+  <data name="lblNomCliente" xml:space="preserve">
+    <value>Nome do Cliente</value>
+  </data>
+  <data name="lblNomContacto" xml:space="preserve">
+    <value>Nome do Contato</value>
+  </data>
+  <data name="lblNomProyecto" xml:space="preserve">
+    <value>Nome do Projeto</value>
+  </data>
+  <data name="lblNomResponsable" xml:space="preserve">
+    <value>Nome do Responsável</value>
+  </data>
+  <data name="lblNomSeccion" xml:space="preserve">
+    <value>Nome da seção</value>
+  </data>
+  <data name="lblNomTarea" xml:space="preserve">
+    <value>Nome da Tarefa</value>
+  </data>
+  <data name="lblNumCondusef" xml:space="preserve">
+    <value>Núm. de Registro CONDUSEF</value>
+  </data>
+  <data name="lblNumExtencion" xml:space="preserve">
+    <value>Número de Ramal</value>
+  </data>
+  <data name="lblNumPoliza" xml:space="preserve">
+    <value>Número da Apólice</value>
+  </data>
+  <data name="lblNumReporte" xml:space="preserve">
+    <value>Número do Relatório</value>
+  </data>
+  <data name="lblNumSiniestro" xml:space="preserve">
+    <value>Número do Sinistro</value>
+  </data>
+  <data name="lblOperaciones" xml:space="preserve">
+    <value>OPERAÇÕES</value>
+  </data>
+  <data name="lblPlazo" xml:space="preserve">
+    <value>Prazo</value>
+  </data>
+  <data name="lblProducto" xml:space="preserve">
+    <value>Produto(s)</value>
+  </data>
+  <data name="lblProtocolos" xml:space="preserve">
+    <value>Protocolo (SLA)</value>
+  </data>
+  <data name="lblProveedores" xml:space="preserve">
+    <value>FORNECEDORES</value>
+  </data>
+  <data name="lblProyecto" xml:space="preserve">
+    <value>Projeto</value>
+  </data>
+  <data name="lblProyectos" xml:space="preserve">
+    <value>Projetos</value>
+  </data>
+  <data name="lblRef" xml:space="preserve">
+    <value>Busca Geral de Referências</value>
+  </data>
+  <data name="lblRespAdministrativo" xml:space="preserve">
+    <value>Responsável Administrativo</value>
+  </data>
+  <data name="lblResponsable" xml:space="preserve">
+    <value>Responsável</value>
+  </data>
+  <data name="lblRespTecnico" xml:space="preserve">
+    <value>Responsável Técnico</value>
+  </data>
+  <data name="lblSecciones" xml:space="preserve">
+    <value>Seção</value>
+  </data>
+  <data name="lblTarea" xml:space="preserve">
+    <value>Tarefa</value>
+  </data>
+  <data name="lblTareaAutomatica" xml:space="preserve">
+    <value>Tarefa Automática</value>
+  </data>
+  <data name="lblTareaInterna" xml:space="preserve">
+    <value>Tarefa Interna</value>
+  </data>
+  <data name="lblTelefono" xml:space="preserve">
+    <value>Telefone</value>
+  </data>
+  <data name="lblTelMovil" xml:space="preserve">
+    <value>Telefone Celular</value>
+  </data>
+  <data name="lblTimeSleep" xml:space="preserve">
+    <value>Tempo de espera</value>
+  </data>
+  <data name="lblTipoAsunto" xml:space="preserve">
+    <value>Tipo de Assunto</value>
+  </data>
+  <data name="lblTitulo" xml:space="preserve">
+    <value>Iniciar Sessão</value>
+  </data>
+  <data name="lblTitulo_Agregar_Archivos" xml:space="preserve">
+    <value>Enviar Arquivos de Trabalho</value>
+  </data>
+  <data name="lblTitulo_Alta_Asunto" xml:space="preserve">
+    <value>CADASTRO DE NOVA REFERÊNCIA</value>
+  </data>
+  <data name="lblTitulo_Alta_Cuaderno" xml:space="preserve">
+    <value>Cadastro de Caderno</value>
+  </data>
+  <data name="lblTitulo_Alta_Inspecciones" xml:space="preserve">
+    <value>CADASTRO DE INSPEÇÕES</value>
+  </data>
+  <data name="lblTitulo_Alta_Proyecto" xml:space="preserve">
+    <value>Cadastro de Projeto</value>
+  </data>
+  <data name="lblTitulo_Categoria_Proyecto" xml:space="preserve">
+    <value>Configuração de Categorias do Projeto</value>
+  </data>
+  <data name="lblTitulo_Cat_Categorias" xml:space="preserve">
+    <value>Catálogo de Categorias</value>
+  </data>
+  <data name="lblTitulo_Cat_Clientes" xml:space="preserve">
+    <value>Catálogo de Clientes</value>
+  </data>
+  <data name="lblTitulo_Cat_Coberturas" xml:space="preserve">
+    <value>Catálogo de Cobertura</value>
+  </data>
+  <data name="lblTitulo_Cat_Contactos" xml:space="preserve">
+    <value>Catálogo de Contatos</value>
+  </data>
+  <data name="lblTitulo_Cat_Documentos" xml:space="preserve">
+    <value>Catálogo de Documentos</value>
+  </data>
+  <data name="lblTitulo_Cat_Estatus" xml:space="preserve">
+    <value>Catálogo de status de reivindicação</value>
+  </data>
+  <data name="lblTitulo_Cat_Etapas" xml:space="preserve">
+    <value>Consulta por Etapas/Protocolos</value>
+  </data>
+  <data name="lblTitulo_Cat_Linea_Neg" xml:space="preserve">
+    <value>Catálogo de Linhas de Negócio</value>
+  </data>
+  <data name="lblTitulo_Cat_Productos" xml:space="preserve">
+    <value>Catálogo de Produtos</value>
+  </data>
+  <data name="lblTitulo_Cat_Protocolos" xml:space="preserve">
+    <value>Catálogo de Protocolos (SLA)</value>
+  </data>
+  <data name="lblTitulo_Cat_Responsables" xml:space="preserve">
+    <value>Catálogo de Responsáveis</value>
+  </data>
+  <data name="lblTitulo_Cat_Secciones" xml:space="preserve">
+    <value>Catálogo de Seções</value>
+  </data>
+  <data name="lblTitulo_Cat_Tareas" xml:space="preserve">
+    <value>Catálogo de Tarefas</value>
+  </data>
+  <data name="lblTitulo_Consulta_Secciones" xml:space="preserve">
+    <value>Visualizar Seções</value>
+  </data>
+  <data name="lblTitulo_Generar_Cuaderno" xml:space="preserve">
+    <value>Gerar Caderno</value>
+  </data>
+  <data name="lblTitulo_Mnu_Dinamico" xml:space="preserve">
+    <value>SINISTROS</value>
+  </data>
+  <data name="lblTpoAsegurado" xml:space="preserve">
+    <value>Tipo de Segurado</value>
+  </data>
+  <data name="lblUsuario" xml:space="preserve">
+    <value>Usuário</value>
+  </data>
+  <data name="msgPanelMensaje" xml:space="preserve">
+    <value>Mensagem</value>
+  </data>
+  <data name="msgSesionExpirada" xml:space="preserve">
+    <value>Sessão expirada.</value>
+  </data>
+  <data name="msg_CapturarDescCategoria" xml:space="preserve">
+    <value>Digite a descrição da categoria</value>
+  </data>
+  <data name="msg_CapturarNomSeccion" xml:space="preserve">
+    <value>Digite o nome da seção</value>
+  </data>
+  <data name="msg_Capturar_ClaveCliente" xml:space="preserve">
+    <value>Inserir código do cliente</value>
+  </data>
+  <data name="msg_Capturar_CorreoContacto" xml:space="preserve">
+    <value>Inserir e-mail do contato</value>
+  </data>
+  <data name="msg_Capturar_DescCobertura" xml:space="preserve">
+    <value>Inserir descrição da cobertura</value>
+  </data>
+  <data name="msg_Capturar_DescDocCorta" xml:space="preserve">
+    <value>Inserir descrição curta do documento</value>
+  </data>
+  <data name="msg_Capturar_DescDocLarga" xml:space="preserve">
+    <value>Inserir descrição longa do documento</value>
+  </data>
+  <data name="msg_Capturar_DescPlazo" xml:space="preserve">
+    <value>Capturar descrição do prazo</value>
+  </data>
+  <data name="msg_Capturar_DescProducto" xml:space="preserve">
+    <value>Digite a descrição do produto</value>
+  </data>
+  <data name="msg_Capturar_Descripcion_Plazo" xml:space="preserve">
+    <value>Inserir descrição do prazo</value>
+  </data>
+  <data name="msg_Capturar_Descripcion_Tarea" xml:space="preserve">
+    <value>Inserir descrição da tarefa</value>
+  </data>
+  <data name="msg_Capturar_DescTarea" xml:space="preserve">
+    <value>Capturar descrição da tarefa</value>
+  </data>
+  <data name="msg_Capturar_LineaNegocios" xml:space="preserve">
+    <value>Inserir nome da linha de negócios</value>
+  </data>
+  <data name="msg_Capturar_NomAsegurado" xml:space="preserve">
+    <value>Inserir nome do segurado</value>
+  </data>
+  <data name="msg_Capturar_NombreCliente" xml:space="preserve">
+    <value>Inserir nome do cliente</value>
+  </data>
+  <data name="msg_Capturar_NomContacto" xml:space="preserve">
+    <value>Inserir nome do contato</value>
+  </data>
+  <data name="msg_Capturar_NomEstatus" xml:space="preserve">
+    <value>Inserir nome do status</value>
+  </data>
+  <data name="msg_Capturar_NomProyecto" xml:space="preserve">
+    <value>Inserir nome do projeto</value>
+  </data>
+  <data name="msg_Capturar_NumPoliza" xml:space="preserve">
+    <value>Inserir número da apólice</value>
+  </data>
+  <data name="msg_Capturar_Responsable" xml:space="preserve">
+    <value>Inserir nome do Responsável</value>
+  </data>
+  <data name="msg_Capturar_Tiempo_Espera" xml:space="preserve">
+    <value>Inserir tempo de espera</value>
+  </data>
+  <data name="msg_CategoriaActualizada" xml:space="preserve">
+    <value>Categoria atualizada com sucesso</value>
+  </data>
+  <data name="msg_CategoriaAgregada" xml:space="preserve">
+    <value>Categoria adicionada com sucesso</value>
+  </data>
+  <data name="msg_CategoriaEliminada" xml:space="preserve">
+    <value>Categoria excluída com sucesso</value>
+  </data>
+  <data name="msg_CategoriaRelacionadaAsunto" xml:space="preserve">
+    <value>A categoria está relacionada a um sinistro</value>
+  </data>
+  <data name="msg_Categoria_Agregada" xml:space="preserve">
+    <value>Categoria adicionada com sucesso</value>
+  </data>
+  <data name="msg_Cliente_Actualizado" xml:space="preserve">
+    <value>Cliente atualizado com sucesso</value>
+  </data>
+  <data name="msg_Cliente_Agregado" xml:space="preserve">
+    <value>Cliente adicionado com sucesso</value>
+  </data>
+  <data name="msg_Cliente_Eliminado" xml:space="preserve">
+    <value>Cliente excluído com sucesso</value>
+  </data>
+  <data name="msg_Cobertura_Actualizada" xml:space="preserve">
+    <value>Cobertura atualizada com sucesso</value>
+  </data>
+  <data name="msg_Cobertura_Agregado" xml:space="preserve">
+    <value>Cobertura adicionada com sucesso</value>
+  </data>
+  <data name="msg_Cobertura_Eliminada" xml:space="preserve">
+    <value>Cobertura excluída com sucesso</value>
+  </data>
+  <data name="msg_Cobertura_Relacionada" xml:space="preserve">
+    <value>A cobertura está relacionada a um sinistro</value>
+  </data>
+  <data name="msg_Confirmar_Delete_Categoria" xml:space="preserve">
+    <value>Deseja excluir a categoria?</value>
+  </data>
+  <data name="msg_Confirmar_Delete_Cliente" xml:space="preserve">
+    <value>Deseja excluir o cliente?</value>
+  </data>
+  <data name="msg_Confirmar_Delete_Cobertura" xml:space="preserve">
+    <value>Deseja excluir a cobertura?</value>
+  </data>
+  <data name="msg_Confirmar_Delete_Contacto" xml:space="preserve">
+    <value>Deseja excluir o contato?</value>
+  </data>
+  <data name="msg_Confirmar_Delete_Documento" xml:space="preserve">
+    <value>Deseja excluir o documento?</value>
+  </data>
+  <data name="msg_Confirmar_Delete_Estatus" xml:space="preserve">
+    <value>Deseja excluir o status?</value>
+  </data>
+  <data name="msg_Confirmar_Delete_LineaNegocio" xml:space="preserve">
+    <value>Deseja excluir o ramo de atividade?</value>
+  </data>
+  <data name="msg_Confirmar_Delete_Producto" xml:space="preserve">
+    <value>Deseja excluir o produto?</value>
+  </data>
+  <data name="msg_Confirmar_Delete_Responsable" xml:space="preserve">
+    <value>Deseja excluir o responsável?</value>
+  </data>
+  <data name="msg_Confirmar_Delete_Seccion" xml:space="preserve">
+    <value>Deseja excluir a seção?</value>
+  </data>
+  <data name="msg_Confirmar_Delete_Tarea" xml:space="preserve">
+    <value>Deseja excluir a tarefa?</value>
+  </data>
+  <data name="msg_Contacto_Actualizado" xml:space="preserve">
+    <value>Contato atualizado com sucesso</value>
+  </data>
+  <data name="msg_Contacto_Agregado" xml:space="preserve">
+    <value>Contato adicionado com sucesso</value>
+  </data>
+  <data name="msg_Contacto_Eliminado" xml:space="preserve">
+    <value>Contato excluído com sucesso</value>
+  </data>
+  <data name="msg_Documento_Actualizado" xml:space="preserve">
+    <value>Documento atualizado com sucesso</value>
+  </data>
+  <data name="msg_Documento_Agregado" xml:space="preserve">
+    <value>Documento adicionado com sucesso</value>
+  </data>
+  <data name="msg_Documento_Eliminado" xml:space="preserve">
+    <value>Documento excluído com sucesso</value>
+  </data>
+  <data name="msg_Estatus_Actualizado" xml:space="preserve">
+    <value>Status atualizado com sucesso</value>
+  </data>
+  <data name="msg_Estatus_Agregado" xml:space="preserve">
+    <value>Status adicionado com sucesso</value>
+  </data>
+  <data name="msg_Estatus_Eliminado" xml:space="preserve">
+    <value>Status excluído com sucesso</value>
+  </data>
+  <data name="msg_LineaNegocios_Actualizado" xml:space="preserve">
+    <value>Linha de negócios atualizada com sucesso</value>
+  </data>
+  <data name="msg_LineaNegocios_Agregado" xml:space="preserve">
+    <value>Linha de negócios adicionada com sucesso</value>
+  </data>
+  <data name="msg_LineaNegocios_Eliminado" xml:space="preserve">
+    <value>Linha de negócios excluída com sucesso</value>
+  </data>
+  <data name="msg_NoResults" xml:space="preserve">
+    <value>Nenhum resultado.</value>
+  </data>
+  <data name="msg_Orden_Tareas_Agregado" xml:space="preserve">
+    <value>Ordem das tarefas adicionada com sucesso</value>
+  </data>
+  <data name="msg_Producto_Actualizado" xml:space="preserve">
+    <value>Produto atualizado com sucesso</value>
+  </data>
+  <data name="msg_Producto_Agregado" xml:space="preserve">
+    <value>Produto adicionado com sucesso</value>
+  </data>
+  <data name="msg_Producto_Eliminado" xml:space="preserve">
+    <value>Produto excluído com sucesso</value>
+  </data>
+  <data name="msg_Producto_Relacionado" xml:space="preserve">
+    <value>O produto está relacionado a um sinistro</value>
+  </data>
+  <data name="msg_Protocolo_Agregado" xml:space="preserve">
+    <value>Protocolo (SLA) adicionado com sucesso</value>
+  </data>
+  <data name="msg_Protocolo_Eliminado" xml:space="preserve">
+    <value>Protocolo excluído com sucesso</value>
+  </data>
+  <data name="msg_Proyecto_Eliminado" xml:space="preserve">
+    <value>Projeto excluído com sucesso</value>
+  </data>
+  <data name="msg_Proyecto_Registrado" xml:space="preserve">
+    <value>O projeto já está registrado</value>
+  </data>
+  <data name="msg_Responsable_Actualizado" xml:space="preserve">
+    <value>Responsável atualizado com sucesso</value>
+  </data>
+  <data name="msg_Responsable_Eliminado" xml:space="preserve">
+    <value>Responsável excluído com sucesso</value>
+  </data>
+  <data name="msg_Responsable_Relacionado" xml:space="preserve">
+    <value>O responsável está relacionado a um Assunto</value>
+  </data>
+  <data name="msg_Resposable_Agregado" xml:space="preserve">
+    <value>Responsável adicionado com sucesso</value>
+  </data>
+  <data name="msg_Seccion_Actualizada" xml:space="preserve">
+    <value>Seção atualizada com sucesso</value>
+  </data>
+  <data name="msg_Seccion_Agregada" xml:space="preserve">
+    <value>Seção adicionada com sucesso</value>
+  </data>
+  <data name="msg_Seccion_Eliminada" xml:space="preserve">
+    <value>Seção excluída com sucesso</value>
+  </data>
+  <data name="msg_SeleccionarCategoriasPor" xml:space="preserve">
+    <value>Selecionar categorias por</value>
+  </data>
+  <data name="msg_Seleccionar_Aseguradora" xml:space="preserve">
+    <value>Selecionar Seguradora</value>
+  </data>
+  <data name="msg_Seleccionar_Categoria" xml:space="preserve">
+    <value>Selecionar Categoria</value>
+  </data>
+  <data name="msg_Seleccionar_CiaSeguros" xml:space="preserve">
+    <value>Selecionar companhia de seguros</value>
+  </data>
+  <data name="msg_Seleccionar_CoberturaPor" xml:space="preserve">
+    <value>Selecionar coberturas por</value>
+  </data>
+  <data name="msg_Seleccionar_FecFinVigencia" xml:space="preserve">
+    <value>Selecionar data de término da vigência</value>
+  </data>
+  <data name="msg_Seleccionar_FecIniVigencia" xml:space="preserve">
+    <value>Selecionar data de início da vigência</value>
+  </data>
+  <data name="msg_Seleccionar_Gerente" xml:space="preserve">
+    <value>Selecionar gerente responsável</value>
+  </data>
+  <data name="msg_Seleccionar_NomCliente" xml:space="preserve">
+    <value>Selecionar nome do cliente</value>
+  </data>
+  <data name="msg_Seleccionar_Producto" xml:space="preserve">
+    <value>Selecionar um produto</value>
+  </data>
+  <data name="msg_Seleccionar_Protocolo" xml:space="preserve">
+    <value>Selecionar Protocolo</value>
+  </data>
+  <data name="msg_Seleccionar_Protocolo_SLA" xml:space="preserve">
+    <value>Selecionar Protocolo (SLA)</value>
+  </data>
+  <data name="msg_Seleccionar_Proyecto" xml:space="preserve">
+    <value>Selecionar Projeto</value>
+  </data>
+  <data name="msg_Seleccionar_Responsable" xml:space="preserve">
+    <value>Selecionar tipo de Responsável</value>
+  </data>
+  <data name="msg_Seleccionar_TipoCarpeta" xml:space="preserve">
+    <value>Selecionar tipo de pasta</value>
+  </data>
+  <data name="msg_Seleccionar_Tipo_Asunto" xml:space="preserve">
+    <value>Selecionar Tipo de Assunto</value>
+  </data>
+  <data name="msg_Seleccionar_TpoAsegurado" xml:space="preserve">
+    <value>Selecionar tipo de segurado</value>
+  </data>
+  <data name="msg_Seleccionar_TpoAsunto" xml:space="preserve">
+    <value>Selecionar tipo de assunto</value>
+  </data>
+  <data name="msg_Seleccionar_Unidad_Tiempo" xml:space="preserve">
+    <value>Selecionar Unidade de Tempo</value>
+  </data>
+  <data name="msg_Tarea_Actualizada" xml:space="preserve">
+    <value>Tarefa atualizada com sucesso</value>
+  </data>
+  <data name="msg_Tarea_Actualizado" xml:space="preserve">
+    <value>Tarefa atualizada com sucesso</value>
+  </data>
+  <data name="msg_Tarea_Agregada" xml:space="preserve">
+    <value>Tarefa adicionada com sucesso</value>
+  </data>
+  <data name="msg_Tarea_Agregado" xml:space="preserve">
+    <value>Tarefa adicionada com sucesso</value>
+  </data>
+  <data name="msg_Tarea_Eliminada" xml:space="preserve">
+    <value>Tarefa excluída com sucesso</value>
+  </data>
+  <data name="msg_Tarea_Eliminado" xml:space="preserve">
+    <value>Tarefa excluída com sucesso</value>
+  </data>
+</root>

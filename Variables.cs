@@ -33,6 +33,7 @@ namespace WebItNow_Peacock
         public static string wPrivilegios;
         public static string wEdoDoc;
         public static string wTabla;
+        public static string wPrefijo;
 
         public static Boolean wDownload = true;
         public static Boolean wExiste = true;
@@ -51,6 +52,7 @@ namespace WebItNow_Peacock
         public static int wProceso;
         public static int wIdNota;
         public static int wRenglon;
+        public static int wIdAsunto;
         public static int wIdAseguradora;
         public static int wIdTpoDocumento;
         public static int wIdProyecto;

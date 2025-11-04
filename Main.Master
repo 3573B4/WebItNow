@@ -1,4 +1,5 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Main.master.cs" Inherits="WebItNow_Peacock.Main" %>
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -38,6 +39,24 @@
         $(document).ready(function () {
             $("input").attr("autocomplete", "off");
         });
+
+        var idLblExpira, idLitSesionExpirada, idPnlExpira;
+
+        window.onload = function () {
+            // Esperar 30 minutos (1800000 ms)
+            setTimeout(function () {
+                var lblExpira = document.getElementById(idLblExpira);
+                var litSesion = document.getElementById(idLitSesionExpirada);
+                var pnl = document.getElementById(idPnlExpira);
+
+                if (lblExpira && litSesion) lblExpira.innerHTML = litSesion.innerHTML;
+                if (pnl) pnl.style.display = 'block';
+
+                // Recarga automática (opcional)
+                setTimeout(function () { location.reload(); }, 1800000);
+            }, 1800000);
+        };
+
 
     </script>
 
@@ -298,7 +317,8 @@
             <div class="container-fluid flex-grow-1" style="background-color: white">
                 <div class="row align-items-center">
                     <button class="navbar-toggler col-10 col-md-11 text-start mt-1" id="BtnMenu" type="button" runat="server" visible="false" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
-                        <span class="navbar-toggler-icon" style="margin-left: 50px; font-size: 38px; color:#0C4687; ">&#9776;<span class="ms-2" style="font-size: 23px;">Menú</span></span>
+                        <%--<span class="navbar-toggler-icon" style="margin-left: 50px; font-size: 38px; color:#0C4687; ">&#9776;<span class="ms-2" style="font-size: 23px;">Menú</span></span>--%>
+                        <span class="navbar-toggler-icon" style="margin-left: 50px; font-size: 38px; color:#0C4687; ">&#9776;<span class="ms-2" style="font-size: 23px;"><asp:Label ID="lblMenuSpan" runat="server" Text='<%$ Resources:GlobalResources, lblMenu %>'></asp:Label></span></span>
                     </button>
                     <div class="col-2 col-md-1">
                         <asp:ImageButton ID="ImageButton1" runat="server" CausesValidation="false" ImageUrl="~/Images/home.png" Width="48px" Height="48px" OnClick="BtnHome_Click" />
@@ -306,7 +326,10 @@
                 </div>
                 <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel" style="background-color:#62BEAF;">
                     <div class="offcanvas-header">
-                        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menú</h5>
+                        <%--<h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menú</h5>--%>
+                        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">
+                            <asp:Label ID="lblMenu" runat="server" Text='<%$ Resources:GlobalResources, lblMenu %>'></asp:Label>
+                        </h5>
                         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                     </div>
                     <hr class="dropdown-divider" />
@@ -320,7 +343,7 @@
                                     <div class="col-md-8">
                                         <div class="card-body">
                                             <div class="">
-                                                <asp:Label ID="LblMenuBienvenido" runat="server" Text="Bienvenido:" Font-Size="Medium" CssClass="card-text" ForeColor="White"></asp:Label>
+                                                <asp:Label ID="LblMenuBienvenido" runat="server" Text="<%$ Resources:GlobalResources, LblMenuBienvenido %>" Font-Size="Medium" CssClass="card-text" ForeColor="White"></asp:Label>
                                             </div>
                                             <div class="">
                                                 <asp:Label ID="LblMenuUsuario" runat="server" Text="Desarrollador" Font-Size="Larger" CssClass="card-title" ForeColor="White"></asp:Label>
@@ -361,22 +384,6 @@
                 </div>
             </div>
         </nav>
-<%--
-            <div class="col-1 me-0">
-                <div class="input-group justify-content-end">
-                    
-                    <button id="btnMnddlUsuario" type="button" runat="server" visible="false" class="btn btn-outline-light dropdown-toggle " data-bs-toggle="dropdown" aria-expanded="false" style="border: 0px;">
-                        <span class="">
-                            <asp:Label ID="LblMenuDdlUsuario" runat="server" Text="Desarrollador" Visible="false"></asp:Label>
-                        </span>
-                    </button>
-                    <ul class="dropdown-menu dropdown-menu-end">
-                        <li><a class="dropdown-item" href="Login.aspx">Cerrar seccion</a></li>
-                    </ul>
-                    
-                </div>
-            </div>
---%>
         </div>
         <br />
         <br />
@@ -392,6 +399,31 @@
                     <%--<h7 class="h7 mt-3 fw-bold">© 2023 Todos los derechos reservados | Itnow Technologies de México S.A. de C.V. </h7>--%>
                 </div>
             </asp:ContentPlaceHolder>                
+        </div>
+
+        <!-- Panel de expiración de sesión -->
+        <asp:Panel ID="pnlExpira" runat="server" CssClass="CajaDialogo" style="display: none; border: none; border-radius: 10px; width: 400px; background-color:#FFFFFF;">
+            <div class="row justify-content-end" data-bs-theme="dark">
+                <div class="col-1">
+                    <asp:Literal ID="litSesionExpirada" runat="server" Visible="false" />
+                    <asp:Button runat="server" OnClientClick="acceso(); return false;" type="button" class="btn-close" aria-label="Close" />
+                </div>
+            </div>
+            <div><br /><hr class="dropdown-divider" /></div>
+            <div><br /><hr class="dropdown-divider" /></div>
+            <div><asp:Label ID="LblExpira" runat="server" Text="" /></div>
+            <div><br /><hr class="dropdown-divider" /></div>
+            <div><br /><asp:Button ID="BtnClose_Expira" OnClientClick="acceso(); return false;" runat="server" CssClass="btn btn-outline-primary"/></div>
+        </asp:Panel>
+
+        <!-- ModalPopupExtender -->
+        <div class="form-group">
+            <div class="d-grid col-6 mx-auto">
+                <ajaxToolkit:ModalPopupExtender ID="mpeExpira" runat="server" PopupControlID="pnlExpira"
+                    TargetControlID="lblHide" BackgroundCssClass="FondoAplicacion" OnOkScript="mpeExpiraOnOk()" >
+                </ajaxToolkit:ModalPopupExtender>
+                <asp:Label ID="lblHide" runat="server" Text="Label" Style="display: none;" />
+            </div>
         </div>
 
     </form>

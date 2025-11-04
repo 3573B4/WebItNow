@@ -12,6 +12,7 @@ namespace WebItNow_Peacock
 {
     public partial class fwConfiguracion_Proyect : Page
     {
+
         protected void Page_PreInit(object sender, EventArgs e)
         {
             //Session["DownloadsPath"] = GetDownloadFolderPath();
@@ -53,7 +54,7 @@ namespace WebItNow_Peacock
                     if (int.TryParse(IdProyecto, out proyectoId) && proyectoId >= 0)
                     {
                         BtnAgregarDatos.Visible = false;
-                        BtnEditar.Visible = true;
+                        btnEditar.Visible = true;
 
                         TxtCliente.Text = (string)Session["Cliente"];
                         TxtNomProyecto.Text = (string)Session["Proyecto"];
@@ -1640,7 +1641,8 @@ namespace WebItNow_Peacock
 
         protected void btnClose_Proceso_Click(object sender, EventArgs e)
         {
-            // PnlDocProceso.Visible = false;
+
+            // Limpia tu variable en el servidor
             Variables.wTabla = string.Empty;
         }
 
@@ -2061,7 +2063,7 @@ namespace WebItNow_Peacock
 
         protected void BtnEditar_Click(object sender, EventArgs e)
         {
-            BtnEditar.Visible = false;
+            btnEditar.Visible = false;
             BtnGrabar.Visible = true;
 
             // Desactivar los CheckBoxes
@@ -2086,7 +2088,7 @@ namespace WebItNow_Peacock
 
         protected void BtnGrabar_Click(object sender, EventArgs e)
         {
-            BtnEditar.Visible = true;
+            btnEditar.Visible = true;
             BtnGrabar.Visible = false;
 
             // Actualizar en la tabla ITM_86 los valores de CheckBox seleccionados. 

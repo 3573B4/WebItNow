@@ -17,14 +17,22 @@ namespace WebItNow_Peacock
         }
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["IdUsuario"] == null || Session["UsPassword"] == null)
-            {
-                Response.Redirect("Login.aspx");
-            }
 
             if (!Page.IsPostBack)
             {
+                Variables.wUserName = Convert.ToString(Session["IdUsuario"]);
+                Variables.wPassword = Convert.ToString(Session["UsPassword"]);
+
+                if (Variables.wUserName == "" || Variables.wPassword == "")
+                {
+                    Response.Redirect("Login.aspx", true);
+                    return;
+                }
+
                 // GetCatalog_TpoDocumento();
+
+                // Labels
+                lblTitulo_Cat_Documentos.Text = GetGlobalResourceObject("GlobalResources", "lblTitulo_Cat_Documentos").ToString();
 
                 GetCarpetas();
                 GetDocumentos();
@@ -79,11 +87,13 @@ namespace WebItNow_Peacock
 
                 if (dt.Rows.Count == 0)
                 {
-                    ddlCarpetas.Items.Insert(0, new ListItem("-- No Hay Carpeta(s) --", "0"));
+                    //ddlCarpetas.Items.Insert(0, new ListItem("-- No Hay Carpeta(s) --", "0"));
+                    ddlCarpetas.Items.Insert(0, new ListItem(GetGlobalResourceObject("GlobalResources", "ddl_NoHayCarpeta").ToString(), "0"));
                 }
                 else
                 {
-                    ddlCarpetas.Items.Insert(0, new ListItem("-- Seleccionar --", "0"));
+                    //ddlCarpetas.Items.Insert(0, new ListItem("-- Seleccionar --", "0"));
+                    ddlCarpetas.Items.Insert(0, new ListItem(GetGlobalResourceObject("GlobalResources", "ddl_Select").ToString(), "0"));
                 }
 
                 dbConn.Close();
@@ -116,7 +126,9 @@ namespace WebItNow_Peacock
                 if (dt.Rows.Count == 0)
                 {
                     GrdDocumentos.ShowHeaderWhenEmpty = true;
-                    GrdDocumentos.EmptyDataText = "No hay resultados.";
+                    GrdDocumentos.EmptyDataText = GetGlobalResourceObject("GlobalResources", "msg_NoResults").ToString();
+
+                    //GrdDocumentos.EmptyDataText = "No hay resultados.";
                 }
 
                 GrdDocumentos.DataSource = dt;
@@ -209,17 +221,20 @@ namespace WebItNow_Peacock
 
                 if (ddlCarpetas.SelectedValue == "0")
                 {
-                    LblMessage.Text = "Seleccionar Tipo de carpeta";
+                    // LblMessage.Text = "Seleccionar Tipo de carpeta";
+                    LblMessage.Text = GetGlobalResourceObject("GlobalResources", "msg_Seleccionar_TipoCarpeta").ToString();
                     mpeMensaje.Show();
                     return;
                 } else if (TxtDescripBrev.Text == "" || TxtDescripBrev.Text == null)
                 {
-                    LblMessage.Text = "Capturar Descripción del documento (Corta)";
+                    // LblMessage.Text = "Capturar Descripción del documento (Corta)";
+                    LblMessage.Text = GetGlobalResourceObject("GlobalResources", "msg_Capturar_DescDocCorta").ToString();
                     mpeMensaje.Show();
                     return;
                 } else if (TxtDescripcion.Text == "" || TxtDescripcion.Text == null)
                 {
-                    LblMessage.Text = "Capturar Descripción del documento (Larga)";
+                    // LblMessage.Text = "Capturar Descripción del documento (Larga)";
+                    LblMessage.Text = GetGlobalResourceObject("GlobalResources", "msg_Capturar_DescDocLarga").ToString();
                     mpeMensaje.Show();
                     return;
                 }
@@ -249,7 +264,9 @@ namespace WebItNow_Peacock
 
                 GetDocumentos();
 
-                LblMessage.Text = "Se agrego documento, correctamente";
+                // LblMessage.Text = "Se agrego documento, correctamente";
+                LblMessage.Text = GetGlobalResourceObject("GlobalResources", "msg_Documento_Agregado").ToString();
+
                 mpeMensaje.Show();
 
                 // Inicializar Controles
@@ -303,7 +320,8 @@ namespace WebItNow_Peacock
             BtnCancelar.Visible = true;
             BtnCerrar.Visible = false;
 
-            LblMessage_1.Text = "¿Desea eliminar el documento?";
+            // LblMessage_1.Text = "¿Desea eliminar el documento?";
+            LblMessage_1.Text = GetGlobalResourceObject("GlobalResources", "msg_Confirmar_Delete_Documento").ToString();
             mpeMensaje_1.Show();
         }
 
@@ -326,7 +344,8 @@ namespace WebItNow_Peacock
 
                 dbConn.Close();
 
-                LblMessage.Text = "Se elimino documento, correctamente";
+                // LblMessage.Text = "Se elimino documento, correctamente";
+                LblMessage.Text = GetGlobalResourceObject("GlobalResources", "msg_Documento_Eliminado").ToString();
                 mpeMensaje.Show();
 
                 GetDocumentos();
@@ -370,7 +389,8 @@ namespace WebItNow_Peacock
 
                 dbConn.Close();
 
-                LblMessage.Text = "Se actualizo documento, correctamente";
+                // LblMessage.Text = "Se actualizo documento, correctamente";
+                LblMessage.Text = GetGlobalResourceObject("GlobalResources", "msg_Documento_Actualizado").ToString();
                 mpeMensaje.Show();
 
                 GetDocumentos();
@@ -459,14 +479,16 @@ namespace WebItNow_Peacock
 
             if (TxtDescripBrev.Text == "" || TxtDescripBrev.Text == null)
             {
-                LblMessage.Text = "Capturar Descripción del documento (Corta)";
+                // LblMessage.Text = "Capturar Descripción del documento (Corta)";
+                LblMessage.Text = GetGlobalResourceObject("GlobalResources", "msg_Capturar_DescDocCorta").ToString();
                 mpeMensaje.Show();
                 return;
             }
 
             if (TxtDescripcion.Text == "" || TxtDescripcion.Text == null)
             {
-                LblMessage.Text = "Capturar Descripción del documento (Larga)";
+                // LblMessage.Text = "Capturar Descripción del documento (Larga)";
+                LblMessage.Text = GetGlobalResourceObject("GlobalResources", "msg_Capturar_DescDocLarga").ToString();
                 mpeMensaje.Show();
                 return;
             }

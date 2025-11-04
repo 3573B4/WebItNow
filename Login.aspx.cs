@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Globalization;
+using System.Threading;
+using System.Web;
 using System.Web.UI;
 using System.Xml;
 
@@ -10,10 +13,99 @@ namespace WebItNow_Peacock
     {
         // Desarrollo : Martin Baltierra Gonzalez
         // Empresa    : Itnow Technologies de México
+
+        protected void Page_PreInit(object sender, EventArgs e)
+        {
+            string idioma = "es-MX"; // por defecto
+
+            // Verificar si ya hay sesión
+            if (Session["Idioma"] != null)
+            {
+                idioma = Session["Idioma"].ToString();
+            }
+            // Si no hay sesión, verificar cookie persistente
+            else if (Request.Cookies["IdiomaUsuario"] != null)
+            {
+                idioma = Request.Cookies["IdiomaUsuario"].Value;
+                Session["Idioma"] = idioma; // también guardamos en sesión
+            }
+            // Si no hay sesión ni cookie, detectar automáticamente idioma del navegador
+            else
+            {
+                try
+                {
+                    string navLang = Request.UserLanguages != null && Request.UserLanguages.Length > 0
+                        ? Request.UserLanguages[0]
+                        : "es-MX";
+
+                    if (navLang.StartsWith("en-US", StringComparison.OrdinalIgnoreCase))
+                        idioma = "en-US";
+                    else if (navLang.StartsWith("pt-BR", StringComparison.OrdinalIgnoreCase))
+                        idioma = "pt-BR";
+                    else
+                        idioma = "es-MX";
+
+                    // Guardar en sesión
+                    Session["Idioma"] = idioma;
+
+                    // Guardar cookie persistente para futuras visitas
+                    HttpCookie cookieIdioma = new HttpCookie("IdiomaUsuario", idioma);
+                    cookieIdioma.Expires = DateTime.Now.AddYears(10);
+                    Response.Cookies.Add(cookieIdioma);
+                }
+                catch
+                {
+                    idioma = "es-MX";
+                }
+            }
+
+            // Aplica cultura
+            Thread.CurrentThread.CurrentCulture = new CultureInfo(idioma);
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo(idioma);
+        }
+
+
+
         protected void Page_Load(object sender, EventArgs e)
         {
+            // Detectar si se hizo un cambio de idioma
+            string idioma = Request["__EVENTARGUMENT"];
+
+            if (!string.IsNullOrEmpty(idioma))
+            {
+                // Actualizar sesión
+                Session["Idioma"] = idioma;
+
+                // Actualizar cookie persistente
+                HttpCookie cookieIdioma = new HttpCookie("IdiomaUsuario", idioma);
+                cookieIdioma.Expires = DateTime.Now.AddYears(15);
+                Response.Cookies.Add(cookieIdioma);
+
+                // Recargar página para aplicar nuevo idioma
+                Response.Redirect(Request.RawUrl, false);
+                Context.ApplicationInstance.CompleteRequest();
+                return;
+            }
+
+            // Opcional: si no hay cambio, aplicar idioma desde sesión o cookie
+            string idiomaActual = Session["Idioma"] != null ? Session["Idioma"].ToString()
+                                : (Request.Cookies["IdiomaUsuario"] != null ? Request.Cookies["IdiomaUsuario"].Value
+                                : "es-MX");
+
+            Thread.CurrentThread.CurrentCulture = new CultureInfo(idiomaActual);
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo(idiomaActual);
+
+            //if (!Page.IsPostBack || Session["Idioma"] != null)
             if (!Page.IsPostBack)
             {
+
+                //string idiomaSeleccionado = Request["__EVENTTARGET"] == "IdiomaDropdown" ? Request["__EVENTARGUMENT"] : null;
+                //if (!string.IsNullOrEmpty(idiomaSeleccionado))
+                //{
+                //    Session["Idioma"] = idiomaSeleccionado;
+                //    Response.Redirect(Request.RawUrl); // recarga la página con el idioma
+                //}
+
                 this.Form.Attributes.Add("autocomplete", "off");
 
                 string filePath = Server.MapPath("~/App_Data/BD_MySQL.xml");
@@ -27,16 +119,28 @@ namespace WebItNow_Peacock
                 System.Web.HttpContext.Current.Session["User"] = doc.SelectSingleNode("/DatabaseConfig/User").InnerText;
                 System.Web.HttpContext.Current.Session["Password"] = doc.SelectSingleNode("/DatabaseConfig/Password").InnerText;
 
+                // Labels
+                lblTitulo.Text = GetGlobalResourceObject("GlobalResources", "lblTitulo").ToString();
+                lblUsuario.Text = GetGlobalResourceObject("GlobalResources", "lblUsuario").ToString();
+                LblPass.Text = GetGlobalResourceObject("GlobalResources", "lblContraseña").ToString();
+                lblVerificacion.Text = GetGlobalResourceObject("GlobalResources", "lblCodigoVerificacion").ToString();
+
+                // Placeholders
+                TxtUsu.Attributes["placeholder"] = GetGlobalResourceObject("GlobalResources", "lblUsuario").ToString();
+                TxtPass.Attributes["placeholder"] = GetGlobalResourceObject("GlobalResources", "lblContraseña").ToString();
+                txtVerificationCode.Attributes["placeholder"] = GetGlobalResourceObject("GlobalResources", "lblCodigoVerificacion").ToString();
+                BtnAceptar.Text = GetGlobalResourceObject("GlobalResources", "btnIniciarSesion").ToString();
+
             }
         }
 
-
+            
         protected void BtnRegistrarse_Click(object sender, EventArgs e)
         {
             Response.Redirect("Register_User.aspx");
         }
 
-        public (string IdPrivilegio, string IdModulo) Autenticar(String pUsuarios, String pContrasena)
+        public (string IdPrivilegio, string IdModulo) Autenticar(String pUsuarios, String pContrasena, String pIdioma)
         {
             ConexionBD_MySQL dbConn = new ConexionBD_MySQL(Variables.wUserName, Variables.wPassword);
             dbConn.Open();
@@ -49,6 +153,8 @@ namespace WebItNow_Peacock
 
                     cmd.Parameters.AddWithValue("@usuario", pUsuarios);
                     cmd.Parameters.AddWithValue("@password", pContrasena);
+                    cmd.Parameters.AddWithValue("@idioma", pIdioma);
+
 
                     using (MySqlDataReader dr = cmd.ExecuteReader())
                     {
@@ -141,8 +247,10 @@ namespace WebItNow_Peacock
                     Variables.wUserName = Convert.ToString(Session["User"]);        // Parametro obtenido de BD_MySQL.xml
                     Variables.wPassword = Convert.ToString(Session["Password"]);    // Parametro obtenido de BD_MySQL.xml
 
+                    string sIdioma = Convert.ToString(Session["Idioma"]);
+
                     // string result = Autenticar(TxtUsu.Text, TxtPass.Text);
-                    (string idPrivilegio, string idModulo) = Autenticar(TxtUsu.Text, TxtPass.Text);
+                    (string idPrivilegio, string idModulo) = Autenticar(TxtUsu.Text, TxtPass.Text, sIdioma);
 
                     // if (result != null)
                     if (!string.IsNullOrEmpty(idPrivilegio) && !string.IsNullOrEmpty(idModulo))
@@ -199,6 +307,45 @@ namespace WebItNow_Peacock
                 LblMessage.Text = ex.Message;
                 this.mpeMensaje.Show();
             }
+        }
+
+        protected void btnIngles_Click(object sender, ImageClickEventArgs e)
+        {
+            Session["Idioma"] = "en-US";
+            Response.Redirect(Request.RawUrl);
+        }
+
+        protected void btnPortugues_Click(object sender, ImageClickEventArgs e)
+        {
+            // Guardas el idioma en sesión
+            Session["Idioma"] = "pt-BR";
+
+            // Recarga la página para aplicar recursos
+            Response.Redirect(Request.RawUrl);
+        }
+
+        protected void btnEspañol_Click(object sender, ImageClickEventArgs e)
+        {
+            Session["Idioma"] = "es-MX";
+            Response.Redirect(Request.RawUrl);
+        }
+
+        protected void ddlIdioma_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // Guardar idioma en sesión y recargar la página
+            //Session["Idioma"] = ddlIdioma.SelectedValue;
+            //Response.Redirect(Request.RawUrl);
+        }
+
+        protected override void RaisePostBackEvent(IPostBackEventHandler sourceControl, string eventArgument)
+        {
+            string idioma = Request.Form["__EVENTARGUMENT"];
+            if (!string.IsNullOrEmpty(idioma))
+            {
+                Session["Idioma"] = idioma;
+                Response.Redirect(Request.RawUrl);
+            }
+            base.RaisePostBackEvent(sourceControl, eventArgument);
         }
 
     }

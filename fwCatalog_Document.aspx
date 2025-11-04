@@ -17,25 +17,6 @@
             $("input").attr("autocomplete", "off");
         });
 
-        window.onload = function () {
-            // Inicia un temporizador para ejecutar después de 30 minutos (1800000 milisegundos)
-            var timer = setTimeout(function () {
-                // Actualiza el contenido del elemento para mostrar que la sesión ha expirado
-                document.getElementById('<%=LblExpira.ClientID %>').innerHTML = 'La sesión ha expirado.';
-        
-                // Encuentra el modal y lo muestra
-                var modalId = '<%=mpeExpira.ClientID%>';
-                var modal = $find(modalId);
-                modal.show();
-
-                // Inicia otro temporizador para recargar la página después de 30 minutos
-                setTimeout(function () {
-                    location.reload();
-                }, 1800000);
-
-            }, 1800000);
-        };
-
         function acceso() {
             location.href = '/Login.aspx';
         }
@@ -57,6 +38,13 @@
         }
 
     </script>
+
+    <style type="text/css">
+        .checkbox-text-space input[type="checkbox"] {
+            margin-right: 6px; /* separación visual */
+        }
+    </style>
+
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePageMethods="true">
@@ -69,32 +57,18 @@
                 </div>
                 <div class="col-lg-8 col-md-8">
                     <div class="input-group input-group-sm">
-                        <h2 class="h2 mb-3 fw-normal mt-4 align-content-center">Catálogo de Documentos</h2>
+                        <%--<h2 class="h2 mb-3 fw-normal mt-4 align-content-center">Catálogo de Documentos</h2>--%>
+                        <asp:Label ID="lblTitulo_Cat_Documentos" runat="server" CssClass="h2 mb-3 fw-normal mt-4 align-content-center" style="display:block; text-align:center;" ></asp:Label>
                     </div>
                 </div>
             </div>
         </div>
 
         <div class="container col-md-8 col-lg-10 mt-4">
-
-<%--            
-            <div class="row mb-3">
-                <div class="col-lg-4 col-md-4 ">
-                    <div class ="mb-2">
-                        <asp:Label ID="LblTpoDocumento" runat="server" Text="Tipo de documento"></asp:Label>
-                    </div>
-                    <div class="input-group input-group-sm">
-                        <asp:DropDownList ID="ddlTpoDocumento" runat="server" CssClass="form-select" OnSelectedIndexChanged="ddlTpoDocumento_SelectedIndexChanged">
-                        </asp:DropDownList>
-                    </div>
-                </div>
-            </div>
---%>
-
             <div class="row mb-3">
                 <div class="col-lg-4 col-md-4">
                     <div class ="mb-2">
-                        <asp:Label ID="LblCarpetas" runat="server" Text="Tipo de carpeta" ></asp:Label>
+                        <asp:Label ID="LblCarpetas" runat="server" Text="<%$ Resources:GlobalResources, lblCarpetas %>" ></asp:Label>
                     </div>
                     <div class=" input-group input-group-sm">
                         <asp:DropDownList ID="ddlCarpetas" runat="server" CssClass="btn btn-outline-secondary text-start" AutoPostBack="true" OnSelectedIndexChanged="ddlCarpetas_SelectedIndexChanged" Width="100%">
@@ -106,10 +80,10 @@
             <div class="row mb-3">
                 <div class="col-lg-4 col-md-4 ">
                     <div class="mb-2">
-                        <asp:Label ID="LblDescripBrev" runat="server" Text="Descripción del documento (Corta)" ></asp:Label>
+                        <asp:Label ID="LblDescripBrev" runat="server" Text="<%$ Resources:GlobalResources, lblDescripBrev %>" ></asp:Label>
                     </div>
                     <div class="input-group input-group-sm">
-                        <asp:TextBox ID="TxtDescripBrev" runat="server" CssClass="form-control form-control-sm" placeholder="Descripción (Corta)" AutoComplete="off" MaxLength="50"></asp:TextBox>
+                        <asp:TextBox ID="TxtDescripBrev" runat="server" CssClass="form-control form-control-sm" placeholder="<%$ Resources:GlobalResources, lblDescripBrev %>" AutoComplete="off" MaxLength="50"></asp:TextBox>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-4 ">
@@ -120,14 +94,17 @@
                         <%--<asp:CheckBox ID="chkDocInterno" runat="server" Text="Documento Interno &nbsp;&nbsp;" TextAlign="Left" style="display: inline-flex; align-items: center;"/>--%>
                     <%--</div>--%>
                     <div class="input-group input-group-sm checkbox-container">
-                        <asp:CheckBox ID="chkDocInterno" runat="server" /> <span> &nbsp;&nbsp; Documento Interno</span>
+                        <%--<asp:CheckBox ID="chkDocInterno" runat="server" /> <span><%$ Resources:GlobalResources, lblDocInterno %></span>--%>
+                        <div class="input-group input-group-sm checkbox-container mb-2">
+                            <asp:CheckBox ID="chkDocInterno" runat="server" CssClass="checkbox-text-space" Text="<%$ Resources:GlobalResources, lblDocInterno %>" />
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="row mb-3">
                 <div class="col-lg-8 col-md-8 ">
                     <div class="mb-2">
-                        <asp:Label ID="LblDescripcion" runat="server" Text="Descripción del documento (Larga)" ></asp:Label>
+                        <asp:Label ID="LblDescripcion" runat="server" Text="<%$ Resources:GlobalResources, lblDescripLarga %>" ></asp:Label>
                     </div>
                     <div class="input-group input-group-sm">
                         <asp:TextBox ID="TxtDescripcion" runat="server" CssClass="form-control form-control-sm" AutoComplete="off" MaxLength="2500" Columns="12" Rows="5" TextMode="MultiLine" ></asp:TextBox>
@@ -139,17 +116,20 @@
         <div class="d-grid gap-4 d-flex justify-content-center mt-2 mb-3">
             <asp:UpdatePanel ID="UpdatePanel2" runat="server">
                 <ContentTemplate>
-                    <asp:Button ID="BtnAnular" runat="server" Text="Cancelar" Font-Bold="True" OnClick="BtnAnular_Click" CssClass="btn btn-primary" Visible="false" TabIndex="0"/>
-                    <asp:Button ID="BtnEditar" runat="server" Text="Editar Datos" Font-Bold="True" OnClick="BtnEditar_Click" CssClass="btn btn-primary" Enabled="false" TabIndex="1"/>
-                    <asp:Button ID="BtnGrabar" runat="server" Text="Aplicar Cambios" Font-Bold="True" OnClick="BtnGrabar_Click" CssClass="btn btn-primary" Visible="false" TabIndex="2"/>
-                    <asp:Button ID="BtnAgregar" runat="server" Text="Agregar" OnClick="BtnAgregar_Click" CausesValidation="true" CssClass="btn btn-primary px-4" TabIndex="3"/>
+                    <asp:Button ID="BtnAnular" runat="server" Text="<%$ Resources:GlobalResources, btnAnular %>" Font-Bold="True" OnClick="BtnAnular_Click" CssClass="btn btn-primary" Visible="false" TabIndex="0"/>
+                    <asp:Button ID="BtnEditar" runat="server" Text="<%$ Resources:GlobalResources, btnEditar %>" Font-Bold="True" OnClick="BtnEditar_Click" CssClass="btn btn-primary" Enabled="false" TabIndex="1"/>
+                    <asp:Button ID="BtnGrabar" runat="server" Text="<%$ Resources:GlobalResources, btnGrabar %>" Font-Bold="True" OnClick="BtnGrabar_Click" CssClass="btn btn-primary" Visible="false" TabIndex="2"/>
+                    <asp:Button ID="BtnAgregar" runat="server" Text="<%$ Resources:GlobalResources, btnAgregar %>" Font-Bold="True" OnClick="BtnAgregar_Click" CausesValidation="true" CssClass="btn btn-primary px-4" TabIndex="3"/>
                 </ContentTemplate>
             </asp:UpdatePanel>
         </div>
 
         <div class="container col-12 mt-4">
             <div class="row mb-3 mt-4" style="background-color:#96E7D9;">
-                <h6 class="h6 fw-normal my-1" style="font-size:small">Consulta de Documentos</h6>
+                <%--<h6 class="h6 fw-normal my-1" style="font-size:small">Consulta de Documentos</h6>--%>
+                    <h6 class="h6 fw-normal my-1" style="font-size:small">
+                        <asp:Literal runat="server" Text="<%$ Resources:GlobalResources, hdrConsultaDocumentos %>" />
+                    </h6>
             </div>
 
             <%-- Catalogo de documentos --%>
@@ -161,7 +141,7 @@
                         DataKeyNames="IdConsecutivo" PageSize="10" Font-Size="Smaller" HeaderStyle-HorizontalAlign="Left" >
                         <AlternatingRowStyle CssClass="alt autoWidth" />
                         <Columns>
-                            <asp:BoundField DataField="Descripcion" HeaderText="Descripción del documento" >
+                            <asp:BoundField DataField="Descripcion" HeaderText="<%$ Resources:GlobalResources, col_DescDocumento %>" >
                             </asp:BoundField>
                             <asp:BoundField DataField="DescripBrev" >
                             </asp:BoundField>
@@ -171,7 +151,7 @@
                             </asp:BoundField>
                             <asp:BoundField DataField="DocInterno">
                             </asp:BoundField>
-                            <asp:BoundField DataField="TpoInterno" HeaderText="Tpo. Documento">
+                            <asp:BoundField DataField="TpoInterno" HeaderText="<%$ Resources:GlobalResources, col_TpoDocumento %>">
                             <ItemStyle HorizontalAlign="Center" />
                             </asp:BoundField>
                             <asp:TemplateField>
@@ -189,33 +169,6 @@
                 </asp:GridView>
             </div>
         </div>
-            <br />
-            <asp:Panel ID="pnlExpira" runat="server" CssClass="CajaDialogo" style="display: none; border: none; border-radius: 10px; width: 400px; background-color:#FFFFFF;">
-                <div class=" row justify-content-end" data-bs-theme="dark">
-                    <div class="col-1">
-                        <asp:Button runat="server" OnClientClick="acceso(); return false;" type="button" class="btn-close" aria-label="Close" />
-                    </div>
-                </div>
-                <div>
-                        <br />
-                    <hr class="dropdown-divider" />
-                </div>
-                <div>
-                        <br />
-                    <hr class="dropdown-divider" />
-                </div>
-                <div>
-                    <asp:Label ID="LblExpira" runat="server" Text="" />
-                </div>
-                <div>
-                    <br />
-                    <hr class="dropdown-divider" />
-                </div>
-                <div>
-                    <br />
-                        <asp:Button ID="BtnClose_Expira" OnClientClick="acceso(); return false;" runat="server" Text="Cerrar" CssClass="btn btn-outline-primary"/>
-                </div>
-            </asp:Panel>
             <br />
             <asp:Panel ID="pnlMensaje" runat="server" CssClass="CajaDialogo" style="display: none; border: none; border-radius: 10px; width: 400px; background-color:#FFFFFF;">
                 <div class=" row justify-content-end" data-bs-theme="dark">
@@ -239,7 +192,7 @@
         
                 <div>
                     <br />
-                    <asp:Button ID="BtnClose" runat="server" OnClick="BtnClose_Click" Text="Cerrar" CssClass="btn btn-outline-primary"/>
+                    <asp:Button ID="BtnClose" runat="server" OnClick="BtnClose_Click" Text="<%$ Resources:GlobalResources, btnCerrar %>" CssClass="btn btn-outline-primary"/>
                 </div>
             </asp:Panel>
             <br />
@@ -265,9 +218,9 @@
         
                 <div class="d-flex justify-content-center mb-3">
                     <br />
-                    <asp:Button ID="BtnAceptar" runat="server" OnClick="BtnAceptar_Click" Text="Aceptar" CssClass="btn btn-outline-primary mx-1" />
-                    <asp:Button ID="BtnCancelar" runat="server" OnClick="BtnCancelar_Click" Text="Cancelar" CssClass="btn btn-outline-secondary mx-1" />
-                    <asp:Button ID="BtnCerrar" runat="server" OnClick="BtnCerrar_Click" Text="Cerrar" CssClass="btn btn-outline-primary"/>
+                    <asp:Button ID="BtnAceptar" runat="server" OnClick="BtnAceptar_Click" Text="<%$ Resources:GlobalResources, btnAceptar %>" CssClass="btn btn-outline-primary mx-1" />
+                    <asp:Button ID="BtnCancelar" runat="server" OnClick="BtnCancelar_Click" Text="<%$ Resources:GlobalResources, btnCancelar %>" CssClass="btn btn-outline-secondary mx-1" />
+                    <asp:Button ID="BtnCerrar" runat="server" OnClick="BtnCerrar_Click" Text="<%$ Resources:GlobalResources, btnCerrar %>" CssClass="btn btn-outline-primary"/>
                 </div>
             </asp:Panel>
             <br />
@@ -292,16 +245,7 @@
                         </div>
                     </td>
                     <td>&nbsp;</td>
-                    <td>
-                        <div class="form-group">
-                            <div class="d-grid col-6 mx-auto">
-                                <ajaxToolkit:ModalPopupExtender ID="mpeExpira" runat="server" PopupControlID="pnlExpira"
-                                    TargetControlID="lblHide" BackgroundCssClass="FondoAplicacion" OnOkScript="mpeExpiraOnOk()" >
-                                </ajaxToolkit:ModalPopupExtender>
-                                <asp:Label ID="lblHide" runat="server" Text="Label" Style="display: none;" />
-                            </div>
-                        </div>
-                    </td>
+                    <td>&nbsp;</td>
                 </tr>
                 <tr>
                     <td>&nbsp;</td>

@@ -388,7 +388,7 @@ namespace WebItNow_Peacock
             TxtTelCelular.ReadOnly = true;
 
             BtnAnular.Visible = true;
-            BtnEditar.Enabled = true;
+            btnEditar.Enabled = true;
             BtnAgregar.Enabled = false;
         }
 
@@ -404,11 +404,11 @@ namespace WebItNow_Peacock
             TxtTelCelular.Text = string.Empty;
             TxtTelCelular.ReadOnly = false;
 
-            BtnEditar.Visible = true;
+            btnEditar.Visible = true;
             BtnGrabar.Visible = false;
             BtnAnular.Visible = false;
 
-            BtnEditar.Enabled = false;
+            btnEditar.Enabled = false;
             BtnAgregar.Enabled = true;
         }
 
@@ -418,7 +418,7 @@ namespace WebItNow_Peacock
             TxtEmail.ReadOnly = false;
             TxtTelCelular.ReadOnly = false;
 
-            BtnEditar.Visible = false;
+            btnEditar.Visible = false;
             BtnGrabar.Visible = true;
         }
 
@@ -449,11 +449,11 @@ namespace WebItNow_Peacock
             TxtTelCelular.Text = string.Empty;
             TxtTelCelular.ReadOnly = false;
 
-            BtnEditar.Visible = true;
+            btnEditar.Visible = true;
             BtnGrabar.Visible = false;
             BtnAnular.Visible = false;
 
-            BtnEditar.Enabled = false;
+            btnEditar.Enabled = false;
             BtnAgregar.Enabled = true;
         }
 
