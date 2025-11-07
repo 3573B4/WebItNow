@@ -761,7 +761,7 @@
                     <%--va otro acordion de Linea de tiempo de las referencias --%>
                     <div class="row mb-3 mt-4" style="background-color:#C6D541; align-items: baseline;">
                         <div class="col-10" style="padding-left: 14px;">
-                            <asp:Label ID="lblLineTimeEtapas" runat="server" Text="Linea de tiempo delas referencias" CssClass="control-label" Font-Size="small"></asp:Label>
+                            <asp:Label ID="lblLineTimeEtapas" runat="server" Text="Linea de tiempo de las referencias" CssClass="control-label" Font-Size="small"></asp:Label>
                         </div>
                         <div class="col-2" style="display:flex; justify-content: end;">
                             <div>
@@ -777,6 +777,7 @@
                     <asp:UpdatePanel ID="updPBtnCrearLineaNegocio" runat="server">
                         <ContentTemplate>
                             <asp:Button ID="btnCrearLineaNegocio" runat="server" Text="Crear linea de negocio" OnClick="btnCrearLineaNegocio_Click" CssClass="btn btn-secondary" Visible="true" />
+                            <asp:Button ID="btnUpdateLineaNegocio" runat="server" Text="Actualizar linea de negocio" OnClick="btnUpdateLineaNegocio_Click" CssClass="btn btn-secondary" Visible="true" />
                         </ContentTemplate>
                     </asp:UpdatePanel>
 
@@ -905,6 +906,8 @@
                                     <asp:PostBackTrigger ControlID="btnShowPnlLineTimeEtapas" />
                                     <%--<asp:PostBackTrigger ControlID="btnModalCompletado" />--%>
                                     <asp:PostBackTrigger ControlID="rptEtapas" />
+                                    <%--boton de crear linea de negocio tambien va aqui--%>
+                                    <asp:PostBackTrigger ControlID="btnUpdateLineaNegocio" />
                                 </Triggers>
                             </asp:UpdatePanel>
 
@@ -3557,6 +3560,7 @@
         </ContentTemplate>
         <Triggers>
             <asp:PostBackTrigger ControlID="btnCrearLineaNegocio" />
+            <asp:PostBackTrigger ControlID="btnUpdateLineaNegocio" />
             <asp:PostBackTrigger ControlID="btnPnlGuardarConfTask" />
 
             <asp:PostBackTrigger ControlID="ImgDel_Documento" />

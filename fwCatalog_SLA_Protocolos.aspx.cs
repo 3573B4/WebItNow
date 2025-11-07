@@ -1728,7 +1728,7 @@ namespace WebItNow_Peacock
                     //mpeNewsProtocolos.Hide();
                     //LblMessage.Text = "Se agrego categoría, correctamente";
 
-                    LblMessage.Text = GetGlobalResourceObject("GlobalResources", "msg_Categoria_Agregada").ToString();
+                    LblMessage.Text = GetGlobalResourceObject("GlobalResources", "msg_CategoriaAgregada").ToString();
                     mpeMensaje.Show();
                 }
 
