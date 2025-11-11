@@ -373,6 +373,7 @@
     <Content Include="Images\correspondencia.png" />
     <Content Include="Images\editar.png" />
     <Content Include="Images\editar_new.png" />
+    <Content Include="Images\eliminar-icon.png" />
     <Content Include="Images\en.png" />
     <Content Include="Images\es.png" />
     <Content Include="Images\fondo_inicio.jpeg" />

@@ -39,6 +39,10 @@
             //
         }
 
+        function mpeConfDeleteEtapa() {
+            //
+        }
+
         // Evitar el envío del formulario con la tecla Enter
         document.onkeydown = function (evt) {
             return (evt ? evt.which : event.keyCode) != 13;
@@ -805,14 +809,28 @@
                                                     <button class="accordion-button collapsed bg-primary text-white" type="button" data-bs-toggle="collapse"
                                                         data-bs-target="#collapseEtapa_<%# Eval("IdDocumento") %>" aria-expanded="false"
                                                         aria-controls="collapseEtapa_<%# Eval("IdDocumento") %>">
+                                                        <asp:ImageButton ID="btnImgMdlEliminarEtapa" runat="server" Width="30px" Height="30px"
+                                                            ImageUrl="~/images/eliminar-icon.png"  
+                                                            AlternateText="Eliminar Etapa"
+                                                            CssClass="btn btn-sm btn-danger mx-2 p-1"
+                                                            CommandName="EliminarEtapa"
+                                                            CommandArgument='<%# Eval("IdDocumento") + ";" + Eval("Etapa") %>'
+                                                            OnClick="btnImgMdlEliminarEtapa_Click"
+                                                            ToolTip="Eliminar esta etapa"/>
                                                         <strong>Etapa: <%# Eval("Etapa") %></strong> 
                                                         <%--<span class="badge ms-3 bg-warning text-dark"> <%# Eval("Estatus") %></span>--%>
+                                                        <asp:Button ID="btnMdlConfEliminacion" runat="server"
+                                                            CssClass="btn btn-danger btn-sm ms-3" Text="Eliminar Etapa"
+                                                            CommandName="mostrarModalEliminar"
+                                                            CommandArgument='<%# Eval("IdDocumento") + ";" + Eval("Etapa") %>'
+                                                            OnClick="btnMdlConfEliminacion_Click" Visible="false" />
                                                     </button>
                                                 </h2>
 
                                                 <div id="collapseEtapa_<%# Eval("IdDocumento") %>" class="accordion-collapse collapse"
                                                     aria-labelledby="headingEtapa_<%# Eval("IdDocumento") %>" data-bs-parent="#accordionEtapas">
                                                     <div class="accordion-body">
+                                                        
 
                                                         <!-- 🔹 Repeater de Tareas -->
                                                         <asp:Repeater ID="rptTareas" runat="server"  OnItemDataBound="rptTareas_ItemDataBound" >
@@ -3562,6 +3580,8 @@
             <asp:PostBackTrigger ControlID="btnCrearLineaNegocio" />
             <asp:PostBackTrigger ControlID="btnUpdateLineaNegocio" />
             <asp:PostBackTrigger ControlID="btnPnlGuardarConfTask" />
+            <asp:PostBackTrigger ControlID="btnPnlDeleteConfEtapa" />
+
 
             <asp:PostBackTrigger ControlID="ImgDel_Documento" />
 
@@ -3841,6 +3861,52 @@
     </asp:Panel>
 
     <br />
+
+    <asp:Panel ID="pnlConfDeleteEtapa" runat="server" CssClass="CajaDialogo mt-5" 
+                style="display: none; border: none; border-radius: 10px; max-width: 100%; width: 800px; background-color:#FFFFFF;" >
+        <div class="card">
+            <div class="card-header">
+                <div class="row justify-content-end" data-bs-theme="dark">
+                    <div class="col-9">
+                        <h5>Confirmar eliminacion de Etapa.</h5>
+                    </div>
+                    <div class="col-1">
+                        <asp:Button runat="server" type="button" class="btn-close" aria-label="Close" />
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card-body ps-0" style="overflow-x: hidden; overflow-y: auto; max-height: 300px;" >
+                <div class="card-text">
+                    <div>
+                        <input type="hidden" id="hIdReferenciaEtapaDelete" runat="server" value="" />
+                        <asp:HiddenField ID="hfIdReferenciaEtapaDelete" runat="server" Value="" />
+                    </div>
+                    <div>
+                        <asp:Label ID="lblPnlMdlContextoDelete" runat="server" 
+                        Text="Deseas Eliminar la Etapa: " />
+                        <br />
+                        <br />
+                        <mark><asp:Label ID="lblPnlMdlTitleEtapa" runat="server" Text="" /></mark>
+                    </div>
+                    <br />
+                    
+                    
+                </div>
+            </div>
+
+            <div class="card-footer d-grid gap-4 d-flex justify-content-center mb-2">
+                <asp:Button ID="btnPnlDeleteConfEtapa" runat="server" CssClass="btn btn-primary"
+                            Text="Eliminar" OnClick="btnPnlDeleteConfEtapa_Click" />
+                <asp:Button ID="btnPnlConfDeleteCancel" runat="server" CssClass="btn btn-outline-secondary"
+                            Text="Cancelar"  />
+            </div>
+                
+        </div>
+    </asp:Panel>
+
+    <br />
+
     <table cellspacing="1" cellpadding="1" border="0">
         <tr>
             <td>
@@ -3908,6 +3974,16 @@
                                     TargetControlID="lblMpePnlConfCompletarTask" BackgroundCssClass="FondoAplicacion" OnOkScript="mpeConfCompletarTask()" >
                                 </ajaxToolkit:ModalPopupExtender>
                                 <asp:Label ID="lblMpePnlConfCompletarTask" runat="server" Text="l" Style="display: none;" />
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="form-group">
+                            <div class="d-grid col-6 mx-auto">
+                                <ajaxToolkit:ModalPopupExtender ID="mpePnlConfDeleteEtapa" runat="server" PopupControlID="pnlConfDeleteEtapa"
+                                    TargetControlID="lblMpePnlConfDeleteEtapa" BackgroundCssClass="FondoAplicacion" OnOkScript="mpeConfDeleteEtapa()" >
+                                </ajaxToolkit:ModalPopupExtender>
+                                <asp:Label ID="lblMpePnlConfDeleteEtapa" runat="server" Text="l" Style="display: none;" />
                             </div>
                         </div>
                     </div>

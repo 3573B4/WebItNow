@@ -9895,7 +9895,7 @@ namespace WebItNow_Peacock
                     using (MySqlCommand cmd = conn.CreateCommand())
                     {
                         cmd.CommandText = @"
-                            UPDATE web_peacock.ITM_100
+                            UPDATE ITM_100
                             SET FechaCompletada = @FechaCompletada,
                                 IdRealizadoResponsable = @IdUsuario,
                                 Comentario = @Comentario,
@@ -9941,6 +9941,72 @@ namespace WebItNow_Peacock
             //btnShowPnlLineTimeEtapas.Text = "\u25B2";  //flechita hacia arriba
 
         }
+
+        protected void btnMdlConfEliminacion_Click(object sender, EventArgs e)
+        {
+            // va el modal para confirmar la eliminacion de la etapa. 
+
+        }
+
+        protected void btnImgMdlEliminarEtapa_Click(object sender, ImageClickEventArgs e)
+        {
+            ImageButton btnImgArgs = (ImageButton)sender;
+            string[] args = btnImgArgs.CommandArgument.Split(';');
+            string sIdReferenciaEtapa = args[0];
+            string nomEtapa = args.Length > 1 ? args[1] : "";
+
+            hIdReferenciaEtapa.Value = sIdReferenciaEtapa;
+            hfIdReferenciaEtapa.Value = sIdReferenciaEtapa;
+            ViewState["IdReferenciaEtapa"] = sIdReferenciaEtapa;
+            ViewState["NomEtapa"] = nomEtapa;
+            lblPnlMdlTitleEtapa.Text = nomEtapa;
+
+
+            mpePnlConfDeleteEtapa.Show();
+        }
+
+        protected void btnPnlDeleteConfEtapa_Click(object sender, EventArgs e)
+        {
+            int iVSIdReferenciaEtapa = Convert.ToInt32(ViewState["IdReferenciaEtapa"]?.ToString());
+            int iIdReferenciaFk = GetiReferenciaFk(Variables.wRef);
+
+            EliminarEtapa_100(iIdReferenciaFk, iVSIdReferenciaEtapa);
+
+            GetLineTimeReferencia();
+        }
+
+
+        private void EliminarEtapa_100(int iIdReferencia,int iIdEtapa)
+        {
+            try
+            {
+                ConexionBD_MySQL dbConn = new ConexionBD_MySQL(Variables.wUserName, Variables.wPassword);
+                dbConn.Open();
+
+                using (MySqlConnection conn = dbConn.Connection)
+                {
+                    using (MySqlCommand cmd = conn.CreateCommand())
+                    {
+                        cmd.CommandText = @"
+                            DELETE FROM ITM_100 
+                             WHERE IdEtapa = @IdEtapa
+                               AND IdReferencia = @IdReferncia;";
+
+                        cmd.Parameters.AddWithValue("@IdEtapa", iIdEtapa);
+                        cmd.Parameters.AddWithValue("@IdReferncia", iIdReferencia);
+
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (System.Exception ex)
+            {
+                LblMessage.Text = ex.Message;
+                mpeMensaje.Show();
+            }
+
+        }
+
     }
 
 }
