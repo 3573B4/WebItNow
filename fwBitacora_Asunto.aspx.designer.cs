@@ -33,6 +33,24 @@ namespace WebItNow_Peacock
         protected global::System.Web.UI.UpdatePanel UpdatePanel1;
 
         /// <summary>
+        /// Control updtPnlBtnRegresar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updtPnlBtnRegresar;
+
+        /// <summary>
+        /// Control BtnRegresar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BtnRegresar;
+
+        /// <summary>
         /// Control LblEtiquetaPnl2.
         /// </summary>
         /// <remarks>
@@ -40,6 +58,24 @@ namespace WebItNow_Peacock
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label LblEtiquetaPnl2;
+
+        /// <summary>
+        /// Control btnShowPanel2.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnShowPanel2;
+
+        /// <summary>
+        /// Control pnl2.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnl2;
 
         /// <summary>
         /// Control LblSeguro_Cia.
@@ -247,15 +283,6 @@ namespace WebItNow_Peacock
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TxtBenef_Preferente;
-
-        /// <summary>
-        /// Control pnl2.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnl2;
 
         /// <summary>
         /// Control LblFechaOcurrencia.
@@ -816,15 +843,6 @@ namespace WebItNow_Peacock
         protected global::System.Web.UI.WebControls.Button btnActualizarPnl2;
 
         /// <summary>
-        /// Control BtnRegresar.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button BtnRegresar;
-
-        /// <summary>
         /// Control BtnRepFotografico.
         /// </summary>
         /// <remarks>
@@ -832,6 +850,42 @@ namespace WebItNow_Peacock
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button BtnRepFotografico;
+
+        /// <summary>
+        /// Control lblResponsables.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblResponsables;
+
+        /// <summary>
+        /// Control btnShowPanel.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnShowPanel;
+
+        /// <summary>
+        /// Control pnlInicio.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlInicio;
+
+        /// <summary>
+        /// Control GrdResponsables.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView GrdResponsables;
 
         /// <summary>
         /// Control LblEtiquetaPnl1.
@@ -931,6 +985,15 @@ namespace WebItNow_Peacock
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ImageButton ImgDel_Documento;
+
+        /// <summary>
+        /// Control litEliminarDocumento.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal litEliminarDocumento;
 
         /// <summary>
         /// Control UpdatePanel4.
@@ -1120,6 +1183,15 @@ namespace WebItNow_Peacock
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button BtnAnularBienes;
+
+        /// <summary>
+        /// Control lblTituloDetDanos.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblTituloDetDanos;
 
         /// <summary>
         /// Control btnShowPanel21.
@@ -1833,13 +1905,13 @@ namespace WebItNow_Peacock
         protected global::System.Web.UI.WebControls.Button BtnCartaSolicitud;
 
         /// <summary>
-        /// Control BtnGeneraDocumento.
+        /// Control BtnInformePreliminar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button BtnGeneraDocumento;
+        protected global::System.Web.UI.WebControls.Button BtnInformePreliminar;
 
         /// <summary>
         /// Control BtnConvenioAjuste.

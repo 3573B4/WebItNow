@@ -266,121 +266,144 @@
 
             <%--<div class="container col-lg-7 col-md-8 col-sm-8 py-5">--%>
             <div class="container col-lg-8 col-md-9 col-sm-10 py-5">
+<%--
                 <div class="row mb-4 mt-3 " style="background-color:#96E7D9; align-items: center; display: flex; height: 24px; ">
                     <div class="col-12" style="padding-left: 14px;">
-                        <asp:Label ID="LblEtiquetaPnl2" runat="server" Text="INFORMACIÓN GENERAL" CssClass="control-label" Font-Size="small"></asp:Label>
+                        <asp:Label ID="LblEtiquetaPnl2" runat="server" Text="<%$ Resources:GlobalResources, hdrTituloInformacionGral %>" CssClass="control-label" Font-Size="small"></asp:Label>
                     </div>
                 </div>
-
-                <div class="row mt-3">
-                    <div class="col-lg-4 col-md-4">
-                        <div class="mb-2">
-                            <asp:Label ID="LblSeguro_Cia" runat="server" Text="Compañia de Seguros" CssClass="form-label"></asp:Label>
-                        </div>
-                        <div class="input-group input-group-sm">
-                            <asp:TextBox ID="TxtSeguro_Cia" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-4">
-                        <div class="mb-2">
-                            <asp:Label ID="LblSubReferencia" runat="server" Text="No. Referencia" CssClass="form-label"></asp:Label>
-                        </div>
-                        <div class="input-group input-group-sm">
-                            <asp:TextBox ID="TxtSubReferencia" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-4">
-                        <div class="mb-2">
-                            <asp:Label ID="LblProducto" runat="server" Text="Producto" CssClass="form-label"></asp:Label>
-                        </div>
-                        <div class="input-group input-group-sm">
-                            <%--<asp:TextBox ID="TxtProducto" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>--%>
-                                <asp:DropDownList ID="ddlProductos" runat="server" CssClass="btn btn-outline-secondary text-start" AutoPostBack="true" OnSelectedIndexChanged="ddlProductos_SelectedIndexChanged" Width="100%" >
-                                </asp:DropDownList>
-                        </div>
-                    </div>
-                </div>
-                <div class="row mt-3">
-                    <div class="col-lg-3 col-md-3">
-                        <div class="mb-2">
-                            <asp:Label ID="LblAntReferencia" runat="server" Text="Referencia Anterior" CssClass="form-label"></asp:Label>
-                        </div>
-                        <div class="input-group input-group-sm">
-                            <asp:TextBox ID="TxtAntReferencia" runat="server" CssClass="form-control form-control-sm" MaxLength="15"></asp:TextBox>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-3">
-                        <div class="mb-2">
-                            <asp:Label ID="LblNumReporte" runat="server" Text="No. Reporte" CssClass="form-label"></asp:Label>
-                        </div>
-                        <div class="input-group input-group-sm">
-                            <asp:TextBox ID="TxtNumReporte" runat="server" CssClass="form-control form-control-sm" MaxLength="25"></asp:TextBox>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-3">
-                        <div class="mb-2">
-                            <asp:Label ID="LblNumSiniestro" runat="server" Text="No. Siniestro (Notificación)" CssClass="form-label"></asp:Label>
-                        </div>
-                        <div class="input-group input-group-sm">
-                            <asp:TextBox ID="TxtNumSiniestro" runat="server" CssClass="form-control form-control-sm" MaxLength="25"></asp:TextBox>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-3">
-                        <div class="mb-2">
-                            <asp:Label ID="LblNumPoliza" runat="server" Text="No. Póliza" CssClass="form-label"></asp:Label>
-                        </div>
-                        <div class="input-group input-group-sm">
-                            <asp:TextBox ID="TxtNumPoliza" runat="server" CssClass="form-control form-control-sm" MaxLength="25"></asp:TextBox>
-                        </div>
-                    </div>
+--%>
+                <div class="d-grid gap-4 d-flex justify-content-end mt-2 mb-3">
+                    <asp:UpdatePanel ID="updtPnlBtnRegresar" runat="server">
+                        <ContentTemplate>
+                            <asp:Button ID="BtnRegresar" runat="server" Text="<%$ Resources:GlobalResources, btnRegresar %>" OnClick="BtnRegresar_Click" CssClass="btn btn-secondary px-4" CausesValidation="false" TabIndex="1"/>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
                 </div>
 
-                <asp:Panel ID="pnlEstadoOcurrencia" runat="server">
-                    <div class="row mt-3">
-                        <div class="col-lg-4 col-md-4">
-                            <div class="mb-2">
-                                <asp:Label ID="LblEstOcurrencia" runat="server" Text="Estado de Ocurrencia" CssClass="form-label"></asp:Label>
-                            </div>
-                            <div class="input-group input-group-sm">
-                                <asp:TextBox ID="TxtEstOcurrencia" runat="server" CssClass="form-control form-control-sm" MaxLength="25"></asp:TextBox>
-                            </div>
-                        </div>
-                        <div class="col-lg-5 col-md-5">
-                            <div class="mb-2">
-                                <asp:Label ID="LblDescMote" runat="server" Text="Descripción Mote" CssClass="form-label"></asp:Label>
-                            </div>
-                            <div class="input-group input-group-sm">
-                                <asp:TextBox ID="TxtDescMote" runat="server" CssClass="form-control form-control-sm" MaxLength="60"></asp:TextBox>
-                            </div>
-                        </div>
+                <%-- INFORMACION GENERAL --%>
+                <div class="row mb-4 mt-3 " style="background-color:#96E7D9; align-items: center; display: flex; height: 24px; ">
+                    <div class="col-10" style="padding-left: 14px;">
+                        <asp:Label ID="LblEtiquetaPnl2" runat="server" Text="<%$ Resources:GlobalResources, hdrTituloInformacionGral %>" CssClass="control-label" Font-Size="small"></asp:Label>
                     </div>
-                </asp:Panel>
-
-                <div class="row mt-3">
-                    <div class="col-lg-6 col-md-6">
-                        <div class="mb-2">
-                            <asp:Label ID="LblNomAsegurado" runat="server" Text="Nombre Asegurado" CssClass="form-label"></asp:Label>
-                        </div>
-                        <div class="input-group input-group-sm">
-                            <asp:TextBox ID="TxtNomAsegurado" runat="server" CssClass="form-control form-control-sm" AutoComplete="off" onkeyup="mayus(this);" MaxLength="80"></asp:TextBox>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-6">
-                        <div class="mb-2">
-                            <asp:Label ID="LblBenef_Preferente" runat="server" Text="Nombre Beneficiario Preferente" CssClass="form-label"></asp:Label>
-                        </div>
-                        <div class="input-group input-group-sm">
-                            <asp:TextBox ID="TxtBenef_Preferente" runat="server" CssClass="form-control form-control-sm" AutoComplete="off" onkeyup="mayus(this);" MaxLength="80"></asp:TextBox>
+                    <div class="col-2" style="display:flex; justify-content: end;">
+                        <div>
+                        	<asp:Button ID="btnShowPanel2" runat="server" Text="&#9660;" OnClick="btnShowPanel2_Click" Height="24px" Width="24px" CssClass="btn btn-primary btn-sm justify-content-center align-items-center p-0 m-0" />
                         </div>
                     </div>
                 </div>
 
                 <div>
-                <asp:Panel ID="pnl2" runat="server" Visible="true">
+                    <asp:Panel ID="pnl2" runat="server" Visible="false">
+
                     <div class="row mt-3">
                         <div class="col-lg-4 col-md-4">
                             <div class="mb-2">
-                                <asp:Label ID="LblFechaOcurrencia" runat="server" Text="Fecha Ocurrencia" CssClass="form-label"></asp:Label>
+                                <asp:Label ID="LblSeguro_Cia" runat="server" Text="<%$ Resources:GlobalResources, LblCiaSeguros %>" CssClass="form-label"></asp:Label>
+                            </div>
+                            <div class="input-group input-group-sm">
+                                <asp:TextBox ID="TxtSeguro_Cia" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4">
+                            <div class="mb-2">
+                                <asp:Label ID="LblSubReferencia" runat="server" Text="No. Referencia" CssClass="form-label"></asp:Label>
+                            </div>
+                            <div class="input-group input-group-sm">
+                                <asp:TextBox ID="TxtSubReferencia" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4">
+                            <div class="mb-2">
+                                <asp:Label ID="LblProducto" runat="server" Text="<%$ Resources:GlobalResources, lblProducto %>" CssClass="form-label"></asp:Label>
+                            </div>
+                            <div class="input-group input-group-sm">
+                                <%--<asp:TextBox ID="TxtProducto" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>--%>
+                                    <asp:DropDownList ID="ddlProductos" runat="server" CssClass="btn btn-outline-secondary text-start" AutoPostBack="true" OnSelectedIndexChanged="ddlProductos_SelectedIndexChanged" Width="100%" >
+                                    </asp:DropDownList>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-3">
+                        <div class="col-lg-3 col-md-3">
+                            <div class="mb-2">
+                                <asp:Label ID="LblAntReferencia" runat="server" Text="Referencia Anterior" CssClass="form-label"></asp:Label>
+                            </div>
+                            <div class="input-group input-group-sm">
+                                <asp:TextBox ID="TxtAntReferencia" runat="server" CssClass="form-control form-control-sm" MaxLength="15"></asp:TextBox>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-3">
+                            <div class="mb-2">
+                                <asp:Label ID="LblNumReporte" runat="server" Text="<%$ Resources:GlobalResources, lblNumReporte %>" CssClass="form-label"></asp:Label>
+                            </div>
+                            <div class="input-group input-group-sm">
+                                <asp:TextBox ID="TxtNumReporte" runat="server" CssClass="form-control form-control-sm" MaxLength="25"></asp:TextBox>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-3">
+                            <div class="mb-2">
+                                <asp:Label ID="LblNumSiniestro" runat="server" Text="<%$ Resources:GlobalResources, lblNumSiniestro %>" CssClass="form-label"></asp:Label>
+                            </div>
+                            <div class="input-group input-group-sm">
+                                <asp:TextBox ID="TxtNumSiniestro" runat="server" CssClass="form-control form-control-sm" MaxLength="25"></asp:TextBox>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-3">
+                            <div class="mb-2">
+                                <asp:Label ID="LblNumPoliza" runat="server" Text="<%$ Resources:GlobalResources, lblNumPoliza %>" CssClass="form-label"></asp:Label>
+                            </div>
+                            <div class="input-group input-group-sm">
+                                <asp:TextBox ID="TxtNumPoliza" runat="server" CssClass="form-control form-control-sm" MaxLength="25"></asp:TextBox>
+                            </div>
+                        </div>
+                    </div>
+
+                    <asp:Panel ID="pnlEstadoOcurrencia" runat="server">
+                        <div class="row mt-3">
+                            <div class="col-lg-4 col-md-4">
+                                <div class="mb-2">
+                                    <asp:Label ID="LblEstOcurrencia" runat="server" Text="Estado de Ocurrencia" CssClass="form-label"></asp:Label>
+                                </div>
+                                <div class="input-group input-group-sm">
+                                    <asp:TextBox ID="TxtEstOcurrencia" runat="server" CssClass="form-control form-control-sm" MaxLength="25"></asp:TextBox>
+                                </div>
+                            </div>
+                            <div class="col-lg-5 col-md-5">
+                                <div class="mb-2">
+                                    <asp:Label ID="LblDescMote" runat="server" Text="Descripción Mote" CssClass="form-label"></asp:Label>
+                                </div>
+                                <div class="input-group input-group-sm">
+                                    <asp:TextBox ID="TxtDescMote" runat="server" CssClass="form-control form-control-sm" MaxLength="60"></asp:TextBox>
+                                </div>
+                            </div>
+                        </div>
+                    </asp:Panel>
+
+                    <div class="row mt-3">
+                        <div class="col-lg-6 col-md-6">
+                            <div class="mb-2">
+                                <asp:Label ID="LblNomAsegurado" runat="server" Text="<%$ Resources:GlobalResources, lblNomAsegurado %>" CssClass="form-label"></asp:Label>
+                            </div>
+                            <div class="input-group input-group-sm">
+                                <asp:TextBox ID="TxtNomAsegurado" runat="server" CssClass="form-control form-control-sm" AutoComplete="off" onkeyup="mayus(this);" MaxLength="80"></asp:TextBox>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6">
+                            <div class="mb-2">
+                                <asp:Label ID="LblBenef_Preferente" runat="server" Text="<%$ Resources:GlobalResources, lblNomBeneficiario %>" CssClass="form-label"></asp:Label>
+                            </div>
+                            <div class="input-group input-group-sm">
+                                <asp:TextBox ID="TxtBenef_Preferente" runat="server" CssClass="form-control form-control-sm" AutoComplete="off" onkeyup="mayus(this);" MaxLength="80"></asp:TextBox>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-3">
+                        <div class="col-lg-4 col-md-4">
+                            <div class="mb-2">
+                                <asp:Label ID="LblFechaOcurrencia" runat="server" Text="<%$ Resources:GlobalResources, lblFecOcurrencia %>" CssClass="form-label"></asp:Label>
                             </div>
                             <div class="input-group input-group-sm">
                                 <asp:TextBox ID="TxtFechaOcurrencia" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -393,7 +416,7 @@
 
                         <div class="col-lg-4 col-md-4">
                             <div class="mb-2">
-                                <asp:Label ID="LblFechaReporte" runat="server" Text="Fecha Reporte" CssClass="form-label"></asp:Label>
+                                <asp:Label ID="LblFechaReporte" runat="server" Text="<%$ Resources:GlobalResources, lblFecReporte %>" CssClass="form-label"></asp:Label>
                             </div>
                             <div class="input-group input-group-sm">
                                 <asp:TextBox ID="TxtFechaReporte" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -406,7 +429,7 @@
 
                         <div class="col-lg-4 col-md-4">
                             <div class="mb-2">
-                                <asp:Label ID="LblFechaAsignacion" runat="server" Text="Fecha Asignacion" CssClass="form-label"></asp:Label>
+                                <asp:Label ID="LblFechaAsignacion" runat="server" Text="<%$ Resources:GlobalResources, lblFecAsignacion %>" CssClass="form-label"></asp:Label>
                             </div>
                             <div class="input-group input-group-sm">
                                 <asp:TextBox ID="TxtFechaAsignacion" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -421,7 +444,7 @@
                     <div class="row mt-3">
                         <div class="col-lg-4 col-md-4">
                             <div class="mb-2">
-                                <asp:Label ID="LblFechaInspeccion" runat="server" Text="Fecha Inspeccion" CssClass="form-label"></asp:Label>
+                                <asp:Label ID="LblFechaInspeccion" runat="server" Text="<%$ Resources:GlobalResources, lblFecInspeccion %>" CssClass="form-label"></asp:Label>
                             </div>
                             <div class="input-group input-group-sm">
                                 <asp:TextBox ID="TxtFechaInspeccion" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -444,7 +467,7 @@
                         </div>
                         <div class="col-lg-4 col-md-4">
                             <div class="mb-2">
-                                <asp:Label ID="LblFechaContacto" runat="server" Text="Fecha Contacto" CssClass="form-label"></asp:Label>
+                                <asp:Label ID="LblFechaContacto" runat="server" Text="<%$ Resources:GlobalResources, lblFecContacto %>" CssClass="form-label"></asp:Label>
                             </div>
                             <div class="input-group input-group-sm">
                                 <asp:TextBox ID="TxtFechaContacto" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -459,7 +482,7 @@
                     <div class="row mt-3">
                         <div class="col-lg-12 col-md-12">
                             <div class ="mb-2">
-                                <asp:Label ID="LblDetalleReporte" runat="server" Text="Detalle del Reporte"></asp:Label>
+                                <asp:Label ID="LblDetalleReporte" runat="server" Text="<%$ Resources:GlobalResources, lblDetReporte %>"></asp:Label>
                             </div>
                             <div class="input-group input-group-sm">
                                 <asp:TextBox ID="TxtDetalleReporte" runat="server" CssClass="form-control form-control-sm mb-1" placeholder="" AutoComplete="off" MaxLength="2500" Columns="12" Rows="5" TextMode="MultiLine"></asp:TextBox>
@@ -470,7 +493,7 @@
                     <div class="row mt-3">
                         <div class="col-lg-8 col-md-8">
                             <div class ="mb-2">
-                                <asp:Label ID="LblCalle" runat="server" Text="Calle" ></asp:Label>
+                                <asp:Label ID="LblCalle" runat="server" Text="<%$ Resources:GlobalResources, lblCalle %>" ></asp:Label>
                             </div>
                             <div class="input-group input-group-sm">
                                 <asp:TextBox ID="TxtCalle" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -478,7 +501,7 @@
                         </div>
                         <div class="col-lg-2 col-md-2">
                             <div class ="mb-2">
-                                <asp:Label ID="LblNumExterior" runat="server" Text="Num. Exterior" ></asp:Label>
+                                <asp:Label ID="LblNumExterior" runat="server" Text="<%$ Resources:GlobalResources, lblNumExt %>" ></asp:Label>
                             </div>
                             <div class="input-group input-group-sm">
                                 <asp:TextBox ID="TxtNumExterior" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -486,7 +509,7 @@
                         </div>
                         <div class="col-lg-2 col-md-2">
                             <div class ="mb-2">
-                                <asp:Label ID="LblNumInterior" runat="server" Text="Num. Interior" ></asp:Label>
+                                <asp:Label ID="LblNumInterior" runat="server" Text="<%$ Resources:GlobalResources, lblNumInt %>" ></asp:Label>
                             </div>
                             <div class="input-group input-group-sm">
                                 <asp:TextBox ID="TxtNumInterior" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -497,7 +520,7 @@
                     <div class="row mt-3">
                         <div class="col-lg-4 col-md-4 ">
                             <div class ="mb-2">
-                                <asp:Label ID="LblEstado" runat="server" Text="Estado" CssClass="control-label" Font-Size="Small"></asp:Label>
+                                <asp:Label ID="LblEstado" runat="server" Text="<%$ Resources:GlobalResources, lblEstado %>" CssClass="control-label" Font-Size="Small"></asp:Label>
                             </div>
                             <div class="input-group input-group-sm">
                                 <asp:DropDownList ID="ddlEstado" runat="server" CssClass="btn btn-outline-secondary text-start" AutoPostBack="true" OnSelectedIndexChanged="ddlEstado_SelectedIndexChanged" Width="100%">
@@ -506,7 +529,7 @@
                         </div>
                         <div class="col-lg-4 col-md-4 ">
                             <div class ="mb-2">
-                                <asp:Label ID="LblDelegacion" runat="server" Text="Delegación / Municipio" CssClass="control-label" Font-Size="Small"></asp:Label>
+                                <asp:Label ID="LblDelegacion" runat="server" Text="<%$ Resources:GlobalResources, lblDelegacion %>" CssClass="control-label" Font-Size="Small"></asp:Label>
                             </div>
                             <div class="input-group input-group-sm">
                                 <asp:DropDownList ID="ddlMunicipios" runat="server" CssClass="btn btn-outline-secondary text-start" AutoPostBack="true" OnSelectedIndexChanged="ddlMunicipios_SelectedIndexChanged" Width="100%" >
@@ -515,7 +538,7 @@
                         </div>
                         <div class="col-lg-3 col-md-3 ">
                             <div class ="mb-2">
-                                <asp:Label ID="LblColonia" runat="server" Text="Colonia" CssClass="control-label" Font-Size="Small"></asp:Label>
+                                <asp:Label ID="LblColonia" runat="server" Text="<%$ Resources:GlobalResources, lblColonia %>" CssClass="control-label" Font-Size="Small"></asp:Label>
                             </div>
                             <div class="input-group input-group-sm">
                                 <asp:TextBox ID="TxtColonia" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -523,7 +546,7 @@
                         </div>
                         <div class="col-lg-1 col-md-1 ">
                             <div class ="mb-2">
-                                <asp:Label ID="LblCodigoPostal" runat="server" Text="C.Postal" CssClass="control-label" Font-Size="Small"></asp:Label>
+                                <asp:Label ID="LblCodigoPostal" runat="server" Text="<%$ Resources:GlobalResources, lblCodigoPostal %>" CssClass="control-label" Font-Size="Small"></asp:Label>
                             </div>
                             <div class="input-group input-group-sm">
                                 <asp:TextBox ID="TxtCodigoPostal" runat="server" CssClass="form-control form-control-sm" MaxLength="5"></asp:TextBox>
@@ -534,7 +557,7 @@
                     <div class="row mt-3">
                         <div class="col-lg-4 col-md-4">
                             <div class ="mb-2">
-                                <asp:Label ID="LblOtrosGeneral" runat="server" Text="Otros" ></asp:Label>
+                                <asp:Label ID="LblOtrosGeneral" runat="server" Text="<%$ Resources:GlobalResources, lblOtros %>" ></asp:Label>
                             </div>
                             <div class="input-group input-group-sm">
                                 <asp:TextBox ID="TxtOtrosGeneral" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -681,10 +704,10 @@
                     <div class="d-grid gap-2 gap-md-3 d-md-flex justify-content-md-center mt-2 mb-3">
                         <asp:UpdatePanel ID="UpdatePanel18" runat="server" UpdateMode="Conditional">
                             <ContentTemplate>
-                                <asp:Button ID="BtnAnularPnl2" runat="server" Text="Cancelar" Font-Bold="True" OnClick="BtnAnularPnl2_Click" CssClass="btn btn-primary" Visible="false" TabIndex="0"/>
-                                <asp:Button ID="btnEditarPnl2" runat="server" Text="Editar Datos" Font-Bold="True" OnClick="btnEditarPnl2_Click" CssClass="btn btn-primary" TabIndex="1"/>
-                                <asp:Button ID="btnActualizarPnl2" runat="server" Text="Aplicar Cambios" Font-Bold="True" OnClick="btnActualizarPnl2_Click" CssClass="btn btn-secondary" visible="false" TabIndex="2"/>
-                                <asp:Button ID="BtnRegresar" runat="server" Text="&nbsp;&nbsp;&nbsp;Regresar&nbsp;&nbsp;&nbsp;" OnClick="BtnRegresar_Click" CssClass="btn btn-secondary" CausesValidation="false" TabIndex="3"/>
+                                <asp:Button ID="BtnAnularPnl2" runat="server" Text="<%$ Resources:GlobalResources, btnCancelar %>" Font-Bold="True" OnClick="BtnAnularPnl2_Click" CssClass="btn btn-primary" Visible="false" TabIndex="0"/>
+                                <asp:Button ID="btnEditarPnl2" runat="server" Text="<%$ Resources:GlobalResources, btnEditar %>" Font-Bold="True" OnClick="btnEditarPnl2_Click" CssClass="btn btn-primary" TabIndex="1"/>
+                                <asp:Button ID="btnActualizarPnl2" runat="server" Text="<%$ Resources:GlobalResources, btnGrabar %>" Font-Bold="True" OnClick="btnActualizarPnl2_Click" CssClass="btn btn-secondary" visible="false" TabIndex="2"/>
+                                <%--<asp:Button ID="BtnRegresar" runat="server" Text="<%$ Resources:GlobalResources, btnRegresar %>" OnClick="BtnRegresar_Click" CssClass="btn btn-secondary" CausesValidation="false" TabIndex="3"/>--%>
                                 <asp:Button ID="BtnRepFotografico" runat="server" Text="Reporte Fotografico" OnClick="BtnRepFotografico_Click" CssClass="btn btn-primary" Visible="false" TabIndex="4" />
                             </ContentTemplate>
                         </asp:UpdatePanel>
@@ -693,17 +716,74 @@
                 </asp:Panel>
                 </div>
 
-                <div class="row mb-4 mt-3" style="background-color:#96E7D9; align-items: baseline;">
+                <%-- RESPONSABLES --%>
+                <div class="row mb-4 mt-3 " style="background-color:#96E7D9; align-items: center; display: flex; height: 24px; ">
                     <div class="col-10" style="padding-left: 14px;">
-                        <asp:Label ID="LblEtiquetaPnl1" runat="server" Text="CONFIGURACIÓN DEL SINIESTRO" CssClass="control-label" Font-Size="small"></asp:Label>
+                        <asp:Label ID="lblResponsables" runat="server" Text="<%$ Resources:GlobalResources, hdrTituloResponsables %>" CssClass="control-label" Font-Size="small"></asp:Label>
                     </div>
                     <div class="col-2" style="display:flex; justify-content: end;">
                         <div>
-                            <%--<asp:UpdatePanel ID="UpdatePanel3" runat="server" UpdateMode="Conditional">--%>
-                                <%--<ContentTemplate>--%>
-                                    <asp:Button ID="btnShowPanel1" runat="server" Text="&#9660;" OnClick="btnShowPanel1_Click" Height="24px" Width="24px" CssClass="btn btn-primary btn-sm justify-content-center align-items-center p-0 m-0" />
-                                <%--</ContentTemplate>--%>
-                            <%--</asp:UpdatePanel>--%>
+                        	<asp:Button ID="btnShowPanel" runat="server" Text="&#9660;" OnClick="btnShowPanel_Click" Height="24px" Width="24px" CssClass="btn btn-primary btn-sm justify-content-center align-items-center p-0 m-0" />
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <asp:Panel ID="pnlInicio" runat="server" Visible="false">
+                        <div class="container col-12 mt-4">
+                        <%-- Catalogo de Responsables --%>
+                        <div style="overflow-x: auto; overflow-y:hidden">
+                            <asp:GridView ID="GrdResponsables"  runat="server" AutoGenerateColumns="false" GridLines="None" Width="100%" 
+                                    AllowPaging="True" CssClass="table table-responsive table-light table-striped table-hover align-middle" PagerStyle-CssClass="pagination-ys" AlternatingRowStyle-CssClass="alt" 
+                                    OnPageIndexChanging="GrdResponsables_PageIndexChanging" OnRowDataBound="GrdResponsables_RowDataBound" 
+                                    DataKeyNames="IdProyecto" PageSize="10" Font-Size="Smaller" >
+                                    <AlternatingRowStyle CssClass="alt autoWidth" />
+                                    <Columns>
+                                        <asp:BoundField DataField="IdRespProyecto" >
+                                        </asp:BoundField>
+                                        <asp:BoundField DataField="IdCliente" >
+                                        </asp:BoundField>
+                                        <asp:BoundField DataField="IdProyecto" >
+                                        </asp:BoundField>
+                                        <asp:BoundField DataField="IdTpoAsunto" >
+                                        </asp:BoundField>
+                                        <asp:BoundField DataField="IdResponsable" >
+                                        </asp:BoundField>
+                                        <asp:BoundField DataField="IdResponsable_Ref" >
+                                        </asp:BoundField>
+                                        <asp:BoundField DataField="Responsable" HeaderText ="<%$ Resources:GlobalResources, col_Responsable %>" >
+                                        </asp:BoundField>
+                                        <asp:BoundField DataField="NomResponsable" HeaderText ="<%$ Resources:GlobalResources, col_NomResponsable %>" >
+                                        </asp:BoundField>
+                                        <asp:BoundField DataField="NomEmpresa" HeaderText ="<%$ Resources:GlobalResources, col_NomEmpresa %>" >
+                                        </asp:BoundField>
+                                        <asp:BoundField DataField="Cargo" HeaderText ="<%$ Resources:GlobalResources, col_Cargo %>" >
+                                        </asp:BoundField>
+                                        <asp:BoundField DataField="Email" HeaderText ="<%$ Resources:GlobalResources, col_Email %>" >
+                                        </asp:BoundField>
+                                        <asp:BoundField DataField="Telefono" HeaderText ="<%$ Resources:GlobalResources, col_Telefono %>" >
+                                        </asp:BoundField>
+                                        <asp:TemplateField>
+                                            <ItemTemplate>
+                                                <asp:ImageButton ID="ImgDelResponsable" runat="server" OnClick="ImgDelResponsable_Click" Height="24px" Width="24px" ImageUrl="~/Images/rechazar_new.png"  Enabled="true" />
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                    </Columns>
+                                    <PagerStyle HorizontalAlign="Center" CssClass="pagination-ys" />
+                            </asp:GridView>
+                        </div>
+                    </div>
+                    </asp:Panel>
+                </div>
+
+                <%-- CONFIGURACIÓN DEL SINIESTRO --%>
+                <div class="row mb-4 mt-3" style="background-color:#96E7D9; align-items: baseline;">
+                    <div class="col-10" style="padding-left: 14px;">
+                        <asp:Label ID="LblEtiquetaPnl1" runat="server" Text="<%$ Resources:GlobalResources, hdrTituloConfigSiniestro %>" CssClass="control-label" Font-Size="small"></asp:Label>
+                    </div>
+                    <div class="col-2" style="display:flex; justify-content: end;">
+                        <div>
+                            <asp:Button ID="btnShowPanel1" runat="server" Text="&#9660;" OnClick="btnShowPanel1_Click" Height="24px" Width="24px" CssClass="btn btn-primary btn-sm justify-content-center align-items-center p-0 m-0" />
                         </div>
                     </div>
                 </div>
@@ -712,7 +792,7 @@
                     <div class="row mb-3">
                         <div class="col-lg-4 col-md-4 ">
                             <div class ="mb-2">
-                                <asp:Label ID="LblTpoAsegurado" runat="server" Text="Tipo de Asegurado" CssClass="control-label" Font-Size="Small"></asp:Label>
+                                <asp:Label ID="LblTpoAsegurado" runat="server" Text="<%$ Resources:GlobalResources, lblTpoAsegurado %>" CssClass="control-label" Font-Size="Small"></asp:Label>
                             </div>
                             <div class="input-group input-group-sm">
                                 <asp:DropDownList ID="ddlTpoAsegurado" runat="server" CssClass="btn btn-outline-secondary text-start" AutoPostBack="true" OnSelectedIndexChanged="ddlTpoAsegurado_SelectedIndexChanged" Width="100%">
@@ -721,7 +801,7 @@
                         </div>
                         <div class="col-lg-4 col-md-4 ">
                             <div class ="mb-2">
-                                <asp:Label ID="LblStatusSiniestro" runat="server" Text="Estatus del Siniestro" CssClass="control-label" Font-Size="Small"></asp:Label>
+                                <asp:Label ID="LblStatusSiniestro" runat="server" Text="<%$ Resources:GlobalResources, lblEstSiniestro %>" CssClass="control-label" Font-Size="Small"></asp:Label>
                             </div>
                             <div class="input-group input-group-sm">
                                 <asp:DropDownList ID="ddlEstSiniestro" runat="server" CssClass="btn btn-outline-secondary text-start" AutoPostBack="true" OnSelectedIndexChanged="ddlEstSiniestro_SelectedIndexChanged" Width="100%" >
@@ -730,7 +810,7 @@
                         </div>
                         <div class="col-lg-4 col-md-4 ">
                             <div class ="mb-2">
-                                <asp:Label ID="LblEtapas" runat="server" Text="Estatus Etapas" CssClass="control-label" Font-Size="Small"></asp:Label>
+                                <asp:Label ID="LblEtapas" runat="server" Text="<%$ Resources:GlobalResources, lblEtapaStatus %>" CssClass="control-label" Font-Size="Small"></asp:Label>
                             </div>
                             <div class="input-group input-group-sm">
                                 <asp:DropDownList ID="ddlConclusion" runat="server" CssClass="btn btn-outline-secondary text-start" AutoPostBack="true" OnSelectedIndexChanged="ddlConclusion_SelectedIndexChanged" Width="100%" >
@@ -742,7 +822,8 @@
                                     <ContentTemplate>
                                         <div class="d-flex align-items-center">
                                         <asp:ImageButton ID="ImgDel_Documento" runat="server" OnClick="ImgDel_Documento_Click" Height="24px" Width="24px" ImageUrl="~/Images/rechazar_new.png" Enabled="true" />
-                                        <span class="ms-2">Eliminar Documento(s)</span>
+                                        <%--<span class="ms-2"><%$ Resources:GlobalResources, lblEliminarDocumento %></span>--%>
+                                        <span class="ms-2"><asp:Literal ID="litEliminarDocumento" runat="server" Text="<%$ Resources:GlobalResources, lblEliminarDocumento %>" /> </span>
                                         </div>
                                     </ContentTemplate>
                                 </asp:UpdatePanel>
@@ -753,7 +834,7 @@
                     <div class="d-grid gap-4 d-flex justify-content-center mt-3 mb-3">
                         <asp:UpdatePanel ID="UpdatePanel4" runat="server" UpdateMode="Conditional">
                             <ContentTemplate>
-                                <asp:Button ID="BtnGraba_Categorias" runat="server" Text="Aplicar Cambios" Font-Bold="True" OnClick="BtnGraba_Categorias_Click" CssClass="btn btn-primary" TabIndex="1"/>
+                                <asp:Button ID="BtnGraba_Categorias" runat="server" Text="<%$ Resources:GlobalResources, btnGrabar %>" Font-Bold="True" OnClick="BtnGraba_Categorias_Click" CssClass="btn btn-primary" TabIndex="1"/>
                             </ContentTemplate>
                         </asp:UpdatePanel>
                     </div>
@@ -761,7 +842,7 @@
                     <%--va otro acordion de Linea de tiempo de las referencias --%>
                     <div class="row mb-3 mt-4" style="background-color:#C6D541; align-items: baseline;">
                         <div class="col-10" style="padding-left: 14px;">
-                            <asp:Label ID="lblLineTimeEtapas" runat="server" Text="Linea de tiempo delas referencias" CssClass="control-label" Font-Size="small"></asp:Label>
+                            <asp:Label ID="lblLineTimeEtapas" runat="server" Text="<%$ Resources:GlobalResources, hdrTituloLineaTiempo %>" CssClass="control-label" Font-Size="small"></asp:Label>
                         </div>
                         <div class="col-2" style="display:flex; justify-content: end;">
                             <div>
@@ -776,13 +857,12 @@
 
                     <asp:UpdatePanel ID="updPBtnCrearLineaNegocio" runat="server">
                         <ContentTemplate>
-                            <asp:Button ID="btnCrearLineaNegocio" runat="server" Text="Crear linea de negocio" OnClick="btnCrearLineaNegocio_Click" CssClass="btn btn-secondary" Visible="true" />
+                            <asp:Button ID="btnCrearLineaNegocio" runat="server" Text="<%$ Resources:GlobalResources, btnCrearLineaNegocio %>" OnClick="btnCrearLineaNegocio_Click" CssClass="btn btn-secondary" Visible="true" />
                         </ContentTemplate>
                     </asp:UpdatePanel>
 
                     <asp:Panel ID="pnlLineTimeEtapas"  runat="server" Visible="true" >
-                        <h2>Linea de tiempo de la Referencia por Etapas</h2>
-
+                        <h2><asp:Literal runat="server" Text="<%$ Resources:GlobalResources, hdrTituloLineaTiempo1 %>" /></h2>
                         <div class="container my-4">
 
                             <asp:UpdatePanel ID="updPRepeaterEtapas" runat="server" UpdateMode="Conditional">
@@ -911,13 +991,10 @@
                         </div>
 
                     </asp:Panel>
-
-                    
-
                     <br />                
                     <div class="row mb-3 mt-4" style="background-color:#C6D541; align-items: baseline;">
                         <div class="col-10" style="padding-left: 14px;">
-                            <asp:Label ID="LblRiesgos" runat="server" Text="RIESGOS" CssClass="control-label" Font-Size="small"></asp:Label>
+                            <asp:Label ID="LblRiesgos" runat="server" Text="<%$ Resources:GlobalResources, hdrTituloRiesgos_1 %>" CssClass="control-label" Font-Size="small"></asp:Label>
                         </div>
                     </div>
 
@@ -970,9 +1047,9 @@
                                  style="background: linear-gradient(to right, #C6D541, #ffffff); padding: 3px 15px;">
                                 <%--<span class="fw-bold text-dark">Acciones para Riesgos</span>--%>
                                 <div class="d-flex gap-2">
-                                    <asp:Button ID="BtnEditarRiesgos" runat="server" Text="Editar" CssClass="btn btn-outline-primary btn-sm rounded-pill px-3" OnClick="BtnEditarRiesgos_Click" />
-                                    <asp:Button ID="BtnActualizarRiesgos" runat="server" Text="Aplicar Cambios" CssClass="btn btn-outline-primary btn-sm rounded-pill px-3" Visible="false" OnClick="BtnActualizarRiesgos_Click" />
-                                    <asp:Button ID="BtnAnularRiesgos" runat="server" Text="Cancelar" CssClass="btn btn-soft-gray btn-sm rounded-pill px-3" Visible="false" OnClick="BtnAnularRiesgos_Click" />
+                                    <asp:Button ID="BtnEditarRiesgos" runat="server" Text="<%$ Resources:GlobalResources, btnEditar %>" CssClass="btn btn-outline-primary btn-sm rounded-pill px-3" OnClick="BtnEditarRiesgos_Click" />
+                                    <asp:Button ID="BtnActualizarRiesgos" runat="server" Text="<%$ Resources:GlobalResources, btnGrabar %>" CssClass="btn btn-outline-primary btn-sm rounded-pill px-3" Visible="false" OnClick="BtnActualizarRiesgos_Click" />
+                                    <asp:Button ID="BtnAnularRiesgos" runat="server" Text="<%$ Resources:GlobalResources, btnCancelar %>" CssClass="btn btn-soft-gray btn-sm rounded-pill px-3" Visible="false" OnClick="BtnAnularRiesgos_Click" />
                                 </div>
                             </div>
                         </div>
@@ -980,7 +1057,7 @@
 
                     <div class="row mb-3 mt-4" style="background-color:#C6D541; align-items: baseline;">
                         <div class="col-10" style="padding-left: 14px;">
-                            <asp:Label ID="LblBienes" runat="server" Text="BIENES" CssClass="control-label" Font-Size="small"></asp:Label>
+                            <asp:Label ID="LblBienes" runat="server" Text="<%$ Resources:GlobalResources, hdrTituloBienes_1 %>" CssClass="control-label" Font-Size="small"></asp:Label>
                         </div>
                     </div>
 
@@ -1032,9 +1109,9 @@
                                  style="background: linear-gradient(to right, #C6D541, #ffffff); padding: 3px 15px;">
                                 <%--<span class="fw-bold text-dark">Acciones para Bienes</span>--%>
                                 <div class="d-flex gap-2">
-                                    <asp:Button ID="BtnEditarBienes" runat="server" Text="Editar" CssClass="btn btn-outline-primary btn-sm rounded-pill px-3" OnClick="BtnEditarBienes_Click" />
-                                    <asp:Button ID="BtnActualizarBienes" runat="server" Text="Aplicar Cambios" CssClass="btn btn-outline-primary btn-sm rounded-pill px-3" Visible="false" OnClick="BtnActualizarBienes_Click" />
-                                    <asp:Button ID="BtnAnularBienes" runat="server" Text="Cancelar" CssClass="btn btn-soft-gray btn-sm rounded-pill px-3" Visible="false" OnClick="BtnAnularBienes_Click" />
+                                    <asp:Button ID="BtnEditarBienes" runat="server" Text="<%$ Resources:GlobalResources, btnEditar %>" CssClass="btn btn-outline-primary btn-sm rounded-pill px-3" OnClick="BtnEditarBienes_Click" />
+                                    <asp:Button ID="BtnActualizarBienes" runat="server" Text="<%$ Resources:GlobalResources, btnGrabar %>" CssClass="btn btn-outline-primary btn-sm rounded-pill px-3" Visible="false" OnClick="BtnActualizarBienes_Click" />
+                                    <asp:Button ID="BtnAnularBienes" runat="server" Text="<%$ Resources:GlobalResources, btnCancelar %>" CssClass="btn btn-soft-gray btn-sm rounded-pill px-3" Visible="false" OnClick="BtnAnularBienes_Click" />
                                 </div>
                             </div>
                         </div>
@@ -1044,7 +1121,10 @@
                         <div class="card shadow-sm border-0 mt-3">
                             <div class="card-body d-flex justify-content-between align-items-center rounded" style="background: linear-gradient(to right, #C6D541, #ffffff); padding: 3px 15px;">
                                 <!-- Texto del título -->
-                                <span class="fw-bold text-dark">DETALLE DE LOS DAÑOS</span>
+                                <%--<span class="fw-bold text-dark"><%$ Resources:GlobalResources, hdrTituloDetDaños %></span>--%>
+                                <asp:Label ID="lblTituloDetDanos" runat="server" CssClass="fw-bold text-dark" Text="<%$ Resources:GlobalResources, hdrTituloDetDaños %>">
+                                </asp:Label>
+
                                 <!-- Botón desplegable -->
                                 <asp:Button ID="btnShowPanel21" runat="server" Text="&#9660;" CssClass="btn btn-soft-gray btn-sm rounded-pill px-3" OnClick="btnShowPanel21_Click" />
                             </div>
@@ -1064,8 +1144,7 @@
 
                             <%-- Categoria Ninguna --%>
                             <asp:Panel ID="pnlVacio" runat="server" Visible="true" CssClass="p-5">
-                                <asp:Label ID="lblOtrosMensaje" runat="server" 
-                                    Text="Seleccione una opción en la lista para mostrar datos."
+                                <asp:Label ID="lblOtrosMensaje" runat="server" Text="<%$ Resources:GlobalResources, hdrTituloSelecOpcion %>"
                                     CssClass="d-block text-center fs-4 fw-bold text-secondary">
                                 </asp:Label>
                             </asp:Panel>
@@ -1075,7 +1154,7 @@
                                 <div class="row mt-3">
                                     <div class="col-lg-4 col-md-4">
                                         <div class="mb-2">
-                                            <asp:Label ID="LblAreaEdif" runat="server" Text="Area" CssClass="form-label"></asp:Label>
+                                            <asp:Label ID="LblAreaEdif" runat="server" Text="<%$ Resources:GlobalResources, lblArea %>" CssClass="form-label"></asp:Label>
                                         </div>
                                         <div class="input-group input-group-sm">
                                             <asp:TextBox ID="TxtAreaEdif" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -1083,7 +1162,7 @@
                                     </div>
                                     <div class="col-lg-4 col-md-4">
                                         <div class="mb-2">
-                                            <asp:Label ID="LblNivelEdif" runat="server" Text="Nivel" CssClass="form-label"></asp:Label>
+                                            <asp:Label ID="LblNivelEdif" runat="server" Text="<%$ Resources:GlobalResources, lblNivel %>" CssClass="form-label"></asp:Label>
                                         </div>
                                         <div class="input-group input-group-sm">
                                             <asp:TextBox ID="TxtNivelEdif" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -1091,7 +1170,7 @@
                                     </div>
                                     <div class="col-lg-4 col-md-4">
                                         <div class="mb-2">
-                                            <asp:Label ID="LblCategoriaEdif" runat="server" Text="Categoria(s)" CssClass="form-label"></asp:Label>
+                                            <asp:Label ID="LblCategoriaEdif" runat="server" Text="<%$ Resources:GlobalResources, lblCategoriaOtros %>" CssClass="form-label"></asp:Label>
                                         </div>
                                         <div class="input-group input-group-sm">
                                             <asp:TextBox ID="TxtCategoriaEdif" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -1101,7 +1180,7 @@
                                 <div class="row mt-3">
                                     <div class="col-lg-4 col-md-4">
                                         <div class="mb-2">
-                                            <asp:Label ID="LblElementoEdif" runat="server" Text="Elemento" CssClass="form-label"></asp:Label>
+                                            <asp:Label ID="LblElementoEdif" runat="server" Text="<%$ Resources:GlobalResources, lblElemento %>" CssClass="form-label"></asp:Label>
                                         </div>
                                         <div class="input-group input-group-sm">
                                             <asp:TextBox ID="TxtElementoEdif" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -1109,7 +1188,7 @@
                                     </div>
                                     <div class="col-lg-4 col-md-4">
                                         <div class="mb-2">
-                                            <asp:Label ID="LblTipoEdif" runat="server" Text="Tipo" CssClass="form-label"></asp:Label>
+                                            <asp:Label ID="LblTipoEdif" runat="server" Text="<%$ Resources:GlobalResources, lblTipo %>" CssClass="form-label"></asp:Label>
                                         </div>
                                         <div class="input-group input-group-sm">
                                             <asp:TextBox ID="TxtTipoEdif" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -1117,7 +1196,7 @@
                                     </div>
                                     <div class="col-lg-4 col-md-4">
                                         <div class="mb-2">
-                                            <asp:Label ID="LblMaterialesEdif" runat="server" Text="Materiales" CssClass="form-label"></asp:Label>
+                                            <asp:Label ID="LblMaterialesEdif" runat="server" Text="<%$ Resources:GlobalResources, lblMateriales %>" CssClass="form-label"></asp:Label>
                                         </div>
                                         <div class="input-group input-group-sm">
                                             <asp:TextBox ID="TxtMaterialesEdif" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -1127,7 +1206,7 @@
                                 <div class="row mt-3">
                                     <div class="col-lg-2 col-md-2">
                                         <div class="mb-2">
-                                            <asp:Label ID="LblMedidaEdif_1" runat="server" Text="Medida (1)" CssClass="form-label"></asp:Label>
+                                            <asp:Label ID="LblMedidaEdif_1" runat="server" Text="<%$ Resources:GlobalResources, lblMedida1 %>" CssClass="form-label"></asp:Label>
                                         </div>
                                         <div class="input-group input-group-sm">
                                             <asp:TextBox ID="TxtMedidaEdif_1" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -1135,7 +1214,7 @@
                                     </div>
                                     <div class="col-lg-2 col-md-2">
                                         <div class="mb-2">
-                                            <asp:Label ID="LblUnidadEdif_1" runat="server" Text="Unidad (1)" CssClass="form-label"></asp:Label>
+                                            <asp:Label ID="LblUnidadEdif_1" runat="server" Text="<%$ Resources:GlobalResources, lblUnidad1 %>" CssClass="form-label"></asp:Label>
                                         </div>
                                         <div class="input-group input-group-sm">
                                             <asp:DropDownList ID="ddlUnidadEdif_1" runat="server" CssClass="btn btn-outline-secondary text-start" AutoPostBack="true" Width="100%">
@@ -1144,7 +1223,7 @@
                                     </div>
                                     <div class="col-lg-2 col-md-2">
                                         <div class="mb-2">
-                                            <asp:Label ID="LblMedidaEdif_2" runat="server" Text="Medida (2)" CssClass="form-label"></asp:Label>
+                                            <asp:Label ID="LblMedidaEdif_2" runat="server" Text="<%$ Resources:GlobalResources, lblMedida2 %>" CssClass="form-label"></asp:Label>
                                         </div>
                                         <div class="input-group input-group-sm">
                                             <asp:TextBox ID="TxtMedidaEdif_2" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -1152,7 +1231,7 @@
                                     </div>
                                     <div class="col-lg-2 col-md-2">
                                         <div class="mb-2">
-                                            <asp:Label ID="LblUnidadEdif_2" runat="server" Text="Unidad (2)" CssClass="form-label"></asp:Label>
+                                            <asp:Label ID="LblUnidadEdif_2" runat="server" Text="<%$ Resources:GlobalResources, lblUnidad2 %>" CssClass="form-label"></asp:Label>
                                         </div>
                                         <div class="input-group input-group-sm">
                                             <asp:DropDownList ID="ddlUnidadEdif_2" runat="server" CssClass="btn btn-outline-secondary text-start" AutoPostBack="true" Width="100%">
@@ -1161,7 +1240,7 @@
                                     </div>
                                     <div class="col-lg-2 col-md-2">
                                         <div class="mb-2">
-                                            <asp:Label ID="LblMedidaEdif_3" runat="server" Text="Medida (3)" CssClass="form-label"></asp:Label>
+                                            <asp:Label ID="LblMedidaEdif_3" runat="server" Text="<%$ Resources:GlobalResources, lblMedida3 %>" CssClass="form-label"></asp:Label>
                                         </div>
                                         <div class="input-group input-group-sm">
                                             <asp:TextBox ID="TxtMedidaEdif_3" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -1169,7 +1248,7 @@
                                     </div>
                                     <div class="col-lg-2 col-md-2">
                                         <div class="mb-2">
-                                            <asp:Label ID="LblUnidadEdif_3" runat="server" Text="Unidad (3)" CssClass="form-label"></asp:Label>
+                                            <asp:Label ID="LblUnidadEdif_3" runat="server" Text="<%$ Resources:GlobalResources, lblUnidad3 %>" CssClass="form-label"></asp:Label>
                                         </div>
                                         <div class="input-group input-group-sm">
                                             <asp:DropDownList ID="ddlUnidadEdif_3" runat="server" CssClass="btn btn-outline-secondary text-start" AutoPostBack="true" Width="100%">
@@ -1180,7 +1259,7 @@
                                 <div class="row mt-3">
                                     <div class="col-lg-12 col-md-12">
                                         <div class="mb-2">
-                                            <asp:Label ID="LblObsEdif_1" runat="server" Text="Observaciones (1)" CssClass="form-label"></asp:Label>
+                                            <asp:Label ID="LblObsEdif_1" runat="server" Text="<%$ Resources:GlobalResources, lblObservaciones1 %>" CssClass="form-label"></asp:Label>
                                         </div>
                                         <div class="input-group input-group-sm">
                                             <asp:TextBox ID="TxtObsEdif_1" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -1190,7 +1269,7 @@
                                 <div class="row mt-3">
                                     <div class="col-lg-12 col-md-12">
                                         <div class="mb-2">
-                                            <asp:Label ID="LblObsEdif_2" runat="server" Text="Observaciones (2)" CssClass="form-label"></asp:Label>
+                                            <asp:Label ID="LblObsEdif_2" runat="server" Text="<%$ Resources:GlobalResources, lblObservaciones2 %>" CssClass="form-label"></asp:Label>
                                         </div>
                                         <div class="input-group input-group-sm">
                                             <asp:TextBox ID="TxtObsEdif_2" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -1199,12 +1278,12 @@
                                 </div>
                             </asp:Panel>
 
-                            <%-- Categoria Otros --%>
+                            <%-- Categoria Otros FALTA--%>
                             <asp:Panel ID="pnlOtros" runat="server" Visible="false">
                                 <div class="row mt-3">
                                     <div class="col-lg-3 col-md-3">
                                         <div class="mb-2">
-                                            <asp:Label ID="LblCategoriaOtros" runat="server" Text="Categoria(s)" CssClass="form-label"></asp:Label>
+                                            <asp:Label ID="LblCategoriaOtros" runat="server" Text="<%$ Resources:GlobalResources, lblCategoriaOtros %>" CssClass="form-label"></asp:Label>
                                         </div>
                                         <div class="input-group input-group-sm">
                                             <asp:TextBox ID="TxtCategoriaOtros" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -1212,7 +1291,7 @@
                                     </div>
                                     <div class="col-lg-3 col-md-3">
                                         <div class="mb-2">
-                                            <asp:Label ID="LblTpoOtros" runat="server" Text="Tipo" CssClass="form-label"></asp:Label>
+                                            <asp:Label ID="LblTpoOtros" runat="server" Text="<%$ Resources:GlobalResources, lblTipo %>" CssClass="form-label"></asp:Label>
                                         </div>
                                         <div class="input-group input-group-sm">
                                             <asp:TextBox ID="TxtTpoOtros" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -1220,7 +1299,7 @@
                                     </div>
                                     <div class="col-lg-3 col-md-3">
                                         <div class="mb-2">
-                                            <asp:Label ID="LblGenOtros" runat="server" Text="Generico" CssClass="form-label"></asp:Label>
+                                            <asp:Label ID="LblGenOtros" runat="server" Text="<%$ Resources:GlobalResources, lblGenerico %>" CssClass="form-label"></asp:Label>
                                         </div>
                                         <div class="input-group input-group-sm">
                                             <asp:TextBox ID="TxtGenOtros" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -1230,7 +1309,7 @@
                                 <div class="row mt-3">
                                     <div class="col-lg-9 col-md-9">
                                         <div class="mb-2">
-                                            <asp:Label ID="LblDescDaños" runat="server" Text="Descripción" CssClass="form-label"></asp:Label>
+                                            <asp:Label ID="LblDescDaños" runat="server" Text="<%$ Resources:GlobalResources, lblDescDaños %>" CssClass="form-label"></asp:Label>
                                         </div>
                                         <div class="input-group input-group-sm">
                                             <asp:TextBox ID="TxtDescOtros" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -1240,7 +1319,7 @@
                                 <div class="row mt-3">
                                     <div class="col-lg-3 col-md-3">
                                         <div class="mb-2">
-                                            <asp:Label ID="LblCantOtros" runat="server" Text="Cantidad" CssClass="form-label"></asp:Label>
+                                            <asp:Label ID="LblCantOtros" runat="server" Text="<%$ Resources:GlobalResources, lblCantidad %>" CssClass="form-label"></asp:Label>
                                         </div>
                                         <div class="input-group input-group-sm">
                                             <asp:TextBox ID="TxtCantOtros" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -1248,7 +1327,7 @@
                                     </div>
                                     <div class="col-lg-3 col-md-3">
                                         <div class="mb-2">
-                                            <asp:Label ID="LblMarcaOtros" runat="server" Text="Marca" CssClass="form-label"></asp:Label>
+                                            <asp:Label ID="LblMarcaOtros" runat="server" Text="<%$ Resources:GlobalResources, lblMarca %>" CssClass="form-label"></asp:Label>
                                         </div>
                                         <div class="input-group input-group-sm">
                                             <asp:TextBox ID="TxtMarcaOtros" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -1256,7 +1335,7 @@
                                     </div>
                                     <div class="col-lg-3 col-md-3">
                                         <div class="mb-2">
-                                            <asp:Label ID="LblModOtros" runat="server" Text="Modelo" CssClass="form-label"></asp:Label>
+                                            <asp:Label ID="LblModOtros" runat="server" Text="<%$ Resources:GlobalResources, lblModelo %>" CssClass="form-label"></asp:Label>
                                         </div>
                                         <div class="input-group input-group-sm">
                                             <asp:TextBox ID="TxtModOtros" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -1264,7 +1343,7 @@
                                     </div>
                                     <div class="col-lg-3 col-md-3">
                                         <div class="mb-2">
-                                            <asp:Label ID="LblNumSerieOtros" runat="server" Text="N. Serie" CssClass="form-label"></asp:Label>
+                                            <asp:Label ID="LblNumSerieOtros" runat="server" Text="<%$ Resources:GlobalResources, lblNoSerie %>" CssClass="form-label"></asp:Label>
                                         </div>
                                         <div class="input-group input-group-sm">
                                             <asp:TextBox ID="TxtNumSerieOtros" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -1274,7 +1353,7 @@
                                 <div class="row mt-3">
                                     <div class="col-lg-12 col-md-12">
                                         <div class="mb-2">
-                                            <asp:Label ID="LblObsOtros_1" runat="server" Text="Observaciones 1" CssClass="form-label"></asp:Label>
+                                            <asp:Label ID="LblObsOtros_1" runat="server" Text="<%$ Resources:GlobalResources, lblObservaciones1 %>" CssClass="form-label"></asp:Label>
                                         </div>
                                         <div class="input-group input-group-sm">
                                             <asp:TextBox ID="TxtObsOtros_1" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -1284,7 +1363,7 @@
                                 <div class="row mt-3">
                                     <div class="col-lg-12 col-md-12">
                                         <div class="mb-2">
-                                            <asp:Label ID="LblObsOtros_2" runat="server" Text="Observaciones 2" CssClass="form-label"></asp:Label>
+                                            <asp:Label ID="LblObsOtros_2" runat="server" Text="<%$ Resources:GlobalResources, lblObservaciones2 %>" CssClass="form-label"></asp:Label>
                                         </div>
                                         <div class="input-group input-group-sm">
                                             <asp:TextBox ID="TxtObsOtros_2" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -1298,10 +1377,10 @@
                                 <div class="d-grid gap-4 d-flex justify-content-center mt-3 mb-3">
                                     <asp:UpdatePanel ID="UpdatePanel6" runat="server" UpdateMode="Conditional">
                                         <ContentTemplate>
-                                            <asp:Button ID="BtnAnularPnl4" runat="server" Text="Cancelar" Font-Bold="True" OnClick="BtnAnularPnl4_Click" CssClass="btn btn-primary" Visible="false" TabIndex="0"/>
-                                            <asp:Button ID="btnEditarPnl4" runat="server" Text="Editar Datos" Font-Bold="True" OnClick="btnEditarPnl4_Click" CssClass="btn btn-primary" Enabled="false" TabIndex="1"/>
-                                            <asp:Button ID="btnActualizarPnl4" runat="server" Text="Aplicar Cambios" Font-Bold="True" OnClick="btnActualizarPnl4_Click" CssClass="btn btn-secondary" visible="false" TabIndex="2"/>
-                                            <asp:Button ID="BtnAgregarPnl4" runat="server" Text="Agregar" OnClick="BtnAgregarPnl4_Click" CausesValidation="true" CssClass="btn btn-primary px-4" TabIndex="3"/>
+                                            <asp:Button ID="BtnAnularPnl4" runat="server" Text="<%$ Resources:GlobalResources, btnCancelar %>" Font-Bold="True" OnClick="BtnAnularPnl4_Click" CssClass="btn btn-primary" Visible="false" TabIndex="0"/>
+                                            <asp:Button ID="btnEditarPnl4" runat="server" Text="<%$ Resources:GlobalResources, btnEditar %>" Font-Bold="True" OnClick="btnEditarPnl4_Click" CssClass="btn btn-primary" Enabled="false" TabIndex="1"/>
+                                            <asp:Button ID="btnActualizarPnl4" runat="server" Text="<%$ Resources:GlobalResources, btnGrabar %>" Font-Bold="True" OnClick="btnActualizarPnl4_Click" CssClass="btn btn-secondary" visible="false" TabIndex="2"/>
+                                            <asp:Button ID="BtnAgregarPnl4" runat="server" Text="<%$ Resources:GlobalResources, btnAgregar %>" OnClick="BtnAgregarPnl4_Click" CausesValidation="true" CssClass="btn btn-primary px-4" TabIndex="3"/>
                                         </ContentTemplate>
                                     </asp:UpdatePanel>
                                 </div>
@@ -1326,29 +1405,29 @@
                                                     </asp:BoundField>
                                                     <asp:BoundField DataField="SubReferencia" >
                                                     </asp:BoundField>
-                                                    <asp:BoundField DataField="AreaEdif" HeaderText="Area" >
+                                                    <asp:BoundField DataField="AreaEdif" HeaderText="<%$ Resources:GlobalResources, col_Area %>" >
                                                     </asp:BoundField>
-                                                    <asp:BoundField DataField="NivelEdif" HeaderText="Nivel" >
+                                                    <asp:BoundField DataField="NivelEdif" HeaderText="<%$ Resources:GlobalResources, col_Nivel %>" >
                                                     </asp:BoundField>
-                                                    <asp:BoundField DataField="CategoriaEdif" HeaderText="Categoria" >
+                                                    <asp:BoundField DataField="CategoriaEdif" HeaderText="<%$ Resources:GlobalResources, col_Categoria %>" >
                                                     </asp:BoundField>
-                                                    <asp:BoundField DataField="ElementoEdif" HeaderText="Elemento" >
+                                                    <asp:BoundField DataField="ElementoEdif" HeaderText="<%$ Resources:GlobalResources, col_Elemento %>" >
                                                     </asp:BoundField>
-                                                    <asp:BoundField DataField="TipoEdif" HeaderText="Tipo" >
+                                                    <asp:BoundField DataField="TipoEdif" HeaderText="<%$ Resources:GlobalResources, col_Tipo %>" >
                                                     </asp:BoundField>
-                                                    <asp:BoundField DataField="MaterialesEdif" HeaderText="Materiales" >
+                                                    <asp:BoundField DataField="MaterialesEdif" HeaderText="<%$ Resources:GlobalResources, col_Materiales %>" >
                                                     </asp:BoundField>
-                                                    <asp:BoundField DataField="MedidaEdif_1" HeaderText="Medida" >
+                                                    <asp:BoundField DataField="MedidaEdif_1" HeaderText="<%$ Resources:GlobalResources, col_Medida1 %>" >
                                                     </asp:BoundField>
-                                                    <asp:BoundField DataField="UnidadEdif_1" HeaderText="Unidad" >
+                                                    <asp:BoundField DataField="UnidadEdif_1" HeaderText="<%$ Resources:GlobalResources, col_Unidad1 %>" >
                                                     </asp:BoundField>
-                                                    <asp:BoundField DataField="MedidaEdif_2" HeaderText="Medida (2)" >
+                                                    <asp:BoundField DataField="MedidaEdif_2" HeaderText="<%$ Resources:GlobalResources, col_Medida2 %>" >
                                                     </asp:BoundField>
-                                                    <asp:BoundField DataField="UnidadEdif_2" HeaderText="Unidad (2)" >
+                                                    <asp:BoundField DataField="UnidadEdif_2" HeaderText="<%$ Resources:GlobalResources, col_Unidad2 %>" >
                                                     </asp:BoundField>
-                                                    <asp:BoundField DataField="MedidaEdif_3" HeaderText="Medida (3)" >
+                                                    <asp:BoundField DataField="MedidaEdif_3" HeaderText="<%$ Resources:GlobalResources, col_Medida3 %>" >
                                                     </asp:BoundField>
-                                                    <asp:BoundField DataField="UnidadEdif_3" HeaderText="Unidad (3)" >
+                                                    <asp:BoundField DataField="UnidadEdif_3" HeaderText="<%$ Resources:GlobalResources, col_Unidad3 %>" >
                                                     </asp:BoundField>
                                                     <asp:BoundField DataField="ObsEdif_1" >
                                                     </asp:BoundField>
@@ -1390,21 +1469,21 @@
                                                     </asp:BoundField>
                                                     <asp:BoundField DataField="SubReferencia" >
                                                     </asp:BoundField>
-                                                    <asp:BoundField DataField="CategoriaOtros" HeaderText="Categoria" >
+                                                    <asp:BoundField DataField="CategoriaOtros" HeaderText="<%$ Resources:GlobalResources, col_Categoria %>" >
                                                     </asp:BoundField>
-                                                    <asp:BoundField DataField="TpoOtros" HeaderText="Tipo" >
+                                                    <asp:BoundField DataField="TpoOtros" HeaderText="<%$ Resources:GlobalResources, col_Tipo %>" >
                                                     </asp:BoundField>
-                                                    <asp:BoundField DataField="GenOtros" HeaderText="Generico" >
+                                                    <asp:BoundField DataField="GenOtros" HeaderText="<%$ Resources:GlobalResources, col_Generico %>" >
                                                     </asp:BoundField>
-                                                    <asp:BoundField DataField="DescOtros" HeaderText="Descripción" >
+                                                    <asp:BoundField DataField="DescOtros" HeaderText="<%$ Resources:GlobalResources, col_Descripcion %>" >
                                                     </asp:BoundField>
-                                                    <asp:BoundField DataField="CantOtros" HeaderText="Cantidad" >
+                                                    <asp:BoundField DataField="CantOtros" HeaderText="<%$ Resources:GlobalResources, col_Cantidad %>" >
                                                     </asp:BoundField>
-                                                    <asp:BoundField DataField="MarcaOtros" HeaderText="Marca" >
+                                                    <asp:BoundField DataField="MarcaOtros" HeaderText="<%$ Resources:GlobalResources, col_Marca %>" >
                                                     </asp:BoundField>
-                                                    <asp:BoundField DataField="ModOtros" HeaderText="Modelo" >
+                                                    <asp:BoundField DataField="ModOtros" HeaderText="<%$ Resources:GlobalResources, col_Modelo %>" >
                                                     </asp:BoundField>
-                                                    <asp:BoundField DataField="NumSerieOtros" HeaderText="N. Serie" >
+                                                    <asp:BoundField DataField="NumSerieOtros" HeaderText="<%$ Resources:GlobalResources, col_Serie %>" >
                                                     </asp:BoundField>
                                                     <asp:BoundField DataField="ObsOtros_1" >
                                                     </asp:BoundField>
@@ -1432,7 +1511,7 @@
 
                     <div class="row mb-3 mt-4" style="background-color:#C6D541; align-items: baseline;">
                         <div class="col-10" style="padding-left: 14px;">
-                            <asp:Label ID="LblOtros" runat="server" Text="OTROS DETALLES" CssClass="control-label" Font-Size="small"></asp:Label>
+                            <asp:Label ID="LblOtros" runat="server" Text="<%$ Resources:GlobalResources, hdrTituloOtrosDetalles_1 %>" CssClass="control-label" Font-Size="small"></asp:Label>
                         </div>
                     </div>
 
@@ -1484,9 +1563,9 @@
                                  style="background: linear-gradient(to right, #C6D541, #ffffff); padding: 3px 15px;">
                                 <%--<span class="fw-bold text-dark">Acciones para Otros Detalles</span>--%>
                                 <div class="d-flex gap-2">
-                                    <asp:Button ID="BtnEditarOtros" runat="server" Text="Editar" CssClass="btn btn-outline-primary btn-sm rounded-pill px-3" OnClick="BtnEditarOtros_Click" />
-                                    <asp:Button ID="BtnActualizarOtros" runat="server" Text="Aplicar Cambios" CssClass="btn btn-outline-primary btn-sm rounded-pill px-3" Visible="false" OnClick="BtnActualizarOtros_Click" />
-                                    <asp:Button ID="BtnAnularOtros" runat="server" Text="Cancelar" CssClass="btn btn-soft-gray btn-sm rounded-pill px-3" Visible="false" OnClick="BtnAnularOtros_Click" />
+                                    <asp:Button ID="BtnEditarOtros" runat="server" Text="<%$ Resources:GlobalResources, btnEditar %>" CssClass="btn btn-outline-primary btn-sm rounded-pill px-3" OnClick="BtnEditarOtros_Click" />
+                                    <asp:Button ID="BtnActualizarOtros" runat="server" Text="<%$ Resources:GlobalResources, btnGrabar %>" CssClass="btn btn-outline-primary btn-sm rounded-pill px-3" Visible="false" OnClick="BtnActualizarOtros_Click" />
+                                    <asp:Button ID="BtnAnularOtros" runat="server" Text="<%$ Resources:GlobalResources, btnCancelar %>" CssClass="btn btn-soft-gray btn-sm rounded-pill px-3" Visible="false" OnClick="BtnAnularOtros_Click" />
                                 </div>
                             </div>
                         </div>
@@ -1497,7 +1576,7 @@
 
                 <div class="row mb-4 mt-3" style="background-color:#96E7D9; align-items: baseline;">
                     <div class="col-10" style="padding-left: 14px;">
-                        <asp:Label ID="LblEtiquetaPnl0" runat="server" Text="DOCUMENTACIÓN" CssClass="control-label" Font-Size="small"></asp:Label>
+                        <asp:Label ID="LblEtiquetaPnl0" runat="server" Text="<%$ Resources:GlobalResources, hdrTituloDocumentacion %>" CssClass="control-label" Font-Size="small"></asp:Label>
                     </div>
                     <div class="col-2" style="display:flex; justify-content: end;">
                         <div>
@@ -1563,16 +1642,16 @@
                                             </ItemTemplate>
                                         </asp:TemplateField>
 --%>
-                                        <asp:TemplateField HeaderText="Tipo Archivo">
+                                        <asp:TemplateField HeaderText="<%$ Resources:GlobalResources, col_TpoArchivo %>">
                                             <ItemTemplate>
                                                 <asp:LinkButton ID="lnkTpoArchivo" runat="server" Text='<%# Eval("TpoArchivo") %>' CommandName="AbrirArchivo" CommandArgument='<%# Container.DataItemIndex %>' />
                                             </ItemTemplate>
                                         </asp:TemplateField>
 
-                                        <asp:BoundField DataField="Descripcion" HeaderText="Descripción del documento" >
+                                        <asp:BoundField DataField="Descripcion" HeaderText="<%$ Resources:GlobalResources, col_DescDocumento %>" >
                                         <ItemStyle Width="825px" />
                                         </asp:BoundField>
-                                        <asp:BoundField DataField="Fec_Entrega" DataFormatString="{0:d}" HeaderText="Fecha de entrega" >
+                                        <asp:BoundField DataField="Fec_Entrega" DataFormatString="{0:d}" HeaderText="<%$ Resources:GlobalResources, col_Fec_Entrega %>" >
                                         <ItemStyle Width="125px" />
                                         </asp:BoundField>
                                         <asp:BoundField DataField="DocInterno" >
@@ -1581,7 +1660,7 @@
                                         </asp:BoundField>  
                                         <asp:BoundField DataField="Nom_Archivo" >
                                         </asp:BoundField>                                          
-                                        <asp:TemplateField HeaderText="Entregado" ItemStyle-HorizontalAlign="Center" HeaderStyle-CssClass="text-center">
+                                        <asp:TemplateField HeaderText="<%$ Resources:GlobalResources, col_Entregado %>" ItemStyle-HorizontalAlign="Center" HeaderStyle-CssClass="text-center">
                                             <ItemStyle Width="125px" />
                                             <ItemTemplate>
                                                 <asp:CheckBox ID="ChBoxRow" runat="server" Checked='<%# Convert.ToBoolean(Eval("IdDescarga")) %>' />
@@ -1597,11 +1676,11 @@
                     <div class="d-grid gap-2 gap-md-3 d-md-flex justify-content-md-center mt-2 mb-3">
                         <asp:UpdatePanel ID="UpdatePanel13" runat="server" UpdateMode="Conditional">
                             <ContentTemplate>
-                                <asp:Button ID="BtnCrear_Cuaderno" runat="server" Text="Crear Cuaderno" Font-Bold="True" OnClick="BtnCrear_Cuaderno_Click" CssClass="btn btn-secondary" TabIndex="0"/>
-                                <asp:Button ID="BtnEnviarWhatsApp" runat="server" Text="Mensaje WhatsApp" OnClick="BtnEnviarWhatsApp_Click" CssClass="btn btn-secondary" TabIndex="1"/>
-                                <asp:Button ID="BtnCartaSolicitud"  runat="server" Text="Carta Solicitud" OnClick="BtnCartaSolicitud_Click" CssClass="btn btn-primary" TabIndex="2"/>
-                                <asp:Button ID="BtnGeneraDocumento" runat="server" Text="Informe Preliminar" OnClick="BtnInformePreliminar_Click" CssClass="btn btn-primary" TabIndex="3"/>
-                                <asp:Button ID="BtnConvenioAjuste" runat="server" Text="Convenio Ajuste" OnClick="BtnConvenioAjuste_Click" CssClass="btn btn-primary" TabIndex="4" />
+                                <asp:Button ID="BtnCrear_Cuaderno" runat="server" Text="<%$ Resources:GlobalResources, btnCrearCuaderno %>" Font-Bold="True" OnClick="BtnCrear_Cuaderno_Click" CssClass="btn btn-secondary" TabIndex="0"/>
+                                <asp:Button ID="BtnEnviarWhatsApp" runat="server" Text="<%$ Resources:GlobalResources, btnMsgWhatsApp %>" OnClick="BtnEnviarWhatsApp_Click" CssClass="btn btn-secondary" TabIndex="1"/>
+                                <asp:Button ID="BtnCartaSolicitud"  runat="server" Text="<%$ Resources:GlobalResources, btnCrtSolicitud %>" OnClick="BtnCartaSolicitud_Click" CssClass="btn btn-primary" TabIndex="2"/>
+                                <asp:Button ID="BtnInformePreliminar" runat="server" Text="<%$ Resources:GlobalResources, btnInfPreliminar %>" OnClick="BtnInformePreliminar_Click" CssClass="btn btn-primary" TabIndex="3"/>
+                                <asp:Button ID="BtnConvenioAjuste" runat="server" Text="<%$ Resources:GlobalResources, btnConAjuste %>" OnClick="BtnConvenioAjuste_Click" CssClass="btn btn-primary" TabIndex="4" />
                             </ContentTemplate>
                         </asp:UpdatePanel>
                     </div>
@@ -1612,7 +1691,7 @@
 
                 <div class="row mb-4 mt-3" style="background-color:#96E7D9; align-items: baseline;">
                     <div class="col-10" style="padding-left: 14px;">
-                        <asp:Label ID="LblEtiquetaPnl3" runat="server" Text="DATOS PERSONALES" CssClass="control-label" Font-Size="small"></asp:Label>
+                        <asp:Label ID="LblEtiquetaPnl3" runat="server" Text="<%$ Resources:GlobalResources, hdrTituloDatosPersonales %>" CssClass="control-label" Font-Size="small"></asp:Label>
                     </div>
                     <div class="col-2" style="display:flex; justify-content: end;">
                         <div>
@@ -1628,7 +1707,7 @@
                 <asp:Panel ID="pnl3" runat="server" Visible="false">
                     <div class="row mb-3 mt-4" style="background-color:#C6D541; align-items: baseline;">
                         <div class="col-10" style="padding-left: 14px;">
-                            <asp:Label ID="LblEtiquetaPnl5" runat="server" Text="CONTACTO 1" CssClass="control-label" Font-Size="small"></asp:Label>
+                            <asp:Label ID="LblEtiquetaPnl5" runat="server" Text="<%$ Resources:GlobalResources, hdrTituloCont1 %>" CssClass="control-label" Font-Size="small"></asp:Label>
                         </div>
                         <div class="col-2" style="display:flex; justify-content: end;">
                             <div>
@@ -1646,7 +1725,7 @@
                         <div class="row mt-3">
                             <div class="col-lg-6 col-md-6">
                                 <div class="mb-2">
-                                    <asp:Label ID="LblNomContacto1" runat="server" Text="Nombre" CssClass="form-label"></asp:Label>
+                                    <asp:Label ID="LblNomContacto1" runat="server" Text="<%$ Resources:GlobalResources, lblNomContacto %>" CssClass="form-label"></asp:Label>
                                 </div>
                                 <div class="input-group input-group-sm">
                                     <asp:TextBox ID="TxtNomContacto1" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -1655,7 +1734,7 @@
 
                             <div class="col-lg-6 col-md-6 ">
                                 <div class="mb-2">
-                                    <asp:Label ID="LblTpoContacto1" runat="server" Text="Tipo de Contacto" CssClass="form-label"></asp:Label>
+                                    <asp:Label ID="LblTpoContacto1" runat="server" Text="<%$ Resources:GlobalResources, lblTpoContacto %>" CssClass="form-label"></asp:Label>
                                 </div>
                                 <div class="input-group input-group-sm">
                                     <asp:TextBox ID="TxtTpoContacto1" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -1665,7 +1744,7 @@
                         <div class="row mt-3">
                             <div class="col-lg-3 col-md-3">
                                 <div class="mb-2">
-                                    <asp:Label ID="LblTel1_Contacto1" runat="server" Text="Telefono 1" CssClass="form-label"></asp:Label>
+                                    <asp:Label ID="LblTel1_Contacto1" runat="server" Text="<%$ Resources:GlobalResources, lblTelefono1 %>" CssClass="form-label"></asp:Label>
                                 </div>
                                 <div class="input-group input-group-sm">
                                     <asp:TextBox ID="TxtTel1_Contacto1" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -1674,7 +1753,7 @@
 
                             <div class="col-lg-3 col-md-3 ">
                                 <div class="mb-2">
-                                    <asp:Label ID="LblTel2_Contacto1" runat="server" Text="Telefono 2" CssClass="form-label"></asp:Label>
+                                    <asp:Label ID="LblTel2_Contacto1" runat="server" Text="<%$ Resources:GlobalResources, lblTelefono2 %>" CssClass="form-label"></asp:Label>
                                 </div>
                                 <div class="input-group input-group-sm">
                                     <asp:TextBox ID="TxtTel2_Contacto1" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -1683,7 +1762,7 @@
 
                             <div class="col-lg-3 col-md-3">
                                 <div class="mb-2">
-                                    <asp:Label ID="LblTel3_Contacto1" runat="server" Text="Telefono 3" CssClass="form-label"></asp:Label>
+                                    <asp:Label ID="LblTel3_Contacto1" runat="server" Text="<%$ Resources:GlobalResources, lblTelefono3 %>" CssClass="form-label"></asp:Label>
                                 </div>
                                 <div class="input-group input-group-sm">
                                     <asp:TextBox ID="TxtTel3_Contacto1" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -1691,7 +1770,7 @@
                             </div>
                             <div class="col-lg-3 col-md-3">
                                 <div class="mb-2">
-                                    <asp:Label ID="LblTel4_Contacto1" runat="server" Text="Telefono 4" CssClass="form-label"></asp:Label>
+                                    <asp:Label ID="LblTel4_Contacto1" runat="server" Text="<%$ Resources:GlobalResources, lblTelefono4 %>" CssClass="form-label"></asp:Label>
                                 </div>
                                 <div class="input-group input-group-sm">
                                     <asp:TextBox ID="TxtTel4_Contacto1" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -1701,7 +1780,7 @@
                         <div class="row mt-3">
                             <div class="col-lg-6 col-md-6">
                                 <div class="mb-2">
-                                    <asp:Label ID="LblEmailContacto1" runat="server" Text="Correo Electronico del Contacto" CssClass="form-label"></asp:Label>
+                                    <asp:Label ID="LblEmailContacto1" runat="server" Text="<%$ Resources:GlobalResources, lblEmailContacto %>" CssClass="form-label"></asp:Label>
                                 </div>
                                 <div class="input-group input-group-sm">
                                     <asp:TextBox ID="TxtEmailContacto1" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -1713,7 +1792,7 @@
                         <div class="row mt-3">
                             <div class="col-lg-12 col-md-12">
                                 <div class="mb-2">
-                                    <asp:Label ID="LblDetalleContacto1" runat="server" Text="Detalle del Contacto" CssClass="form-label"></asp:Label>
+                                    <asp:Label ID="LblDetalleContacto1" runat="server" Text="<%$ Resources:GlobalResources, lblDetContacto %>" CssClass="form-label"></asp:Label>
                                 </div>
                                 <div class="input-group input-group-sm">
                                     <asp:TextBox ID="TxtDetalleContacto1" runat="server" CssClass="form-control form-control-sm" placeholder="" AutoComplete="off" MaxLength="2500" Columns="12" Rows="5" TextMode="MultiLine" ></asp:TextBox>
@@ -1725,7 +1804,7 @@
 
                     <div class="row mb-3 mt-4" style="background-color:#C6D541; align-items: baseline;">
                         <div class="col-10" style="padding-left: 14px;">
-                            <asp:Label ID="LblEtiquetaPnl6" runat="server" Text="CONTACTO 2" CssClass="control-label" Font-Size="small"></asp:Label>
+                            <asp:Label ID="LblEtiquetaPnl6" runat="server" Text="<%$ Resources:GlobalResources, hdrTituloCont2 %>" CssClass="control-label" Font-Size="small"></asp:Label>
                         </div>
                         <div class="col-2" style="display:flex; justify-content: end;">
                             <div>
@@ -1743,7 +1822,7 @@
                         <div class="row mt-3">
                             <div class="col-lg-6 col-md-6">
                                 <div class="mb-2">
-                                    <asp:Label ID="LblNomContacto2" runat="server" Text="Nombre" CssClass="form-label"></asp:Label>
+                                    <asp:Label ID="LblNomContacto2" runat="server" Text="<%$ Resources:GlobalResources, lblNomContacto %>" CssClass="form-label"></asp:Label>
                                 </div>
                                 <div class="input-group input-group-sm">
                                     <asp:TextBox ID="TxtNomContacto2" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -1752,7 +1831,7 @@
 
                             <div class="col-lg-6 col-md-6 ">
                                 <div class="mb-2">
-                                    <asp:Label ID="LblTpoContacto2" runat="server" Text="Tipo de Contacto" CssClass="form-label"></asp:Label>
+                                    <asp:Label ID="LblTpoContacto2" runat="server" Text="<%$ Resources:GlobalResources, lblTpoContacto %>" CssClass="form-label"></asp:Label>
                                 </div>
                                 <div class="input-group input-group-sm">
                                     <asp:TextBox ID="TxtTpoContacto2" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -1762,7 +1841,7 @@
                         <div class="row mt-3">
                             <div class="col-lg-3 col-md-3">
                                 <div class="mb-2">
-                                    <asp:Label ID="LblTel1_Contacto2" runat="server" Text="Telefono 1" CssClass="form-label"></asp:Label>
+                                    <asp:Label ID="LblTel1_Contacto2" runat="server" Text="<%$ Resources:GlobalResources, lblTelefono1 %>" CssClass="form-label"></asp:Label>
                                 </div>
                                 <div class="input-group input-group-sm">
                                     <asp:TextBox ID="TxtTel1_Contacto2" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -1771,7 +1850,7 @@
 
                             <div class="col-lg-3 col-md-3 ">
                                 <div class="mb-2">
-                                    <asp:Label ID="LblTel2_Contacto2" runat="server" Text="Telefono 2" CssClass="form-label"></asp:Label>
+                                    <asp:Label ID="LblTel2_Contacto2" runat="server" Text="<%$ Resources:GlobalResources, lblTelefono2 %>" CssClass="form-label"></asp:Label>
                                 </div>
                                 <div class="input-group input-group-sm">
                                     <asp:TextBox ID="TxtTel2_Contacto2" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -1780,7 +1859,7 @@
 
                             <div class="col-lg-3 col-md-3">
                                 <div class="mb-2">
-                                    <asp:Label ID="LblTel3_Contacto2" runat="server" Text="Telefono 3" CssClass="form-label"></asp:Label>
+                                    <asp:Label ID="LblTel3_Contacto2" runat="server" Text="<%$ Resources:GlobalResources, lblTelefono3 %>" CssClass="form-label"></asp:Label>
                                 </div>
                                 <div class="input-group input-group-sm">
                                     <asp:TextBox ID="TxtTel3_Contacto2" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -1788,7 +1867,7 @@
                             </div>
                             <div class="col-lg-3 col-md-3">
                                 <div class="mb-2">
-                                    <asp:Label ID="LblTel4_Contacto2" runat="server" Text="Telefono 4" CssClass="form-label"></asp:Label>
+                                    <asp:Label ID="LblTel4_Contacto2" runat="server" Text="<%$ Resources:GlobalResources, lblTelefono4 %>" CssClass="form-label"></asp:Label>
                                 </div>
                                 <div class="input-group input-group-sm">
                                     <asp:TextBox ID="TxtTel4_Contacto2" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -1798,7 +1877,7 @@
                         <div class="row mt-3">
                             <div class="col-lg-6 col-md-6">
                                 <div class="mb-2">
-                                    <asp:Label ID="LblEmailContacto2" runat="server" Text="Correo Electronico del Contacto" CssClass="form-label"></asp:Label>
+                                    <asp:Label ID="LblEmailContacto2" runat="server" Text="<%$ Resources:GlobalResources, lblEmailContacto %>" CssClass="form-label"></asp:Label>
                                 </div>
                                 <div class="input-group input-group-sm">
                                     <asp:TextBox ID="TxtEmailContacto2" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -1810,7 +1889,7 @@
                         <div class="row mt-3">
                             <div class="col-lg-12 col-md-12">
                                 <div class="mb-2">
-                                    <asp:Label ID="LblDetalleContacto2" runat="server" Text="Detalle del Contacto" CssClass="form-label"></asp:Label>
+                                    <asp:Label ID="LblDetalleContacto2" runat="server" Text="<%$ Resources:GlobalResources, lblDetContacto %>" CssClass="form-label"></asp:Label>
                                 </div>
                                 <div class="input-group input-group-sm">
                                     <asp:TextBox ID="TxtDetalleContacto2" runat="server" CssClass="form-control form-control-sm" placeholder="" AutoComplete="off" MaxLength="2500" Columns="12" Rows="5" TextMode="MultiLine" ></asp:TextBox>
@@ -1822,7 +1901,7 @@
 
                     <div class="row mb-3 mt-4" style="background-color:#C6D541; align-items: baseline;">
                         <div class="col-10" style="padding-left: 14px;">
-                            <asp:Label ID="LblEtiquetaPnl7" runat="server" Text="CONTACTO 3" CssClass="control-label" Font-Size="small"></asp:Label>
+                            <asp:Label ID="LblEtiquetaPnl7" runat="server" Text="<%$ Resources:GlobalResources, hdrTituloCont3 %>" CssClass="control-label" Font-Size="small"></asp:Label>
                         </div>
                         <div class="col-2" style="display:flex; justify-content: end;">
                             <div>
@@ -1840,7 +1919,7 @@
                         <div class="row mt-3">
                             <div class="col-lg-6 col-md-6">
                                 <div class="mb-2">
-                                    <asp:Label ID="LblNomContacto3" runat="server" Text="Nombre" CssClass="form-label"></asp:Label>
+                                    <asp:Label ID="LblNomContacto3" runat="server" Text="<%$ Resources:GlobalResources, lblNomContacto %>" CssClass="form-label"></asp:Label>
                                 </div>
                                 <div class="input-group input-group-sm">
                                     <asp:TextBox ID="TxtNomContacto3" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -1849,7 +1928,7 @@
 
                             <div class="col-lg-6 col-md-6 ">
                                 <div class="mb-2">
-                                    <asp:Label ID="LblTpoContacto3" runat="server" Text="Tipo de Contacto" CssClass="form-label"></asp:Label>
+                                    <asp:Label ID="LblTpoContacto3" runat="server" Text="<%$ Resources:GlobalResources, lblTpoContacto %>" CssClass="form-label"></asp:Label>
                                 </div>
                                 <div class="input-group input-group-sm">
                                     <asp:TextBox ID="TxtTpoContacto3" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -1859,7 +1938,7 @@
                         <div class="row mt-3">
                             <div class="col-lg-3 col-md-3">
                                 <div class="mb-2">
-                                    <asp:Label ID="LblTel1_Contacto3" runat="server" Text="Telefono 1" CssClass="form-label"></asp:Label>
+                                    <asp:Label ID="LblTel1_Contacto3" runat="server" Text="<%$ Resources:GlobalResources, lblTelefono1 %>" CssClass="form-label"></asp:Label>
                                 </div>
                                 <div class="input-group input-group-sm">
                                     <asp:TextBox ID="TxtTel1_Contacto3" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -1868,7 +1947,7 @@
 
                             <div class="col-lg-3 col-md-3 ">
                                 <div class="mb-2">
-                                    <asp:Label ID="LblTel2_Contacto3" runat="server" Text="Telefono 2" CssClass="form-label"></asp:Label>
+                                    <asp:Label ID="LblTel2_Contacto3" runat="server" Text="<%$ Resources:GlobalResources, lblTelefono2 %>" CssClass="form-label"></asp:Label>
                                 </div>
                                 <div class="input-group input-group-sm">
                                     <asp:TextBox ID="TxtTel2_Contacto3" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -1877,7 +1956,7 @@
 
                             <div class="col-lg-3 col-md-3">
                                 <div class="mb-2">
-                                    <asp:Label ID="LblTel3_Contacto3" runat="server" Text="Telefono 3" CssClass="form-label"></asp:Label>
+                                    <asp:Label ID="LblTel3_Contacto3" runat="server" Text="<%$ Resources:GlobalResources, lblTelefono3 %>" CssClass="form-label"></asp:Label>
                                 </div>
                                 <div class="input-group input-group-sm">
                                     <asp:TextBox ID="TxtTel3_Contacto3" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -1885,7 +1964,7 @@
                             </div>
                             <div class="col-lg-3 col-md-3">
                                 <div class="mb-2">
-                                    <asp:Label ID="LblTel4_Contacto3" runat="server" Text="Telefono 4" CssClass="form-label"></asp:Label>
+                                    <asp:Label ID="LblTel4_Contacto3" runat="server" Text="<%$ Resources:GlobalResources, lblTelefono4 %>" CssClass="form-label"></asp:Label>
                                 </div>
                                 <div class="input-group input-group-sm">
                                     <asp:TextBox ID="TxtTel4_Contacto3" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -1895,7 +1974,7 @@
                         <div class="row mt-3">
                             <div class="col-lg-6 col-md-6">
                                 <div class="mb-2">
-                                    <asp:Label ID="LblEmailContacto3" runat="server" Text="Correo Electronico del Contacto" CssClass="form-label"></asp:Label>
+                                    <asp:Label ID="LblEmailContacto3" runat="server" Text="<%$ Resources:GlobalResources, lblEmailContacto %>" CssClass="form-label"></asp:Label>
                                 </div>
                                 <div class="input-group input-group-sm">
                                     <asp:TextBox ID="TxtEmailContacto3" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -1907,7 +1986,7 @@
                         <div class="row mt-3">
                             <div class="col-lg-12 col-md-12">
                                 <div class="mb-2">
-                                    <asp:Label ID="LblDetalleContacto3" runat="server" Text="Detalle del Contacto" CssClass="form-label"></asp:Label>
+                                    <asp:Label ID="LblDetalleContacto3" runat="server" Text="<%$ Resources:GlobalResources, lblDetContacto %>" CssClass="form-label"></asp:Label>
                                 </div>
                                 <div class="input-group input-group-sm">
                                     <asp:TextBox ID="TxtDetalleContacto3" runat="server" CssClass="form-control form-control-sm" placeholder="" AutoComplete="off" MaxLength="2500" Columns="12" Rows="5" TextMode="MultiLine" ></asp:TextBox>
@@ -1919,7 +1998,7 @@
 
                     <div class="row mb-3 mt-4" style="background-color:#C6D541; align-items: baseline;">
                         <div class="col-10" style="padding-left: 14px;">
-                            <asp:Label ID="LblEtiquetaPnl8" runat="server" Text="CONTACTO 4" CssClass="control-label" Font-Size="small"></asp:Label>
+                            <asp:Label ID="LblEtiquetaPnl8" runat="server" Text="<%$ Resources:GlobalResources, hdrTituloCont4 %>" CssClass="control-label" Font-Size="small"></asp:Label>
                         </div>
                         <div class="col-2" style="display:flex; justify-content: end;">
                             <div>
@@ -1937,7 +2016,7 @@
                         <div class="row mt-3">
                             <div class="col-lg-6 col-md-6">
                                 <div class="mb-2">
-                                    <asp:Label ID="LblNomContacto4" runat="server" Text="Nombre" CssClass="form-label"></asp:Label>
+                                    <asp:Label ID="LblNomContacto4" runat="server" Text="<%$ Resources:GlobalResources, lblNomContacto %>" CssClass="form-label"></asp:Label>
                                 </div>
                                 <div class="input-group input-group-sm">
                                     <asp:TextBox ID="TxtNomContacto4" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -1946,7 +2025,7 @@
 
                             <div class="col-lg-6 col-md-6 ">
                                 <div class="mb-2">
-                                    <asp:Label ID="LblTpoContacto4" runat="server" Text="Tipo de Contacto" CssClass="form-label"></asp:Label>
+                                    <asp:Label ID="LblTpoContacto4" runat="server" Text="<%$ Resources:GlobalResources, lblTpoContacto %>" CssClass="form-label"></asp:Label>
                                 </div>
                                 <div class="input-group input-group-sm">
                                     <asp:TextBox ID="TxtTpoContacto4" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -1956,7 +2035,7 @@
                         <div class="row mt-3">
                             <div class="col-lg-3 col-md-3">
                                 <div class="mb-2">
-                                    <asp:Label ID="LblTel1_Contacto4" runat="server" Text="Telefono 1" CssClass="form-label"></asp:Label>
+                                    <asp:Label ID="LblTel1_Contacto4" runat="server" Text="<%$ Resources:GlobalResources, lblTelefono1 %>" CssClass="form-label"></asp:Label>
                                 </div>
                                 <div class="input-group input-group-sm">
                                     <asp:TextBox ID="TxtTel1_Contacto4" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -1965,7 +2044,7 @@
 
                             <div class="col-lg-3 col-md-3 ">
                                 <div class="mb-2">
-                                    <asp:Label ID="LblTel2_Contacto4" runat="server" Text="Telefono 2" CssClass="form-label"></asp:Label>
+                                    <asp:Label ID="LblTel2_Contacto4" runat="server" Text="<%$ Resources:GlobalResources, lblTelefono2 %>" CssClass="form-label"></asp:Label>
                                 </div>
                                 <div class="input-group input-group-sm">
                                     <asp:TextBox ID="TxtTel2_Contacto4" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -1974,7 +2053,7 @@
 
                             <div class="col-lg-3 col-md-3">
                                 <div class="mb-2">
-                                    <asp:Label ID="LblTel3_Contacto4" runat="server" Text="Telefono 3" CssClass="form-label"></asp:Label>
+                                    <asp:Label ID="LblTel3_Contacto4" runat="server" Text="<%$ Resources:GlobalResources, lblTelefono3 %>" CssClass="form-label"></asp:Label>
                                 </div>
                                 <div class="input-group input-group-sm">
                                     <asp:TextBox ID="TxtTel3_Contacto4" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -1982,7 +2061,7 @@
                             </div>
                             <div class="col-lg-3 col-md-3">
                                 <div class="mb-2">
-                                    <asp:Label ID="LblTel4_Contacto4" runat="server" Text="Telefono 4" CssClass="form-label"></asp:Label>
+                                    <asp:Label ID="LblTel4_Contacto4" runat="server" Text="<%$ Resources:GlobalResources, lblTelefono4 %>" CssClass="form-label"></asp:Label>
                                 </div>
                                 <div class="input-group input-group-sm">
                                     <asp:TextBox ID="TxtTel4_Contacto4" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -1992,7 +2071,7 @@
                         <div class="row mt-3">
                             <div class="col-lg-6 col-md-6">
                                 <div class="mb-2">
-                                    <asp:Label ID="LblEmailContacto4" runat="server" Text="Correo Electronico del Contacto" CssClass="form-label"></asp:Label>
+                                    <asp:Label ID="LblEmailContacto4" runat="server" Text="<%$ Resources:GlobalResources, lblEmailContacto %>" CssClass="form-label"></asp:Label>
                                 </div>
                                 <div class="input-group input-group-sm">
                                     <asp:TextBox ID="TxtEmailContacto4" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -2004,7 +2083,7 @@
                         <div class="row mt-3">
                             <div class="col-lg-12 col-md-12">
                                 <div class="mb-2">
-                                    <asp:Label ID="LblDetalleContacto4" runat="server" Text="Detalle del Contacto" CssClass="form-label"></asp:Label>
+                                    <asp:Label ID="LblDetalleContacto4" runat="server" Text="<%$ Resources:GlobalResources, lblDetContacto %>" CssClass="form-label"></asp:Label>
                                 </div>
                                 <div class="input-group input-group-sm">
                                     <asp:TextBox ID="TxtDetalleContacto4" runat="server" CssClass="form-control form-control-sm" placeholder="" AutoComplete="off" MaxLength="2500" Columns="12" Rows="5" TextMode="MultiLine" ></asp:TextBox>
@@ -2018,9 +2097,9 @@
                     <div class="d-grid gap-4 d-flex justify-content-center mt-3 mb-3">
                         <asp:UpdatePanel ID="UpdatePanel5" runat="server" UpdateMode="Conditional">
                             <ContentTemplate>
-                                <asp:Button ID="BtnAnularPnl3" runat="server" Text="Cancelar" Font-Bold="True" OnClick="BtnAnularPnl3_Click" CssClass="btn btn-primary" Visible="false" TabIndex="0"/>
-                                <asp:Button ID="btnEditarPnl3" runat="server" Text="Editar Datos" Font-Bold="True" OnClick="btnEditarPnl3_Click" CssClass="btn btn-primary" TabIndex="1"/>
-                                <asp:Button ID="btnActualizarPnl3" runat="server" Text="Aplicar Cambios" Font-Bold="True" OnClick="btnActualizarPnl3_Click" CssClass="btn btn-secondary" visible="false" TabIndex="2"/>
+                                <asp:Button ID="BtnAnularPnl3" runat="server" Text="<%$ Resources:GlobalResources, btnCancelar %>" Font-Bold="True" OnClick="BtnAnularPnl3_Click" CssClass="btn btn-primary" Visible="false" TabIndex="0"/>
+                                <asp:Button ID="btnEditarPnl3" runat="server" Text="<%$ Resources:GlobalResources, btnEditar %>" Font-Bold="True" OnClick="btnEditarPnl3_Click" CssClass="btn btn-primary" TabIndex="1"/>
+                                <asp:Button ID="btnActualizarPnl3" runat="server" Text="<%$ Resources:GlobalResources, btnGrabar %>" Font-Bold="True" OnClick="btnActualizarPnl3_Click" CssClass="btn btn-secondary" visible="false" TabIndex="2"/>
                             </ContentTemplate>
                         </asp:UpdatePanel>
                     </div>
@@ -2028,7 +2107,7 @@
                 </div>
                 <div class="row mb-4 mt-3" style="background-color:#96E7D9; align-items: baseline;">
                     <div class="col-10" style="padding-left: 14px;">
-                        <asp:Label ID="LblEtiquetaPnl4" runat="server" Text="INFORMACIÓN PÓLIZA" CssClass="control-label" Font-Size="small"></asp:Label>
+                        <asp:Label ID="LblEtiquetaPnl4" runat="server" Text="<%$ Resources:GlobalResources, hdrTituloInfPoliza %>" CssClass="control-label" Font-Size="small"></asp:Label>
                     </div>
                     <div class="col-2" style="display:flex; justify-content: end;">
                         <div>
@@ -2046,7 +2125,7 @@
 
                     <div class="row mb-3 mt-4" style="background-color:#C6D541; align-items: baseline;">
                         <div class="col-10" style="padding-left: 14px;">
-                            <asp:Label ID="LblEtiquetaPnl9" runat="server" Text="DETALLES PÓLIZA" CssClass="control-label" Font-Size="small"></asp:Label>
+                            <asp:Label ID="LblEtiquetaPnl9" runat="server" Text="<%$ Resources:GlobalResources, hdrTituloDetPoliza %>" CssClass="control-label" Font-Size="small"></asp:Label>
                         </div>
                         <div class="col-2" style="display:flex; justify-content: end;">
                             <div>
@@ -2063,7 +2142,7 @@
                         <div class="row mt-3">
                             <div class="col-lg-6 col-md-6">
                                 <div class="mb-2">
-                                    <asp:Label ID="LblTpoProducto" runat="server" Text="Tipo Producto" CssClass="form-label"></asp:Label>
+                                    <asp:Label ID="LblTpoProducto" runat="server" Text="<%$ Resources:GlobalResources, lblTpoProducto %>" CssClass="form-label"></asp:Label>
                                 </div>
                                 <div class="input-group input-group-sm">
                                     <asp:TextBox ID="TxtTpoProducto" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -2072,7 +2151,7 @@
 
                             <div class="col-lg-3 col-md-3">
                                 <div class="mb-2">
-                                    <asp:Label ID="LblFechaEmision" runat="server" Text="Fecha Emision" CssClass="form-label"></asp:Label>
+                                    <asp:Label ID="LblFechaEmision" runat="server" Text="<%$ Resources:GlobalResources, lblFecEmision %>" CssClass="form-label"></asp:Label>
                                 </div>
                                 <div class="input-group input-group-sm">
                                     <asp:TextBox ID="TxtFechaEmision" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -2084,7 +2163,7 @@
                             </div>
                             <div class="col-lg-3 col-md-3">
                                 <div class="mb-2">
-                                    <asp:Label ID="LblHoraEmision" runat="server" Text="Hora Emisión" CssClass="form-label"></asp:Label>
+                                    <asp:Label ID="LblHoraEmision" runat="server" Text="<%$ Resources:GlobalResources, lblHoraEmision %>" CssClass="form-label"></asp:Label>
                                 </div>
                                 <div class="input-group input-group-sm">
                                     <asp:TextBox ID="TxtHoraEmision" runat="server" CssClass="form-control form-control-sm" 
@@ -2098,7 +2177,7 @@
                         <div class="row mt-3">
                             <div class="col-lg-3 col-md-3">
                                 <div class="mb-2">
-                                    <asp:Label ID="LblFechaIniVigencia" runat="server" Text="Fecha Inicio Vigencia" CssClass="form-label"></asp:Label>
+                                    <asp:Label ID="LblFechaIniVigencia" runat="server" Text="<%$ Resources:GlobalResources, lblFecIniVigencia %>" CssClass="form-label"></asp:Label>
                                 </div>
                                 <div class="input-group input-group-sm">
                                     <asp:TextBox ID="TxtFechaIniVigencia" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -2110,7 +2189,7 @@
                             </div>
                             <div class="col-lg-3 col-md-3">
                                 <div class="mb-2">
-                                    <asp:Label ID="LblFechaFinVigencia" runat="server" Text="Fecha Final Vigencia" CssClass="form-label"></asp:Label>
+                                    <asp:Label ID="LblFechaFinVigencia" runat="server" Text="<%$ Resources:GlobalResources, lblFecFinVigencia %>" CssClass="form-label"></asp:Label>
                                 </div>
                                 <div class="input-group input-group-sm">
                                     <asp:TextBox ID="TxtFechaFinVigencia" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -2123,7 +2202,7 @@
 
                             <div class="col-lg-3 col-md-3 ">
                                 <div class="mb-2">
-                                    <asp:Label ID="LblNumCertificado" runat="server" Text="No. Certificado" CssClass="form-label"></asp:Label>
+                                    <asp:Label ID="LblNumCertificado" runat="server" Text="<%$ Resources:GlobalResources, lblNoCertificado %>" CssClass="form-label"></asp:Label>
                                 </div>
                                 <div class="input-group input-group-sm">
                                     <asp:TextBox ID="TxtNumCertificado" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -2132,7 +2211,7 @@
 
                             <div class="col-lg-3 col-md-3">
                                 <div class="mb-2">
-                                    <asp:Label ID="LblTpoMoneda" runat="server" Text="Tipo Moneda" CssClass="form-label"></asp:Label>
+                                    <asp:Label ID="LblTpoMoneda" runat="server" Text="<%$ Resources:GlobalResources, lblTpoMoneda %>" CssClass="form-label"></asp:Label>
                                 </div>
                                 <div class="input-group input-group-sm">
                                     <asp:TextBox ID="TxtTpoMoneda" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -2144,7 +2223,7 @@
                         <div class="row mt-3">
                             <div class="col-lg-3 col-md-3 ">
                                 <div class="mb-2">
-                                    <asp:Label ID="LblTpoPlan" runat="server" Text="Tipo Plan" CssClass="form-label"></asp:Label>
+                                    <asp:Label ID="LblTpoPlan" runat="server" Text="<%$ Resources:GlobalResources, lblTpoPlan %>" CssClass="form-label"></asp:Label>
                                 </div>
                                 <div class="input-group input-group-sm">
                                     <asp:TextBox ID="TxtTpoPlan" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -2152,7 +2231,7 @@
                             </div>
                             <div class="col-lg-3 col-md-3">
                                 <div class="mb-2">
-                                    <asp:Label ID="LblPlazo" runat="server" Text="Plazo" CssClass="form-label"></asp:Label>
+                                    <asp:Label ID="LblPlazo" runat="server" Text="<%$ Resources:GlobalResources, lblPlazo %>" CssClass="form-label"></asp:Label>
                                 </div>
                                 <div class="input-group input-group-sm">
                                     <asp:TextBox ID="TxtPlazo" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -2160,7 +2239,7 @@
                             </div>
                             <div class="col-lg-3 col-md-3">
                                 <div class="mb-2">
-                                    <asp:Label ID="LblCanalVentas" runat="server" Text="Canal de Ventas" CssClass="form-label"></asp:Label>
+                                    <asp:Label ID="LblCanalVentas" runat="server" Text="<%$ Resources:GlobalResources, lblCanalVentas %>" CssClass="form-label"></asp:Label>
                                 </div>
                                 <div class="input-group input-group-sm">
                                     <asp:TextBox ID="TxtCanalVentas" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -2169,7 +2248,7 @@
 
                             <div class="col-lg-3 col-md-3 ">
                                 <div class="mb-2">
-                                    <asp:Label ID="LblNumRenovacion" runat="server" Text="No. Renovación" CssClass="form-label"></asp:Label>
+                                    <asp:Label ID="LblNumRenovacion" runat="server" Text="<%$ Resources:GlobalResources, lblNoRenovacion %>" CssClass="form-label"></asp:Label>
                                 </div>
                                 <div class="input-group input-group-sm">
                                     <asp:TextBox ID="TxtNumRenovacion" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -2180,7 +2259,7 @@
                         <div class="row mt-3">
                             <div class="col-lg-12 col-md-12 ">
                                 <div class="mb-2">
-                                    <asp:Label ID="LblGiro" runat="server" Text="Giro" CssClass="form-label"></asp:Label>
+                                    <asp:Label ID="LblGiro" runat="server" Text="<%$ Resources:GlobalResources, lblGiro %>" CssClass="form-label"></asp:Label>
                                 </div>
                                 <div class="input-group input-group-sm">
                                     <asp:TextBox ID="TxtGiro_Asegurado" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -2190,7 +2269,7 @@
                         <div class="row mt-3">
                             <div class="col-lg-3 col-md-3 ">
                                 <div class="mb-2">
-                                    <asp:Label ID="LblFormaPago" runat="server" Text="Forma de Pago" CssClass="form-label"></asp:Label>
+                                    <asp:Label ID="LblFormaPago" runat="server" Text="<%$ Resources:GlobalResources, lblFormaPago %>" CssClass="form-label"></asp:Label>
                                 </div>
                                 <div class="input-group input-group-sm">
                                     <asp:TextBox ID="TxtFormaPago" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -2198,7 +2277,7 @@
                             </div>
                             <div class="col-lg-3 col-md-3 ">
                                 <div class="mb-2">
-                                    <asp:Label ID="LblPrimaTotalAnual" runat="server" Text="Prima Total Anual" CssClass="form-label"></asp:Label>
+                                    <asp:Label ID="LblPrimaTotalAnual" runat="server" Text="<%$ Resources:GlobalResources, lblPrimaTotalAnual %>" CssClass="form-label"></asp:Label>
                                 </div>
                                 <div class="input-group input-group-sm">
                                     <asp:TextBox ID="TxtPrimaTotalAnual" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -2206,7 +2285,7 @@
                             </div>
                             <div class="col-lg-3 col-md-3 ">
                                 <div class="mb-2">
-                                    <asp:Label ID="LblPrimaNeta" runat="server" Text="Prima Neta" CssClass="form-label"></asp:Label>
+                                    <asp:Label ID="LblPrimaNeta" runat="server" Text="<%$ Resources:GlobalResources, lblPrimaNeta %>" CssClass="form-label"></asp:Label>
                                 </div>
                                 <div class="input-group input-group-sm">
                                     <asp:TextBox ID="TxtPrimaNeta" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -2214,7 +2293,7 @@
                             </div>
                             <div class="col-lg-3 col-md-3 ">
                                 <div class="mb-2">
-                                    <asp:Label ID="LblGastosExpedicion" runat="server" Text="Gastos de Expedición" CssClass="form-label"></asp:Label>
+                                    <asp:Label ID="LblGastosExpedicion" runat="server" Text="<%$ Resources:GlobalResources, lblGastosExpedicion %>" CssClass="form-label"></asp:Label>
                                 </div>
                                 <div class="input-group input-group-sm">
                                     <asp:TextBox ID="TxtGastosExpedicion" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -2225,7 +2304,7 @@
                         <div class="row mt-3">
                             <div class="col-lg-3 col-md-3 ">
                                 <div class="mb-2">
-                                    <asp:Label ID="LblRecargoPago" runat="server" Text="Recargo por Pago Fraccionado (%)" CssClass="form-label"></asp:Label>
+                                    <asp:Label ID="LblRecargoPago" runat="server" Text="<%$ Resources:GlobalResources, lblRecargoPago %>" CssClass="form-label"></asp:Label>
                                 </div>
                                 <div class="input-group input-group-sm">
                                     <asp:TextBox ID="TxtRecargoPago" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -2233,7 +2312,7 @@
                             </div>
                             <div class="col-lg-3 col-md-3 ">
                                 <div class="mb-2">
-                                    <asp:Label ID="LblPorcentajeIVA" runat="server" Text="IVA (%)" CssClass="form-label"></asp:Label>
+                                    <asp:Label ID="LblPorcentajeIVA" runat="server" Text="<%$ Resources:GlobalResources, lblIVA_Porc %>" CssClass="form-label"></asp:Label>
                                 </div>
                                 <div class="input-group input-group-sm">
                                     <asp:TextBox ID="TxtPorcentajeIVA" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -2241,7 +2320,7 @@
                             </div>
                             <div class="col-lg-3 col-md-3 ">
                                 <div class="mb-2">
-                                    <asp:Label ID="LblMontoIVA" runat="server" Text="IVA (Monto)" CssClass="form-label"></asp:Label>
+                                    <asp:Label ID="LblMontoIVA" runat="server" Text="<%$ Resources:GlobalResources, lblIVA_Monto %>" CssClass="form-label"></asp:Label>
                                 </div>
                                 <div class="input-group input-group-sm">
                                     <asp:TextBox ID="TxtMontoIVA" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -2249,7 +2328,7 @@
                             </div>
                             <div class="col-lg-3 col-md-3 ">
                                 <div class="mb-2">
-                                    <asp:Label ID="LblPrimaTotal" runat="server" Text="Prima Total" CssClass="form-label"></asp:Label>
+                                    <asp:Label ID="LblPrimaTotal" runat="server" Text="<%$ Resources:GlobalResources, lblPrimaTotal %>" CssClass="form-label"></asp:Label>
                                 </div>
                                 <div class="input-group input-group-sm">
                                     <asp:TextBox ID="TxtPrimaTotal" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -2260,7 +2339,7 @@
                         <div class="row mt-3">
                             <div class="col-lg-3 col-md-3 ">
                                 <div class="mb-2">
-                                    <asp:Label ID="LblPrimaFormaPago" runat="server" Text="Prima según Forma de Pago" CssClass="form-label"></asp:Label>
+                                    <asp:Label ID="LblPrimaFormaPago" runat="server" Text="<%$ Resources:GlobalResources, lblPrimaFormaPago %>" CssClass="form-label"></asp:Label>
                                 </div>
                                 <div class="input-group input-group-sm">
                                     <asp:TextBox ID="TxtPrimaFormaPago" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -2268,7 +2347,7 @@
                             </div>
                             <div class="col-lg-3 col-md-3 ">
                                 <div class="mb-2">
-                                    <asp:Label ID="LblPagoSubsecuente" runat="server" Text="Pagos Subsecuentes" CssClass="form-label"></asp:Label>
+                                    <asp:Label ID="LblPagoSubsecuente" runat="server" Text="<%$ Resources:GlobalResources, lblPagoSubsecuente %>" CssClass="form-label"></asp:Label>
                                 </div>
                                 <div class="input-group input-group-sm">
                                     <asp:TextBox ID="TxtPagoSubsecuente" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -2279,7 +2358,7 @@
                         <%-- CONDUSEF --%>
                         <div class="row mb-3 mt-4" style="background-color:#AED6F1; align-items: baseline;">
                             <div class="col-10" style="padding-left: 14px;">
-                                <asp:Label ID="LblEtiquetaPnl19" runat="server" Text=" REGISTROS ANTE CNBV / CONDUSEF" CssClass="control-label" Font-Size="small"></asp:Label>
+                                <asp:Label ID="LblEtiquetaPnl19" runat="server" Text="<%$ Resources:GlobalResources, hdrTituloRegistrosAnte %>" CssClass="control-label" Font-Size="small"></asp:Label>
                             </div>
                             <div class="col-2" style="display:flex; justify-content: end;">
                                 <div>
@@ -2292,7 +2371,7 @@
                             <div class="row mt-3">
                                 <div class="col-lg-3 col-md-3 ">
                                     <div class="mb-2">
-                                        <asp:Label ID="LblRegistroPPAQ" runat="server" Text="Registro PPAQ" CssClass="form-label"></asp:Label>
+                                        <asp:Label ID="LblRegistroPPAQ" runat="server" Text="<%$ Resources:GlobalResources, lblRegistroPPAQ %>" CssClass="form-label"></asp:Label>
                                     </div>
                                     <div class="input-group input-group-sm">
                                         <asp:TextBox ID="TxtRegistroPPAQ" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -2300,7 +2379,7 @@
                                 </div>
                                 <div class="col-lg-3 col-md-3 ">
                                     <div class="mb-2">
-                                        <asp:Label ID="LblFecRegistroPPAQ" runat="server" Text="Fecha Registro PPAQ" CssClass="form-label"></asp:Label>
+                                        <asp:Label ID="LblFecRegistroPPAQ" runat="server" Text="<%$ Resources:GlobalResources, lblFecRegistroPPAQ %>" CssClass="form-label"></asp:Label>
                                     </div>
                                     <div class="input-group input-group-sm">
                                         <asp:TextBox ID="TxtFecRegistroPPAQ" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -2312,7 +2391,7 @@
                                 </div>
                                 <div class="col-lg-3 col-md-3 ">
                                     <div class="mb-2">
-                                        <asp:Label ID="LblRegistroRESP" runat="server" Text="Registro RESP" CssClass="form-label"></asp:Label>
+                                        <asp:Label ID="LblRegistroRESP" runat="server" Text="<%$ Resources:GlobalResources, lblRegistroRESP %>" CssClass="form-label"></asp:Label>
                                     </div>
                                     <div class="input-group input-group-sm">
                                         <asp:TextBox ID="TxtRegistroRESP" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -2320,7 +2399,7 @@
                                 </div>
                                 <div class="col-lg-3 col-md-3 ">
                                     <div class="mb-2">
-                                        <asp:Label ID="LblFecRegistroRESP" runat="server" Text="Fecha Registro RESP" CssClass="form-label"></asp:Label>
+                                        <asp:Label ID="LblFecRegistroRESP" runat="server" Text="<%$ Resources:GlobalResources, lblFecRegistroRESP %>" CssClass="form-label"></asp:Label>
                                     </div>
                                     <div class="input-group input-group-sm">
                                         <asp:TextBox ID="TxtFecRegistroRESP" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -2334,7 +2413,7 @@
                             <div class="row mt-3">
                                 <div class="col-lg-3 col-md-3 ">
                                     <div class="mb-2">
-                                        <asp:Label ID="LblRegistroCGEN" runat="server" Text="Registro CGEN" CssClass="form-label"></asp:Label>
+                                        <asp:Label ID="LblRegistroCGEN" runat="server" Text="<%$ Resources:GlobalResources, lblRegistroCGEN %>" CssClass="form-label"></asp:Label>
                                     </div>
                                     <div class="input-group input-group-sm">
                                         <asp:TextBox ID="TxtRegistroCGEN" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -2342,7 +2421,7 @@
                                 </div>
                                 <div class="col-lg-3 col-md-3 ">
                                     <div class="mb-2">
-                                        <asp:Label ID="LblFecRegistroCGEN" runat="server" Text="Fecha Registro CGEN" CssClass="form-label"></asp:Label>
+                                        <asp:Label ID="LblFecRegistroCGEN" runat="server" Text="<%$ Resources:GlobalResources, lblFecRegistroCGEN %>" CssClass="form-label"></asp:Label>
                                     </div>
                                     <div class="input-group input-group-sm">
                                         <asp:TextBox ID="TxtFecRegistroCGEN" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -2354,7 +2433,7 @@
                                 </div>
                                 <div class="col-lg-3 col-md-3 ">
                                     <div class="mb-2">
-                                        <asp:Label ID="LblRegistroBADI" runat="server" Text="Registro BADI" CssClass="form-label"></asp:Label>
+                                        <asp:Label ID="LblRegistroBADI" runat="server" Text="<%$ Resources:GlobalResources, lblRegistroBADI %>" CssClass="form-label"></asp:Label>
                                     </div>
                                     <div class="input-group input-group-sm">
                                         <asp:TextBox ID="TxtRegistroBADI" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -2362,7 +2441,7 @@
                                 </div>
                                 <div class="col-lg-3 col-md-3 ">
                                     <div class="mb-2">
-                                        <asp:Label ID="LblFecRegistroBADI" runat="server" Text="Fecha Registro BADI" CssClass="form-label"></asp:Label>
+                                        <asp:Label ID="LblFecRegistroBADI" runat="server" Text="<%$ Resources:GlobalResources, lblFecRegistroBADI %>" CssClass="form-label"></asp:Label>
                                     </div>
                                     <div class="input-group input-group-sm">
                                         <asp:TextBox ID="TxtFecRegistroBADI" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -2376,7 +2455,7 @@
                             <div class="row mt-3">
                                 <div class="col-lg-3 col-md-3 ">
                                     <div class="mb-2">
-                                        <asp:Label ID="LblRegistroCONDUSEF" runat="server" Text="Registro CONDUSEF" CssClass="form-label"></asp:Label>
+                                        <asp:Label ID="LblRegistroCONDUSEF" runat="server" Text="<%$ Resources:GlobalResources, lblRegistroCONDUSEF %>" CssClass="form-label"></asp:Label>
                                     </div>
                                     <div class="input-group input-group-sm">
                                         <asp:TextBox ID="TxtRegistroCONDUSEF" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -2384,7 +2463,7 @@
                                 </div>
                                 <div class="col-lg-3 col-md-3 ">
                                     <div class="mb-2">
-                                        <asp:Label ID="LblFecRegistroCONDUSEF" runat="server" Text="Fecha Registro CONDUSEF" CssClass="form-label"></asp:Label>
+                                        <asp:Label ID="LblFecRegistroCONDUSEF" runat="server" Text="<%$ Resources:GlobalResources, lblFecRegistroCONDUSEF %>" CssClass="form-label"></asp:Label>
                                     </div>
                                     <div class="input-group input-group-sm">
                                         <asp:TextBox ID="TxtFecRegistroCONDUSEF" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -2401,9 +2480,9 @@
                         <div class="d-grid gap-4 d-flex justify-content-center mt-3 mb-3">
                             <asp:UpdatePanel ID="UpdatePanel27" runat="server" UpdateMode="Conditional">
                                 <ContentTemplate>
-                                    <asp:Button ID="BtnAnularPnl9" runat="server" Text="Cancelar" Font-Bold="True" OnClick="BtnAnularPnl9_Click" CssClass="btn btn-primary" Visible="false" TabIndex="0"/>
-                                    <asp:Button ID="btnEditarPnl9" runat="server" Text="Editar Datos" Font-Bold="True" OnClick="btnEditarPnl9_Click" CssClass="btn btn-primary" TabIndex="1"/>
-                                    <asp:Button ID="btnActualizarPnl9" runat="server" Text="Aplicar Cambios" Font-Bold="True" OnClick="btnActualizarPnl9_Click" CssClass="btn btn-secondary" visible="false" TabIndex="2"/>
+                                    <asp:Button ID="BtnAnularPnl9" runat="server" Text="<%$ Resources:GlobalResources, btnCancelar %>" Font-Bold="True" OnClick="BtnAnularPnl9_Click" CssClass="btn btn-primary" Visible="false" TabIndex="0"/>
+                                    <asp:Button ID="btnEditarPnl9" runat="server" Text="<%$ Resources:GlobalResources, btnEditar %>" Font-Bold="True" OnClick="btnEditarPnl9_Click" CssClass="btn btn-primary" TabIndex="1"/>
+                                    <asp:Button ID="btnActualizarPnl9" runat="server" Text="<%$ Resources:GlobalResources, btnGrabar %>" Font-Bold="True" OnClick="btnActualizarPnl9_Click" CssClass="btn btn-secondary" visible="false" TabIndex="2"/>
                                 </ContentTemplate>
                             </asp:UpdatePanel>
                         </div>
@@ -2412,7 +2491,7 @@
                     <%-- Detalles Contratante --%>
                     <div class="row mb-3 mt-4" style="background-color:#C6D541; align-items: baseline;">
                         <div class="col-10" style="padding-left: 14px;">
-                            <asp:Label ID="LblEtiquetaPnl10" runat="server" Text="DETALLES CONTRATANTE" CssClass="control-label" Font-Size="small"></asp:Label>
+                            <asp:Label ID="LblEtiquetaPnl10" runat="server" Text="<%$ Resources:GlobalResources, hdrTituloDetContratante %>" CssClass="control-label" Font-Size="small"></asp:Label>
                         </div>
                         <div class="col-2" style="display:flex; justify-content: end;">
                             <div>
@@ -2429,7 +2508,7 @@
                         <div class="row mt-3">
                             <div class="col-lg-6 col-md-6">
                                 <div class="mb-2">
-                                    <asp:Label ID="LblNomContratante" runat="server" Text="Nombre Contratante" CssClass="form-label"></asp:Label>
+                                    <asp:Label ID="LblNomContratante" runat="server" Text="<%$ Resources:GlobalResources, lblNomContratante %>" CssClass="form-label"></asp:Label>
                                 </div>
                                 <div class="input-group input-group-sm">
                                     <asp:TextBox ID="TxtNomContratante" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -2437,7 +2516,7 @@
                             </div>
                             <div class="col-lg-3 col-md-3">
                                 <div class="mb-2">
-                                    <asp:Label ID="LblRFC_Contratante" runat="server" Text="RFC Contratante" CssClass="form-label"></asp:Label>
+                                    <asp:Label ID="LblRFC_Contratante" runat="server" Text="<%$ Resources:GlobalResources, lblRFCContratante %>" CssClass="form-label"></asp:Label>
                                 </div>
                                 <div class="input-group input-group-sm">
                                     <asp:TextBox ID="TxtRFC_Contratante" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -2445,7 +2524,7 @@
                             </div>
                             <div class="col-lg-3 col-md-3">
                                 <div class="mb-2">
-                                    <asp:Label ID="LblTpoContratante" runat="server" Text="Tipo Contratante" CssClass="form-label"></asp:Label>
+                                    <asp:Label ID="LblTpoContratante" runat="server" Text="<%$ Resources:GlobalResources, lblTpoContratante %>" CssClass="form-label"></asp:Label>
                                 </div>
                                 <div class="input-group input-group-sm">
                                     <asp:TextBox ID="TxtTpoContratante" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -2455,7 +2534,7 @@
                         <div class="row mt-3">
                             <div class="col-lg-6 col-md-6">
                                 <div class="mb-2">
-                                    <asp:Label ID="LblEmailContratante" runat="server" Text="Correo electrónico del Contratante" CssClass="form-label"></asp:Label>
+                                    <asp:Label ID="LblEmailContratante" runat="server" Text="<%$ Resources:GlobalResources, lblEmailContratante %>" CssClass="form-label"></asp:Label>
                                 </div>
                                 <div class="input-group input-group-sm">
                                     <asp:TextBox ID="TxtEmailContratante" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -2463,7 +2542,7 @@
                             </div>
                             <div class="col-lg-3 col-md-3">
                                 <div class="mb-2">
-                                    <asp:Label ID="LblTelefonoContratante" runat="server" Text="Teléfono particular del Contratante" CssClass="form-label"></asp:Label>
+                                    <asp:Label ID="LblTelefonoContratante" runat="server" Text="<%$ Resources:GlobalResources, lblTelContratante %>" CssClass="form-label"></asp:Label>
                                 </div>
                                 <div class="input-group input-group-sm">
                                     <asp:TextBox ID="TxtTelefonoContratante" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -2471,7 +2550,7 @@
                             </div>
                             <div class="col-lg-3 col-md-3">
                                 <div class="mb-2">
-                                    <asp:Label ID="LblCelularContratante" runat="server" Text="Teléfono celular del Contratante" CssClass="form-label"></asp:Label>
+                                    <asp:Label ID="LblCelularContratante" runat="server" Text="<%$ Resources:GlobalResources, lblTelCelContratante %>" CssClass="form-label"></asp:Label>
                                 </div>
                                 <div class="input-group input-group-sm">
                                     <asp:TextBox ID="TxtCelularContratante" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -2482,7 +2561,8 @@
                         <div class="row mt-3">
                             <div class="col-lg-8 col-md-8">
                                 <div class ="mb-2">
-                                    <asp:Label ID="LblCalleContratante" runat="server" Text="Calle Contratante" ></asp:Label>
+                                    <%--Calle Contratante--%>
+                                    <asp:Label ID="LblCalleContratante" runat="server" Text="<%$ Resources:GlobalResources, lblCalle %>" ></asp:Label>
                                 </div>
                                 <div class="input-group input-group-sm">
                                     <asp:TextBox ID="TxtCalleContratante" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -2490,7 +2570,7 @@
                             </div>
                             <div class="col-lg-2 col-md-2">
                                 <div class ="mb-2">
-                                    <asp:Label ID="LblNumExtContratante" runat="server" Text="Num. Exterior" ></asp:Label>
+                                    <asp:Label ID="LblNumExtContratante" runat="server" Text="<%$ Resources:GlobalResources, lblNumExt %>" ></asp:Label>
                                 </div>
                                 <div class="input-group input-group-sm">
                                     <asp:TextBox ID="TxtNumExtContratante" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -2498,7 +2578,7 @@
                             </div>
                             <div class="col-lg-2 col-md-2">
                                 <div class ="mb-2">
-                                    <asp:Label ID="LblNumIntContratante" runat="server" Text="Num. Interior" ></asp:Label>
+                                    <asp:Label ID="LblNumIntContratante" runat="server" Text="<%$ Resources:GlobalResources, lblNumInt %>" ></asp:Label>
                                 </div>
                                 <div class="input-group input-group-sm">
                                     <asp:TextBox ID="TxtNumIntContratante" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -2509,7 +2589,7 @@
                         <div class="row mt-3">
                             <div class="col-lg-4 col-md-4 ">
                                 <div class ="mb-2">
-                                    <asp:Label ID="LblEstadoContratante" runat="server" Text="Estado" CssClass="control-label" Font-Size="Small"></asp:Label>
+                                    <asp:Label ID="LblEstadoContratante" runat="server" Text="<%$ Resources:GlobalResources, lblEstado %>" CssClass="control-label" Font-Size="Small"></asp:Label>
                                 </div>
                                 <div class="input-group input-group-sm">
                                     <asp:DropDownList ID="ddlEstadoContratante" runat="server" CssClass="btn btn-outline-secondary text-start" AutoPostBack="true" OnSelectedIndexChanged="ddlEstadoContratante_SelectedIndexChanged" Width="100%">
@@ -2518,7 +2598,7 @@
                             </div>
                             <div class="col-lg-4 col-md-4 ">
                                 <div class ="mb-2">
-                                    <asp:Label ID="LblMunicipioContratante" runat="server" Text="Delegación / Municipio" CssClass="control-label" Font-Size="Small"></asp:Label>
+                                    <asp:Label ID="LblMunicipioContratante" runat="server" Text="<%$ Resources:GlobalResources, lblDelegacion %>" CssClass="control-label" Font-Size="Small"></asp:Label>
                                 </div>
                                 <div class="input-group input-group-sm">
                                     <asp:DropDownList ID="ddlMunicipiosContratante" runat="server" CssClass="btn btn-outline-secondary text-start" AutoPostBack="true" OnSelectedIndexChanged="ddlMunicipiosContratante_SelectedIndexChanged" Width="100%" >
@@ -2527,7 +2607,8 @@
                             </div>
                             <div class="col-lg-3 col-md-3 ">
                                 <div class ="mb-2">
-                                    <asp:Label ID="LblColoniaContratante" runat="server" Text="Colonia Contratante" CssClass="control-label" Font-Size="Small"></asp:Label>
+                                    <%--Colonia Contratante--%>
+                                    <asp:Label ID="LblColoniaContratante" runat="server" Text="<%$ Resources:GlobalResources, lblColonia %>" CssClass="control-label" Font-Size="Small"></asp:Label>
                                 </div>
                                 <div class="input-group input-group-sm">
                                     <asp:TextBox ID="TxtColoniaContratante" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -2535,7 +2616,7 @@
                             </div>
                             <div class="col-lg-1 col-md-1 ">
                                 <div class ="mb-2">
-                                    <asp:Label ID="LblCPostalContratante" runat="server" Text="C.Postal" CssClass="control-label" Font-Size="Small"></asp:Label>
+                                    <asp:Label ID="LblCPostalContratante" runat="server" Text="<%$ Resources:GlobalResources, lblCodigoPostal %>" CssClass="control-label" Font-Size="Small"></asp:Label>
                                 </div>
                                 <div class="input-group input-group-sm">
                                     <asp:TextBox ID="TxtCPostalContratante" runat="server" CssClass="form-control form-control-sm" MaxLength="5"></asp:TextBox>
@@ -2545,7 +2626,7 @@
                         <div class="row mt-3">
                             <div class="col-lg-4 col-md-4">
                                 <div class ="mb-2">
-                                    <asp:Label ID="LblOtrosContratante" runat="server" Text="Otros" ></asp:Label>
+                                    <asp:Label ID="LblOtrosContratante" runat="server" Text="<%$ Resources:GlobalResources, lblOtros %>" ></asp:Label>
                                 </div>
                                 <div class="input-group input-group-sm">
                                     <asp:TextBox ID="TxtOtrosContratante" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -2556,9 +2637,9 @@
                         <div class="d-grid gap-4 d-flex justify-content-center mt-3 mb-3">
                             <asp:UpdatePanel ID="UpdatePanel26" runat="server" UpdateMode="Conditional">
                                 <ContentTemplate>
-                                    <asp:Button ID="BtnAnularPnl10" runat="server" Text="Cancelar" Font-Bold="True" OnClick="BtnAnularPnl10_Click" CssClass="btn btn-primary" Visible="false" TabIndex="0"/>
-                                    <asp:Button ID="btnEditarPnl10" runat="server" Text="Editar Datos" Font-Bold="True" OnClick="btnEditarPnl10_Click" CssClass="btn btn-primary" TabIndex="1"/>
-                                    <asp:Button ID="btnActualizarPnl10" runat="server" Text="Aplicar Cambios" Font-Bold="True" OnClick="btnActualizarPnl10_Click" CssClass="btn btn-secondary" visible="false" TabIndex="2"/>
+                                    <asp:Button ID="BtnAnularPnl10" runat="server" Text="<%$ Resources:GlobalResources, btnCancelar %>" Font-Bold="True" OnClick="BtnAnularPnl10_Click" CssClass="btn btn-primary" Visible="false" TabIndex="0"/>
+                                    <asp:Button ID="btnEditarPnl10" runat="server" Text="<%$ Resources:GlobalResources, btnEditar %>" Font-Bold="True" OnClick="btnEditarPnl10_Click" CssClass="btn btn-primary" TabIndex="1"/>
+                                    <asp:Button ID="btnActualizarPnl10" runat="server" Text="<%$ Resources:GlobalResources, btnGrabar %>" Font-Bold="True" OnClick="btnActualizarPnl10_Click" CssClass="btn btn-secondary" visible="false" TabIndex="2"/>
                                 </ContentTemplate>
                             </asp:UpdatePanel>
                         </div>
@@ -2567,7 +2648,7 @@
                     <%-- Datos Asegurado --%>
                     <div class="row mb-3 mt-4" style="background-color:#C6D541; align-items: baseline;">
                         <div class="col-10" style="padding-left: 14px;">
-                            <asp:Label ID="LblEtiquetaPnl11" runat="server" Text="ASEGURADO(S)" CssClass="control-label" Font-Size="small"></asp:Label>
+                            <asp:Label ID="LblEtiquetaPnl11" runat="server" Text="<%$ Resources:GlobalResources, hdrTituloAseg %>" CssClass="control-label" Font-Size="small"></asp:Label>
                         </div>
                         <div class="col-2" style="display:flex; justify-content: end;">
                             <div>
@@ -2584,7 +2665,7 @@
                         <%-- Asegurado 1 --%>
                         <div class="row mb-3 mt-4" style="background-color:#AED6F1; align-items: baseline;">
                             <div class="col-10" style="padding-left: 14px;">
-                                <asp:Label ID="LblEtiquetaPnl12" runat="server" Text="ASEGURADO 1" CssClass="control-label" Font-Size="small"></asp:Label>
+                                <asp:Label ID="LblEtiquetaPnl12" runat="server" Text="<%$ Resources:GlobalResources, hdrTituloAseg1 %>" CssClass="control-label" Font-Size="small"></asp:Label>
                             </div>
                             <div class="col-2" style="display:flex; justify-content: end;">
                                 <div>
@@ -2601,7 +2682,7 @@
                             <div class="row mt-3">
                                 <div class="col-lg-6 col-md-6">
                                     <div class="mb-2">
-                                        <asp:CheckBox ID="chkCopiarDatos" runat="server" AutoPostBack="True" OnCheckedChanged="chkCopiarDatos_CheckedChanged" Text="&nbsp;&nbsp;&nbsp;Copiar datos de CONTRATANTE" TextAlign="Right" />
+                                        <asp:CheckBox ID="chkCopiarDatos" runat="server" AutoPostBack="True" OnCheckedChanged="chkCopiarDatos_CheckedChanged" Text="<%$ Resources:GlobalResources, lblCopiarContratante %>" TextAlign="Right" />
                                     </div>
                                 </div>
                             </div>
@@ -2609,7 +2690,7 @@
                             <div class="row mt-3">
                                 <div class="col-lg-6 col-md-6">
                                     <div class="mb-2">
-                                        <asp:Label ID="LblNombreAsegurado1" runat="server" Text="Nombre Asegurado" CssClass="form-label"></asp:Label>
+                                        <asp:Label ID="LblNombreAsegurado1" runat="server" Text="<%$ Resources:GlobalResources, lblNomAsegurado %>" CssClass="form-label"></asp:Label>
                                     </div>
                                     <div class="input-group input-group-sm">
                                         <asp:TextBox ID="TxtNombreAsegurado1" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -2617,7 +2698,7 @@
                                 </div>
                                 <div class="col-lg-3 col-md-3">
                                     <div class="mb-2">
-                                        <asp:Label ID="LblRFC_Asegurado1" runat="server" Text="RFC Asegurado" CssClass="form-label"></asp:Label>
+                                        <asp:Label ID="LblRFC_Asegurado1" runat="server" Text="<%$ Resources:GlobalResources, lblRFCAsegurado %>" CssClass="form-label"></asp:Label>
                                     </div>
                                     <div class="input-group input-group-sm">
                                         <asp:TextBox ID="TxtRFC_Asegurado1" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -2625,7 +2706,7 @@
                                 </div>
                                 <div class="col-lg-3 col-md-3">
                                     <div class="mb-2">
-                                        <asp:Label ID="LblTipoAsegurado1" runat="server" Text="Tipo Asegurado" CssClass="form-label"></asp:Label>
+                                        <asp:Label ID="LblTipoAsegurado1" runat="server" Text="<%$ Resources:GlobalResources, lblTpoAsegurado %>" CssClass="form-label"></asp:Label>
                                     </div>
                                     <div class="input-group input-group-sm">
                                         <asp:TextBox ID="TxtTpoAsegurado1" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -2636,7 +2717,7 @@
                             <div class="row mt-3">
                                 <div class="col-lg-6 col-md-6">
                                     <div class="mb-2">
-                                        <asp:Label ID="LblEmailAsegurado1" runat="server" Text="Correo electrónico del Asegurado" CssClass="form-label"></asp:Label>
+                                        <asp:Label ID="LblEmailAsegurado1" runat="server" Text="<%$ Resources:GlobalResources, lblEmailAsegurado %>" CssClass="form-label"></asp:Label>
                                     </div>
                                     <div class="input-group input-group-sm">
                                         <asp:TextBox ID="TxtEmailAsegurado1" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -2644,7 +2725,7 @@
                                 </div>
                                 <div class="col-lg-3 col-md-3">
                                     <div class="mb-2">
-                                        <asp:Label ID="LblTelefonoAsegurado1" runat="server" Text="Teléfono particular del Asegurado" CssClass="form-label"></asp:Label>
+                                        <asp:Label ID="LblTelefonoAsegurado1" runat="server" Text="<%$ Resources:GlobalResources, lblTelAsegurado %>" CssClass="form-label"></asp:Label>
                                     </div>
                                     <div class="input-group input-group-sm">
                                         <asp:TextBox ID="TxtTelefonoAsegurado1" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -2652,7 +2733,7 @@
                                 </div>
                                 <div class="col-lg-3 col-md-3">
                                     <div class="mb-2">
-                                        <asp:Label ID="LblCelularAsegurado1" runat="server" Text="Teléfono celular del Asegurado" CssClass="form-label"></asp:Label>
+                                        <asp:Label ID="LblCelularAsegurado1" runat="server" Text="<%$ Resources:GlobalResources, lblTelCelAsegurado %>" CssClass="form-label"></asp:Label>
                                     </div>
                                     <div class="input-group input-group-sm">
                                         <asp:TextBox ID="TxtCelularAsegurado1" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -2663,7 +2744,8 @@
                             <div class="row mt-3">
                                 <div class="col-lg-8 col-md-8">
                                     <div class ="mb-2">
-                                        <asp:Label ID="LblCalleAsegurado1" runat="server" Text="Calle Asegurado" ></asp:Label>
+                                        <%-- Calle Asegurado --%>
+                                        <asp:Label ID="LblCalleAsegurado1" runat="server" Text="<%$ Resources:GlobalResources, lblCalle %>" ></asp:Label>
                                     </div>
                                     <div class="input-group input-group-sm">
                                         <asp:TextBox ID="TxtCalleAsegurado1" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -2671,7 +2753,7 @@
                                 </div>
                                 <div class="col-lg-2 col-md-2">
                                     <div class ="mb-2">
-                                        <asp:Label ID="LblNumExtAsegurado1" runat="server" Text="Num. Exterior" ></asp:Label>
+                                        <asp:Label ID="LblNumExtAsegurado1" runat="server" Text="<%$ Resources:GlobalResources, lblNumExt %>" ></asp:Label>
                                     </div>
                                     <div class="input-group input-group-sm">
                                         <asp:TextBox ID="TxtNumExtAsegurado1" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -2679,7 +2761,7 @@
                                 </div>
                                 <div class="col-lg-2 col-md-2">
                                     <div class ="mb-2">
-                                        <asp:Label ID="LblNumIntAsegurado1" runat="server" Text="Num. Interior" ></asp:Label>
+                                        <asp:Label ID="LblNumIntAsegurado1" runat="server" Text="<%$ Resources:GlobalResources, lblNumInt %>" ></asp:Label>
                                     </div>
                                     <div class="input-group input-group-sm">
                                         <asp:TextBox ID="TxtNumIntAsegurado1" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -2690,7 +2772,7 @@
                             <div class="row mt-3">
                                 <div class="col-lg-4 col-md-4 ">
                                     <div class ="mb-2">
-                                        <asp:Label ID="LblEstadoAsegurado1" runat="server" Text="Estado" CssClass="control-label" Font-Size="Small"></asp:Label>
+                                        <asp:Label ID="LblEstadoAsegurado1" runat="server" Text="<%$ Resources:GlobalResources, lblEstado %>" CssClass="control-label" Font-Size="Small"></asp:Label>
                                     </div>
                                     <div class="input-group input-group-sm">
                                         <asp:DropDownList ID="ddlEstadoAsegurado1" runat="server" CssClass="btn btn-outline-secondary text-start" AutoPostBack="true" OnSelectedIndexChanged="ddlEstadoAsegurado1_SelectedIndexChanged" Width="100%">
@@ -2699,7 +2781,7 @@
                                 </div>
                                 <div class="col-lg-4 col-md-4 ">
                                     <div class ="mb-2">
-                                        <asp:Label ID="LblMunicipiosAsegurado1" runat="server" Text="Delegación / Municipio" CssClass="control-label" Font-Size="Small"></asp:Label>
+                                        <asp:Label ID="LblMunicipiosAsegurado1" runat="server" Text="<%$ Resources:GlobalResources, lblDelegacion %>" CssClass="control-label" Font-Size="Small"></asp:Label>
                                     </div>
                                     <div class="input-group input-group-sm">
                                         <asp:DropDownList ID="ddlMunicipiosAsegurado1" runat="server" CssClass="btn btn-outline-secondary text-start" AutoPostBack="true" OnSelectedIndexChanged="ddlMunicipiosAsegurado1_SelectedIndexChanged" Width="100%" >
@@ -2708,7 +2790,8 @@
                                 </div>
                                 <div class="col-lg-3 col-md-3 ">
                                     <div class ="mb-2">
-                                        <asp:Label ID="LblColoniaAsegurado1" runat="server" Text="Colonia Asegurado" CssClass="control-label" Font-Size="Small"></asp:Label>
+                                        <%-- Colonia Asegurado --%>
+                                        <asp:Label ID="LblColoniaAsegurado1" runat="server" Text="<%$ Resources:GlobalResources, lblColonia %>" CssClass="control-label" Font-Size="Small"></asp:Label>
                                     </div>
                                     <div class="input-group input-group-sm">
                                         <asp:TextBox ID="TxtColoniaAsegurado1" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -2716,7 +2799,7 @@
                                 </div>
                                 <div class="col-lg-1 col-md-1 ">
                                     <div class ="mb-2">
-                                        <asp:Label ID="LblCPostalAsegurado1" runat="server" Text="C.Postal" CssClass="control-label" Font-Size="Small"></asp:Label>
+                                        <asp:Label ID="LblCPostalAsegurado1" runat="server" Text="<%$ Resources:GlobalResources, lblCodigoPostal %>" CssClass="control-label" Font-Size="Small"></asp:Label>
                                     </div>
                                     <div class="input-group input-group-sm">
                                         <asp:TextBox ID="TxtCPostalAsegurado1" runat="server" CssClass="form-control form-control-sm" MaxLength="5"></asp:TextBox>
@@ -2726,7 +2809,7 @@
                             <div class="row mt-3">
                                 <div class="col-lg-4 col-md-4">
                                     <div class ="mb-2">
-                                        <asp:Label ID="LblOtrosAsegurado1" runat="server" Text="Otros" ></asp:Label>
+                                        <asp:Label ID="LblOtrosAsegurado1" runat="server" Text="<%$ Resources:GlobalResources, lblOtros %>" ></asp:Label>
                                     </div>
                                     <div class="input-group input-group-sm">
                                         <asp:TextBox ID="TxtOtrosAsegurado1" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -2738,7 +2821,7 @@
                     <%-- Asegurado 2 --%>
                         <div class="row mb-3 mt-4" style="background-color:#AED6F1; align-items: baseline;">
                             <div class="col-10" style="padding-left: 14px;">
-                                <asp:Label ID="LblEtiquetaPnl13" runat="server" Text="ASEGURADO 2" CssClass="control-label" Font-Size="small"></asp:Label>
+                                <asp:Label ID="LblEtiquetaPnl13" runat="server" Text="<%$ Resources:GlobalResources, hdrTituloAseg2 %>" CssClass="control-label" Font-Size="small"></asp:Label>
                             </div>
                             <div class="col-2" style="display:flex; justify-content: end;">
                                 <div>
@@ -2755,7 +2838,7 @@
                             <div class="row mt-3">
                                 <div class="col-lg-6 col-md-6">
                                     <div class="mb-2">
-                                        <asp:Label ID="LblNombreAsegurado2" runat="server" Text="Nombre Asegurado" CssClass="form-label"></asp:Label>
+                                        <asp:Label ID="LblNombreAsegurado2" runat="server" Text="<%$ Resources:GlobalResources, lblNomAsegurado %>" CssClass="form-label"></asp:Label>
                                     </div>
                                     <div class="input-group input-group-sm">
                                         <asp:TextBox ID="TxtNombreAsegurado2" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -2763,7 +2846,7 @@
                                 </div>
                                 <div class="col-lg-3 col-md-3">
                                     <div class="mb-2">
-                                        <asp:Label ID="LblRFC_Asegurado2" runat="server" Text="RFC Asegurado" CssClass="form-label"></asp:Label>
+                                        <asp:Label ID="LblRFC_Asegurado2" runat="server" Text="<%$ Resources:GlobalResources, lblRFCAsegurado %>" CssClass="form-label"></asp:Label>
                                     </div>
                                     <div class="input-group input-group-sm">
                                         <asp:TextBox ID="TxtRFC_Asegurado2" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -2771,7 +2854,7 @@
                                 </div>
                                 <div class="col-lg-3 col-md-3">
                                     <div class="mb-2">
-                                        <asp:Label ID="LblTipoAsegurado2" runat="server" Text="Tipo Asegurado" CssClass="form-label"></asp:Label>
+                                        <asp:Label ID="LblTipoAsegurado2" runat="server" Text="<%$ Resources:GlobalResources, lblTpoAsegurado %>" CssClass="form-label"></asp:Label>
                                     </div>
                                     <div class="input-group input-group-sm">
                                         <asp:TextBox ID="TxtTpoAsegurado2" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -2781,7 +2864,7 @@
                             <div class="row mt-3">
                                 <div class="col-lg-6 col-md-6">
                                     <div class="mb-2">
-                                        <asp:Label ID="LblEmailAsegurado2" runat="server" Text="Correo electrónico del Asegurado" CssClass="form-label"></asp:Label>
+                                        <asp:Label ID="LblEmailAsegurado2" runat="server" Text="<%$ Resources:GlobalResources, lblEmailAsegurado %>" CssClass="form-label"></asp:Label>
                                     </div>
                                     <div class="input-group input-group-sm">
                                         <asp:TextBox ID="TxtEmailAsegurado2" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -2789,7 +2872,7 @@
                                 </div>
                                 <div class="col-lg-3 col-md-3">
                                     <div class="mb-2">
-                                        <asp:Label ID="LblTelefonoAsegurado2" runat="server" Text="Teléfono particular del Asegurado" CssClass="form-label"></asp:Label>
+                                        <asp:Label ID="LblTelefonoAsegurado2" runat="server" Text="<%$ Resources:GlobalResources, lblTelAsegurado %>" CssClass="form-label"></asp:Label>
                                     </div>
                                     <div class="input-group input-group-sm">
                                         <asp:TextBox ID="TxtTelefonoAsegurado2" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -2797,7 +2880,7 @@
                                 </div>
                                 <div class="col-lg-3 col-md-3">
                                     <div class="mb-2">
-                                        <asp:Label ID="LblCelularAsegurado2" runat="server" Text="Teléfono celular del Asegurado" CssClass="form-label"></asp:Label>
+                                        <asp:Label ID="LblCelularAsegurado2" runat="server" Text="<%$ Resources:GlobalResources, lblTelCelAsegurado %>" CssClass="form-label"></asp:Label>
                                     </div>
                                     <div class="input-group input-group-sm">
                                         <asp:TextBox ID="TxtCelularAsegurado2" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -2807,7 +2890,7 @@
                             <div class="row mt-3">
                                 <div class="col-lg-8 col-md-8">
                                     <div class ="mb-2">
-                                        <asp:Label ID="LblCalleAsegurado2" runat="server" Text="Calle Asegurado" ></asp:Label>
+                                        <asp:Label ID="LblCalleAsegurado2" runat="server" Text="<%$ Resources:GlobalResources, lblCalle %>" ></asp:Label>
                                     </div>
                                     <div class="input-group input-group-sm">
                                         <asp:TextBox ID="TxtCalleAsegurado2" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -2815,7 +2898,7 @@
                                 </div>
                                 <div class="col-lg-2 col-md-2">
                                     <div class ="mb-2">
-                                        <asp:Label ID="LblNumExtAsegurado2" runat="server" Text="Num. Exterior" ></asp:Label>
+                                        <asp:Label ID="LblNumExtAsegurado2" runat="server" Text="<%$ Resources:GlobalResources, lblNumExt %>" ></asp:Label>
                                     </div>
                                     <div class="input-group input-group-sm">
                                         <asp:TextBox ID="TxtNumExtAsegurado2" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -2823,7 +2906,7 @@
                                 </div>
                                 <div class="col-lg-2 col-md-2">
                                     <div class ="mb-2">
-                                        <asp:Label ID="LblNumIntAsegurado2" runat="server" Text="Num. Interior" ></asp:Label>
+                                        <asp:Label ID="LblNumIntAsegurado2" runat="server" Text="<%$ Resources:GlobalResources, lblNumInt %>" ></asp:Label>
                                     </div>
                                     <div class="input-group input-group-sm">
                                         <asp:TextBox ID="TxtNumIntAsegurado2" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -2834,7 +2917,7 @@
                             <div class="row mt-3">
                                 <div class="col-lg-4 col-md-4 ">
                                     <div class ="mb-2">
-                                        <asp:Label ID="LblEstadoAsegurado2" runat="server" Text="Estado" CssClass="control-label" Font-Size="Small"></asp:Label>
+                                        <asp:Label ID="LblEstadoAsegurado2" runat="server" Text="<%$ Resources:GlobalResources, lblEstado %>" CssClass="control-label" Font-Size="Small"></asp:Label>
                                     </div>
                                     <div class="input-group input-group-sm">
                                         <asp:DropDownList ID="ddlEstadoAsegurado2" runat="server" CssClass="btn btn-outline-secondary text-start" AutoPostBack="true" OnSelectedIndexChanged="ddlEstadoAsegurado2_SelectedIndexChanged" Width="100%">
@@ -2843,7 +2926,7 @@
                                 </div>
                                 <div class="col-lg-4 col-md-4 ">
                                     <div class ="mb-2">
-                                        <asp:Label ID="LblMunicipiosAsegurado2" runat="server" Text="Delegación / Municipio" CssClass="control-label" Font-Size="Small"></asp:Label>
+                                        <asp:Label ID="LblMunicipiosAsegurado2" runat="server" Text="<%$ Resources:GlobalResources, lblDelegacion %>" CssClass="control-label" Font-Size="Small"></asp:Label>
                                     </div>
                                     <div class="input-group input-group-sm">
                                         <asp:DropDownList ID="ddlMunicipiosAsegurado2" runat="server" CssClass="btn btn-outline-secondary text-start" AutoPostBack="true" OnSelectedIndexChanged="ddlMunicipiosAsegurado2_SelectedIndexChanged" Width="100%" >
@@ -2852,7 +2935,7 @@
                                 </div>
                                 <div class="col-lg-3 col-md-3 ">
                                     <div class ="mb-2">
-                                        <asp:Label ID="LblColoniaAsegurado2" runat="server" Text="Colonia Asegurado" CssClass="control-label" Font-Size="Small"></asp:Label>
+                                        <asp:Label ID="LblColoniaAsegurado2" runat="server" Text="<%$ Resources:GlobalResources, lblColonia %>" CssClass="control-label" Font-Size="Small"></asp:Label>
                                     </div>
                                     <div class="input-group input-group-sm">
                                         <asp:TextBox ID="TxtColoniaAsegurado2" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -2860,7 +2943,7 @@
                                 </div>
                                 <div class="col-lg-1 col-md-1 ">
                                     <div class ="mb-2">
-                                        <asp:Label ID="LblCPostalAsegurado2" runat="server" Text="C.Postal" CssClass="control-label" Font-Size="Small"></asp:Label>
+                                        <asp:Label ID="LblCPostalAsegurado2" runat="server" Text="<%$ Resources:GlobalResources, lblCodigoPostal %>" CssClass="control-label" Font-Size="Small"></asp:Label>
                                     </div>
                                     <div class="input-group input-group-sm">
                                         <asp:TextBox ID="TxtCPostalAsegurado2" runat="server" CssClass="form-control form-control-sm" MaxLength="5"></asp:TextBox>
@@ -2870,7 +2953,7 @@
                             <div class="row mt-3">
                                 <div class="col-lg-4 col-md-4">
                                     <div class ="mb-2">
-                                        <asp:Label ID="LblOtrosAsegurado2" runat="server" Text="Otros" ></asp:Label>
+                                        <asp:Label ID="LblOtrosAsegurado2" runat="server" Text="<%$ Resources:GlobalResources, lblOtros %>" ></asp:Label>
                                     </div>
                                     <div class="input-group input-group-sm">
                                         <asp:TextBox ID="TxtOtrosAsegurado2" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -2882,7 +2965,7 @@
                     <%-- Asegurado 3 --%>
                         <div class="row mb-3 mt-4" style="background-color:#AED6F1; align-items: baseline;">
                             <div class="col-10" style="padding-left: 14px;">
-                                <asp:Label ID="LblEtiquetaPnl14" runat="server" Text="ASEGURADO 3" CssClass="control-label" Font-Size="small"></asp:Label>
+                                <asp:Label ID="LblEtiquetaPnl14" runat="server" Text="<%$ Resources:GlobalResources, hdrTituloAseg3 %>" CssClass="control-label" Font-Size="small"></asp:Label>
                             </div>
                             <div class="col-2" style="display:flex; justify-content: end;">
                                 <div>
@@ -2899,7 +2982,7 @@
                             <div class="row mt-3">
                                 <div class="col-lg-6 col-md-6">
                                     <div class="mb-2">
-                                        <asp:Label ID="LblNombreAsegurado3" runat="server" Text="Nombre Asegurado" CssClass="form-label"></asp:Label>
+                                        <asp:Label ID="LblNombreAsegurado3" runat="server" Text="<%$ Resources:GlobalResources, lblNomAsegurado %>" CssClass="form-label"></asp:Label>
                                     </div>
                                     <div class="input-group input-group-sm">
                                         <asp:TextBox ID="TxtNombreAsegurado3" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -2907,7 +2990,7 @@
                                 </div>
                                 <div class="col-lg-3 col-md-3">
                                     <div class="mb-2">
-                                        <asp:Label ID="LblRFC_Asegurado3" runat="server" Text="RFC Asegurado" CssClass="form-label"></asp:Label>
+                                        <asp:Label ID="LblRFC_Asegurado3" runat="server" Text="<%$ Resources:GlobalResources, lblRFCAsegurado %>" CssClass="form-label"></asp:Label>
                                     </div>
                                     <div class="input-group input-group-sm">
                                         <asp:TextBox ID="TxtRFC_Asegurado3" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -2915,7 +2998,7 @@
                                 </div>
                                 <div class="col-lg-3 col-md-3">
                                     <div class="mb-2">
-                                        <asp:Label ID="LblTipoAsegurado3" runat="server" Text="Tipo Asegurado" CssClass="form-label"></asp:Label>
+                                        <asp:Label ID="LblTipoAsegurado3" runat="server" Text="<%$ Resources:GlobalResources, lblTpoAsegurado %>" CssClass="form-label"></asp:Label>
                                     </div>
                                     <div class="input-group input-group-sm">
                                         <asp:TextBox ID="TxtTpoAsegurado3" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -2925,7 +3008,7 @@
                             <div class="row mt-3">
                                 <div class="col-lg-6 col-md-6">
                                     <div class="mb-2">
-                                        <asp:Label ID="LblEmailAsegurado3" runat="server" Text="Correo electrónico del Asegurado" CssClass="form-label"></asp:Label>
+                                        <asp:Label ID="LblEmailAsegurado3" runat="server" Text="<%$ Resources:GlobalResources, lblEmailAsegurado %>" CssClass="form-label"></asp:Label>
                                     </div>
                                     <div class="input-group input-group-sm">
                                         <asp:TextBox ID="TxtEmailAsegurado3" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -2933,7 +3016,7 @@
                                 </div>
                                 <div class="col-lg-3 col-md-3">
                                     <div class="mb-2">
-                                        <asp:Label ID="LblTelefonoAsegurado3" runat="server" Text="Teléfono particular del Asegurado" CssClass="form-label"></asp:Label>
+                                        <asp:Label ID="LblTelefonoAsegurado3" runat="server" Text="<%$ Resources:GlobalResources, lblTelAsegurado %>" CssClass="form-label"></asp:Label>
                                     </div>
                                     <div class="input-group input-group-sm">
                                         <asp:TextBox ID="TxtTelefonoAsegurado3" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -2941,7 +3024,7 @@
                                 </div>
                                 <div class="col-lg-3 col-md-3">
                                     <div class="mb-2">
-                                        <asp:Label ID="LblCelularAsegurado3" runat="server" Text="Teléfono celular del Asegurado" CssClass="form-label"></asp:Label>
+                                        <asp:Label ID="LblCelularAsegurado3" runat="server" Text="<%$ Resources:GlobalResources, lblTelCelAsegurado %>" CssClass="form-label"></asp:Label>
                                     </div>
                                     <div class="input-group input-group-sm">
                                         <asp:TextBox ID="TxtCelularAsegurado3" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -2951,7 +3034,7 @@
                             <div class="row mt-3">
                                 <div class="col-lg-8 col-md-8">
                                     <div class ="mb-2">
-                                        <asp:Label ID="LblCalleAsegurado3" runat="server" Text="Calle Asegurado" ></asp:Label>
+                                        <asp:Label ID="LblCalleAsegurado3" runat="server" Text="<%$ Resources:GlobalResources, lblCalle %>" ></asp:Label>
                                     </div>
                                     <div class="input-group input-group-sm">
                                         <asp:TextBox ID="TxtCalleAsegurado3" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -2959,7 +3042,7 @@
                                 </div>
                                 <div class="col-lg-2 col-md-2">
                                     <div class ="mb-2">
-                                        <asp:Label ID="LblNumExtAsegurado3" runat="server" Text="Num. Exterior" ></asp:Label>
+                                        <asp:Label ID="LblNumExtAsegurado3" runat="server" Text="<%$ Resources:GlobalResources, lblNumExt %>" ></asp:Label>
                                     </div>
                                     <div class="input-group input-group-sm">
                                         <asp:TextBox ID="TxtNumExtAsegurado3" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -2967,7 +3050,7 @@
                                 </div>
                                 <div class="col-lg-2 col-md-2">
                                     <div class ="mb-2">
-                                        <asp:Label ID="LblNumIntAsegurado3" runat="server" Text="Num. Interior" ></asp:Label>
+                                        <asp:Label ID="LblNumIntAsegurado3" runat="server" Text="<%$ Resources:GlobalResources, lblNumInt %>" ></asp:Label>
                                     </div>
                                     <div class="input-group input-group-sm">
                                         <asp:TextBox ID="TxtNumIntAsegurado3" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -2978,7 +3061,7 @@
                             <div class="row mt-3">
                                 <div class="col-lg-4 col-md-4 ">
                                     <div class ="mb-2">
-                                        <asp:Label ID="LblEstadoAsegurado3" runat="server" Text="Estado" CssClass="control-label" Font-Size="Small"></asp:Label>
+                                        <asp:Label ID="LblEstadoAsegurado3" runat="server" Text="<%$ Resources:GlobalResources, lblEstado %>" CssClass="control-label" Font-Size="Small"></asp:Label>
                                     </div>
                                     <div class="input-group input-group-sm">
                                         <asp:DropDownList ID="ddlEstadoAsegurado3" runat="server" CssClass="btn btn-outline-secondary text-start" AutoPostBack="true" OnSelectedIndexChanged="ddlEstadoAsegurado3_SelectedIndexChanged" Width="100%">
@@ -2987,7 +3070,7 @@
                                 </div>
                                 <div class="col-lg-4 col-md-4 ">
                                     <div class ="mb-2">
-                                        <asp:Label ID="LblMunicipiosAsegurado3" runat="server" Text="Delegación / Municipio" CssClass="control-label" Font-Size="Small"></asp:Label>
+                                        <asp:Label ID="LblMunicipiosAsegurado3" runat="server" Text="<%$ Resources:GlobalResources, lblDelegacion %>" CssClass="control-label" Font-Size="Small"></asp:Label>
                                     </div>
                                     <div class="input-group input-group-sm">
                                         <asp:DropDownList ID="ddlMunicipiosAsegurado3" runat="server" CssClass="btn btn-outline-secondary text-start" AutoPostBack="true" OnSelectedIndexChanged="ddlMunicipiosAsegurado3_SelectedIndexChanged" Width="100%" >
@@ -2996,7 +3079,7 @@
                                 </div>
                                 <div class="col-lg-3 col-md-3 ">
                                     <div class ="mb-2">
-                                        <asp:Label ID="LblColoniaAsegurado3" runat="server" Text="Colonia Asegurado" CssClass="control-label" Font-Size="Small"></asp:Label>
+                                        <asp:Label ID="LblColoniaAsegurado3" runat="server" Text="<%$ Resources:GlobalResources, lblColonia %>" CssClass="control-label" Font-Size="Small"></asp:Label>
                                     </div>
                                     <div class="input-group input-group-sm">
                                         <asp:TextBox ID="TxtColoniaAsegurado3" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -3004,7 +3087,7 @@
                                 </div>
                                 <div class="col-lg-1 col-md-1 ">
                                     <div class ="mb-2">
-                                        <asp:Label ID="LblCPostalAsegurado3" runat="server" Text="C.Postal" CssClass="control-label" Font-Size="Small"></asp:Label>
+                                        <asp:Label ID="LblCPostalAsegurado3" runat="server" Text="<%$ Resources:GlobalResources, lblCodigoPostal %>" CssClass="control-label" Font-Size="Small"></asp:Label>
                                     </div>
                                     <div class="input-group input-group-sm">
                                         <asp:TextBox ID="TxtCPostalAsegurado3" runat="server" CssClass="form-control form-control-sm" MaxLength="5"></asp:TextBox>
@@ -3014,7 +3097,7 @@
                             <div class="row mt-3">
                                 <div class="col-lg-4 col-md-4">
                                     <div class ="mb-2">
-                                        <asp:Label ID="LblOtrosAsegurado3" runat="server" Text="Otros" ></asp:Label>
+                                        <asp:Label ID="LblOtrosAsegurado3" runat="server" Text="<%$ Resources:GlobalResources, lblOtros %>" ></asp:Label>
                                     </div>
                                     <div class="input-group input-group-sm">
                                         <asp:TextBox ID="TxtOtrosAsegurado3" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -3026,9 +3109,9 @@
                         <div class="d-grid gap-4 d-flex justify-content-center mt-3 mb-3">
                             <asp:UpdatePanel ID="UpdatePanel25" runat="server" UpdateMode="Conditional">
                                 <ContentTemplate>
-                                    <asp:Button ID="BtnAnularPnl11" runat="server" Text="Cancelar" Font-Bold="True" OnClick="BtnAnularPnl11_Click" CssClass="btn btn-primary" Visible="false" TabIndex="0"/>
-                                    <asp:Button ID="btnEditarPnl11" runat="server" Text="Editar Datos" Font-Bold="True" OnClick="btnEditarPnl11_Click" CssClass="btn btn-primary" TabIndex="1"/>
-                                    <asp:Button ID="btnActualizarPnl11" runat="server" Text="Aplicar Cambios" Font-Bold="True" OnClick="btnActualizarPnl11_Click" CssClass="btn btn-secondary" visible="false" TabIndex="2"/>
+                                    <asp:Button ID="BtnAnularPnl11" runat="server" Text="<%$ Resources:GlobalResources, btnCancelar %>" Font-Bold="True" OnClick="BtnAnularPnl11_Click" CssClass="btn btn-primary" Visible="false" TabIndex="0"/>
+                                    <asp:Button ID="btnEditarPnl11" runat="server" Text="<%$ Resources:GlobalResources, btnEditar %>" Font-Bold="True" OnClick="btnEditarPnl11_Click" CssClass="btn btn-primary" TabIndex="1"/>
+                                    <asp:Button ID="btnActualizarPnl11" runat="server" Text="<%$ Resources:GlobalResources, btnGrabar %>" Font-Bold="True" OnClick="btnActualizarPnl11_Click" CssClass="btn btn-secondary" visible="false" TabIndex="2"/>
                                 </ContentTemplate>
                             </asp:UpdatePanel>
                         </div>
@@ -3038,7 +3121,7 @@
                     <%-- Bien Asegurado --%>
                     <div class="row mb-3 mt-4" style="background-color:#C6D541; align-items: baseline;">
                         <div class="col-10" style="padding-left: 14px;">
-                            <asp:Label ID="LblEtiquetaPnl15" runat="server" Text="BIEN ASEGURADO" CssClass="control-label" Font-Size="small"></asp:Label>
+                            <asp:Label ID="LblEtiquetaPnl15" runat="server" Text="<%$ Resources:GlobalResources, hdrTituloBienAseg %>" CssClass="control-label" Font-Size="small"></asp:Label>
                         </div>
                         <div class="col-2" style="display:flex; justify-content: end;">
                             <div>
@@ -3055,7 +3138,7 @@
                         <%-- Ubicacion Asegurada --%>
                         <div class="row mb-3 mt-4" style="background-color:#AED6F1; align-items: baseline;">
                             <div class="col-10" style="padding-left: 14px;">
-                                <asp:Label ID="LblEtiquetaPnl16" runat="server" Text="UBICACIÓN ASEGURADA" CssClass="control-label" Font-Size="small"></asp:Label>
+                                <asp:Label ID="LblEtiquetaPnl16" runat="server" Text="<%$ Resources:GlobalResources, hdrTituloUbicacion %>" CssClass="control-label" Font-Size="small"></asp:Label>
                             </div>
                             <div class="col-2" style="display:flex; justify-content: end;">
                                 <div>
@@ -3072,7 +3155,8 @@
                             <div class="row mt-3">
                                 <div class="col-lg-8 col-md-8">
                                     <div class ="mb-2">
-                                        <asp:Label ID="LblCalleBienAsegurado" runat="server" Text="Calle Bien Asegurado" ></asp:Label>
+                                        <%-- Bien Asegurado --%>
+                                        <asp:Label ID="LblCalleBienAsegurado" runat="server" Text="<%$ Resources:GlobalResources, lblCalle %> " ></asp:Label>
                                     </div>
                                     <div class="input-group input-group-sm">
                                         <asp:TextBox ID="TxtCalleBienAsegurado" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -3080,7 +3164,7 @@
                                 </div>
                                 <div class="col-lg-2 col-md-2">
                                     <div class ="mb-2">
-                                        <asp:Label ID="LblNumExtBienAsegurado" runat="server" Text="Num. Exterior" ></asp:Label>
+                                        <asp:Label ID="LblNumExtBienAsegurado" runat="server" Text="<%$ Resources:GlobalResources, lblNumExt %>" ></asp:Label>
                                     </div>
                                     <div class="input-group input-group-sm">
                                         <asp:TextBox ID="TxtNumExtBienAsegurado" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -3088,7 +3172,7 @@
                                 </div>
                                 <div class="col-lg-2 col-md-2">
                                     <div class ="mb-2">
-                                        <asp:Label ID="LblNumIntBienAsegurado" runat="server" Text="Num. Interior" ></asp:Label>
+                                        <asp:Label ID="LblNumIntBienAsegurado" runat="server" Text="<%$ Resources:GlobalResources, lblNumInt %>" ></asp:Label>
                                     </div>
                                     <div class="input-group input-group-sm">
                                         <asp:TextBox ID="TxtNumIntBienAsegurado" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -3099,7 +3183,7 @@
                             <div class="row mt-3">
                                 <div class="col-lg-4 col-md-4 ">
                                     <div class ="mb-2">
-                                        <asp:Label ID="LblEstadoBienAsegurado" runat="server" Text="Estado" CssClass="control-label" Font-Size="Small"></asp:Label>
+                                        <asp:Label ID="LblEstadoBienAsegurado" runat="server" Text="<%$ Resources:GlobalResources, lblEstado %>" CssClass="control-label" Font-Size="Small"></asp:Label>
                                     </div>
                                     <div class="input-group input-group-sm">
                                         <asp:DropDownList ID="ddlEstadoBienAsegurado" runat="server" CssClass="btn btn-outline-secondary text-start" AutoPostBack="true" OnSelectedIndexChanged="ddlEstadoBienAsegurado_SelectedIndexChanged" Width="100%">
@@ -3108,7 +3192,7 @@
                                 </div>
                                 <div class="col-lg-4 col-md-4 ">
                                     <div class ="mb-2">
-                                        <asp:Label ID="LblMunicipioBienAsegurado" runat="server" Text="Delegación / Municipio" CssClass="control-label" Font-Size="Small"></asp:Label>
+                                        <asp:Label ID="LblMunicipioBienAsegurado" runat="server" Text="<%$ Resources:GlobalResources, lblDelegacion %>" CssClass="control-label" Font-Size="Small"></asp:Label>
                                     </div>
                                     <div class="input-group input-group-sm">
                                         <asp:DropDownList ID="ddlMunicipiosBienAsegurado" runat="server" CssClass="btn btn-outline-secondary text-start" AutoPostBack="true" OnSelectedIndexChanged="ddlMunicipiosBienAsegurado_SelectedIndexChanged" Width="100%" >
@@ -3117,7 +3201,8 @@
                                 </div>
                                 <div class="col-lg-3 col-md-3 ">
                                     <div class ="mb-2">
-                                        <asp:Label ID="LblColoniaBienAsegurado" runat="server" Text="Colonia Bien Asegurado" CssClass="control-label" Font-Size="Small"></asp:Label>
+                                        <%-- Bien Asegurado --%>
+                                        <asp:Label ID="LblColoniaBienAsegurado" runat="server" Text="<%$ Resources:GlobalResources, lblColonia %>" CssClass="control-label" Font-Size="Small"></asp:Label>
                                     </div>
                                     <div class="input-group input-group-sm">
                                         <asp:TextBox ID="TxtColoniaBienAsegurado" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -3125,7 +3210,7 @@
                                 </div>
                                 <div class="col-lg-1 col-md-1 ">
                                     <div class ="mb-2">
-                                        <asp:Label ID="LblCodigoBienAsegurado" runat="server" Text="C.Postal" CssClass="control-label" Font-Size="Small"></asp:Label>
+                                        <asp:Label ID="LblCodigoBienAsegurado" runat="server" Text="<%$ Resources:GlobalResources, lblCodigoPostal %>" CssClass="control-label" Font-Size="Small"></asp:Label>
                                     </div>
                                     <div class="input-group input-group-sm">
                                         <asp:TextBox ID="TxtCodigoBienAsegurado" runat="server" CssClass="form-control form-control-sm" MaxLength="5"></asp:TextBox>
@@ -3136,7 +3221,7 @@
                             <div class="row mt-3">
                                 <div class="col-lg-4 col-md-4">
                                     <div class ="mb-2">
-                                        <asp:Label ID="LblOtrosBienAsegurado" runat="server" Text="Otros" ></asp:Label>
+                                        <asp:Label ID="LblOtrosBienAsegurado" runat="server" Text="<%$ Resources:GlobalResources, lblOtros %>" ></asp:Label>
                                     </div>
                                     <div class="input-group input-group-sm">
                                         <asp:TextBox ID="TxtOtrosBienAsegurado" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -3147,7 +3232,7 @@
                             <div class="row mt-3">
                                 <div class="col-lg-12 col-md-12">
                                     <div class="mb-2">
-                                        <asp:Label ID="LblTpoTecho" runat="server" Text="Tipos de Techos" CssClass="form-label"></asp:Label>
+                                        <asp:Label ID="LblTpoTecho" runat="server" Text="<%$ Resources:GlobalResources, lblTpoTechos %>" CssClass="form-label"></asp:Label>
                                     </div>
                                     <div class="input-group input-group-sm">
                                         <asp:TextBox ID="TxtTpoTecho" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -3158,7 +3243,7 @@
                             <div class="row mt-3">
                                 <div class="col-lg-12 col-md-12">
                                     <div class="mb-2">
-                                        <asp:Label ID="LblTpoMuro" runat="server" Text="Tipos de Muros" CssClass="form-label"></asp:Label>
+                                        <asp:Label ID="LblTpoMuro" runat="server" Text="<%$ Resources:GlobalResources, lblTpoMuros %>" CssClass="form-label"></asp:Label>
                                     </div>
                                     <div class="input-group input-group-sm">
                                         <asp:TextBox ID="TxtTpoMuro" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -3169,7 +3254,7 @@
                             <div class="row mt-3">
                                 <div class="col-lg-3 col-md-3">
                                     <div class="mb-2">
-                                        <asp:Label ID="LblTpoVivienda" runat="server" Text="Tipo Vivienda" CssClass="form-label"></asp:Label>
+                                        <asp:Label ID="LblTpoVivienda" runat="server" Text="<%$ Resources:GlobalResources, lblTpoVivienda %>" CssClass="form-label"></asp:Label>
                                     </div>
                                     <div class="input-group input-group-sm">
                                         <asp:TextBox ID="TxtTpoVivienda" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -3177,7 +3262,7 @@
                                 </div>
                                 <div class="col-lg-3 col-md-3">
                                     <div class="mb-2">
-                                        <asp:Label ID="LblPisosBienAsegurado" runat="server" Text="Pisos Bien Asegurado" CssClass="form-label"></asp:Label>
+                                        <asp:Label ID="LblPisosBienAsegurado" runat="server" Text="<%$ Resources:GlobalResources, lblPisosBienAsegurado %>" CssClass="form-label"></asp:Label>
                                     </div>
                                     <div class="input-group input-group-sm">
                                         <asp:TextBox ID="TxtPisosBienAsegurado" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -3185,7 +3270,7 @@
                                 </div>
                                 <div class="col-lg-3 col-md-3">
                                     <div class="mb-2">
-                                        <asp:Label ID="LblPisosDelBienAsegurado" runat="server" Text="Pisos del Bien Asegurado" CssClass="form-label"></asp:Label>
+                                        <asp:Label ID="LblPisosDelBienAsegurado" runat="server" Text="<%$ Resources:GlobalResources, lblPisosDelBienAsegurado %>" CssClass="form-label"></asp:Label>
                                     </div>
                                     <div class="input-group input-group-sm">
                                         <asp:TextBox ID="TxtPisosDelBienAsegurado" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -3193,7 +3278,7 @@
                                 </div>
                                 <div class="col-lg-3 col-md-3">
                                     <div class="mb-2">
-                                        <asp:Label ID="LblLocalesComerciales" runat="server" Text="Locales_Comerciales" CssClass="form-label"></asp:Label>
+                                        <asp:Label ID="LblLocalesComerciales" runat="server" Text="<%$ Resources:GlobalResources, lblLocalComercial %>" CssClass="form-label"></asp:Label>
                                     </div>
                                     <div class="input-group input-group-sm">
                                         <asp:TextBox ID="TxtLocalesComerciales" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
@@ -3204,7 +3289,7 @@
                             <div class="row mt-3">
                                 <div class="col-lg-12 col-md-12">
                                     <div class="mb-2">
-                                        <asp:Label ID="LblDetalleBienAsegurado" runat="server" Text="Detalles Bien Asegurado" CssClass="form-label"></asp:Label>
+                                        <asp:Label ID="LblDetalleBienAsegurado" runat="server" Text="<%$ Resources:GlobalResources, lblDetBienAsegurado %>" CssClass="form-label"></asp:Label>
                                     </div>
                                     <div class="input-group input-group-sm">
                                         <asp:TextBox ID="TxtDetallesBienAsegurado" runat="server" CssClass="form-control form-control-sm" placeholder="" AutoComplete="off" MaxLength="2500" Columns="12" Rows="5" TextMode="MultiLine"></asp:TextBox>
@@ -3215,9 +3300,9 @@
                             <div class="d-grid gap-4 d-flex justify-content-center mt-3 mb-3">
                                 <asp:UpdatePanel ID="UpdatePanel28" runat="server" UpdateMode="Conditional">
                                     <ContentTemplate>
-                                        <asp:Button ID="BtnAnularPnl15" runat="server" Text="Cancelar" Font-Bold="True" OnClick="BtnAnularPnl15_Click" CssClass="btn btn-primary" Visible="false" TabIndex="0"/>
-                                        <asp:Button ID="btnEditarPnl15" runat="server" Text="Editar Datos" Font-Bold="True" OnClick="btnEditarPnl15_Click" CssClass="btn btn-primary" TabIndex="1"/>
-                                        <asp:Button ID="btnActualizarPnl15" runat="server" Text="Aplicar Cambios" Font-Bold="True" OnClick="btnActualizarPnl15_Click" CssClass="btn btn-secondary" visible="false" TabIndex="2"/>
+                                        <asp:Button ID="BtnAnularPnl15" runat="server" Text="<%$ Resources:GlobalResources, btnCancelar %>" Font-Bold="True" OnClick="BtnAnularPnl15_Click" CssClass="btn btn-primary" Visible="false" TabIndex="0"/>
+                                        <asp:Button ID="btnEditarPnl15" runat="server" Text="<%$ Resources:GlobalResources, btnEditar %>" Font-Bold="True" OnClick="btnEditarPnl15_Click" CssClass="btn btn-primary" TabIndex="1"/>
+                                        <asp:Button ID="btnActualizarPnl15" runat="server" Text="<%$ Resources:GlobalResources, btnGrabar %>" Font-Bold="True" OnClick="btnActualizarPnl15_Click" CssClass="btn btn-secondary" visible="false" TabIndex="2"/>
                                     </ContentTemplate>
                                 </asp:UpdatePanel>
                             </div>
@@ -3229,7 +3314,7 @@
                     <%-- Datos Coberturas --%>
                     <div class="row mb-3 mt-4" style="background-color:#C6D541; align-items: baseline;">
                         <div class="col-10" style="padding-left: 14px;">
-                            <asp:Label ID="LblEtiquetaPnl17" runat="server" Text="COBERTURAS" CssClass="control-label" Font-Size="small"></asp:Label>
+                            <asp:Label ID="LblEtiquetaPnl17" runat="server" Text="<%$ Resources:GlobalResources, hdrTituloCoberturas %>" CssClass="control-label" Font-Size="small"></asp:Label>
                         </div>
                         <div class="col-2" style="display:flex; justify-content: end;">
                             <div>
@@ -3257,7 +3342,7 @@
 --%>
                             <div class="col-lg-4 col-md-4">
                                 <div class ="mb-2">
-                                    <asp:Label ID="LblCoberturas" runat="server" Text="Cobertura" ></asp:Label>
+                                    <asp:Label ID="LblCoberturas" runat="server" Text="<%$ Resources:GlobalResources, lblCobertura %>" ></asp:Label>
                                 </div>
                                 <div class=" input-group input-group-sm">
                                     <asp:DropDownList ID="ddlCoberturas" runat="server" CssClass="btn btn-outline-secondary text-start" AutoPostBack="true" OnSelectedIndexChanged="ddlCoberturas_SelectedIndexChanged" Width="100%">
@@ -3267,10 +3352,10 @@
 
                             <div class="col-lg-4 col-md-4">
                                 <div class="mb-2">
-                                    <asp:Label ID="LblSeccion" runat="server" Text="Nombre Sección" CssClass="form-label"></asp:Label>
+                                    <asp:Label ID="LblSeccion" runat="server" Text="<%$ Resources:GlobalResources, lblNomSeccion %>" CssClass="form-label"></asp:Label>
                                 </div>
                                 <div class="input-group input-group-sm">
-                                    <asp:TextBox ID="TxtSeccion" runat="server" MaxLength="30" CssClass="form-control form-control-sm" placeholder="Nombre Sección"></asp:TextBox>
+                                    <asp:TextBox ID="TxtSeccion" runat="server" MaxLength="30" CssClass="form-control form-control-sm" placeholder="<%$ Resources:GlobalResources, lblNomSeccion %>"></asp:TextBox>
                                 </div>
                             </div>
 
@@ -3286,12 +3371,12 @@
                         <div class="row mb-3">
                             <div class="col-lg-9 col-md-9">
                                 <div class="mb-2">
-                                    <asp:Label ID="LblDescripcion" runat="server" Text="DESCRIPCIÓN" CssClass="form-label" Style="font-weight:bold;"></asp:Label>
+                                    <asp:Label ID="LblDescripcion" runat="server" Text="<%$ Resources:GlobalResources, lblDescripcion %>" CssClass="form-label" Style="font-weight:bold;"></asp:Label>
                                 </div>
                             </div>
                             <div class="col-lg-3 col-md-3">
                                 <div class="mb-2">
-                                    <asp:Label ID="LblValores" runat="server" Text="VALORES" CssClass="form-label" Style="font-weight:bold;"></asp:Label>
+                                    <asp:Label ID="LblValores" runat="server" Text="<%$ Resources:GlobalResources, lblValores %>" CssClass="form-label" Style="font-weight:bold;"></asp:Label>
                                 </div>
                             </div>
                         </div>
@@ -3299,18 +3384,18 @@
                         <div class="row mb-3">
                             <div class="col-lg-9 col-md-9">
                                 <div class="mb-2">
-                                    <asp:Label ID="LblSumaAsegurada" runat="server" Text="Suma Asegurada" CssClass="form-label"></asp:Label>
+                                    <asp:Label ID="LblSumaAsegurada" runat="server" Text="<%$ Resources:GlobalResources, lblSumaAsegurada %>" CssClass="form-label"></asp:Label>
                                 </div>
                                 <div class="input-group input-group-sm">
-                                    <asp:TextBox ID="TxtSumaAsegurada" runat="server" CssClass="form-control form-control-sm" placeholder="Suma Asegurada" AutoComplete="off" MaxLength="1250" Columns="9" Rows="2" TextMode="MultiLine" ></asp:TextBox>
+                                    <asp:TextBox ID="TxtSumaAsegurada" runat="server" CssClass="form-control form-control-sm" placeholder="<%$ Resources:GlobalResources, lblIngSumaAsegurada %>" AutoComplete="off" MaxLength="1250" Columns="9" Rows="2" TextMode="MultiLine" ></asp:TextBox>
                                 </div>
                             </div>
                             <div class="col-lg-3 col-md-3">
                                 <div class="mb-2">
-                                    <asp:Label ID="LblValSumaAsegurada" runat="server" Text="Suma Asegurada" CssClass="form-label"></asp:Label>
+                                    <asp:Label ID="LblValSumaAsegurada" runat="server" Text="<%$ Resources:GlobalResources, lblSumaAsegurada %>" CssClass="form-label"></asp:Label>
                                 </div>
                                 <div class="input-group input-group-sm">
-                                    <asp:TextBox ID="TxtValSumaAsegurada" runat="server" MaxLength="50" CssClass="form-control form-control-sm" placeholder="Suma Asegurada"></asp:TextBox>
+                                    <asp:TextBox ID="TxtValSumaAsegurada" runat="server" MaxLength="50" CssClass="form-control form-control-sm" placeholder="<%$ Resources:GlobalResources, lblIngSumaAsegurada %>"></asp:TextBox>
 <%--                                    <asp:TextBox ID="TxtValSumaAsegurada" runat="server" CssClass="form-control form-control-sm" MaxLength ="18"
                                         oninput="this.value = this.value.replace(/[^0-9.]/g, ''); if ((this.value.match(/\./g) || []).length > 1) this.value = this.value.replace(/\.$/, '');">
                                     </asp:TextBox>
@@ -3323,18 +3408,18 @@
                         <div class="row mb-3">
                             <div class="col-lg-9 col-md-9">
                                 <div class="mb-2">
-                                    <asp:Label ID="LblAgregado" runat="server" Text="Agregado" CssClass="form-label"></asp:Label>
+                                    <asp:Label ID="LblAgregado" runat="server" Text="<%$ Resources:GlobalResources, lblAgregado %>" CssClass="form-label"></asp:Label>
                                 </div>
                                 <div class="input-group input-group-sm">
-                                    <asp:TextBox ID="TxtAgregado" runat="server" CssClass="form-control form-control-sm" placeholder="Agregado"  AutoComplete="off" MaxLength="1250" Columns="9" Rows="2" TextMode="MultiLine" ></asp:TextBox>
+                                    <asp:TextBox ID="TxtAgregado" runat="server" CssClass="form-control form-control-sm" placeholder="<%$ Resources:GlobalResources, lblIngAgregado %>"  AutoComplete="off" MaxLength="1250" Columns="9" Rows="2" TextMode="MultiLine" ></asp:TextBox>
                                 </div>
                             </div>
                             <div class="col-lg-3 col-md-3">
                                 <div class="mb-2">
-                                    <asp:Label ID="LblValAgregado" runat="server" Text="Agregado" CssClass="form-label"></asp:Label>
+                                    <asp:Label ID="LblValAgregado" runat="server" Text="<%$ Resources:GlobalResources, lblAgregado %>" CssClass="form-label"></asp:Label>
                                 </div>
                                 <div class="input-group input-group-sm">
-                                    <asp:TextBox ID="TxtValAgregado" runat="server" MaxLength="50" CssClass="form-control form-control-sm" placeholder="Agregado"></asp:TextBox>
+                                    <asp:TextBox ID="TxtValAgregado" runat="server" MaxLength="50" CssClass="form-control form-control-sm" placeholder="<%$ Resources:GlobalResources, lblIngAgregado %>"></asp:TextBox>
 <%--                                    <asp:TextBox ID="TxtValAgregado" runat="server" CssClass="form-control form-control-sm" MaxLength ="18"
                                         oninput="this.value = this.value.replace(/[^0-9.]/g, ''); if ((this.value.match(/\./g) || []).length > 1) this.value = this.value.replace(/\.$/, '');">
                                     </asp:TextBox>
@@ -3347,38 +3432,38 @@
                         <div class="row mt-3" style="display:none;">
                             <div class="col-lg-9 col-md-9">
                                 <div class="mb-2">
-                                    <asp:Label ID="LblNomCobertura" runat="server" Text="Nombre Cobertura" CssClass="form-label"></asp:Label>
+                                    <asp:Label ID="LblNomCobertura" runat="server" Text="<%$ Resources:GlobalResources, lblNomCobertura %>" CssClass="form-label"></asp:Label>
                                 </div>
                                 <div class="input-group input-group-sm">
-                                    <asp:TextBox ID="TxtNomCobertura" runat="server" CssClass="form-control form-control-sm" placeholder="Ingrese Cobertura"  AutoComplete="off" MaxLength="1250" Columns="9" Rows="2" TextMode="MultiLine" ></asp:TextBox>
+                                    <asp:TextBox ID="TxtNomCobertura" runat="server" CssClass="form-control form-control-sm" placeholder="<%$ Resources:GlobalResources, lblNomCobertura %>"  AutoComplete="off" MaxLength="1250" Columns="9" Rows="2" TextMode="MultiLine" ></asp:TextBox>
                                 </div>
                             </div>
                         </div>
                         <div class="row mt-3" style="display:none;">
                             <div class="col-lg-9 col-md-9">
                                 <div class="mb-2">
-                                    <asp:Label ID="LblRiesgo" runat="server" Text="Riesgo" CssClass="form-label"></asp:Label>
+                                    <asp:Label ID="LblRiesgo" runat="server" Text="<%$ Resources:GlobalResources, lblRiesgo %>" CssClass="form-label"></asp:Label>
                                 </div>
                                 <div class="input-group input-group-sm">
-                                    <asp:TextBox ID="TxtRiesgo" runat="server" MaxLength="100" CssClass="form-control form-control-sm" placeholder="Ingrese Riesgo"></asp:TextBox>
+                                    <asp:TextBox ID="TxtRiesgo" runat="server" MaxLength="100" CssClass="form-control form-control-sm" placeholder="<%$ Resources:GlobalResources, lblIngRiesgo %>"></asp:TextBox>
                                 </div>
                             </div>
                         </div>
                         <div class="row mt-3">
                             <div class="col-lg-9 col-md-9">
                                 <div class="mb-2">
-                                    <asp:Label ID="LblSublimite" runat="server" Text="Sublimite" CssClass="form-label"></asp:Label>
+                                    <asp:Label ID="LblSublimite" runat="server" Text="<%$ Resources:GlobalResources, lblSublimite %>" CssClass="form-label"></asp:Label>
                                 </div>
                                 <div class="input-group input-group-sm">
-                                    <asp:TextBox ID="TxtSublimite" runat="server" CssClass="form-control form-control-sm" placeholder="Ingrese Sublimite" AutoComplete="off" MaxLength="1250" Columns="9" Rows="2" TextMode="MultiLine" ></asp:TextBox>
+                                    <asp:TextBox ID="TxtSublimite" runat="server" CssClass="form-control form-control-sm" placeholder="<%$ Resources:GlobalResources, lblIngSublimite %>" AutoComplete="off" MaxLength="1250" Columns="9" Rows="2" TextMode="MultiLine" ></asp:TextBox>
                                 </div>
                             </div>
                             <div class="col-lg-3 col-md-3">
                                 <div class="mb-2">
-                                    <asp:Label ID="LblValSublimite" runat="server" Text="Sublimite" CssClass="form-label"></asp:Label>
+                                    <asp:Label ID="LblValSublimite" runat="server" Text="<%$ Resources:GlobalResources, lblSublimite %>" CssClass="form-label"></asp:Label>
                                 </div>
                                 <div class="input-group input-group-sm">
-                                    <asp:TextBox ID="TxtValSublimite" runat="server" MaxLength="50" CssClass="form-control form-control-sm" placeholder="Ingrese Sublimite"></asp:TextBox>
+                                    <asp:TextBox ID="TxtValSublimite" runat="server" MaxLength="50" CssClass="form-control form-control-sm" placeholder="<%$ Resources:GlobalResources, lblIngSublimite %>"></asp:TextBox>
                                 </div>
                             </div>
 			            </div>
@@ -3395,36 +3480,36 @@
                         <div class="row mt-3">
                             <div class="col-lg-9 col-md-9">
                                 <div class="mb-2">
-                                    <asp:Label ID="LblDeducible" runat="server" Text="Deducible" CssClass="form-label"></asp:Label>
+                                    <asp:Label ID="LblDeducible" runat="server" Text="<%$ Resources:GlobalResources, lblDeducible %>" CssClass="form-label"></asp:Label>
                                 </div>
                                 <div class="input-group input-group-sm">
-                                    <asp:TextBox ID="TxtDeducible" runat="server" CssClass="form-control form-control-sm" placeholder="Ingrese Deducible" AutoComplete="off" MaxLength="1250" Columns="9" Rows="2" TextMode="MultiLine" ></asp:TextBox>
+                                    <asp:TextBox ID="TxtDeducible" runat="server" CssClass="form-control form-control-sm" placeholder="<%$ Resources:GlobalResources, lblIngDeducible %>" AutoComplete="off" MaxLength="1250" Columns="9" Rows="2" TextMode="MultiLine" ></asp:TextBox>
                                 </div>
                             </div>
                             <div class="col-lg-3 col-md-3">
                                 <div class="mb-2">
-                                    <asp:Label ID="LblValDeducible" runat="server" Text="Deducible" CssClass="form-label"></asp:Label>
+                                    <asp:Label ID="LblValDeducible" runat="server" Text="<%$ Resources:GlobalResources, lblDeducible %>" CssClass="form-label"></asp:Label>
                                 </div>
                                 <div class="input-group input-group-sm">
-                                    <asp:TextBox ID="TxtValDeducible" runat="server" MaxLength="50" CssClass="form-control form-control-sm" placeholder="Ingrese Deducible"></asp:TextBox>
+                                    <asp:TextBox ID="TxtValDeducible" runat="server" MaxLength="50" CssClass="form-control form-control-sm" placeholder="<%$ Resources:GlobalResources, lblIngDeducible %>"></asp:TextBox>
                                 </div>
                             </div>
 			            </div>
                         <div class="row mt-3">
                             <div class="col-lg-9 col-md-9">
                                 <div class="mb-2">
-                                    <asp:Label ID="LblCoaseguro" runat="server" Text="Coaseguro" CssClass="form-label"></asp:Label>
+                                    <asp:Label ID="LblCoaseguro" runat="server" Text="<%$ Resources:GlobalResources, lblCoaseguro %>" CssClass="form-label"></asp:Label>
                                 </div>
                                 <div class="input-group input-group-sm">
-                                    <asp:TextBox ID="TxtCoaseguro" runat="server" CssClass="form-control form-control-sm" placeholder="Ingrese Coaseguro" AutoComplete="off" MaxLength="1250" Columns="9" Rows="2" TextMode="MultiLine" ></asp:TextBox>
+                                    <asp:TextBox ID="TxtCoaseguro" runat="server" CssClass="form-control form-control-sm" placeholder="<%$ Resources:GlobalResources, lblIngCoaseguro %>" AutoComplete="off" MaxLength="1250" Columns="9" Rows="2" TextMode="MultiLine" ></asp:TextBox>
                                 </div>
                             </div>
                             <div class="col-lg-3 col-md-3">
                                 <div class="mb-2">
-                                    <asp:Label ID="LblValCoaseguro" runat="server" Text="Coaseguro" CssClass="form-label"></asp:Label>
+                                    <asp:Label ID="LblValCoaseguro" runat="server" Text="<%$ Resources:GlobalResources, lblCoaseguro %>" CssClass="form-label"></asp:Label>
                                 </div>
                                 <div class="input-group input-group-sm">
-                                    <asp:TextBox ID="TxtValCoaseguro" runat="server" MaxLength="50" CssClass="form-control form-control-sm" placeholder="Ingrese Coaseguro"></asp:TextBox>
+                                    <asp:TextBox ID="TxtValCoaseguro" runat="server" MaxLength="50" CssClass="form-control form-control-sm" placeholder="<%$ Resources:GlobalResources, lblIngCoaseguro %>"></asp:TextBox>
                                 </div>
                             </div>
 			            </div>
@@ -3492,10 +3577,10 @@
                         <div class="d-grid gap-4 d-flex justify-content-center mt-3 mb-3">
                             <asp:UpdatePanel ID="UpdatePanel2" runat="server">
                                 <ContentTemplate>
-                                    <asp:Button ID="BtnAnularPnl17" runat="server" Text="Cancelar" Font-Bold="True" OnClick="BtnAnularPnl17_Click" CssClass="btn btn-primary" Visible="false" TabIndex="0"/>
-                                    <asp:Button ID="btnEditarPnl17" runat="server" Text="Editar Datos" Font-Bold="True" OnClick="btnEditarPnl17_Click" CssClass="btn btn-primary" Enabled="false" TabIndex="1"/>
-                                    <asp:Button ID="btnActualizarPnl17" runat="server" Text="Aplicar Cambios" Font-Bold="True" OnClick="btnActualizarPnl17_Click" CssClass="btn btn-secondary" visible="false" TabIndex="2"/>
-                                    <asp:Button ID="BtnAgregarPnl17" runat="server" Text="Agregar" OnClick="BtnAgregarPnl17_Click" CausesValidation="true" CssClass="btn btn-primary px-4" TabIndex="3"/>
+                                    <asp:Button ID="BtnAnularPnl17" runat="server" Text="<%$ Resources:GlobalResources, btnCancelar %>" Font-Bold="True" OnClick="BtnAnularPnl17_Click" CssClass="btn btn-primary" Visible="false" TabIndex="0"/>
+                                    <asp:Button ID="btnEditarPnl17" runat="server" Text="<%$ Resources:GlobalResources, btnEditar %>" Font-Bold="True" OnClick="btnEditarPnl17_Click" CssClass="btn btn-primary" Enabled="false" TabIndex="1"/>
+                                    <asp:Button ID="btnActualizarPnl17" runat="server" Text="<%$ Resources:GlobalResources, btnGrabar %>" Font-Bold="True" OnClick="btnActualizarPnl17_Click" CssClass="btn btn-secondary" visible="false" TabIndex="2"/>
+                                    <asp:Button ID="BtnAgregarPnl17" runat="server" Text="<%$ Resources:GlobalResources, btnAgregar %>" OnClick="BtnAgregarPnl17_Click" CausesValidation="true" CssClass="btn btn-primary px-4" TabIndex="3"/>
                                 </ContentTemplate>
                             </asp:UpdatePanel>
                         </div>
@@ -3526,7 +3611,7 @@
                                             </asp:TemplateField>
                                             <asp:BoundField DataField="IdSeccion" />
                                             <asp:BoundField DataField="IdCobertura" />
-                                            <asp:BoundField DataField="DescCobertura" HeaderText="Nombre Cobertura" />
+                                            <asp:BoundField DataField="DescCobertura" HeaderText="<%$ Resources:GlobalResources, col_NomCobertura %>" />
                                             <asp:BoundField DataField="Cob_Nombre" />
                                             <asp:BoundField DataField="Cob_Seccion" />
                                             <asp:BoundField DataField="Cob_Riesgo" />
@@ -3536,11 +3621,11 @@
                                             <asp:BoundField DataField="Cob_Deducible" />
                                             <asp:BoundField DataField="Cob_Coaseguro" />
                                             <asp:BoundField DataField="Cob_Notas" />
-                                            <asp:BoundField DataField="Cob_ValSuma" HeaderText="Suma Asegurada" />
-                                            <asp:BoundField DataField="Cob_ValAgregado" HeaderText="Agregado" />
-                                            <asp:BoundField DataField="Cob_ValSublimite"  HeaderText="Sublimite" />
-                                            <asp:BoundField DataField="Cob_ValDeducible" HeaderText="Deducible" />
-                                            <asp:BoundField DataField="Cob_ValCoaseguro" HeaderText="Coaseguro" />
+                                            <asp:BoundField DataField="Cob_ValSuma" HeaderText="<%$ Resources:GlobalResources, col_SumaAsegurada %>" />
+                                            <asp:BoundField DataField="Cob_ValAgregado" HeaderText="<%$ Resources:GlobalResources, col_Agregado %>" />
+                                            <asp:BoundField DataField="Cob_ValSublimite"  HeaderText="<%$ Resources:GlobalResources, col_Sublimite %>" />
+                                            <asp:BoundField DataField="Cob_ValDeducible" HeaderText="<%$ Resources:GlobalResources, col_Deducible %>" />
+                                            <asp:BoundField DataField="Cob_ValCoaseguro" HeaderText="<%$ Resources:GlobalResources, col_Coaseguro %>" />
                                             <asp:BoundField DataField="Aplica_Siniestro" />
                                         </Columns>
                                         <PagerStyle HorizontalAlign="Center" CssClass="pagination-ys" />
@@ -3565,7 +3650,7 @@
             <asp:PostBackTrigger ControlID="BtnEnviarWhatsApp" />
             <asp:PostBackTrigger ControlID="BtnGraba_Categorias" />
             <asp:PostBackTrigger ControlID="BtnCartaSolicitud" />
-            <asp:PostBackTrigger ControlID="BtnGeneraDocumento" />
+            <asp:PostBackTrigger ControlID="BtnInformePreliminar" />
             <asp:PostBackTrigger ControlID="BtnConvenioAjuste" />
             
             <asp:PostBackTrigger ControlID="BtnAnularPnl2" />
@@ -3669,9 +3754,9 @@
         
         <div class="d-flex justify-content-center mb-3">
             <br />
-            <asp:Button ID="BtnAceptar" runat="server" OnClick="BtnAceptar_Click" Text="Aceptar" CssClass="btn btn-outline-primary mx-1" />
-            <asp:Button ID="BtnCancelar" runat="server" OnClick="BtnCancelar_Click" Text="Cancelar" CssClass="btn btn-outline-secondary mx-1" />
-            <asp:Button ID="BtnCerrar" runat="server" OnClick="BtnCerrar_Click" Text="Cerrar" CssClass="btn btn-outline-primary"/>
+            <asp:Button ID="BtnAceptar" runat="server" OnClick="BtnAceptar_Click" Text="<%$ Resources:GlobalResources, btnAceptar %>" CssClass="btn btn-outline-primary mx-1" />
+            <asp:Button ID="BtnCancelar" runat="server" OnClick="BtnCancelar_Click" Text="<%$ Resources:GlobalResources, btnCancelar %>" CssClass="btn btn-outline-secondary mx-1" />
+            <asp:Button ID="BtnCerrar" runat="server" OnClick="BtnCerrar_Click" Text="<%$ Resources:GlobalResources, btnCerrar %>" CssClass="btn btn-outline-primary"/>
         </div>
     </asp:Panel>
     <br />
@@ -3697,8 +3782,8 @@
         
         <div class="d-flex justify-content-center mb-3">
             <br />
-            <asp:Button ID="BtnAceptar_Del_Doc" runat="server" OnClick="BtnAceptar_Del_Doc_Click" Text="Aceptar" CssClass="btn btn-outline-primary mx-1" />
-            <asp:Button ID="BtnCancelar_Del_Doc" runat="server" OnClick="BtnCancelar_Del_Doc_Click" Text="Cancelar" CssClass="btn btn-outline-secondary mx-1" />
+            <asp:Button ID="BtnAceptar_Del_Doc" runat="server" OnClick="BtnAceptar_Del_Doc_Click" Text="<%$ Resources:GlobalResources, btnAceptar %>" CssClass="btn btn-outline-primary mx-1" />
+            <asp:Button ID="BtnCancelar_Del_Doc" runat="server" OnClick="BtnCancelar_Del_Doc_Click" Text="<%$ Resources:GlobalResources, btnCancelar %>" CssClass="btn btn-outline-secondary mx-1" />
         </div>
     </asp:Panel>
     <br />
@@ -3724,8 +3809,8 @@
         
         <div class="d-flex justify-content-center mb-3">
             <br />
-            <asp:Button ID="BtnAceptar_CrearCuaderno" runat="server" OnClick="BtnAceptar_CrearCuaderno_Click" Text="Aceptar" CssClass="btn btn-outline-primary mx-1" />
-            <asp:Button ID="BtnCancelar_CrearCuaderno" runat="server" OnClick="BtnCancelar_CrearCuaderno_Click" Text="Cancelar" CssClass="btn btn-outline-secondary mx-1" />
+            <asp:Button ID="BtnAceptar_CrearCuaderno" runat="server" OnClick="BtnAceptar_CrearCuaderno_Click" Text="<%$ Resources:GlobalResources, btnAceptar %>" CssClass="btn btn-outline-primary mx-1" />
+            <asp:Button ID="BtnCancelar_CrearCuaderno" runat="server" OnClick="BtnCancelar_CrearCuaderno_Click" Text="<%$ Resources:GlobalResources, btnCancelar %>" CssClass="btn btn-outline-secondary mx-1" />
         </div>
     </asp:Panel>
     <br />
@@ -3751,9 +3836,9 @@
         
         <div class="d-flex justify-content-center mb-3">
             <br />
-            <asp:Button ID="BtnDañosEdif_Aceptar" runat="server" OnClick="BtnDañosEdif_Aceptar_Click" Text="Aceptar" CssClass="btn btn-outline-primary mx-1" />
-            <asp:Button ID="BtnDañosEdif_Cancel" runat="server" OnClick="BtnDañosEdif_Cancel_Click" Text="Cancelar" CssClass="btn btn-outline-secondary mx-1" />
-            <asp:Button ID="BtnDañosEdif_Cerrar" runat="server" OnClick="BtnDañosEdif_Cerrar_Click" Text="Cerrar" CssClass="btn btn-outline-primary"/>
+            <asp:Button ID="BtnDañosEdif_Aceptar" runat="server" OnClick="BtnDañosEdif_Aceptar_Click" Text="<%$ Resources:GlobalResources, btnAceptar %>" CssClass="btn btn-outline-primary mx-1" />
+            <asp:Button ID="BtnDañosEdif_Cancel" runat="server" OnClick="BtnDañosEdif_Cancel_Click" Text="<%$ Resources:GlobalResources, btnCancelar %>" CssClass="btn btn-outline-secondary mx-1" />
+            <asp:Button ID="BtnDañosEdif_Cerrar" runat="server" OnClick="BtnDañosEdif_Cerrar_Click" Text="<%$ Resources:GlobalResources, btnCerrar %>" CssClass="btn btn-outline-primary"/>
         </div>
     </asp:Panel>
     <br />
@@ -3779,9 +3864,9 @@
         
         <div class="d-flex justify-content-center mb-3">
             <br />
-            <asp:Button ID="BtnDañosOtros_Aceptar" runat="server" OnClick="BtnDañosOtros_Aceptar_Click" Text="Aceptar" CssClass="btn btn-outline-primary mx-1" />
-            <asp:Button ID="BtnDañosOtros_Cancel" runat="server" OnClick="BtnDañosOtros_Cancel_Click" Text="Cancelar" CssClass="btn btn-outline-secondary mx-1" />
-            <asp:Button ID="BtnDañosOtros_Cerrar" runat="server" OnClick="BtnDañosOtros_Cerrar_Click" Text="Cerrar" CssClass="btn btn-outline-primary"/>
+            <asp:Button ID="BtnDañosOtros_Aceptar" runat="server" OnClick="BtnDañosOtros_Aceptar_Click" Text="<%$ Resources:GlobalResources, btnAceptar %>" CssClass="btn btn-outline-primary mx-1" />
+            <asp:Button ID="BtnDañosOtros_Cancel" runat="server" OnClick="BtnDañosOtros_Cancel_Click" Text="<%$ Resources:GlobalResources, btnCancelar %>" CssClass="btn btn-outline-secondary mx-1" />
+            <asp:Button ID="BtnDañosOtros_Cerrar" runat="server" OnClick="BtnDañosOtros_Cerrar_Click" Text="<%$ Resources:GlobalResources, btnCerrar %>" CssClass="btn btn-outline-primary"/>
         </div>
     </asp:Panel>
     <br />
