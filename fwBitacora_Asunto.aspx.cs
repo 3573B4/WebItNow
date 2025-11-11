@@ -84,6 +84,8 @@ namespace WebItNow_Peacock
 
                 // GetConsulta_Datos(sReferencia);
 
+                GetDatosResponsables();
+
                 GetProductos();
                 GetEstados();
 
@@ -106,9 +108,10 @@ namespace WebItNow_Peacock
                 string flechaHaciaAbajo = "\u25BC";
                 string flechaHaciaArriba = "\u25B2";
 
+                btnShowPanel.Text = flechaHaciaAbajo;       // Flecha hacia arriba
                 btnShowPanel0.Text = flechaHaciaAbajo;      // Flecha hacia arriba
                 btnShowPanel1.Text = flechaHaciaArriba;     // Flecha hacia arriba
-             // btnShowPanel2.Text = flechaHaciaAbajo;      // Flecha hacia abajo
+                btnShowPanel2.Text = flechaHaciaAbajo;      // Flecha hacia abajo
                 btnShowPanel3.Text = flechaHaciaAbajo;      // Flecha hacia abajo
                 btnShowPanel4.Text = flechaHaciaAbajo;      // Flecha hacia abajo
                 btnShowPanel5.Text = flechaHaciaArriba;     // Flecha hacia arriba
@@ -250,7 +253,8 @@ namespace WebItNow_Peacock
             ddl.Items.Clear();
 
             // Opción inicial vacía con valor 0
-            ddl.Items.Add(new ListItem("-- Seleccionar --", "0"));
+         // ddl.Items.Add(new ListItem("-- Seleccionar --", "0"));
+            ddl.Items.Add(new ListItem(GetGlobalResourceObject("GlobalResources", "ddl_Select").ToString(), "0"));
 
             ddl.Items.Add(new ListItem("mm", "mm"));
             ddl.Items.Add(new ListItem("cm", "cm"));
@@ -284,7 +288,8 @@ namespace WebItNow_Peacock
                 ddlEstado.DataTextField = "d_estado";
 
                 ddlEstado.DataBind();
-                ddlEstado.Items.Insert(0, new ListItem("-- Seleccionar --", "0"));
+             // ddlEstado.Items.Insert(0, new ListItem("-- Seleccionar --", "0"));
+                ddlEstado.Items.Insert(0, new ListItem(GetGlobalResourceObject("GlobalResources", "ddl_Select").ToString(), "0"));
 
                 dbConn.Close();
             }
@@ -319,7 +324,8 @@ namespace WebItNow_Peacock
                 ddlEstadoContratante.DataTextField = "d_estado";
 
                 ddlEstadoContratante.DataBind();
-                ddlEstadoContratante.Items.Insert(0, new ListItem("-- Seleccionar --", "0"));
+             // ddlEstadoContratante.Items.Insert(0, new ListItem("-- Seleccionar --", "0"));
+                ddlEstadoContratante.Items.Insert(0, new ListItem(GetGlobalResourceObject("GlobalResources", "ddl_Select").ToString(), "0"));
 
                 dbConn.Close();
             }
@@ -354,7 +360,8 @@ namespace WebItNow_Peacock
                 ddlEstadoBienAsegurado.DataTextField = "d_estado";
 
                 ddlEstadoBienAsegurado.DataBind();
-                ddlEstadoBienAsegurado.Items.Insert(0, new ListItem("-- Seleccionar --", "0"));
+             // ddlEstadoBienAsegurado.Items.Insert(0, new ListItem("-- Seleccionar --", "0"));
+                ddlEstadoBienAsegurado.Items.Insert(0, new ListItem(GetGlobalResourceObject("GlobalResources", "ddl_Select").ToString(), "0"));
 
                 dbConn.Close();
             }
@@ -389,7 +396,8 @@ namespace WebItNow_Peacock
                 ddlEstadoAsegurado1.DataTextField = "d_estado";
 
                 ddlEstadoAsegurado1.DataBind();
-                ddlEstadoAsegurado1.Items.Insert(0, new ListItem("-- Seleccionar --", "0"));
+             // ddlEstadoAsegurado1.Items.Insert(0, new ListItem("-- Seleccionar --", "0"));
+                ddlEstadoAsegurado1.Items.Insert(0, new ListItem(GetGlobalResourceObject("GlobalResources", "ddl_Select").ToString(), "0"));
 
                 dbConn.Close();
             }
@@ -424,8 +432,8 @@ namespace WebItNow_Peacock
                 ddlEstadoAsegurado2.DataTextField = "d_estado";
 
                 ddlEstadoAsegurado2.DataBind();
-                ddlEstadoAsegurado2.Items.Insert(0, new ListItem("-- Seleccionar --", "0"));
-
+             // ddlEstadoAsegurado2.Items.Insert(0, new ListItem("-- Seleccionar --", "0"));
+                ddlEstadoAsegurado2.Items.Insert(0, new ListItem(GetGlobalResourceObject("GlobalResources", "ddl_Select").ToString(), "0"));
                 dbConn.Close();
             }
             catch (System.Exception ex)
@@ -434,7 +442,6 @@ namespace WebItNow_Peacock
                 mpeMensaje.Show();
             }
         }
-
 
         protected void GetEstadosAsegurado3()
         {
@@ -460,7 +467,8 @@ namespace WebItNow_Peacock
                 ddlEstadoAsegurado3.DataTextField = "d_estado";
 
                 ddlEstadoAsegurado3.DataBind();
-                ddlEstadoAsegurado3.Items.Insert(0, new ListItem("-- Seleccionar --", "0"));
+             // ddlEstadoAsegurado3.Items.Insert(0, new ListItem("-- Seleccionar --", "0"));
+                ddlEstadoAsegurado3.Items.Insert(0, new ListItem(GetGlobalResourceObject("GlobalResources", "ddl_Select").ToString(), "0"));
 
                 dbConn.Close();
             }
@@ -491,7 +499,8 @@ namespace WebItNow_Peacock
                 ddlMunicipios.DataTextField = "D_mnpio";
 
                 ddlMunicipios.DataBind();
-                ddlMunicipios.Items.Insert(0, new ListItem("-- Seleccionar --", "0"));
+             // ddlMunicipios.Items.Insert(0, new ListItem("-- Seleccionar --", "0"));
+                ddlMunicipios.Items.Insert(0, new ListItem(GetGlobalResourceObject("GlobalResources", "ddl_Select").ToString(), "0"));
 
                 dbConn.Close();
             }
@@ -522,7 +531,8 @@ namespace WebItNow_Peacock
                 ddlMunicipiosContratante.DataTextField = "D_mnpio";
 
                 ddlMunicipiosContratante.DataBind();
-                ddlMunicipiosContratante.Items.Insert(0, new ListItem("-- Seleccionar --", "0"));
+             // ddlMunicipiosContratante.Items.Insert(0, new ListItem("-- Seleccionar --", "0"));
+                ddlMunicipiosContratante.Items.Insert(0, new ListItem(GetGlobalResourceObject("GlobalResources", "ddl_Select").ToString(), "0"));
 
                 dbConn.Close();
             }
@@ -553,7 +563,8 @@ namespace WebItNow_Peacock
                 ddlMunicipiosBienAsegurado.DataTextField = "D_mnpio";
 
                 ddlMunicipiosBienAsegurado.DataBind();
-                ddlMunicipiosBienAsegurado.Items.Insert(0, new ListItem("-- Seleccionar --", "0"));
+             // ddlMunicipiosBienAsegurado.Items.Insert(0, new ListItem("-- Seleccionar --", "0"));
+                ddlMunicipiosBienAsegurado.Items.Insert(0, new ListItem(GetGlobalResourceObject("GlobalResources", "ddl_Select").ToString(), "0"));
 
                 dbConn.Close();
             }
@@ -584,7 +595,8 @@ namespace WebItNow_Peacock
                 ddlMunicipiosAsegurado1.DataTextField = "D_mnpio";
 
                 ddlMunicipiosAsegurado1.DataBind();
-                ddlMunicipiosAsegurado1.Items.Insert(0, new ListItem("-- Seleccionar --", "0"));
+             // ddlMunicipiosAsegurado1.Items.Insert(0, new ListItem("-- Seleccionar --", "0"));
+                ddlMunicipiosAsegurado1.Items.Insert(0, new ListItem(GetGlobalResourceObject("GlobalResources", "ddl_Select").ToString(), "0"));
 
                 dbConn.Close();
             }
@@ -615,7 +627,8 @@ namespace WebItNow_Peacock
                 ddlMunicipiosAsegurado2.DataTextField = "D_mnpio";
 
                 ddlMunicipiosAsegurado2.DataBind();
-                ddlMunicipiosAsegurado2.Items.Insert(0, new ListItem("-- Seleccionar --", "0"));
+             // ddlMunicipiosAsegurado2.Items.Insert(0, new ListItem("-- Seleccionar --", "0"));
+                ddlMunicipiosAsegurado2.Items.Insert(0, new ListItem(GetGlobalResourceObject("GlobalResources", "ddl_Select").ToString(), "0"));
 
                 dbConn.Close();
             }
@@ -646,7 +659,8 @@ namespace WebItNow_Peacock
                 ddlMunicipiosAsegurado3.DataTextField = "D_mnpio";
 
                 ddlMunicipiosAsegurado3.DataBind();
-                ddlMunicipiosAsegurado3.Items.Insert(0, new ListItem("-- Seleccionar --", "0"));
+             // ddlMunicipiosAsegurado3.Items.Insert(0, new ListItem("-- Seleccionar --", "0"));
+                ddlMunicipiosAsegurado3.Items.Insert(0, new ListItem(GetGlobalResourceObject("GlobalResources", "ddl_Select").ToString(), "0"));
 
                 dbConn.Close();
             }
@@ -696,7 +710,8 @@ namespace WebItNow_Peacock
                 ddlConclusion.DataTextField = "Descripcion";
 
                 ddlConclusion.DataBind();
-                ddlConclusion.Items.Insert(0, new ListItem("-- Seleccionar --", "0"));
+             // ddlConclusion.Items.Insert(0, new ListItem("-- Seleccionar --", "0"));
+                ddlConclusion.Items.Insert(0, new ListItem(GetGlobalResourceObject("GlobalResources", "ddl_Select").ToString(), "0"));
 
                 dbConn.Close();
             }
@@ -738,7 +753,8 @@ namespace WebItNow_Peacock
                 ddlTpoAsegurado.DataTextField = "Descripcion";
 
                 ddlTpoAsegurado.DataBind();
-                ddlTpoAsegurado.Items.Insert(0, new ListItem("-- Seleccionar --", "0"));
+             // ddlTpoAsegurado.Items.Insert(0, new ListItem("-- Seleccionar --", "0"));
+                ddlTpoAsegurado.Items.Insert(0, new ListItem(GetGlobalResourceObject("GlobalResources", "ddl_Select").ToString(), "0"));
 
                 dbConn.Close();
             }
@@ -770,7 +786,8 @@ namespace WebItNow_Peacock
                 ddlEstSiniestro.DataTextField = "Descripcion";
 
                 ddlEstSiniestro.DataBind();
-                ddlEstSiniestro.Items.Insert(0, new ListItem("-- Seleccionar --", "0"));
+             // ddlEstSiniestro.Items.Insert(0, new ListItem("-- Seleccionar --", "0"));
+                ddlEstSiniestro.Items.Insert(0, new ListItem(GetGlobalResourceObject("GlobalResources", "ddl_Select").ToString(), "0"));
 
                 dbConn.Close();
             }
@@ -839,11 +856,13 @@ namespace WebItNow_Peacock
 
                 if (dt.Rows.Count == 0)
                 {
-                    ddlCoberturas.Items.Insert(0, new ListItem("-- No Cobertura(s) --", "0"));
+                 // ddlCoberturas.Items.Insert(0, new ListItem("-- No Cobertura(s) --", "0"));
+                    ddlCoberturas.Items.Insert(0, new ListItem(GetGlobalResourceObject("GlobalResources", "ddl_NoHayCoberturas").ToString(), "0"));
                 }
                 else
                 {
-                    ddlCoberturas.Items.Insert(0, new ListItem("-- Seleccionar --", "0"));
+                 // ddlCoberturas.Items.Insert(0, new ListItem("-- Seleccionar --", "0"));
+                    ddlCoberturas.Items.Insert(0, new ListItem(GetGlobalResourceObject("GlobalResources", "ddl_Select").ToString(), "0"));
                 }
 
                 dbConn.Close();
@@ -876,7 +895,8 @@ namespace WebItNow_Peacock
                 ddlProductos.DataTextField = "Descripcion";
 
                 ddlProductos.DataBind();
-                ddlProductos.Items.Insert(0, new ListItem("-- Seleccionar --", "0"));
+             // ddlProductos.Items.Insert(0, new ListItem("-- Seleccionar --", "0"));
+                ddlProductos.Items.Insert(0, new ListItem(GetGlobalResourceObject("GlobalResources", "ddl_Select").ToString(), "0"));
 
                 //Conecta.Cerrar();
                 //cmd.Dispose();
@@ -994,11 +1014,13 @@ namespace WebItNow_Peacock
 
                 if (dt.Rows.Count == 0)
                 {
-                    ddlCategorias.Items.Insert(0, new ListItem("-- No Hay Categoria(s) --", "0"));
+                 // ddlCategorias.Items.Insert(0, new ListItem("-- No Hay Categoria(s) --", "0"));
+                    ddlCategorias.Items.Insert(0, new ListItem(GetGlobalResourceObject("GlobalResources", "ddl_NoHayCategoria").ToString(), "0"));
                 }
                 else
                 {
-                    ddlCategorias.Items.Insert(0, new ListItem("-- Seleccionar --", "0"));
+                 // ddlCategorias.Items.Insert(0, new ListItem("-- Seleccionar --", "0"));
+                    ddlCategorias.Items.Insert(0, new ListItem(GetGlobalResourceObject("GlobalResources", "ddl_Select").ToString(), "0"));
                 }
 
                 dbConn.Close();
@@ -1031,7 +1053,8 @@ namespace WebItNow_Peacock
                 if (dt.Rows.Count == 0)
                 {
                     GrdEdificio.ShowHeaderWhenEmpty = true;
-                    GrdEdificio.EmptyDataText = "No hay resultados.";
+                 // GrdEdificio.EmptyDataText = "No hay resultados.";
+                    GrdEdificio.EmptyDataText = GetGlobalResourceObject("GlobalResources", "msg_NoResults").ToString();
                 }
 
                 GrdEdificio.DataSource = dt;
@@ -1069,7 +1092,8 @@ namespace WebItNow_Peacock
                 if (dt.Rows.Count == 0)
                 {
                     GrdOtrosDaños.ShowHeaderWhenEmpty = true;
-                    GrdOtrosDaños.EmptyDataText = "No hay resultados.";
+                 // GrdOtrosDaños.EmptyDataText = "No hay resultados.";
+                    GrdOtrosDaños.EmptyDataText = GetGlobalResourceObject("GlobalResources", "msg_NoResults").ToString();
                 }
 
                 GrdOtrosDaños.DataSource = dt;
@@ -1108,7 +1132,8 @@ namespace WebItNow_Peacock
                 if (dt.Rows.Count == 0)
                 {
                     GrdCoberturas.ShowHeaderWhenEmpty = true;
-                    GrdCoberturas.EmptyDataText = "No hay resultados.";
+                 // GrdCoberturas.EmptyDataText = "No hay resultados.";
+                    GrdCoberturas.EmptyDataText = GetGlobalResourceObject("GlobalResources", "msg_NoResults").ToString();
                 }
 
                 GrdCoberturas.DataSource = dt;
@@ -1167,7 +1192,8 @@ namespace WebItNow_Peacock
                 if (dt.Rows.Count == 0)
                 {
                     GrdDocumentos.ShowHeaderWhenEmpty = true;
-                    GrdDocumentos.EmptyDataText = "No hay resultados.";
+                 // GrdDocumentos.EmptyDataText = "No hay resultados.";
+                    GrdDocumentos.EmptyDataText = GetGlobalResourceObject("GlobalResources", "msg_NoResults").ToString();
                 }
 
                 GrdDocumentos.DataSource = dt;
@@ -1180,6 +1206,74 @@ namespace WebItNow_Peacock
 
             }
             catch (System.Exception ex)
+            {
+                LblMessage.Text = ex.Message;
+                mpeMensaje.Show();
+            }
+        }
+
+        public void GetDatosResponsables()
+        {
+            try
+            {
+                string strQuery = string.Empty;
+
+                ConexionBD_MySQL dbConn = new ConexionBD_MySQL(Variables.wUserName, Variables.wPassword);
+                dbConn.Open();
+
+                // Consulta a las tablas : Estado de Documento (Expediente) = ITM_12
+
+                strQuery = "SELECT b.IdRespProyecto, b.IdCliente, b.IdProyecto, b.IdTpoAsunto, b.IdResponsable, b.IdResponsable_Ref, " +
+                           "  c.Descripcion as Responsable, a.Descripcion as NomResponsable, a.NomEmpresa, a.Cargo, a.Email, a.Telefono " +
+                           "  FROM ITM_79_1 as a, ITM_79_2 as b, ITM_93_1 as c " +
+                           " WHERE a.IdResponsable = b.IdResponsable " +
+                           "   AND a.IdResponsable_Ref = b.IdResponsable_Ref " +
+                           "   AND b.IdResponsable_Ref = c.IdTpoUsuario " +
+                           "   AND b.IdCliente = '" + Variables.wPrefijo_Aseguradora + "' " +
+                           "   AND b.IdProyecto = " + Variables.wIdProyecto + " AND b.IdStatus = 1 ";
+                        //"UNION ALL " +
+                        //"SELECT b.IdRespProyecto, b.IdCliente, b.IdProyecto, b.IdTpoAsunto, b.IdResponsable, b.IdResponsable_Ref, " +
+                        //"  c.Descripcion as Responsable, a.Descripcion as NomResponsable, a.NomEmpresa, a.Cargo, a.Email, a.Telefono " +
+                        //"  FROM ITM_79 as a, ITM_79_2 as b, ITM_93 as c " +
+                        //" WHERE a.IdGerente = b.IdResponsable " +
+                        //"   AND a.IdResponsable_Ref = b.IdResponsable_Ref " +
+                        //"   AND b.IdResponsable_Ref = c.IdTpoUsuario " +
+                        //"   AND b.IdCliente = '" + Variables.wPrefijo_Aseguradora + "' " +
+                        //"   AND b.IdProyecto = " + Variables.wIdProyecto + " AND b.IdStatus = 1 " +
+                        //"UNION ALL " +
+                        //"SELECT b.IdRespProyecto, b.IdCliente, b.IdProyecto, b.IdTpoAsunto, b.IdResponsable, b.IdResponsable_Ref, " +
+                        //"  c.Descripcion as Responsable, a.Descripcion as NomResponsable, a.NomEmpresa, a.Cargo, a.Email, a.Telefono " +
+                        //"  FROM ITM_69 as a, ITM_79_2 as b, ITM_93 as c " +
+                        //" WHERE a.IdRespAdministrativo = b.IdResponsable " +
+                        //"   AND a.IdResponsable_Ref = b.IdResponsable_Ref " +
+                        //"   AND b.IdResponsable_Ref = c.IdTpoUsuario " +
+                        //"   AND b.IdCliente = '" + Variables.wPrefijo_Aseguradora + "' " +
+                        //"   AND b.IdProyecto = " + Variables.wIdProyecto + " AND b.IdStatus = 1 " +
+                        //"UNION ALL " +
+                        //"SELECT b.IdRespProyecto, b.IdCliente, b.IdProyecto, b.IdTpoAsunto, b.IdResponsable, b.IdResponsable_Ref, " +
+                        //"  c.Descripcion as Responsable, a.Descripcion as NomResponsable, a.NomEmpresa, a.Cargo, a.Email, a.Telefono " +
+                        //"  FROM ITM_68 as a, ITM_79_2 as b, ITM_93 as c " +
+                        //" WHERE a.IdRespTecnico = b.IdResponsable " +
+                        //"   AND a.IdResponsable_Ref = b.IdResponsable_Ref " +
+                        //"   AND b.IdResponsable_Ref = c.IdTpoUsuario " +
+                        //"   AND b.IdCliente = '" + Variables.wPrefijo_Aseguradora + "' " +
+                        //"   AND b.IdProyecto = " + Variables.wIdProyecto + " AND b.IdStatus = 1 ";
+
+                DataTable dt = dbConn.ExecuteQuery(strQuery);
+
+                if (dt.Rows.Count == 0)
+                {
+                    GrdResponsables.ShowHeaderWhenEmpty = true;
+                    GrdResponsables.EmptyDataText = GetGlobalResourceObject("GlobalResources", "msg_NoResults").ToString();
+                }
+
+                GrdResponsables.DataSource = dt;
+                GrdResponsables.DataBind();
+
+                //* * Agrega THEAD y TBODY a GridView.
+                GrdResponsables.HeaderRow.TableSection = TableRowSection.TableHeader;
+            }
+            catch (Exception ex)
             {
                 LblMessage.Text = ex.Message;
                 mpeMensaje.Show();
@@ -2813,14 +2907,14 @@ namespace WebItNow_Peacock
 
             if (pnl2.Visible)
             {
-                // string flechaHaciaArriba = "\u25B2";
-                // btnShowPanel2.Text = flechaHaciaArriba; // Flecha hacia arriba
+                string flechaHaciaArriba = "\u25B2";
+                btnShowPanel2.Text = flechaHaciaArriba; // Flecha hacia arriba
                 pnl2.Visible = true;
             }
             else
             {
-                // string flechaHaciaAbajo = "\u25BC";
-                // btnShowPanel2.Text = flechaHaciaAbajo; // Flecha hacia abajo
+                string flechaHaciaAbajo = "\u25BC";
+                btnShowPanel2.Text = flechaHaciaAbajo; // Flecha hacia abajo
                 pnl2.Visible = false;
             }
         }
@@ -4297,7 +4391,8 @@ namespace WebItNow_Peacock
                 if (dt.Rows.Count == 0)
                 {
                     grdSeccion_2.ShowHeaderWhenEmpty = true;
-                    grdSeccion_2.EmptyDataText = "No hay resultados.";
+                 // grdSeccion_2.EmptyDataText = "No hay resultados.";
+                    grdSeccion_2.EmptyDataText = GetGlobalResourceObject("GlobalResources", "msg_NoResults").ToString();
                 }
 
                 grdSeccion_2.DataSource = dt;
@@ -4350,7 +4445,8 @@ namespace WebItNow_Peacock
                 if (dt.Rows.Count == 0)
                 {
                     grdSeccion_4.ShowHeaderWhenEmpty = true;
-                    grdSeccion_4.EmptyDataText = "No hay resultados.";
+                 // grdSeccion_4.EmptyDataText = "No hay resultados.";
+                    grdSeccion_4.EmptyDataText = GetGlobalResourceObject("GlobalResources", "msg_NoResults").ToString();
                 }
 
                 grdSeccion_4.DataSource = dt;
@@ -4403,7 +4499,8 @@ namespace WebItNow_Peacock
                 if (dt.Rows.Count == 0)
                 {
                     grdSeccion_5.ShowHeaderWhenEmpty = true;
-                    grdSeccion_5.EmptyDataText = "No hay resultados.";
+                 // grdSeccion_5.EmptyDataText = "No hay resultados.";
+                    grdSeccion_5.EmptyDataText = GetGlobalResourceObject("GlobalResources", "msg_NoResults").ToString();
                 }
 
                 grdSeccion_5.DataSource = dt;
@@ -8428,7 +8525,8 @@ namespace WebItNow_Peacock
             {
 
             }
-            else if (ddlCategorias.SelectedItem.Text.ToUpper() == "EDIFICIO")
+            else if (ddlCategorias.SelectedItem.Text.ToUpper() == "EDIFICIO" || ddlCategorias.SelectedItem.Text.ToUpper() == "BUILDING" || 
+                     ddlCategorias.SelectedItem.Text.ToUpper() == "EDIFÍCIO")
             {
                 Actualizar_Daños_Edificio(Variables.wIdAsunto);
 
@@ -8472,7 +8570,8 @@ namespace WebItNow_Peacock
                 // Nada seleccionado
                 pnlVacio.Visible = true;
             }
-            else if (ddlCategorias.SelectedItem.Text.ToUpper() == "EDIFICIO")
+            else if (ddlCategorias.SelectedItem.Text.ToUpper() == "EDIFICIO" || ddlCategorias.SelectedItem.Text.ToUpper() == "BUILDING" || 
+                     ddlCategorias.SelectedItem.Text.ToUpper() == "EDIFÍCIO")
             {
                 GetAltaDaños_Edificio();
 
@@ -8729,7 +8828,9 @@ namespace WebItNow_Peacock
             {
                 // Mostrar el mensaje de "No hay resultados"
                 GrdEdificio.ShowHeaderWhenEmpty = true;
-                GrdEdificio.EmptyDataText = "No hay resultados.";
+             // GrdEdificio.EmptyDataText = "No hay resultados.";
+                GrdEdificio.EmptyDataText = GetGlobalResourceObject("GlobalResources", "msg_NoResults").ToString();
+
             }
 
             // Enlaza el DataTable (vacío o lleno) al GridView
@@ -8770,7 +8871,8 @@ namespace WebItNow_Peacock
             {
                 // Mostrar el mensaje de "No hay resultados"
                 GrdOtrosDaños.ShowHeaderWhenEmpty = true;
-                GrdOtrosDaños.EmptyDataText = "No hay resultados.";
+             // GrdOtrosDaños.EmptyDataText = "No hay resultados.";
+                GrdOtrosDaños.EmptyDataText = GetGlobalResourceObject("GlobalResources", "msg_NoResults").ToString();
             }
 
             // Enlaza el DataTable (vacío o lleno) al GridView
@@ -8813,7 +8915,8 @@ namespace WebItNow_Peacock
             {
 
             }
-            else if (ddlCategorias.SelectedItem.Text.ToUpper() == "EDIFICIO")
+            else if (ddlCategorias.SelectedItem.Text.ToUpper() == "EDIFICIO" || ddlCategorias.SelectedItem.Text.ToUpper() == "BUILDING" || 
+                     ddlCategorias.SelectedItem.Text.ToUpper() == "EDIFÍCIO")
             {
                 Actualizar_Daños_Edificio();
 
@@ -9926,6 +10029,7 @@ namespace WebItNow_Peacock
             }
         }
 
+<<<<<<< HEAD
         protected void btnUpdateLineaNegocio_Click(object sender, EventArgs e)
         {
             // insertar las Etapas en la tabla 100
@@ -10007,6 +10111,70 @@ namespace WebItNow_Peacock
 
         }
 
+=======
+        protected void btnShowPanel_Click(object sender, EventArgs e)
+        {
+            pnlInicio.Visible = !pnlInicio.Visible;   // Cambia la visibilidad del Panel Inicio al contrario de su estado actual
+
+            if (pnlInicio.Visible)
+            {
+                string flechaHaciaArriba = "\u25B2";
+                btnShowPanel.Text = flechaHaciaArriba; // Flecha hacia arriba
+                pnlInicio.Visible = true;
+            }
+            else
+            {
+                string flechaHaciaAbajo = "\u25BC";
+                btnShowPanel.Text = flechaHaciaAbajo; // Flecha hacia abajo
+                pnlInicio.Visible = false;
+            }
+        }
+
+        protected void GrdResponsables_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+
+        }
+
+        protected void GrdResponsables_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+                e.Row.Attributes.Add("OnClick", "" + Page.ClientScript.GetPostBackClientHyperlink(this.GrdResponsables, "Select$" + e.Row.RowIndex.ToString()) + ";");
+
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                e.Row.Cells[6].Width = Unit.Pixel(250);     // Responsable
+                e.Row.Cells[7].Width = Unit.Pixel(250);     // NomResponsable
+                e.Row.Cells[8].Width = Unit.Pixel(250);     // NomEmpresa
+                e.Row.Cells[9].Width = Unit.Pixel(150);     // Cargo
+                e.Row.Cells[10].Width = Unit.Pixel(150);    // Email
+                e.Row.Cells[11].Width = Unit.Pixel(150);    // Telefono
+                e.Row.Cells[12].Width = Unit.Pixel(50);     // Eliminar
+            }
+            if (e.Row.RowType == DataControlRowType.Header)
+            {
+                e.Row.Cells[0].Visible = false;    // IdRespProyecto
+                e.Row.Cells[1].Visible = false;    // IdCliente
+                e.Row.Cells[2].Visible = false;    // IdProyecto
+                e.Row.Cells[3].Visible = false;    // IdTpoAsunto
+                e.Row.Cells[4].Visible = false;    // IdResponsable
+                e.Row.Cells[5].Visible = false;    // IdResponsable_Ref
+            }
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                e.Row.Cells[0].Visible = false;    // IdRespProyecto
+                e.Row.Cells[1].Visible = false;    // IdCliente
+                e.Row.Cells[2].Visible = false;    // IdProyecto
+                e.Row.Cells[3].Visible = false;    // IdTpoAsunto
+                e.Row.Cells[4].Visible = false;    // IdResponsable
+                e.Row.Cells[5].Visible = false;    // IdResponsable_Ref
+            }
+        }
+
+        protected void ImgDelResponsable_Click(object sender, ImageClickEventArgs e)
+        {
+
+        }
+>>>>>>> changes-teammate
     }
 
 }
