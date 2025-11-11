@@ -987,6 +987,15 @@ namespace WebItNow_Peacock
         protected global::System.Web.UI.WebControls.Button btnCrearLineaNegocio;
 
         /// <summary>
+        /// Control btnUpdateLineaNegocio.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnUpdateLineaNegocio;
+
+        /// <summary>
         /// Control pnlLineTimeEtapas.
         /// </summary>
         /// <remarks>
@@ -5640,6 +5649,69 @@ namespace WebItNow_Peacock
         protected global::System.Web.UI.WebControls.Button btnPnlCerrarConfTask;
 
         /// <summary>
+        /// Control pnlConfDeleteEtapa.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlConfDeleteEtapa;
+
+        /// <summary>
+        /// Control hIdReferenciaEtapaDelete.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputHidden hIdReferenciaEtapaDelete;
+
+        /// <summary>
+        /// Control hfIdReferenciaEtapaDelete.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hfIdReferenciaEtapaDelete;
+
+        /// <summary>
+        /// Control lblPnlMdlContextoDelete.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblPnlMdlContextoDelete;
+
+        /// <summary>
+        /// Control lblPnlMdlTitleEtapa.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblPnlMdlTitleEtapa;
+
+        /// <summary>
+        /// Control btnPnlDeleteConfEtapa.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnPnlDeleteConfEtapa;
+
+        /// <summary>
+        /// Control btnPnlConfDeleteCancel.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnPnlConfDeleteCancel;
+
+        /// <summary>
         /// Control mpeMensaje.
         /// </summary>
         /// <remarks>
@@ -5764,5 +5836,23 @@ namespace WebItNow_Peacock
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblMpePnlConfCompletarTask;
+
+        /// <summary>
+        /// Control mpePnlConfDeleteEtapa.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::AjaxControlToolkit.ModalPopupExtender mpePnlConfDeleteEtapa;
+
+        /// <summary>
+        /// Control lblMpePnlConfDeleteEtapa.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblMpePnlConfDeleteEtapa;
     }
 }

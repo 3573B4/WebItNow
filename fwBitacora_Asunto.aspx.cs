@@ -9225,6 +9225,7 @@ namespace WebItNow_Peacock
                     //poner invisible el boton para empezar la Linea de Negocio 
                     btnCrearLineaNegocio.Visible = false;
                     pnlLineTimeEtapas.Visible = true;
+                    btnUpdateLineaNegocio.Visible = true;
                     //mostrar flecha hacia arriba
                     btnShowPnlLineTimeEtapas.Text = flechaHaciaArriba;      //flecha hacia arriba
 
@@ -9237,6 +9238,7 @@ namespace WebItNow_Peacock
                 {
                     btnCrearLineaNegocio.Visible = true;
                     pnlLineTimeEtapas.Visible = false;
+                    btnUpdateLineaNegocio.Visible = false;
                     //mostrar flecha hacia abajo
                     btnShowPnlLineTimeEtapas.Text = flechaHaciaAbajo;      //flecha hacia abajo
                     //btnShowPnlLineTimeEtapas.Enabled = false;
@@ -9589,8 +9591,11 @@ namespace WebItNow_Peacock
                                             " VALUES ( " + iIdUltimoConsecutivo + ", " + iIdReferenciaFk + " , " + iIdRelacion + ", " +
                                                      iIdEtapa + ", '" + iIdRespAsignado + "', 1, " +
                                                      " '" + fechaHoraAsignada + "', 1 ); ";
-
-                    affectedRows = dbConn.ExecuteNonQuery(strQueryInsert);
+                    if (ExisteRegistroITM100(iIdReferenciaFk, iIdRelacion, null, null, null) == 0)
+                    {
+                        // Insertar solo si no existe
+                        dbConn.ExecuteNonQuery(strQueryInsert);
+                    }
 
                     // funcion de insertar tarea.
                     InsertTareas_100(iIdReferenciaFk, iIdRelacion, iIdEtapa);
@@ -9662,7 +9667,12 @@ namespace WebItNow_Peacock
                                                     iIdEtapa + ", " + iIdRelaciones + ", " + iIdTarea + ", '" + iIdRespAsignado + "', 1, " +
                                                     " '" + fechaHoraAsignada + "', 1 ); ";
 
-                affectedRows = dbConn.ExecuteNonQuery(strQueryInsert);
+                if (ExisteRegistroITM100(iIdReferenciaFk, iIdRelacion, iIdRelaciones, iIdTarea, null) == 0)
+                {
+                    dbConn.ExecuteNonQuery(strQueryInsert);
+                }
+
+                //affectedRows = dbConn.ExecuteNonQuery(strQueryInsert);
 
                 // 2️⃣ Buscar e insertar subtareas relacionadas
                 string qSubTareas = " SELECT IdTarea, IdOrden " +
@@ -9691,7 +9701,12 @@ namespace WebItNow_Peacock
                                                         idSubTarea + " ,'" + iIdRespAsignado + "', 1, " +
                                                         " '" + fechaHoraAsignada + "', 1 ); ";
 
-                    affectedRows = dbConn.ExecuteNonQuery(strQuerySubInsert);
+                    if (ExisteRegistroITM100(iIdReferenciaFk, iIdRelacion, iIdRelaciones, iIdTarea, idSubTarea) == 0)
+                    {
+                        dbConn.ExecuteNonQuery(strQuerySubInsert);
+                    }
+
+                    //affectedRows = dbConn.ExecuteNonQuery(strQuerySubInsert);
 
                 }
             }
@@ -9699,6 +9714,51 @@ namespace WebItNow_Peacock
             dbConn.Close();
 
         }
+
+        private int ExisteRegistroITM100(int idReferencia, int idRelacionEtapa, int? idRelacionTareas, int? idTarea, int? idSubTarea)
+        {
+            int existe = 0;
+
+            try
+            {
+                using (ConexionBD_MySQL dbConn = new ConexionBD_MySQL(Variables.wUserName, Variables.wPassword))
+                {
+                    dbConn.Open();
+
+                    string query = @"
+                        SELECT COUNT(*) 
+                        FROM ITM_100 
+                        WHERE IdReferencia = @IdReferencia
+                          AND IdRelacionEtapa = @IdRelacionEtapa
+                          AND (IdRelacionTareas <=> @IdRelacionTareas)
+                          AND (IdTarea <=> @IdTarea)
+                          AND (IdSubTarea <=> @IdSubTarea)
+                          AND IdStatus = 1;";
+
+                    using (var cmd = new MySql.Data.MySqlClient.MySqlCommand(query, dbConn.Connection))
+                    {
+                        cmd.Parameters.AddWithValue("@IdReferencia", idReferencia);
+                        cmd.Parameters.AddWithValue("@IdRelacionEtapa", idRelacionEtapa);
+                        cmd.Parameters.AddWithValue("@IdRelacionTareas", idRelacionTareas.HasValue ? (object)idRelacionTareas.Value : DBNull.Value);
+                        cmd.Parameters.AddWithValue("@IdTarea", idTarea.HasValue ? (object)idTarea.Value : DBNull.Value);
+                        cmd.Parameters.AddWithValue("@IdSubTarea", idSubTarea.HasValue ? (object)idSubTarea.Value : DBNull.Value);
+
+                        object result = cmd.ExecuteScalar();
+                        if (result != null && result != DBNull.Value)
+                            existe = Convert.ToInt32(result);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Muestra el error sin detener el flujo de ejecución
+                LblMessage.Text = "Error al validar existencia: " + ex.Message;
+                mpeMensaje.Show();
+            }
+
+            return existe;
+        }
+
 
         protected void rptEtapas_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
@@ -9835,7 +9895,7 @@ namespace WebItNow_Peacock
                     using (MySqlCommand cmd = conn.CreateCommand())
                     {
                         cmd.CommandText = @"
-                            UPDATE web_peacock.ITM_100
+                            UPDATE ITM_100
                             SET FechaCompletada = @FechaCompletada,
                                 IdRealizadoResponsable = @IdUsuario,
                                 Comentario = @Comentario,
@@ -9854,6 +9914,7 @@ namespace WebItNow_Peacock
 
                 dbConn.Close();
 
+                txtMdlComentario.Text = null;
                 // Refrescar
                 GetLineTimeReferencia();
 
@@ -9864,6 +9925,88 @@ namespace WebItNow_Peacock
                 mpeMensaje.Show();
             }
         }
+
+        protected void btnUpdateLineaNegocio_Click(object sender, EventArgs e)
+        {
+            // insertar las Etapas en la tabla 100
+            InsertEtapas_100();
+
+            //se obtiene las Etapas insertadas y se muestra
+            //aqui va la funcion para traer toda la Linea de teimpo de la referencia
+            GetLineTimeReferencia();
+
+            //btnCrearLineaNegocio.Visible = false;
+            //pnlLineTimeEtapas.Visible = true;
+
+            //btnShowPnlLineTimeEtapas.Text = "\u25B2";  //flechita hacia arriba
+
+        }
+
+        protected void btnMdlConfEliminacion_Click(object sender, EventArgs e)
+        {
+            // va el modal para confirmar la eliminacion de la etapa. 
+
+        }
+
+        protected void btnImgMdlEliminarEtapa_Click(object sender, ImageClickEventArgs e)
+        {
+            ImageButton btnImgArgs = (ImageButton)sender;
+            string[] args = btnImgArgs.CommandArgument.Split(';');
+            string sIdReferenciaEtapa = args[0];
+            string nomEtapa = args.Length > 1 ? args[1] : "";
+
+            hIdReferenciaEtapa.Value = sIdReferenciaEtapa;
+            hfIdReferenciaEtapa.Value = sIdReferenciaEtapa;
+            ViewState["IdReferenciaEtapa"] = sIdReferenciaEtapa;
+            ViewState["NomEtapa"] = nomEtapa;
+            lblPnlMdlTitleEtapa.Text = nomEtapa;
+
+
+            mpePnlConfDeleteEtapa.Show();
+        }
+
+        protected void btnPnlDeleteConfEtapa_Click(object sender, EventArgs e)
+        {
+            int iVSIdReferenciaEtapa = Convert.ToInt32(ViewState["IdReferenciaEtapa"]?.ToString());
+            int iIdReferenciaFk = GetiReferenciaFk(Variables.wRef);
+
+            EliminarEtapa_100(iIdReferenciaFk, iVSIdReferenciaEtapa);
+
+            GetLineTimeReferencia();
+        }
+
+
+        private void EliminarEtapa_100(int iIdReferencia,int iIdEtapa)
+        {
+            try
+            {
+                ConexionBD_MySQL dbConn = new ConexionBD_MySQL(Variables.wUserName, Variables.wPassword);
+                dbConn.Open();
+
+                using (MySqlConnection conn = dbConn.Connection)
+                {
+                    using (MySqlCommand cmd = conn.CreateCommand())
+                    {
+                        cmd.CommandText = @"
+                            DELETE FROM ITM_100 
+                             WHERE IdEtapa = @IdEtapa
+                               AND IdReferencia = @IdReferncia;";
+
+                        cmd.Parameters.AddWithValue("@IdEtapa", iIdEtapa);
+                        cmd.Parameters.AddWithValue("@IdReferncia", iIdReferencia);
+
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (System.Exception ex)
+            {
+                LblMessage.Text = ex.Message;
+                mpeMensaje.Show();
+            }
+
+        }
+
     }
 
 }
