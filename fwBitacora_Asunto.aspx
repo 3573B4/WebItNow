@@ -846,11 +846,7 @@
                     <%--va otro acordion de Linea de tiempo de las referencias --%>
                     <div class="row mb-3 mt-4" style="background-color:#C6D541; align-items: baseline;">
                         <div class="col-10" style="padding-left: 14px;">
-<<<<<<< HEAD
-                            <asp:Label ID="lblLineTimeEtapas" runat="server" Text="Linea de tiempo de las referencias" CssClass="control-label" Font-Size="small"></asp:Label>
-=======
                             <asp:Label ID="lblLineTimeEtapas" runat="server" Text="<%$ Resources:GlobalResources, hdrTituloLineaTiempo %>" CssClass="control-label" Font-Size="small"></asp:Label>
->>>>>>> changes-teammate
                         </div>
                         <div class="col-2" style="display:flex; justify-content: end;">
                             <div>
@@ -865,12 +861,8 @@
 
                     <asp:UpdatePanel ID="updPBtnCrearLineaNegocio" runat="server">
                         <ContentTemplate>
-<<<<<<< HEAD
-                            <asp:Button ID="btnCrearLineaNegocio" runat="server" Text="Crear linea de negocio" OnClick="btnCrearLineaNegocio_Click" CssClass="btn btn-secondary" Visible="true" />
-                            <asp:Button ID="btnUpdateLineaNegocio" runat="server" Text="Actualizar linea de negocio" OnClick="btnUpdateLineaNegocio_Click" CssClass="btn btn-secondary" Visible="true" />
-=======
                             <asp:Button ID="btnCrearLineaNegocio" runat="server" Text="<%$ Resources:GlobalResources, btnCrearLineaNegocio %>" OnClick="btnCrearLineaNegocio_Click" CssClass="btn btn-secondary" Visible="true" />
->>>>>>> changes-teammate
+                            <asp:Button ID="btnUpdateLineaNegocio" runat="server" Text="Actualizar linea de negocio" OnClick="btnUpdateLineaNegocio_Click" CssClass="btn btn-secondary" Visible="true" />
                         </ContentTemplate>
                     </asp:UpdatePanel>
 

@@ -10029,7 +10029,6 @@ namespace WebItNow_Peacock
             }
         }
 
-<<<<<<< HEAD
         protected void btnUpdateLineaNegocio_Click(object sender, EventArgs e)
         {
             // insertar las Etapas en la tabla 100
@@ -10111,7 +10110,6 @@ namespace WebItNow_Peacock
 
         }
 
-=======
         protected void btnShowPanel_Click(object sender, EventArgs e)
         {
             pnlInicio.Visible = !pnlInicio.Visible;   // Cambia la visibilidad del Panel Inicio al contrario de su estado actual
@@ -10174,7 +10172,7 @@ namespace WebItNow_Peacock
         {
 
         }
->>>>>>> changes-teammate
+
     }
 
 }
