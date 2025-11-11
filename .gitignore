@@ -18,7 +18,6 @@ x86/
 
 # NuGet
 *.nupkg
-<<<<<<< HEAD
 *.snupkg
 packages/
 project.lock.json
@@ -46,17 +45,6 @@ publish/
 *.Publish.xml
 *.pubxml
 *.publishproj
-=======
-packages/
-*.snupkg
-project.lock.json
-
-# Logs
-*.log
-# Publicaciones temporales
-*.Publish.xml
-*.pubxml
-*.publishproj
 
 # Archivos generados por compilación
 *.tmp
@@ -71,14 +59,10 @@ project.lock.json
 iisexpress/
 *.vspscc
 # Configuraciones de usuario y locales
->>>>>>> work-esteban
 *.userprefs
 *.local
 *.config
 
-<<<<<<< HEAD
-# Archivos generados por pruebas o compilación
-=======
 # Resharper / Rider
 _ReSharper*/
 *.DotSettings.user
@@ -86,5 +70,5 @@ _ReSharper*/
 
 # Publish
 publish/
->>>>>>> work-esteban
+# Archivos generados por pruebas o compilación
 TestResult*/

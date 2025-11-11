@@ -10029,7 +10029,69 @@ namespace WebItNow_Peacock
             }
         }
 
-<<<<<<< HEAD
+        protected void btnShowPanel_Click(object sender, EventArgs e)
+        {
+            pnlInicio.Visible = !pnlInicio.Visible;   // Cambia la visibilidad del Panel Inicio al contrario de su estado actual
+
+            if (pnlInicio.Visible)
+            {
+                string flechaHaciaArriba = "\u25B2";
+                btnShowPanel.Text = flechaHaciaArriba; // Flecha hacia arriba
+                pnlInicio.Visible = true;
+            }
+            else
+            {
+                string flechaHaciaAbajo = "\u25BC";
+                btnShowPanel.Text = flechaHaciaAbajo; // Flecha hacia abajo
+                pnlInicio.Visible = false;
+            }
+        }
+
+        protected void GrdResponsables_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+
+        }
+
+        protected void GrdResponsables_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+                e.Row.Attributes.Add("OnClick", "" + Page.ClientScript.GetPostBackClientHyperlink(this.GrdResponsables, "Select$" + e.Row.RowIndex.ToString()) + ";");
+
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                e.Row.Cells[6].Width = Unit.Pixel(250);     // Responsable
+                e.Row.Cells[7].Width = Unit.Pixel(250);     // NomResponsable
+                e.Row.Cells[8].Width = Unit.Pixel(250);     // NomEmpresa
+                e.Row.Cells[9].Width = Unit.Pixel(150);     // Cargo
+                e.Row.Cells[10].Width = Unit.Pixel(150);    // Email
+                e.Row.Cells[11].Width = Unit.Pixel(150);    // Telefono
+                e.Row.Cells[12].Width = Unit.Pixel(50);     // Eliminar
+            }
+            if (e.Row.RowType == DataControlRowType.Header)
+            {
+                e.Row.Cells[0].Visible = false;    // IdRespProyecto
+                e.Row.Cells[1].Visible = false;    // IdCliente
+                e.Row.Cells[2].Visible = false;    // IdProyecto
+                e.Row.Cells[3].Visible = false;    // IdTpoAsunto
+                e.Row.Cells[4].Visible = false;    // IdResponsable
+                e.Row.Cells[5].Visible = false;    // IdResponsable_Ref
+            }
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                e.Row.Cells[0].Visible = false;    // IdRespProyecto
+                e.Row.Cells[1].Visible = false;    // IdCliente
+                e.Row.Cells[2].Visible = false;    // IdProyecto
+                e.Row.Cells[3].Visible = false;    // IdTpoAsunto
+                e.Row.Cells[4].Visible = false;    // IdResponsable
+                e.Row.Cells[5].Visible = false;    // IdResponsable_Ref
+            }
+        }
+
+        protected void ImgDelResponsable_Click(object sender, ImageClickEventArgs e)
+        {
+
+        }
+
         protected void btnUpdateLineaNegocio_Click(object sender, EventArgs e)
         {
             // insertar las Etapas en la tabla 100
@@ -10111,70 +10173,6 @@ namespace WebItNow_Peacock
 
         }
 
-=======
-        protected void btnShowPanel_Click(object sender, EventArgs e)
-        {
-            pnlInicio.Visible = !pnlInicio.Visible;   // Cambia la visibilidad del Panel Inicio al contrario de su estado actual
-
-            if (pnlInicio.Visible)
-            {
-                string flechaHaciaArriba = "\u25B2";
-                btnShowPanel.Text = flechaHaciaArriba; // Flecha hacia arriba
-                pnlInicio.Visible = true;
-            }
-            else
-            {
-                string flechaHaciaAbajo = "\u25BC";
-                btnShowPanel.Text = flechaHaciaAbajo; // Flecha hacia abajo
-                pnlInicio.Visible = false;
-            }
-        }
-
-        protected void GrdResponsables_PageIndexChanging(object sender, GridViewPageEventArgs e)
-        {
-
-        }
-
-        protected void GrdResponsables_RowDataBound(object sender, GridViewRowEventArgs e)
-        {
-            if (e.Row.RowType == DataControlRowType.DataRow)
-                e.Row.Attributes.Add("OnClick", "" + Page.ClientScript.GetPostBackClientHyperlink(this.GrdResponsables, "Select$" + e.Row.RowIndex.ToString()) + ";");
-
-            if (e.Row.RowType == DataControlRowType.DataRow)
-            {
-                e.Row.Cells[6].Width = Unit.Pixel(250);     // Responsable
-                e.Row.Cells[7].Width = Unit.Pixel(250);     // NomResponsable
-                e.Row.Cells[8].Width = Unit.Pixel(250);     // NomEmpresa
-                e.Row.Cells[9].Width = Unit.Pixel(150);     // Cargo
-                e.Row.Cells[10].Width = Unit.Pixel(150);    // Email
-                e.Row.Cells[11].Width = Unit.Pixel(150);    // Telefono
-                e.Row.Cells[12].Width = Unit.Pixel(50);     // Eliminar
-            }
-            if (e.Row.RowType == DataControlRowType.Header)
-            {
-                e.Row.Cells[0].Visible = false;    // IdRespProyecto
-                e.Row.Cells[1].Visible = false;    // IdCliente
-                e.Row.Cells[2].Visible = false;    // IdProyecto
-                e.Row.Cells[3].Visible = false;    // IdTpoAsunto
-                e.Row.Cells[4].Visible = false;    // IdResponsable
-                e.Row.Cells[5].Visible = false;    // IdResponsable_Ref
-            }
-            if (e.Row.RowType == DataControlRowType.DataRow)
-            {
-                e.Row.Cells[0].Visible = false;    // IdRespProyecto
-                e.Row.Cells[1].Visible = false;    // IdCliente
-                e.Row.Cells[2].Visible = false;    // IdProyecto
-                e.Row.Cells[3].Visible = false;    // IdTpoAsunto
-                e.Row.Cells[4].Visible = false;    // IdResponsable
-                e.Row.Cells[5].Visible = false;    // IdResponsable_Ref
-            }
-        }
-
-        protected void ImgDelResponsable_Click(object sender, ImageClickEventArgs e)
-        {
-
-        }
->>>>>>> changes-teammate
     }
 
 }
