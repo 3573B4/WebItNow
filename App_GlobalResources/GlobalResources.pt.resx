@@ -129,6 +129,12 @@
   <data name="btnAnular" xml:space="preserve">
     <value>Cancelar</value>
   </data>
+  <data name="btnArch_PDF" xml:space="preserve">
+    <value>Gerar PDF</value>
+  </data>
+  <data name="btnArch_ZIP" xml:space="preserve">
+    <value>Gerar ZIP</value>
+  </data>
   <data name="btnCancelar" xml:space="preserve">
     <value>Cancelar</value>
   </data>
@@ -137,6 +143,24 @@
   </data>
   <data name="btnCerrar" xml:space="preserve">
     <value>Fechar</value>
+  </data>
+  <data name="btnCloseNotebook" xml:space="preserve">
+    <value>Fechar bloco de notas</value>
+  </data>
+  <data name="btnConAjuste" xml:space="preserve">
+    <value>Acordo de Ajuste</value>
+  </data>
+  <data name="btnCrearCuaderno" xml:space="preserve">
+    <value>Criar Caderno</value>
+  </data>
+  <data name="btnCrearLineaNegocio" xml:space="preserve">
+    <value>Criar Linha de Negócio</value>
+  </data>
+  <data name="btnCrearRef" xml:space="preserve">
+    <value>Criar Referência</value>
+  </data>
+  <data name="btnCrtSolicitud" xml:space="preserve">
+    <value>Carta de Solicitação</value>
   </data>
   <data name="btnEditar" xml:space="preserve">
     <value>Editar Dados</value>
@@ -147,14 +171,23 @@
   <data name="btnExportarExcel" xml:space="preserve">
     <value>Exportar para Excel</value>
   </data>
+  <data name="btnGenerarCuaderno" xml:space="preserve">
+    <value>Gerar Caderno</value>
+  </data>
   <data name="btnGrabar" xml:space="preserve">
     <value>Aplicar Alterações</value>
   </data>
   <data name="btnGuardarOrden" xml:space="preserve">
     <value>Salvar pedido</value>
   </data>
+  <data name="btnInfPreliminar" xml:space="preserve">
+    <value>Relatório Preliminar</value>
+  </data>
   <data name="btnIniciarSesion" xml:space="preserve">
     <value>Entrar</value>
+  </data>
+  <data name="btnMsgWhatsApp" xml:space="preserve">
+    <value>Mensagem do WhatsApp</value>
   </data>
   <data name="btnOrdenarTask" xml:space="preserve">
     <value>Ordenar Lista</value>
@@ -171,17 +204,41 @@
   <data name="btnSiguiente" xml:space="preserve">
     <value>Próximo</value>
   </data>
+  <data name="col_Agregado" xml:space="preserve">
+    <value>Agregado</value>
+  </data>
+  <data name="col_Area" xml:space="preserve">
+    <value>Área</value>
+  </data>
+  <data name="col_Cantidad" xml:space="preserve">
+    <value>Quantidade</value>
+  </data>
+  <data name="col_Cargo" xml:space="preserve">
+    <value>Cargo / Função</value>
+  </data>
   <data name="col_Categoria" xml:space="preserve">
     <value>Categoria</value>
   </data>
   <data name="col_Clave" xml:space="preserve">
     <value>Chave</value>
   </data>
+  <data name="col_Coaseguro" xml:space="preserve">
+    <value>Cosseguro</value>
+  </data>
+  <data name="col_CodigoPostal" xml:space="preserve">
+    <value>Código Postal</value>
+  </data>
+  <data name="col_Colonia" xml:space="preserve">
+    <value>Bairro</value>
+  </data>
   <data name="col_CorreoContacto" xml:space="preserve">
     <value>E-mail do Contato</value>
   </data>
   <data name="col_CveCategoria" xml:space="preserve">
     <value>Cód. Categoria</value>
+  </data>
+  <data name="col_CveEstatus" xml:space="preserve">
+    <value>Cód. do Status</value>
   </data>
   <data name="col_Cve_Cobertura" xml:space="preserve">
     <value>Chave da Cobertura</value>
@@ -195,11 +252,20 @@
   <data name="col_Cve_Seccion" xml:space="preserve">
     <value>Cód. Seção</value>
   </data>
+  <data name="col_Deducible" xml:space="preserve">
+    <value>Franquia</value>
+  </data>
   <data name="col_DescCategoria" xml:space="preserve">
     <value>Descrição da categoria</value>
   </data>
   <data name="col_DescDocumento" xml:space="preserve">
     <value>Descrição do Documento</value>
+  </data>
+  <data name="col_DescEstatus" xml:space="preserve">
+    <value>Descrição do Status</value>
+  </data>
+  <data name="col_Descripcion" xml:space="preserve">
+    <value>Descrição</value>
   </data>
   <data name="col_DescripcionCliente" xml:space="preserve">
     <value>Descrição do Cliente</value>
@@ -210,6 +276,9 @@
   <data name="col_Desc_Cobertura" xml:space="preserve">
     <value>Descrição da Cobertura</value>
   </data>
+  <data name="col_Desc_Documento" xml:space="preserve">
+    <value>Descrição do Documento</value>
+  </data>
   <data name="col_Desc_Etapa" xml:space="preserve">
     <value>Descrição da Etapa</value>
   </data>
@@ -219,8 +288,26 @@
   <data name="col_Desc_Seccion" xml:space="preserve">
     <value>Descrição</value>
   </data>
+  <data name="col_d_Tipo_Asenta" xml:space="preserve">
+    <value>Tipo de Assentamento</value>
+  </data>
+  <data name="col_Elemento" xml:space="preserve">
+    <value>Elemento</value>
+  </data>
+  <data name="col_Email" xml:space="preserve">
+    <value>E-mail</value>
+  </data>
+  <data name="col_Entregado" xml:space="preserve">
+    <value>Entregue</value>
+  </data>
   <data name="col_Fecha_Asignacion" xml:space="preserve">
     <value>Data de Atribuição</value>
+  </data>
+  <data name="col_Fec_Entrega" xml:space="preserve">
+    <value>Data de Entrega</value>
+  </data>
+  <data name="col_Generico" xml:space="preserve">
+    <value>Genérico</value>
   </data>
   <data name="col_IdOrden" xml:space="preserve">
     <value>Ordem</value>
@@ -231,8 +318,29 @@
   <data name="col_IdStatus" xml:space="preserve">
     <value>Status</value>
   </data>
+  <data name="col_Marca" xml:space="preserve">
+    <value>Marca</value>
+  </data>
+  <data name="col_Materiales" xml:space="preserve">
+    <value>Materiais</value>
+  </data>
+  <data name="col_Medida1" xml:space="preserve">
+    <value>Medida (1)</value>
+  </data>
+  <data name="col_Medida2" xml:space="preserve">
+    <value>Medida (2)</value>
+  </data>
+  <data name="col_Medida3" xml:space="preserve">
+    <value>Medida (3)</value>
+  </data>
   <data name="col_MedidaTiempo" xml:space="preserve">
     <value>Unidade de tempo</value>
+  </data>
+  <data name="col_Modelo" xml:space="preserve">
+    <value>Modelo</value>
+  </data>
+  <data name="col_Nivel" xml:space="preserve">
+    <value>Nível</value>
   </data>
   <data name="col_NomActor" xml:space="preserve">
     <value>Nome do Autor</value>
@@ -243,11 +351,17 @@
   <data name="col_NomCliente" xml:space="preserve">
     <value>Nome do Cliente</value>
   </data>
+  <data name="col_NomCobertura" xml:space="preserve">
+    <value>Nome da Cobertura</value>
+  </data>
   <data name="col_NomContacto" xml:space="preserve">
     <value>Nome do Contato</value>
   </data>
   <data name="col_NomDemandado" xml:space="preserve">
     <value>Nome do Réu</value>
+  </data>
+  <data name="col_NomEmpresa" xml:space="preserve">
+    <value>Nome da Empresa</value>
   </data>
   <data name="col_NomLineaNegocio" xml:space="preserve">
     <value>Descrição da Linha de Negócio</value>
@@ -255,8 +369,14 @@
   <data name="col_NomProyecto" xml:space="preserve">
     <value>Nome do Projeto</value>
   </data>
+  <data name="col_NomResponsable" xml:space="preserve">
+    <value>Nome do Responsável</value>
+  </data>
   <data name="col_NomTarea" xml:space="preserve">
     <value>Nome da Tarefa</value>
+  </data>
+  <data name="col_Nom_Archivo" xml:space="preserve">
+    <value>Nome do Arquivo</value>
   </data>
   <data name="col_NumPoliza" xml:space="preserve">
     <value>Número da Apólice</value>
@@ -279,6 +399,9 @@
   <data name="col_Referencia_Anterior" xml:space="preserve">
     <value>Referência Anterior</value>
   </data>
+  <data name="col_Responsable" xml:space="preserve">
+    <value>Responsável</value>
+  </data>
   <data name="col_Resp_Administrativo" xml:space="preserve">
     <value>Responsável Administrativo</value>
   </data>
@@ -287,6 +410,15 @@
   </data>
   <data name="col_Seguro_Cia" xml:space="preserve">
     <value>Companhia de Seguros</value>
+  </data>
+  <data name="col_Serie" xml:space="preserve">
+    <value>Nº de Série</value>
+  </data>
+  <data name="col_Sublimite" xml:space="preserve">
+    <value>Sublimite</value>
+  </data>
+  <data name="col_SumaAsegurada" xml:space="preserve">
+    <value>Soma Segurada</value>
   </data>
   <data name="col_Telefono" xml:space="preserve">
     <value>Telefone</value>
@@ -297,6 +429,12 @@
   <data name="col_TelMovil" xml:space="preserve">
     <value>Telefone Celular</value>
   </data>
+  <data name="col_Tipo" xml:space="preserve">
+    <value>Tipo</value>
+  </data>
+  <data name="col_TpoArchivo" xml:space="preserve">
+    <value>Tipo de Arquivo</value>
+  </data>
   <data name="col_TpoDocumento" xml:space="preserve">
     <value>Tipo de Documento</value>
   </data>
@@ -306,11 +444,26 @@
   <data name="col_Tpo_Asunto" xml:space="preserve">
     <value>Tipo de Assunto</value>
   </data>
+  <data name="col_Unidad1" xml:space="preserve">
+    <value>Unidade (1)</value>
+  </data>
+  <data name="col_Unidad2" xml:space="preserve">
+    <value>Unidade (2)</value>
+  </data>
+  <data name="col_Unidad3" xml:space="preserve">
+    <value>Unidade (3)</value>
+  </data>
   <data name="col_UnidadTiempo" xml:space="preserve">
     <value>Unidade de Tempo</value>
   </data>
   <data name="ddl_NoHayCarpeta" xml:space="preserve">
     <value>-- Nenhuma pasta encontrada --</value>
+  </data>
+  <data name="ddl_NoHayCategoria" xml:space="preserve">
+    <value>-- Sem Categoria(s) --</value>
+  </data>
+  <data name="ddl_NoHayCoberturas" xml:space="preserve">
+    <value>-- Não Há Cobertura(s) --</value>
   </data>
   <data name="ddl_Select" xml:space="preserve">
     <value>-- Selecionar --</value>
@@ -345,11 +498,62 @@
   <data name="hdrLineaNegocios" xml:space="preserve">
     <value>Consulta de Linhas de Negócio</value>
   </data>
+  <data name="hdrTituloAseg" xml:space="preserve">
+    <value>SEGURADO(S)</value>
+  </data>
+  <data name="hdrTituloAseg1" xml:space="preserve">
+    <value>SEGURADO 1</value>
+  </data>
+  <data name="hdrTituloAseg2" xml:space="preserve">
+    <value>SEGURADO 2</value>
+  </data>
+  <data name="hdrTituloAseg3" xml:space="preserve">
+    <value> SEGURADO 3</value>
+  </data>
   <data name="hdrTituloAsegurados" xml:space="preserve">
     <value>SEGURADOS AOS QUAIS ESTE(S) DOCUMENTO(S) SE APLICA(M)</value>
   </data>
+  <data name="hdrTituloBienAseg" xml:space="preserve">
+    <value>BEM SEGURO</value>
+  </data>
   <data name="hdrTituloBienes" xml:space="preserve">
     <value>BENS AOS QUAIS ESTE(S) DOCUMENTO(S) SE APLICA(M)</value>
+  </data>
+  <data name="hdrTituloBienes_1" xml:space="preserve">
+    <value>BENS</value>
+  </data>
+  <data name="hdrTituloCoberturas" xml:space="preserve">
+    <value>COBERTURAS</value>
+  </data>
+  <data name="hdrTituloConfigSiniestro" xml:space="preserve">
+    <value>CONFIGURAÇÃO DO SINISTRO</value>
+  </data>
+  <data name="hdrTituloCont1" xml:space="preserve">
+    <value>CONTATO 1</value>
+  </data>
+  <data name="hdrTituloCont2" xml:space="preserve">
+    <value>CONTATO 2</value>
+  </data>
+  <data name="hdrTituloCont3" xml:space="preserve">
+    <value>CONTATO 3</value>
+  </data>
+  <data name="hdrTituloCont4" xml:space="preserve">
+    <value>CONTATO 4</value>
+  </data>
+  <data name="hdrTituloDatosPersonales" xml:space="preserve">
+    <value>DADOS PESSOAIS</value>
+  </data>
+  <data name="hdrTituloDetContratante" xml:space="preserve">
+    <value>DETALHES DO CONTRATANTE</value>
+  </data>
+  <data name="hdrTituloDetDaños" xml:space="preserve">
+    <value>DETALHES DOS DANOS</value>
+  </data>
+  <data name="hdrTituloDetPoliza" xml:space="preserve">
+    <value>DETALHES DA APÓLICE</value>
+  </data>
+  <data name="hdrTituloDocumentacion" xml:space="preserve">
+    <value>DOCUMENTAÇÃO</value>
   </data>
   <data name="hdrTituloDocumentos" xml:space="preserve">
     <value>DOCUMENTOS EXIGIDOS POR</value>
@@ -357,14 +561,47 @@
   <data name="hdrTituloEstatus" xml:space="preserve">
     <value>STATUS AOS QUAIS ESTE(S) DOCUMENTO(S) SE APLICA(M)</value>
   </data>
+  <data name="hdrTituloInformacionGral" xml:space="preserve">
+    <value>INFORMAÇÕES GERAIS</value>
+  </data>
+  <data name="hdrTituloInfPoliza" xml:space="preserve">
+    <value>INFORMAÇÕES DA APÓLICE</value>
+  </data>
+  <data name="hdrTituloLineaTiempo" xml:space="preserve">
+    <value>Linha do tempo das referências</value>
+  </data>
+  <data name="hdrTituloLineaTiempo1" xml:space="preserve">
+    <value>Linha do Tempo da Referência por Etapas</value>
+  </data>
   <data name="hdrTituloOtrosDetalles" xml:space="preserve">
     <value>OUTROS DETALHES AOS QUAIS ESTE(S) DOCUMENTO(S) SE APLICA(M)</value>
+  </data>
+  <data name="hdrTituloOtrosDetalles_1" xml:space="preserve">
+    <value>OUTROS DETALHES</value>
+  </data>
+  <data name="hdrTituloRegistrosAnte" xml:space="preserve">
+    <value>REGISTROS PERANTE CNBV / CONDUSEF</value>
+  </data>
+  <data name="hdrTituloResponsables" xml:space="preserve">
+    <value>RESPONSÁVEIS</value>
   </data>
   <data name="hdrTituloRiesgos" xml:space="preserve">
     <value>RISCOS AOS QUAIS ESTE(S) DOCUMENTO(S) SE APLICA(M)</value>
   </data>
+  <data name="hdrTituloRiesgos_1" xml:space="preserve">
+    <value>RISCOS</value>
+  </data>
+  <data name="hdrTituloSelecOpcion" xml:space="preserve">
+    <value>Selecione uma opção na lista para exibir os dados.</value>
+  </data>
+  <data name="hdrTituloUbicacion" xml:space="preserve">
+    <value>LOCAL SEGURADO</value>
+  </data>
   <data name="lblAddNewProtocolo" xml:space="preserve">
     <value>Adicionar Novo Protocolo (SLA)</value>
+  </data>
+  <data name="lblAgregado" xml:space="preserve">
+    <value>Agregado</value>
   </data>
   <data name="lblAltaInspeccion" xml:space="preserve">
     <value>CADASTRO DE INSPEÇÃO</value>
@@ -375,11 +612,38 @@
   <data name="lblAltaReferencia" xml:space="preserve">
     <value>ABERTURA DE REFERÊNCIA</value>
   </data>
+  <data name="lblAplicarSiniestro" xml:space="preserve">
+    <value>Aplicar ao Sinistro</value>
+  </data>
+  <data name="lblArea" xml:space="preserve">
+    <value>Área</value>
+  </data>
   <data name="lblAsuntos" xml:space="preserve">
     <value>Assuntos</value>
   </data>
+  <data name="lblCalle" xml:space="preserve">
+    <value>Rua</value>
+  </data>
+  <data name="lblCanalVentas" xml:space="preserve">
+    <value>Canal de Vendas</value>
+  </data>
+  <data name="lblCantidad" xml:space="preserve">
+    <value>Quantidade</value>
+  </data>
+  <data name="lblCargo" xml:space="preserve">
+    <value>Cargo / Função</value>
+  </data>
+  <data name="LblCarpeta" xml:space="preserve">
+    <value>Pasta na qual deseja trabalhar</value>
+  </data>
   <data name="lblCarpetas" xml:space="preserve">
     <value>Tipo de Pasta</value>
+  </data>
+  <data name="lblCategoriaOtros" xml:space="preserve">
+    <value>Categoria(s)</value>
+  </data>
+  <data name="lblCategorias" xml:space="preserve">
+    <value>Categoria</value>
   </data>
   <data name="lblCategoriasPor" xml:space="preserve">
     <value>Categorias por</value>
@@ -390,17 +654,29 @@
   <data name="lblClaveCliente" xml:space="preserve">
     <value>Chave do Cliente</value>
   </data>
+  <data name="lblCoaseguro" xml:space="preserve">
+    <value>Cosseguro</value>
+  </data>
   <data name="lblCobertura" xml:space="preserve">
-    <value>Descrição da Cobertura</value>
+    <value>Cobertura</value>
+  </data>
+  <data name="lblCodigoPostal" xml:space="preserve">
+    <value>CEP</value>
   </data>
   <data name="lblCodigoVerificacion" xml:space="preserve">
     <value>Código de verificação</value>
+  </data>
+  <data name="lblColonia" xml:space="preserve">
+    <value>Bairro</value>
   </data>
   <data name="lblColumnas" xml:space="preserve">
     <value>Coluna para pesquisar</value>
   </data>
   <data name="lblConsultaCategoria" xml:space="preserve">
     <value>Consulta de categorias</value>
+  </data>
+  <data name="lblConsultaEstatus" xml:space="preserve">
+    <value>Consulta de Status do Sinistro</value>
   </data>
   <data name="lblConsultaProtocolo" xml:space="preserve">
     <value>Consulta de Protocolos (SLA)</value>
@@ -417,17 +693,32 @@
   <data name="lblContraseña" xml:space="preserve">
     <value>Senha</value>
   </data>
+  <data name="lblCopiarContratante" xml:space="preserve">
+    <value>Copiar dados do CONTRATANTE</value>
+  </data>
   <data name="lblCorreoContacto" xml:space="preserve">
     <value>E-mail do Contato</value>
   </data>
   <data name="lblCorrespondencia" xml:space="preserve">
     <value>CORRESPONDÊNCIA</value>
   </data>
+  <data name="lblDeducible" xml:space="preserve">
+    <value>Franquia</value>
+  </data>
+  <data name="lblDelegacion" xml:space="preserve">
+    <value>Município / Distrito</value>
+  </data>
   <data name="lblDemandado" xml:space="preserve">
     <value>Nome do Réu</value>
   </data>
   <data name="lblDescCategoria" xml:space="preserve">
     <value>Descrição da categoria</value>
+  </data>
+  <data name="lblDescCobertura" xml:space="preserve">
+    <value>Descrição da Cobertura</value>
+  </data>
+  <data name="lblDescDaños" xml:space="preserve">
+    <value>Descrição</value>
   </data>
   <data name="lblDescMote" xml:space="preserve">
     <value>Descrição do Motivo</value>
@@ -441,23 +732,116 @@
   <data name="lblDescripBrev" xml:space="preserve">
     <value>Descrição do Documento (Curta)</value>
   </data>
+  <data name="lblDescripcion" xml:space="preserve">
+    <value>DESCRIÇÃO</value>
+  </data>
   <data name="lblDescripLarga" xml:space="preserve">
     <value>Descrição do Documento (Longa)</value>
   </data>
   <data name="lblDescTarea" xml:space="preserve">
     <value>Descrição da Tarefa a Realizar</value>
   </data>
+  <data name="lblDetBienAsegurado" xml:space="preserve">
+    <value>Detalhes do Bem Segurado</value>
+  </data>
+  <data name="lblDetContacto" xml:space="preserve">
+    <value>Detalhes do Contato</value>
+  </data>
+  <data name="lblDetReporte" xml:space="preserve">
+    <value>Detalhes do Relato</value>
+  </data>
   <data name="lblDocInterno" xml:space="preserve">
     <value>Documento Interno</value>
+  </data>
+  <data name="lblDocSolicitados" xml:space="preserve">
+    <value>Documentos Solicitados</value>
+  </data>
+  <data name="lblDocumentos" xml:space="preserve">
+    <value>Documentos da Categoria</value>
+  </data>
+  <data name="lblDocumentosPor" xml:space="preserve">
+    <value>Documentos Exigidos Por</value>
+  </data>
+  <data name="lblElemento" xml:space="preserve">
+    <value>Elemento</value>
   </data>
   <data name="lblEliminar" xml:space="preserve">
     <value>Excluir</value>
   </data>
+  <data name="lblEliminarDocumento" xml:space="preserve">
+    <value>Excluir Documento(s)</value>
+  </data>
+  <data name="lblEmail" xml:space="preserve">
+    <value>E-mail</value>
+  </data>
+  <data name="lblEmailAsegurado" xml:space="preserve">
+    <value>E-mail do Segurado</value>
+  </data>
+  <data name="lblEmailContacto" xml:space="preserve">
+    <value>E-mail do Contato</value>
+  </data>
+  <data name="lblEmailContratante" xml:space="preserve">
+    <value>E-mail do Contratante</value>
+  </data>
+  <data name="lblEstado" xml:space="preserve">
+    <value>Estado</value>
+  </data>
+  <data name="lblEstatus" xml:space="preserve">
+    <value>Status</value>
+  </data>
   <data name="lblEstOcurrencia" xml:space="preserve">
     <value>Estado da Ocorrência</value>
   </data>
+  <data name="lblEstSiniestro" xml:space="preserve">
+    <value>Status do Sinistro</value>
+  </data>
+  <data name="lblEtapaStatus" xml:space="preserve">
+    <value>Etapas do Status</value>
+  </data>
+  <data name="lblFecAsignacion" xml:space="preserve">
+    <value>Data da Designação</value>
+  </data>
+  <data name="lblFecContacto" xml:space="preserve">
+    <value>Data do Contato</value>
+  </data>
+  <data name="lblFecEmision" xml:space="preserve">
+    <value>Data de Emissão</value>
+  </data>
+  <data name="lblFecFinVigencia" xml:space="preserve">
+    <value>Data Final de Vigência</value>
+  </data>
   <data name="lblFechaAsignacion" xml:space="preserve">
     <value>Data de Atribuição</value>
+  </data>
+  <data name="lblFechaProgramada" xml:space="preserve">
+    <value>Data Programada</value>
+  </data>
+  <data name="lblFecIniVigencia" xml:space="preserve">
+    <value>Data de Início de Vigência</value>
+  </data>
+  <data name="lblFecInspeccion" xml:space="preserve">
+    <value>Data da Inspeção</value>
+  </data>
+  <data name="lblFecOcurrencia" xml:space="preserve">
+    <value>Data da Ocorrência</value>
+  </data>
+  <data name="lblFecRegistroBADI" xml:space="preserve">
+    <value>Data de Registro BADI</value>
+  </data>
+  <data name="lblFecRegistroCGEN" xml:space="preserve">
+    <value>Data de Registro CGEN</value>
+  </data>
+  <data name="lblFecRegistroCONDUSEF" xml:space="preserve">
+    <value>Data de Registro CONDUSEF</value>
+  </data>
+  <data name="lblFecRegistroPPAQ" xml:space="preserve">
+    <value>Data de Registro PPAQ</value>
+  </data>
+  <data name="lblFecRegistroRESP" xml:space="preserve">
+    <value>Data de Registro RESP</value>
+  </data>
+  <data name="lblFecReporte" xml:space="preserve">
+    <value>Data do Relato</value>
   </data>
   <data name="lblFiltros" xml:space="preserve">
     <value>Filtros</value>
@@ -465,20 +849,86 @@
   <data name="lblFinVigencia" xml:space="preserve">
     <value>Fim da Vigência</value>
   </data>
+  <data name="lblFormaPago" xml:space="preserve">
+    <value>Forma de Pagamento</value>
+  </data>
+  <data name="lblGastosExpedicion" xml:space="preserve">
+    <value>Taxas de Emissão</value>
+  </data>
+  <data name="lblGenerarArchivo" xml:space="preserve">
+    <value>Gerar arquivo ZIP/PDF</value>
+  </data>
+  <data name="lblGenerico" xml:space="preserve">
+    <value>Genérico</value>
+  </data>
   <data name="lblGerente" xml:space="preserve">
     <value>Gerente Responsável</value>
+  </data>
+  <data name="lblGiro" xml:space="preserve">
+    <value>Ramo de Atividade</value>
+  </data>
+  <data name="lblHoraAsignacion" xml:space="preserve">
+    <value>Hora da Designação</value>
+  </data>
+  <data name="lblHoraEmision" xml:space="preserve">
+    <value>Hora de Emissão</value>
+  </data>
+  <data name="lblHoras" xml:space="preserve">
+    <value>Hora Programada</value>
   </data>
   <data name="lblIdioma" xml:space="preserve">
     <value>Língua</value>
   </data>
+  <data name="lblIngAgregado" xml:space="preserve">
+    <value>Insira o Agregado</value>
+  </data>
+  <data name="lblIngCoaseguro" xml:space="preserve">
+    <value>Insira o Cosseguro</value>
+  </data>
+  <data name="lblIngDeducible" xml:space="preserve">
+    <value>Insira a Franquia</value>
+  </data>
+  <data name="lblIngRiesgo" xml:space="preserve">
+    <value>Insira o Risco</value>
+  </data>
+  <data name="lblIngSublimite" xml:space="preserve">
+    <value>Insira o Sublimite</value>
+  </data>
+  <data name="lblIngSumaAsegurada" xml:space="preserve">
+    <value>Insira a Soma Segurada</value>
+  </data>
   <data name="lblIniVigencia" xml:space="preserve">
     <value>Início da Vigência</value>
+  </data>
+  <data name="lblIVA_Monto" xml:space="preserve">
+    <value>IVA (Montante)</value>
+  </data>
+  <data name="lblIVA_Porc" xml:space="preserve">
+    <value>IVA (%)</value>
   </data>
   <data name="lblLineaNegocio" xml:space="preserve">
     <value>Nome da Linha de Negócio</value>
   </data>
   <data name="lblLineaNegocios" xml:space="preserve">
     <value>LINHA DE NEGÓCIOS</value>
+  </data>
+  <data name="lblLocalComercial" xml:space="preserve">
+    <value>Estabelecimentos Comerciais</value>
+  </data>
+  <data name="lblMarca" xml:space="preserve">
+    <value>Marca</value>
+  </data>
+  <data name="lblMateriales" xml:space="preserve">
+    <value>Materiais</value>
+  </data>
+  <data name="lblMedida1" xml:space="preserve">
+    <value>Medida (1)</value>
+  </data>
+  <data name="lblMedida2" xml:space="preserve">
+    <value>Medida (2)</value>
+  </data>
+  <data name="lblMedida3" xml:space="preserve">
+    <value>Medida (3)</value>
   </data>
   <data name="lblMedidaTiempo" xml:space="preserve">
     <value>Unidade de tempo</value>
@@ -489,20 +939,44 @@
   <data name="lblMenuBienvenido" xml:space="preserve">
     <value>Bem-vindo:</value>
   </data>
+  <data name="lblMinutes" xml:space="preserve">
+    <value>Minuto Programado</value>
+  </data>
+  <data name="lblModelo" xml:space="preserve">
+    <value>Modelo</value>
+  </data>
+  <data name="lblNivel" xml:space="preserve">
+    <value>Nível</value>
+  </data>
+  <data name="lblNoCertificado" xml:space="preserve">
+    <value>Nº Certificado</value>
+  </data>
   <data name="lblNomActor" xml:space="preserve">
     <value>Nome do Autor</value>
   </data>
   <data name="lblNomAsegurado" xml:space="preserve">
     <value>Nome do Segurado</value>
   </data>
-  <data name="lblNombreCliente" xml:space="preserve">
-    <value>Nome do Cliente</value>
+  <data name="lblNomBeneficiario" xml:space="preserve">
+    <value>Nome do Beneficiário Preferencial</value>
   </data>
   <data name="lblNomCliente" xml:space="preserve">
     <value>Nome do Cliente</value>
   </data>
+  <data name="lblNomCobertura" xml:space="preserve">
+    <value>Nome da Cobertura</value>
+  </data>
   <data name="lblNomContacto" xml:space="preserve">
     <value>Nome do Contato</value>
+  </data>
+  <data name="lblNomContratante" xml:space="preserve">
+    <value>Nome do Contratante</value>
+  </data>
+  <data name="lblNomEmpresa" xml:space="preserve">
+    <value>Nome da Empresa</value>
+  </data>
+  <data name="lblNomEstatus" xml:space="preserve">
+    <value>Nome do Status</value>
   </data>
   <data name="lblNomProyecto" xml:space="preserve">
     <value>Nome do Projeto</value>
@@ -516,11 +990,26 @@
   <data name="lblNomTarea" xml:space="preserve">
     <value>Nome da Tarefa</value>
   </data>
+  <data name="lblNoRenovacion" xml:space="preserve">
+    <value>Nº Renovação</value>
+  </data>
+  <data name="lblNoSerie" xml:space="preserve">
+    <value>Nº de Série</value>
+  </data>
+  <data name="lblNotas" xml:space="preserve">
+    <value>Notas</value>
+  </data>
   <data name="lblNumCondusef" xml:space="preserve">
     <value>Núm. de Registro CONDUSEF</value>
   </data>
+  <data name="lblNumExt" xml:space="preserve">
+    <value>Nº Externo</value>
+  </data>
   <data name="lblNumExtencion" xml:space="preserve">
     <value>Número de Ramal</value>
+  </data>
+  <data name="lblNumInt" xml:space="preserve">
+    <value>Nº Interno</value>
   </data>
   <data name="lblNumPoliza" xml:space="preserve">
     <value>Número da Apólice</value>
@@ -531,11 +1020,44 @@
   <data name="lblNumSiniestro" xml:space="preserve">
     <value>Número do Sinistro</value>
   </data>
+  <data name="lblObservaciones1" xml:space="preserve">
+    <value>Observações (1)</value>
+  </data>
+  <data name="lblObservaciones2" xml:space="preserve">
+    <value>Observações (2)</value>
+  </data>
+  <data name="lblObs_Domicilio" xml:space="preserve">
+    <value>Observações do Endereço</value>
+  </data>
   <data name="lblOperaciones" xml:space="preserve">
     <value>OPERAÇÕES</value>
   </data>
+  <data name="lblOtros" xml:space="preserve">
+    <value>Outros</value>
+  </data>
+  <data name="lblPagoSubsecuente" xml:space="preserve">
+    <value>Pagamentos Subsequentes</value>
+  </data>
+  <data name="lblPisosBienAsegurado" xml:space="preserve">
+    <value>Andares do Imóvel Segurado</value>
+  </data>
+  <data name="lblPisosDelBienAsegurado" xml:space="preserve">
+    <value>Quantidade de Andares do Imóvel Segurado</value>
+  </data>
   <data name="lblPlazo" xml:space="preserve">
     <value>Prazo</value>
+  </data>
+  <data name="lblPrimaFormaPago" xml:space="preserve">
+    <value>Prêmio conforme Forma de Pagamento</value>
+  </data>
+  <data name="lblPrimaNeta" xml:space="preserve">
+    <value>Prêmio Líquido</value>
+  </data>
+  <data name="lblPrimaTotal" xml:space="preserve">
+    <value>Prêmio Total</value>
+  </data>
+  <data name="lblPrimaTotalAnual" xml:space="preserve">
+    <value>Prêmio Total Anual</value>
   </data>
   <data name="lblProducto" xml:space="preserve">
     <value>Produto(s)</value>
@@ -552,11 +1074,44 @@
   <data name="lblProyectos" xml:space="preserve">
     <value>Projetos</value>
   </data>
+  <data name="lblRecargoPago" xml:space="preserve">
+    <value>Acréscimo por Pagamento Parcelado (%)</value>
+  </data>
   <data name="lblRef" xml:space="preserve">
     <value>Busca Geral de Referências</value>
   </data>
+  <data name="lblReferencia" xml:space="preserve">
+    <value>Referência</value>
+  </data>
+  <data name="lblRef_Siniestro" xml:space="preserve">
+    <value>Número de Referência ou Sinistro</value>
+  </data>
+  <data name="lblRegimen" xml:space="preserve">
+    <value>Tipo de Segurado</value>
+  </data>
+  <data name="lblRegistroBADI" xml:space="preserve">
+    <value>Registro BADI</value>
+  </data>
+  <data name="lblRegistroCGEN" xml:space="preserve">
+    <value>Registro CGEN</value>
+  </data>
+  <data name="lblRegistroCONDUSEF" xml:space="preserve">
+    <value>Registro CONDUSEF</value>
+  </data>
+  <data name="lblRegistroPPAQ" xml:space="preserve">
+    <value>Registro PPAQ</value>
+  </data>
+  <data name="lblRegistroRESP" xml:space="preserve">
+    <value>Registro RESP</value>
+  </data>
+  <data name="lblReporte" xml:space="preserve">
+    <value>Relatório</value>
+  </data>
   <data name="lblRespAdministrativo" xml:space="preserve">
     <value>Responsável Administrativo</value>
+  </data>
+  <data name="lblRespInspeccion" xml:space="preserve">
+    <value>Responsável pela Inspeção</value>
   </data>
   <data name="lblResponsable" xml:space="preserve">
     <value>Responsável</value>
@@ -564,8 +1119,26 @@
   <data name="lblRespTecnico" xml:space="preserve">
     <value>Responsável Técnico</value>
   </data>
+  <data name="lblRFCAsegurado" xml:space="preserve">
+    <value>RFC do Segurado / CPF do Segurado</value>
+  </data>
+  <data name="lblRFCContratante" xml:space="preserve">
+    <value>RFC do Contratante / CPF do Contratante</value>
+  </data>
+  <data name="lblRiesgo" xml:space="preserve">
+    <value>Risco</value>
+  </data>
   <data name="lblSecciones" xml:space="preserve">
     <value>Seção</value>
+  </data>
+  <data name="lblSiniestro" xml:space="preserve">
+    <value>Sinistro</value>
+  </data>
+  <data name="lblSublimite" xml:space="preserve">
+    <value>Sublimite</value>
+  </data>
+  <data name="lblSumaAsegurada" xml:space="preserve">
+    <value>Soma Segurada</value>
   </data>
   <data name="lblTarea" xml:space="preserve">
     <value>Tarefa</value>
@@ -576,8 +1149,32 @@
   <data name="lblTareaInterna" xml:space="preserve">
     <value>Tarefa Interna</value>
   </data>
+  <data name="lblTelAsegurado" xml:space="preserve">
+    <value>Telefone Residencial do Segurado</value>
+  </data>
+  <data name="lblTelCelAsegurado" xml:space="preserve">
+    <value>Telefone Celular do Segurado</value>
+  </data>
+  <data name="lblTelCelContratante" xml:space="preserve">
+    <value>Telefone Celular do Contratante</value>
+  </data>
+  <data name="lblTelContratante" xml:space="preserve">
+    <value>Telefone Residencial do Contratante</value>
+  </data>
   <data name="lblTelefono" xml:space="preserve">
     <value>Telefone</value>
+  </data>
+  <data name="lblTelefono1" xml:space="preserve">
+    <value>Telefone 1</value>
+  </data>
+  <data name="lblTelefono2" xml:space="preserve">
+    <value>Telefone 2</value>
+  </data>
+  <data name="lblTelefono3" xml:space="preserve">
+    <value>Telefone 3</value>
+  </data>
+  <data name="lblTelefono4" xml:space="preserve">
+    <value>Telefone 4</value>
   </data>
   <data name="lblTelMovil" xml:space="preserve">
     <value>Telefone Celular</value>
@@ -585,8 +1182,14 @@
   <data name="lblTimeSleep" xml:space="preserve">
     <value>Tempo de espera</value>
   </data>
+  <data name="lblTipo" xml:space="preserve">
+    <value>Tipo</value>
+  </data>
   <data name="lblTipoAsunto" xml:space="preserve">
     <value>Tipo de Assunto</value>
+  </data>
+  <data name="lblTipoInspeccion" xml:space="preserve">
+    <value>Tipo de Inspeção</value>
   </data>
   <data name="lblTitulo" xml:space="preserve">
     <value>Iniciar Sessão</value>
@@ -648,8 +1251,20 @@
   <data name="lblTitulo_Cat_Tareas" xml:space="preserve">
     <value>Catálogo de Tarefas</value>
   </data>
+  <data name="lblTitulo_Cat_TpoUsuario" xml:space="preserve">
+    <value>Configuração Novo Cliente</value>
+  </data>
+  <data name="lblTitulo_Configuracion_Documentos" xml:space="preserve">
+    <value>Configuração de Documentos por Categoria</value>
+  </data>
+  <data name="lblTitulo_Configuracion_Estatus" xml:space="preserve">
+    <value>Configuração de Status por Etapas</value>
+  </data>
   <data name="lblTitulo_Consulta_Secciones" xml:space="preserve">
     <value>Visualizar Seções</value>
+  </data>
+  <data name="lblTitulo_Datos_Inspeccion" xml:space="preserve">
+    <value>DADOS DA INSPEÇÃO</value>
   </data>
   <data name="lblTitulo_Generar_Cuaderno" xml:space="preserve">
     <value>Gerar Caderno</value>
@@ -660,8 +1275,47 @@
   <data name="lblTpoAsegurado" xml:space="preserve">
     <value>Tipo de Segurado</value>
   </data>
+  <data name="lblTpoContacto" xml:space="preserve">
+    <value>Tipo de Contato</value>
+  </data>
+  <data name="lblTpoContratante" xml:space="preserve">
+    <value>Tipo de Contratante</value>
+  </data>
+  <data name="lblTpoCuaderno" xml:space="preserve">
+    <value>Tipo de Pasta</value>
+  </data>
+  <data name="lblTpoMoneda" xml:space="preserve">
+    <value>Tipo de Moeda</value>
+  </data>
+  <data name="lblTpoMuros" xml:space="preserve">
+    <value>Tipos de Paredes</value>
+  </data>
+  <data name="lblTpoPlan" xml:space="preserve">
+    <value>Tipo de Plano</value>
+  </data>
+  <data name="lblTpoProducto" xml:space="preserve">
+    <value>Tipo de Produto</value>
+  </data>
+  <data name="lblTpoTechos" xml:space="preserve">
+    <value>Tipos de Telhados</value>
+  </data>
+  <data name="lblTpoVivienda" xml:space="preserve">
+    <value>Tipo de Habitação</value>
+  </data>
+  <data name="lblUnidad1" xml:space="preserve">
+    <value>Unidade (1)</value>
+  </data>
+  <data name="lblUnidad2" xml:space="preserve">
+    <value>Unidade (2)</value>
+  </data>
+  <data name="lblUnidad3" xml:space="preserve">
+    <value>Unidade (3)</value>
+  </data>
   <data name="lblUsuario" xml:space="preserve">
     <value>Usuário</value>
+  </data>
+  <data name="lblValores" xml:space="preserve">
+    <value>VALORES</value>
   </data>
   <data name="msgPanelMensaje" xml:space="preserve">
     <value>Mensagem</value>
@@ -726,8 +1380,14 @@
   <data name="msg_Capturar_NumPoliza" xml:space="preserve">
     <value>Inserir número da apólice</value>
   </data>
+  <data name="msg_Capturar_Referencia" xml:space="preserve">
+    <value>Inserir Referência</value>
+  </data>
   <data name="msg_Capturar_Responsable" xml:space="preserve">
     <value>Inserir nome do Responsável</value>
+  </data>
+  <data name="msg_Capturar_Riesgo" xml:space="preserve">
+    <value>Inserir Risco</value>
   </data>
   <data name="msg_Capturar_Tiempo_Espera" xml:space="preserve">
     <value>Inserir tempo de espera</value>
@@ -746,6 +1406,9 @@
   </data>
   <data name="msg_Categoria_Agregada" xml:space="preserve">
     <value>Categoria adicionada com sucesso</value>
+  </data>
+  <data name="msg_Cita_Agregado" xml:space="preserve">
+    <value>A consulta foi agendada com sucesso</value>
   </data>
   <data name="msg_Cliente_Actualizado" xml:space="preserve">
     <value>Cliente atualizado com sucesso</value>
@@ -840,6 +1503,9 @@
   <data name="msg_NoResults" xml:space="preserve">
     <value>Nenhum resultado.</value>
   </data>
+  <data name="msg_Orden_Etapas_Agregado" xml:space="preserve">
+    <value>A ordem das etapas foi adicionada com sucesso</value>
+  </data>
   <data name="msg_Orden_Tareas_Agregado" xml:space="preserve">
     <value>Ordem das tarefas adicionada com sucesso</value>
   </data>
@@ -866,6 +1532,9 @@
   </data>
   <data name="msg_Proyecto_Registrado" xml:space="preserve">
     <value>O projeto já está registrado</value>
+  </data>
+  <data name="msg_Ref_NoRegistrada" xml:space="preserve">
+    <value>A referência não está registrada</value>
   </data>
   <data name="msg_Responsable_Actualizado" xml:space="preserve">
     <value>Responsável atualizado com sucesso</value>
@@ -903,14 +1572,23 @@
   <data name="msg_Seleccionar_CoberturaPor" xml:space="preserve">
     <value>Selecionar coberturas por</value>
   </data>
+  <data name="msg_Seleccionar_Empresa" xml:space="preserve">
+    <value>Selecione uma empresa</value>
+  </data>
   <data name="msg_Seleccionar_FecFinVigencia" xml:space="preserve">
     <value>Selecionar data de término da vigência</value>
   </data>
   <data name="msg_Seleccionar_FecIniVigencia" xml:space="preserve">
     <value>Selecionar data de início da vigência</value>
   </data>
+  <data name="msg_Seleccionar_FecProgramada" xml:space="preserve">
+    <value>Selecionar Data Programada</value>
+  </data>
   <data name="msg_Seleccionar_Gerente" xml:space="preserve">
     <value>Selecionar gerente responsável</value>
+  </data>
+  <data name="msg_Seleccionar_HoraProgramada" xml:space="preserve">
+    <value>Selecionar Hora Programada</value>
   </data>
   <data name="msg_Seleccionar_NomCliente" xml:space="preserve">
     <value>Selecionar nome do cliente</value>
@@ -927,6 +1605,9 @@
   <data name="msg_Seleccionar_Proyecto" xml:space="preserve">
     <value>Selecionar Projeto</value>
   </data>
+  <data name="msg_Seleccionar_RespInspeccion" xml:space="preserve">
+    <value>Selecionar Responsável pela Inspeção</value>
+  </data>
   <data name="msg_Seleccionar_Responsable" xml:space="preserve">
     <value>Selecionar tipo de Responsável</value>
   </data>
@@ -941,6 +1622,9 @@
   </data>
   <data name="msg_Seleccionar_TpoAsunto" xml:space="preserve">
     <value>Selecionar tipo de assunto</value>
+  </data>
+  <data name="msg_Seleccionar_TpoInspeccion" xml:space="preserve">
+    <value>Selecionar Tipo de Inspeção</value>
   </data>
   <data name="msg_Seleccionar_Unidad_Tiempo" xml:space="preserve">
     <value>Selecionar Unidade de Tempo</value>
