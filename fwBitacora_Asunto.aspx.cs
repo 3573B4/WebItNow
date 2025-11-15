@@ -9393,6 +9393,7 @@ namespace WebItNow_Peacock
                                     t.IdReferenciaEtapa,
                                     p.IdOrden,
                                     u.Us_Nombre AS Responsable,
+                                    t.IdEstatusTarea,
                                     s.Nombre AS Estatus,
                                     t.FechaAsignacion
                                FROM web_peacock.ITM_100 t
@@ -9457,6 +9458,7 @@ namespace WebItNow_Peacock
                             t.IdReferenciaEtapa,
                             p.IdOrden,
                             u.Us_Nombre AS Responsable,
+                            t.IdEstatusTarea,
                             s.Nombre AS Estatus,
                             t.FechaAsignacion,
                             t.IdRelacionTareas,
@@ -9518,6 +9520,7 @@ namespace WebItNow_Peacock
                             t.IdReferenciaEtapa,
                             p.IdOrden,
                             u.Us_Nombre AS Responsable,
+                            t.IdEstatusTarea,
                             s.Nombre AS Estatus,
                             t.FechaAsignacion,
                             t.FechaCompletada,
@@ -9525,6 +9528,7 @@ namespace WebItNow_Peacock
                             ur.Us_Nombre AS RealizadoPor,
                             t.comentario,
                             t.IdRelacionTareas,
+                            t.IdTarea,
                             j.NomTarea,
                             t.IdSubTarea,
                             js.NomTarea AS NomSubTarea
@@ -9838,7 +9842,7 @@ namespace WebItNow_Peacock
                           AND (IdSubTarea <=> @IdSubTarea)
                           AND IdStatus = 1;";
 
-                    using (var cmd = new MySql.Data.MySqlClient.MySqlCommand(query, dbConn.Connection))
+                    using (var cmd = new MySqlCommand(query, dbConn.Connection))
                     {
                         cmd.Parameters.AddWithValue("@IdReferencia", idReferencia);
                         cmd.Parameters.AddWithValue("@IdRelacionEtapa", idRelacionEtapa);
@@ -9950,12 +9954,20 @@ namespace WebItNow_Peacock
             Button btnArgs = (Button)sender;
             string[] args = btnArgs.CommandArgument.Split(';');
             string sIdReferenciaEtapa = args[0];
-            string nomSubTarea = args.Length > 1 ? args[1] : "";
+            string nomSubTarea = args.Length > 5 ? args[1] : "";
+            string sIdEtapa = args.Length > 5 ? args[2] : "";
+            string sIdRelacionTarea = args.Length > 5 ? args[3] : "";
+            string sIdTarea = args.Length > 5 ? args[4] : "";
+            string sIdSubTarea = args.Length > 5 ? args[5] : "";
 
             hIdReferenciaEtapa.Value = sIdReferenciaEtapa;
             hfIdReferenciaEtapa.Value = sIdReferenciaEtapa;
             ViewState["IdReferenciaEtapa"] = sIdReferenciaEtapa;
             ViewState["NomSubTarea"] = nomSubTarea;
+            ViewState["vsIdDocumento"] = sIdEtapa;
+            ViewState["vsIdRelacionTareas"] = sIdRelacionTarea;
+            ViewState["vsIdTarea"] = sIdTarea;
+            ViewState["vsIdSubTarea"] = sIdSubTarea;
             lblPnlMdlTitleTask.Text = nomSubTarea;
 
             //UpdatePanel1.Update();
@@ -9971,9 +9983,14 @@ namespace WebItNow_Peacock
                 //string sHFIdReferenciaEtapa = hfIdReferenciaEtapa.Value.Trim();
                 string sVSIdReferenciaEtapa = ViewState["IdReferenciaEtapa"]?.ToString();
                 string comentario = txtMdlComentario.Text.Trim();
-                string iIdRespCompletado = Variables.wUserLogon.ToString().Trim();
+                int iIdReferenciaFk = GetiReferenciaFk(Variables.wRef);
+                string sIdRespCompletado = Variables.wUserLogon.ToString().Trim();
                 DateTime fechaHora = DateTime.Now;
                 string fechaHoraAsignada = fechaHora.ToString("yyyy-MM-dd HH:mm:ss");
+                string sVSIdEtapa = ViewState["vsIdDocumento"]?.ToString();
+                string sVSIdRelacionTarea = ViewState["vsIdRelacionTareas"]?.ToString();
+                string sVSIdTarea = ViewState["vsIdTarea"]?.ToString();
+                string sVSIdSubTarea = ViewState["vsIdSubTarea"]?.ToString();
 
                 if (sVSIdReferenciaEtapa == "" || sVSIdReferenciaEtapa == null ||
                     string.IsNullOrEmpty(sVSIdReferenciaEtapa))
@@ -10003,10 +10020,10 @@ namespace WebItNow_Peacock
                                 IdRealizadoResponsable = @IdUsuario,
                                 Comentario = @Comentario,
                                 IdEstatusTarea = @IdEstatus
-                            WHERE IdReferenciaEtapa = @IdReferenciaEtapa";
+                            WHERE IdReferenciaEtapa = @IdReferenciaEtapa;";
 
                         cmd.Parameters.AddWithValue("@FechaCompletada", fechaHoraAsignada);
-                        cmd.Parameters.AddWithValue("@IdUsuario", iIdRespCompletado);
+                        cmd.Parameters.AddWithValue("@IdUsuario", sIdRespCompletado);
                         cmd.Parameters.AddWithValue("@Comentario", comentario);
                         cmd.Parameters.AddWithValue("@IdEstatus", 3);
                         cmd.Parameters.AddWithValue("@IdReferenciaEtapa", sVSIdReferenciaEtapa);
@@ -10016,8 +10033,17 @@ namespace WebItNow_Peacock
                 }
 
                 dbConn.Close();
-
                 txtMdlComentario.Text = null;
+                //funcion para ver si ya esta completada
+                if (CheckTaskCompled(iIdReferenciaFk, sVSIdEtapa, sVSIdRelacionTarea,
+                                    sVSIdTarea) != 3)
+                {
+                    //funcion para completar la tarea
+                    MarcarTareaCompleta(iIdReferenciaFk, sVSIdEtapa, sVSIdRelacionTarea,
+                                        sVSIdTarea, comentario, sIdRespCompletado);
+
+                }
+
                 // Refrescar
                 GetLineTimeReferencia();
 
@@ -10028,6 +10054,194 @@ namespace WebItNow_Peacock
                 mpeMensaje.Show();
             }
         }
+
+        private int CheckTaskCompled(int idReferencia, string idEtapa, string IdRelacionTarea,
+                                         string idTarea)
+        {
+            int estatus = 0;
+
+            try
+            {
+                ConexionBD_MySQL dbConn = new ConexionBD_MySQL(Variables.wUserName, Variables.wPassword);
+
+                using (MySqlConnection conn = dbConn.Connection)
+                {
+                    conn.Open();
+
+                    string query = @"
+                        SELECT IdEstatusTarea
+                          FROM itm_100
+                         WHERE IdReferencia = @IdReferencia
+                           AND IdEtapa = @IdEtapa
+                           AND IdRelacionTareas = @IdRelacionTarea
+                           AND IdTarea = @IdTarea
+                           AND IdSubTarea IS NULL 
+                           AND IdStatus = 1
+                         LIMIT 1;";
+
+                    using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@IdReferencia", idReferencia);
+                        cmd.Parameters.AddWithValue("@IdEtapa", idEtapa);
+                        cmd.Parameters.AddWithValue("@IdRelacionTarea", IdRelacionTarea);
+                        cmd.Parameters.AddWithValue("@IdTarea", idTarea);
+
+                        object result = cmd.ExecuteScalar();
+                        if (result != null)
+                        {
+                            estatus = Convert.ToInt32(result);
+                        }
+                    }
+
+                    conn.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                LblMessage.Text = ex.Message;
+                mpeMensaje.Show();
+            }
+
+            return estatus;
+        }
+
+        private void MarcarTareaCompleta(int idReferencia, string idEtapa, string IdRelacionTarea, 
+                                         string idTarea,  string comentario, string idUsuario)
+        {
+            try
+            {
+                DateTime fechaHora = DateTime.Now;
+                string fechaHoraAsignada = fechaHora.ToString("yyyy-MM-dd HH:mm:ss");
+
+                ConexionBD_MySQL dbConn = new ConexionBD_MySQL(Variables.wUserName, Variables.wPassword);
+
+                using (MySqlConnection conn = dbConn.Connection)
+                {
+                    conn.Open();
+
+                    // 1️ Marcar la tarea como completada
+                    string qUpdateTarea = @"
+                        UPDATE itm_100 
+                           SET IdEstatusTarea = 3, 
+                               FechaCompletada = @fechaHoraAsignada,
+                               Comentario = 'Tarea completada automáticamente',
+                               IdRealizadoResponsable = @IdUsuario
+                         WHERE IdReferencia = @IdReferencia
+                           AND IdEtapa = @IdEtapa
+                           AND IdRelacionTareas = @IdRelacionTarea
+                           AND IdTarea = @IdTarea
+                           AND IdSubTarea IS NULL;";
+
+                    using (MySqlCommand cmdTarea = new MySqlCommand(qUpdateTarea, conn))
+                    {
+                        cmdTarea.Parameters.AddWithValue("@IdReferencia", idReferencia);
+                        cmdTarea.Parameters.AddWithValue("@IdEtapa", idEtapa);
+                        cmdTarea.Parameters.AddWithValue("@IdRelacionTarea", IdRelacionTarea);
+                        cmdTarea.Parameters.AddWithValue("@IdTarea", idTarea);
+
+                        //cmdTarea.Parameters.AddWithValue("@Comentario", comentario);
+                        cmdTarea.Parameters.AddWithValue("@IdUsuario", idUsuario);
+                        cmdTarea.Parameters.AddWithValue("@fechaHoraAsignada", fechaHoraAsignada);
+
+                        cmdTarea.ExecuteNonQuery();
+                    }
+
+                    // 2️ Validar si todas las tareas de la etapa están completadas
+                    CheckEtapaCompletada(conn, idReferencia, idEtapa, idUsuario);
+
+                    conn.Close();
+                }
+
+                // Mensaje de éxito
+                //ScriptManager.RegisterStartupScript(this, GetType(), "msg", "alert('Tarea completada correctamente.');", true);
+            }
+            catch (Exception ex)
+            {
+                LblMessage.Text = ex.Message;
+                mpeMensaje.Show();
+            }
+        }
+
+        private void CheckEtapaCompletada(MySqlConnection conn, int idReferencia, string idEtapa, string idUsuario)
+        {
+            try
+            {
+                DateTime fechaHora = DateTime.Now;
+                string fechaHoraAsignada = fechaHora.ToString("yyyy-MM-dd HH:mm:ss");
+
+                // 1️ Consultar cuántas tareas existen en la etapa
+                string qTotalTareas = @"
+                    SELECT COUNT(*) 
+                      FROM itm_100 
+                     WHERE IdReferencia = @IdReferencia 
+                       AND IdEtapa = @IdEtapa 
+                       AND IdRelacionTareas IS NOT NULL
+                       AND IdTarea IS NOT NULL
+                       AND IdSubTarea IS NULL ; ";
+
+                // 2️ Consultar cuántas están completadas
+                string qCompletadas = @"
+                    SELECT COUNT(*) 
+                      FROM itm_100 
+                     WHERE IdReferencia = @IdReferencia 
+                       AND IdEtapa = @IdEtapa 
+                       AND IdRelacionTareas IS NOT NULL
+                       AND IdTarea IS NOT NULL
+                       AND IdSubTarea  IS NULL 
+                       AND IdEstatusTarea = 3;";
+
+                int total = 0, completadas = 0;
+
+                using (MySqlCommand cmdTotal = new MySqlCommand(qTotalTareas, conn))
+                {
+                    cmdTotal.Parameters.AddWithValue("@IdReferencia", idReferencia);
+                    cmdTotal.Parameters.AddWithValue("@IdEtapa", idEtapa);
+                    total = Convert.ToInt32(cmdTotal.ExecuteScalar());
+                }
+
+                using (MySqlCommand cmdComp = new MySqlCommand(qCompletadas, conn))
+                {
+                    cmdComp.Parameters.AddWithValue("@IdReferencia", idReferencia);
+                    cmdComp.Parameters.AddWithValue("@IdEtapa", idEtapa);
+                    completadas = Convert.ToInt32(cmdComp.ExecuteScalar());
+                }
+
+                // 3️⃣ Si todas están completadas → marcar etapa completa
+                if (total > 0 && total == completadas)
+                {
+                    string qUpdateEtapa = @"
+                        UPDATE itm_100 
+                           SET IdEstatusTarea = 3, 
+                               FechaCompletada = @fechaHoraAsignada,
+                               Comentario = 'Etapa completada automáticamente',
+                               IdRealizadoResponsable = @IdUsuario
+                         WHERE IdReferencia = @IdReferencia 
+                           AND IdEtapa = @IdEtapa
+                           AND IdTarea IS NULL
+                           AND IdRelacionTareas IS NULL
+                           AND IdSubTarea IS NULL ; ";
+
+                    using (MySqlCommand cmdUpd = new MySqlCommand(qUpdateEtapa, conn))
+                    {
+                        cmdUpd.Parameters.AddWithValue("@IdReferencia", idReferencia);
+                        cmdUpd.Parameters.AddWithValue("@IdEtapa", idEtapa);
+                        cmdUpd.Parameters.AddWithValue("@IdUsuario", idUsuario);
+                        cmdUpd.Parameters.AddWithValue("@fechaHoraAsignada", fechaHoraAsignada);
+                        cmdUpd.ExecuteNonQuery();
+                    }
+
+                    // Mensaje de etapa completada
+                    //ScriptManager.RegisterStartupScript(this, GetType(), "msgEtapa",
+                    //    "alert('Etapa completada automáticamente.');", true);
+                }
+            }
+            catch (Exception ex)
+            {
+                LblMessage.Text = ex.Message;
+                mpeMensaje.Show();
+            }
+        }
+
 
         protected void btnUpdateLineaNegocio_Click(object sender, EventArgs e)
         {

@@ -232,12 +232,12 @@
           width: 14px;
           height: 14px;
           border-radius: 50%;
-          background: #0d6efd;
+          background: #0d6efd; /* azul pendiente */
           left: 24px;
           top: 5px;
         }
         .timeline-item.completed::before {
-          background: #198754;
+          background: #198754; /* verde completado */
         }
         .sub-card { 
             border-left: 5px solid #0d6efd; /* azul visible */
@@ -883,7 +883,7 @@
                                         </HeaderTemplate>
 
                                         <ItemTemplate>
-                                            <li class="timeline-item ">
+                                            <li class="timeline-item <%# Eval("IdEstatusTarea").ToString() == "3" ? "completed" : "" %>">
                                             <div class="accordion-item mb-3">
                                                 <h2 class="accordion-header" id="headingEtapa_<%# Eval("IdDocumento") %>">
                                                     <button class="accordion-button collapsed bg-primary text-white" type="button" data-bs-toggle="collapse"
@@ -898,7 +898,9 @@
                                                             OnClick="btnImgMdlEliminarEtapa_Click"
                                                             ToolTip="Eliminar esta etapa"/>
                                                         <strong>Etapa: <%# Eval("Etapa") %></strong> 
-                                                        <%--<span class="badge ms-3 bg-warning text-dark"> <%# Eval("Estatus") %></span>--%>
+                                                        <span class="badge <%# Eval("IdEstatusTarea").ToString() == "3" ? "bg-success" : "bg-warning" %> text-dark ms-3"> 
+                                                            <%# Eval("Estatus") %>
+                                                        </span>
                                                         <asp:Button ID="btnMdlConfEliminacion" runat="server"
                                                             CssClass="btn btn-danger btn-sm ms-3" Text="Eliminar Etapa"
                                                             CommandName="mostrarModalEliminar"
@@ -925,7 +927,9 @@
                                                                             data-bs-toggle="collapse" data-bs-target="#collapseTarea_<%# Eval("IdRelacionTareas") %>"
                                                                             aria-expanded="false" aria-controls="collapseTarea_<%# Eval("IdRelacionTareas") %>">
                                                                             <strong>Tarea:</strong> <%# Eval("NomTarea") %>
-                                                                            <%--<span class="badge ms-3 bg-warning text-dark"> <%# Eval("Estatus") %></span>--%>
+                                                                            <span class="badge <%# Eval("IdEstatusTarea").ToString() == "3" ? "bg-success" : "bg-warning" %> text-dark ms-3">
+                                                                                <%# Eval("Estatus") %>
+                                                                            </span>
                                                                         </button>
                                                                     </h2>
 
@@ -964,7 +968,9 @@
                                                                                             <asp:Button ID="btnModalCompletado" runat="server" CssClass="btn btn-success btn-sm"
                                                                                                 Text="Completar"
                                                                                                 CommandName="completar"
-                                                                                                CommandArgument='<%# Eval("IdReferenciaEtapa") + ";" + Eval("NomSubTarea") %>'
+                                                                                                CommandArgument='<%# Eval("IdReferenciaEtapa") + ";" + Eval("NomSubTarea") + ";" + 
+                                                                                                                     Eval("IdDocumento") + ";" + Eval("IdRelacionTareas")  + ";" + 
+                                                                                                                     Eval("IdTarea") + ";" + Eval("IdSubTarea") %>'
                                                                                                 OnClick="btnModalCompletado_Click" />
                                                                                         </div>
                                                                                         

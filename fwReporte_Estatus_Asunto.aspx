@@ -119,46 +119,7 @@
                         </div>
                     
                     </div>
-                    <!-- opcion con click -->
-                    <div class="container text-center mt-4" style="display:none;">
-                        <div class="row g-3">
-                            <!-- Bloque 1 -->
-                            <div class="col border p-3 stage-block" data-stage="primer_contacto" onclick="showReferences(this)">
-                                <div>primer contacto</div>
-                                <div class="pt-2 fw-bold">20</div>
-                            </div>
-
-                            <!-- Bloque 2 -->
-                            <div class="col border p-3 stage-block" data-stage="inspeccion" onclick="showReferences(this)">
-                                <div>inspección</div>
-                                <div class="pt-2 fw-bold">50</div>
-                            </div>
-
-                            <!-- Bloque 3 -->
-                            <div class="col border p-3 stage-block" data-stage="documentacion" onclick="showReferences(this)">
-                                <div>documentación</div>
-                                <div class="pt-2 fw-bold">120</div>
-                            </div>
-
-                            <!-- Bloque 4 -->
-                            <div class="col border p-3 stage-block" data-stage="ajuste" onclick="showReferences(this)">
-                                <div>ajuste</div>
-                                <div class="pt-2 fw-bold">100</div>
-                            </div>
-
-                            <!-- Bloque 5 -->
-                            <div class="col border p-3 stage-block" data-stage="firma_convenio" onclick="showReferences(this)">
-                                <div>firma de convenio</div>
-                                <div class="pt-2 fw-bold">200</div>
-                            </div>
-
-                            <!-- Bloque 6 -->
-                            <div class="col border p-3 stage-block" data-stage="cierre" onclick="showReferences(this)">
-                                <div>cierre</div>
-                                <div class="pt-2 fw-bold">20000</div>
-                            </div>
-                        </div>
-                    </div>
+                    
                     <!-- opcion con ListView -->
                     <div class="">
                         <asp:ListView ID="lvEtapas" runat="server" OnItemCommand="lvEtapas_ItemCommand">

@@ -1,4 +1,5 @@
-﻿    using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -222,39 +223,63 @@ namespace WebItNow_Peacock
             try
             {
                 ConexionBD_MySQL dbConn = new ConexionBD_MySQL(Variables.wUserName, Variables.wPassword);
-                dbConn.Open();
 
-                //string IdTpoAsunto = (string)Session["IdTpoAsunto"];
-                //string IdCliente = (string)Session["IdCliente"];
-
-                string strQuery = " SELECT r.IdRelacion, r.IdEtapa_fk, " +
-                                         " e.Descripcion AS NombreEtapa, " +
-                                         " 3 AS NumeroReferencias " +
-                                  "   FROM ITM_97 r INNER JOIN ITM_83 e " +
-                                  "     ON r.IdEtapa_fk = e.IdDocumento " +
-                                  "  WHERE r.bSeleccion = 1 AND r.IdStatus = 1 AND e.IdStatus = 1 " +
-                                  "    AND r.IdAseguradora_fk = " + iIdAseguradora +
-                                  "    AND r.IdServicio_fk    = " + iIdProyecto +
-                                  "    AND r.IdCategoria_fk   = " + iIdCategoria +
-                                  "  ORDER BY r.IdOrden ASC LIMIT 24; ";
-
-                DataTable dt = dbConn.ExecuteQuery(strQuery);
-
-                dbConn.Close();
-
-                //lvOrderTaskItem.Items.Clear();
-
-                if (dt.Rows.Count == 0)
+                using (MySqlConnection conn = dbConn.Connection)
                 {
-                    //lvOrderTaskItem.Items.Clear();
-                    //lvOrderTaskItem. = "No hay resultados.";
-                    //lvOrderTaskItem.EmptyDataTemplate = "no hay Tareas.";
+
+                    conn.Open();
+                    string strQuery = @"
+                                    SELECT r.IdRelacion, r.IdEtapa_fk,
+                                           e.Descripcion AS NombreEtapa,
+                                           COALESCE(t.NumeroReferencias, 0) AS NumeroReferencias
+                                      FROM ITM_97 r INNER JOIN ITM_83 e 
+                                        ON r.IdEtapa_fk = e.IdDocumento
+                                      LEFT JOIN ( 
+                                                  SELECT IdRelacionEtapa, IdEtapa,
+                                                         COUNT(*) AS NumeroReferencias
+                                                    FROM ITM_100
+                                                   WHERE IdStatus = 1 AND IdRelacionTareas IS NULL
+                                                     AND IdTarea IS NULL AND IdSubTarea IS NULL
+                                                   GROUP BY IdRelacionEtapa, IdEtapa
+                                                ) t 
+                                        ON t.IdRelacionEtapa = r.IdRelacion
+                                       AND t.IdEtapa = r.IdEtapa_fk
+                                     WHERE r.bSeleccion = 1 AND r.IdStatus = 1 AND e.IdStatus = 1
+                                       AND r.IdAseguradora_fk = @IdAseguradora
+                                       AND r.IdServicio_fk = @IdServicio
+                                       AND r.IdCategoria_fk = @IdCategoria
+                                     ORDER BY r.IdOrden ASC LIMIT 24; ";
+
+                    using (MySqlCommand cmd = new MySqlCommand(strQuery, conn))
+                    {
+                        // Parámetros seguros
+                        cmd.Parameters.AddWithValue("@IdAseguradora", iIdAseguradora);
+                        cmd.Parameters.AddWithValue("@IdServicio", iIdProyecto);
+                        cmd.Parameters.AddWithValue("@IdCategoria", iIdCategoria);
+
+                        MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                        DataTable dt = new DataTable();
+                        da.Fill(dt);
+
+                        if (dt.Rows.Count == 0)
+                        {
+                            //lvOrderTaskItem.Items.Clear();
+                            //lvOrderTaskItem. = "No hay resultados.";
+                            //lvOrderTaskItem.EmptyDataTemplate = "no hay Tareas.";
+                        }
+
+                        lvEtapas.DataSource = dt;
+
+                        lvEtapas.DataBind();
+
+                    }
+
                 }
 
-                lvEtapas.DataSource = dt;
+                //DataTable dt = dbConn.ExecuteQuery(strQuery);
+                //dbConn.Close();
+                //lvOrderTaskItem.Items.Clear();
 
-                lvEtapas.DataBind();
-                
             }
             catch (Exception ex)
             {
